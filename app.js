@@ -3,6 +3,7 @@ app.id = "app";
 document.body.appendChild(app);
 
 const updated = document.getElementById("updated");
+const pageTitle = document.getElementById("pageTitle");
 const searchBox = document.getElementById("searchBox");
 
 const params = new URLSearchParams(window.location.search);
@@ -49,6 +50,18 @@ function loadView(view) {
   fetch(CONFIG.API_URL + "?view=" + view)
     .then(res => res.json())
     .then(data => {
+      const titles = {
+  new: "NEW",
+  viewers: "VIEWERS",
+  kr: "KR",
+  jp: "JP",
+  en: "EN",
+  cn: "CN",
+  youtube: "YOUTUBE",
+  playerlinks: "PLAYER LINKS"
+};
+
+pageTitle.textContent = titles[view] || view.toUpperCase();
       updated.textContent = data.lastUpdated || "";
 
       if (data.counts) {
