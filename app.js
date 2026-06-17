@@ -165,10 +165,10 @@ function renderPlayerLinks(players) {
       <table class="player-table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Team</th>
-            <th>Nat</th>
-            <th>Role</th>
+            <th class="sortable" data-sort="name">Name</th>
+            <th class="sortable" data-sort="team">Team</th>
+            <th class="sortable" data-sort="nationality">Nat</th>
+            <th class="sortable" data-sort="role">Role</th>
             <th>TW</th>
             <th>CHZ</th>
             <th>SOOP</th>
@@ -179,7 +179,12 @@ function renderPlayerLinks(players) {
         </thead>
         <tbody>
           ${players.map(p => `
-            <tr>
+            <tr
+              data-name="${(p.name || "").toLowerCase()}"
+              data-team="${(p.team || "").toLowerCase()}"
+              data-nationality="${(p.nationality || "").toLowerCase()}"
+              data-role="${(p.role || "").toLowerCase()}"
+            >
               <td>${p.name || ""}</td>
               <td>${p.team || ""}</td>
               <td>${p.nationality || ""}</td>
@@ -196,6 +201,41 @@ function renderPlayerLinks(players) {
       </table>
     </div>
   `;
+
+  setupPlayerLinksSort();
+}
+
+function setupPlayerLinksSort() {
+  document.querySelectorAll(".player-table th.sortable").forEach(th => {
+    th.addEventListener("click", () => {
+      const key = th.dataset.sort;
+      const tbody = document.querySelector(".player-table tbody");
+      if (!tbody) return;
+
+      const rows = Array.from(tbody.querySelectorAll("tr"));
+
+      const currentDir = th.dataset.dir || "desc";
+      const nextDir = currentDir === "asc" ? "desc" : "asc";
+
+      document.querySelectorAll(".player-table th.sortable").forEach(h => {
+        h.dataset.dir = "";
+        h.classList.remove("sorted-asc", "sorted-desc");
+      });
+
+      th.dataset.dir = nextDir;
+      th.classList.add(nextDir === "asc" ? "sorted-asc" : "sorted-desc");
+
+      rows.sort((a, b) => {
+        const aValue = a.dataset[key] || "";
+        const bValue = b.dataset[key] || "";
+
+        const result = aValue.localeCompare(bValue);
+        return nextDir === "asc" ? result : -result;
+      });
+
+      rows.forEach(row => tbody.appendChild(row));
+    });
+  });
 }
 
 function linkDot(url, cls) {
