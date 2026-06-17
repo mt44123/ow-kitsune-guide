@@ -354,7 +354,7 @@ function renderPlayerLinks(players) {
             >
               <td>${p.teamRegion || ""}</td>
               <td>${p.team || ""}</td>
-             <td class="name-cell ${getRegionNameClass(p.nationality)}">  ${p.name || ""}</td>
+               <td>${p.name || ""}</td>
               <td>${p.nationality || ""}</td>
               <td>${p.role || ""}</td>
               <td>${linkDot(p.twitchUrl, "tw")}</td>
