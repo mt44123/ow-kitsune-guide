@@ -11,6 +11,17 @@ let currentView = params.get("view") || "new";
 
 let currentData = [];
 
+const titles = {
+  new: "NEW",
+  viewers: "VIEWERS",
+  kr: "KR",
+  jp: "JP",
+  en: "EN",
+  cn: "CN",
+  youtube: "YOUTUBE",
+  playerlinks: "PLAYER LINKS"
+};
+
 document.querySelectorAll(".nav button").forEach(button => {
   if (button.dataset.view === currentView) {
     button.classList.add("active");
@@ -45,25 +56,12 @@ searchBox.addEventListener("input", () => {
 });
 
 function loadView(view) {
-  function loadView(view) {
-  app.innerHTML =
-    "<p style='color:#f99e1a;'>🦊 Following the Kitsune...</p>";
+  app.innerHTML = `<p class="loading">🦊 Following the Kitsune...</p>`;
+  pageTitle.textContent = titles[view] || view.toUpperCase();
 
   fetch(CONFIG.API_URL + "?view=" + view)
     .then(res => res.json())
     .then(data => {
-      const titles = {
-  new: "NEW",
-  viewers: "VIEWERS",
-  kr: "KR",
-  jp: "JP",
-  en: "EN",
-  cn: "CN",
-  youtube: "YOUTUBE",
-  playerlinks: "PLAYER LINKS"
-};
-
-pageTitle.textContent = titles[view] || view.toUpperCase();
       updated.textContent = data.lastUpdated || "";
 
       if (data.counts) {
@@ -82,7 +80,7 @@ pageTitle.textContent = titles[view] || view.toUpperCase();
       }
     })
     .catch(error => {
-      app.innerHTML = "<p style='color:#f99e1a;'>Failed to load data.</p>";
+      app.innerHTML = `<p class="error">Failed to load data.</p>`;
       console.error(error);
     });
 }
@@ -127,7 +125,7 @@ function renderLive(players) {
   app.className = "";
 
   if (!players.length) {
-    app.innerHTML = "<p style='color:#aaa;'>No players found.</p>";
+    app.innerHTML = `<p class="empty">No players found.</p>`;
     return;
   }
 
@@ -147,7 +145,7 @@ function renderYoutube(videos) {
   app.className = "";
 
   if (!videos.length) {
-    app.innerHTML = "<p style='color:#aaa;'>No videos found.</p>";
+    app.innerHTML = `<p class="empty">No videos found.</p>`;
     return;
   }
 
@@ -172,7 +170,7 @@ function renderPlayerLinks(players) {
   app.className = "table-mode";
 
   if (!players.length) {
-    app.innerHTML = "<p style='color:#aaa;'>No player links found.</p>";
+    app.innerHTML = `<p class="empty">No player links found.</p>`;
     return;
   }
 
@@ -278,18 +276,7 @@ function linkDot(url, cls) {
 }
 
 function updateAllButtonCounts(counts) {
-  const labels = {
-    new: "NEW",
-    viewers: "VIEWERS",
-    kr: "KR",
-    jp: "JP",
-    en: "EN",
-    cn: "CN",
-    youtube: "YOUTUBE",
-    playerlinks: "PLAYER LINKS"
-  };
-
-  Object.entries(labels).forEach(([key, label]) => {
+  Object.entries(titles).forEach(([key, label]) => {
     const button = document.querySelector(`.nav button[data-view="${key}"]`);
     if (!button) return;
 
