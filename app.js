@@ -100,7 +100,7 @@ function filterPlayerLinks(players) {
   if (!keyword) return players;
 
   return players.filter(p =>
-    [p.name, p.team, p.role, p.nationality]
+    [p.name, p.teamRegion, p.team, p.role, p.nationality]
       .join(" ")
       .toLowerCase()
       .includes(keyword)
@@ -160,13 +160,18 @@ function renderPlayerLinks(players) {
     return;
   }
 
+  players = [...players].sort((a, b) =>
+    String(a.teamRegion || "").localeCompare(String(b.teamRegion || ""))
+  );
+
   app.innerHTML = `
     <div class="player-table-wrap">
       <table class="player-table">
         <thead>
           <tr>
-            <th class="sortable" data-sort="name">Name</th>
+            <th class="sortable sorted-asc" data-sort="teamRegion">Region</th>
             <th class="sortable" data-sort="team">Team</th>
+            <th class="sortable" data-sort="name">Name</th>
             <th class="sortable" data-sort="nationality">Nat</th>
             <th class="sortable" data-sort="role">Role</th>
             <th>TW</th>
@@ -180,13 +185,15 @@ function renderPlayerLinks(players) {
         <tbody>
           ${players.map(p => `
             <tr
-              data-name="${(p.name || "").toLowerCase()}"
+              data-team-region="${(p.teamRegion || "").toLowerCase()}"
               data-team="${(p.team || "").toLowerCase()}"
+              data-name="${(p.name || "").toLowerCase()}"
               data-nationality="${(p.nationality || "").toLowerCase()}"
               data-role="${(p.role || "").toLowerCase()}"
             >
-              <td>${p.name || ""}</td>
+              <td>${p.teamRegion || ""}</td>
               <td>${p.team || ""}</td>
+              <td>${p.name || ""}</td>
               <td>${p.nationality || ""}</td>
               <td>${p.role || ""}</td>
               <td>${linkDot(p.twitchUrl, "tw")}</td>
