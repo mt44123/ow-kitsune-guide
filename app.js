@@ -142,7 +142,7 @@ function renderLive(players) {
 }
 
 function renderYoutube(videos) {
-  app.className = "";
+  app.className = "youtube-mode";
 
   if (!videos.length) {
     app.innerHTML = `<p class="empty">No videos found.</p>`;
@@ -151,15 +151,21 @@ function renderYoutube(videos) {
 
   app.innerHTML = videos.map(v => {
     const mainTitle = v.titleJp || v.rawTitle || v.titleEn || "";
+    const subTitle = v.titleEn && v.titleEn !== mainTitle ? v.titleEn : "";
 
     return `
-      <a class="card-link" href="${v.url}" target="_blank" rel="noopener">
-        <div class="card">
-          ${v.thumbnail ? `<img class="thumb" src="${v.thumbnail}" loading="lazy">` : ""}
-          <div class="player-name">${v.name}</div>
-          <div class="meta">${v.team || "-"} │ ${v.role || "-"} │ ${v.nationality || "-"}</div>
-          <div class="title">${mainTitle}</div>
-          <div class="stats">📅 ${v.date}</div>
+      <a class="card-link youtube-card-link" href="${v.url}" target="_blank" rel="noopener">
+        <div class="youtube-card">
+          ${v.thumbnail ? `<img class="youtube-thumb" src="${v.thumbnail}" loading="lazy" alt="">` : ""}
+
+          <div class="youtube-info">
+            <div class="youtube-title">${mainTitle}</div>
+            ${subTitle ? `<div class="youtube-subtitle">${subTitle}</div>` : ""}
+
+            <div class="youtube-player">${v.name || "-"}</div>
+            <div class="youtube-meta">${v.team || "-"} │ ${v.role || "-"} │ ${v.nationality || "-"}</div>
+            <div class="youtube-date">📅 ${v.date || "-"}</div>
+          </div>
         </div>
       </a>
     `;
