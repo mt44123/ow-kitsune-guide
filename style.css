@@ -391,22 +391,27 @@ p{
   border-left:4px solid #444;
 }
 
-.card.lang-kr{
-  border-left-color:#00d564;
-}
-
-.card.lang-jp{
-  border-left-color:#f99e1a;
-}
-
+/* NA */
 .card.lang-en{
-  border-left-color:#3b82f6;
+  border-left-color:#813AF2;
 }
 
-.card.lang-cn{
-  border-left-color:#ffd700;
+/* ASIA */
+.card.lang-kr{
+  border-left-color:#E51B23;
 }
 
+/* EMEA */
 .card.lang-intl{
-  border-left-color:#a855f7;
+  border-left-color:#00C4C4;
+}
+
+/* CHINA */
+.card.lang-cn{
+  border-left-color:#FFC422;
+}
+
+/* JP（独自） */
+.card.lang-jp{
+  border-left-color:#FF5DB1;
 }
