@@ -160,9 +160,16 @@ function renderPlayerLinks(players) {
     return;
   }
 
-  players = [...players].sort((a, b) =>
-    String(a.teamRegion || "").localeCompare(String(b.teamRegion || ""))
-  );
+  players = [...players].sort((a, b) => {
+  const aValue = String(a.teamRegion || "");
+  const bValue = String(b.teamRegion || "");
+
+  if (aValue === "" && bValue !== "") return 1;
+  if (aValue !== "" && bValue === "") return -1;
+  if (aValue === "" && bValue === "") return 0;
+
+  return aValue.localeCompare(bValue);
+});
 
   app.innerHTML = `
     <div class="player-table-wrap">
@@ -233,12 +240,16 @@ function setupPlayerLinksSort() {
       th.classList.add(nextDir === "asc" ? "sorted-asc" : "sorted-desc");
 
       rows.sort((a, b) => {
-        const aValue = a.dataset[key] || "";
-        const bValue = b.dataset[key] || "";
+  const aValue = a.dataset[key] || "";
+  const bValue = b.dataset[key] || "";
 
-        const result = aValue.localeCompare(bValue);
-        return nextDir === "asc" ? result : -result;
-      });
+  if (aValue === "" && bValue !== "") return 1;
+  if (aValue !== "" && bValue === "") return -1;
+  if (aValue === "" && bValue === "") return 0;
+
+  const result = aValue.localeCompare(bValue);
+  return nextDir === "asc" ? result : -result;
+});
 
       rows.forEach(row => tbody.appendChild(row));
     });
