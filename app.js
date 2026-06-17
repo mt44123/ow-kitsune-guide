@@ -26,16 +26,7 @@ const titles = {
 
 const voiceLines = [
   "My ultimate is charging...",
-  "Ultimate ready.",
-  "GOATs located.",
-  "Streams acquired.",
-  "Fox trail found.",
-  "Target spotted.",
-  "Objective secured.",
-  "Payload moving.",
-  "Highlight detected.",
-  "Kitsune guidance activated.",
-  "The Kitsune is watching."
+  "Ultimate ready...",
 ];
 
 function setRandomVoiceLine() {
