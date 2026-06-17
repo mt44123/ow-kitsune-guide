@@ -229,3 +229,47 @@ p{
 .empty{
   color:#aaa;
 }
+
+.discord-note{
+  background:#1f1f1f;
+  border:1px solid #333;
+  border-radius:12px;
+  padding:10px 12px;
+  margin-bottom:10px;
+  color:#ccc;
+  font-size:12px;
+  line-height:1.4;
+}
+
+/* PLAYER LINKS column width */
+.player-table th:nth-child(1),
+.player-table td:nth-child(1){
+  min-width:56px;
+}
+
+.player-table th:nth-child(2),
+.player-table td:nth-child(2){
+  min-width:120px;
+}
+
+.player-table th:nth-child(3),
+.player-table td:nth-child(3){
+  min-width:120px;
+  font-weight:bold;
+}
+
+.player-table th:nth-child(4),
+.player-table td:nth-child(4){
+  min-width:60px;
+}
+
+.player-table th:nth-child(5),
+.player-table td:nth-child(5){
+  min-width:60px;
+}
+
+.player-table th:nth-child(n+6),
+.player-table td:nth-child(n+6){
+  text-align:center;
+  min-width:42px;
+}
