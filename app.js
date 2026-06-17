@@ -56,7 +56,7 @@ searchBox.addEventListener("input", () => {
 });
 
 function loadView(view) {
-  app.innerHTML = `<p class="loading">🦊 Following the Kitsune...</p>`;
+  app.innerHTML = `<p class="loading">🦊 My ultimate is charging...</p>`;
   pageTitle.textContent = titles[view] || view.toUpperCase();
 
   fetch(CONFIG.API_URL + "?view=" + view)
