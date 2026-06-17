@@ -4,6 +4,7 @@ document.body.appendChild(app);
 
 const updated = document.getElementById("updated");
 const pageTitle = document.getElementById("pageTitle");
+const voiceLine = document.getElementById("voiceLine");
 const searchBox = document.getElementById("searchBox");
 
 const params = new URLSearchParams(window.location.search);
@@ -22,6 +23,27 @@ const titles = {
   youtube: "YOUTUBE",
   playerlinks: "PLAYER LINKS"
 };
+
+const voiceLines = [
+  "My ultimate is charging...",
+  "Ultimate ready.",
+  "GOATs located.",
+  "Streams acquired.",
+  "Fox trail found.",
+  "Target spotted.",
+  "Objective secured.",
+  "Payload moving.",
+  "Highlight detected.",
+  "Kitsune guidance activated.",
+  "The Kitsune is watching."
+];
+
+function setRandomVoiceLine() {
+  if (!voiceLine) return;
+
+  voiceLine.textContent =
+    voiceLines[Math.floor(Math.random() * voiceLines.length)];
+}
 
 document.querySelectorAll(".nav button").forEach(button => {
   if (button.dataset.view === currentView) {
@@ -59,6 +81,7 @@ searchBox.addEventListener("input", () => {
 function loadView(view) {
   app.innerHTML = `<p class="loading">🦊 My ultimate is charging...</p>`;
   pageTitle.textContent = titles[view] || view.toUpperCase();
+  setRandomVoiceLine();
 
   fetch(CONFIG.API_URL + "?view=" + view)
     .then(res => res.json())
@@ -165,7 +188,7 @@ function renderYoutube(videos) {
 
             <div class="youtube-player">${v.name || "-"}</div>
             <div class="youtube-meta">${v.team || "-"} │ ${v.role || "-"} │ ${v.nationality || "-"}</div>
-            <div class="youtube-date">  📅 ${v.date || "-"} ・ ${timeAgo(v.date)}</div>
+            <div class="youtube-date">📅 ${v.date || "-"} ・ ${timeAgo(v.date)}</div>
           </div>
         </div>
       </a>
@@ -193,11 +216,11 @@ function renderPlayerLinks(players) {
   });
 
   app.innerHTML = `
-  <div class="discord-note">
-  ● DC links are Discord server home pages, not invite links. DCはDiscordサーバーのトップページです（招待リンクではありません）
-</div>
+    <div class="discord-note">
+      ● DC links are Discord server home pages, not invite links. DCはDiscordサーバーのトップページです（招待リンクではありません）
+    </div>
 
-  <div class="player-table-wrap">
+    <div class="player-table-wrap">
       <table class="player-table">
         <thead>
           <tr>
