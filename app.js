@@ -45,7 +45,9 @@ searchBox.addEventListener("input", () => {
 });
 
 function loadView(view) {
-  app.innerHTML = "<p style='color:#aaa;'>Loading...</p>";
+  function loadView(view) {
+  app.innerHTML =
+    "<p style='color:#f99e1a;'>🦊 Following the Kitsune...</p>";
 
   fetch(CONFIG.API_URL + "?view=" + view)
     .then(res => res.json())
