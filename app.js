@@ -261,7 +261,7 @@ function renderLive(players) {
 
   app.innerHTML = players.map(p => `
     <a class="card-link" href="${p.url}" target="_blank" rel="noopener">
-      <div class="card">
+      <div class="card ${getLangClass(p)}">
         <div class="player-name">${p.name}</div>
         <div class="meta">${p.team || "-"} │ ${p.role || "-"} │ ${p.nationality || "-"}</div>
         <div class="stats">${p.platform}　🕓${p.liveFor}　🔥${Number(p.viewers || 0).toLocaleString()}</div>
@@ -408,6 +408,29 @@ function setupPlayerLinksSort() {
       rows.forEach(row => tbody.appendChild(row));
     });
   });
+}
+
+function getLangClass(p) {
+  const platform = String(p.platform || "");
+  const language = String(p.language || "");
+
+  if (platform.includes("CHZZK") || platform.includes("SOOP") || language === "KO") {
+    return "lang-kr";
+  }
+
+  if (language === "JA") {
+    return "lang-jp";
+  }
+
+  if (language === "EN") {
+    return "lang-en";
+  }
+
+  if (platform.includes("BILIBILI")) {
+    return "lang-cn";
+  }
+
+  return "lang-intl";
 }
 
 function linkDot(url, cls) {
