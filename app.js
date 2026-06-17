@@ -15,9 +15,10 @@ const titles = {
   new: "NEW",
   viewers: "VIEWERS",
   kr: "KR",
-  jp: "JP",
   en: "EN",
   cn: "CN",
+  jp: "JP",
+  intl: "INTL",
   youtube: "YOUTUBE",
   playerlinks: "PLAYER LINKS"
 };
