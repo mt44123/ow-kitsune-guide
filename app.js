@@ -1,13 +1,15 @@
-fetch(CONFIG.API_URL + "?view=new")
-
 const app = document.createElement("div");
 app.id = "app";
 document.body.appendChild(app);
 
-fetch(API_URL + "?view=new")
+fetch(CONFIG.API_URL + "?view=new")
   .then(res => res.json())
   .then(data => {
     renderLive(data.players || []);
+  })
+  .catch(error => {
+    app.innerHTML = "<p style='color:#f99e1a;'>Failed to load data.</p>";
+    console.error(error);
   });
 
 function renderLive(players) {
