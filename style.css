@@ -492,3 +492,47 @@ p{
 .player-table td.name-cell.region-unknown{
   box-shadow:inset 3px 0 0 #555;
 }
+
+.player-table td.team-cell{
+  padding-left:10px !important;
+}
+
+/* KR */
+.player-table td.team-cell.team-kr{
+  box-shadow:inset 3px 0 0 #E51B23;
+}
+
+/* JP */
+.player-table td.team-cell.team-jp{
+  box-shadow:inset 3px 0 0 #F5F5F5;
+}
+
+/* NA */
+.player-table td.team-cell.team-na{
+  box-shadow:inset 3px 0 0 #813AF2;
+}
+
+/* EMEA */
+.player-table td.team-cell.team-emea{
+  box-shadow:inset 3px 0 0 #00C4C4;
+}
+
+/* CN */
+.player-table td.team-cell.team-cn{
+  box-shadow:inset 3px 0 0 #FFC422;
+}
+
+/* PAC */
+.player-table td.team-cell.team-pac{
+  box-shadow:inset 3px 0 0 #FFB6D9;
+}
+
+/* SA */
+.player-table td.team-cell.team-sa{
+  box-shadow:inset 3px 0 0 #22C55E;
+}
+
+/* FACEIT / OWCS */
+.player-table td.team-cell.team-special{
+  box-shadow:inset 3px 0 0 #F99E1A;
+}
