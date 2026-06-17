@@ -16,6 +16,47 @@ p{
   color:#ddd;
 }
 
+.nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:16px 0;
+}
+
+.nav button{
+  background:#333;
+  color:white;
+  border:none;
+  border-radius:10px;
+  padding:8px 12px;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.nav button.active{
+  background:#f99e1a;
+  color:#111;
+  font-weight:bold;
+}
+
+.updated{
+  color:#888;
+  font-size:12px;
+  margin:8px 0 12px;
+}
+
+#searchBox{
+  width:100%;
+  box-sizing:border-box;
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  margin-bottom:12px;
+  background:#222;
+  color:white;
+  font-size:14px;
+}
+
 #app{
   margin-top:16px;
   display:grid;
@@ -63,52 +104,10 @@ p{
   color:#aaa;
   font-size:12px;
   line-height:1.35;
-
   display:-webkit-box;
   -webkit-line-clamp:4;
   -webkit-box-orient:vertical;
   overflow:hidden;
-}
-
-.nav{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin:16px 0;
-}
-
-.nav button{
-  background:#333;
-  color:white;
-  border:none;
-  border-radius:10px;
-  padding:8px 12px;
-  font-size:14px;
-  cursor:pointer;
-}
-
-.nav button.active{
-  background:#f99e1a;
-  color:#111;
-  font-weight:bold;
-}
-
-.updated{
-  color:#888;
-  font-size:12px;
-  margin:8px 0 12px;
-}
-
-#searchBox{
-  width:100%;
-  box-sizing:border-box;
-  padding:12px;
-  border-radius:10px;
-  border:none;
-  margin-bottom:12px;
-  background:#222;
-  color:white;
-  font-size:14px;
 }
 
 .thumb{
@@ -117,17 +116,6 @@ p{
   object-fit:cover;
   border-radius:10px;
   margin-bottom:8px;
-}
-
-@media (min-width:900px){
-  #app{
-    grid-template-columns:repeat(4,minmax(0,1fr));
-  }
-
-  .card{
-    height:170px;
-    overflow:hidden;
-  }
 }
 
 .player-table-wrap{
@@ -157,6 +145,27 @@ p{
   color:#ccc;
 }
 
+.player-table th.sortable{
+  cursor:pointer;
+  user-select:none;
+}
+
+.player-table th.sortable:hover{
+  color:#f99e1a;
+}
+
+.player-table th.sorted-asc::after{
+  content:" ▲";
+  color:#f99e1a;
+  font-size:10px;
+}
+
+.player-table th.sorted-desc::after{
+  content:" ▼";
+  color:#f99e1a;
+  font-size:10px;
+}
+
 .player-table tr:hover{
   background:#242424;
 }
@@ -183,4 +192,15 @@ p{
 
 #app.table-mode .player-table-wrap{
   width:100%;
+}
+
+@media (min-width:900px){
+  #app{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+
+  .card{
+    height:170px;
+    overflow:hidden;
+  }
 }
