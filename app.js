@@ -32,10 +32,13 @@ function loadView(view) {
   fetch(CONFIG.API_URL + "?view=" + view)
     .then(res => res.json())
     .then(data => {
-      updated.textContent = data.lastUpdated || "";
-      currentPlayers = data.players || [];
-      renderLive(currentPlayers);
-    })
+  updated.textContent = data.lastUpdated || "";
+  currentPlayers = data.players || [];
+
+  updateButtonCount(view, currentPlayers.length);
+
+  renderLive(currentPlayers);
+})
     .catch(error => {
       app.innerHTML = "<p style='color:#f99e1a;'>Failed to load data.</p>";
       console.error(error);
