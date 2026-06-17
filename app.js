@@ -82,3 +82,19 @@ function renderLive(players) {
 }
 
 loadView(currentView);
+
+function updateButtonCount(view, count){
+
+  const button =
+    document.querySelector(
+      `.nav button[data-view="${view}"]`
+    );
+
+  if(!button) return;
+
+  const label =
+    view.toUpperCase();
+
+  button.textContent =
+    `${label} (${count})`;
+}
