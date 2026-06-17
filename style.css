@@ -138,7 +138,8 @@ p{
 }
 
 .player-table{
-  width:100%;
+  width:max-content;
+  min-width:100%;
   border-collapse:collapse;
   font-size:12px;
 }
@@ -175,3 +176,11 @@ p{
 .bili{ color:#FFD700; }
 .yt{ color:#FF0033; }
 .dc{ color:#fff; }
+
+#app.table-mode{
+  display:block;
+}
+
+#app.table-mode .player-table-wrap{
+  width:100%;
+}
