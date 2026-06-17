@@ -164,7 +164,7 @@ function renderYoutube(videos) {
 
             <div class="youtube-player">${v.name || "-"}</div>
             <div class="youtube-meta">${v.team || "-"} │ ${v.role || "-"} │ ${v.nationality || "-"}</div>
-            <div class="youtube-date">📅 ${v.date || "-"}</div>
+            <div class="youtube-date">  📅 ${v.date || "-"} ・ ${timeAgo(v.date)}</div>
           </div>
         </div>
       </a>
