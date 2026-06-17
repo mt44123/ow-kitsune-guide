@@ -215,3 +215,17 @@ p{
   color:#f99e1a;
   font-weight:bold;
 }
+
+.loading{
+  color:#f99e1a;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.error{
+  color:#f99e1a;
+}
+
+.empty{
+  color:#aaa;
+}
