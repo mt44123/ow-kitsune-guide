@@ -288,6 +288,7 @@ p{
   border-radius:14px;
   overflow:hidden;
   transition:.15s;
+  border-left:4px solid #444;
 }
 
 .youtube-card:hover{
