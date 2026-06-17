@@ -492,14 +492,6 @@ function getNationalityRegionClass(nationality) {
 function getTeamRegionClass(region, team) {
   team = String(team || "");
 
-  if (
-    team.includes("FACEIT") ||
-    team.includes("Official OWCS") ||
-    team.includes("OWCS Creator")
-  ) {
-    return "team-special";
-  }
-
   switch (String(region || "").toUpperCase()) {
     case "KR":
       return "team-kr";
