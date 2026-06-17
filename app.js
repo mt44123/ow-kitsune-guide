@@ -285,7 +285,7 @@ function renderYoutube(videos) {
 
     return `
       <a class="card-link youtube-card-link" href="${v.url}" target="_blank" rel="noopener">
-        <div class="youtube-card">
+        <div class="youtube-card ${getNationalityRegionClass(v.nationality)}">
           ${v.thumbnail ? `<img class="youtube-thumb" src="${v.thumbnail}" loading="lazy" alt="">` : ""}
 
           <div class="youtube-info">
@@ -436,6 +436,57 @@ function getLangClass(p) {
 function linkDot(url, cls) {
   if (!url) return `<span class="no-link">-</span>`;
   return `<a class="${cls} link-dot" href="${url}" target="_blank" rel="noopener">●</a>`;
+}
+
+function getNationalityRegionClass(nationality) {
+  const nat = String(nationality || "").toLowerCase();
+
+  if (nat.includes("japan") || nat.includes("jp")) return "region-jp";
+  if (nat.includes("south korea") || nat.includes("kr")) return "region-kr";
+  if (nat.includes("china") || nat.includes("cn")) return "region-cn";
+
+  const na = [
+    "canada", "costa rica", "cuba", "dominican republic", "el salvador",
+    "guatemala", "honduras", "jamaica", "mexico", "nicaragua",
+    "panama", "us", "en"
+  ];
+
+  const pac = [
+    "australia", "bangladesh", "brunei", "cambodia", "fiji",
+    "hong kong", "india", "indonesia", "laos", "malaysia",
+    "mongolia", "myanmar", "nepal", "new zealand", "pakistan",
+    "papua new guinea", "philippines", "singapore", "sri lanka",
+    "taiwan", "thailand", "timor-leste", "vietnam"
+  ];
+
+  const sa = [
+    "argentina", "bolivia", "brazil", "chile", "colombia",
+    "ecuador", "guyana", "paraguay", "peru", "suriname",
+    "uruguay", "venezuela"
+  ];
+
+  const emea = [
+    "albania", "algeria", "andorra", "armenia", "austria",
+    "azerbaijan", "bahrain", "belgium", "belarus",
+    "bosnia and herzegovina", "bulgaria", "croatia", "cyprus",
+    "czech republic", "denmark", "egypt", "estonia", "finland",
+    "france", "georgia", "germany", "greece", "hungary", "iraq",
+    "ireland", "israel", "italy", "jordan", "kazakhstan",
+    "kuwait", "latvia", "lebanon", "libya", "lithuania",
+    "luxembourg", "malta", "morocco", "netherlands", "norway",
+    "oman", "palestine", "poland", "portugal", "qatar",
+    "romania", "saudi arabia", "serbia", "slovakia", "slovenia",
+    "south africa", "spain", "sweden", "switzerland", "syria",
+    "tunisia", "turkey", "ukraine", "united arab emirates",
+    "uk", "yemen"
+  ];
+
+  if (na.some(x => nat.includes(x))) return "region-na";
+  if (pac.some(x => nat.includes(x))) return "region-pac";
+  if (sa.some(x => nat.includes(x))) return "region-sa";
+  if (emea.some(x => nat.includes(x))) return "region-emea";
+
+  return "region-unknown";
 }
 
 function timeAgo(dateString) {
