@@ -185,6 +185,11 @@ function renderPlayerLinks(players) {
   `;
 }
 
+function linkDot(url, cls) {
+  if (!url) return `<span class="no-link">-</span>`;
+  return `<a class="${cls} link-dot" href="${url}" target="_blank" rel="noopener">●</a>`;
+}
+
 function updateButtonCount(view, count) {
   const button = document.querySelector(`.nav button[data-view="${view}"]`);
   if (!button) return;
