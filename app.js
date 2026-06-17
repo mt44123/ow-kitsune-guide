@@ -13,11 +13,9 @@ document.querySelectorAll(".nav button").forEach(button => {
     currentView = button.dataset.view;
     searchBox.value = "";
 
-    document.querySelectorAll(".nav button").forEach(b => {
-      b.classList.remove("active");
-    });
-
+    document.querySelectorAll(".nav button").forEach(b => b.classList.remove("active"));
     button.classList.add("active");
+
     loadView(currentView);
   });
 });
@@ -25,6 +23,8 @@ document.querySelectorAll(".nav button").forEach(button => {
 searchBox.addEventListener("input", () => {
   if (currentView === "youtube") {
     renderYoutube(filterYoutube(currentData));
+  } else if (currentView === "playerlinks") {
+    renderPlayerLinks(filterPlayerLinks(currentData));
   } else {
     renderLive(filterPlayers(currentData));
   }
@@ -42,6 +42,10 @@ function loadView(view) {
         currentData = data.videos || [];
         updateButtonCount(view, currentData.length);
         renderYoutube(currentData);
+      } else if (view === "playerlinks") {
+        currentData = data.playerLinks || [];
+        updateButtonCount(view, currentData.length);
+        renderPlayerLinks(currentData);
       } else {
         currentData = data.players || [];
         updateButtonCount(view, currentData.length);
@@ -58,38 +62,36 @@ function filterPlayers(players) {
   const keyword = searchBox.value.toLowerCase().trim();
   if (!keyword) return players;
 
-  return players.filter(p => {
-    const text = [
-      p.name,
-      p.team,
-      p.role,
-      p.nationality,
-      p.platform,
-      p.title
-    ].join(" ").toLowerCase();
-
-    return text.includes(keyword);
-  });
+  return players.filter(p =>
+    [p.name, p.team, p.role, p.nationality, p.platform, p.title]
+      .join(" ")
+      .toLowerCase()
+      .includes(keyword)
+  );
 }
 
 function filterYoutube(videos) {
   const keyword = searchBox.value.toLowerCase().trim();
   if (!keyword) return videos;
 
-  return videos.filter(v => {
-    const text = [
-      v.name,
-      v.team,
-      v.role,
-      v.nationality,
-      v.rawTitle,
-      v.titleJp,
-      v.titleEn,
-      v.date
-    ].join(" ").toLowerCase();
+  return videos.filter(v =>
+    [v.name, v.team, v.role, v.nationality, v.rawTitle, v.titleJp, v.titleEn, v.date]
+      .join(" ")
+      .toLowerCase()
+      .includes(keyword)
+  );
+}
 
-    return text.includes(keyword);
-  });
+function filterPlayerLinks(players) {
+  const keyword = searchBox.value.toLowerCase().trim();
+  if (!keyword) return players;
+
+  return players.filter(p =>
+    [p.name, p.team, p.role, p.nationality]
+      .join(" ")
+      .toLowerCase()
+      .includes(keyword)
+  );
 }
 
 function renderLive(players) {
@@ -131,6 +133,55 @@ function renderYoutube(videos) {
       </a>
     `;
   }).join("");
+}
+
+function renderPlayerLinks(players) {
+  if (!players.length) {
+    app.innerHTML = "<p style='color:#aaa;'>No player links found.</p>";
+    return;
+  }
+
+  app.innerHTML = `
+    <div class="player-table-wrap">
+      <table class="player-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Team</th>
+            <th>Nat</th>
+            <th>Role</th>
+            <th>TW</th>
+            <th>CHZ</th>
+            <th>SOOP</th>
+            <th>BILI</th>
+            <th>YT</th>
+            <th>DC*</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${players.map(p => `
+            <tr>
+              <td>${p.name || ""}</td>
+              <td>${p.team || ""}</td>
+              <td>${p.nationality || ""}</td>
+              <td>${p.role || ""}</td>
+              <td>${linkDot(p.twitchUrl, "tw")}</td>
+              <td>${linkDot(p.chzzkUrl, "chz")}</td>
+              <td>${linkDot(p.soopUrl, "soop")}</td>
+              <td>${linkDot(p.biliUrl, "bili")}</td>
+              <td>${linkDot(p.youtubeUrl, "yt")}</td>
+              <td>${linkDot(p.discordUrl, "dc")}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function linkDot(url, cls) {
+  if (!url) return `<span class="no-link">-</span>`;
+  return `<a class="${cls} link-dot" href="${url}" target="_blank" rel="noopener">●</a>`;
 }
 
 function updateButtonCount(view, count) {
