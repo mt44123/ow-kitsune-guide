@@ -286,6 +286,42 @@ function linkDot(url, cls) {
   return `<a class="${cls} link-dot" href="${url}" target="_blank" rel="noopener">●</a>`;
 }
 
+function timeAgo(dateString) {
+  if (!dateString) return "-";
+
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) return "-";
+
+  const now = new Date();
+  const diff = Math.floor((now - date) / 1000);
+
+  if (diff < 60) return "just now";
+  if (diff < 3600) return `${Math.floor(diff / 60)} min ago`;
+
+  if (diff < 86400) {
+    const h = Math.floor(diff / 3600);
+    return `${h} hour${h > 1 ? "s" : ""} ago`;
+  }
+
+  if (diff < 604800) {
+    const d = Math.floor(diff / 86400);
+    return `${d} day${d > 1 ? "s" : ""} ago`;
+  }
+
+  if (diff < 2592000) {
+    const w = Math.floor(diff / 604800);
+    return `${w} week${w > 1 ? "s" : ""} ago`;
+  }
+
+  if (diff < 31536000) {
+    const m = Math.floor(diff / 2592000);
+    return `${m} month${m > 1 ? "s" : ""} ago`;
+  }
+
+  const y = Math.floor(diff / 31536000);
+  return `${y} year${y > 1 ? "s" : ""} ago`;
+}
+
 function updateAllButtonCounts(counts) {
   Object.entries(titles).forEach(([key, label]) => {
     const button = document.querySelector(`.nav button[data-view="${key}"]`);
