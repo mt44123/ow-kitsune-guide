@@ -455,3 +455,35 @@ p{
 .youtube-card.region-unknown{
   border-left-color:#555;
 }
+
+.name-kr{
+  border-left:3px solid #E51B23;
+}
+
+.name-jp{
+  border-left:3px solid #F5F5F5;
+}
+
+.name-na{
+  border-left:3px solid #813AF2;
+}
+
+.name-emea{
+  border-left:3px solid #00C4C4;
+}
+
+.name-cn{
+  border-left:3px solid #FFC422;
+}
+
+.name-pac{
+  border-left:3px solid #FFB6D9;
+}
+
+.name-sa{
+  border-left:3px solid #22C55E;
+}
+
+.player-table td.name-cell{
+  padding-left:10px;
+}
