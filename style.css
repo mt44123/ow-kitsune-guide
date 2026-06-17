@@ -141,8 +141,11 @@ p{
 }
 
 .player-table th{
+  position:sticky;
+  top:0;
   background:#1f1f1f;
   color:#ccc;
+  z-index:1;
 }
 
 .player-table th.sortable{
