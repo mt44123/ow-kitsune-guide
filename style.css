@@ -414,7 +414,7 @@ p{
 
 /* JP（独自） */
 .card.lang-jp{
-  border-left-color:#FF5DB1;
+  border-left-color:#F5F5F5;
 }
 
 /* NA = EN */
@@ -439,12 +439,12 @@ p{
 
 /* JP */
 .youtube-card.region-jp{
-  border-left-color:#FF5DB1;
+  border-left-color:#F5F5F5;
 }
 
 /* PAC */
 .youtube-card.region-pac{
-  border-left-color:#F43F5E;
+  border-left-color:#FFB6D9;
 }
 
 /* SA */
