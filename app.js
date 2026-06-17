@@ -353,7 +353,7 @@ function renderPlayerLinks(players) {
               data-role="${(p.role || "").toLowerCase()}"
             >
               <td>${p.teamRegion || ""}</td>
-              <td>${p.team || ""}</td>
+             <td class="team-cell ${getTeamRegionClass(p.teamRegion, p.team)}">  ${p.team || ""}</td>
                <td class="name-cell ${getNationalityRegionClass(p.nationality)}">  ${p.name || ""}</td>
               <td>${p.nationality || ""}</td>
               <td>${p.role || ""}</td>
@@ -487,6 +487,80 @@ function getNationalityRegionClass(nationality) {
   if (emea.some(x => nat.includes(x))) return "region-emea";
 
   return "region-unknown";
+}
+
+function getTeamRegionClass(region, team) {
+  team = String(team || "");
+
+  if (
+    team.includes("FACEIT") ||
+    team.includes("Official OWCS") ||
+    team.includes("OWCS Creator")
+  ) {
+    return "team-special";
+  }
+
+  switch (String(region || "").toUpperCase()) {
+    case "KR":
+      return "team-kr";
+
+    case "JP":
+      return "team-jp";
+
+    case "NA":
+      return "team-na";
+
+    case "EMEA":
+      return "team-emea";
+
+    case "CN":
+      return "team-cn";
+
+    case "PAC":
+      return "team-pac";
+
+    case "SA":
+      return "team-sa";
+
+    default:
+      return "team-unknown";
+  }
+}function getTeamRegionClass(region, team) {
+  team = String(team || "");
+
+  if (
+    team.includes("FACEIT") ||
+    team.includes("Official OWCS") ||
+    team.includes("OWCS Creator")
+  ) {
+    return "team-special";
+  }
+
+  switch (String(region || "").toUpperCase()) {
+    case "KR":
+      return "team-kr";
+
+    case "JP":
+      return "team-jp";
+
+    case "NA":
+      return "team-na";
+
+    case "EMEA":
+      return "team-emea";
+
+    case "CN":
+      return "team-cn";
+
+    case "PAC":
+      return "team-pac";
+
+    case "SA":
+      return "team-sa";
+
+    default:
+      return "team-unknown";
+  }
 }
 
 function timeAgo(dateString) {
