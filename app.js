@@ -186,7 +186,12 @@ function renderPlayerLinks(players) {
   });
 
   app.innerHTML = `
-    <div class="player-table-wrap">
+  <div class="discord-note">
+    💬 DC links are Discord server home pages, not invite links.
+    You must already be a member to access them.
+  </div>
+
+  <div class="player-table-wrap">
       <table class="player-table">
         <thead>
           <tr>
