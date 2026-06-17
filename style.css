@@ -130,4 +130,48 @@ p{
   }
 }
 
+.player-table-wrap{
+  overflow-x:auto;
+  background:#181818;
+  border-radius:12px;
+  border:1px solid #333;
+}
 
+.player-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:12px;
+}
+
+.player-table th,
+.player-table td{
+  padding:8px;
+  border-bottom:1px solid #2b2b2b;
+  white-space:nowrap;
+  text-align:left;
+}
+
+.player-table th{
+  background:#1f1f1f;
+  color:#ccc;
+}
+
+.player-table tr:hover{
+  background:#242424;
+}
+
+.link-dot{
+  font-size:16px;
+  font-weight:bold;
+}
+
+.no-link{
+  color:#555;
+}
+
+.tw{ color:#9146FF; }
+.chz{ color:#00D564; }
+.soop{ color:#3B82F6; }
+.bili{ color:#FFD700; }
+.yt{ color:#FF0033; }
+.dc{ color:#fff; }
