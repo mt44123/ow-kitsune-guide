@@ -6,7 +6,7 @@ const updated = document.getElementById("updated");
 const searchBox = document.getElementById("searchBox");
 
 let currentView = "new";
-let currentPlayers = [];
+let currentData = [];
 
 document.querySelectorAll(".nav button").forEach(button => {
   button.addEventListener("click", () => {
@@ -23,7 +23,11 @@ document.querySelectorAll(".nav button").forEach(button => {
 });
 
 searchBox.addEventListener("input", () => {
-  renderLive(filterPlayers(currentPlayers));
+  if (currentView === "youtube") {
+    renderYoutube(filterYoutube(currentData));
+  } else {
+    renderLive(filterPlayers(currentData));
+  }
 });
 
 function loadView(view) {
@@ -32,13 +36,18 @@ function loadView(view) {
   fetch(CONFIG.API_URL + "?view=" + view)
     .then(res => res.json())
     .then(data => {
-  updated.textContent = data.lastUpdated || "";
-  currentPlayers = data.players || [];
+      updated.textContent = data.lastUpdated || "";
 
-  updateButtonCount(view, currentPlayers.length);
-
-  renderLive(currentPlayers);
-})
+      if (view === "youtube") {
+        currentData = data.videos || [];
+        updateButtonCount(view, currentData.length);
+        renderYoutube(currentData);
+      } else {
+        currentData = data.players || [];
+        updateButtonCount(view, currentData.length);
+        renderLive(currentData);
+      }
+    })
     .catch(error => {
       app.innerHTML = "<p style='color:#f99e1a;'>Failed to load data.</p>";
       console.error(error);
@@ -63,6 +72,26 @@ function filterPlayers(players) {
   });
 }
 
+function filterYoutube(videos) {
+  const keyword = searchBox.value.toLowerCase().trim();
+  if (!keyword) return videos;
+
+  return videos.filter(v => {
+    const text = [
+      v.name,
+      v.team,
+      v.role,
+      v.nationality,
+      v.rawTitle,
+      v.titleJp,
+      v.titleEn,
+      v.date
+    ].join(" ").toLowerCase();
+
+    return text.includes(keyword);
+  });
+}
+
 function renderLive(players) {
   if (!players.length) {
     app.innerHTML = "<p style='color:#aaa;'>No players found.</p>";
@@ -81,20 +110,34 @@ function renderLive(players) {
   `).join("");
 }
 
-loadView(currentView);
+function renderYoutube(videos) {
+  if (!videos.length) {
+    app.innerHTML = "<p style='color:#aaa;'>No videos found.</p>";
+    return;
+  }
 
-function updateButtonCount(view, count){
+  app.innerHTML = videos.map(v => {
+    const mainTitle = v.titleJp || v.rawTitle || v.titleEn || "";
 
-  const button =
-    document.querySelector(
-      `.nav button[data-view="${view}"]`
-    );
-
-  if(!button) return;
-
-  const label =
-    view.toUpperCase();
-
-  button.textContent =
-    `${label} (${count})`;
+    return `
+      <a class="card-link" href="${v.url}" target="_blank" rel="noopener">
+        <div class="card">
+          ${v.thumbnail ? `<img class="thumb" src="${v.thumbnail}" loading="lazy">` : ""}
+          <div class="player-name">${v.name}</div>
+          <div class="meta">${v.team || "-"} │ ${v.role || "-"} │ ${v.nationality || "-"}</div>
+          <div class="title">${mainTitle}</div>
+          <div class="stats">📅 ${v.date}</div>
+        </div>
+      </a>
+    `;
+  }).join("");
 }
+
+function updateButtonCount(view, count) {
+  const button = document.querySelector(`.nav button[data-view="${view}"]`);
+  if (!button) return;
+
+  button.textContent = `${view.toUpperCase()} (${count})`;
+}
+
+loadView(currentView);
