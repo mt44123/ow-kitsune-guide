@@ -51,17 +51,18 @@ function loadView(view) {
     .then(data => {
       updated.textContent = data.lastUpdated || "";
 
+      if (data.counts) {
+        updateAllButtonCounts(data.counts);
+      }
+
       if (view === "youtube") {
         currentData = data.videos || [];
-        updateButtonCount(view, currentData.length);
         renderYoutube(currentData);
       } else if (view === "playerlinks") {
         currentData = data.playerLinks || [];
-        updateButtonCount(view, currentData.length);
         renderPlayerLinks(currentData);
       } else {
         currentData = data.players || [];
-        updateButtonCount(view, currentData.length);
         renderLive(currentData);
       }
     })
@@ -161,15 +162,15 @@ function renderPlayerLinks(players) {
   }
 
   players = [...players].sort((a, b) => {
-  const aValue = String(a.teamRegion || "");
-  const bValue = String(b.teamRegion || "");
+    const aValue = String(a.teamRegion || "");
+    const bValue = String(b.teamRegion || "");
 
-  if (aValue === "" && bValue !== "") return 1;
-  if (aValue !== "" && bValue === "") return -1;
-  if (aValue === "" && bValue === "") return 0;
+    if (aValue === "" && bValue !== "") return 1;
+    if (aValue !== "" && bValue === "") return -1;
+    if (aValue === "" && bValue === "") return 0;
 
-  return aValue.localeCompare(bValue);
-});
+    return aValue.localeCompare(bValue);
+  });
 
   app.innerHTML = `
     <div class="player-table-wrap">
@@ -240,16 +241,16 @@ function setupPlayerLinksSort() {
       th.classList.add(nextDir === "asc" ? "sorted-asc" : "sorted-desc");
 
       rows.sort((a, b) => {
-  const aValue = a.dataset[key] || "";
-  const bValue = b.dataset[key] || "";
+        const aValue = a.dataset[key] || "";
+        const bValue = b.dataset[key] || "";
 
-  if (aValue === "" && bValue !== "") return 1;
-  if (aValue !== "" && bValue === "") return -1;
-  if (aValue === "" && bValue === "") return 0;
+        if (aValue === "" && bValue !== "") return 1;
+        if (aValue !== "" && bValue === "") return -1;
+        if (aValue === "" && bValue === "") return 0;
 
-  const result = aValue.localeCompare(bValue);
-  return nextDir === "asc" ? result : -result;
-});
+        const result = aValue.localeCompare(bValue);
+        return nextDir === "asc" ? result : -result;
+      });
 
       rows.forEach(row => tbody.appendChild(row));
     });
@@ -261,10 +262,7 @@ function linkDot(url, cls) {
   return `<a class="${cls} link-dot" href="${url}" target="_blank" rel="noopener">●</a>`;
 }
 
-function updateButtonCount(view, count) {
-  const button = document.querySelector(`.nav button[data-view="${view}"]`);
-  if (!button) return;
-
+function updateAllButtonCounts(counts) {
   const labels = {
     new: "NEW",
     viewers: "VIEWERS",
@@ -276,7 +274,13 @@ function updateButtonCount(view, count) {
     playerlinks: "PLAYER LINKS"
   };
 
-  button.textContent = `${labels[view] || view.toUpperCase()} (${count})`;
+  Object.entries(labels).forEach(([key, label]) => {
+    const button = document.querySelector(`.nav button[data-view="${key}"]`);
+    if (!button) return;
+
+    const count = counts[key] ?? "";
+    button.textContent = `${label} (${count})`;
+  });
 }
 
 loadView(currentView);
