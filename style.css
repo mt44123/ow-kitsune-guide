@@ -93,6 +93,24 @@ p{
   font-weight:bold;
 }
 
+.updated{
+  color:#888;
+  font-size:12px;
+  margin:8px 0 12px;
+}
+
+#searchBox{
+  width:100%;
+  box-sizing:border-box;
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  margin-bottom:12px;
+  background:#222;
+  color:white;
+  font-size:14px;
+}
+
 @media (min-width:900px){
   #app{
     grid-template-columns:repeat(4,minmax(0,1fr));
