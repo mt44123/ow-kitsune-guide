@@ -386,3 +386,27 @@ p{
   font-size:13px;
   font-style:italic;
 }
+
+.card{
+  border-left:4px solid #444;
+}
+
+.card.lang-kr{
+  border-left-color:#00d564;
+}
+
+.card.lang-jp{
+  border-left-color:#f99e1a;
+}
+
+.card.lang-en{
+  border-left-color:#3b82f6;
+}
+
+.card.lang-cn{
+  border-left-color:#ffd700;
+}
+
+.card.lang-intl{
+  border-left-color:#a855f7;
+}
