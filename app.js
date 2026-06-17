@@ -5,15 +5,28 @@ document.body.appendChild(app);
 const updated = document.getElementById("updated");
 const searchBox = document.getElementById("searchBox");
 
-let currentView = "new";
+const params = new URLSearchParams(window.location.search);
+let currentView = params.get("view") || "new";
+
 let currentData = [];
 
 document.querySelectorAll(".nav button").forEach(button => {
+  if (button.dataset.view === currentView) {
+    button.classList.add("active");
+  } else {
+    button.classList.remove("active");
+  }
+
   button.addEventListener("click", () => {
     currentView = button.dataset.view;
     searchBox.value = "";
 
-    document.querySelectorAll(".nav button").forEach(b => b.classList.remove("active"));
+    history.replaceState({}, "", "?view=" + currentView);
+
+    document.querySelectorAll(".nav button").forEach(b => {
+      b.classList.remove("active");
+    });
+
     button.classList.add("active");
 
     loadView(currentView);
