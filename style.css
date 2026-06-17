@@ -532,7 +532,3 @@ p{
   box-shadow:inset 3px 0 0 #22C55E;
 }
 
-/* FACEIT / OWCS */
-.player-table td.team-cell.team-special{
-  box-shadow:inset 3px 0 0 #F99E1A;
-}
