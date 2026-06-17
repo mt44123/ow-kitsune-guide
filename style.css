@@ -111,6 +111,12 @@ p{
   font-size:14px;
 }
 
+.thumb{
+  width:100%;
+  border-radius:10px;
+  margin-bottom:8px;
+}
+
 @media (min-width:900px){
   #app{
     grid-template-columns:repeat(4,minmax(0,1fr));
@@ -121,3 +127,5 @@ p{
     overflow:hidden;
   }
 }
+
+
