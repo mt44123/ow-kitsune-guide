@@ -95,6 +95,8 @@ function filterPlayerLinks(players) {
 }
 
 function renderLive(players) {
+  app.className = "";
+
   if (!players.length) {
     app.innerHTML = "<p style='color:#aaa;'>No players found.</p>";
     return;
@@ -113,6 +115,8 @@ function renderLive(players) {
 }
 
 function renderYoutube(videos) {
+  app.className = "";
+
   if (!videos.length) {
     app.innerHTML = "<p style='color:#aaa;'>No videos found.</p>";
     return;
@@ -136,6 +140,8 @@ function renderYoutube(videos) {
 }
 
 function renderPlayerLinks(players) {
+  app.className = "table-mode";
+
   if (!players.length) {
     app.innerHTML = "<p style='color:#aaa;'>No player links found.</p>";
     return;
@@ -179,16 +185,22 @@ function renderPlayerLinks(players) {
   `;
 }
 
-function linkDot(url, cls) {
-  if (!url) return `<span class="no-link">-</span>`;
-  return `<a class="${cls} link-dot" href="${url}" target="_blank" rel="noopener">●</a>`;
-}
-
 function updateButtonCount(view, count) {
   const button = document.querySelector(`.nav button[data-view="${view}"]`);
   if (!button) return;
 
-  button.textContent = `${view.toUpperCase()} (${count})`;
+  const labels = {
+    new: "NEW",
+    viewers: "VIEWERS",
+    kr: "KR",
+    jp: "JP",
+    en: "EN",
+    cn: "CN",
+    youtube: "YOUTUBE",
+    playerlinks: "PLAYER LINKS"
+  };
+
+  button.textContent = `${labels[view] || view.toUpperCase()} (${count})`;
 }
 
 loadView(currentView);
