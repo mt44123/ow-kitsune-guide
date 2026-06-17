@@ -415,3 +415,42 @@ p{
 .card.lang-jp{
   border-left-color:#FF5DB1;
 }
+
+/* NA = EN */
+.youtube-card.region-na{
+  border-left-color:#813AF2;
+}
+
+/* KR */
+.youtube-card.region-kr{
+  border-left-color:#E51B23;
+}
+
+/* CN */
+.youtube-card.region-cn{
+  border-left-color:#FFC422;
+}
+
+/* EMEA = INTL */
+.youtube-card.region-emea{
+  border-left-color:#00C4C4;
+}
+
+/* JP */
+.youtube-card.region-jp{
+  border-left-color:#FF5DB1;
+}
+
+/* PAC */
+.youtube-card.region-pac{
+  border-left-color:#F43F5E;
+}
+
+/* SA */
+.youtube-card.region-sa{
+  border-left-color:#22C55E;
+}
+
+.youtube-card.region-unknown{
+  border-left-color:#555;
+}
