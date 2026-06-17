@@ -193,7 +193,7 @@ function renderPlayerLinks(players) {
 
   app.innerHTML = `
   <div class="discord-note">
-  ● DC links are Discord server home pages, not invite links. DCはDiscordサーバーのトップページです（招待リンクではありません）。
+  ● DC links are Discord server home pages, not invite links. DCはDiscordサーバーのトップページです（招待リンクではありません）
 </div>
 
   <div class="player-table-wrap">
