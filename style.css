@@ -208,3 +208,10 @@ p{
     overflow:hidden;
   }
 }
+
+#pageTitle{
+  font-size:22px;
+  margin:8px 0 12px;
+  color:#f99e1a;
+  font-weight:bold;
+}
