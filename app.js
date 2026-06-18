@@ -799,17 +799,16 @@ function updateAllButtonCounts(counts) {
     if (!button) return;
 
     const count = counts[key] ?? "";
-    const text = `${label}\n(${count})`;
 
     if (button.classList.contains("media-nav")) {
       const labelEl = button.querySelector(".media-label");
       if (labelEl) {
-        labelEl.textContent = text;
+        labelEl.textContent = `${label}\n(${count})`;
       }
       return;
     }
 
-    button.textContent = text;
+    button.innerHTML = `${label}<br>(${count})`;
   });
 }
 
