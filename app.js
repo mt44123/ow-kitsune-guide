@@ -13,6 +13,39 @@ let currentView = params.get("view") || "new";
 let currentData = [];
 let requestId = 0;
 
+const progressSteps = [0, 12, 28, 47, 66, 84, 95];
+
+let progressTimer = null;
+let progressIndex = 0;
+
+function startFakeProgress() {
+  progressIndex = 0;
+  clearInterval(progressTimer);
+
+  app.innerHTML =
+    `<p class="loading">🦊 My ultimate is charging... ${progressSteps[0]}%</p>`;
+
+  progressTimer = setInterval(() => {
+    if (progressIndex >= progressSteps.length - 1) return;
+
+    progressIndex++;
+
+    app.innerHTML =
+      `<p class="loading">🦊 My ultimate is charging... ${progressSteps[progressIndex]}%</p>`;
+  }, 700);
+}
+
+function finishFakeProgress() {
+  clearInterval(progressTimer);
+
+  app.innerHTML =
+    `<p class="loading">🦊 My ultimate is charging... 100%</p>`;
+}
+
+function stopFakeProgress() {
+  clearInterval(progressTimer);
+}
+
 const titles = {
   new: "NEW",
   viewers: "VIEWERS",
@@ -187,7 +220,9 @@ searchBox.addEventListener("input", () => {
 
 function loadView(view) {
   const currentRequest = ++requestId;
-  app.innerHTML = `<p class="loading">🦊 My ultimate is charging...</p>`;
+
+  startFakeProgress();
+
   pageTitle.textContent = titles[view] || view.toUpperCase();
   setRandomVoiceLine();
 
@@ -195,6 +230,9 @@ function loadView(view) {
     .then(res => res.json())
     .then(data => {
       if (currentRequest !== requestId) return;
+
+      finishFakeProgress();
+
       updated.textContent = data.lastUpdated || "";
 
       if (data.counts) {
@@ -213,7 +251,10 @@ function loadView(view) {
       }
     })
     .catch(error => {
-       if (currentRequest !== requestId) return;
+      if (currentRequest !== requestId) return;
+
+      stopFakeProgress();
+
       app.innerHTML = `<p class="error">Failed to load data.</p>`;
       console.error(error);
     });
