@@ -307,6 +307,18 @@ function filterYoutube(videos) {
   );
 }
 
+function filterClips(clips) {
+  const keyword = searchBox.value.toLowerCase().trim();
+  if (!keyword) return clips;
+
+  return clips.filter(c =>
+    [c.name, c.team, c.role, c.nationality, c.title, c.login, c.creator, c.date]
+      .join(" ")
+      .toLowerCase()
+      .includes(keyword)
+  );
+}
+
 function filterPlayerLinks(players) {
   const keyword = searchBox.value.toLowerCase().trim();
   if (!keyword) return players;
