@@ -564,3 +564,10 @@ p{
 #app.table-mode .player-table tr:hover td:nth-child(3){
   background:#242424;
 }
+
+.scroll-note{
+  color:#888;
+  font-size:12px;
+  margin-bottom:8px;
+  text-align:center;
+}
