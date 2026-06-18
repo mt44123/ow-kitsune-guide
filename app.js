@@ -13,7 +13,15 @@ let currentView = params.get("view") || "new";
 let currentData = [];
 let requestId = 0;
 
-const progressSteps = [0, 12, 28, 47, 66, 84, 95];
+const progressSets = [
+  [0, 8, 21, 39, 58, 77, 95],
+  [0, 12, 28, 47, 66, 84, 95],
+  [0, 15, 31, 52, 70, 87, 95],
+  [0, 10, 24, 43, 63, 81, 95]
+];
+
+let progressSteps =
+  progressSets[Math.floor(Math.random() * progressSets.length)];
 
 let progressTimer = null;
 let progressIndex = 0;
