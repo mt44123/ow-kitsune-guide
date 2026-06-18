@@ -536,43 +536,6 @@ function getTeamRegionClass(region, team) {
     default:
       return "team-unknown";
   }
-}function getTeamRegionClass(region, team) {
-  team = String(team || "");
-
-  if (
-    team.includes("FACEIT") ||
-    team.includes("Official OWCS") ||
-    team.includes("OWCS Creator")
-  ) {
-    return "team-special";
-  }
-
-  switch (String(region || "").toUpperCase()) {
-    case "KR":
-      return "team-kr";
-
-    case "JP":
-      return "team-jp";
-
-    case "NA":
-      return "team-na";
-
-    case "EMEA":
-      return "team-emea";
-
-    case "CN":
-      return "team-cn";
-
-    case "PAC":
-      return "team-pac";
-
-    case "SA":
-      return "team-sa";
-
-    default:
-      return "team-unknown";
-  }
-}
 
 function timeAgo(dateString) {
   if (!dateString) return "-";
