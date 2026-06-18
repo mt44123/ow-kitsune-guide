@@ -532,3 +532,9 @@ p{
   box-shadow:inset 3px 0 0 #22C55E;
 }
 
+.tagline{
+  margin-top:0;
+  color:#888;
+  font-size:12px;
+  letter-spacing:.5px;
+}
