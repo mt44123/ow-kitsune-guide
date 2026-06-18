@@ -229,11 +229,14 @@ function loadView(view) {
   fetch(CONFIG.API_URL + "?view=" + view)
     .then(res => res.json())
     .then(data => {
-      if (currentRequest !== requestId) return;
+  if (currentRequest !== requestId) {
+    stopFakeProgress();
+    return;
+  }
 
-      finishFakeProgress();
+  finishFakeProgress();
 
-      updated.textContent = data.lastUpdated || "";
+  updated.textContent = data.lastUpdated || "";
 
       if (data.counts) {
         updateAllButtonCounts(data.counts);
