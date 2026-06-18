@@ -268,11 +268,7 @@ p{
 
 .player-table th:nth-child(4),
 .player-table td:nth-child(4){
-  width:90px;
-  max-width:90px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+  min-width:60px;
 }
 
 .player-table th:nth-child(5),
