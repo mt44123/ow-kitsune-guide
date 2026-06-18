@@ -340,7 +340,7 @@ function renderPlayerLinks(players) {
             <th class="sortable sorted-asc" data-sort="teamRegion">Region</th>
             <th class="sortable" data-sort="team">Team</th>
             <th class="sortable" data-sort="name">Name</th>
-            <th class="sortable" data-sort="nationality">Nat</th>
+            <th class="sortable" data-sort="nationality">Nationality</th>
             <th class="sortable" data-sort="role">Role</th>
             <th>TW</th>
             <th>CHZ</th>
