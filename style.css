@@ -573,12 +573,14 @@ p{
   text-align:center;
 }
 
-.player-name-link{
+.player-name-link,
+.team-link{
   color:inherit;
   text-decoration:none;
 }
 
-.player-name-link:hover{
+.player-name-link:hover,
+.team-link:hover{
   color:#f99e1a;
 }
 
