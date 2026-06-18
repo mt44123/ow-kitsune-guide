@@ -403,7 +403,7 @@ app.innerHTML = `
 
             <td>${p.nationality || ""}</td>
             <td>${p.role || ""}</td>
-            <td>  ${    p.lastStreamUrl      ? `<a href="${p.lastStreamUrl}" target="_blank" rel="noopener">${p.lastStreamAge || "-"} ${p.lastStreamPlatform || ""}</a>`      : "-"  }</td>
+            <td>  ${    p.lastStreamUrl      ? `<a class="last-stream-link" href="${p.lastStreamUrl}" target="_blank" rel="noopener">${p.lastStreamAge || "-"} ${p.lastStreamPlatform || ""}</a>`      : "-"  }</td>
             <td>${linkDot(p.twitchUrl, "tw")}</td>
             <td>${linkDot(p.chzzkUrl, "chz")}</td>
             <td>${linkDot(p.soopUrl, "soop")}</td>
