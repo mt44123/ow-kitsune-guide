@@ -327,9 +327,9 @@ function renderPlayerLinks(players) {
     </div>
     
     <div class="scroll-note">
-      ⇠ Swipe left / right for more links ⇢<br>
-      ⇠ 左右にスワイプして続きを表示 ⇢
-    </div>
+📱Mobile: Swipe left / right to view links<br>
+📱スマホ: 左右にスワイプするとリンクを表示できます
+</div>
     
 
     <div class="player-table-wrap">
