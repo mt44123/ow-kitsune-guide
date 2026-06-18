@@ -358,6 +358,7 @@ app.innerHTML = `
           <th class="sortable" data-sort="name">Name</th>
           <th class="sortable" data-sort="nationality">Nationality</th>
           <th class="sortable" data-sort="role">Role</th>
+          <th class="sortable" data-sort="laststream">Last Stream</th>
           <th>TW</th>
           <th>CHZ</th>
           <th>SOOP</th>
@@ -374,10 +375,11 @@ app.innerHTML = `
             data-name="${(p.name || "").toLowerCase()}"
             data-nationality="${(p.nationality || "").toLowerCase()}"
             data-role="${(p.role || "").toLowerCase()}"
+            data-laststream="${p.lastStreamAge || '9999d'}"
           >
             <td>${p.teamRegion || ""}</td>
 
-            <td class="team-cell ${getTeamRegionClass(p.teamRegion, p.team)}">
+            <td class="team-cell ${getClass(p.teamRegion, p.team)}">
               <a
                 class="team-link"
                 href="https://liquipedia.net/overwatch/${encodeURIComponent(p.team || "")}"
@@ -439,14 +441,27 @@ function setupPlayerLinksSort() {
 
       rows.sort((a, b) => {
         const aValue = a.dataset[key] || "";
-        const bValue = b.dataset[key] || "";
+const bValue = b.dataset[key] || "";
 
-        if (aValue === "" && bValue !== "") return 1;
-        if (aValue !== "" && bValue === "") return -1;
-        if (aValue === "" && bValue === "") return 0;
+if (key === "laststream") {
+  const parseDays = v => {
+    if (!v) return 999999;
+    if (v === "TODAY") return 0;
 
-        const result = aValue.localeCompare(bValue);
-        return nextDir === "asc" ? result : -result;
+    const m = String(v).match(/^(\d+)d$/);
+    return m ? Number(m[1]) : 999999;
+  };
+
+  const result = parseDays(aValue) - parseDays(bValue);
+  return nextDir === "asc" ? result : -result;
+}
+
+if (aValue === "" && bValue !== "") return 1;
+if (aValue !== "" && bValue === "") return -1;
+if (aValue === "" && bValue === "") return 0;
+
+const result = aValue.localeCompare(bValue);
+return nextDir === "asc" ? result : -result;
       });
 
       rows.forEach(row => tbody.appendChild(row));
