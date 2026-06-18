@@ -66,7 +66,7 @@ const titles = {
   jp: "JP",
   intl: "INTL",
   youtube: "YOUTUBE",
-  clips: "CLIPS",
+  clips: "NEW CLIPS",
   hotclips: "HOT CLIPS",
   playerlinks: "PLAYER LINKS"
 };
