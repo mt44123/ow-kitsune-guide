@@ -277,7 +277,8 @@ p{
 
 .player-table th:nth-child(5),
 .player-table td:nth-child(5){
-  min-width:60px;
+  width:45px;
+  max-width:45px;
 }
 
 .player-table th:nth-child(n+6),
