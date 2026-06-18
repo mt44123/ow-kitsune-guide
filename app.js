@@ -66,6 +66,7 @@ const titles = {
   jp: "JP",
   intl: "INTL",
   youtube: "YOUTUBE",
+  clips: "CLIPS",
   playerlinks: "PLAYER LINKS"
 };
 
@@ -254,15 +255,21 @@ function loadView(view) {
       }
 
       if (view === "youtube") {
-        currentData = data.videos || [];
-        renderYoutube(currentData);
-      } else if (view === "playerlinks") {
-        currentData = data.playerLinks || [];
-        renderPlayerLinks(currentData);
-      } else {
-        currentData = data.players || [];
-        renderLive(currentData);
-      }
+  currentData = data.videos || [];
+  renderYoutube(currentData);
+
+} else if (view === "clips") {
+  currentData = data.clips || [];
+  renderClips(currentData);
+
+} else if (view === "playerlinks") {
+  currentData = data.playerLinks || [];
+  renderPlayerLinks(currentData);
+
+} else {
+  currentData = data.players || [];
+  renderLive(currentData);
+}
     })
     .catch(error => {
       if (currentRequest !== requestId) return;
@@ -376,6 +383,56 @@ function renderYoutube(videos) {
       </a>
     `;
   }).join("");
+}
+
+function renderClips(clips) {
+  app.className = "youtube-mode";
+
+  if (!clips.length) {
+    app.innerHTML = `<p class="empty">No clips found.</p>`;
+    return;
+  }
+
+  app.innerHTML = clips.map(c => `
+    <a class="card-link youtube-card-link"
+       href="${c.url}"
+       target="_blank"
+       rel="noopener">
+
+      <div class="youtube-card ${getNationalityRegionClass(c.nationality)}">
+
+        ${c.thumbnail
+          ? `<img class="youtube-thumb"
+                  src="${c.thumbnail}"
+                  loading="lazy"
+                  alt="">`
+          : ""}
+
+        <div class="youtube-info">
+
+          <div class="youtube-title">
+            ${c.title || ""}
+          </div>
+
+          <div class="youtube-player">
+            ${c.name || "-"}
+          </div>
+
+          <div class="youtube-meta">
+            ${c.team || "-"} │ ${c.role || "-"} │ ${c.nationality || "-"}
+          </div>
+
+          <div class="youtube-date">
+            🎬 ${Number(c.views || 0).toLocaleString()} views
+            ・ ${timeAgo(c.date)}
+          </div>
+
+        </div>
+
+      </div>
+
+    </a>
+  `).join("");
 }
 
 function renderPlayerLinks(players) {
