@@ -279,12 +279,18 @@ p{
 
 .player-table th:nth-child(5),
 .player-table td:nth-child(5){
-  width:45px;
-  max-width:45px;
+  min-width:70px;
+  max-width:none;
 }
 
-.player-table th:nth-child(n+6),
-.player-table td:nth-child(n+6){
+.player-table th:nth-child(6),
+.player-table td:nth-child(6){
+  min-width:90px;
+  text-align:center;
+}
+
+.player-table th:nth-child(n+7),
+.player-table td:nth-child(n+7){
   text-align:center;
   min-width:42px;
 }
