@@ -663,3 +663,8 @@ img{
 .last-stream-link:hover{
   text-decoration:underline;
 }
+
+.tw-inactive{
+  color:#9147ff;
+  opacity:.4;
+}
