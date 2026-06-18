@@ -325,12 +325,11 @@ function renderPlayerLinks(players) {
     <div class="discord-note">
       *DC links are Discord server home pages, not invite links. DCはDiscordサーバーのトップページです（招待リンクではありません）
     </div>
-    
+
     <div class="scroll-note">
-📱Mobile: Swipe left / right to view links<br>
-📱スマホ: 左右にスワイプするとリンクを表示できます
-</div>
-    
+      📱Mobile: Swipe left / right to view links<br>
+      📱スマホ: 左右にスワイプするとリンクを表示できます
+    </div>
 
     <div class="player-table-wrap">
       <table class="player-table">
@@ -359,8 +358,22 @@ function renderPlayerLinks(players) {
               data-role="${(p.role || "").toLowerCase()}"
             >
               <td>${p.teamRegion || ""}</td>
-             <td class="team-cell ${getTeamRegionClass(p.teamRegion, p.team)}">  ${p.team || ""}</td>
-               <td class="name-cell ${getNationalityRegionClass(p.nationality)}">  ${p.name || ""}</td>
+
+              <td class="team-cell ${getTeamRegionClass(p.teamRegion, p.team)}">
+                ${p.team || ""}
+              </td>
+
+              <td class="name-cell ${getNationalityRegionClass(p.nationality)}">
+                <a
+                  class="player-name-link"
+                  href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  ${p.name || ""}
+                </a>
+              </td>
+
               <td>${p.nationality || ""}</td>
               <td>${p.role || ""}</td>
               <td>${linkDot(p.twitchUrl, "tw")}</td>
