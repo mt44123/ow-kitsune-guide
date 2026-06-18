@@ -709,16 +709,11 @@ img{
     gap:6px;
   }
 
-  .nav button{
-    width:60px;
-    min-height:48px;
-    font-size:12px;
-    padding:4px;
-  }
-
+  .nav button,
   .nav button.media-nav{
-    width:68px;
+    width:64px;
     min-height:52px;
+    padding:4px;
   }
 
   .media-icon{
