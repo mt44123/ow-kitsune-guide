@@ -157,16 +157,24 @@ p{
   color:#f99e1a;
 }
 
-.player-table th.sorted-asc::after{
-  content:" ▲";
+.player-table th.sorted-asc::before{
+  content:"▲";
   color:#f99e1a;
-  font-size:10px;
+  margin-right:4px;
 }
 
-.player-table th.sorted-desc::after{
-  content:" ▼";
+.player-table th.sorted-desc::before{
+  content:"▼";
   color:#f99e1a;
-  font-size:10px;
+  margin-right:4px;
+}
+
+.player-table th.sortable::before{
+  content:"▲▼";
+  font-size:8px;
+  color:#555;
+  margin-right:4px;
+  letter-spacing:-1px;
 }
 
 .player-table tr:hover{
