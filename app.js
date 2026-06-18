@@ -329,6 +329,8 @@ function renderPlayerLinks(players) {
     <div class="discord-note">
   *DC links are Discord server home pages, not invite links.
   DCはDiscordサーバーのトップページです（招待リンクではありません）<br>
+  *If the Discord app is installed on your mobile device, the link may only open the app and not navigate to the server.
+  Discordアプリがインストールされている場合、アプリが開くだけでサーバーへ移動しないことがあります。<br>
   *Click player or team names to open Liquipedia.
   プレイヤー名・チーム名をクリックするとLiquipediaを開きます。
 </div>
