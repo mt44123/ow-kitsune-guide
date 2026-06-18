@@ -284,8 +284,22 @@ function renderYoutube(videos) {
   }
 
   app.innerHTML = videos.map(v => {
-    const mainTitle = v.titleJp || v.rawTitle || v.titleEn || "";
-    const subTitle = v.titleEn && v.titleEn !== mainTitle ? v.titleEn : "";
+    const raw = v.rawTitle || "";
+    const jp = v.titleJp || "";
+    const en = v.titleEn || "";
+
+    let mainTitle = "";
+    const subTitles = [];
+
+    if (jp) {
+      mainTitle = jp;
+
+      if (en) subTitles.push(en);
+      if (raw && raw !== jp && raw !== en) subTitles.push(raw);
+    } else {
+      mainTitle = raw || en || "";
+      if (raw && en && en !== raw) subTitles.push(en);
+    }
 
     return `
       <a class="card-link youtube-card-link" href="${v.url}" target="_blank" rel="noopener">
@@ -294,7 +308,10 @@ function renderYoutube(videos) {
 
           <div class="youtube-info">
             <div class="youtube-title">${mainTitle}</div>
-            ${subTitle ? `<div class="youtube-subtitle">${subTitle}</div>` : ""}
+
+            ${subTitles.map(t => `
+              <div class="youtube-subtitle">${t}</div>
+            `).join("")}
 
             <div class="youtube-player">${v.name || "-"}</div>
             <div class="youtube-meta">${v.team || "-"} │ ${v.role || "-"} │ ${v.nationality || "-"}</div>
