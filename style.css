@@ -702,3 +702,31 @@ img{
   white-space:pre-line;
   text-align:center;
 }
+
+@media (max-width: 600px){
+
+  .nav{
+    gap:6px;
+  }
+
+  .nav button{
+    width:60px;
+    min-height:48px;
+    font-size:12px;
+    padding:4px;
+  }
+
+  .nav button.media-nav{
+    width:68px;
+    min-height:52px;
+  }
+
+  .media-icon{
+    font-size:16px;
+  }
+
+  .media-label{
+    font-size:9px;
+    line-height:1.05;
+  }
+}
