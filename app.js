@@ -325,15 +325,26 @@ function renderPlayerLinks(players) {
     return aValue.localeCompare(bValue);
   });
 
-  app.innerHTML = `
-    <div class="discord-note">
-  *DC links are Discord server home pages, not invite links.
-  DCはDiscordサーバーのトップページです（招待リンクではありません）<br>
-  *If the Discord app is installed on your mobile device, the link may only open the app and not navigate to the server.
-  Discordアプリがインストールされている場合、アプリが開くだけでサーバーへ移動しないことがあります。<br>
-  *Click player or team names to open Liquipedia.
-  プレイヤー名・チーム名をクリックするとLiquipediaを開きます。
-</div>
+app.innerHTML = `
+  <div class="discord-note">
+    *Click player or team names to open Liquipedia.<br>
+    プレイヤー名・チーム名をクリックするとLiquipediaを開きます。
+
+    <details class="playerlinks-help">
+      <summary>More Info / 詳細</summary>
+
+      <p>
+        *DC links are Discord server home pages, not invite links.<br>
+        DCはDiscordサーバーのトップページです（招待リンクではありません）
+      </p>
+
+      <p>
+        *If the Discord app is installed on your mobile device, the link may only open the app and not navigate to the server.<br>
+        Discordアプリがインストールされている場合、アプリが開くだけでサーバーへ移動しないことがあります。
+      </p>
+    </details>
+  </div>
+`; 
 
     <div class="scroll-note">
       📱Mobile: Swipe left / right 📱スマホ: 左右にスワイプ
