@@ -702,26 +702,3 @@ img{
   white-space:pre-line;
   text-align:center;
 }
-
-@media (max-width: 600px){
-
-  .nav{
-    gap:6px;
-  }
-
-  .nav button,
-  .nav button.media-nav{
-    width:64px;
-    min-height:52px;
-    padding:4px;
-  }
-
-  .media-icon{
-    font-size:16px;
-  }
-
-  .media-label{
-    font-size:9px;
-    line-height:1.05;
-  }
-}
