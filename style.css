@@ -285,14 +285,22 @@ p{
 
 #app.youtube-mode{
   display:grid;
+  grid-template-columns:1fr;
   gap:12px;
+  width:100%;
+  max-width:100%;
 }
 
 .youtube-card-link{
   display:block;
+  width:100%;
+  max-width:100%;
+  min-width:0;
 }
 
 .youtube-card{
+  width:100%;
+  max-width:100%;
   background:#222;
   border-radius:14px;
   overflow:hidden;
@@ -306,12 +314,12 @@ p{
 }
 
 .youtube-thumb{
+  display:block;
   width:100%;
+  max-width:100%;
   aspect-ratio:16 / 9;
   object-fit:cover;
-  display:block;
 }
-
 .youtube-info{
   padding:12px;
 }
@@ -363,6 +371,7 @@ p{
 @media (min-width:900px){
   #app.youtube-mode{
     grid-template-columns:repeat(3,minmax(0,1fr));
+    align-items:start;
   }
 
   .youtube-card{
@@ -584,3 +593,11 @@ p{
   color:#f99e1a;
 }
 
+html,
+body{
+  overflow-x:hidden;
+}
+
+img{
+  max-width:100%;
+}
