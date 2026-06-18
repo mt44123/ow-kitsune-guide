@@ -681,14 +681,14 @@ img{
 }
 
 .nav button.media-nav{
-  width:72px;
-  height:58px;
-  padding:6px 4px;
+  width:64px;
+  height:50px;
+  padding:4px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:3px;
+  gap:1px;
 }
 
 .media-icon{
