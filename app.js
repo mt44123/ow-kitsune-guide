@@ -801,12 +801,12 @@ function updateAllButtonCounts(counts) {
     const count = counts[key] ?? "";
 
     if (button.classList.contains("media-nav")) {
-      const labelEl = button.querySelector(".media-label");
-      if (labelEl) {
-        labelEl.textContent = `${label}\n(${count})`;
-      }
-      return;
-    }
+  const labelEl = button.querySelector(".media-label");
+  if (labelEl) {
+    labelEl.textContent = label;
+  }
+  return;
+}
 
     button.innerHTML = `${label}<br>(${count})`;
   });
