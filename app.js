@@ -11,6 +11,7 @@ const params = new URLSearchParams(window.location.search);
 let currentView = params.get("view") || "new";
 
 let currentData = [];
+let requestId = 0;
 
 const titles = {
   new: "NEW",
@@ -185,6 +186,7 @@ searchBox.addEventListener("input", () => {
 });
 
 function loadView(view) {
+  const currentRequest = ++requestId;
   app.innerHTML = `<p class="loading">🦊 My ultimate is charging...</p>`;
   pageTitle.textContent = titles[view] || view.toUpperCase();
   setRandomVoiceLine();
@@ -192,6 +194,7 @@ function loadView(view) {
   fetch(CONFIG.API_URL + "?view=" + view)
     .then(res => res.json())
     .then(data => {
+      if (currentRequest !== requestId) return;
       updated.textContent = data.lastUpdated || "";
 
       if (data.counts) {
@@ -210,6 +213,7 @@ function loadView(view) {
       }
     })
     .catch(error => {
+       if (currentRequest !== requestId) return;
       app.innerHTML = `<p class="error">Failed to load data.</p>`;
       console.error(error);
     });
