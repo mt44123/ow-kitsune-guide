@@ -538,3 +538,21 @@ p{
   font-size:12px;
   letter-spacing:.5px;
 }
+
+/* PLAYER LINKS sticky Name column */
+#app.table-mode .player-table th:nth-child(3),
+#app.table-mode .player-table td:nth-child(3){
+  position:sticky;
+  left:0;
+  z-index:2;
+  background:#181818;
+}
+
+#app.table-mode .player-table th:nth-child(3){
+  z-index:3;
+  background:#1f1f1f;
+}
+
+#app.table-mode .player-table tr:hover td:nth-child(3){
+  background:#242424;
+}
