@@ -632,3 +632,18 @@ img{
 .footer a:hover{
   text-decoration:underline;
 }
+
+.playerlinks-help{
+  margin-top:8px;
+  color:#888;
+}
+
+.playerlinks-help summary{
+  cursor:pointer;
+  user-select:none;
+}
+
+.playerlinks-help p{
+  margin:8px 0 0;
+  font-size:12px;
+}
