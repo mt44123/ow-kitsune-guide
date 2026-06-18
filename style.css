@@ -667,3 +667,25 @@ img{
 .tw-inactive{
   color:#ddd6ff;
 }
+
+.nav button.media-nav{
+  width:82px;
+  height:58px;
+  padding:6px 4px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+}
+
+.media-icon{
+  font-size:20px;
+  line-height:1;
+}
+
+.media-label{
+  font-size:11px;
+  line-height:1.1;
+  white-space:nowrap;
+}
