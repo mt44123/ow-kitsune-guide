@@ -268,7 +268,7 @@ function renderLive(players) {
       <div class="card ${getLangClass(p)}">
         <div class="player-name">${p.name}</div>
         <div class="meta">${p.team || "-"} │ ${p.role || "-"} │ ${p.nationality || "-"}</div>
-        <div class="stats">${p.platform}　🕓${p.liveFor}　🔥${Number(p.viewers || 0).toLocaleString()}</div>
+        <div class="stats">${p.platform}　🕓${formatLiveFor(p.startedAt)}　🔥${Number(p.viewers || 0).toLocaleString()}</div>
         <div class="title">${p.title || ""}</div>
       </div>
     </a>
@@ -561,6 +561,33 @@ function getTeamRegionClass(region, team) {
     default:
       return "team-unknown";
   }
+}
+
+function formatLiveFor(startedAt) {
+  if (!startedAt) return "";
+
+  const start = new Date(startedAt);
+
+  if (isNaN(start.getTime())) {
+    return "";
+  }
+
+  const diffMinutes = Math.floor(
+    (Date.now() - start.getTime()) / 60000
+  );
+
+  if (diffMinutes < 0) {
+    return "";
+  }
+
+  const hours = Math.floor(diffMinutes / 60);
+  const minutes = diffMinutes % 60;
+
+  if (hours > 0) {
+    return `${hours}h ${minutes}m`;
+  }
+
+  return `${minutes}m`;
 }
 
 function timeAgo(dateString) {
