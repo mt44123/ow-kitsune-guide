@@ -607,3 +607,25 @@ body{
 img{
   max-width:100%;
 }
+
+.feedback-link{
+  text-align:center;
+  margin:0 0 12px;
+}
+
+.feedback-link a{
+  color:#f99e1a;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.feedback-link a:hover{
+  text-decoration:underline;
+}
+
+.feedback-sub{
+  margin-top:4px;
+  color:#888;
+  font-size:12px;
+}
