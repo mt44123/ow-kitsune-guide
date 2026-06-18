@@ -152,9 +152,9 @@ p{
 
 .player-table th,
 .player-table td{
-  padding:8px;
+  padding:6px 8px;
   border-bottom:1px solid #2b2b2b;
-  white-space:pre-line;
+  white-space:nowrap;
   text-align:left;
 }
 
