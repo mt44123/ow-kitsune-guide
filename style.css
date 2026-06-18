@@ -268,7 +268,7 @@ p{
 
 .player-table th:nth-child(4),
 .player-table td:nth-child(4){
-  min-width:60px;
+  min-width:45px;
 }
 
 .player-table th:nth-child(5),
