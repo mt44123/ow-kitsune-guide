@@ -323,12 +323,14 @@ function renderPlayerLinks(players) {
 
   app.innerHTML = `
     <div class="discord-note">
-      *DC links are Discord server home pages, not invite links. DCはDiscordサーバーのトップページです（招待リンクではありません）
-    </div>
+  *DC links are Discord server home pages, not invite links.
+  DCはDiscordサーバーのトップページです（招待リンクではありません）<br>
+  *Click player or team names to open Liquipedia.
+  プレイヤー名・チーム名をクリックするとLiquipediaを開きます。
+</div>
 
     <div class="scroll-note">
-      📱Mobile: Swipe left / right to view links<br>
-      📱スマホ: 左右にスワイプするとリンクを表示できます
+      📱Mobile: Swipe left / right 📱スマホ: 左右にスワイプ
     </div>
 
     <div class="player-table-wrap">
