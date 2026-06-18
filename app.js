@@ -67,6 +67,7 @@ const titles = {
   intl: "INTL",
   youtube: "YOUTUBE",
   clips: "CLIPS",
+  hotclips: "HOT CLIPS",
   playerlinks: "PLAYER LINKS"
 };
 
@@ -223,10 +224,16 @@ document.querySelectorAll(".nav button").forEach(button => {
 searchBox.addEventListener("input", () => {
   if (currentView === "youtube") {
     renderYoutube(filterYoutube(currentData));
-  } else if (currentView === "clips") {
+
+  } else if (
+    currentView === "clips" ||
+    currentView === "hotclips"
+  ) {
     renderClips(filterClips(currentData));
+
   } else if (currentView === "playerlinks") {
     renderPlayerLinks(filterPlayerLinks(currentData));
+
   } else {
     renderLive(filterPlayers(currentData));
   }
@@ -260,7 +267,10 @@ function loadView(view) {
   currentData = data.videos || [];
   renderYoutube(currentData);
 
-} else if (view === "clips") {
+} else if (
+  view === "clips" ||
+  view === "hotclips"
+) {
   currentData = data.clips || [];
   renderClips(currentData);
 
