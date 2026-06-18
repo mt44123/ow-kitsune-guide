@@ -223,6 +223,8 @@ document.querySelectorAll(".nav button").forEach(button => {
 searchBox.addEventListener("input", () => {
   if (currentView === "youtube") {
     renderYoutube(filterYoutube(currentData));
+  } else if (currentView === "clips") {
+    renderClips(filterClips(currentData));
   } else if (currentView === "playerlinks") {
     renderPlayerLinks(filterPlayerLinks(currentData));
   } else {
