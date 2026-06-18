@@ -359,9 +359,16 @@ function renderPlayerLinks(players) {
             >
               <td>${p.teamRegion || ""}</td>
 
-              <td class="team-cell ${getTeamRegionClass(p.teamRegion, p.team)}">
-                ${p.team || ""}
-              </td>
+             <td class="team-cell ${getTeamRegionClass(p.teamRegion, p.team)}">
+  <a
+    class="team-link"
+    href="https://liquipedia.net/overwatch/${encodeURIComponent(p.team || "")}"
+    target="_blank"
+    rel="noopener"
+  >
+    ${p.team || ""}
+  </a>
+</td>
 
               <td class="name-cell ${getNationalityRegionClass(p.nationality)}">
                 <a
