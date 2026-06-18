@@ -614,12 +614,12 @@ img{
 }
 
 .feedback-link a{
-  color:#f99e1a;
+  color:#888;
   text-decoration:none;
   font-size:13px;
-  font-weight:bold;
 }
 
 .feedback-link a:hover{
+  color:#aaa;
   text-decoration:underline;
 }
