@@ -344,76 +344,75 @@ app.innerHTML = `
       </p>
     </details>
   </div>
-`; 
 
-    <div class="scroll-note">
-      📱Mobile: Swipe left / right 📱スマホ: 左右にスワイプ
-    </div>
+  <div class="scroll-note">
+    📱Mobile: Swipe left / right 📱スマホ: 左右にスワイプ
+  </div>
 
-    <div class="player-table-wrap">
-      <table class="player-table">
-        <thead>
-          <tr>
-            <th class="sortable sorted-asc" data-sort="teamRegion">Region</th>
-            <th class="sortable" data-sort="team">Team</th>
-            <th class="sortable" data-sort="name">Name</th>
-            <th class="sortable" data-sort="nationality">Nationality</th>
-            <th class="sortable" data-sort="role">Role</th>
-            <th>TW</th>
-            <th>CHZ</th>
-            <th>SOOP</th>
-            <th>BILI</th>
-            <th>YT</th>
-            <th>DC*</th>
+  <div class="player-table-wrap">
+    <table class="player-table">
+      <thead>
+        <tr>
+          <th class="sortable sorted-asc" data-sort="teamRegion">Region</th>
+          <th class="sortable" data-sort="team">Team</th>
+          <th class="sortable" data-sort="name">Name</th>
+          <th class="sortable" data-sort="nationality">Nationality</th>
+          <th class="sortable" data-sort="role">Role</th>
+          <th>TW</th>
+          <th>CHZ</th>
+          <th>SOOP</th>
+          <th>BILI</th>
+          <th>YT</th>
+          <th>DC*</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${players.map(p => `
+          <tr
+            data-team-region="${(p.teamRegion || "").toLowerCase()}"
+            data-team="${(p.team || "").toLowerCase()}"
+            data-name="${(p.name || "").toLowerCase()}"
+            data-nationality="${(p.nationality || "").toLowerCase()}"
+            data-role="${(p.role || "").toLowerCase()}"
+          >
+            <td>${p.teamRegion || ""}</td>
+
+            <td class="team-cell ${getTeamRegionClass(p.teamRegion, p.team)}">
+              <a
+                class="team-link"
+                href="https://liquipedia.net/overwatch/${encodeURIComponent(p.team || "")}"
+                target="_blank"
+                rel="noopener"
+              >
+                ${p.team || ""}
+              </a>
+            </td>
+
+            <td class="name-cell ${getNationalityRegionClass(p.nationality)}">
+              <a
+                class="player-name-link"
+                href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
+                target="_blank"
+                rel="noopener"
+              >
+                ${p.name || ""}
+              </a>
+            </td>
+
+            <td>${p.nationality || ""}</td>
+            <td>${p.role || ""}</td>
+            <td>${linkDot(p.twitchUrl, "tw")}</td>
+            <td>${linkDot(p.chzzkUrl, "chz")}</td>
+            <td>${linkDot(p.soopUrl, "soop")}</td>
+            <td>${linkDot(p.biliUrl, "bili")}</td>
+            <td>${linkDot(p.youtubeUrl, "yt")}</td>
+            <td>${linkDot(p.discordUrl, "dc")}</td>
           </tr>
-        </thead>
-        <tbody>
-          ${players.map(p => `
-            <tr
-              data-team-region="${(p.teamRegion || "").toLowerCase()}"
-              data-team="${(p.team || "").toLowerCase()}"
-              data-name="${(p.name || "").toLowerCase()}"
-              data-nationality="${(p.nationality || "").toLowerCase()}"
-              data-role="${(p.role || "").toLowerCase()}"
-            >
-              <td>${p.teamRegion || ""}</td>
-
-             <td class="team-cell ${getTeamRegionClass(p.teamRegion, p.team)}">
-  <a
-    class="team-link"
-    href="https://liquipedia.net/overwatch/${encodeURIComponent(p.team || "")}"
-    target="_blank"
-    rel="noopener"
-  >
-    ${p.team || ""}
-  </a>
-</td>
-
-              <td class="name-cell ${getNationalityRegionClass(p.nationality)}">
-                <a
-                  class="player-name-link"
-                  href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  ${p.name || ""}
-                </a>
-              </td>
-
-              <td>${p.nationality || ""}</td>
-              <td>${p.role || ""}</td>
-              <td>${linkDot(p.twitchUrl, "tw")}</td>
-              <td>${linkDot(p.chzzkUrl, "chz")}</td>
-              <td>${linkDot(p.soopUrl, "soop")}</td>
-              <td>${linkDot(p.biliUrl, "bili")}</td>
-              <td>${linkDot(p.youtubeUrl, "yt")}</td>
-              <td>${linkDot(p.discordUrl, "dc")}</td>
-            </tr>
-          `).join("")}
-        </tbody>
-      </table>
-    </div>
-  `;
+        `).join("")}
+      </tbody>
+    </table>
+  </div>
+`;
 
   setupPlayerLinksSort();
 }
