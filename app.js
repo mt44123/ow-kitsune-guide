@@ -407,46 +407,44 @@ function renderClips(clips) {
     return;
   }
 
-  app.innerHTML = clips.map(c => `
-    <a class="card-link youtube-card-link"
-       href="${c.url}"
-       target="_blank"
-       rel="noopener">
+  app.innerHTML = clips.map(c => {
+    const raw = c.rawTitle || c.title || "";
+    const jp = c.titleJp || "";
+    const en = c.titleEn || "";
 
-      <div class="youtube-card ${getNationalityRegionClass(c.nationality)}">
+    let mainTitle = "";
+    const subTitles = [];
 
-        ${c.thumbnail
-          ? `<img class="youtube-thumb"
-                  src="${c.thumbnail}"
-                  loading="lazy"
-                  alt="">`
-          : ""}
+    if (jp) {
+      mainTitle = jp;
 
-        <div class="youtube-info">
+      if (en) subTitles.push(en);
+      if (raw && raw !== jp && raw !== en) subTitles.push(raw);
+    } else {
+      mainTitle = raw || en || "";
+      if (raw && en && en !== raw) subTitles.push(en);
+    }
 
-          <div class="youtube-title">
-            ${c.title || ""}
+    return `
+      <a class="card-link youtube-card-link" href="${c.url}" target="_blank" rel="noopener">
+        <div class="youtube-card ${getNationalityRegionClass(c.nationality)}">
+          ${c.thumbnail ? `<img class="youtube-thumb" src="${c.thumbnail}" loading="lazy" alt="">` : ""}
+
+          <div class="youtube-info">
+            <div class="youtube-title">${mainTitle}</div>
+
+            ${subTitles.map(t => `
+              <div class="youtube-subtitle">${t}</div>
+            `).join("")}
+
+            <div class="youtube-player">${c.name || "-"}</div>
+            <div class="youtube-meta">${c.team || "-"} │ ${c.role || "-"} │ ${c.nationality || "-"}</div>
+            <div class="youtube-date">🎬 ${Number(c.views || 0).toLocaleString()} views ・ ${timeAgo(c.date)}</div>
           </div>
-
-          <div class="youtube-player">
-            ${c.name || "-"}
-          </div>
-
-          <div class="youtube-meta">
-            ${c.team || "-"} │ ${c.role || "-"} │ ${c.nationality || "-"}
-          </div>
-
-          <div class="youtube-date">
-            🎬 ${Number(c.views || 0).toLocaleString()} views
-            ・ ${timeAgo(c.date)}
-          </div>
-
         </div>
-
-      </div>
-
-    </a>
-  `).join("");
+      </a>
+    `;
+  }).join("");
 }
 
 function renderPlayerLinks(players) {
