@@ -59,7 +59,7 @@ function stopFakeProgress() {
 
 const titles = {
   new: "NEW",
-  viewers: "VIEWERS",
+  viewers: "HOT",
   kr: "KR",
   en: "EN",
   cn: "CN",
