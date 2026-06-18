@@ -536,6 +536,7 @@ function getTeamRegionClass(region, team) {
     default:
       return "team-unknown";
   }
+}
 
 function timeAgo(dateString) {
   if (!dateString) return "-";
