@@ -379,7 +379,7 @@ app.innerHTML = `
           >
             <td>${p.teamRegion || ""}</td>
 
-            <td class="team-cell ${getClass(p.teamRegion, p.team)}">
+            <td class="team-cell ${getTeamRegionClass(p.teamRegion, p.team)}">
               <a
                 class="team-link"
                 href="https://liquipedia.net/overwatch/${encodeURIComponent(p.team || "")}"
@@ -403,6 +403,7 @@ app.innerHTML = `
 
             <td>${p.nationality || ""}</td>
             <td>${p.role || ""}</td>
+            <td>${p.lastStreamAge || "-"}</td>
             <td>${linkDot(p.twitchUrl, "tw")}</td>
             <td>${linkDot(p.chzzkUrl, "chz")}</td>
             <td>${linkDot(p.soopUrl, "soop")}</td>
