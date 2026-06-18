@@ -799,7 +799,7 @@ function updateAllButtonCounts(counts) {
     if (!button) return;
 
     const count = counts[key] ?? "";
-    const text = `${label} (${count})`;
+    const text = `${label}\n(${count})`;
 
     if (button.classList.contains("media-nav")) {
       const labelEl = button.querySelector(".media-label");
