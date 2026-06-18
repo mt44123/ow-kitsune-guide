@@ -27,6 +27,9 @@ let progressTimer = null;
 let progressIndex = 0;
 
 function startFakeProgress() {
+    progressSteps =
+    progressSets[Math.floor(Math.random() * progressSets.length)];
+  
   progressIndex = 0;
   clearInterval(progressTimer);
 
