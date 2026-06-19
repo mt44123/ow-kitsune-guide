@@ -929,7 +929,7 @@ function renderYoutube(videos) {
             <div class="youtube-player">${escapeHtml(v.name || "-")}</div>
             <div class="youtube-meta">${escapeHtml(v.team || "-")} │ ${escapeHtml(v.role || "-")} │ ${escapeHtml(v.nationality || "-")}</div>
             <div class="youtube-date">
-            🔥 ${formatViews(v.views)} ・ 📅 ${timeAgo(v.date)}
+            ▶️ ${formatViews(v.views)} ・ 📅 ${timeAgo(v.date)}
           </div>
           </div>
         </div>
