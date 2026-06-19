@@ -226,9 +226,8 @@ function updateNavState(view) {
   const liveSubNav = document.getElementById("liveSubNav");
   const clipsSubNav = document.getElementById("clipsSubNav");
 
-  document
-    .querySelectorAll(".main-nav button")
-    .forEach(b => b.classList.remove("active"));
+document
+  .querySelectorAll(".main-nav button[data-view], .main-nav button[data-section]")
 
   document
     .querySelectorAll(".sub-nav button")
