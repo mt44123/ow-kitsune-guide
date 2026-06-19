@@ -394,7 +394,7 @@ function loadView(view) {
   pageTitle.textContent = titles[view] || view.toUpperCase();
   setRandomVoiceLine();
 
-fetch(CONFIG.API_URL + "?view=" + apiView)
+fetch(CONFIG.API_URL + "?view=" + view)
     .then(res => res.json())
     .then(data => {
   if (currentRequest !== requestId) {
