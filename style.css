@@ -719,6 +719,13 @@ img{
   gap:8px;
   overflow-x:auto;
   flex-wrap:nowrap;
+
+  position:sticky;
+  top:0;
+  z-index:100;
+
+  background:var(--bg-dark);
+  padding:8px 0;
 }
 
 .main-nav button{
@@ -730,7 +737,13 @@ img{
   gap:6px;
   flex-wrap:nowrap;
   overflow-x:auto;
-  margin-top:8px;
+
+  position:sticky;
+  top:66px;
+  z-index:99;
+
+  background:var(--bg-dark);
+  padding:6px 0;
 
   scrollbar-width:none;
 }
