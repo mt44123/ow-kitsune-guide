@@ -883,7 +883,7 @@ function renderLive(players) {
       <div class="card ${getLangClass(p)}">
         <div class="player-name">${p.name}</div>
         <div class="meta">${p.team || "-"} │ ${p.role || "-"} │ ${p.nationality || "-"}</div>
-        <div class="stats">${p.platform}　🕓${formatLiveFor(p.startedAt)}　🔥${Number(p.viewers || 0).toLocaleString()}</div>
+        <div class="stats">${p.platform}　🕓${formatLiveFor(p.startedAt)}　▶️${Number(p.viewers || 0).toLocaleString()}</div>
         <div class="title">${p.title || ""}</div>
       </div>
     </a>
@@ -931,7 +931,7 @@ function renderYoutube(videos) {
             <div class="youtube-player">${escapeHtml(v.name || "-")}</div>
             <div class="youtube-meta">${escapeHtml(v.team || "-")} │ ${escapeHtml(v.role || "-")} │ ${escapeHtml(v.nationality || "-")}</div>
             <div class="youtube-date">
-            ▶️ ${formatViews(v.views)} ・ 📅 ${timeAgo(v.date)}
+            ▶️ ${formatViews(v.views)} ・ 🕓 ${timeAgo(v.date)}
           </div>
           </div>
         </div>
@@ -980,7 +980,7 @@ function renderClips(clips) {
 
             <div class="youtube-player">${escapeHtml(c.name || "-")}</div>
             <div class="youtube-meta">${escapeHtml(c.team || "-")} │ ${escapeHtml(c.role || "-")} │ ${escapeHtml(c.nationality || "-")}</div>
-            <div class="youtube-date">🎬 ${Number(c.views || 0).toLocaleString()} views ・ ${timeAgo(c.date)}</div>
+            <div class="youtube-date">▶️ ${Number(c.views || 0).toLocaleString()} views 🕓 ${timeAgo(c.date)}</div>
           </div>
         </div>
       </a>
