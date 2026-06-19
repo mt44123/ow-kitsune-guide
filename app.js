@@ -211,9 +211,70 @@ document.querySelectorAll(".nav button").forEach(button => {
 
     history.replaceState({}, "", "?view=" + currentView);
 
-    document.querySelectorAll(".nav button").forEach(b => {
-      b.classList.remove("active");
-    });
+    const liveViews = ["new", "viewers", "kr", "en", "cn", "jp", "intl"];
+let currentLiveView = liveViews.includes(currentView) ? currentView : "new";
+
+function isLiveView(view) {
+  return liveViews.includes(view);
+}
+
+function updateNavState(view) {
+  const liveButton = document.querySelector('[data-section="live"]');
+  const liveSubNav = document.getElementById("liveSubNav");
+
+  document.querySelectorAll(".main-nav button").forEach(button => {
+    button.classList.remove("active");
+  });
+
+  document.querySelectorAll("#liveSubNav button").forEach(button => {
+    button.classList.remove("active");
+  });
+
+  if (isLiveView(view)) {
+    if (liveButton) liveButton.classList.add("active");
+    if (liveSubNav) liveSubNav.style.display = "flex";
+
+    const subButton = document.querySelector(`#liveSubNav button[data-view="${view}"]`);
+    if (subButton) subButton.classList.add("active");
+
+  } else {
+    if (liveSubNav) liveSubNav.style.display = "none";
+
+    const mainButton = document.querySelector(`.main-nav button[data-view="${view}"]`);
+    if (mainButton) mainButton.classList.add("active");
+  }
+}
+
+document.querySelectorAll(".main-nav button").forEach(button => {
+  button.addEventListener("click", () => {
+    if (button.dataset.section === "live") {
+      currentView = currentLiveView;
+    } else {
+      currentView = button.dataset.view;
+    }
+
+    searchBox.value = "";
+    history.replaceState({}, "", "?view=" + currentView);
+
+    updateNavState(currentView);
+    loadView(currentView);
+  });
+});
+
+document.querySelectorAll("#liveSubNav button").forEach(button => {
+  button.addEventListener("click", () => {
+    currentView = button.dataset.view;
+    currentLiveView = currentView;
+
+    searchBox.value = "";
+    history.replaceState({}, "", "?view=" + currentView);
+
+    updateNavState(currentView);
+    loadView(currentView);
+  });
+});
+
+updateNavState(currentView);
 
     button.classList.add("active");
 
