@@ -394,11 +394,6 @@ function loadView(view) {
   pageTitle.textContent = titles[view] || view.toUpperCase();
   setRandomVoiceLine();
 
-const apiView =
-  view === "jpclips"
-    ? "hotclips"
-    : view;
-
 fetch(CONFIG.API_URL + "?view=" + apiView)
     .then(res => res.json())
     .then(data => {
