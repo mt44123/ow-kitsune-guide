@@ -856,20 +856,21 @@ function timeAgo(dateString) {
 
 function updateAllButtonCounts(counts) {
   Object.entries(titles).forEach(([key, label]) => {
-    const button = document.querySelector(`.nav button[data-view="${key}"]`);
+    const button = document.querySelector(`#liveSubNav button[data-view="${key}"]`);
     if (!button) return;
 
     const count = counts[key] ?? "";
+    button.textContent = `${label} (${count})`;
+  });
 
-    if (button.classList.contains("media-nav")) {
-  const labelEl = button.querySelector(".media-label");
-  if (labelEl) {
-    labelEl.textContent = label;
-  }
-  return;
-}
+  document.querySelectorAll(".main-nav .media-nav").forEach(button => {
+    const view = button.dataset.view;
+    if (!view) return;
 
-    button.innerHTML = `${label} (${count})`;
+    const labelEl = button.querySelector(".media-label");
+    if (!labelEl) return;
+
+    labelEl.textContent = titles[view] || labelEl.textContent;
   });
 }
 
