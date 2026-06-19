@@ -227,11 +227,14 @@ function updateNavState(view) {
   const clipsSubNav = document.getElementById("clipsSubNav");
 
 document
-  .querySelectorAll(".main-nav button[data-view], .main-nav button[data-section]")
+  .querySelectorAll(
+    '.main-nav button:not(#searchToggle)'
+  )
+  .forEach(b => b.classList.remove("active"));
 
-  document
-    .querySelectorAll(".sub-nav button")
-    .forEach(b => b.classList.remove("active"));
+document
+  .querySelectorAll(".sub-nav button")
+  .forEach(b => b.classList.remove("active"));
 
   if (liveSubNav) liveSubNav.style.display = "none";
   if (clipsSubNav) clipsSubNav.style.display = "none";
