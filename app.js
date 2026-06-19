@@ -26,6 +26,10 @@ let progressSteps =
 let progressTimer = null;
 let progressIndex = 0;
 
+let liveCache = null;
+let liveCacheTime = 0;
+const LIVE_CLIENT_CACHE_MS = 60 * 1000;
+
 function startFakeProgress() {
     progressSteps =
     progressSets[Math.floor(Math.random() * progressSets.length)];
@@ -348,6 +352,11 @@ searchBox.addEventListener("input", () => {
 });
 
 function loadView(view) {
+  if (isLiveView(view)) {
+    loadLiveView(view);
+    return;
+  }
+
   const currentRequest = ++requestId;
 
   startFakeProgress();
@@ -399,6 +408,125 @@ function loadView(view) {
       app.innerHTML = `<p class="error">Failed to load data.</p>`;
       console.error(error);
     });
+}
+
+function loadLiveView(view) {
+  const now = Date.now();
+
+  if (liveCache && now - liveCacheTime < LIVE_CLIENT_CACHE_MS) {
+    renderLiveFromCache(view);
+    return;
+  }
+
+  const currentRequest = ++requestId;
+
+  startFakeProgress();
+
+  pageTitle.textContent = titles[view] || view.toUpperCase();
+  setRandomVoiceLine();
+
+  fetch(CONFIG.API_URL + "?view=new")
+    .then(res => res.json())
+    .then(data => {
+      if (currentRequest !== requestId) {
+        stopFakeProgress();
+        return;
+      }
+
+      finishFakeProgress();
+
+      liveCache = data;
+      liveCacheTime = Date.now();
+
+      updated.textContent = data.lastUpdated || "";
+
+      if (data.counts) {
+        updateAllButtonCounts(data.counts);
+      }
+
+      renderLiveFromCache(view);
+    })
+    .catch(error => {
+      if (currentRequest !== requestId) return;
+
+      stopFakeProgress();
+
+      app.innerHTML = `<p class="error">Failed to load data.</p>`;
+      console.error(error);
+    });
+}
+
+function renderLiveFromCache(view) {
+  const players = liveCache?.players || [];
+
+  currentData = getClientFilteredLivePlayers(players, view);
+  renderLive(currentData);
+}
+
+function getClientFilteredLivePlayers(players, view) {
+  return players
+    .filter(p => matchLiveViewClient(p, view))
+    .sort((a, b) => {
+      if (
+        view === "viewers" ||
+        view === "kr" ||
+        view === "jp" ||
+        view === "en" ||
+        view === "cn" ||
+        view === "intl"
+      ) {
+        return Number(b.viewers || 0) - Number(a.viewers || 0);
+      }
+
+      return getLiveMinutesClient(a.startedAt) - getLiveMinutesClient(b.startedAt);
+    });
+}
+
+function matchLiveViewClient(p, view) {
+  const platform = String(p.platform || "");
+  const language = String(p.language || "");
+
+  switch (view) {
+    case "kr":
+      return (
+        platform.includes("CHZZK") ||
+        platform.includes("SOOP") ||
+        language === "KO"
+      );
+
+    case "jp":
+      return language === "JA";
+
+    case "en":
+      return language === "EN";
+
+    case "cn":
+      return platform.includes("BILIBILI");
+
+    case "intl":
+      return (
+        !platform.includes("CHZZK") &&
+        !platform.includes("SOOP") &&
+        !platform.includes("BILIBILI") &&
+        language &&
+        language !== "KO" &&
+        language !== "JA" &&
+        language !== "EN"
+      );
+
+    default:
+      return true;
+  }
+}
+
+function getLiveMinutesClient(startedAt) {
+  if (!startedAt) return 999999;
+
+  const date = new Date(String(startedAt).replace(/\//g, "-"));
+
+  if (isNaN(date.getTime())) return 999999;
+
+  return Math.floor((Date.now() - date.getTime()) / 60000);
 }
 
 function filterPlayers(players) {
