@@ -32,7 +32,7 @@ h1{
 
 p{
   margin-top:0;
-  color:#ddd;
+  color:var(--text-sub);
 }
 
 .nav{
@@ -69,7 +69,7 @@ p{
 }
 
 .updated{
-  color:#888;
+  color:var(--text-muted);
   font-size:12px;
   margin:8px 0 12px;
 }
@@ -98,14 +98,14 @@ p{
 }
 
 .card{
-  background:#222;
+  background:var(--bg-main);
   border-radius:14px;
   padding:14px;
   transition:.15s;
 }
 
 .card:hover{
-  background:#2a2a2a;
+  background:var(--bg-light);
   transform:translateY(-2px);
 }
 
@@ -116,21 +116,21 @@ p{
 }
 
 .meta{
-  color:#bbb;
+  color:var(--text-sub);
   font-size:13px;
 }
 
 .stats{
   margin-top:8px;
   padding-top:8px;
-  border-top:1px solid #444;
+  border-top:1px solid var(--border);
   font-weight:bold;
   font-size:13px;
 }
 
 .title{
   margin-top:8px;
-  color:#aaa;
+  color:var(--text-sub);
   font-size:12px;
   line-height:1.35;
   display:-webkit-box;
