@@ -40,6 +40,12 @@ let twitchClipsCacheTime = 0;
 let soopClipsCache = null;
 let soopClipsCacheTime = 0;
 
+let chzzkNewClipsCache = null;
+let chzzkNewClipsCacheTime = 0;
+
+let chzzkHotClipsCache = null;
+let chzzkHotClipsCacheTime = 0;
+
 const CLIPS_CLIENT_CACHE_MS = 6 * 60 * 60 * 1000;
 
 let youtubeCache = null;
@@ -95,6 +101,9 @@ const titles = {
   jpclips: "JP",
   soopclips: "SOOP NEW",
   soophotclips: "SOOP HOT",
+  
+  chzzknewclips: "CHZZK NEW",
+  chzzkhotclips: "CHZZK HOT",
 
   playerlinks: "PLAYER LINKS"
 };
@@ -228,11 +237,9 @@ function setRandomVoiceLine() {
 
 const liveViews = ["new", "viewers", "kr", "en", "cn", "jp", "intl"];
 const clipViews = [
-  "clips",
-  "hotclips",
-  "jpclips",
-  "soopclips",
-  "soophotclips"
+  "clips",  "hotclips",  "jpclips",
+  "soopclips",  "soophotclips"
+  "chzzknewclips",  "chzzkhotclips"
 ];
 const youtubeViews = [  "youtube",  "youtubehot",  "youtubejp"];
 
@@ -502,12 +509,34 @@ function loadClipsView(view) {
   pageTitle.textContent = titles[view] || view.toUpperCase();
   setRandomVoiceLine();
 
-  const isSoop =
-    view === "soopclips" ||
-    view === "soophotclips";
+const isSoop =
+  view === "soopclips" ||
+  view === "soophotclips";
 
-  const cache = isSoop ? soopClipsCache : twitchClipsCache;
-  const cacheTime = isSoop ? soopClipsCacheTime : twitchClipsCacheTime;
+const isChzzk =
+  view === "chzzknewclips" ||
+  view === "chzzkhotclips";
+
+let cache;
+let cacheTime;
+
+if (isSoop) {
+  cache = soopClipsCache;
+  cacheTime = soopClipsCacheTime;
+} else if (isChzzk) {
+  cache =
+    view === "chzzknewclips"
+      ? chzzkNewClipsCache
+      : chzzkHotClipsCache;
+
+  cacheTime =
+    view === "chzzknewclips"
+      ? chzzkNewClipsCacheTime
+      : chzzkHotClipsCacheTime;
+} else {
+  cache = twitchClipsCache;
+  cacheTime = twitchClipsCacheTime;
+}
 
   if (cache && now - cacheTime < CLIPS_CLIENT_CACHE_MS) {
     requestId++;
@@ -522,7 +551,15 @@ function loadClipsView(view) {
 
   startFakeProgress();
 
-  const apiView = isSoop ? "soopclips" : "hotclips";
+let apiView = "hotclips";
+
+if (isSoop) {
+  apiView = "soopclips";
+} else if (view === "chzzknewclips") {
+  apiView = "chzzknewclips";
+} else if (view === "chzzkhotclips") {
+  apiView = "chzzkhotclips";
+}
 
   fetch(CONFIG.API_URL + "?view=" + apiView)
     .then(res => res.json())
@@ -534,17 +571,34 @@ function loadClipsView(view) {
 
       finishFakeProgress();
 
-      const clips = isSoop
-        ? (data.soopclips || [])
-        : (data.clips || []);
+let clips = [];
 
-      if (isSoop) {
-        soopClipsCache = clips;
-        soopClipsCacheTime = Date.now();
-      } else {
-        twitchClipsCache = clips;
-        twitchClipsCacheTime = Date.now();
-      }
+if (isSoop) {
+  clips = data.soopclips || [];
+} else if (view === "chzzknewclips") {
+  clips = data.chzzknewclips || [];
+} else if (view === "chzzkhotclips") {
+  clips = data.chzzkhotclips || [];
+} else {
+  clips = data.clips || [];
+}
+      
+if (isSoop) {
+  soopClipsCache = clips;
+  soopClipsCacheTime = Date.now();
+
+} else if (view === "chzzknewclips") {
+  chzzkNewClipsCache = clips;
+  chzzkNewClipsCacheTime = Date.now();
+
+} else if (view === "chzzkhotclips") {
+  chzzkHotClipsCache = clips;
+  chzzkHotClipsCacheTime = Date.now();
+
+} else {
+  twitchClipsCache = clips;
+  twitchClipsCacheTime = Date.now();
+}
 
       currentData = filterClipView(clips, view);
       renderClips(currentData);
