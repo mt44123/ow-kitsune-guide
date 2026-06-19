@@ -745,11 +745,20 @@ function filterClips(clips) {
   if (!keyword) return clips;
 
   return clips.filter(c =>
-    [c.name, c.team, c.role, c.nationality, c.title, c.login, c.creator, c.date]
-      .join(" ")
-      .toLowerCase()
-      .includes(keyword)
-  );
+  [
+    c.name,
+    c.team,
+    c.role,
+    c.nationality,
+    c.rawTitle,
+    c.titleJp,
+    c.titleEn,
+    c.date
+  ]
+    .join(" ")
+    .toLowerCase()
+    .includes(keyword)
+);
 }
 
 function filterClipView(clips, view) {
