@@ -198,89 +198,105 @@ function setRandomVoiceLine() {
     voiceLines[Math.floor(Math.random() * voiceLines.length)];
 }
 
-document.querySelectorAll(".nav button").forEach(button => {
-  if (button.dataset.view === currentView) {
-    button.classList.add("active");
-  } else {
-    button.classList.remove("active");
-  }
+const liveViews = ["new","viewers","kr","en","cn","jp","intl"];
+let currentLiveView =
+  liveViews.includes(currentView)
+    ? currentView
+    : "new";
 
-  button.addEventListener("click", () => {
-    currentView = button.dataset.view;
-    searchBox.value = "";
-
-    history.replaceState({}, "", "?view=" + currentView);
-
-    const liveViews = ["new", "viewers", "kr", "en", "cn", "jp", "intl"];
-let currentLiveView = liveViews.includes(currentView) ? currentView : "new";
-
-function isLiveView(view) {
+function isLiveView(view){
   return liveViews.includes(view);
 }
 
-function updateNavState(view) {
-  const liveButton = document.querySelector('[data-section="live"]');
-  const liveSubNav = document.getElementById("liveSubNav");
+function updateNavState(view){
+  const liveButton =
+    document.querySelector('[data-section="live"]');
 
-  document.querySelectorAll(".main-nav button").forEach(button => {
-    button.classList.remove("active");
-  });
+  const liveSubNav =
+    document.getElementById("liveSubNav");
 
-  document.querySelectorAll("#liveSubNav button").forEach(button => {
-    button.classList.remove("active");
-  });
+  document
+    .querySelectorAll(".main-nav button")
+    .forEach(b => b.classList.remove("active"));
+
+  document
+    .querySelectorAll("#liveSubNav button")
+    .forEach(b => b.classList.remove("active"));
 
   if (isLiveView(view)) {
-    if (liveButton) liveButton.classList.add("active");
-    if (liveSubNav) liveSubNav.style.display = "flex";
 
-    const subButton = document.querySelector(`#liveSubNav button[data-view="${view}"]`);
-    if (subButton) subButton.classList.add("active");
+    liveButton?.classList.add("active");
+
+    if (liveSubNav)
+      liveSubNav.style.display = "flex";
+
+    document
+      .querySelector(
+        `#liveSubNav button[data-view="${view}"]`
+      )
+      ?.classList.add("active");
 
   } else {
-    if (liveSubNav) liveSubNav.style.display = "none";
 
-    const mainButton = document.querySelector(`.main-nav button[data-view="${view}"]`);
-    if (mainButton) mainButton.classList.add("active");
+    if (liveSubNav)
+      liveSubNav.style.display = "none";
+
+    document
+      .querySelector(
+        `.main-nav button[data-view="${view}"]`
+      )
+      ?.classList.add("active");
   }
 }
 
-document.querySelectorAll(".main-nav button").forEach(button => {
-  button.addEventListener("click", () => {
-    if (button.dataset.section === "live") {
-      currentView = currentLiveView;
-    } else {
-      currentView = button.dataset.view;
-    }
+document
+  .querySelectorAll(".main-nav button")
+  .forEach(button => {
 
-    searchBox.value = "";
-    history.replaceState({}, "", "?view=" + currentView);
+    button.addEventListener("click", () => {
 
-    updateNavState(currentView);
-    loadView(currentView);
-  });
+      if (button.dataset.section === "live") {
+        currentView = currentLiveView;
+      } else {
+        currentView = button.dataset.view;
+      }
+
+      searchBox.value = "";
+
+      history.replaceState(
+        {},
+        "",
+        "?view=" + currentView
+      );
+
+      updateNavState(currentView);
+      loadView(currentView);
+    });
 });
 
-document.querySelectorAll("#liveSubNav button").forEach(button => {
-  button.addEventListener("click", () => {
-    currentView = button.dataset.view;
-    currentLiveView = currentView;
+document
+  .querySelectorAll("#liveSubNav button")
+  .forEach(button => {
 
-    searchBox.value = "";
-    history.replaceState({}, "", "?view=" + currentView);
+    button.addEventListener("click", () => {
 
-    updateNavState(currentView);
-    loadView(currentView);
-  });
+      currentView = button.dataset.view;
+      currentLiveView = currentView;
+
+      searchBox.value = "";
+
+      history.replaceState(
+        {},
+        "",
+        "?view=" + currentView
+      );
+
+      updateNavState(currentView);
+      loadView(currentView);
+    });
 });
 
 updateNavState(currentView);
-
-    button.classList.add("active");
-
-    loadView(currentView);
-  });
-});
 
 searchBox.addEventListener("input", () => {
   if (currentView === "youtube") {
