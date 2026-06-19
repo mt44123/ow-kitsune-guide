@@ -351,11 +351,13 @@ searchBox.addEventListener("input", () => {
     if (currentView === "youtube") {
       renderYoutube(filterYoutube(currentData));
 
-    } else if (
-      currentView === "clips" ||
-      currentView === "hotclips"
-    ) {
-      renderClips(filterClips(currentData));
+} else if (
+  currentView === "clips" ||
+  currentView === "hotclips" ||
+  currentView === "jpclips" ||
+  currentView === "globalclips"
+) {
+  renderClips(filterClips(currentData));
 
     } else if (currentView === "playerlinks") {
       renderPlayerLinks(filterPlayerLinks(currentData));
