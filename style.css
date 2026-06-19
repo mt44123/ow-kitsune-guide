@@ -188,13 +188,13 @@ p{
 
 .player-table th.sorted-asc::before{
   content:"▲";
-  color:#f99e1a;
+  color:var(--accent);
   margin-right:4px;
 }
 
 .player-table th.sorted-desc::before{
   content:"▼";
-  color:#f99e1a;
+  color:var(--accent);
   margin-right:4px;
 }
 
