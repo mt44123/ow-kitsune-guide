@@ -317,9 +317,11 @@ const searchToggle =
   document.getElementById("searchToggle");
 
 searchToggle?.addEventListener("click", () => {
-  searchBox.classList.toggle("search-hidden");
+  const isOpen = searchBox.classList.toggle("search-hidden") === false;
 
-  if (!searchBox.classList.contains("search-hidden")) {
+  searchToggle.classList.toggle("search-active", isOpen);
+
+  if (isOpen) {
     searchBox.focus();
   }
 });
