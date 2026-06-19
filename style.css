@@ -717,10 +717,6 @@ img{
   text-align:center;
 }
 
-.sub-nav::-webkit-scrollbar{
-  display:none;
-}
-
 .sub-nav button{
   height:32px;
   width:auto;
