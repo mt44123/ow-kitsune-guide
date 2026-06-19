@@ -32,7 +32,7 @@ const LIVE_CLIENT_CACHE_MS = 60 * 1000;
 
 let playerLinksCache = null;
 let playerLinksCacheTime = 0;
-const PLAYER_LINKS_CLIENT_CACHE_MS = 10 * 60 * 1000;
+const PLAYER_LINKS_CLIENT_CACHE_MS =  6 * 60 * 60 * 1000;
 
 let hotClipsCache = null;
 let hotClipsCacheTime = 0;
