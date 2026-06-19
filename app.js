@@ -457,6 +457,9 @@ function loadView(view) {
 }
 
 function loadYoutubeView(view) {
+  document.body.classList.add("youtube-view");
+  document.body.classList.remove("clip-view");
+  
   const now = Date.now();
 
   pageTitle.textContent = titles[view] || "YOUTUBE";
@@ -504,6 +507,9 @@ function loadYoutubeView(view) {
 }
 
 function loadClipsView(view) {
+  document.body.classList.add("clip-view");
+  document.body.classList.remove("youtube-view");
+  
   const now = Date.now();
 
   pageTitle.textContent = titles[view] || view.toUpperCase();
