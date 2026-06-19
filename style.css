@@ -766,10 +766,14 @@ img{
 
 #searchBox{
   position:sticky;
-  top:112px;
+  top:72px;
   margin-top:8px;
   z-index:98;
   transition:.2s;
+}
+
+body.has-sub-nav #searchBox{
+  top:112px;
 }
 
 body:not(.show-search-header) #searchBox{
