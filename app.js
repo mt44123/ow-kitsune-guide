@@ -490,7 +490,7 @@ fetch(CONFIG.API_URL + "?view=" + view)
 function loadYoutubeView(view) {
   const now = Date.now();
 
-  pageTitle.textContent = titles.youtube;
+  pageTitle.textContent = titles[view] || "YOUTUBE";
   setRandomVoiceLine();
 
   if (
@@ -500,7 +500,7 @@ function loadYoutubeView(view) {
     requestId++;
     stopFakeProgress();
 
-    currentData = youtubeCache;
+    currentData = filterYoutubeView(youtubeCache, view);
     renderYoutube(currentData);
     return;
   }
@@ -522,7 +522,7 @@ function loadYoutubeView(view) {
       youtubeCache = data.videos || [];
       youtubeCacheTime = Date.now();
 
-      currentData = youtubeCache;
+      currentData = filterYoutubeView(youtubeCache, view);
       renderYoutube(currentData);
     })
     .catch(error => {
