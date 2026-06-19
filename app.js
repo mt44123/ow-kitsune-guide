@@ -392,8 +392,8 @@ searchBox.addEventListener("input", () => {
 
   searchTimer = setTimeout(() => {
 
-    if (currentView === "youtube") {
-      renderYoutube(filterYoutube(currentData));
+    if (isYoutubeView(currentView)) {
+  renderYoutube(filterYoutube(currentData));
 
 } else if (
   currentView === "clips" ||
