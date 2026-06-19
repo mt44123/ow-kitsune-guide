@@ -333,22 +333,30 @@ searchToggle?.addEventListener("click", () => {
   }
 });
 
+let searchTimer;
+
 searchBox.addEventListener("input", () => {
-  if (currentView === "youtube") {
-    renderYoutube(filterYoutube(currentData));
+  clearTimeout(searchTimer);
 
-  } else if (
-    currentView === "clips" ||
-    currentView === "hotclips"
-  ) {
-    renderClips(filterClips(currentData));
+  searchTimer = setTimeout(() => {
 
-  } else if (currentView === "playerlinks") {
-    renderPlayerLinks(filterPlayerLinks(currentData));
+    if (currentView === "youtube") {
+      renderYoutube(filterYoutube(currentData));
 
-  } else {
-    renderLive(filterPlayers(currentData));
-  }
+    } else if (
+      currentView === "clips" ||
+      currentView === "hotclips"
+    ) {
+      renderClips(filterClips(currentData));
+
+    } else if (currentView === "playerlinks") {
+      renderPlayerLinks(filterPlayerLinks(currentData));
+
+    } else {
+      renderLive(filterPlayers(currentData));
+    }
+
+  }, 200);
 });
 
 function loadView(view) {
