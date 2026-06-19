@@ -238,7 +238,7 @@ function setRandomVoiceLine() {
 const liveViews = ["new", "viewers", "kr", "en", "cn", "jp", "intl"];
 const clipViews = [
   "clips",  "hotclips",  "jpclips",
-  "soopclips",  "soophotclips"
+  "soopclips",  "soophotclips", 
   "chzzknewclips",  "chzzkhotclips"
 ];
 const youtubeViews = [  "youtube",  "youtubehot",  "youtubejp"];
