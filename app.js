@@ -792,10 +792,12 @@ function filterYoutubeView(videos, view) {
   }
 
   if (view === "youtubejp") {
-    return result.filter(v =>
-      String(v.titleJp || "").trim()
-    );
-  }
+  return result.filter(
+    v =>
+      getNationalityRegionClass(v.nationality) ===
+      "region-jp"
+  );
+}
 
   return result.sort(
     (a, b) => new Date(b.date) - new Date(a.date)
