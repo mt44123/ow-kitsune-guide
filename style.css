@@ -789,8 +789,10 @@ body.clip-view .youtube-title{
   -webkit-line-clamp:6;
 }
 
-@media (max-width:900px){
-  body.clip-view .youtube-title{
-    -webkit-line-clamp:2;
+@media (min-width:900px){
+
+  body.clip-view #app.youtube-mode{
+    grid-template-columns:repeat(6,minmax(0,1fr));
   }
+
 }
