@@ -89,6 +89,8 @@ const titles = {
   clips: "NEW",
   hotclips: "HOT",
   jpclips: "JP",
+  soopclips: "SOOP",
+  soophotclips: "SOOP HOT",
 
   playerlinks: "PLAYER LINKS"
 };
@@ -221,7 +223,13 @@ function setRandomVoiceLine() {
 }
 
 const liveViews = ["new", "viewers", "kr", "en", "cn", "jp", "intl"];
-const clipViews = ["clips", "hotclips", "jpclips"];
+const clipViews = [
+  "clips",
+  "hotclips",
+  "jpclips",
+  "soopclips",
+  "soophotclips"
+];
 const youtubeViews = [  "youtube",  "youtubehot",  "youtubejp"];
 
 let currentLiveView =
@@ -424,72 +432,21 @@ function loadView(view) {
   }
 
   if (isYoutubeView(view)) {
-  loadYoutubeView(view);
-  return;
-}
+    loadYoutubeView(view);
+    return;
+  }
 
   if (view === "playerlinks") {
     loadPlayerLinksView();
     return;
   }
 
-  if (view === "hotclips" || view === "jpclips") {
-  loadHotClipsView(view);
-  return;
-}
-
-  const currentRequest = ++requestId;
-
-  startFakeProgress();
-
-  pageTitle.textContent = titles[view] || view.toUpperCase();
-  setRandomVoiceLine();
-
-fetch(CONFIG.API_URL + "?view=" + view)
-    .then(res => res.json())
-    .then(data => {
-  if (currentRequest !== requestId) {
-    stopFakeProgress();
+  if (isClipView(view)) {
+    loadClipsView(view);
     return;
   }
 
-  finishFakeProgress();
-
-  updated.textContent = data.lastUpdated || "";
-
-      if (view === "youtube") {
-  currentData = data.videos || [];
-  renderYoutube(currentData);
-
-} else if (
-  view === "clips" ||
-  view === "hotclips" ||
-  view === "jpclips"
-) {
-  currentData = filterClipView(
-    data.clips || [],
-    view
-  );
-
-  renderClips(currentData);
-
-} else if (view === "playerlinks") {
-  currentData = data.playerLinks || [];
-  renderPlayerLinks(currentData);
-
-} else {
-  currentData = data.players || [];
-  renderLive(currentData);
-}
-    })
-    .catch(error => {
-      if (currentRequest !== requestId) return;
-
-      stopFakeProgress();
-
-      app.innerHTML = `<p class="error">Failed to load data.</p>`;
-      console.error(error);
-    });
+  loadLiveView("new");
 }
 
 function loadYoutubeView(view) {
@@ -539,7 +496,7 @@ function loadYoutubeView(view) {
     });
 }
 
-function loadHotClipsView(view) {
+function loadClipsView(view) {
   const now = Date.now();
 
   pageTitle.textContent = titles[view] || view.toUpperCase();
@@ -552,7 +509,11 @@ function loadHotClipsView(view) {
     requestId++;
     stopFakeProgress();
 
-    currentData = filterClipView(hotClipsCache, view);
+    currentData = filterClipView(
+      hotClipsCache,
+      view
+    );
+
     renderClips(currentData);
     return;
   }
@@ -561,7 +522,13 @@ function loadHotClipsView(view) {
 
   startFakeProgress();
 
-  fetch(CONFIG.API_URL + "?view=hotclips")
+  const apiView =
+    view === "soopclips" ||
+    view === "soophotclips"
+      ? "soopclips"
+      : "hotclips";
+
+  fetch(CONFIG.API_URL + "?view=" + apiView)
     .then(res => res.json())
     .then(data => {
       if (currentRequest !== requestId) {
@@ -571,17 +538,28 @@ function loadHotClipsView(view) {
 
       finishFakeProgress();
 
-      hotClipsCache = data.clips || [];
+      hotClipsCache =
+        apiView === "soopclips"
+          ? (data.soopclips || [])
+          : (data.clips || []);
+
       hotClipsCacheTime = Date.now();
 
-      currentData = filterClipView(hotClipsCache, view);
+      currentData = filterClipView(
+        hotClipsCache,
+        view
+      );
+
       renderClips(currentData);
     })
     .catch(error => {
       if (currentRequest !== requestId) return;
 
       stopFakeProgress();
-      app.innerHTML = `<p class="error">Failed to load data.</p>`;
+
+      app.innerHTML =
+        `<p class="error">Failed to load data.</p>`;
+
       console.error(error);
     });
 }
@@ -826,16 +804,25 @@ function filterClips(clips) {
 }
 
 function filterClipView(clips, view) {
+  let result = [...clips];
 
   if (view === "jpclips") {
-    return clips.filter(
+    return result.filter(
       c =>
         getNationalityRegionClass(c.nationality) ===
         "region-jp"
     );
   }
 
-  return clips;
+  if (view === "soophotclips") {
+    return result.sort(
+      (a, b) => Number(b.views || 0) - Number(a.views || 0)
+    );
+  }
+
+  return result.sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
 }
 
 function filterPlayerLinks(players) {
