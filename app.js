@@ -413,10 +413,12 @@ function loadView(view) {
 function loadLiveView(view) {
   const now = Date.now();
 
-  if (liveCache && now - liveCacheTime < LIVE_CLIENT_CACHE_MS) {
-    renderLiveFromCache(view);
-    return;
-  }
+if (liveCache && now - liveCacheTime < LIVE_CLIENT_CACHE_MS) {
+  pageTitle.textContent = titles[view] || view.toUpperCase();
+  setRandomVoiceLine();
+  renderLiveFromCache(view);
+  return;
+}
 
   const currentRequest = ++requestId;
 
