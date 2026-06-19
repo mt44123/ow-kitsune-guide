@@ -764,17 +764,22 @@ img{
 
 #searchBox{
   background:var(--bg-main);
-  transition:.2s;
+  transition:
+    opacity .15s ease,
+    height .15s ease,
+    padding .15s ease,
+    margin .15s ease,
+    border-width .15s ease;
 }
 
 body:not(.show-search-header) #searchBox{
   opacity:0;
-  transform:translateY(-8px);
   pointer-events:none;
 
   height:0;
-  padding:0;
-  margin:0;
-  border:none;
+  padding-top:0;
+  padding-bottom:0;
+  margin-bottom:0;
+  border-width:0;
   overflow:hidden;
 }
