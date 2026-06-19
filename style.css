@@ -782,3 +782,15 @@ img{
   color:var(--text-main);
   font-weight:bold;
 }
+
+/* CLIPSだけ */
+
+body.clip-view .youtube-title{
+  -webkit-line-clamp:6;
+}
+
+@media (max-width:900px){
+  body.clip-view .youtube-title{
+    -webkit-line-clamp:2;
+  }
+}
