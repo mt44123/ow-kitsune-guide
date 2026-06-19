@@ -766,7 +766,8 @@ img{
 
 #searchBox{
   position:sticky;
-  top:104px;
+  top:112px;
+  margin-top:8px;
   z-index:98;
   transition:.2s;
 }
