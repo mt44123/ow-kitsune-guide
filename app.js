@@ -365,8 +365,8 @@ searchBox.addEventListener("input", () => {
 ) {
   renderClips(filterClips(currentData));
 
-    } else if (currentView === "playerlinks") {
-      renderPlayerLinks(filterPlayerLinks(currentData));
+} else if (currentView === "playerlinks") {
+  searchPlayerLinksTable();
 
     } else {
       renderLive(filterPlayers(currentData));
@@ -775,6 +775,26 @@ function filterPlayerLinks(players) {
       .toLowerCase()
       .includes(keyword)
   );
+}
+
+function searchPlayerLinksTable() {
+  const keyword = searchBox.value.toLowerCase().trim();
+  const rows = document.querySelectorAll(".player-table tbody tr");
+
+  rows.forEach(row => {
+    const text = [
+      row.dataset.teamRegion,
+      row.dataset.team,
+      row.dataset.name,
+      row.dataset.nationality,
+      row.dataset.role
+    ].join(" ");
+
+    row.style.display =
+      !keyword || text.includes(keyword)
+        ? ""
+        : "none";
+  });
 }
 
 function renderLive(players) {
