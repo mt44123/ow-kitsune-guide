@@ -34,6 +34,10 @@ let playerLinksCache = null;
 let playerLinksCacheTime = 0;
 const PLAYER_LINKS_CLIENT_CACHE_MS = 10 * 60 * 1000;
 
+let hotClipsCache = null;
+let hotClipsCacheTime = 0;
+const HOT_CLIPS_CLIENT_CACHE_MS = 10 * 60 * 1000;
+
 function startFakeProgress() {
     progressSteps =
     progressSets[Math.floor(Math.random() * progressSets.length)];
@@ -378,6 +382,11 @@ function loadView(view) {
     return;
   }
 
+  if (view === "hotclips" || view === "jpclips") {
+  loadHotClipsView(view);
+  return;
+}
+
   const currentRequest = ++requestId;
 
   startFakeProgress();
@@ -436,6 +445,53 @@ fetch(CONFIG.API_URL + "?view=" + apiView)
 
       stopFakeProgress();
 
+      app.innerHTML = `<p class="error">Failed to load data.</p>`;
+      console.error(error);
+    });
+}
+
+function loadHotClipsView(view) {
+  const now = Date.now();
+
+  pageTitle.textContent = titles[view] || view.toUpperCase();
+  setRandomVoiceLine();
+
+  if (
+    hotClipsCache &&
+    now - hotClipsCacheTime < HOT_CLIPS_CLIENT_CACHE_MS
+  ) {
+    requestId++;
+    stopFakeProgress();
+
+    currentData = filterClipView(hotClipsCache, view);
+    renderClips(currentData);
+    return;
+  }
+
+  const currentRequest = ++requestId;
+
+  startFakeProgress();
+
+  fetch(CONFIG.API_URL + "?view=hotclips")
+    .then(res => res.json())
+    .then(data => {
+      if (currentRequest !== requestId) {
+        stopFakeProgress();
+        return;
+      }
+
+      finishFakeProgress();
+
+      hotClipsCache = data.clips || [];
+      hotClipsCacheTime = Date.now();
+
+      currentData = filterClipView(hotClipsCache, view);
+      renderClips(currentData);
+    })
+    .catch(error => {
+      if (currentRequest !== requestId) return;
+
+      stopFakeProgress();
       app.innerHTML = `<p class="error">Failed to load data.</p>`;
       console.error(error);
     });
