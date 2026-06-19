@@ -738,3 +738,7 @@ img{
 .sub-nav::-webkit-scrollbar{
   display:none;
 }
+
+.sub-nav button{
+  white-space: nowrap;
+}
