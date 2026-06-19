@@ -883,7 +883,7 @@ function renderLive(players) {
       <div class="card ${getLangClass(p)}">
         <div class="player-name">${p.name}</div>
         <div class="meta">${p.team || "-"} │ ${p.role || "-"} │ ${p.nationality || "-"}</div>
-        <div class="stats">${p.platform}　🕓${formatLiveFor(p.startedAt)}　▶️${Number(p.viewers || 0).toLocaleString()}</div>
+        <div class="stats">${p.platform}　🕓${formatLiveFor(p.startedAt)}　👥${Number(p.viewers || 0).toLocaleString()}</div>
         <div class="title">${p.title || ""}</div>
       </div>
     </a>
