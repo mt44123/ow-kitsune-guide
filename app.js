@@ -38,6 +38,10 @@ let hotClipsCache = null;
 let hotClipsCacheTime = 0;
 const HOT_CLIPS_CLIENT_CACHE_MS = 6 * 60 * 60 * 1000;
 
+let youtubeCache = null;
+let youtubeCacheTime = 0;
+const YOUTUBE_CLIENT_CACHE_MS =  30 * 60 * 1000;
+
 function startFakeProgress() {
     progressSteps =
     progressSets[Math.floor(Math.random() * progressSets.length)];
@@ -377,6 +381,11 @@ function loadView(view) {
     return;
   }
 
+  if (view === "youtube") {
+  loadYoutubeView();
+  return;
+}
+
   if (view === "playerlinks") {
     loadPlayerLinksView();
     return;
@@ -440,6 +449,53 @@ fetch(CONFIG.API_URL + "?view=" + view)
 
       stopFakeProgress();
 
+      app.innerHTML = `<p class="error">Failed to load data.</p>`;
+      console.error(error);
+    });
+}
+
+function loadYoutubeView() {
+  const now = Date.now();
+
+  pageTitle.textContent = titles.youtube;
+  setRandomVoiceLine();
+
+  if (
+    youtubeCache &&
+    now - youtubeCacheTime < YOUTUBE_CLIENT_CACHE_MS
+  ) {
+    requestId++;
+    stopFakeProgress();
+
+    currentData = youtubeCache;
+    renderYoutube(currentData);
+    return;
+  }
+
+  const currentRequest = ++requestId;
+
+  startFakeProgress();
+
+  fetch(CONFIG.API_URL + "?view=youtube")
+    .then(res => res.json())
+    .then(data => {
+      if (currentRequest !== requestId) {
+        stopFakeProgress();
+        return;
+      }
+
+      finishFakeProgress();
+
+      youtubeCache = data.videos || [];
+      youtubeCacheTime = Date.now();
+
+      currentData = youtubeCache;
+      renderYoutube(currentData);
+    })
+    .catch(error => {
+      if (currentRequest !== requestId) return;
+
+      stopFakeProgress();
       app.innerHTML = `<p class="error">Failed to load data.</p>`;
       console.error(error);
     });
