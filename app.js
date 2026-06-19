@@ -751,14 +751,14 @@ function renderClips(clips) {
           ${c.thumbnail ? `<img class="youtube-thumb" src="${c.thumbnail}" loading="lazy" alt="">` : ""}
 
           <div class="youtube-info">
-            <div class="youtube-title">${mainTitle}</div>
+            <div class="youtube-title">${escapeHtml(mainTitle)}</div>
 
             ${subTitles.map(t => `
-              <div class="youtube-subtitle">${t}</div>
+              <div class="youtube-subtitle">${escapeHtml(t)}</div>
             `).join("")}
 
-            <div class="youtube-player">${c.name || "-"}</div>
-            <div class="youtube-meta">${c.team || "-"} │ ${c.role || "-"} │ ${c.nationality || "-"}</div>
+            <div class="youtube-player">${escapeHtml(c.name || "-")}</div>
+            <div class="youtube-meta">${escapeHtml(c.team || "-")} │ ${escapeHtml(c.role || "-")} │ ${escapeHtml(c.nationality || "-")}</div>
             <div class="youtube-date">🎬 ${Number(c.views || 0).toLocaleString()} views ・ ${timeAgo(c.date)}</div>
           </div>
         </div>
@@ -1123,5 +1123,15 @@ function updateAllButtonCounts(counts) {
   });
 }
 
+function escapeHtml(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
 loadView(currentView);
+
 
