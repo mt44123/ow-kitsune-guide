@@ -81,7 +81,10 @@ const titles = {
   cn: "CN",
   jp: "JP",
   intl: "INTL",
-  youtube: "YOUTUBE",
+  
+  youtube: "NEW",
+  youtubehot: "HOT",
+  youtubejp: "JP",
 
   clips: "NEW",
   hotclips: "HOT",
@@ -311,7 +314,9 @@ document
   
   document.body.classList.toggle(
   "has-sub-nav",
-  isLiveView(view) || isClipView(view)
+  isLiveView(view) ||
+  isClipView(view) ||
+  isYoutubeView(view)
 );
 }
 
@@ -923,7 +928,9 @@ function renderYoutube(videos) {
 
             <div class="youtube-player">${escapeHtml(v.name || "-")}</div>
             <div class="youtube-meta">${escapeHtml(v.team || "-")} │ ${escapeHtml(v.role || "-")} │ ${escapeHtml(v.nationality || "-")}</div>
-            <div class="youtube-date">📅 ${v.date || "-"} ・ ${timeAgo(v.date)}</div>
+            <div class="youtube-date">
+            👁 ${Number(v.views || 0).toLocaleString()} views ・ 📅 ${timeAgo(v.date)}
+          </div>
           </div>
         </div>
       </a>
