@@ -30,6 +30,10 @@ let liveCache = null;
 let liveCacheTime = 0;
 const LIVE_CLIENT_CACHE_MS = 60 * 1000;
 
+let playerLinksCache = null;
+let playerLinksCacheTime = 0;
+const PLAYER_LINKS_CLIENT_CACHE_MS = 10 * 60 * 1000;
+
 function startFakeProgress() {
     progressSteps =
     progressSets[Math.floor(Math.random() * progressSets.length)];
@@ -365,6 +369,11 @@ function loadView(view) {
     return;
   }
 
+  if (view === "playerlinks") {
+    loadPlayerLinksView();
+    return;
+  }
+
   const currentRequest = ++requestId;
 
   startFakeProgress();
@@ -407,6 +416,57 @@ function loadView(view) {
   currentData = data.players || [];
   renderLive(currentData);
 }
+    })
+    .catch(error => {
+      if (currentRequest !== requestId) return;
+
+      stopFakeProgress();
+
+      app.innerHTML = `<p class="error">Failed to load data.</p>`;
+      console.error(error);
+    });
+}
+
+function loadPlayerLinksView() {
+  const now = Date.now();
+
+  pageTitle.textContent = titles.playerlinks;
+  setRandomVoiceLine();
+
+  if (
+    playerLinksCache &&
+    now - playerLinksCacheTime < PLAYER_LINKS_CLIENT_CACHE_MS
+  ) {
+    currentData = playerLinksCache;
+    renderPlayerLinks(currentData);
+    return;
+  }
+
+  const currentRequest = ++requestId;
+
+  startFakeProgress();
+
+  fetch(CONFIG.API_URL + "?view=playerlinks")
+    .then(res => res.json())
+    .then(data => {
+      if (currentRequest !== requestId) {
+        stopFakeProgress();
+        return;
+      }
+
+      finishFakeProgress();
+
+      updated.textContent = data.lastUpdated || "";
+
+      if (data.counts) {
+        updateAllButtonCounts(data.counts);
+      }
+
+      playerLinksCache = data.playerLinks || [];
+      playerLinksCacheTime = Date.now();
+
+      currentData = playerLinksCache;
+      renderPlayerLinks(currentData);
     })
     .catch(error => {
       if (currentRequest !== requestId) return;
