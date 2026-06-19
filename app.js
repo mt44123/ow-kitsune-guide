@@ -298,6 +298,8 @@ document
 
 updateNavState(currentView);
 
+document.body.classList.add("show-search-header");
+
 let lastScrollY = window.scrollY;
 
 window.addEventListener("scroll", () => {
