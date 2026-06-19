@@ -767,8 +767,15 @@ img{
 #searchBox{
   position:sticky;
   top:72px;
-  margin-top:8px;
+  margin-top:0;
+
   z-index:98;
+
+  background:var(--bg-dark);
+
+  padding-top:8px;
+  padding-bottom:8px;
+
   transition:.2s;
 }
 
