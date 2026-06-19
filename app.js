@@ -219,6 +219,7 @@ function setRandomVoiceLine() {
 
 const liveViews = ["new", "viewers", "kr", "en", "cn", "jp", "intl"];
 const clipViews = ["clips", "hotclips", "jpclips"];
+const youtubeViews = [  "youtube",  "youtubehot",  "youtubejp"];
 
 let currentLiveView =
   liveViews.includes(currentView)
@@ -230,12 +231,21 @@ let currentClipView =
     ? currentView
     : "clips";
 
+let currentYoutubeView =
+  youtubeViews.includes(currentView)
+    ? currentView
+    : "youtube";
+
 function isLiveView(view) {
   return liveViews.includes(view);
 }
 
 function isClipView(view) {
   return clipViews.includes(view);
+}
+
+function isYoutubeView(view) {
+  return youtubeViews.includes(view);
 }
 
 function updateNavState(view) {
