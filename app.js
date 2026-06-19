@@ -207,7 +207,7 @@ function setRandomVoiceLine() {
 }
 
 const liveViews = ["new", "viewers", "kr", "en", "cn", "jp", "intl"];
-const clipViews = ["clips", "hotclips"];
+const clipViews = ["clips", "hotclips", "jpclips", "globalclips"];
 
 let currentLiveView =
   liveViews.includes(currentView)
