@@ -713,3 +713,17 @@ img{
   white-space:pre-line;
   text-align:center;
 }
+
+.main-nav{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  flex-wrap:nowrap;
+  margin-bottom:10px;
+}
+
+.sub-nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
