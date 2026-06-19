@@ -717,40 +717,6 @@ img{
   text-align:center;
 }
 
-.main-nav{
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  flex-wrap:nowrap;
-
-  position:sticky;
-  top:0;
-  z-index:100;
-
-  background:var(--bg-dark);
-  padding:8px 0;
-}
-
-.main-nav button{
-  flex:0 0 auto;
-}
-
-.sub-nav{
-  display:flex;
-  gap:6px;
-  flex-wrap:nowrap;
-  overflow-x:auto;
-
-  position:sticky;
-  top:66px;
-  z-index:99;
-
-  background:var(--bg-dark);
-  padding:6px 0;
-
-  scrollbar-width:none;
-}
-
 .sub-nav::-webkit-scrollbar{
   display:none;
 }
@@ -764,24 +730,45 @@ img{
   white-space:nowrap;
 }
 
-#searchBox{
+.sticky-header{
   position:sticky;
-  top:72px;
-
-  z-index:98;
+  top:0;
+  z-index:1000;
 
   background:var(--bg-dark);
 
-  padding-top:8px;
-  padding-bottom:8px;
+  padding:8px 0 10px;
 
-  box-shadow:0 4px 8px rgba(0,0,0,.25);
-
-  transition:.2s;
+  box-shadow:0 4px 12px rgba(0,0,0,.35);
 }
 
-body.has-sub-nav #searchBox{
-  top:112px;
+.main-nav{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  flex-wrap:nowrap;
+}
+
+.main-nav button{
+  flex:0 0 auto;
+}
+
+.sub-nav{
+  display:flex;
+  gap:6px;
+  flex-wrap:nowrap;
+  overflow-x:auto;
+
+  scrollbar-width:none;
+}
+
+.sub-nav::-webkit-scrollbar{
+  display:none;
+}
+
+#searchBox{
+  background:var(--bg-main);
+  transition:.2s;
 }
 
 body:not(.show-search-header) #searchBox{
