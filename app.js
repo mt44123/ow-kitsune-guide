@@ -298,6 +298,20 @@ document
 
 updateNavState(currentView);
 
+let lastScrollY = window.scrollY;
+
+window.addEventListener("scroll", () => {
+  const currentScrollY = window.scrollY;
+
+  if (currentScrollY < lastScrollY || currentScrollY < 80) {
+    document.body.classList.add("show-search-header");
+  } else {
+    document.body.classList.remove("show-search-header");
+  }
+
+  lastScrollY = currentScrollY;
+});
+
 searchBox.addEventListener("input", () => {
   if (currentView === "youtube") {
     renderYoutube(filterYoutube(currentData));
