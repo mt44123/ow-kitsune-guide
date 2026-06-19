@@ -74,8 +74,12 @@ const titles = {
   jp: "JP",
   intl: "INTL",
   youtube: "YOUTUBE",
-  clips: "NEW CLIPS",
-  hotclips: "HOT CLIPS",
+
+  clips: "NEW",
+  hotclips: "HOT",
+  jpclips: "JP",
+  globalclips: "GLOBAL",
+
   playerlinks: "PLAYER LINKS"
 };
 
@@ -381,7 +385,12 @@ function loadView(view) {
   pageTitle.textContent = titles[view] || view.toUpperCase();
   setRandomVoiceLine();
 
-  fetch(CONFIG.API_URL + "?view=" + view)
+const apiView =
+  view === "jpclips" || view === "globalclips"
+    ? "hotclips"
+    : view;
+
+fetch(CONFIG.API_URL + "?view=" + apiView)
     .then(res => res.json())
     .then(data => {
   if (currentRequest !== requestId) {
@@ -403,9 +412,15 @@ function loadView(view) {
 
 } else if (
   view === "clips" ||
-  view === "hotclips"
+  view === "hotclips" ||
+  view === "jpclips" ||
+  view === "globalclips"
 ) {
-  currentData = data.clips || [];
+  currentData = filterClipView(
+    data.clips || [],
+    view
+  );
+
   renderClips(currentData);
 
 } else if (view === "playerlinks") {
@@ -637,6 +652,27 @@ function filterClips(clips) {
       .toLowerCase()
       .includes(keyword)
   );
+}
+
+function filterClipView(clips, view) {
+
+  if (view === "jpclips") {
+    return clips.filter(
+      c =>
+        getNationalityRegionClass(c.nationality) ===
+        "region-jp"
+    );
+  }
+
+  if (view === "globalclips") {
+    return clips.filter(
+      c =>
+        getNationalityRegionClass(c.nationality) !==
+        "region-jp"
+    );
+  }
+
+  return clips;
 }
 
 function filterPlayerLinks(players) {
