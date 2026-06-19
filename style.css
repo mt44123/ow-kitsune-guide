@@ -628,9 +628,12 @@ p{
   color:var(--accent);
 }
 
-html,
-body{
+html{
   overflow-x:hidden;
+}
+
+body{
+  overflow-x:clip;
 }
 
 img{
