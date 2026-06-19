@@ -929,7 +929,7 @@ function renderYoutube(videos) {
             <div class="youtube-player">${escapeHtml(v.name || "-")}</div>
             <div class="youtube-meta">${escapeHtml(v.team || "-")} │ ${escapeHtml(v.role || "-")} │ ${escapeHtml(v.nationality || "-")}</div>
             <div class="youtube-date">
-            👁 ${Number(v.views || 0).toLocaleString()} views ・ 📅 ${timeAgo(v.date)}
+            🔥 ${formatViews(v.views)} ・ 📅 ${timeAgo(v.date)}
           </div>
           </div>
         </div>
@@ -1320,6 +1320,20 @@ function timeAgo(dateString) {
 
   const y = Math.floor(diff / 31536000);
   return `${y} year${y > 1 ? "s" : ""} ago`;
+}
+
+function formatViews(views) {
+  views = Number(views || 0);
+
+  if (views >= 1000000) {
+    return (views / 1000000).toFixed(1) + "M";
+  }
+
+  if (views >= 1000) {
+    return (views / 1000).toFixed(1) + "K";
+  }
+
+  return views.toLocaleString();
 }
 
 function updateAllButtonCounts(counts) {
