@@ -775,3 +775,10 @@ img{
 .search-hidden{
   display:none;
 }
+
+.search-button.search-active,
+#searchToggle.search-active{
+  background:var(--accent);
+  color:var(--text-main);
+  font-weight:bold;
+}
