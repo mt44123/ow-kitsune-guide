@@ -260,6 +260,11 @@ function updateNavState(view) {
       .querySelector(`.main-nav button[data-view="${view}"]`)
       ?.classList.add("active");
   }
+  
+  document.body.classList.toggle(
+  "has-sub-nav",
+  isLiveView(view) || isClipView(view)
+);
 }
 
 document
