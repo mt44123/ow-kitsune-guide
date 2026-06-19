@@ -320,10 +320,16 @@ document
   .forEach(button => {
     button.addEventListener("click", () => {
       if (button.id === "searchToggle") return;
+      
       if (button.dataset.section === "live") {
         currentView = currentLiveView;
+      
       } else if (button.dataset.section === "clips") {
         currentView = currentClipView;
+      
+      } else if (button.dataset.section === "youtube") {
+        currentView = currentYoutubeView;
+      
       } else {
         currentView = button.dataset.view;
       }
@@ -351,6 +357,10 @@ document
         currentClipView = currentView;
       }
 
+      if (isYoutubeView(currentView)) {
+        currentYoutubeView = currentView;
+      }
+            
       searchBox.value = "";
 
       history.replaceState({}, "", "?view=" + currentView);
@@ -408,8 +418,8 @@ function loadView(view) {
     return;
   }
 
-  if (view === "youtube") {
-  loadYoutubeView();
+  if (isYoutubeView(view)) {
+  loadYoutubeView(view);
   return;
 }
 
@@ -477,7 +487,7 @@ fetch(CONFIG.API_URL + "?view=" + view)
     });
 }
 
-function loadYoutubeView() {
+function loadYoutubeView(view) {
   const now = Date.now();
 
   pageTitle.textContent = titles.youtube;
