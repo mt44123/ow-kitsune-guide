@@ -93,7 +93,7 @@ const titles = {
   clips: "NEW",
   hotclips: "HOT",
   jpclips: "JP",
-  soopclips: "SOOP",
+  soopclips: "SOOP NEW",
   soophotclips: "SOOP HOT",
 
   playerlinks: "PLAYER LINKS"
