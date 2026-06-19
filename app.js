@@ -313,20 +313,15 @@ document
 
 updateNavState(currentView);
 
-document.body.classList.add("show-search-header");
+const searchToggle =
+  document.getElementById("searchToggle");
 
-let lastScrollY = window.scrollY;
+searchToggle?.addEventListener("click", () => {
+  searchBox.classList.toggle("search-hidden");
 
-window.addEventListener("scroll", () => {
-  const currentScrollY = window.scrollY;
-
-  if (currentScrollY < lastScrollY || currentScrollY < 80) {
-    document.body.classList.add("show-search-header");
-  } else {
-    document.body.classList.remove("show-search-header");
+  if (!searchBox.classList.contains("search-hidden")) {
+    searchBox.focus();
   }
-
-  lastScrollY = currentScrollY;
 });
 
 searchBox.addEventListener("input", () => {
@@ -922,3 +917,4 @@ function updateAllButtonCounts(counts) {
 }
 
 loadView(currentView);
+
