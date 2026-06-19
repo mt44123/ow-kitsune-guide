@@ -34,9 +34,13 @@ let playerLinksCache = null;
 let playerLinksCacheTime = 0;
 const PLAYER_LINKS_CLIENT_CACHE_MS =  6 * 60 * 60 * 1000;
 
-let hotClipsCache = null;
-let hotClipsCacheTime = 0;
-const HOT_CLIPS_CLIENT_CACHE_MS = 6 * 60 * 60 * 1000;
+let twitchClipsCache = null;
+let twitchClipsCacheTime = 0;
+
+let soopClipsCache = null;
+let soopClipsCacheTime = 0;
+
+const CLIPS_CLIENT_CACHE_MS = 6 * 60 * 60 * 1000;
 
 let youtubeCache = null;
 let youtubeCacheTime = 0;
@@ -493,18 +497,32 @@ function loadYoutubeView(view) {
 }
 
 function loadClipsView(view) {
+  const now = Date.now();
+
   pageTitle.textContent = titles[view] || view.toUpperCase();
   setRandomVoiceLine();
+
+  const isSoop =
+    view === "soopclips" ||
+    view === "soophotclips";
+
+  const cache = isSoop ? soopClipsCache : twitchClipsCache;
+  const cacheTime = isSoop ? soopClipsCacheTime : twitchClipsCacheTime;
+
+  if (cache && now - cacheTime < CLIPS_CLIENT_CACHE_MS) {
+    requestId++;
+    stopFakeProgress();
+
+    currentData = filterClipView(cache, view);
+    renderClips(currentData);
+    return;
+  }
 
   const currentRequest = ++requestId;
 
   startFakeProgress();
 
-  const apiView =
-    view === "soopclips" ||
-    view === "soophotclips"
-      ? "soopclips"
-      : "hotclips";
+  const apiView = isSoop ? "soopclips" : "hotclips";
 
   fetch(CONFIG.API_URL + "?view=" + apiView)
     .then(res => res.json())
@@ -516,10 +534,17 @@ function loadClipsView(view) {
 
       finishFakeProgress();
 
-      const clips =
-        apiView === "soopclips"
-          ? (data.soopclips || [])
-          : (data.clips || []);
+      const clips = isSoop
+        ? (data.soopclips || [])
+        : (data.clips || []);
+
+      if (isSoop) {
+        soopClipsCache = clips;
+        soopClipsCacheTime = Date.now();
+      } else {
+        twitchClipsCache = clips;
+        twitchClipsCacheTime = Date.now();
+      }
 
       currentData = filterClipView(clips, view);
       renderClips(currentData);
@@ -532,7 +557,6 @@ function loadClipsView(view) {
       console.error(error);
     });
 }
-
 function loadPlayerLinksView() {
   const now = Date.now();
 
