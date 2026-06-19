@@ -437,10 +437,11 @@ if (
   playerLinksCache &&
   now - playerLinksCacheTime < PLAYER_LINKS_CLIENT_CACHE_MS
 ) {
-  requestId++;
-  currentData = playerLinksCache;
-  renderPlayerLinks(currentData);
-  return;
+requestId++;
+stopFakeProgress();
+currentData = playerLinksCache;
+renderPlayerLinks(currentData);
+return;
 }
 
   const currentRequest = ++requestId;
@@ -483,11 +484,12 @@ function loadLiveView(view) {
   const now = Date.now();
 
 if (liveCache && now - liveCacheTime < LIVE_CLIENT_CACHE_MS) {
-  requestId++;
-  pageTitle.textContent = titles[view] || view.toUpperCase();
-  setRandomVoiceLine();
-  renderLiveFromCache(view);
-  return;
+requestId++;
+stopFakeProgress();
+pageTitle.textContent = titles[view] || view.toUpperCase();
+setRandomVoiceLine();
+renderLiveFromCache(view);
+return;
 }
 
   const currentRequest = ++requestId;
