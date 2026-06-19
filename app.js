@@ -308,34 +308,6 @@ document
 
 updateNavState(currentView);
 
-      loadView(currentView);
-    });
-});
-
-document
-  .querySelectorAll("#liveSubNav button")
-  .forEach(button => {
-
-    button.addEventListener("click", () => {
-
-      currentView = button.dataset.view;
-      currentLiveView = currentView;
-
-      searchBox.value = "";
-
-      history.replaceState(
-        {},
-        "",
-        "?view=" + currentView
-      );
-
-      updateNavState(currentView);
-      loadView(currentView);
-    });
-});
-
-updateNavState(currentView);
-
 document.body.classList.add("show-search-header");
 
 let lastScrollY = window.scrollY;
