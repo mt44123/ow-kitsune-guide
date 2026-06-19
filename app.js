@@ -372,7 +372,7 @@ searchBox.addEventListener("input", () => {
       renderLive(filterPlayers(currentData));
     }
 
-  }, 200);
+  }, 300);
 });
 
 function loadView(view) {
