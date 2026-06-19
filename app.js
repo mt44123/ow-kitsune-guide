@@ -433,14 +433,15 @@ function loadPlayerLinksView() {
   pageTitle.textContent = titles.playerlinks;
   setRandomVoiceLine();
 
-  if (
-    playerLinksCache &&
-    now - playerLinksCacheTime < PLAYER_LINKS_CLIENT_CACHE_MS
-  ) {
-    currentData = playerLinksCache;
-    renderPlayerLinks(currentData);
-    return;
-  }
+if (
+  playerLinksCache &&
+  now - playerLinksCacheTime < PLAYER_LINKS_CLIENT_CACHE_MS
+) {
+  requestId++;
+  currentData = playerLinksCache;
+  renderPlayerLinks(currentData);
+  return;
+}
 
   const currentRequest = ++requestId;
 
@@ -482,6 +483,7 @@ function loadLiveView(view) {
   const now = Date.now();
 
 if (liveCache && now - liveCacheTime < LIVE_CLIENT_CACHE_MS) {
+  requestId++;
   pageTitle.textContent = titles[view] || view.toUpperCase();
   setRandomVoiceLine();
   renderLiveFromCache(view);
