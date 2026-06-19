@@ -270,6 +270,7 @@ document
   .querySelectorAll(".main-nav button")
   .forEach(button => {
     button.addEventListener("click", () => {
+      if (button.id === "searchToggle") return;
       if (button.dataset.section === "live") {
         currentView = currentLiveView;
       } else if (button.dataset.section === "clips") {
