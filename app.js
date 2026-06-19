@@ -869,7 +869,7 @@ function updateAllButtonCounts(counts) {
   return;
 }
 
-    button.innerHTML = `${label}<br>(${count})`;
+    button.innerHTML = `${label} (${count})`;
   });
 }
 
