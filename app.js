@@ -408,11 +408,7 @@ searchBox.addEventListener("input", () => {
     if (isYoutubeView(currentView)) {
   renderYoutube(filterYoutube(currentData));
 
-} else if (
-  currentView === "clips" ||
-  currentView === "hotclips" ||
-  currentView === "jpclips"
-) {
+} else if (isClipView(currentView)) {
   renderClips(filterClips(currentData));
 
 } else if (currentView === "playerlinks") {
