@@ -418,7 +418,7 @@ p{
   margin-top:40px;
   padding-top:20px;
   border-top:1px solid #333;
-  color:#777;
+  color:var(--text-muted);
   font-size:12px;
   line-height:1.6;
 }
@@ -436,7 +436,7 @@ p{
 }
 
 #voiceLine{
-  color:#888;
+  color:var(--text-muted);
   font-size:13px;
   font-style:italic;
 }
@@ -587,7 +587,7 @@ p{
 
 .tagline{
   margin-top:0;
-  color:#888;
+  color:var(--text-muted);
   font-size:12px;
   letter-spacing:.5px;
 }
@@ -611,7 +611,7 @@ p{
 }
 
 .scroll-note{
-  color:#888;
+  color:var(--text-muted);
   font-size:12px;
   margin-bottom:8px;
   text-align:center;
@@ -625,7 +625,7 @@ p{
 
 .player-name-link:hover,
 .team-link:hover{
-  color:#f99e1a;
+  color:var(--accent);
 }
 
 html,
@@ -643,18 +643,18 @@ img{
 }
 
 .feedback-link a{
-  color:#888;
+  color:var(--text-muted);
   text-decoration:none;
   font-size:13px;
 }
 
 .feedback-link a:hover{
-  color:#aaa;
+  color:var(--text-sub);
   text-decoration:underline;
 }
 
 .footer a{
-  color:#f99e1a;
+  color:var(--accent);
   text-decoration:none;
 }
 
@@ -664,7 +664,7 @@ img{
 
 .playerlinks-help{
   margin-top:8px;
-  color:#888;
+  color:var(--text-muted);
 }
 
 .playerlinks-help summary{
