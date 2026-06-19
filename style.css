@@ -727,7 +727,14 @@ img{
 
 .sub-nav{
   display:flex;
-  gap:8px;
-  flex-wrap:wrap;
+  gap:6px;
+  flex-wrap:nowrap;
+  overflow-x:auto;
   margin-top:8px;
+
+  scrollbar-width:none;
+}
+
+.sub-nav::-webkit-scrollbar{
+  display:none;
 }
