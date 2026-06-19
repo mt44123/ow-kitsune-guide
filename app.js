@@ -777,6 +777,26 @@ function filterYoutube(videos) {
   );
 }
 
+function filterYoutubeView(videos, view) {
+  let result = [...videos];
+
+  if (view === "youtubehot") {
+    return result.sort(
+      (a, b) => Number(b.views || 0) - Number(a.views || 0)
+    );
+  }
+
+  if (view === "youtubejp") {
+    return result.filter(v =>
+      String(v.titleJp || "").trim()
+    );
+  }
+
+  return result.sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+}
+
 function filterClips(clips) {
   const keyword = searchBox.value.toLowerCase().trim();
   if (!keyword) return clips;
