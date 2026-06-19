@@ -254,6 +254,7 @@ function updateNavState(view) {
 
   const liveSubNav = document.getElementById("liveSubNav");
   const clipsSubNav = document.getElementById("clipsSubNav");
+  const youtubeSubNav = document.getElementById("youtubeSubNav");
 
 document
   .querySelectorAll(
@@ -267,6 +268,7 @@ document
 
   if (liveSubNav) liveSubNav.style.display = "none";
   if (clipsSubNav) clipsSubNav.style.display = "none";
+  if (youtubeSubNav) youtubeSubNav.style.display = "none";
 
   if (isLiveView(view)) {
     liveButton?.classList.add("active");
@@ -286,6 +288,21 @@ document
       .querySelector(`#clipsSubNav button[data-view="${view}"]`)
       ?.classList.add("active");
 
+} else if (isYoutubeView(view)) {
+
+  document
+    .querySelector('.main-nav button[data-section="youtube"]')
+    ?.classList.add("active");
+
+  if (youtubeSubNav)
+    youtubeSubNav.style.display = "flex";
+
+  document
+    .querySelector(
+      `#youtubeSubNav button[data-view="${view}"]`
+    )
+    ?.classList.add("active");
+    
   } else {
     document
       .querySelector(`.main-nav button[data-view="${view}"]`)
