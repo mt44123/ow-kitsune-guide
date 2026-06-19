@@ -763,3 +763,16 @@ img{
   font-size:12px;
   white-space:nowrap;
 }
+
+#searchBox{
+  position:sticky;
+  top:104px;
+  z-index:98;
+  transition:.2s;
+}
+
+body:not(.show-search-header) #searchBox{
+  opacity:0;
+  transform:translateY(-8px);
+  pointer-events:none;
+}
