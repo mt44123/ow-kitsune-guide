@@ -719,11 +719,15 @@ img{
   gap:8px;
   overflow-x:auto;
   flex-wrap:nowrap;
-  margin-bottom:10px;
+}
+
+.main-nav button{
+  flex:0 0 auto;
 }
 
 .sub-nav{
   display:flex;
-  flex-wrap:wrap;
   gap:8px;
+  flex-wrap:wrap;
+  margin-top:8px;
 }
