@@ -78,7 +78,6 @@ const titles = {
   clips: "NEW",
   hotclips: "HOT",
   jpclips: "JP",
-  globalclips: "GLOBAL",
 
   playerlinks: "PLAYER LINKS"
 };
@@ -211,7 +210,7 @@ function setRandomVoiceLine() {
 }
 
 const liveViews = ["new", "viewers", "kr", "en", "cn", "jp", "intl"];
-const clipViews = ["clips", "hotclips", "jpclips", "globalclips"];
+const clipViews = ["clips", "hotclips", "jpclips"];
 
 let currentLiveView =
   liveViews.includes(currentView)
@@ -354,8 +353,7 @@ searchBox.addEventListener("input", () => {
 } else if (
   currentView === "clips" ||
   currentView === "hotclips" ||
-  currentView === "jpclips" ||
-  currentView === "globalclips"
+  currentView === "jpclips"
 ) {
   renderClips(filterClips(currentData));
 
@@ -388,7 +386,7 @@ function loadView(view) {
   setRandomVoiceLine();
 
 const apiView =
-  view === "jpclips" || view === "globalclips"
+  view === "jpclips"
     ? "hotclips"
     : view;
 
@@ -415,8 +413,7 @@ fetch(CONFIG.API_URL + "?view=" + apiView)
 } else if (
   view === "clips" ||
   view === "hotclips" ||
-  view === "jpclips" ||
-  view === "globalclips"
+  view === "jpclips"
 ) {
   currentData = filterClipView(
     data.clips || [],
@@ -662,14 +659,6 @@ function filterClipView(clips, view) {
     return clips.filter(
       c =>
         getNationalityRegionClass(c.nationality) ===
-        "region-jp"
-    );
-  }
-
-  if (view === "globalclips") {
-    return clips.filter(
-      c =>
-        getNationalityRegionClass(c.nationality) !==
         "region-jp"
     );
   }
