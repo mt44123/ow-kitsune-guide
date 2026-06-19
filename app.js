@@ -493,26 +493,8 @@ function loadYoutubeView(view) {
 }
 
 function loadClipsView(view) {
-  const now = Date.now();
-
   pageTitle.textContent = titles[view] || view.toUpperCase();
   setRandomVoiceLine();
-
-  if (
-    hotClipsCache &&
-    now - hotClipsCacheTime < HOT_CLIPS_CLIENT_CACHE_MS
-  ) {
-    requestId++;
-    stopFakeProgress();
-
-    currentData = filterClipView(
-      hotClipsCache,
-      view
-    );
-
-    renderClips(currentData);
-    return;
-  }
 
   const currentRequest = ++requestId;
 
@@ -534,28 +516,19 @@ function loadClipsView(view) {
 
       finishFakeProgress();
 
-      hotClipsCache =
+      const clips =
         apiView === "soopclips"
           ? (data.soopclips || [])
           : (data.clips || []);
 
-      hotClipsCacheTime = Date.now();
-
-      currentData = filterClipView(
-        hotClipsCache,
-        view
-      );
-
+      currentData = filterClipView(clips, view);
       renderClips(currentData);
     })
     .catch(error => {
       if (currentRequest !== requestId) return;
 
       stopFakeProgress();
-
-      app.innerHTML =
-        `<p class="error">Failed to load data.</p>`;
-
+      app.innerHTML = `<p class="error">Failed to load data.</p>`;
       console.error(error);
     });
 }
