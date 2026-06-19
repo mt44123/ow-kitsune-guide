@@ -415,10 +415,6 @@ fetch(CONFIG.API_URL + "?view=" + view)
 
   updated.textContent = data.lastUpdated || "";
 
-      if (data.counts) {
-        updateAllButtonCounts(data.counts);
-      }
-
       if (view === "youtube") {
   currentData = data.videos || [];
   renderYoutube(currentData);
@@ -580,10 +576,6 @@ return;
       finishFakeProgress();
 
       updated.textContent = data.lastUpdated || "";
-
-      if (data.counts) {
-        updateAllButtonCounts(data.counts);
-      }
 
       playerLinksCache = data.playerLinks || [];
       playerLinksCacheTime = Date.now();
