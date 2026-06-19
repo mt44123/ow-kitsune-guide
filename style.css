@@ -336,15 +336,15 @@ p{
 .youtube-card{
   width:100%;
   max-width:100%;
-  background:#222;
+  background:var(--bg-main);
   border-radius:14px;
   overflow:hidden;
   transition:.15s;
-  border-left:4px solid #444;
+  border-left:4px solid var(--border);
 }
 
 .youtube-card:hover{
-  background:#2a2a2a;
+  background:var(--bg-light);
   transform:translateY(-2px);
 }
 
@@ -363,7 +363,7 @@ p{
   font-size:15px;
   font-weight:bold;
   line-height:1.35;
-  color:#fff;
+  color:var(--text-main);
   display:-webkit-box;
   -webkit-line-clamp:3;
   -webkit-box-orient:vertical;
@@ -372,7 +372,7 @@ p{
 
 .youtube-subtitle{
   margin-top:6px;
-  color:#aaa;
+  color:var(--text-sub);
   font-size:12px;
   line-height:1.35;
   display:-webkit-box;
@@ -385,20 +385,20 @@ p{
   margin-top:10px;
   font-size:15px;
   font-weight:bold;
-  color:#f99e1a;
+  color:var(--accent);
 }
 
 .youtube-meta{
   margin-top:3px;
-  color:#bbb;
+  color:var(--text-sub);
   font-size:12px;
 }
 
 .youtube-date{
   margin-top:8px;
   padding-top:8px;
-  border-top:1px solid #444;
-  color:#ddd;
+  border-top:1px solid var(--border);
+  color:var(--text-sub);
   font-size:12px;
   font-weight:bold;
 }
