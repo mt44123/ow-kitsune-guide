@@ -198,53 +198,66 @@ function setRandomVoiceLine() {
     voiceLines[Math.floor(Math.random() * voiceLines.length)];
 }
 
-const liveViews = ["new","viewers","kr","en","cn","jp","intl"];
+const liveViews = ["new", "viewers", "kr", "en", "cn", "jp", "intl"];
+const clipViews = ["clips", "hotclips"];
+
 let currentLiveView =
   liveViews.includes(currentView)
     ? currentView
     : "new";
 
-function isLiveView(view){
+let currentClipView =
+  clipViews.includes(currentView)
+    ? currentView
+    : "clips";
+
+function isLiveView(view) {
   return liveViews.includes(view);
 }
 
-function updateNavState(view){
-  const liveButton =
-    document.querySelector('[data-section="live"]');
+function isClipView(view) {
+  return clipViews.includes(view);
+}
 
-  const liveSubNav =
-    document.getElementById("liveSubNav");
+function updateNavState(view) {
+  const liveButton = document.querySelector('[data-section="live"]');
+  const clipsButton = document.querySelector('[data-section="clips"]');
+
+  const liveSubNav = document.getElementById("liveSubNav");
+  const clipsSubNav = document.getElementById("clipsSubNav");
 
   document
     .querySelectorAll(".main-nav button")
     .forEach(b => b.classList.remove("active"));
 
   document
-    .querySelectorAll("#liveSubNav button")
+    .querySelectorAll(".sub-nav button")
     .forEach(b => b.classList.remove("active"));
 
-  if (isLiveView(view)) {
+  if (liveSubNav) liveSubNav.style.display = "none";
+  if (clipsSubNav) clipsSubNav.style.display = "none";
 
+  if (isLiveView(view)) {
     liveButton?.classList.add("active");
 
-    if (liveSubNav)
-      liveSubNav.style.display = "flex";
+    if (liveSubNav) liveSubNav.style.display = "flex";
 
     document
-      .querySelector(
-        `#liveSubNav button[data-view="${view}"]`
-      )
+      .querySelector(`#liveSubNav button[data-view="${view}"]`)
+      ?.classList.add("active");
+
+  } else if (isClipView(view)) {
+    clipsButton?.classList.add("active");
+
+    if (clipsSubNav) clipsSubNav.style.display = "flex";
+
+    document
+      .querySelector(`#clipsSubNav button[data-view="${view}"]`)
       ?.classList.add("active");
 
   } else {
-
-    if (liveSubNav)
-      liveSubNav.style.display = "none";
-
     document
-      .querySelector(
-        `.main-nav button[data-view="${view}"]`
-      )
+      .querySelector(`.main-nav button[data-view="${view}"]`)
       ?.classList.add("active");
   }
 }
@@ -252,24 +265,49 @@ function updateNavState(view){
 document
   .querySelectorAll(".main-nav button")
   .forEach(button => {
-
     button.addEventListener("click", () => {
-
       if (button.dataset.section === "live") {
         currentView = currentLiveView;
+      } else if (button.dataset.section === "clips") {
+        currentView = currentClipView;
       } else {
         currentView = button.dataset.view;
       }
 
       searchBox.value = "";
 
-      history.replaceState(
-        {},
-        "",
-        "?view=" + currentView
-      );
+      history.replaceState({}, "", "?view=" + currentView);
 
       updateNavState(currentView);
+      loadView(currentView);
+    });
+  });
+
+document
+  .querySelectorAll(".sub-nav button")
+  .forEach(button => {
+    button.addEventListener("click", () => {
+      currentView = button.dataset.view;
+
+      if (isLiveView(currentView)) {
+        currentLiveView = currentView;
+      }
+
+      if (isClipView(currentView)) {
+        currentClipView = currentView;
+      }
+
+      searchBox.value = "";
+
+      history.replaceState({}, "", "?view=" + currentView);
+
+      updateNavState(currentView);
+      loadView(currentView);
+    });
+  });
+
+updateNavState(currentView);
+
       loadView(currentView);
     });
 });
