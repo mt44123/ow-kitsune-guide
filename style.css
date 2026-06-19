@@ -783,16 +783,22 @@ img{
   font-weight:bold;
 }
 
-/* CLIPSだけ */
-
-body.clip-view .youtube-title{
-  -webkit-line-clamp:6;
-}
+/* CLIPS */
 
 @media (min-width:900px){
 
   body.clip-view #app.youtube-mode{
-    grid-template-columns:repeat(6,minmax(0,1fr));
+    grid-template-columns:repeat(5,minmax(0,1fr));
+  }
+
+}
+
+/* CLIPS mobile */
+
+@media (max-width:900px){
+
+  body.clip-view #app.youtube-mode{
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 
 }
