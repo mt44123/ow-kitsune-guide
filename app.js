@@ -1517,15 +1517,15 @@ function loadToolsView() {
   <div class="card">
   <h3>📚 Translation Tools</h3>
 
-  <p>
-    Some YouTube and SOOP streams may include built-in captions and translation features.
-    If captions or translations are unavailable, try using the tools below.
-  </p>
+<p>
+  Some YouTube and SOOP streams may include built-in captions and translation features.
+  If captions or translations are unavailable, here are some tools that can be used for free or have generous free tiers.
+</p>
 
-  <p>
-    YouTubeやSOOPでは、配信や動画によって公式の自動字幕・翻訳機能が利用できる場合があります
-    字幕や翻訳機能が利用できない場合は、下記のツールをお試しください
-  </p>
+<p>
+  YouTubeやSOOPでは、配信や動画によって公式の自動字幕・翻訳機能が利用できる場合があります。
+  字幕や翻訳機能が利用できない場合は、無料利用でも十分実用的な下記のツールをお試しください。
+</p>
 
 <div class="tool-item">
   <div>
