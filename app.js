@@ -928,14 +928,14 @@ function filterClipView(clips, view) {
         (Date.now() - date.getTime()) /
         (1000 * 60 * 60 * 24);
   
-      return days <= 730;
+      return days <= 30;
     });
   
     return result.sort(
-      (a, b) => new Date(b.date) - new Date(a.date)
+      (a, b) => Number(b.views || 0) - Number(a.views || 0)
     );
   }
-
+  
   return result.sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
