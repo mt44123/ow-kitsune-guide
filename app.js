@@ -1511,13 +1511,28 @@ function loadToolsView() {
 
   app.className = "";
   app.innerHTML = `
-    <div class="card">
-      <h3>📚 Tools</h3>
-      <p>Coming Soon...</p>
-    </div>
-  `;
+    app.innerHTML = `
+    
+  <div class="tools-page">
+
+  <div class="card">
+    <h3>📚 Translation Tools</h3>
+
+    <p><a href="https://translate.google.com/" target="_blank">Google Translate</a></p>
+
+    <p><a href="https://www.deepl.com/translator" target="_blank">DeepL</a></p>
+
+    <p><a href="https://chatgpt.com/" target="_blank">ChatGPT</a></p>
+
+    <p><a href="https://lens.google/" target="_blank">Google Lens</a></p>
+  </div>
+
+  <div class="card">
+    <h3>📺 Stream Resources</h3>
+
+    <p><a href="https://liquipedia.net/overwatch/Main_Page" target="_blank">Liquipedia</a></p>
+  </div>
+
+</div>
+`;
 }
-
-loadView(currentView);
-
-
