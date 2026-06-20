@@ -1665,6 +1665,25 @@ function loadToolsView() {
 
 <div class="card">
 <div class="tool-item">
+
+  <div>
+    <strong>💻 Discord (Browser Version)</strong>
+  </div>
+
+  <p>
+   If you use Discord in a web browser, you can translate messages using your browser's built-in translation feature.
+   This can be useful when reading Discord servers run by overseas players.
+  </p>
+
+  <p>
+    Discordをブラウザ版で利用すると、ブラウザの翻訳機能でメッセージを翻訳できます。海外プレイヤーのDiscordサーバーを読む際に便利です。
+  </p>
+
+</div>
+</div>
+
+<div class="card">
+<div class="tool-item">
   <div>
     <a href="https://www.duolingo.com/learn">
       💻📱 Duolingo
