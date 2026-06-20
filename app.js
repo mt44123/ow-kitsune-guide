@@ -921,10 +921,24 @@ function filterClipView(clips, view) {
     );
   }
 
- if (
-  view === "chzzkhotclips" ||
-  view === "chzzkbestclips"
-) {
+if (view === "chzzkhotclips") {
+  result = result.filter(c => {
+    const date = new Date(c.date);
+    if (isNaN(date.getTime())) return false;
+
+    const days =
+      (Date.now() - date.getTime()) /
+      (1000 * 60 * 60 * 24);
+
+    return days <= 30;
+  });
+
+  return result.sort(
+    (a, b) => Number(b.views || 0) - Number(a.views || 0)
+  );
+}
+
+if (view === "chzzkbestclips") {
   return result.sort(
     (a, b) => Number(b.views || 0) - Number(a.views || 0)
   );
