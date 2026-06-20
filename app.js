@@ -240,7 +240,7 @@ const liveViews = ["new", "viewers", "kr", "en", "cn", "jp", "intl"];
 const clipViews = [
   "clips",  "hotclips",  "jpclips",
   "soopclips",  "soophotclips", 
-  "chzzknewclips",  "chzzkhotclips"
+  "chzzknewclips",  "chzzkbestclips"
 ];
 const youtubeViews = [  "youtube",  "youtubehot",  "youtubejp"];
 
@@ -534,7 +534,7 @@ const isSoop =
 
 const isChzzk =
   view === "chzzknewclips" ||
-  view === "chzzkhotclips";
+  view === "chzzkbestclips";
 
 let cache;
 let cacheTime;
@@ -579,8 +579,8 @@ if (isSoop) {
   apiView = "soopclips";
 } else if (view === "chzzknewclips") {
   apiView = "chzzknewclips";
-} else if (view === "chzzkhotclips") {
-  apiView = "chzzkhotclips";
+} else if (view === "chzzkbestclips") {
+  apiView = "chzzkbestclips";
 }
 
   fetch(CONFIG.API_URL + "?view=" + apiView)
@@ -599,7 +599,7 @@ if (isSoop) {
   clips = data.soopclips || [];
 } else if (view === "chzzknewclips") {
   clips = data.chzzknewclips || [];
-} else if (view === "chzzkhotclips") {
+} else if (view === "chzzkbestclips") {
   clips = data.chzzkhotclips || [];
 } else {
   clips = data.clips || [];
@@ -613,7 +613,7 @@ if (isSoop) {
   chzzkNewClipsCache = clips;
   chzzkNewClipsCacheTime = Date.now();
 
-} else if (view === "chzzkhotclips") {
+} else if (view === "chzzkbestclips") {
   chzzkHotClipsCache = clips;
   chzzkHotClipsCacheTime = Date.now();
 
