@@ -522,7 +522,7 @@ function loadClipsView(view) {
 if (viewNote) {
   if (view === "hotclips") {
     viewNote.textContent =
-      "🔥 HOT = Most viewed clips from the last 30 days";
+      "HOT = Most viewed clips from the last 30 days　過去30日以内の人気クリップ";
   } else {
     viewNote.textContent = "";
   }
