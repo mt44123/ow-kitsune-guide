@@ -1526,8 +1526,8 @@ function loadToolsView() {
     <a href="https://support.google.com/chrome/answer/10538231?hl=ja">Chromeで字幕と翻訳を管理する</a>
   </div>
 
-  <p>...</p>
-  <p>...</p>
+  <p>Generate captions in Chrome and translate videos and live streams in real time.</p>
+  <p>Chromeブラウザで、動画やライブ配信の字幕を生成して、リアルタイムで翻訳できます。</p>
 </div>
 
   <div class="tool-item">
