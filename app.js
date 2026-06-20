@@ -1523,8 +1523,8 @@ function loadToolsView() {
   </p>
 
   <p>
-    YouTubeやSOOPでは、配信や動画によって公式の自動字幕・翻訳機能が利用できる場合があります。
-    字幕や翻訳機能が利用できない場合は、下記のツールをお試しください。
+    YouTubeやSOOPでは、配信や動画によって公式の自動字幕・翻訳機能が利用できる場合があります
+    字幕や翻訳機能が利用できない場合は、下記のツールをお試しください
   </p>
 
 <div class="tool-item">
@@ -1560,34 +1560,29 @@ function loadToolsView() {
   
 </div>
 
-
-
-
-
-
-
-
-
-  <div class="tool-item">
-    <a href="https://www.deepl.com/translator" target="_blank" rel="noopener">
-      DeepL
-    </a>
-    <p>Useful for natural translations. 自然な翻訳を確認したい時に便利です。</p>
-  </div>
-
-  <div class="tool-item">
-    <a href="https://chatgpt.com/" target="_blank" rel="noopener">
+<div class="tool-item">
+  <div>
+    <a href="https://chatgpt.com/">
       ChatGPT
     </a>
-    <p>Useful for translation, summaries, and explaining slang. 翻訳・要約・スラング解説に便利です。</p>
   </div>
 
-  <div class="tool-item">
-    <a href="https://lens.google/" target="_blank" rel="noopener">
-      Google Lens
-    </a>
-    <p>Useful for translating text in images. 画像内の文字翻訳に便利です。</p>
-  </div>
+  <p>
+    My personal recommendation. ChatGPT usually provides the most natural translations, especially for gaming terms, esports slang, and stream conversations.
+  </p>
+  <p>
+    個人的に一番おすすめです。ゲーム用語やeスポーツ用語、配信中の会話なども自然に翻訳してくれます。
+  </p>
+  <p>
+    For YouTube videos, open the transcript ("Show transcript"), copy the text, and paste it into ChatGPT. It can translate long interviews, stream clips, and match discussions with better context than most translation tools.
+  </p>
+  <p>
+    YouTube動画の場合は、「文字起こし（Show transcript）」を開いて内容をコピーし、ChatGPTに貼り付けるだけです。長いインタビューや配信内容、試合の振り返りなども文脈を考慮して翻訳してくれます。
+  </p>
+</div>
+
+
+
 </div>
 `;
 }
