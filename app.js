@@ -1345,34 +1345,31 @@ function timeAgo(dateString) {
   const date = new Date(dateString);
   if (isNaN(date.getTime())) return "-";
 
-  const now = new Date();
-  const diff = Math.floor((now - date) / 1000);
+  const diff = Math.floor((Date.now() - date.getTime()) / 1000);
 
-  if (diff < 60) return "just now";
-  if (diff < 3600) return `${Math.floor(diff / 60)} min ago`;
+  if (diff < 60) return "NOW";
+
+  if (diff < 3600) {
+    return `${Math.floor(diff / 60)}m`;
+  }
 
   if (diff < 86400) {
-    const h = Math.floor(diff / 3600);
-    return `${h} hour${h > 1 ? "s" : ""} ago`;
+    return `${Math.floor(diff / 3600)}h`;
   }
 
-  if (diff < 604800) {
-    const d = Math.floor(diff / 86400);
-    return `${d} day${d > 1 ? "s" : ""} ago`;
+  const days = Math.floor(diff / 86400);
+
+  if (days < 30) {
+    return `${days}d`;
   }
 
-  if (diff < 2592000) {
-    const w = Math.floor(diff / 604800);
-    return `${w} week${w > 1 ? "s" : ""} ago`;
+  const months = Math.floor(days / 30);
+
+  if (months < 12) {
+    return `${months}mo`;
   }
 
-  if (diff < 31536000) {
-    const m = Math.floor(diff / 2592000);
-    return `${m} month${m > 1 ? "s" : ""} ago`;
-  }
-
-  const y = Math.floor(diff / 31536000);
-  return `${y} year${y > 1 ? "s" : ""} ago`;
+  return `${Math.floor(months / 12)}y`;
 }
 
 function formatViews(views) {
