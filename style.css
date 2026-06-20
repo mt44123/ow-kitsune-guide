@@ -853,4 +853,15 @@ img{
   line-height:1.4;
 }
 
-loadView(currentView);
+.tools-page{
+  display:grid;
+  gap:12px;
+}
+
+@media (min-width:900px){
+  .tools-page{
+    max-width:900px;
+    margin:0 auto;
+    grid-template-columns:1fr;
+  }
+}
