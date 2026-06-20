@@ -803,16 +803,19 @@ img{
 
 }
 
-.tips-link{
-  margin:8px 0 12px;
+.header-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+}
+
+.tools-link{
+  background:none;
+  border:none;
+  color:#f99e1a;
   font-size:13px;
-}
-
-.tips-link a{
-  color:var(--accent);
-  text-decoration:none;
-}
-
-.tips-link a:hover{
-  text-decoration:underline;
+  cursor:pointer;
+  white-space:nowrap;
+  padding:0;
+  margin-top:8px;
 }
