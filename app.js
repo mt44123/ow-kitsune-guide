@@ -1617,12 +1617,51 @@ function loadToolsView() {
   </div>
 
 <p>
+  A Chrome extension that lets you extract text directly from images and videos using OCR.
+</p>
+
+<p>
   It was the first OCR tool I found through a web search, and I have been using it ever since. While there may be other alternatives, it has worked well for my needs.
 </p>
 <p>
-  検索で最初に見つけたOCRソフトだったため、ずっと使用しています。他にも選択肢はあると思いますが、私の用途では特に問題なく利用できています
+  画像や動画内の文字をOCRで読み取り、テキスト化できるChrome拡張機能です。
+</p>
+
+<p>
+  検索で最初に見つけたOCRソフトだったため、ずっと使用しています。他にも選択肢はあると思いますが、私の用途では特に問題なく利用できています。
 </p>
    
+</div>
+</div>
+
+<div class="card">
+<div class="tool-item">
+  <div>
+    <a href="https://chromewebstore.google.com/detail/debflmkfmkejgppfabgfcbemelmnpnho?utm_source=item-share-cb">
+      💻 ViiTor Real-Time Translation
+    </a>
+  </div>
+
+<p>
+  Another Chrome extension that I recommend. Chrome's built-in Live Caption and translation features can sometimes use more system resources, while ViiTor is generally much lighter.
+</p>
+<p>
+  The translations can be less accurate, but the generated subtitles can be selected and copied. This makes it easy to paste them into ChatGPT or another AI assistant for higher-quality translations.
+</p>
+<p>
+  The free version has been more than sufficient for my personal use.
+</p>
+<p>
+  こちらもおすすめのChrome拡張機能です。Chromeの自動字幕起こし・翻訳機能はブラウザが少し重くなる場合がありますが、ViiTorは比較的軽快に動作します。
+</p>
+
+<p>
+  翻訳精度はやや粗めですが、生成された字幕を選択してコピーできるのが大きな特徴です。そのままChatGPTなどのAIに貼り付けることで、より自然な翻訳にすることができます。
+</p>
+
+<p>
+  私の使用用途では、無料版でも特に問題なく利用できています。
+</p>
 </div>
 </div>
 
