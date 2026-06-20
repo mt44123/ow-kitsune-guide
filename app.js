@@ -1547,3 +1547,5 @@ function loadToolsView() {
 </div>
 `;
 }
+
+loadView(currentView);
