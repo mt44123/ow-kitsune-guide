@@ -1586,8 +1586,27 @@ function loadToolsView() {
     YouTube動画の場合は、「文字起こし（文字起こしを表示）」を開いて内容をコピーし、ChatGPTに貼り付けるだけです。長いインタビューや配信内容、試合の振り返りなども文脈を考慮して翻訳してくれます。
   </p>
 </div>
+</div>
 
+<div class="card">
+<div class="tool-item">
+  <div>
+    <a href="https://www.duolingo.com/learn">
+      💻📱 Duolingo
+    </a>
+  </div>
 
+  <p>
+    Great for learning English, Korean, and other languages little by little.
+    Helpful if you want to understand streams without relying entirely on translation tools.
+  </p>
+  <p>
+    英語や韓国語などを少しずつ学べる語学学習アプリです。
+    翻訳ツールだけに頼らず、海外配信をもっと理解したい方におすすめです。
+  </p>
+   
+</div>
+</div>
 
 </div>
 `;
