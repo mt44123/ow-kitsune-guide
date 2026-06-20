@@ -516,6 +516,18 @@ function loadClipsView(view) {
   pageTitle.textContent = titles[view] || view.toUpperCase();
   setRandomVoiceLine();
 
+  const viewNote =
+  document.getElementById("viewNote");
+
+if (viewNote) {
+  if (view === "hotclips") {
+    viewNote.textContent =
+      "🔥 HOT = Most viewed clips from the last 30 days";
+  } else {
+    viewNote.textContent = "";
+  }
+}
+
 const isSoop =
   view === "soopclips" ||
   view === "soophotclips";
