@@ -1517,6 +1517,16 @@ function loadToolsView() {
   <div class="card">
   <h3>📚 Translation Tools</h3>
 
+  <p>
+    Some YouTube and SOOP streams may include built-in captions and translation features.
+    If captions or translations are unavailable, try using the tools below.
+  </p>
+
+  <p>
+    YouTubeやSOOPでは、配信や動画によって公式の自動字幕・翻訳機能が利用できる場合があります。
+    字幕や翻訳機能が利用できない場合は、下記のツールをお試しください。
+  </p>
+
 <div class="tool-item">
   <div>
     <a href="https://support.google.com/chrome/answer/10538231?hl=en-GB&sjid=4036900480667797437-NC">
@@ -1529,7 +1539,7 @@ function loadToolsView() {
   </div>
 
   <p>Generate captions in Chrome and translate videos and live streams in real time.</p>
-  <p>Chromeブラウザで、動画やライブ配信の字幕を生成して、リアルタイムで翻訳できます。</p>
+  <p>Chromeブラウザで、動画やライブ配信の字幕を生成して、リアルタイムで翻訳できます</p>
 </div>
 
 <div class="tool-item">
