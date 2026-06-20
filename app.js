@@ -1519,11 +1519,11 @@ function loadToolsView() {
 
 <div class="tool-item">
   <div>
-    <a href="https://support.google.com/chrome/answer/10538231?hl=en-GB&sjid=4036900480667797437-NC">Manage captions and translations in Chrome</a>
+    <a href="https://support.google.com/chrome/answer/10538231?hl=en-GB&sjid=4036900480667797437-NC">Manage captions and translations in Chrome(EN)</a>
   </div>
 
   <div>
-    <a href="https://support.google.com/chrome/answer/10538231?hl=ja">Chromeで字幕と翻訳を管理する</a>
+    <a href="https://support.google.com/chrome/answer/10538231?hl=ja">Chromeで字幕と翻訳を管理する(JP)</a>
   </div>
 
   <p>Generate captions in Chrome and translate videos and live streams in real time.</p>
