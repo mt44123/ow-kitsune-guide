@@ -524,19 +524,15 @@ function loadClipsView(view) {
 
 if (
   view === "hotclips" ||
-  view === "soophotclips"
+  view === "soophotclips" ||
+  view === "chzzkhotclips"
 ) {
   viewNote.textContent =
     "HOT = Most viewed clips from the last 30 days　過去30日以内の人気クリップ";
 
-} else if (view === "chzzkhotclips") {
-  viewNote.textContent =
-    "HOT = Most viewed recent clips　最近の人気クリップ";
-
-  
 } else if (view === "chzzkbestclips") {
   viewNote.textContent =
-    "BEST = Popular clips from all time　人気クリップ";
+    "BEST = Popular clips 人気クリップ";
 
 } else {
   viewNote.textContent = "";
