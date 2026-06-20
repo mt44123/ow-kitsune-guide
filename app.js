@@ -561,8 +561,6 @@ if (isSoop) {
     cache = chzzkBestClipsCache;
     cacheTime = chzzkBestClipsCacheTime;
   }
-
-}
   
 } else if (view === "hotclips") {
   cache = twitchHotClipsCache;
