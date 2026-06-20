@@ -1546,7 +1546,7 @@ function loadToolsView() {
   <p>Generate captions on Android and translate videos and live streams in real time.</p>
   <p>※I use an iPhone, so Android instructions are based on official documentation.</p>
   <p>Androidで、動画やライブ配信の字幕を生成して、リアルタイムで翻訳できます</p>
-　<p>※筆者はiPhoneユーザーのため、Android関連の内容は公式ドキュメントを参考にしています</p>
+  <p>※筆者はiPhoneユーザーのため、Android関連の内容は公式ドキュメントを参考にしています</p>
   
 </div>
 
