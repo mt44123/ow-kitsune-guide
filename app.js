@@ -923,16 +923,16 @@ function filterClipView(clips, view) {
     result = result.filter(c => {
       const date = new Date(c.date);
       if (isNaN(date.getTime())) return false;
-
+  
       const days =
         (Date.now() - date.getTime()) /
         (1000 * 60 * 60 * 24);
-
+  
       return days <= 730;
     });
-
+  
     return result.sort(
-      (a, b) => Number(b.views || 0) - Number(a.views || 0)
+      (a, b) => new Date(b.date) - new Date(a.date)
     );
   }
 
