@@ -1527,6 +1527,8 @@ function loadToolsView() {
   字幕や翻訳機能が利用できない場合は、無料利用でも十分実用的な下記のツールをお試しください。
 </p>
 
+<hr>
+
 <div class="tool-item">
   <div>
     <a href="https://support.google.com/chrome/answer/10538231?hl=en-GB&sjid=4036900480667797437-NC">
