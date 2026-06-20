@@ -586,7 +586,7 @@ p{
 }
 
 .tagline{
-  margin-top:0;
+  margin:0 0 4px;
   color:var(--text-muted);
   font-size:12px;
   letter-spacing:.5px;
