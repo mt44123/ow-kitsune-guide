@@ -910,11 +910,14 @@ function filterClipView(clips, view) {
     );
   }
 
-  if (view === "chzzkhotclips") {
-    return result.sort(
-      (a, b) => Number(b.views || 0) - Number(a.views || 0)
-    );
-  }
+ if (
+  view === "chzzkhotclips" ||
+  view === "chzzkbestclips"
+) {
+  return result.sort(
+    (a, b) => Number(b.views || 0) - Number(a.views || 0)
+  );
+}
   
   if (view === "soophotclips") {
     result = result.filter(c => {
