@@ -104,6 +104,7 @@ const titles = {
   soophotclips: "SOOP HOT",
   
   chzzknewclips: "CHZZK NEW",
+  chzzkhotclips: "CHZZK HOT",
   chzzkbestclips: "CHZZK BEST",
 
   playerlinks: "PLAYER LINKS"
@@ -240,7 +241,7 @@ const liveViews = ["new", "viewers", "kr", "en", "cn", "jp", "intl"];
 const clipViews = [
   "clips",  "hotclips",  "jpclips",
   "soopclips",  "soophotclips", 
-  "chzzknewclips",  "chzzkbestclips"
+  "chzzknewclips", "chzzkhotclips", "chzzkbestclips"
 ];
 const youtubeViews = [  "youtube",  "youtubehot",  "youtubejp"];
 
