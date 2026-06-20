@@ -1520,7 +1520,7 @@ function loadToolsView() {
 <div class="tool-item">
   <div>
     <a href="https://support.google.com/chrome/answer/10538231?hl=en-GB&sjid=4036900480667797437-NC">
-    Manage captions and translations in Chrome(EN)</a>
+    💻Manage captions and translations in Chrome(EN)</a>
   </div>
 
   <div>
@@ -1535,7 +1535,7 @@ function loadToolsView() {
 <div class="tool-item">
   <div>
     <a href="https://support.google.com/accessibility/android/answer/9350862?hl=en&sjid=4036900480667797437-NC">
-    Manage captions and translations on Android(EN)</a>
+    📱Manage captions and translations on Android(EN)</a>
   </div>
 
   <div>
