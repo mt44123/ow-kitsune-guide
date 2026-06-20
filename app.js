@@ -1519,16 +1519,44 @@ function loadToolsView() {
 
 <div class="tool-item">
   <div>
-    <a href="https://support.google.com/chrome/answer/10538231?hl=en-GB&sjid=4036900480667797437-NC">Manage captions and translations in Chrome(EN)</a>
+    <a href="https://support.google.com/chrome/answer/10538231?hl=en-GB&sjid=4036900480667797437-NC">
+    Manage captions and translations in Chrome(EN)</a>
   </div>
 
   <div>
-    <a href="https://support.google.com/chrome/answer/10538231?hl=ja">Chromeで字幕と翻訳を管理する(JP)</a>
+    <a href="https://support.google.com/chrome/answer/10538231?hl=ja">
+    Chromeで字幕と翻訳を管理する(JP)</a>
   </div>
 
   <p>Generate captions in Chrome and translate videos and live streams in real time.</p>
   <p>Chromeブラウザで、動画やライブ配信の字幕を生成して、リアルタイムで翻訳できます。</p>
 </div>
+
+<div class="tool-item">
+  <div>
+    <a href="https://support.google.com/accessibility/android/answer/9350862?hl=en&sjid=4036900480667797437-NC">
+    Manage captions and translations on Android(EN)</a>
+  </div>
+
+  <div>
+    <a href="https://support.google.com/accessibility/android/answer/9350862?hl=ja_ALL">
+    Androidで字幕と翻訳を管理する(JP)</a>
+  </div>
+
+  <p>Generate captions on Android and translate videos and live streams in real time.</p>
+  <p>※I use an iPhone, so Android instructions are based on official documentation.</p>
+  <p>Androidで、動画やライブ配信の字幕を生成して、リアルタイムで翻訳できます。</p>
+　<p>※筆者はiPhoneユーザーのため、Android関連の内容は公式ドキュメントを参考にしています；；</p>
+  
+</div>
+
+
+
+
+
+
+
+
 
   <div class="tool-item">
     <a href="https://www.deepl.com/translator" target="_blank" rel="noopener">
