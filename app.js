@@ -1573,18 +1573,38 @@ function loadToolsView() {
     </a>
   </div>
 
-  <p>
-    My personal recommendation. ChatGPT usually provides the most natural translations, especially for gaming terms, esports slang, and stream conversations.
-  </p>
-  <p>
-    個人的に一番おすすめです。ゲーム用語やeスポーツ用語、配信中の会話なども自然に翻訳してくれます。
-  </p>
-  <p>
-    For YouTube videos, open the transcript ("Show transcript"), copy the text, and paste it into ChatGPT. It can translate long interviews, stream clips, and match discussions with better context than most translation tools.
-  </p>
-  <p>
-    YouTube動画の場合は、「文字起こし（文字起こしを表示）」を開いて内容をコピーし、ChatGPTに貼り付けるだけです。長いインタビューや配信内容、試合の振り返りなども文脈を考慮して翻訳してくれます。
-  </p>
+<p>
+  ・My personal recommendation. ChatGPT usually provides the most natural translations, especially for gaming terms, esports slang, and stream conversations.
+</p>
+
+<p>
+  ・For YouTube videos, open the transcript ("Show transcript"), copy the text, and paste it into ChatGPT. It can translate long interviews, stream clips, and match discussions with better context than most translation tools.
+</p>
+
+<p>
+  ・Chrome Live Caption subtitles cannot be directly selected or copied. If needed, you can use an OCR tool to extract text from the screen and then paste it into ChatGPT or another AI assistant. This allows you to use your preferred AI instead of relying only on Google Translate.
+</p>
+
+<p>
+  Below are some OCR tools that I personally use.
+</p>
+
+<p>
+  ・個人的に一番おすすめです。ゲーム用語やeスポーツ用語、配信中の会話なども自然に翻訳してくれます。
+</p>
+
+<p>
+  ・YouTube動画の場合は、「文字起こし（文字起こしを表示）」を開いて内容をコピーし、ChatGPTに貼り付けるだけです。長いインタビューや配信内容、試合の振り返りなども文脈を考慮して翻訳してくれます。
+</p>
+
+<p>
+  ・Chromeの自動字幕起こしは直接選択やコピーができません。その場合はOCRソフトで画面内の文字を読み取り、テキスト化してからChatGPTなどのAIに貼り付ける方法もおすすめです。Google翻訳だけでなく、自分の好きなAIで翻訳できるようになります。
+</p>
+
+<p>
+  下記に私が実際に使用しているOCRソフトを紹介します。
+</p>
+  
 </div>
 </div>
 
