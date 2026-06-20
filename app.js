@@ -1602,7 +1602,7 @@ function loadToolsView() {
 </p>
 
 <p>
-  下記に私が実際に使用しているOCRソフトを紹介します。
+  下記に私が実際に使用しているOCRソフトを紹介します
 </p>
   
 </div>
@@ -1620,7 +1620,7 @@ function loadToolsView() {
   It was the first OCR tool I found through a web search, and I have been using it ever since. While there may be other alternatives, it has worked well for my needs.
 </p>
 <p>
-  検索で最初に見つけたOCRソフトだったため、ずっと使用しています。他にも選択肢はあると思いますが、私の用途では特に問題なく利用できています。
+  検索で最初に見つけたOCRソフトだったため、ずっと使用しています。他にも選択肢はあると思いますが、私の用途では特に問題なく利用できています
 </p>
    
 </div>
@@ -1634,15 +1634,10 @@ function loadToolsView() {
     </a>
   </div>
 
-  <p>
-     Great for learning English, Korean, Chinese, Japanese, chess, and many other topics through short daily lessons.
-</p>
-    Helpful if you want to understand streams without relying entirely on translation tools.
-  </p>
-  <p>
-    英語・韓国語・中国語・日本語・チェスなどを少しずつ学べる語学学習アプリです。
-    翻訳ツールだけに頼らず、海外配信をもっと理解したい方におすすめです。
-  </p>
+  <p>Great for learning English, Korean, Chinese, Japanese, chess, and many other topics through short daily lessons.</p>
+  <p>Helpful if you want to understand streams without relying entirely on translation tools.</p>
+  <p>英語・韓国語・中国語・日本語・チェスなどを少しずつ学べる語学学習アプリです</p>
+  <p>翻訳ツールだけに頼らず、海外配信をもっと理解したい方におすすめです</p>
    
 </div>
 </div>
