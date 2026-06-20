@@ -6,6 +6,12 @@ const updated = document.getElementById("updated");
 const pageTitle = document.getElementById("pageTitle");
 const voiceLine = document.getElementById("voiceLine");
 const searchBox = document.getElementById("searchBox");
+const toolsButton =  document.getElementById("toolsButton");
+
+toolsButton?.addEventListener(
+  "click",
+  () => loadToolsView()
+);
 
 const params = new URLSearchParams(window.location.search);
 let currentView = params.get("view") || "new";
@@ -1486,6 +1492,30 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function loadToolsView() {
+  currentView = "toolstips";
+  history.replaceState({}, "", "?view=toolstips");
+
+  updateNavState(currentView);
+  stopFakeProgress();
+
+  document.body.classList.remove("youtube-view", "clip-view");
+
+  pageTitle.textContent = "TOOLS";
+  setRandomVoiceLine();
+
+  updated.textContent = "";
+  document.getElementById("viewNote").textContent = "";
+
+  app.className = "";
+  app.innerHTML = `
+    <div class="card">
+      <h3>📚 Tools</h3>
+      <p>Coming Soon...</p>
+    </div>
+  `;
 }
 
 loadView(currentView);
