@@ -1518,13 +1518,11 @@ function loadToolsView() {
   <h3>📚 Translation Tools</h3>
 
 <p>
-  Some YouTube and SOOP streams may include built-in captions and translation features.
-  If captions or translations are unavailable, here are some tools that can be used for free or have generous free tiers.
+  If captions or translations are unavailable, try the tools below. For most users, the free versions are more than enough.
 </p>
 
 <p>
-  YouTubeやSOOPでは、配信や動画によって公式の自動字幕・翻訳機能が利用できる場合があります。
-  字幕や翻訳機能が利用できない場合は、無料利用でも十分実用的な下記のツールをお試しください。
+  字幕や翻訳機能が利用できない場合は、下記のツールをお試しください。一般的な用途であれば、無料版でも十分活用できます。
 </p>
 </div>
 
