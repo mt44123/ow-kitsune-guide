@@ -39,7 +39,7 @@ p{
   display:flex;
   flex-wrap:wrap;
   gap:8px;
-  margin:16px 0;
+  margin:8px 0;
 }
 
 .nav button{
