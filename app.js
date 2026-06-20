@@ -535,6 +535,7 @@ const isSoop =
 
 const isChzzk =
   view === "chzzknewclips" ||
+  view === "chzzkhotclips" ||
   view === "chzzkbestclips";
 
 let cache;
@@ -578,7 +579,11 @@ let apiView = view === "hotclips" ? "hotclips" : "clips";
 
 if (isSoop) {
   apiView = "soopclips";
-} else if (view === "chzzknewclips") {
+  
+} else if (
+  view === "chzzknewclips" ||
+  view === "chzzkhotclips"
+) {
   apiView = "chzzknewclips";
 } else if (view === "chzzkbestclips") {
   apiView = "chzzkbestclips";
@@ -598,10 +603,16 @@ let clips = [];
 
 if (isSoop) {
   clips = data.soopclips || [];
-} else if (view === "chzzknewclips") {
+
+} else if (
+  view === "chzzknewclips" ||
+  view === "chzzkhotclips"
+) {
   clips = data.chzzknewclips || [];
+
 } else if (view === "chzzkbestclips") {
   clips = data.chzzkbestclips || [];
+
 } else {
   clips = data.clips || [];
 }
@@ -887,6 +898,12 @@ function filterClipView(clips, view) {
     );
   }
 
+  if (view === "chzzkhotclips") {
+    return result.sort(
+      (a, b) => Number(b.views || 0) - Number(a.views || 0)
+    );
+  }
+  
   if (view === "soophotclips") {
     result = result.filter(c => {
       const date = new Date(c.date);
