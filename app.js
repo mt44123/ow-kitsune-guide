@@ -1510,10 +1510,9 @@ function loadToolsView() {
   document.getElementById("viewNote").textContent = "";
 
   app.className = "";
+
   app.innerHTML = `
-    app.innerHTML = `
-    
-  <div class="tools-page">
+<div class="tools-page">
 
   <div class="card">
     <h3>📚 Translation Tools</h3>
