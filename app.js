@@ -1526,33 +1526,35 @@ function loadToolsView() {
   YouTubeやSOOPでは、配信や動画によって公式の自動字幕・翻訳機能が利用できる場合があります。
   字幕や翻訳機能が利用できない場合は、無料利用でも十分実用的な下記のツールをお試しください。
 </p>
+</div>
 
-<hr>
-
+<div class="card">
 <div class="tool-item">
   <div>
     <a href="https://support.google.com/chrome/answer/10538231?hl=en-GB&sjid=4036900480667797437-NC">
-    💻Manage captions and translations in Chrome(EN)</a>
+    💻 Manage captions and translations in Chrome (EN)</a>
   </div>
 
   <div>
     <a href="https://support.google.com/chrome/answer/10538231?hl=ja">
-    Chromeで字幕と翻訳を管理する(JP)</a>
+    Chromeで字幕と翻訳を管理する (JP)</a>
   </div>
 
   <p>Generate captions in Chrome and translate videos and live streams in real time.</p>
   <p>Chromeブラウザで、動画やライブ配信の字幕を生成して、リアルタイムで翻訳できます</p>
 </div>
+</div>
 
+<div class="card">
 <div class="tool-item">
   <div>
     <a href="https://support.google.com/accessibility/android/answer/9350862?hl=en&sjid=4036900480667797437-NC">
-    📱Manage captions and translations on Android(EN)</a>
+    📱 Manage captions and translations on Android (EN)</a>
   </div>
 
   <div>
     <a href="https://support.google.com/accessibility/android/answer/9350862?hl=ja_ALL">
-    Androidで字幕と翻訳を管理する(JP)</a>
+    Androidで字幕と翻訳を管理する (JP)</a>
   </div>
 
   <p>Generate captions on Android and translate videos and live streams in real time.</p>
@@ -1561,11 +1563,13 @@ function loadToolsView() {
   <p>※筆者はiPhoneユーザーのため、Android関連の内容は公式ドキュメントを参考にしています</p>
   
 </div>
+</div>
 
+<div class="card">
 <div class="tool-item">
   <div>
     <a href="https://chatgpt.com/">
-      💻📱ChatGPT
+      💻📱 ChatGPT
     </a>
   </div>
 
