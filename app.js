@@ -1515,23 +1515,35 @@ function loadToolsView() {
 <div class="tools-page">
 
   <div class="card">
-    <h3>📚 Translation Tools</h3>
+  <h3>📚 Translation Tools</h3>
 
-    <p><a href="https://translate.google.com/" target="_blank">Google Translate</a></p>
-
-    <p><a href="https://www.deepl.com/translator" target="_blank">DeepL</a></p>
-
-    <p><a href="https://chatgpt.com/" target="_blank">ChatGPT</a></p>
-
-    <p><a href="https://lens.google/" target="_blank">Google Lens</a></p>
+  <div class="tool-item">
+    <a href="https://translate.google.com/" target="_blank" rel="noopener">
+      Google Translate
+    </a>
+    <p>Text translation tool. テキスト翻訳に使えます。</p>
   </div>
 
-  <div class="card">
-    <h3>📺 Stream Resources</h3>
-
-    <p><a href="https://liquipedia.net/overwatch/Main_Page" target="_blank">Liquipedia</a></p>
+  <div class="tool-item">
+    <a href="https://www.deepl.com/translator" target="_blank" rel="noopener">
+      DeepL
+    </a>
+    <p>Useful for natural translations. 自然な翻訳を確認したい時に便利です。</p>
   </div>
 
+  <div class="tool-item">
+    <a href="https://chatgpt.com/" target="_blank" rel="noopener">
+      ChatGPT
+    </a>
+    <p>Useful for translation, summaries, and explaining slang. 翻訳・要約・スラング解説に便利です。</p>
+  </div>
+
+  <div class="tool-item">
+    <a href="https://lens.google/" target="_blank" rel="noopener">
+      Google Lens
+    </a>
+    <p>Useful for translating text in images. 画像内の文字翻訳に便利です。</p>
+  </div>
 </div>
 `;
 }
