@@ -104,7 +104,7 @@ const titles = {
   soophotclips: "SOOP HOT",
   
   chzzknewclips: "CHZZK NEW",
-  chzzkhotclips: "CHZZK HOT",
+  chzzkbestclips: "CHZZK BEST",
 
   playerlinks: "PLAYER LINKS"
 };
