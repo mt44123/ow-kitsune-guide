@@ -1611,17 +1611,36 @@ function loadToolsView() {
 <div class="card">
 <div class="tool-item">
   <div>
+    <a href="https://chromewebstore.google.com/detail/eenjdnjldapjajjofmldgmkjaienebbj?utm_source=item-share-cb">
+      💻 Copyfish 🐟 Free OCR Software
+    </a>
+  </div>
+
+<p>
+  It was the first OCR tool I found through a web search, and I have been using it ever since. While there may be other alternatives, it has worked well for my needs.
+</p>
+<p>
+  検索で最初に見つけたOCRソフトだったため、ずっと使用しています。他にも選択肢はあると思いますが、私の用途では特に問題なく利用できています。
+</p>
+   
+</div>
+</div>
+
+<div class="card">
+<div class="tool-item">
+  <div>
     <a href="https://www.duolingo.com/learn">
       💻📱 Duolingo
     </a>
   </div>
 
   <p>
-    Great for learning English, Korean, and other languages little by little.
+     Great for learning English, Korean, Chinese, Japanese, chess, and many other topics through short daily lessons.
+</p>
     Helpful if you want to understand streams without relying entirely on translation tools.
   </p>
   <p>
-    英語や韓国語などを少しずつ学べる語学学習アプリです。
+    英語・韓国語・中国語・日本語・チェスなどを少しずつ学べる語学学習アプリです。
     翻訳ツールだけに頼らず、海外配信をもっと理解したい方におすすめです。
   </p>
    
