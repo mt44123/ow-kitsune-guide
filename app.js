@@ -1563,7 +1563,7 @@ function loadToolsView() {
 <div class="tool-item">
   <div>
     <a href="https://chatgpt.com/">
-      ChatGPT
+      💻📱ChatGPT
     </a>
   </div>
 
