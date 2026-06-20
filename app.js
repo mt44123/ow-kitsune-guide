@@ -36,13 +36,14 @@ const PLAYER_LINKS_CLIENT_CACHE_MS =  6 * 60 * 60 * 1000;
 
 let twitchClipsCache = null;
 let twitchClipsCacheTime = 0;
+let twitchHotClipsCache = null;
+let twitchHotClipsCacheTime = 0;
 
 let soopClipsCache = null;
 let soopClipsCacheTime = 0;
 
 let chzzkNewClipsCache = null;
 let chzzkNewClipsCacheTime = 0;
-
 let chzzkHotClipsCache = null;
 let chzzkHotClipsCacheTime = 0;
 
@@ -539,6 +540,9 @@ if (isSoop) {
     view === "chzzknewclips"
       ? chzzkNewClipsCacheTime
       : chzzkHotClipsCacheTime;
+} else if (view === "hotclips") {
+  cache = twitchHotClipsCache;
+  cacheTime = twitchHotClipsCacheTime;
 } else {
   cache = twitchClipsCache;
   cacheTime = twitchClipsCacheTime;
@@ -557,7 +561,7 @@ if (isSoop) {
 
   startFakeProgress();
 
-let apiView = "hotclips";
+let apiView = view === "hotclips" ? "hotclips" : "clips";
 
 if (isSoop) {
   apiView = "soopclips";
@@ -601,6 +605,9 @@ if (isSoop) {
   chzzkHotClipsCache = clips;
   chzzkHotClipsCacheTime = Date.now();
 
+} else if (view === "hotclips") {
+  twitchHotClipsCache = clips;
+  twitchHotClipsCacheTime = Date.now();
 } else {
   twitchClipsCache = clips;
   twitchClipsCacheTime = Date.now();
