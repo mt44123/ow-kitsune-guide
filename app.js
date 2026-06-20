@@ -1498,6 +1498,8 @@ function loadToolsView() {
   currentView = "toolstips";
   history.replaceState({}, "", "?view=toolstips");
 
+  requestId++;
+
   updateNavState(currentView);
   stopFakeProgress();
 
