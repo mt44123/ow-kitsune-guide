@@ -46,6 +46,8 @@ let chzzkNewClipsCache = null;
 let chzzkNewClipsCacheTime = 0;
 let chzzkHotClipsCache = null;
 let chzzkHotClipsCacheTime = 0;
+let chzzkBestClipsCache = null;
+let chzzkBestClipsCacheTime = 0;
 
 const CLIPS_CLIENT_CACHE_MS = 6 * 60 * 60 * 1000;
 
@@ -544,16 +546,24 @@ let cacheTime;
 if (isSoop) {
   cache = soopClipsCache;
   cacheTime = soopClipsCacheTime;
+  
 } else if (isChzzk) {
-  cache =
-    view === "chzzknewclips"
-      ? chzzkNewClipsCache
-      : chzzkHotClipsCache;
 
-  cacheTime =
-    view === "chzzknewclips"
-      ? chzzkNewClipsCacheTime
-      : chzzkHotClipsCacheTime;
+  if (view === "chzzknewclips") {
+    cache = chzzkNewClipsCache;
+    cacheTime = chzzkNewClipsCacheTime;
+
+  } else if (view === "chzzkhotclips") {
+    cache = chzzkHotClipsCache;
+    cacheTime = chzzkHotClipsCacheTime;
+
+  } else {
+    cache = chzzkBestClipsCache;
+    cacheTime = chzzkBestClipsCacheTime;
+  }
+
+}
+  
 } else if (view === "hotclips") {
   cache = twitchHotClipsCache;
   cacheTime = twitchHotClipsCacheTime;
@@ -625,9 +635,13 @@ if (isSoop) {
   chzzkNewClipsCache = clips;
   chzzkNewClipsCacheTime = Date.now();
 
-} else if (view === "chzzkbestclips") {
+} else if (view === "chzzkhotclips") {
   chzzkHotClipsCache = clips;
   chzzkHotClipsCacheTime = Date.now();
+
+} else if (view === "chzzkbestclips") {
+  chzzkBestClipsCache = clips;
+  chzzkBestClipsCacheTime = Date.now();
 
 } else if (view === "hotclips") {
   twitchHotClipsCache = clips;
