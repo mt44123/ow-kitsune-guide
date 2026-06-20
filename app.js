@@ -1509,7 +1509,7 @@ function loadToolsView() {
   updated.textContent = "";
   document.getElementById("viewNote").textContent = "";
 
-  app.className = "";
+  app.className = "tools-mode";
 
   app.innerHTML = `
 <div class="tools-page">
