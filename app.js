@@ -1667,7 +1667,7 @@ function loadToolsView() {
 <div class="tool-item">
 
   <div>
-    <strong>💻 Discord (Browser Version)</strong>
+    <strong>💻📱 Discord (Browser Version)</strong>
   </div>
 
   <p>
