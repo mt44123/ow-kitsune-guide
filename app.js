@@ -600,7 +600,7 @@ if (isSoop) {
 } else if (view === "chzzknewclips") {
   clips = data.chzzknewclips || [];
 } else if (view === "chzzkbestclips") {
-  clips = data.chzzkhotclips || [];
+  clips = data.chzzkbestclips || [];
 } else {
   clips = data.clips || [];
 }
