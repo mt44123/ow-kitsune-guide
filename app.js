@@ -686,7 +686,10 @@ const todayBirthdays = players.filter(p => {
   const todaySection = `
   <div class="birthday-today">
 
-    <h3>🎂 Today's Birthdays</h3>
+   <h3>
+  🎂 Today's Birthdays
+  (${today.getMonth() + 1}/${today.getDate()})
+</h3>
 
     ${
       todayBirthdays.length
