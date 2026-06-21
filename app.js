@@ -1380,6 +1380,15 @@ function getNationalityRegionClass(nationality) {
   return "region-unknown";
 }
 
+function shortNationality(nationality) {
+  const map = {
+    "Dominican Republic": "Dominican Rep.",
+    "United Arab Emirates": "U.Arab Emirates"
+  };
+
+  return map[nationality] || nationality;
+}
+
 function getTeamRegionClass(region, team) {
   team = String(team || "");
 
