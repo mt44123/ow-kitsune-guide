@@ -1721,16 +1721,19 @@ function linkDot(url, cls) {
 }
 
 function getNationalityRegionClass(nationality) {
-  const nat = String(nationality || "").toLowerCase();
+  const nat = String(nationality || "")
+    .toLowerCase()
+    .trim();
 
-  if (nat.includes("japan") || nat.includes("jp")) return "region-jp";
-  if (nat.includes("south korea") || nat.includes("kr")) return "region-kr";
-  if (nat.includes("china") || nat.includes("cn")) return "region-cn";
+  if (["japan", "jp"].includes(nat)) return "region-jp";
+  if (["south korea", "kr"].includes(nat)) return "region-kr";
+  if (["china", "cn"].includes(nat)) return "region-cn";
+  if (["united states", "usa", "us", "en"].includes(nat)) return "region-na";
 
   const na = [
     "canada", "costa rica", "cuba", "dominican republic", "el salvador",
     "guatemala", "honduras", "jamaica", "mexico", "nicaragua",
-    "panama", "us", "en"
+    "panama",
   ];
 
   const pac = [
