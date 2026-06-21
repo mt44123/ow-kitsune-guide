@@ -1081,3 +1081,75 @@ img{
     font-size:24px;
   }
 }
+
+.birthday-count{
+  margin-left:4px;
+  color:var(--accent);
+  font-weight:bold;
+}
+
+.birthday-calendar-link{
+  display:inline-block;
+  margin-top:3px;
+  color:var(--accent);
+  text-decoration:none;
+  font-size:10px;
+  font-weight:bold;
+}
+
+.birthday-calendar-link:hover{
+  text-decoration:underline;
+}
+
+.birthday-list{
+  display:none;
+  margin-top:12px;
+}
+
+.birthday-list-item{
+  display:grid;
+  grid-template-columns:52px 1fr auto;
+  gap:8px;
+  align-items:center;
+
+  background:var(--bg-light);
+  border:1px solid var(--border);
+  border-left:4px solid var(--accent);
+  border-radius:8px;
+
+  padding:8px;
+  margin-bottom:8px;
+
+  font-size:12px;
+}
+
+.birthday-list-date{
+  color:var(--accent);
+  font-weight:bold;
+}
+
+.birthday-list-item a{
+  color:var(--accent);
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.birthday-list-item.region-na{ border-left-color:#813AF2; }
+.birthday-list-item.region-kr{ border-left-color:#E51B23; }
+.birthday-list-item.region-cn{ border-left-color:#FFC422; }
+.birthday-list-item.region-emea{ border-left-color:#00C4C4; }
+.birthday-list-item.region-jp{ border-left-color:#F5F5F5; }
+.birthday-list-item.region-pac{ border-left-color:#FFB6D9; }
+.birthday-list-item.region-sa{ border-left-color:#22C55E; }
+.birthday-list-item.region-unknown{ border-left-color:#555; }
+
+@media (max-width:900px){
+  .birthday-weekdays,
+  .birthday-grid{
+    display:none !important;
+  }
+
+  .birthday-list{
+    display:block;
+  }
+}
