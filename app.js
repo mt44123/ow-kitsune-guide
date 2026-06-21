@@ -1382,8 +1382,8 @@ function getNationalityRegionClass(nationality) {
 
 function shortNationality(nationality) {
   return String(nationality || "")
-    .replaceAll("Dominican Republic", "Dominican Rep.")
-    .replaceAll("United Arab Emirates", "U.Arab Emirates");
+    .replaceAll("Dominican Republic", "Dominican")
+    .replaceAll("United Arab Emirates", "U.Arab Emir");
 }
 
 function getTeamRegionClass(region, team) {
