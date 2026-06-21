@@ -1203,3 +1203,11 @@ img{
 .birthday-today-empty{
   color:var(--text-sub);
 }
+
+#voiceLine{
+  cursor:pointer;
+}
+
+#voiceLine:hover{
+  color:var(--accent);
+}
