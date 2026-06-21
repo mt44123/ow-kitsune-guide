@@ -1522,7 +1522,7 @@ function renderPlayerLinks(players) {
 app.innerHTML = `
   <div class="discord-note">
     *Click player or team names to open Liquipedia.<br>
-    プレイヤー名・チーム名をクリックするとLiquipediaを開きます。
+    プレイヤー名・チーム名をクリックするとLiquipediaを開きます。皆Liquipediaを見よう。
 
     <details class="playerlinks-help">
       <summary>More Info / 詳細</summary>
@@ -1536,6 +1536,15 @@ app.innerHTML = `
         *If the Discord app is installed on your mobile device, the link may only open the app and not navigate to the server.<br>
         Discordアプリがインストールされている場合、アプリが開くだけでサーバーへ移動しないことがあります。
       </p>
+      
+      <p>
+        Some player and team information is sourced from Liquipedia.
+        Special thanks to the Liquipedia contributors who help keep esports history alive.
+        
+        一部のプレイヤー情報・チーム情報はLiquipediaを参考にしています。
+        eスポーツの歴史を支えているLiquipedia編集者の皆様に感謝します。
+      </p>
+      
     </details>
   </div>
 
