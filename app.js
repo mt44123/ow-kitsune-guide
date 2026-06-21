@@ -19,33 +19,18 @@ voiceLine?.addEventListener("click", () => {
 
   const utterance = new SpeechSynthesisUtterance(text);
 
-const targetLang =
-  voiceLine.dataset.lang || "en-US";
-
 const voices = speechSynthesis.getVoices();
 
-let matchingVoices =
-  voices.filter(v =>
-    v.lang.toLowerCase().startsWith(
-      targetLang.toLowerCase().split("-")[0]
-    )
-  );
-
-if (matchingVoices.length === 0) {
-  matchingVoices = voices;
-}
-
 const voice =
-  matchingVoices[
-    Math.floor(Math.random() * matchingVoices.length)
+  voices[
+    Math.floor(Math.random() * voices.length)
   ];
 
 utterance.voice = voice;
-utterance.lang = targetLang;
 
 if (voiceActor) {
   voiceActor.textContent =
-    `🎙️ ${voice.name} (${voice.lang})`;
+    `${voice.name} (${voice.lang})`;
 }
 
 utterance.rate = 0.95;
