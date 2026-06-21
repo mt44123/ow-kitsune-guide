@@ -511,7 +511,11 @@ function loadBirthdaysView() {
   const now = Date.now();
 
   updated.textContent = "";
-  document.getElementById("viewNote").textContent = "";
+  
+  document.getElementById("viewNote").innerHTML = `
+  🌐 Dates are shown based on your device's local date.<br>
+  🌐 日付はお使いの端末のローカル日付を基準に表示されます。
+  `;
 
   pageTitle.textContent = "BIRTHDAYS";
   setRandomVoiceLine();
