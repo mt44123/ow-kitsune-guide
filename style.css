@@ -970,6 +970,12 @@ img{
   padding:6px;
 }
 
+.birthday-weekdays > div,
+.birthday-day,
+.birthday-event{
+  min-width:0;
+}
+
 .birthday-day{
   overflow:hidden;
 }
