@@ -539,6 +539,11 @@ function renderBirthdayCalendar(players) {
   const year = birthdayCalendarDate.getFullYear();
   const month = birthdayCalendarDate.getMonth();
 
+  const today = new Date();
+  const todayY = today.getFullYear();
+  const todayM = today.getMonth();
+  const todayD = today.getDate();
+
   const firstDay = new Date(year, month, 1);
   const startDay = firstDay.getDay();
   const lastDate = new Date(year, month + 1, 0).getDate();
@@ -552,10 +557,7 @@ function renderBirthdayCalendar(players) {
     const [, bornMonth, bornDay] = p.born.split("-").map(Number);
     if (bornMonth !== month + 1) return;
 
-    if (!birthdaysByDay[bornDay]) {
-      birthdaysByDay[bornDay] = [];
-    }
-
+    if (!birthdaysByDay[bornDay]) birthdaysByDay[bornDay] = [];
     birthdaysByDay[bornDay].push(p);
   });
 
@@ -575,25 +577,61 @@ function renderBirthdayCalendar(players) {
       isOtherMonth = true;
     }
 
+    const isToday =
+      !isOtherMonth &&
+      year === todayY &&
+      month === todayM &&
+      displayDay === todayD;
+
     const events =
       !isOtherMonth && birthdaysByDay[displayDay]
         ? birthdaysByDay[displayDay]
         : [];
 
     cells += `
-      <div class="birthday-day ${isOtherMonth ? "other-month" : ""}">
-        <div class="birthday-day-number">${displayDay}</div>
+      <div class="birthday-day ${isOtherMonth ? "other-month" : ""} ${isToday ? "today" : ""}">
+        <div class="birthday-day-number">
+          ${displayDay}
+          ${events.length ? `<span class="birthday-count">🎂 ${events.length}</span>` : ""}
+        </div>
 
         ${events.map(p => `
           <div class="birthday-event ${getNationalityRegionClass(p.nationality)}">
             <strong>🎂 ${escapeHtml(p.name)}</strong>
             <span>${escapeHtml(p.team || "-")} / ${escapeHtml(p.role || "-")}</span>
-            <span>${p.age ? `${p.age} years old` : ""}</span>
+            <span>${p.age ? `Turns ${Number(p.age) + 1}` : ""}</span>
+            <a
+              class="birthday-calendar-link"
+              href="${googleBirthdayUrl(p, year)}"
+              target="_blank"
+              rel="noopener"
+            >📅 Add</a>
           </div>
         `).join("")}
       </div>
     `;
   }
+
+  const listItems = players
+    .filter(p => p.born)
+    .map(p => {
+      const [, m, d] = p.born.split("-").map(Number);
+      return { ...p, month: m, day: d };
+    })
+    .filter(p => p.month === month + 1)
+    .sort((a, b) => a.day - b.day)
+    .map(p => `
+      <div class="birthday-list-item ${getNationalityRegionClass(p.nationality)}">
+        <div class="birthday-list-date">${month + 1}/${p.day}</div>
+        <div>
+          <strong>🎂 ${escapeHtml(p.name)}</strong>
+          <div>${escapeHtml(p.team || "-")} / ${escapeHtml(p.role || "-")} / ${escapeHtml(p.nationality || "-")}</div>
+          <div>${p.age ? `Turns ${Number(p.age) + 1}` : ""}</div>
+        </div>
+        <a href="${googleBirthdayUrl(p, year)}" target="_blank" rel="noopener">📅 Add</a>
+      </div>
+    `)
+    .join("");
 
   app.innerHTML = `
     <div class="birthday-calendar">
@@ -609,17 +647,15 @@ function renderBirthdayCalendar(players) {
       </div>
 
       <div class="birthday-weekdays">
-        <div>SUN</div>
-        <div>MON</div>
-        <div>TUE</div>
-        <div>WED</div>
-        <div>THU</div>
-        <div>FRI</div>
-        <div>SAT</div>
+        <div>SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
       </div>
 
       <div class="birthday-grid">
         ${cells}
+      </div>
+
+      <div class="birthday-list">
+        ${listItems || `<p class="empty">No birthdays this month.</p>`}
       </div>
     </div>
   `;
@@ -633,6 +669,25 @@ function renderBirthdayCalendar(players) {
     birthdayCalendarDate = new Date(year, month + 1, 1);
     renderBirthdayCalendar(players);
   };
+}
+
+function googleBirthdayUrl(p, year) {
+  const [, month, day] = p.born.split("-").map(Number);
+
+  const mm = String(month).padStart(2, "0");
+  const dd = String(day).padStart(2, "0");
+
+  const start = `${year}${mm}${dd}`;
+  const endDate = new Date(year, month - 1, day + 1);
+  const end =
+    `${endDate.getFullYear()}${String(endDate.getMonth() + 1).padStart(2, "0")}${String(endDate.getDate()).padStart(2, "0")}`;
+
+  const title = encodeURIComponent(`🎂 ${p.name} Birthday`);
+  const details = encodeURIComponent(
+    `${p.name} / ${p.team || "-"} / ${p.role || "-"} / ${p.nationality || "-"}`
+  );
+
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}`;
 }
 
 function loadYoutubeView(view) {
