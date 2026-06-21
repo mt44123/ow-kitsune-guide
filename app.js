@@ -620,7 +620,14 @@ function renderBirthdayCalendar(players) {
 
         ${events.map(p => `
           <div class="birthday-event ${getNationalityRegionClass(p.nationality)}">
-            <strong>🎂 ${escapeHtml(p.name)}</strong>
+            <strong>
+              🎂 <a
+                class="birthday-player-link"
+                href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
+                target="_blank"
+                rel="noopener"
+              >${escapeHtml(p.name)}</a>
+            </strong>
             <span>${escapeHtml(p.team || "-")} / ${escapeHtml(p.role || "-")}</span>
             <span>${p.age ? `Turns ${Number(p.age) + 1}` : ""}</span>
             <a
@@ -647,7 +654,14 @@ function renderBirthdayCalendar(players) {
       <div class="birthday-list-item ${getNationalityRegionClass(p.nationality)}">
         <div class="birthday-list-date">${month + 1}/${p.day}</div>
         <div>
-          <strong>🎂 ${escapeHtml(p.name)}</strong>
+          <strong>
+            🎂 <a
+              class="birthday-player-link"
+              href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
+              target="_blank"
+              rel="noopener"
+            >${escapeHtml(p.name)}</a>
+          </strong>
           <div>${escapeHtml(p.team || "-")} / ${escapeHtml(p.role || "-")} / ${escapeHtml(p.nationality || "-")}</div>
           <div>${p.age ? `Turns ${Number(p.age) + 1}` : ""}</div>
         </div>
