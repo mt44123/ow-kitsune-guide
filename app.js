@@ -1170,6 +1170,7 @@ app.innerHTML = `
           <th class="sortable" data-sort="name">Name</th>
           <th class="sortable" data-sort="nationality">Nationality</th>
           <th class="sortable" data-sort="role">Role</th>
+          <th class="sortable" data-sort="age">Age (Born)</th>
           <th class="sortable" data-sort="laststream">Last Stream</th>
           <th>TW</th>
           <th>CHZ</th>
@@ -1187,6 +1188,7 @@ app.innerHTML = `
             data-name="${(p.name || "").toLowerCase()}"
             data-nationality="${(p.nationality || "").toLowerCase()}"
             data-role="${(p.role || "").toLowerCase()}"
+            data-age="${p.age || 0}"
             data-laststream="${p.lastStreamAge || '9999d'}"
           >
             <td>${p.teamRegion || ""}</td>
@@ -1215,6 +1217,10 @@ app.innerHTML = `
 
             <td>${p.nationality || ""}</td>
             <td>${p.role || ""}</td>
+            <td>
+            ${p.age || ""}
+            ${p.born ? ` (${p.born})` : ""}
+            </td>
             <td>  ${    p.lastStreamUrl      ? `<a class="last-stream-link" href="${p.lastStreamUrl}" target="_blank" rel="noopener">${p.lastStreamAge || "-"} ${p.lastStreamPlatform || ""}</a>`      : "-"  }</td>
             <td>${linkDot(p.twitchUrl, p.twitchActive ? "tw" : "tw-inactive")}</td>
             <td>${linkDot(p.chzzkUrl, "chz")}</td>
@@ -1256,6 +1262,15 @@ function setupPlayerLinksSort() {
         const aValue = a.dataset[key] || "";
 const bValue = b.dataset[key] || "";
 
+  if (key === "age") {
+  const result =
+    Number(aValue || 0) - Number(bValue || 0);
+
+  return nextDir === "asc"
+    ? result
+    : -result;
+}
+        
 if (key === "laststream") {
   const parseDays = v => {
     if (!v) return 999999;
@@ -1264,7 +1279,7 @@ if (key === "laststream") {
     const m = String(v).match(/^(\d+)d$/);
     return m ? Number(m[1]) : 999999;
   };
-
+  
   const result = parseDays(aValue) - parseDays(bValue);
   return nextDir === "asc" ? result : -result;
 }
