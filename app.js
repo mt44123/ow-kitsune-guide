@@ -1386,9 +1386,6 @@ function shortNationality(nationality) {
     .replaceAll("United Arab Emirates", "U.Arab Emirates");
 }
 
-  return map[nationality] || nationality;
-}
-
 function getTeamRegionClass(region, team) {
   team = String(team || "");
 
