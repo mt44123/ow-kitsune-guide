@@ -1215,7 +1215,7 @@ app.innerHTML = `
               </a>
             </td>
 
-            <td>${p.nationality || ""}</td>
+           <td>${shortNationality(p.nationality || "")}</td>
             <td>${p.role || ""}</td>
             <td>
             ${p.age || ""}
