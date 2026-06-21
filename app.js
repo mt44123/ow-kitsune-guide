@@ -19,18 +19,32 @@ voiceLine?.addEventListener("click", () => {
 
   const utterance = new SpeechSynthesisUtterance(text);
 
+const targetLang =
+  voiceLine.dataset.lang || "en-US";
+
 const voices = speechSynthesis.getVoices();
 
-if (voices.length > 0) {
-  const voice =
-    voices[Math.floor(Math.random() * voices.length)];
+let matchingVoices =
+  voices.filter(v =>
+    v.lang.toLowerCase().startsWith(
+      targetLang.toLowerCase().split("-")[0]
+    )
+  );
 
-  utterance.voice = voice;
+if (matchingVoices.length === 0) {
+  matchingVoices = voices;
+}
 
-  if (voiceActor) {
-    voiceActor.textContent =
-      `🎙️ ${voice.name} (${voice.lang})`;
-  }
+const voice =
+  matchingVoices[
+    Math.floor(Math.random() * matchingVoices.length)
+  ];
+
+utterance.voice = voice;
+
+if (voiceActor) {
+  voiceActor.textContent =
+    `🎙️ ${voice.name} (${voice.lang})`;
 }
 
 utterance.rate = 0.95;
@@ -326,7 +340,7 @@ const voiceLines = [
 { hero:"Tracer", text:"Right on the money!", lang:"en-GB" },
 { hero:"Tracer", text:"Spot on!", lang:"en-GB" },
 { hero:"Tracer", text:"Target locked!", lang:"en-GB" },
-{ hero:"Tracer", text:"That's a stick!", lang:"en-GB" },
+{ hero:"Tracer", text:"That's a stick!", lang:"en-GB" }, 
 ];
 
 function setRandomVoiceLine() {
@@ -335,9 +349,13 @@ function setRandomVoiceLine() {
   const line =
     voiceLines[Math.floor(Math.random() * voiceLines.length)];
 
-  voiceLine.dataset.voice = line;
-  voiceLine.textContent = line + " 🎙️";
+  voiceLine.dataset.voice = line.text;
+  voiceLine.dataset.lang = line.lang;
+  voiceLine.dataset.hero = line.hero || "";
+
+  voiceLine.textContent = line.text + " 🎙️";
 }
+
 const liveViews = ["new", "viewers", "kr", "en", "cn", "jp", "intl"];
 const clipViews = [
   "clips",  "hotclips",  "jpclips",
