@@ -1218,24 +1218,38 @@ img{
   margin-top:2px;
 }
 
+.title-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+}
+
 @media (max-width:900px){
 
   .title-row{
     flex-direction:column;
-    align-items:center;
+    align-items:stretch;
     gap:2px;
   }
 
+  .title-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+  }
+
   #pageTitle{
-    margin-bottom:0;
+    margin:0;
   }
 
   #voiceLine{
-    text-align:center;
+    text-align:right;
   }
 
   #voiceActor{
-    text-align:center;
+    text-align:right;
     margin-top:0;
   }
 
