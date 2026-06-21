@@ -18,6 +18,7 @@ voiceLine?.addEventListener("click", () => {
   utterance.lang = "en-US";
   utterance.rate = 0.95;
   utterance.pitch = 1;
+  utterance.volume = 0.3;
 
   speechSynthesis.speak(utterance);
 });
@@ -266,7 +267,8 @@ function setRandomVoiceLine() {
   if (!voiceLine) return;
 
   voiceLine.textContent =
-    voiceLines[Math.floor(Math.random() * voiceLines.length)];
+    voiceLines[Math.floor(Math.random() * voiceLines.length)] +
+    " 🎙️"; 
 }
 
 const liveViews = ["new", "viewers", "kr", "en", "cn", "jp", "intl"];
