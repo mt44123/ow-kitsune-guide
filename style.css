@@ -934,7 +934,7 @@ img{
 
 .birthday-weekdays{
   display:grid;
-  grid-template-columns:repeat(7,1fr);
+  grid-template-columns:repeat(7,minmax(0,1fr));
 
   margin-bottom:4px;
 
@@ -954,7 +954,7 @@ img{
 
 .birthday-grid{
   display:grid;
-  grid-template-columns:repeat(7,1fr);
+  grid-template-columns:repeat(7,minmax(0,1fr));
 
   border-top:1px solid var(--border);
 }
@@ -968,6 +968,14 @@ img{
   border-bottom:1px solid var(--border);
 
   padding:6px;
+}
+
+.birthday-day{
+  overflow:hidden;
+}
+
+.birthday-event{
+  max-width:100%;
 }
 
 .birthday-day.other-month{
