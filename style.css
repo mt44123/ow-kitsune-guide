@@ -1082,12 +1082,6 @@ img{
   }
 }
 
-.birthday-count{
-  margin-left:4px;
-  color:var(--accent);
-  font-weight:bold;
-}
-
 .birthday-calendar-link{
   display:inline-block;
   margin-top:3px;
