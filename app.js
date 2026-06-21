@@ -17,19 +17,16 @@ voiceLine?.addEventListener("click", () => {
 
   const utterance = new SpeechSynthesisUtterance(text);
 
-  const voices = speechSynthesis
-    .getVoices()
-    .filter(v => v.lang.startsWith("en"));
-  
-  if (voices.length) {
-    utterance.voice =
-      voices[Math.floor(Math.random() * voices.length)];
-  }
-  
-  utterance.lang = "en-US";
-  utterance.rate = 0.95;
-  utterance.pitch = 1;
-  utterance.volume = 0.3;
+const voices = speechSynthesis.getVoices();
+
+if (voices.length > 0) {
+  utterance.voice =
+    voices[Math.floor(Math.random() * voices.length)];
+}
+
+utterance.rate = 0.95;
+utterance.pitch = 1;
+utterance.volume = 0.3;
 
   speechSynthesis.speak(utterance);
 });
