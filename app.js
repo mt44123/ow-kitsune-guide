@@ -570,11 +570,22 @@ function renderBirthdayCalendar(players) {
   const todayM = today.getMonth();
   const todayD = today.getDate();
 
+const todayBirthdays = players.filter(p => {
+  if (!p.born) return false;
+
+  const [, m, d] = p.born.split("-").map(Number);
+
+  return (
+    m === today.getMonth() + 1 &&
+    d === today.getDate()
+  );
+});
+  
   const firstDay = new Date(year, month, 1);
   const startDay = firstDay.getDay();
   const lastDate = new Date(year, month + 1, 0).getDate();
   const prevLastDate = new Date(year, month, 0).getDate();
-
+ 
   const birthdaysByDay = {};
 
   players.forEach(p => {
@@ -672,8 +683,40 @@ function renderBirthdayCalendar(players) {
     `)
     .join("");
 
-  app.innerHTML = `
-    <div class="birthday-calendar">
+  const todaySection = `
+  <div class="birthday-today">
+
+    <h3>🎂 Today's Birthdays</h3>
+
+    ${
+      todayBirthdays.length
+        ? todayBirthdays.map(p => `
+            <div class="birthday-today-item">
+              🎂
+              <a
+                class="birthday-player-link"
+                href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
+                target="_blank"
+                rel="noopener"
+              >
+                ${escapeHtml(p.name)}
+              </a>
+            </div>
+          `).join("")
+        : `
+            <div class="birthday-today-empty">
+              🦊 No birthdays today.
+            </div>
+          `
+    }
+
+  </div>
+`;
+
+app.innerHTML = `
+  ${todaySection}
+
+  <div class="birthday-calendar">
       <div class="birthday-calendar-header">
         <button id="birthdayPrev">‹</button>
 
