@@ -499,17 +499,140 @@ function loadView(view) {
   loadLiveView("new");
 }
 
+let birthdayCalendarDate = new Date();
+
 function loadBirthdaysView() {
   pageTitle.textContent = "BIRTHDAYS";
   setRandomVoiceLine();
 
-  app.className = "";
+  app.className = "birthday-calendar-mode";
+
+  renderBirthdayCalendar([
+    {
+      name: "PlayerA",
+      team: "Team Alpha",
+      role: "DPS",
+      nationality: "Japan",
+      born: "2004-06-05",
+      age: 22
+    },
+    {
+      name: "PlayerB",
+      team: "Team Beta",
+      role: "SUP",
+      nationality: "South Korea",
+      born: "2003-06-21",
+      age: 23
+    },
+    {
+      name: "PlayerC",
+      team: "Team Gamma",
+      role: "TANK",
+      nationality: "US",
+      born: "2005-06-21",
+      age: 21
+    }
+  ]);
+}
+
+function renderBirthdayCalendar(players) {
+  const year = birthdayCalendarDate.getFullYear();
+  const month = birthdayCalendarDate.getMonth();
+
+  const firstDay = new Date(year, month, 1);
+  const startDay = firstDay.getDay();
+  const lastDate = new Date(year, month + 1, 0).getDate();
+  const prevLastDate = new Date(year, month, 0).getDate();
+
+  const birthdaysByDay = {};
+
+  players.forEach(p => {
+    if (!p.born) return;
+
+    const [, bornMonth, bornDay] = p.born.split("-").map(Number);
+    if (bornMonth !== month + 1) return;
+
+    if (!birthdaysByDay[bornDay]) {
+      birthdaysByDay[bornDay] = [];
+    }
+
+    birthdaysByDay[bornDay].push(p);
+  });
+
+  let cells = "";
+
+  for (let i = 0; i < 42; i++) {
+    const dayNum = i - startDay + 1;
+
+    let displayDay = dayNum;
+    let isOtherMonth = false;
+
+    if (dayNum <= 0) {
+      displayDay = prevLastDate + dayNum;
+      isOtherMonth = true;
+    } else if (dayNum > lastDate) {
+      displayDay = dayNum - lastDate;
+      isOtherMonth = true;
+    }
+
+    const events =
+      !isOtherMonth && birthdaysByDay[displayDay]
+        ? birthdaysByDay[displayDay]
+        : [];
+
+    cells += `
+      <div class="birthday-day ${isOtherMonth ? "other-month" : ""}">
+        <div class="birthday-day-number">${displayDay}</div>
+
+        ${events.map(p => `
+          <div class="birthday-event ${getNationalityRegionClass(p.nationality)}">
+            <strong>🎂 ${escapeHtml(p.name)}</strong>
+            <span>${escapeHtml(p.team || "-")} / ${escapeHtml(p.role || "-")}</span>
+            <span>${p.age ? `${p.age} years old` : ""}</span>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }
 
   app.innerHTML = `
-    <p class="empty">
-      🎂 Birthdays coming soon.
-    </p>
+    <div class="birthday-calendar">
+      <div class="birthday-calendar-header">
+        <button id="birthdayPrev">‹</button>
+
+        <div>
+          <div class="birthday-year">${year}</div>
+          <div class="birthday-month">${month + 1}</div>
+        </div>
+
+        <button id="birthdayNext">›</button>
+      </div>
+
+      <div class="birthday-weekdays">
+        <div>SUN</div>
+        <div>MON</div>
+        <div>TUE</div>
+        <div>WED</div>
+        <div>THU</div>
+        <div>FRI</div>
+        <div>SAT</div>
+      </div>
+
+      <div class="birthday-grid">
+        ${cells}
+      </div>
+    </div>
   `;
+
+  document.getElementById("birthdayPrev").onclick = () => {
+    birthdayCalendarDate = new Date(year, month - 1, 1);
+    renderBirthdayCalendar(players);
+  };
+
+  document.getElementById("birthdayNext").onclick = () => {
+    birthdayCalendarDate = new Date(year, month + 1, 1);
+    renderBirthdayCalendar(players);
+  };
 }
 
 function loadYoutubeView(view) {
