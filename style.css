@@ -1217,7 +1217,12 @@ img{
   color:var(--text-muted);
   margin-top:-2px;
 
+  width:100%;
   text-align:right;
+}
+
+.title-row{
+  gap:0;
 }
 
 .title-top{
