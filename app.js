@@ -508,6 +508,9 @@ let birthdayCalendarDate = new Date();
 function loadBirthdaysView() {
   const now = Date.now();
 
+  updated.textContent = "";
+  document.getElementById("viewNote").textContent = "";
+
   pageTitle.textContent = "BIRTHDAYS";
   setRandomVoiceLine();
 
