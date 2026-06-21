@@ -1188,7 +1188,7 @@ app.innerHTML = `
             data-name="${(p.name || "").toLowerCase()}"
             data-nationality="${(p.nationality || "").toLowerCase()}"
             data-role="${(p.role || "").toLowerCase()}"
-            data-age="${p.age || 0}"
+            data-age="${p.age || ""}"
             data-laststream="${p.lastStreamAge || '9999d'}"
           >
             <td>${p.teamRegion || ""}</td>
@@ -1263,22 +1263,16 @@ function setupPlayerLinksSort() {
 const bValue = b.dataset[key] || "";
 
 if (key === "age") {
-
-  const aAge = Number(aValue || 0);
-  const bAge = Number(bValue || 0);
-
-  const aEmpty = !aValue;
-  const bEmpty = !bValue;
+  const aEmpty = aValue === "";
+  const bEmpty = bValue === "";
 
   if (aEmpty && !bEmpty) return 1;
   if (!aEmpty && bEmpty) return -1;
   if (aEmpty && bEmpty) return 0;
 
-  const result = aAge - bAge;
+  const result = Number(aValue) - Number(bValue);
 
-  return nextDir === "asc"
-    ? result
-    : -result;
+  return nextDir === "asc" ? result : -result;
 }
         
 if (key === "laststream") {
