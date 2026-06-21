@@ -1381,10 +1381,10 @@ function getNationalityRegionClass(nationality) {
 }
 
 function shortNationality(nationality) {
-  const map = {
-    "Dominican Republic": "Dominican Rep.",
-    "United Arab Emirates": "U.Arab Emirates"
-  };
+  return String(nationality || "")
+    .replaceAll("Dominican Republic", "Dominican Rep.")
+    .replaceAll("United Arab Emirates", "U.Arab Emirates");
+}
 
   return map[nationality] || nationality;
 }
