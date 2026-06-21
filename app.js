@@ -7,9 +7,9 @@ const pageTitle = document.getElementById("pageTitle");
 const voiceLine = document.getElementById("voiceLine");
 
 voiceLine?.addEventListener("click", () => {
-  const text = voiceLine.textContent
-  .replace("🎙️", "")
-  .trim();
+  const text =
+  voiceLine.dataset.voice ||
+  voiceLine.textContent.trim();
 
   if (!text) return;
 
@@ -268,11 +268,12 @@ const voiceLines = [
 function setRandomVoiceLine() {
   if (!voiceLine) return;
 
-  voiceLine.textContent =
-    voiceLines[Math.floor(Math.random() * voiceLines.length)] +
-    " 🎙️"; 
-}
+  const line =
+    voiceLines[Math.floor(Math.random() * voiceLines.length)];
 
+  voiceLine.dataset.voice = line;
+  voiceLine.textContent = line + " 🎙️";
+}
 const liveViews = ["new", "viewers", "kr", "en", "cn", "jp", "intl"];
 const clipViews = [
   "clips",  "hotclips",  "jpclips",
