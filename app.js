@@ -115,7 +115,8 @@ const titles = {
   chzzkhotclips: "CHZZK HOT",
   chzzkbestclips: "CHZZK BEST",
 
-  playerlinks: "PLAYER LINKS"
+  playerlinks: "LINKS",
+  birthdays: "BIRTHDAYS"
 };
 
 const voiceLines = [
@@ -253,6 +254,11 @@ const clipViews = [
 ];
 const youtubeViews = [  "youtube",  "youtubehot",  "youtubejp"];
 
+const playerViews = [
+  "playerlinks",
+  "birthdays"
+];
+
 let currentLiveView =
   liveViews.includes(currentView)
     ? currentView
@@ -267,6 +273,15 @@ let currentYoutubeView =
   youtubeViews.includes(currentView)
     ? currentView
     : "youtube";
+
+let currentPlayerView =
+  playerViews.includes(currentView)
+    ? currentView
+    : "playerlinks";
+
+function isPlayerView(view) {
+  return playerViews.includes(view);
+}
 
 function isLiveView(view) {
   return liveViews.includes(view);
@@ -287,24 +302,23 @@ function updateNavState(view) {
   const liveSubNav = document.getElementById("liveSubNav");
   const clipsSubNav = document.getElementById("clipsSubNav");
   const youtubeSubNav = document.getElementById("youtubeSubNav");
+  const playerSubNav = document.getElementById("playerSubNav");
 
-document
-  .querySelectorAll(
-    '.main-nav button:not(#searchToggle)'
-  )
-  .forEach(b => b.classList.remove("active"));
+  document
+    .querySelectorAll('.main-nav button:not(#searchToggle)')
+    .forEach(b => b.classList.remove("active"));
 
-document
-  .querySelectorAll(".sub-nav button")
-  .forEach(b => b.classList.remove("active"));
+  document
+    .querySelectorAll(".sub-nav button")
+    .forEach(b => b.classList.remove("active"));
 
   if (liveSubNav) liveSubNav.style.display = "none";
   if (clipsSubNav) clipsSubNav.style.display = "none";
   if (youtubeSubNav) youtubeSubNav.style.display = "none";
+  if (playerSubNav) playerSubNav.style.display = "none";
 
   if (isLiveView(view)) {
     liveButton?.classList.add("active");
-
     if (liveSubNav) liveSubNav.style.display = "flex";
 
     document
@@ -313,40 +327,47 @@ document
 
   } else if (isClipView(view)) {
     clipsButton?.classList.add("active");
-
     if (clipsSubNav) clipsSubNav.style.display = "flex";
 
     document
       .querySelector(`#clipsSubNav button[data-view="${view}"]`)
       ?.classList.add("active");
 
-} else if (isYoutubeView(view)) {
+  } else if (isYoutubeView(view)) {
+    document
+      .querySelector('.main-nav button[data-section="youtube"]')
+      ?.classList.add("active");
 
-  document
-    .querySelector('.main-nav button[data-section="youtube"]')
-    ?.classList.add("active");
+    if (youtubeSubNav) youtubeSubNav.style.display = "flex";
 
-  if (youtubeSubNav)
-    youtubeSubNav.style.display = "flex";
+    document
+      .querySelector(`#youtubeSubNav button[data-view="${view}"]`)
+      ?.classList.add("active");
 
-  document
-    .querySelector(
-      `#youtubeSubNav button[data-view="${view}"]`
-    )
-    ?.classList.add("active");
-    
+  } else if (isPlayerView(view)) {
+    document
+      .querySelector('.main-nav button[data-section="players"]')
+      ?.classList.add("active");
+
+    if (playerSubNav) playerSubNav.style.display = "flex";
+
+    document
+      .querySelector(`#playerSubNav button[data-view="${view}"]`)
+      ?.classList.add("active");
+
   } else {
     document
       .querySelector(`.main-nav button[data-view="${view}"]`)
       ?.classList.add("active");
   }
-  
+
   document.body.classList.toggle(
-  "has-sub-nav",
-  isLiveView(view) ||
-  isClipView(view) ||
-  isYoutubeView(view)
-);
+    "has-sub-nav",
+    isLiveView(view) ||
+    isClipView(view) ||
+    isYoutubeView(view) ||
+    isPlayerView(view)
+  );
 }
 
 document
@@ -363,7 +384,10 @@ document
       
       } else if (button.dataset.section === "youtube") {
         currentView = currentYoutubeView;
-      
+
+      } else if (button.dataset.section === "players") {
+        currentView = currentPlayerView;
+        
       } else {
         currentView = button.dataset.view;
       }
@@ -393,6 +417,10 @@ document
 
       if (isYoutubeView(currentView)) {
         currentYoutubeView = currentView;
+      }
+
+      if (isPlayerView(currentView)) {
+        currentPlayerView = currentView;
       }
             
       searchBox.value = "";
@@ -458,12 +486,30 @@ function loadView(view) {
     return;
   }
 
+  if (view === "birthdays") {
+  loadBirthdaysView();
+  return;
+}
+
   if (isClipView(view)) {
     loadClipsView(view);
     return;
   }
 
   loadLiveView("new");
+}
+
+function loadBirthdaysView() {
+  pageTitle.textContent = "BIRTHDAYS";
+  setRandomVoiceLine();
+
+  app.className = "";
+
+  app.innerHTML = `
+    <p class="empty">
+      🎂 Birthdays coming soon.
+    </p>
+  `;
 }
 
 function loadYoutubeView(view) {
