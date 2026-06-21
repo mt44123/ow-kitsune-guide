@@ -985,7 +985,7 @@ img{
 }
 
 .birthday-day.other-month{
-  background:var(--bg-dark);
+  background:var(--bg-light);
 }
 
 .birthday-day-number{
