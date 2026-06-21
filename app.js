@@ -339,7 +339,8 @@ function setRandomVoiceLine() {
   voiceLine.dataset.lang = line.lang;
   voiceLine.dataset.hero = line.hero || "";
 
-  voiceLine.textContent = line.text + " 🎙️";
+  voiceLine.textContent =
+  "🎙️ " + line.text;
 }
 
 const liveViews = ["new", "viewers", "kr", "en", "cn", "jp", "intl"];
