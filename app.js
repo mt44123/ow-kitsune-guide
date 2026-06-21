@@ -41,6 +41,7 @@ const voice =
   ];
 
 utterance.voice = voice;
+utterance.lang = targetLang;
 
 if (voiceActor) {
   voiceActor.textContent =
