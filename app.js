@@ -1262,9 +1262,19 @@ function setupPlayerLinksSort() {
         const aValue = a.dataset[key] || "";
 const bValue = b.dataset[key] || "";
 
-  if (key === "age") {
-  const result =
-    Number(aValue || 0) - Number(bValue || 0);
+if (key === "age") {
+
+  const aAge = Number(aValue || 0);
+  const bAge = Number(bValue || 0);
+
+  const aEmpty = !aValue;
+  const bEmpty = !bValue;
+
+  if (aEmpty && !bEmpty) return 1;
+  if (!aEmpty && bEmpty) return -1;
+  if (aEmpty && bEmpty) return 0;
+
+  const result = aAge - bAge;
 
   return nextDir === "asc"
     ? result
