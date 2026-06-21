@@ -1179,3 +1179,27 @@ img{
     display:block;
   }
 }
+
+/* Today */
+
+.birthday-today{
+  background:var(--bg-light);
+  border:1px solid var(--border);
+  border-left:4px solid var(--accent);
+  border-radius:10px;
+  padding:12px;
+  margin-bottom:12px;
+}
+
+.birthday-today h3{
+  margin:0 0 8px;
+  color:var(--accent);
+}
+
+.birthday-today-item{
+  margin:4px 0;
+}
+
+.birthday-today-empty{
+  color:var(--text-sub);
+}
