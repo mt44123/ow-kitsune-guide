@@ -61,6 +61,10 @@ let youtubeCache = null;
 let youtubeCacheTime = 0;
 const YOUTUBE_CLIENT_CACHE_MS =  30 * 60 * 1000;
 
+let birthdaysCache = null;
+let birthdaysCacheTime = 0;
+const BIRTHDAYS_CLIENT_CACHE_MS = 6 * 60 * 60 * 1000;
+
 function startFakeProgress() {
     progressSteps =
     progressSets[Math.floor(Math.random() * progressSets.length)];
@@ -502,17 +506,46 @@ function loadView(view) {
 let birthdayCalendarDate = new Date();
 
 function loadBirthdaysView() {
+  const now = Date.now();
+
   pageTitle.textContent = "BIRTHDAYS";
   setRandomVoiceLine();
 
   app.className = "birthday-calendar-mode";
 
+  if (
+    birthdaysCache &&
+    now - birthdaysCacheTime < BIRTHDAYS_CLIENT_CACHE_MS
+  ) {
+    requestId++;
+    stopFakeProgress();
+
+    currentData = birthdaysCache;
+    renderBirthdayCalendar(currentData);
+    return;
+  }
+
+  const currentRequest = ++requestId;
+
+  startFakeProgress();
+
   fetch(CONFIG.API_URL + "?view=birthdays")
     .then(r => r.json())
     .then(data => {
-      renderBirthdayCalendar(data.birthdays || []);
+      if (currentRequest !== requestId) return;
+
+      finishFakeProgress();
+
+      birthdaysCache = data.birthdays || [];
+      birthdaysCacheTime = Date.now();
+
+      currentData = birthdaysCache;
+      renderBirthdayCalendar(currentData);
     })
     .catch(err => {
+      if (currentRequest !== requestId) return;
+
+      stopFakeProgress();
       console.error(err);
 
       app.innerHTML = `
