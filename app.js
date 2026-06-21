@@ -65,6 +65,8 @@ let birthdaysCache = null;
 let birthdaysCacheTime = 0;
 const BIRTHDAYS_CLIENT_CACHE_MS = 6 * 60 * 60 * 1000;
 
+let playerLinksLastUpdated = "";
+
 function startFakeProgress() {
     progressSteps =
     progressSets[Math.floor(Math.random() * progressSets.length)];
@@ -944,11 +946,14 @@ if (
   playerLinksCache &&
   now - playerLinksCacheTime < PLAYER_LINKS_CLIENT_CACHE_MS
 ) {
-requestId++;
-stopFakeProgress();
-currentData = playerLinksCache;
-renderPlayerLinks(currentData);
-return;
+  requestId++;
+  stopFakeProgress();
+
+  updated.textContent = playerLinksLastUpdated;
+
+  currentData = playerLinksCache;
+  renderPlayerLinks(currentData);
+  return;
 }
 
   const currentRequest = ++requestId;
@@ -962,14 +967,15 @@ return;
         stopFakeProgress();
         return;
       }
-
+    
       finishFakeProgress();
-
-      updated.textContent = data.lastUpdated || "";
-
+    
+      playerLinksLastUpdated = data.lastUpdated || "";
+      updated.textContent = playerLinksLastUpdated;
+    
       playerLinksCache = data.playerLinks || [];
       playerLinksCacheTime = Date.now();
-
+    
       currentData = playerLinksCache;
       renderPlayerLinks(currentData);
     })
