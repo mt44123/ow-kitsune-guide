@@ -646,7 +646,7 @@ const todayBirthdays = players.filter(p => {
               >${escapeHtml(p.name)}</a>
             </strong>
             <span>${escapeHtml(p.team || "-")} / ${escapeHtml(p.role || "-")}</span>
-            <span>${p.age ? `Turns ${Number(p.age) + 1}` : ""}</span>
+            <span>${p.born ? `Turns ${getAgeOnBirthdayThisYear(p.born, year)}` : ""}</span>
             <a
               class="birthday-calendar-link"
               href="${googleBirthdayUrl(p, year)}"
@@ -680,7 +680,7 @@ const todayBirthdays = players.filter(p => {
             >${escapeHtml(p.name)}</a>
           </strong>
           <div>${escapeHtml(p.team || "-")} / ${escapeHtml(p.role || "-")} / ${escapeHtml(p.nationality || "-")}</div>
-          <div>${p.age ? `Turns ${Number(p.age) + 1}` : ""}</div>
+          <div>${p.born ? `Turns ${getAgeOnBirthdayThisYear(p.born, year)}` : ""}</div>
         </div>
         <a href="${googleBirthdayUrl(p, year)}" target="_blank" rel="noopener">📅 Add</a>
       </div>
@@ -717,7 +717,7 @@ const todayBirthdays = players.filter(p => {
     </span>
 
     <span>
-      ${p.age ? `Turns ${Number(p.age) + 1}` : ""}
+      ${p.born ? `Turns ${getTurnsAgeToday(p.born)}` : ""}
     </span>
 
     <a
@@ -798,6 +798,50 @@ function googleBirthdayUrl(p, year) {
   );
 
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}`;
+}
+
+function getCurrentAgeFromBorn(born) {
+  if (!born) return "";
+
+  const [birthYear, birthMonth, birthDay] =
+    String(born).split("-").map(Number);
+
+  if (!birthYear || !birthMonth || !birthDay) return "";
+
+  const today = new Date();
+
+  let age = today.getFullYear() - birthYear;
+
+  const birthdayThisYear =
+    new Date(today.getFullYear(), birthMonth - 1, birthDay);
+
+  if (today < birthdayThisYear) {
+    age--;
+  }
+
+  return age;
+}
+
+function getAgeOnBirthdayThisYear(born, year) {
+  if (!born) return "";
+
+  const birthYear = Number(String(born).split("-")[0]);
+
+  if (!birthYear) return "";
+
+  return year - birthYear;
+}
+
+function getTurnsAgeToday(born) {
+  if (!born) return "";
+
+  const birthYear = Number(
+    String(born).split("-")[0]
+  );
+
+  if (!birthYear) return "";
+
+  return new Date().getFullYear() - birthYear;
 }
 
 function loadYoutubeView(view) {
@@ -1526,7 +1570,7 @@ app.innerHTML = `
             data-name="${(p.name || "").toLowerCase()}"
             data-nationality="${(p.nationality || "").toLowerCase()}"
             data-role="${(p.role || "").toLowerCase()}"
-            data-age="${p.age || ""}"
+            data-age="${p.born ? getCurrentAgeFromBorn(p.born) : ""}"
             data-laststream="${p.lastStreamAge || '9999d'}"
           >
             <td>${p.teamRegion || ""}</td>
@@ -1556,7 +1600,7 @@ app.innerHTML = `
            <td>${shortNationality(p.nationality || "")}</td>
             <td>${p.role || ""}</td>
             <td>
-            ${p.age || ""}
+            ${p.born ? getCurrentAgeFromBorn(p.born) : ""}
             ${p.born ? ` (${p.born})` : ""}
             </td>
             <td>  ${    p.lastStreamUrl      ? `<a class="last-stream-link" href="${p.lastStreamUrl}" target="_blank" rel="noopener">${p.lastStreamAge || "-"} ${p.lastStreamPlatform || ""}</a>`      : "-"  }</td>
