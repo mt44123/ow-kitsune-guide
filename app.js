@@ -21,8 +21,6 @@ voiceLine?.addEventListener("click", () => {
 
 const voices = speechSynthesis.getVoices();
 
-const voices = speechSynthesis.getVoices();
-
 if (voices.length > 0) {
   const voice =
     voices[Math.floor(Math.random() * voices.length)];
