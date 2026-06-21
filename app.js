@@ -25,7 +25,7 @@ if (voices.length > 0) {
 }
 
 utterance.rate = 0.95;
-utterance.pitch = 1;
+utterance.pitch =  0.8 + Math.random() * 0.6;
 utterance.volume = 0.3;
 
   speechSynthesis.speak(utterance);
