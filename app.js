@@ -691,18 +691,39 @@ const todayBirthdays = players.filter(p => {
     ${
       todayBirthdays.length
         ? todayBirthdays.map(p => `
-            <div class="birthday-today-item">
-              🎂
-              <a
-                class="birthday-player-link"
-                href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
-                target="_blank"
-                rel="noopener"
-              >
-                ${escapeHtml(p.name)}
-              </a>
-            </div>
-          `).join("")
+  <div class="birthday-event ${getNationalityRegionClass(p.nationality)}">
+
+    <strong>
+      <a
+        class="birthday-player-link"
+        href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
+        target="_blank"
+        rel="noopener"
+      >
+        🎂 ${escapeHtml(p.name)}
+      </a>
+    </strong>
+
+    <span>
+      ${escapeHtml(p.team || "-")} /
+      ${escapeHtml(p.role || "-")}
+    </span>
+
+    <span>
+      ${p.age ? `Turns ${Number(p.age) + 1}` : ""}
+    </span>
+
+    <a
+      class="birthday-calendar-link"
+      href="${googleBirthdayUrl(p, year)}"
+      target="_blank"
+      rel="noopener"
+    >
+      📅 Add
+    </a>
+
+  </div>
+`).join("")
         : `
             <div class="birthday-today-empty">
               🦊 No birthdays today.
