@@ -946,6 +946,12 @@ img{
   text-align:center;
 }
 
+.birthday-weekdays div{
+  background:var(--bg-light);
+  padding:8px 0;
+  border-radius:6px;
+}
+
 .birthday-grid{
   display:grid;
   grid-template-columns:repeat(7,1fr);
