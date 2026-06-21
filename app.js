@@ -1722,8 +1722,9 @@ function linkDot(url, cls) {
 
 function getNationalityRegionClass(nationality) {
   const nat = String(nationality || "")
-    .toLowerCase()
-    .trim();
+  .split(",")[0]
+  .trim()
+  .toLowerCase();
 
   if (["japan", "jp"].includes(nat)) return "region-jp";
   if (["south korea", "kr"].includes(nat)) return "region-kr";
