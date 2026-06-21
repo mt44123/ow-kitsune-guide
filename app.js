@@ -7,7 +7,9 @@ const pageTitle = document.getElementById("pageTitle");
 const voiceLine = document.getElementById("voiceLine");
 
 voiceLine?.addEventListener("click", () => {
-  const text = voiceLine.textContent.trim();
+  const text = voiceLine.textContent
+  .replace("🎙️", "")
+  .trim();
 
   if (!text) return;
 
