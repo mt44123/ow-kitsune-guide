@@ -1211,3 +1211,9 @@ img{
 #voiceLine:hover{
   color:var(--accent);
 }
+
+#voiceActor{
+  font-size:12px;
+  color:var(--text-muted);
+  margin-top:2px;
+}
