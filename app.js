@@ -5,6 +5,8 @@ document.body.appendChild(app);
 const updated = document.getElementById("updated");
 const pageTitle = document.getElementById("pageTitle");
 const voiceLine = document.getElementById("voiceLine");
+const voiceActor =
+  document.getElementById("voiceActor");
 
 voiceLine?.addEventListener("click", () => {
   const text =
@@ -19,9 +21,18 @@ voiceLine?.addEventListener("click", () => {
 
 const voices = speechSynthesis.getVoices();
 
+const voices = speechSynthesis.getVoices();
+
 if (voices.length > 0) {
-  utterance.voice =
+  const voice =
     voices[Math.floor(Math.random() * voices.length)];
+
+  utterance.voice = voice;
+
+  if (voiceActor) {
+    voiceActor.textContent =
+      `🎙️ ${voice.name} (${voice.lang})`;
+  }
 }
 
 utterance.rate = 0.95;
