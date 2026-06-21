@@ -507,32 +507,20 @@ function loadBirthdaysView() {
 
   app.className = "birthday-calendar-mode";
 
-  renderBirthdayCalendar([
-    {
-      name: "PlayerA",
-      team: "Team Alpha",
-      role: "DPS",
-      nationality: "Japan",
-      born: "2004-06-05",
-      age: 22
-    },
-    {
-      name: "PlayerB",
-      team: "Team Beta",
-      role: "SUP",
-      nationality: "South Korea",
-      born: "2003-06-21",
-      age: 23
-    },
-    {
-      name: "PlayerC",
-      team: "Team Gamma",
-      role: "TANK",
-      nationality: "US",
-      born: "2005-06-21",
-      age: 21
-    }
-  ]);
+  fetch(CONFIG.API_URL + "?view=birthdays")
+    .then(r => r.json())
+    .then(data => {
+      renderBirthdayCalendar(data.birthdays || []);
+    })
+    .catch(err => {
+      console.error(err);
+
+      app.innerHTML = `
+        <p class="error">
+          Failed to load birthdays.
+        </p>
+      `;
+    });
 }
 
 function renderBirthdayCalendar(players) {
