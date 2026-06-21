@@ -5,6 +5,23 @@ document.body.appendChild(app);
 const updated = document.getElementById("updated");
 const pageTitle = document.getElementById("pageTitle");
 const voiceLine = document.getElementById("voiceLine");
+
+voiceLine?.addEventListener("click", () => {
+  const text = voiceLine.textContent.trim();
+
+  if (!text) return;
+
+  speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+
+  utterance.lang = "en-US";
+  utterance.rate = 0.95;
+  utterance.pitch = 1;
+
+  speechSynthesis.speak(utterance);
+});
+
 const searchBox = document.getElementById("searchBox");
 const toolsButton =  document.getElementById("toolsButton");
 
