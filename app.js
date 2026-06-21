@@ -1538,10 +1538,10 @@ app.innerHTML = `
       </p>
       
       <p>
-        Some player and team information is sourced from Liquipedia.
-        Special thanks to the Liquipedia contributors who help keep esports history alive.
+        Some player and team information is sourced from Liquipedia.<br>
+        Special thanks to the Liquipedia contributors who help keep esports history alive.<br>
         
-        一部のプレイヤー情報・チーム情報はLiquipediaを参考にしています。
+        一部のプレイヤー情報・チーム情報はLiquipediaを参考にしています。<br>
         eスポーツの歴史を支えているLiquipedia編集者の皆様に感謝します。
       </p>
       
