@@ -579,8 +579,7 @@ function renderBirthdayCalendar(players) {
     cells += `
       <div class="birthday-day ${isOtherMonth ? "other-month" : ""} ${isToday ? "today" : ""}">
         <div class="birthday-day-number">
-          ${displayDay}
-          ${events.length ? `<span class="birthday-count">🎂 ${events.length}</span>` : ""}
+        ${displayDay}
         </div>
 
         ${events.map(p => `
