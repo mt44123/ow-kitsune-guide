@@ -59,28 +59,109 @@ let currentLang =
 
 const i18n = {
   en: {
-    birthdays: "BIRTHDAYS",
-    todayBirthdays: "🎂 Today's Birthdays",
-    noBirthdaysToday: "🦊 No birthdays today.",
-    add: "📅 Add"
+    birthdayNote:
+      "🌐 Dates are shown based on your device's local date.",
+
+    liquipediaNote:
+      "*Click player or team names to open Liquipedia.",
+
+    discordNote1:
+      "*DC links are Discord server home pages, not invite links.",
+
+    discordNote2:
+      "*If the Discord app is installed on your mobile device, the link may only open the app and not navigate to the server.",
+
+    credit1:
+      "Some player and team information is sourced from Liquipedia.",
+
+    credit2:
+      "Special thanks to the Liquipedia contributors who help keep esports history alive.",
+
+    footer:
+      "🦊OW KITSUNE GUIDE is an unofficial fan-made project. Stream and video data may be delayed or inaccurate. Player information is collected from publicly available sources. Some links may become unavailable if a player changes their account or username."
   },
+
   ja: {
-    birthdays: "誕生日",
-    todayBirthdays: "🎂 今日の誕生日",
-    noBirthdaysToday: "🦊 今日の誕生日はありません。",
-    add: "📅 追加"
+    birthdayNote:
+      "🌐 日付はお使いの端末のローカル日付を基準に表示されます。",
+
+    liquipediaNote:
+      "プレイヤー名・チーム名をクリックするとLiquipediaを開きます。皆Liquipediaを見よう。",
+
+    discordNote1:
+      "DCはDiscordサーバーのトップページです（招待リンクではありません）",
+
+    discordNote2:
+      "Discordアプリがインストールされている場合、アプリが開くだけでサーバーへ移動しないことがあります。",
+
+    credit1:
+      "一部のプレイヤー情報・チーム情報はLiquipediaを参考にしています。",
+
+    credit2:
+      "eスポーツの歴史を支えているLiquipedia編集者の皆様に感謝します。",
+
+    footer:
+      "🦊OW KITSUNE GUIDE は非公式のファン制作サイトです。配信状況や動画情報は遅延・誤差が発生する場合があります。掲載情報は公開情報をもとに収集しています。選手のアカウント変更等により、一部リンクが利用できなくなる場合があります。"
   },
+
   ko: {
-    birthdays: "생일",
-    todayBirthdays: "🎂 오늘의 생일",
-    noBirthdaysToday: "🦊 오늘 생일인 선수가 없습니다.",
-    add: "📅 추가"
+    birthdayNote:
+      "🌐 날짜는 사용 중인 기기의 로컬 날짜를 기준으로 표시됩니다.",
+
+    liquipediaNote:
+      "선수명 또는 팀명을 클릭하면 Liquipedia가 열립니다.",
+
+    discordNote1:
+      "DC 링크는 Discord 서버 홈 페이지이며 초대 링크가 아닙니다.",
+
+    discordNote2:
+      "Discord 앱이 설치되어 있으면 앱만 열리고 서버로 이동하지 않을 수 있습니다.",
+
+    credit1:
+      "일부 선수 및 팀 정보는 Liquipedia를 참고했습니다.",
+
+    credit2:
+      "e스포츠 역사를 기록하는 Liquipedia 기여자분들께 감사드립니다.",
+
+    footer:
+      "🦊OW KITSUNE GUIDE는 비공식 팬 프로젝트입니다. 스트림 및 영상 정보는 지연되거나 부정확할 수 있습니다. 공개된 정보를 기반으로 수집되며 선수 계정 변경으로 일부 링크가 작동하지 않을 수 있습니다."
   }
 };
 
 function t(key){
   return i18n[currentLang]?.[key] || i18n.en[key] || key;
 }
+
+function updateLangButtons(){
+  document
+    .querySelectorAll(".lang-switch button")
+    .forEach(button => {
+      button.classList.toggle(
+        "active",
+        button.dataset.lang === currentLang
+      );
+    });
+  const footerText =
+  document.getElementById("footerText");
+
+if (footerText) {
+  footerText.textContent = t("footer");
+}
+}
+
+document
+  .querySelectorAll(".lang-switch button")
+  .forEach(button => {
+    button.addEventListener("click", () => {
+      currentLang = button.dataset.lang;
+      localStorage.setItem("siteLang", currentLang);
+
+      updateLangButtons();
+      loadView(currentView);
+    });
+  });
+
+updateLangButtons();
 
 const progressSets = [
   [0, 8, 21, 39, 58, 77, 95],
@@ -481,10 +562,8 @@ function loadBirthdaysView() {
 
   updated.textContent = "";
   
-  document.getElementById("viewNote").innerHTML = `
-  🌐 Dates are shown based on your device's local date.<br>
-  🌐 日付はお使いの端末のローカル日付を基準に表示されます。
-  `;
+  document.getElementById("viewNote").innerHTML =
+  t("birthdayNote");
 
   pageTitle.textContent = "BIRTHDAYS";
   setRandomVoiceLine();
@@ -1490,29 +1569,16 @@ function renderPlayerLinks(players) {
 
 app.innerHTML = `
   <div class="discord-note">
-    *Click player or team names to open Liquipedia.<br>
-    プレイヤー名・チーム名をクリックするとLiquipediaを開きます。皆Liquipediaを見よう。
+    ${t("liquipediaNote")}
 
     <details class="playerlinks-help">
       <summary>More Info / 詳細</summary>
 
-      <p>
-        *DC links are Discord server home pages, not invite links.<br>
-        DCはDiscordサーバーのトップページです（招待リンクではありません）
-      </p>
+      <p>${t("discordNote1")}</p>
 
-      <p>
-        *If the Discord app is installed on your mobile device, the link may only open the app and not navigate to the server.<br>
-        Discordアプリがインストールされている場合、アプリが開くだけでサーバーへ移動しないことがあります。
-      </p>
+      <p>${t("discordNote2")}</p>
       
-      <p>
-        Some player and team information is sourced from Liquipedia.<br>
-        Special thanks to the Liquipedia contributors who help keep esports history alive.<br>
-        
-        一部のプレイヤー情報・チーム情報はLiquipediaを参考にしています。<br>
-        eスポーツの歴史を支えているLiquipedia編集者の皆様に感謝します。
-      </p>
+      <p>${t("credit1")}<br>${t("credit2")}</p>
       
     </details>
   </div>
