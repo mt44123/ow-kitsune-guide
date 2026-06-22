@@ -244,6 +244,8 @@ function isYoutubeView(view) {
 function updateNavState(view) {
   const liveButton = document.querySelector('[data-section="live"]');
   const clipsButton = document.querySelector('[data-section="clips"]');
+  const youtubeButton = document.querySelector('[data-section="youtube"]');
+  const playersButton = document.querySelector('[data-section="players"]');
 
   const liveSubNav = document.getElementById("liveSubNav");
   const clipsSubNav = document.getElementById("clipsSubNav");
@@ -280,10 +282,7 @@ function updateNavState(view) {
       ?.classList.add("active");
 
   } else if (isYoutubeView(view)) {
-    document
-      .querySelector('.main-nav button[data-section="youtube"]')
-      ?.classList.add("active");
-
+    youtubeButton?.classList.add("active");
     if (youtubeSubNav) youtubeSubNav.style.display = "flex";
 
     document
@@ -291,10 +290,7 @@ function updateNavState(view) {
       ?.classList.add("active");
 
   } else if (isPlayerView(view)) {
-    document
-      .querySelector('.main-nav button[data-section="players"]')
-      ?.classList.add("active");
-
+    playersButton?.classList.add("active");
     if (playerSubNav) playerSubNav.style.display = "flex";
 
     document
@@ -452,7 +448,7 @@ function loadBirthdaysView() {
 
   updated.textContent = "";
   
-  document.getElementById("viewNote").innerHTML = `
+  viewNote.innerHTML = `
   🌐 Dates are shown based on your device's local date.<br>
   🌐 日付はお使いの端末のローカル日付を基準に表示されます。
 `;
@@ -1865,7 +1861,7 @@ function loadToolsView() {
   setRandomVoiceLine();
 
   updated.textContent = "";
-  document.getElementById("viewNote").textContent = "";
+  viewNote.textContent = "";
 
   app.className = "tools-mode";
 
