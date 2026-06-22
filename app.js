@@ -1543,30 +1543,92 @@ app.innerHTML = `
 }
 
 function setupPlayerLinksSort() {
-  document.querySelectorAll(".player-table th.sortable").forEach(th => {
-    th.addEventListener("click", () => {
-      const key = th.dataset.sort;
-      const tbody = document.querySelector(".player-table tbody");
-      if (!tbody) return;
+  document
+    .querySelectorAll(".player-table th.sortable")
+    .forEach(th => {
 
-      const rows = Array.from(tbody.querySelectorAll("tr"));
+      th.addEventListener("click", () => {
+        const key = th.dataset.sort;
 
-      const currentDir = th.dataset.dir || "desc";
-      const nextDir = currentDir === "asc" ? "desc" : "asc";
+        const tbody =
+          document.querySelector(
+            ".player-table tbody"
+          );
 
-      document.querySelectorAll(".player-table th.sortable").forEach(h => {
-        h.dataset.dir = "";
-        h.classList.remove("sorted-asc", "sorted-desc");
+        if (!tbody) return;
+
+        const rows =
+          Array.from(
+            tbody.querySelectorAll("tr")
+          );
+
+        const currentDir =
+          th.dataset.dir || "desc";
+
+        const nextDir =
+          currentDir === "asc"
+            ? "desc"
+            : "asc";
+
+        document
+          .querySelectorAll(
+            ".player-table th.sortable"
+          )
+          .forEach(h => {
+            h.dataset.dir = "";
+            h.classList.remove(
+              "sorted-asc",
+              "sorted-desc"
+            );
+          });
+
+        th.dataset.dir = nextDir;
+
+        th.classList.add(
+          nextDir === "asc"
+            ? "sorted-asc"
+            : "sorted-desc"
+        );
+
+        rows.sort((a, b) => {
+          const aValue =
+            a.dataset[key] || "";
+
+          const bValue =
+            b.dataset[key] || "";
+
+          if (key === "age") {
+            return compareAge_(
+              aValue,
+              bValue,
+              nextDir
+            );
+          }
+
+          if (key === "laststream") {
+            return compareLastStream_(
+              aValue,
+              bValue,
+              nextDir
+            );
+          }
+
+          return compareText_(
+            aValue,
+            bValue,
+            nextDir
+          );
+        });
+
+        rows.forEach(row =>
+          tbody.appendChild(row)
+        );
       });
 
-      th.dataset.dir = nextDir;
-      th.classList.add(nextDir === "asc" ? "sorted-asc" : "sorted-desc");
+    });
+}
 
-      rows.sort((a, b) => {
-        const aValue = a.dataset[key] || "";
-const bValue = b.dataset[key] || "";
-
-if (key === "age") {
+function compareAge_(aValue, bValue, dir) {
   const aEmpty = aValue === "";
   const bEmpty = bValue === "";
 
@@ -1574,35 +1636,49 @@ if (key === "age") {
   if (!aEmpty && bEmpty) return -1;
   if (aEmpty && bEmpty) return 0;
 
-  const result = Number(aValue) - Number(bValue);
+  const result =
+    Number(aValue) - Number(bValue);
 
-  return nextDir === "asc" ? result : -result;
+  return dir === "asc"
+    ? result
+    : -result;
 }
-        
-if (key === "laststream") {
-  const parseDays = v => {
-    if (!v) return 999999;
-    if (v === "TODAY") return 0;
 
-    const m = String(v).match(/^(\d+)d$/);
-    return m ? Number(m[1]) : 999999;
+function compareLastStream_(aValue, bValue, dir) {
+
+  const parseDays = value => {
+    if (!value) return 999999;
+    if (value === "TODAY") return 0;
+
+    const match =
+      String(value).match(/^(\d+)d$/);
+
+    return match
+      ? Number(match[1])
+      : 999999;
   };
-  
-  const result = parseDays(aValue) - parseDays(bValue);
-  return nextDir === "asc" ? result : -result;
+
+  const result =
+    parseDays(aValue) -
+    parseDays(bValue);
+
+  return dir === "asc"
+    ? result
+    : -result;
 }
 
-if (aValue === "" && bValue !== "") return 1;
-if (aValue !== "" && bValue === "") return -1;
-if (aValue === "" && bValue === "") return 0;
+function compareText_(aValue, bValue, dir) {
 
-const result = aValue.localeCompare(bValue);
-return nextDir === "asc" ? result : -result;
-      });
+  if (aValue === "" && bValue !== "") return 1;
+  if (aValue !== "" && bValue === "") return -1;
+  if (aValue === "" && bValue === "") return 0;
 
-      rows.forEach(row => tbody.appendChild(row));
-    });
-  });
+  const result =
+    aValue.localeCompare(bValue);
+
+  return dir === "asc"
+    ? result
+    : -result;
 }
 
 function getLangClass(p) {
@@ -1833,23 +1909,20 @@ function formatViews(views) {
 }
 
 function updateAllButtonCounts(counts) {
-  Object.entries(titles).forEach(([key, label]) => {
-    const button = document.querySelector(`#liveSubNav button[data-view="${key}"]`);
-    if (!button) return;
 
-    const count = counts[key] ?? "";
-    button.textContent = `${label} (${count})`;
-  });
+  document
+    .querySelectorAll("#liveSubNav button[data-view]")
+    .forEach(button => {
 
-  document.querySelectorAll(".main-nav .media-nav").forEach(button => {
-    const view = button.dataset.view;
-    if (!view) return;
+      const view = button.dataset.view;
+      const label = titles[view] || view.toUpperCase();
 
-    const labelEl = button.querySelector(".media-label");
-    if (!labelEl) return;
+      const count = counts?.[view] ?? "";
 
-    labelEl.textContent = titles[view] || labelEl.textContent;
-  });
+      button.textContent =
+        `${label} (${count})`;
+    });
+
 }
 
 function escapeHtml(value) {
