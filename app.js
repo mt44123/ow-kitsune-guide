@@ -390,19 +390,18 @@ searchToggle?.addEventListener("click", () => {
 
 let searchTimer;
 
-searchBox.addEventListener("input", () => {
+searchBox?.addEventListener("input", () => {
   clearTimeout(searchTimer);
 
   searchTimer = setTimeout(() => {
-
     if (isYoutubeView(currentView)) {
-  renderYoutube(filterYoutube(currentData));
+      renderYoutube(filterYoutube(currentData));
 
-} else if (isClipView(currentView)) {
-  renderClips(filterClips(currentData));
+    } else if (isClipView(currentView)) {
+      renderClips(filterClips(currentData));
 
-} else if (currentView === "playerlinks") {
-  searchPlayerLinksTable();
+    } else if (currentView === "playerlinks") {
+      searchPlayerLinksTable();
 
     } else {
       renderLive(filterPlayers(currentData));
@@ -422,18 +421,18 @@ function loadView(view) {
     return;
   }
 
+  if (isClipView(view)) {
+    loadClipsView(view);
+    return;
+  }
+
   if (view === "playerlinks") {
     loadPlayerLinksView();
     return;
   }
 
   if (view === "birthdays") {
-  loadBirthdaysView();
-  return;
-}
-
-  if (isClipView(view)) {
-    loadClipsView(view);
+    loadBirthdaysView();
     return;
   }
 
@@ -961,19 +960,19 @@ function loadPlayerLinksView() {
   pageTitle.textContent = titles.playerlinks;
   setRandomVoiceLine();
 
-if (
-  playerLinksCache &&
-  now - playerLinksCacheTime < PLAYER_LINKS_CLIENT_CACHE_MS
-) {
-  requestId++;
-  stopFakeProgress();
+  if (
+    playerLinksCache &&
+    now - playerLinksCacheTime < PLAYER_LINKS_CLIENT_CACHE_MS
+  ) {
+    requestId++;
+    stopFakeProgress();
 
-  updated.textContent = playerLinksLastUpdated;
+    updated.textContent = playerLinksLastUpdated;
 
-  currentData = playerLinksCache;
-  renderPlayerLinks(currentData);
-  return;
-}
+    currentData = playerLinksCache;
+    renderPlayerLinks(currentData);
+    return;
+  }
 
   const currentRequest = ++requestId;
 
@@ -986,15 +985,15 @@ if (
         stopFakeProgress();
         return;
       }
-    
+
       finishFakeProgress();
-    
+
       playerLinksLastUpdated = data.lastUpdated || "";
       updated.textContent = playerLinksLastUpdated;
-    
+
       playerLinksCache = data.playerLinks || [];
       playerLinksCacheTime = Date.now();
-    
+
       currentData = playerLinksCache;
       renderPlayerLinks(currentData);
     })
@@ -1003,7 +1002,9 @@ if (
 
       stopFakeProgress();
 
-      app.innerHTML = `<p class="error">Failed to load data.</p>`;
+      app.innerHTML =
+        `<p class="error">Failed to load data.</p>`;
+
       console.error(error);
     });
 }
@@ -1011,21 +1012,25 @@ if (
 function loadLiveView(view) {
   const now = Date.now();
 
-if (liveCache && now - liveCacheTime < LIVE_CLIENT_CACHE_MS) {
-requestId++;
-stopFakeProgress();
-pageTitle.textContent = titles[view] || view.toUpperCase();
-setRandomVoiceLine();
-renderLiveFromCache(view);
-return;
-}
+  pageTitle.textContent =
+    titles[view] || view.toUpperCase();
+
+  setRandomVoiceLine();
+
+  if (
+    liveCache &&
+    now - liveCacheTime < LIVE_CLIENT_CACHE_MS
+  ) {
+    requestId++;
+    stopFakeProgress();
+
+    renderLiveFromCache(view);
+    return;
+  }
 
   const currentRequest = ++requestId;
 
   startFakeProgress();
-
-  pageTitle.textContent = titles[view] || view.toUpperCase();
-  setRandomVoiceLine();
 
   fetch(CONFIG.API_URL + "?view=new")
     .then(res => res.json())
@@ -1040,7 +1045,8 @@ return;
       liveCache = data;
       liveCacheTime = Date.now();
 
-      updated.textContent = data.lastUpdated || "";
+      updated.textContent =
+        data.lastUpdated || "";
 
       if (data.counts) {
         updateAllButtonCounts(data.counts);
@@ -1053,7 +1059,9 @@ return;
 
       stopFakeProgress();
 
-      app.innerHTML = `<p class="error">Failed to load data.</p>`;
+      app.innerHTML =
+        `<p class="error">Failed to load data.</p>`;
+
       console.error(error);
     });
 }
