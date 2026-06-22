@@ -80,18 +80,13 @@ let playerLinksCache = null;
 let playerLinksCacheTime = 0;
 const PLAYER_LINKS_CLIENT_CACHE_MS =  6 * 60 * 60 * 1000;
 
-let twitchClipsCache = null;
-let twitchClipsCacheTime = 0;
-let twitchHotClipsCache = null;
-let twitchHotClipsCacheTime = 0;
-
-let soopClipsCache = null;
-let soopClipsCacheTime = 0;
-
-let chzzkNewClipsCache = null;
-let chzzkNewClipsCacheTime = 0;
-let chzzkBestClipsCache = null;
-let chzzkBestClipsCacheTime = 0;
+const clipCache = {
+  twitch: { data: null, time: 0 },
+  twitchhot: { data: null, time: 0 },
+  soop: { data: null, time: 0 },
+  chzzknew: { data: null, time: 0 },
+  chzzkbest: { data: null, time: 0 }
+};
 
 const CLIPS_CLIENT_CACHE_MS = 6 * 60 * 60 * 1000;
 
@@ -861,14 +856,16 @@ function loadClipsView(view) {
 
   const source = getClipSource_(view);
 
+  const cached = clipCache[source.cacheKey];
+
   if (
-    source.cache &&
-    now - source.cacheTime < CLIPS_CLIENT_CACHE_MS
+    cached?.data &&
+    now - cached.time < CLIPS_CLIENT_CACHE_MS
   ) {
     requestId++;
     stopFakeProgress();
 
-    currentData = filterClipView(source.cache, view);
+    currentData = filterClipView(cached.data, view);
     renderClips(currentData);
     return;
   }
@@ -908,9 +905,7 @@ function getClipSource_(view) {
     return {
       type: "soop",
       apiView: view === "soophotclips" ? "soophotclips" : "soopclips",
-      cacheKey: "soop",
-      cache: soopClipsCache,
-      cacheTime: soopClipsCacheTime
+      cacheKey: "soop"
     };
   }
 
@@ -918,9 +913,7 @@ function getClipSource_(view) {
     return {
       type: "chzzknew",
       apiView: "chzzknewclips",
-      cacheKey: "chzzknew",
-      cache: chzzkNewClipsCache,
-      cacheTime: chzzkNewClipsCacheTime
+      cacheKey: "chzzknew"
     };
   }
 
@@ -928,9 +921,7 @@ function getClipSource_(view) {
     return {
       type: "chzzkbest",
       apiView: "chzzkbestclips",
-      cacheKey: "chzzkbest",
-      cache: chzzkBestClipsCache,
-      cacheTime: chzzkBestClipsCacheTime
+      cacheKey: "chzzkbest"
     };
   }
 
@@ -938,18 +929,14 @@ function getClipSource_(view) {
     return {
       type: "twitch",
       apiView: "hotclips",
-      cacheKey: "twitchhot",
-      cache: twitchHotClipsCache,
-      cacheTime: twitchHotClipsCacheTime
+      cacheKey: "twitchhot"
     };
   }
 
   return {
     type: "twitch",
     apiView: "clips",
-    cacheKey: "twitch",
-    cache: twitchClipsCache,
-    cacheTime: twitchClipsCacheTime
+    cacheKey: "twitch"
   };
 }
 
@@ -962,34 +949,10 @@ function getClipsFromApiData_(data, type) {
 }
 
 function setClipCache_(cacheKey, clips) {
-  const now = Date.now();
+  if (!clipCache[cacheKey]) return;
 
-  if (cacheKey === "soop") {
-    soopClipsCache = clips;
-    soopClipsCacheTime = now;
-    return;
-  }
-
-  if (cacheKey === "chzzknew") {
-    chzzkNewClipsCache = clips;
-    chzzkNewClipsCacheTime = now;
-    return;
-  }
-
-  if (cacheKey === "chzzkbest") {
-    chzzkBestClipsCache = clips;
-    chzzkBestClipsCacheTime = now;
-    return;
-  }
-
-  if (cacheKey === "twitchhot") {
-    twitchHotClipsCache = clips;
-    twitchHotClipsCacheTime = now;
-    return;
-  }
-
-  twitchClipsCache = clips;
-  twitchClipsCacheTime = now;
+  clipCache[cacheKey].data = clips;
+  clipCache[cacheKey].time = Date.now();
 }
 
 function loadPlayerLinksView() {
