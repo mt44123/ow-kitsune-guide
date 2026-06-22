@@ -566,33 +566,11 @@ const cells = buildBirthdayCells_(
   birthdaysByDay
 );
 
-  const listItems = players
-    .filter(p => p.born)
-    .map(p => {
-      const [, m, d] = p.born.split("-").map(Number);
-      return { ...p, month: m, day: d };
-    })
-    .filter(p => p.month === month + 1)
-    .sort((a, b) => a.day - b.day)
-    .map(p => `
-      <div class="birthday-list-item ${getNationalityRegionClass(p.nationality)}">
-        <div class="birthday-list-date">${month + 1}/${p.day}</div>
-        <div>
-          <strong>
-            🎂 <a
-              class="birthday-player-link"
-              href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
-              target="_blank"
-              rel="noopener"
-            >${escapeHtml(p.name)}</a>
-          </strong>
-          <div>${escapeHtml(p.team || "-")} / ${escapeHtml(p.role || "-")} / ${escapeHtml(p.nationality || "-")}</div>
-          <div>${p.born ? `Turns ${getAgeOnBirthdayThisYear(p.born, year)}` : ""}</div>
-        </div>
-        <a href="${googleBirthdayUrl(p, year)}" target="_blank" rel="noopener">📅 Add</a>
-      </div>
-    `)
-    .join("");
+const listItems = buildBirthdayList_(
+  players,
+  month,
+  year
+);
 
 const todaySection =
   buildBirthdayTodaySection_(
@@ -787,6 +765,72 @@ function buildBirthdayCells_(
   }
 
   return cells;
+}
+
+function buildBirthdayList_(
+  players,
+  month,
+  year
+) {
+  return players
+    .filter(p => p.born)
+    .map(p => {
+      const [, m, d] =
+        p.born.split("-").map(Number);
+
+      return {
+        ...p,
+        month: m,
+        day: d
+      };
+    })
+    .filter(p => p.month === month + 1)
+    .sort((a, b) => a.day - b.day)
+    .map(p => `
+      <div class="birthday-list-item ${getNationalityRegionClass(p.nationality)}">
+
+        <div class="birthday-list-date">
+          ${month + 1}/${p.day}
+        </div>
+
+        <div>
+          <strong>
+            🎂 <a
+              class="birthday-player-link"
+              href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
+              target="_blank"
+              rel="noopener"
+            >
+              ${escapeHtml(p.name)}
+            </a>
+          </strong>
+
+          <div>
+            ${escapeHtml(p.team || "-")} /
+            ${escapeHtml(p.role || "-")} /
+            ${escapeHtml(p.nationality || "-")}
+          </div>
+
+          <div>
+            ${
+              p.born
+                ? `Turns ${getAgeOnBirthdayThisYear(p.born, year)}`
+                : ""
+            }
+          </div>
+        </div>
+
+        <a
+          href="${googleBirthdayUrl(p, year)}"
+          target="_blank"
+          rel="noopener"
+        >
+          📅 Add
+        </a>
+
+      </div>
+    `)
+    .join("");
 }
 
 function googleBirthdayUrl(p, year) {
