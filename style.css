@@ -1204,6 +1204,21 @@ img{
   color:var(--text-sub);
 }
 
+.birthday-today .birthday-event strong,
+.birthday-today .birthday-event span{
+  text-align:center;
+}
+
+.birthday-today .birthday-event{
+  text-align:center;
+}
+
+.birthday-today .birthday-calendar-link{
+  display:block;
+  width:max-content;
+  margin:3px auto 0;
+}
+
 #voiceLine{
   cursor:pointer;
 }
