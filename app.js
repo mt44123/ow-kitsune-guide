@@ -1342,6 +1342,7 @@ function renderLive(players) {
 }
 
 function renderYoutube(videos) {
+    console.log("YOUTUBE SAMPLE", videos[0]);
   app.className = "youtube-mode";
 
   if (!videos.length) {
