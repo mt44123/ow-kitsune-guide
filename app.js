@@ -1,6 +1,4 @@
-const app = document.createElement("div");
-app.id = "app";
-document.body.appendChild(app);
+const app = document.getElementById("app");
 
 const updated = document.getElementById("updated");
 const pageTitle = document.getElementById("pageTitle");
