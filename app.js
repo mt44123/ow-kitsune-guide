@@ -70,9 +70,11 @@ const BIRTHDAYS_CLIENT_CACHE_MS = 6 * 60 * 60 * 1000;
 let playerLinksLastUpdated = "";
 
 function startFakeProgress() {
-    progressSteps =
-    progressSets[Math.floor(Math.random() * progressSets.length)];
-  
+  progressSteps =
+    progressSets[
+      Math.floor(Math.random() * progressSets.length)
+    ];
+
   progressIndex = 0;
   clearInterval(progressTimer);
 
@@ -134,15 +136,16 @@ function setRandomVoiceLine() {
   if (!voiceLines.length) return;
 
   const line =
-    voiceLines[Math.floor(Math.random() * voiceLines.length)];
+    voiceLines[
+      Math.floor(Math.random() * voiceLines.length)
+    ];
 
-voiceLine.dataset.voice =
-  line.text;
+  voiceLine.dataset.voice = line.text;
   voiceLine.dataset.lang = line.lang;
   voiceLine.dataset.hero = line.hero || "";
 
   voiceLine.textContent =
-  "🎙️ " + line.text;
+    "🎙️ " + line.text;
 }
 
 function speakCurrentVoiceLine_() {
