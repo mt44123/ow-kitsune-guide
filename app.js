@@ -639,59 +639,12 @@ const todayBirthdays = players.filter(p => {
     `)
     .join("");
 
-  const todaySection = `
-  <div class="birthday-today">
-
-   <h3>
-  🎂 Today's Birthdays
-  (${today.getMonth() + 1}/${today.getDate()})
-</h3>
-
-    ${
-      todayBirthdays.length
-        ? todayBirthdays.map(p => `
-  <div class="birthday-event ${getNationalityRegionClass(p.nationality)}">
-
-    <strong>
-      <a
-        class="birthday-player-link"
-        href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
-        target="_blank"
-        rel="noopener"
-      >
-        🎂 ${escapeHtml(p.name)}
-      </a>
-    </strong>
-
-    <span>
-      ${escapeHtml(p.team || "-")} /
-      ${escapeHtml(p.role || "-")}
-    </span>
-
-    <span>
-      ${p.born ? `Turns ${getTurnsAgeToday(p.born)}` : ""}
-    </span>
-
-    <a
-      class="birthday-calendar-link"
-      href="${googleBirthdayUrl(p, year)}"
-      target="_blank"
-      rel="noopener"
-    >
-      📅 Add
-    </a>
-
-  </div>
-`).join("")
-        : `
-            <div class="birthday-today-empty">
-              🦊 No birthdays today.
-            </div>
-          `
-    }
-
-  </div>
-`;
+const todaySection =
+  buildBirthdayTodaySection_(
+    todayBirthdays,
+    today,
+    year
+  );
 
 app.innerHTML = `
   ${todaySection}
@@ -731,6 +684,66 @@ app.innerHTML = `
     birthdayCalendarDate = new Date(year, month + 1, 1);
     renderBirthdayCalendar(players);
   };
+}
+
+function buildBirthdayTodaySection_(
+  todayBirthdays,
+  today,
+  year
+) {
+  return `
+    <div class="birthday-today">
+
+      <h3>
+        🎂 Today's Birthdays
+        (${today.getMonth() + 1}/${today.getDate()})
+      </h3>
+
+      ${
+        todayBirthdays.length
+          ? todayBirthdays.map(p => `
+              <div class="birthday-event ${getNationalityRegionClass(p.nationality)}">
+
+                <strong>
+                  <a
+                    class="birthday-player-link"
+                    href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    🎂 ${escapeHtml(p.name)}
+                  </a>
+                </strong>
+
+                <span>
+                  ${escapeHtml(p.team || "-")} /
+                  ${escapeHtml(p.role || "-")}
+                </span>
+
+                <span>
+                  ${p.born ? `Turns ${getTurnsAgeToday(p.born)}` : ""}
+                </span>
+
+                <a
+                  class="birthday-calendar-link"
+                  href="${googleBirthdayUrl(p, year)}"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  📅 Add
+                </a>
+
+              </div>
+            `).join("")
+          : `
+              <div class="birthday-today-empty">
+                🦊 No birthdays today.
+              </div>
+            `
+      }
+
+    </div>
+  `;
 }
 
 function googleBirthdayUrl(p, year) {
