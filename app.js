@@ -1,6 +1,7 @@
 const app = document.getElementById("app");
 
 const updated = document.getElementById("updated");
+const viewNote = document.getElementById("viewNote");
 const pageTitle = document.getElementById("pageTitle");
 const voiceLine = document.getElementById("voiceLine");
 const voiceActor =
@@ -841,9 +842,6 @@ function loadClipsView(view) {
 
   pageTitle.textContent = titles[view] || view.toUpperCase();
   setRandomVoiceLine();
-
- const viewNote =
-  document.getElementById("viewNote");
 
 if (
   view === "hotclips" ||
