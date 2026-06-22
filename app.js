@@ -1521,36 +1521,73 @@ function renderClips(clips) {
     app.innerHTML = `<p class="empty">No clips found.</p>`;
     return;
   }
+  app.innerHTML =
+    clips
+      .map(renderClipCard_)
+      .join("");
+}
 
-  app.innerHTML = clips.map(c => {
-    const { mainTitle, subTitles } = buildMediaTitles_(
+function renderClipCard_(c) {
+  const { mainTitle, subTitles } =
+    buildMediaTitles_(
       c.rawTitle || c.title || "",
       c.titleJp || "",
       c.titleEn || ""
     );
 
-    return `
-      <a class="card-link youtube-card-link" href="${c.url}" target="_blank" rel="noopener">
-        <div class="youtube-card ${getNationalityRegionClass(c.nationality)}">
-          ${c.thumbnail ? `<img class="youtube-thumb" src="${c.thumbnail}" loading="lazy" alt="">` : ""}
+  return `
+    <a
+      class="card-link youtube-card-link"
+      href="${c.url}"
+      target="_blank"
+      rel="noopener"
+    >
+      <div class="youtube-card ${getNationalityRegionClass(c.nationality)}">
 
-          <div class="youtube-info">
-            <div class="youtube-title">${escapeHtml(mainTitle)}</div>
+        ${
+          c.thumbnail
+            ? `<img
+                 class="youtube-thumb"
+                 src="${c.thumbnail}"
+                 loading="lazy"
+                 alt=""
+               >`
+            : ""
+        }
 
-            ${subTitles.map(t => `
-              <div class="youtube-subtitle">${escapeHtml(t)}</div>
-            `).join("")}
+        <div class="youtube-info">
 
-            <div class="youtube-player">${escapeHtml(c.name || "-")}</div>
-            <div class="youtube-meta">${escapeHtml(c.team || "-")} │ ${escapeHtml(c.role || "-")} │ ${escapeHtml(c.nationality || "-")}</div>
-            <div class="youtube-date">
-              ▶️ ${Number(c.views || 0).toLocaleString()} views 🕓 ${timeAgo(c.date)}
-            </div>
+          <div class="youtube-title">
+            ${escapeHtml(mainTitle)}
           </div>
+
+          ${subTitles.map(t => `
+            <div class="youtube-subtitle">
+              ${escapeHtml(t)}
+            </div>
+          `).join("")}
+
+          <div class="youtube-player">
+            ${escapeHtml(c.name || "-")}
+          </div>
+
+          <div class="youtube-meta">
+            ${escapeHtml(c.team || "-")}
+            │
+            ${escapeHtml(c.role || "-")}
+            │
+            ${escapeHtml(c.nationality || "-")}
+          </div>
+
+          <div class="youtube-date">
+            ▶️ ${Number(c.views || 0).toLocaleString()} views
+            🕓 ${timeAgo(c.date)}
+          </div>
+
         </div>
-      </a>
-    `;
-  }).join("");
+      </div>
+    </a>
+  `;
 }
 
 function renderPlayerLinks(players) {
