@@ -1239,15 +1239,26 @@ function filterClipView(clips, view) {
   let result = [...clips];
 
   if (view === "jpclips") {
-    return result.filter(
-      c =>
-        getNationalityRegionClass(c.nationality) ===
-        "region-jp"
+    return result.filter(c =>
+      getNationalityRegionClass(c.nationality) === "region-jp"
     );
   }
 
-if (view === "chzzkhotclips") {
-  result = result.filter(c => {
+  if (view === "chzzkbestclips") {
+    return sortClipsByViews_(result);
+  }
+
+  if (view === "chzzkhotclips" || view === "soophotclips") {
+    return sortClipsByViews_(filterRecentClips_(result, 30));
+  }
+
+  return result.sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+}
+
+function filterRecentClips_(clips, daysLimit) {
+  return clips.filter(c => {
     const date = new Date(c.date);
     if (isNaN(date.getTime())) return false;
 
@@ -1255,39 +1266,13 @@ if (view === "chzzkhotclips") {
       (Date.now() - date.getTime()) /
       (1000 * 60 * 60 * 24);
 
-    return days <= 30;
+    return days <= daysLimit;
   });
-
-  return result.sort(
-    (a, b) => Number(b.views || 0) - Number(a.views || 0)
-  );
 }
 
-if (view === "chzzkbestclips") {
-  return result.sort(
+function sortClipsByViews_(clips) {
+  return clips.sort(
     (a, b) => Number(b.views || 0) - Number(a.views || 0)
-  );
-}
-  
-  if (view === "soophotclips") {
-    result = result.filter(c => {
-      const date = new Date(c.date);
-      if (isNaN(date.getTime())) return false;
-  
-      const days =
-        (Date.now() - date.getTime()) /
-        (1000 * 60 * 60 * 24);
-  
-      return days <= 30;
-    });
-  
-    return result.sort(
-      (a, b) => Number(b.views || 0) - Number(a.views || 0)
-    );
-  }
-  
-  return result.sort(
-    (a, b) => new Date(b.date) - new Date(a.date)
   );
 }
 
@@ -1340,22 +1325,11 @@ function renderYoutube(videos) {
   }
 
   app.innerHTML = videos.map(v => {
-    const raw = v.rawTitle || "";
-    const jp = v.titleJp || "";
-    const en = v.titleEn || "";
-
-    let mainTitle = "";
-    const subTitles = [];
-
-    if (jp) {
-      mainTitle = jp;
-
-      if (en) subTitles.push(en);
-      if (raw && raw !== jp && raw !== en) subTitles.push(raw);
-    } else {
-      mainTitle = raw || en || "";
-      if (raw && en && en !== raw) subTitles.push(en);
-    }
+    const { mainTitle, subTitles } = buildMediaTitles_(
+      v.rawTitle || "",
+      v.titleJp || "",
+      v.titleEn || ""
+    );
 
     return `
       <a class="card-link youtube-card-link" href="${v.url}" target="_blank" rel="noopener">
@@ -1372,13 +1346,42 @@ function renderYoutube(videos) {
             <div class="youtube-player">${escapeHtml(v.name || "-")}</div>
             <div class="youtube-meta">${escapeHtml(v.team || "-")} │ ${escapeHtml(v.role || "-")} │ ${escapeHtml(v.nationality || "-")}</div>
             <div class="youtube-date">
-            ▶️ ${formatViews(v.views)} ・ 🕓 ${timeAgo(v.date)}
-          </div>
+              ▶️ ${formatViews(v.views)} ・ 🕓 ${timeAgo(v.date)}
+            </div>
           </div>
         </div>
       </a>
     `;
   }).join("");
+}
+
+function buildMediaTitles_(raw, jp, en) {
+  let mainTitle = "";
+  const subTitles = [];
+
+  if (jp) {
+    mainTitle = jp;
+
+    if (en) {
+      subTitles.push(en);
+    }
+
+    if (raw && raw !== jp && raw !== en) {
+      subTitles.push(raw);
+    }
+
+  } else {
+    mainTitle = raw || en || "";
+
+    if (raw && en && en !== raw) {
+      subTitles.push(en);
+    }
+  }
+
+  return {
+    mainTitle,
+    subTitles
+  };
 }
 
 function renderClips(clips) {
@@ -1390,22 +1393,11 @@ function renderClips(clips) {
   }
 
   app.innerHTML = clips.map(c => {
-    const raw = c.rawTitle || c.title || "";
-    const jp = c.titleJp || "";
-    const en = c.titleEn || "";
-
-    let mainTitle = "";
-    const subTitles = [];
-
-    if (jp) {
-      mainTitle = jp;
-
-      if (en) subTitles.push(en);
-      if (raw && raw !== jp && raw !== en) subTitles.push(raw);
-    } else {
-      mainTitle = raw || en || "";
-      if (raw && en && en !== raw) subTitles.push(en);
-    }
+    const { mainTitle, subTitles } = buildMediaTitles_(
+      c.rawTitle || c.title || "",
+      c.titleJp || "",
+      c.titleEn || ""
+    );
 
     return `
       <a class="card-link youtube-card-link" href="${c.url}" target="_blank" rel="noopener">
@@ -1421,7 +1413,9 @@ function renderClips(clips) {
 
             <div class="youtube-player">${escapeHtml(c.name || "-")}</div>
             <div class="youtube-meta">${escapeHtml(c.team || "-")} │ ${escapeHtml(c.role || "-")} │ ${escapeHtml(c.nationality || "-")}</div>
-            <div class="youtube-date">▶️ ${Number(c.views || 0).toLocaleString()} views 🕓 ${timeAgo(c.date)}</div>
+            <div class="youtube-date">
+              ▶️ ${Number(c.views || 0).toLocaleString()} views 🕓 ${timeAgo(c.date)}
+            </div>
           </div>
         </div>
       </a>
