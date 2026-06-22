@@ -200,53 +200,59 @@ async function loadVoiceLines() {
   }
 }
 
-const liveViews = ["new", "viewers", "kr", "en", "cn", "jp", "intl"];
-const clipViews = [
-  "clips",  "hotclips",  "jpclips",
-  "soopclips",  "soophotclips", 
-  "chzzknewclips", "chzzkhotclips", "chzzkbestclips"
-];
-const youtubeViews = [  "youtube",  "youtubehot",  "youtubejp"];
+const VIEW_GROUPS = {
+  live: ["new", "viewers", "kr", "en", "cn", "jp", "intl"],
 
-const playerViews = [
-  "playerlinks",
-  "birthdays"
-];
+  clips: [
+    "clips",
+    "hotclips",
+    "jpclips",
+    "soopclips",
+    "soophotclips",
+    "chzzknewclips",
+    "chzzkhotclips",
+    "chzzkbestclips"
+  ],
+
+  youtube: ["youtube", "youtubehot", "youtubejp"],
+
+  players: ["playerlinks", "birthdays"]
+};
 
 let currentLiveView =
-  liveViews.includes(currentView)
+  isLiveView(currentView)
     ? currentView
     : "new";
 
 let currentClipView =
-  clipViews.includes(currentView)
+  isClipView(currentView)
     ? currentView
     : "clips";
 
 let currentYoutubeView =
-  youtubeViews.includes(currentView)
+  isYoutubeView(currentView)
     ? currentView
     : "youtube";
 
 let currentPlayerView =
-  playerViews.includes(currentView)
+  isPlayerView(currentView)
     ? currentView
     : "playerlinks";
 
-function isPlayerView(view) {
-  return playerViews.includes(view);
-}
-
 function isLiveView(view) {
-  return liveViews.includes(view);
+  return VIEW_GROUPS.live.includes(view);
 }
 
 function isClipView(view) {
-  return clipViews.includes(view);
+  return VIEW_GROUPS.clips.includes(view);
 }
 
 function isYoutubeView(view) {
-  return youtubeViews.includes(view);
+  return VIEW_GROUPS.youtube.includes(view);
+}
+
+function isPlayerView(view) {
+  return VIEW_GROUPS.players.includes(view);
 }
 
 function updateNavState(view) {
