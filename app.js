@@ -2160,9 +2160,14 @@ function loadToolsView() {
 }
 
 async function init() {
-  await loadVoiceLines();
   updateLangButtons();
+
   loadView(currentView);
+
+  await loadVoiceLines();
+  setRandomVoiceLine();
 }
+
+init();
 
 init();
