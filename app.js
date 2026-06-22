@@ -90,8 +90,6 @@ let soopClipsCacheTime = 0;
 
 let chzzkNewClipsCache = null;
 let chzzkNewClipsCacheTime = 0;
-let chzzkHotClipsCache = null;
-let chzzkHotClipsCacheTime = 0;
 let chzzkBestClipsCache = null;
 let chzzkBestClipsCacheTime = 0;
 
@@ -839,72 +837,38 @@ function loadYoutubeView(view) {
 function loadClipsView(view) {
   document.body.classList.add("clip-view");
   document.body.classList.remove("youtube-view");
-  
+
   const now = Date.now();
 
   pageTitle.textContent = titles[view] || view.toUpperCase();
   setRandomVoiceLine();
 
-if (
-  view === "hotclips" ||
-  view === "soophotclips" ||
-  view === "chzzkhotclips"
-) {
-  viewNote.textContent =
-    "HOT = Most viewed clips from the last 30 days　過去30日以内の人気クリップ";
+  if (
+    view === "hotclips" ||
+    view === "soophotclips" ||
+    view === "chzzkhotclips"
+  ) {
+    viewNote.textContent =
+      "HOT = Most viewed clips from the last 30 days　過去30日以内の人気クリップ";
 
-} else if (view === "chzzkbestclips") {
-  viewNote.textContent =
-    "BEST = Popular clips 人気クリップ";
-
-} else {
-  viewNote.textContent = "";
-}
-
-const isSoop =
-  view === "soopclips" ||
-  view === "soophotclips";
-
-const isChzzk =
-  view === "chzzknewclips" ||
-  view === "chzzkhotclips" ||
-  view === "chzzkbestclips";
-
-let cache;
-let cacheTime;
-
-if (isSoop) {
-  cache = soopClipsCache;
-  cacheTime = soopClipsCacheTime;
-  
-} else if (isChzzk) {
-
-  if (view === "chzzknewclips") {
-    cache = chzzkNewClipsCache;
-    cacheTime = chzzkNewClipsCacheTime;
-
-  } else if (view === "chzzkhotclips") {
-    cache = chzzkHotClipsCache;
-    cacheTime = chzzkHotClipsCacheTime;
+  } else if (view === "chzzkbestclips") {
+    viewNote.textContent =
+      "BEST = Popular clips 人気クリップ";
 
   } else {
-    cache = chzzkBestClipsCache;
-    cacheTime = chzzkBestClipsCacheTime;
+    viewNote.textContent = "";
   }
-  
-} else if (view === "hotclips") {
-  cache = twitchHotClipsCache;
-  cacheTime = twitchHotClipsCacheTime;
-} else {
-  cache = twitchClipsCache;
-  cacheTime = twitchClipsCacheTime;
-}
 
-  if (cache && now - cacheTime < CLIPS_CLIENT_CACHE_MS) {
+  const source = getClipSource_(view);
+
+  if (
+    source.cache &&
+    now - source.cacheTime < CLIPS_CLIENT_CACHE_MS
+  ) {
     requestId++;
     stopFakeProgress();
 
-    currentData = filterClipView(cache, view);
+    currentData = filterClipView(source.cache, view);
     renderClips(currentData);
     return;
   }
@@ -913,21 +877,7 @@ if (isSoop) {
 
   startFakeProgress();
 
-let apiView = view === "hotclips" ? "hotclips" : "clips";
-
-if (isSoop) {
-  apiView = "soopclips";
-  
-} else if (
-  view === "chzzknewclips" ||
-  view === "chzzkhotclips"
-) {
-  apiView = "chzzknewclips";
-} else if (view === "chzzkbestclips") {
-  apiView = "chzzkbestclips";
-}
-
-  fetch(CONFIG.API_URL + "?view=" + apiView)
+  fetch(CONFIG.API_URL + "?view=" + source.apiView)
     .then(res => res.json())
     .then(data => {
       if (currentRequest !== requestId) {
@@ -937,47 +887,9 @@ if (isSoop) {
 
       finishFakeProgress();
 
-let clips = [];
+      const clips = getClipsFromApiData_(data, source.type);
 
-if (isSoop) {
-  clips = data.soopclips || [];
-
-} else if (
-  view === "chzzknewclips" ||
-  view === "chzzkhotclips"
-) {
-  clips = data.chzzknewclips || [];
-
-} else if (view === "chzzkbestclips") {
-  clips = data.chzzkbestclips || [];
-
-} else {
-  clips = data.clips || [];
-}
-      
-if (isSoop) {
-  soopClipsCache = clips;
-  soopClipsCacheTime = Date.now();
-
-} else if (view === "chzzknewclips") {
-  chzzkNewClipsCache = clips;
-  chzzkNewClipsCacheTime = Date.now();
-
-} else if (view === "chzzkhotclips") {
-  chzzkHotClipsCache = clips;
-  chzzkHotClipsCacheTime = Date.now();
-
-} else if (view === "chzzkbestclips") {
-  chzzkBestClipsCache = clips;
-  chzzkBestClipsCacheTime = Date.now();
-
-} else if (view === "hotclips") {
-  twitchHotClipsCache = clips;
-  twitchHotClipsCacheTime = Date.now();
-} else {
-  twitchClipsCache = clips;
-  twitchClipsCacheTime = Date.now();
-}
+      setClipCache_(source.cacheKey, clips);
 
       currentData = filterClipView(clips, view);
       renderClips(currentData);
@@ -990,6 +902,96 @@ if (isSoop) {
       console.error(error);
     });
 }
+
+function getClipSource_(view) {
+  if (view === "soopclips" || view === "soophotclips") {
+    return {
+      type: "soop",
+      apiView: view === "soophotclips" ? "soophotclips" : "soopclips",
+      cacheKey: "soop",
+      cache: soopClipsCache,
+      cacheTime: soopClipsCacheTime
+    };
+  }
+
+  if (view === "chzzknewclips" || view === "chzzkhotclips") {
+    return {
+      type: "chzzknew",
+      apiView: "chzzknewclips",
+      cacheKey: "chzzknew",
+      cache: chzzkNewClipsCache,
+      cacheTime: chzzkNewClipsCacheTime
+    };
+  }
+
+  if (view === "chzzkbestclips") {
+    return {
+      type: "chzzkbest",
+      apiView: "chzzkbestclips",
+      cacheKey: "chzzkbest",
+      cache: chzzkBestClipsCache,
+      cacheTime: chzzkBestClipsCacheTime
+    };
+  }
+
+  if (view === "hotclips") {
+    return {
+      type: "twitch",
+      apiView: "hotclips",
+      cacheKey: "twitchhot",
+      cache: twitchHotClipsCache,
+      cacheTime: twitchHotClipsCacheTime
+    };
+  }
+
+  return {
+    type: "twitch",
+    apiView: "clips",
+    cacheKey: "twitch",
+    cache: twitchClipsCache,
+    cacheTime: twitchClipsCacheTime
+  };
+}
+
+function getClipsFromApiData_(data, type) {
+  if (type === "soop") return data.soopclips || [];
+  if (type === "chzzknew") return data.chzzknewclips || [];
+  if (type === "chzzkbest") return data.chzzkbestclips || [];
+
+  return data.clips || [];
+}
+
+function setClipCache_(cacheKey, clips) {
+  const now = Date.now();
+
+  if (cacheKey === "soop") {
+    soopClipsCache = clips;
+    soopClipsCacheTime = now;
+    return;
+  }
+
+  if (cacheKey === "chzzknew") {
+    chzzkNewClipsCache = clips;
+    chzzkNewClipsCacheTime = now;
+    return;
+  }
+
+  if (cacheKey === "chzzkbest") {
+    chzzkBestClipsCache = clips;
+    chzzkBestClipsCacheTime = now;
+    return;
+  }
+
+  if (cacheKey === "twitchhot") {
+    twitchHotClipsCache = clips;
+    twitchHotClipsCacheTime = now;
+    return;
+  }
+
+  twitchClipsCache = clips;
+  twitchClipsCacheTime = now;
+}
+
 function loadPlayerLinksView() {
   const now = Date.now();
 
@@ -1286,18 +1288,6 @@ if (view === "chzzkbestclips") {
   
   return result.sort(
     (a, b) => new Date(b.date) - new Date(a.date)
-  );
-}
-
-function filterPlayerLinks(players) {
-  const keyword = searchBox.value.toLowerCase().trim();
-  if (!keyword) return players;
-
-  return players.filter(p =>
-    [p.name, p.teamRegion, p.team, p.role, p.nationality]
-      .join(" ")
-      .toLowerCase()
-      .includes(keyword)
   );
 }
 
