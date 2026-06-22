@@ -1276,3 +1276,23 @@ img{
   }
 
 }
+
+.lang-switch{
+  display:flex;
+  gap:6px;
+  justify-content:flex-end;
+  margin-top:6px;
+}
+
+.lang-switch button{
+  background:var(--bg-main);
+  color:var(--text-main);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:4px 8px;
+  cursor:pointer;
+}
+
+.lang-switch button.active{
+  background:var(--accent);
+}
