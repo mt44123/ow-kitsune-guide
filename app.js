@@ -9,41 +9,10 @@ speechSynthesis.onvoiceschanged = () => {
   speechSynthesis.getVoices();
 };
 
-voiceLine?.addEventListener("click", () => {
-  const text =
-  voiceLine.dataset.voice ||
-  voiceLine.textContent.trim();
-
-  if (!text) return;
-
-  speechSynthesis.cancel();
-
-  const utterance = new SpeechSynthesisUtterance(text);
-
-const voices = speechSynthesis.getVoices();
-
-if (voices.length) {
-  const voice =
-    voices[Math.floor(Math.random() * voices.length)];
-
-  utterance.voice = voice;
-
-  if (voiceActor) {
-    voiceActor.textContent =
-      `${voice.name} (${voice.lang})`;
-  }
-} else {
-  if (voiceActor) {
-    voiceActor.textContent = "Loading voice...";
-  }
-}
-
-utterance.rate = 0.95;
-utterance.pitch =  0.8 + Math.random() * 0.6;
-utterance.volume = 0.3;
-
-  speechSynthesis.speak(utterance);
-});
+voiceLine?.addEventListener(
+  "click",
+  speakCurrentVoiceLine_
+);
 
 const searchBox = document.getElementById("searchBox");
 const toolsButton =  document.getElementById("toolsButton");
@@ -174,6 +143,46 @@ voiceLine.dataset.voice =
 
   voiceLine.textContent =
   "🎙️ " + line.text;
+}
+
+function speakCurrentVoiceLine_() {
+  const text =
+    voiceLine?.dataset.voice ||
+    voiceLine?.textContent.trim();
+
+  if (!text) return;
+
+  speechSynthesis.cancel();
+
+  const utterance =
+    new SpeechSynthesisUtterance(text);
+
+  const voices =
+    speechSynthesis.getVoices();
+
+  if (voices.length) {
+    const voice =
+      voices[Math.floor(
+        Math.random() * voices.length
+      )];
+
+    utterance.voice = voice;
+
+    if (voiceActor) {
+      voiceActor.textContent =
+        `${voice.name} (${voice.lang})`;
+    }
+
+  } else if (voiceActor) {
+    voiceActor.textContent =
+      "Loading voice...";
+  }
+
+  utterance.rate = 0.95;
+  utterance.pitch = 0.8 + Math.random() * 0.6;
+  utterance.volume = 0.3;
+
+  speechSynthesis.speak(utterance);
 }
 
 async function loadVoiceLines() {
