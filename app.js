@@ -526,16 +526,16 @@ function renderBirthdayCalendar(players) {
   const todayM = today.getMonth();
   const todayD = today.getDate();
 
-const todayBirthdays = players.filter(p => {
-  if (!p.born) return false;
-
-  const [, m, d] = p.born.split("-").map(Number);
-
-  return (
-    m === today.getMonth() + 1 &&
-    d === today.getDate()
-  );
-});
+  const todayBirthdays = players.filter(p => {
+    if (!p.born) return false;
+  
+    const [, m, d] = p.born.split("-").map(Number);
+  
+    return (
+      m === today.getMonth() + 1 &&
+      d === today.getDate()
+    );
+  });
   
   const firstDay = new Date(year, month, 1);
   const startDay = firstDay.getDay();
@@ -554,59 +554,59 @@ const todayBirthdays = players.filter(p => {
     birthdaysByDay[bornDay].push(p);
   });
 
-const cells = buildBirthdayCells_(
-  year,
-  month,
-  todayY,
-  todayM,
-  todayD,
-  startDay,
-  lastDate,
-  prevLastDate,
-  birthdaysByDay
-);
+  const cells = buildBirthdayCells_(
+    year,
+    month,
+    todayY,
+    todayM,
+    todayD,
+    startDay,
+    lastDate,
+    prevLastDate,
+    birthdaysByDay
+  );
 
-const listItems = buildBirthdayList_(
-  players,
-  month,
-  year
-);
-
-const todaySection =
-  buildBirthdayTodaySection_(
-    todayBirthdays,
-    today,
+  const listItems = buildBirthdayList_(
+    players,
+    month,
     year
   );
 
-app.innerHTML = `
-  ${todaySection}
+  const todaySection =
+    buildBirthdayTodaySection_(
+      todayBirthdays,
+      today,
+      year
+    );
 
-  <div class="birthday-calendar">
-      <div class="birthday-calendar-header">
-        <button id="birthdayPrev">‹</button>
-
-        <div>
-          <div class="birthday-year">${year}</div>
-          <div class="birthday-month">${month + 1}</div>
+  app.innerHTML = `
+    ${todaySection}
+  
+    <div class="birthday-calendar">
+        <div class="birthday-calendar-header">
+          <button id="birthdayPrev">‹</button>
+  
+          <div>
+            <div class="birthday-year">${year}</div>
+            <div class="birthday-month">${month + 1}</div>
+          </div>
+  
+          <button id="birthdayNext">›</button>
         </div>
-
-        <button id="birthdayNext">›</button>
+  
+        <div class="birthday-weekdays">
+          <div>SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
+        </div>
+  
+        <div class="birthday-grid">
+          ${cells}
+        </div>
+  
+        <div class="birthday-list">
+          ${listItems || `<p class="empty">No birthdays this month.</p>`}
+        </div>
       </div>
-
-      <div class="birthday-weekdays">
-        <div>SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
-      </div>
-
-      <div class="birthday-grid">
-        ${cells}
-      </div>
-
-      <div class="birthday-list">
-        ${listItems || `<p class="empty">No birthdays this month.</p>`}
-      </div>
-    </div>
-  `;
+    `;
 
   document.getElementById("birthdayPrev").onclick = () => {
     birthdayCalendarDate = new Date(year, month - 1, 1);
