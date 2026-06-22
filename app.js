@@ -1182,46 +1182,54 @@ function filterYoutube(videos) {
 }
 
 function filterYoutubeView(videos, view) {
-  let result = [...videos];
+  const result = [...videos];
 
   if (view === "youtubehot") {
-    return result.sort(
-      (a, b) => Number(b.views || 0) - Number(a.views || 0)
-    );
+    return sortByViews_(result);
   }
 
   if (view === "youtubejp") {
-  return result.filter(
-    v =>
-      getNationalityRegionClass(v.nationality) ===
-      "region-jp"
+    return result.filter(v =>
+      getNationalityRegionClass(v.nationality) === "region-jp"
+    );
+  }
+
+  return sortByDateDesc_(result);
+}
+
+function sortByViews_(items) {
+  return items.sort(
+    (a, b) => Number(b.views || 0) - Number(a.views || 0)
   );
 }
 
-  return result.sort(
+function sortByDateDesc_(items) {
+  return items.sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
 }
 
 function filterClips(clips) {
-  const keyword = searchBox.value.toLowerCase().trim();
+  const keyword =
+    searchBox.value.toLowerCase().trim();
+
   if (!keyword) return clips;
 
   return clips.filter(c =>
-  [
-    c.name,
-    c.team,
-    c.role,
-    c.nationality,
-    c.rawTitle,
-    c.titleJp,
-    c.titleEn,
-    c.date
-  ]
-    .join(" ")
-    .toLowerCase()
-    .includes(keyword)
-);
+    [
+      c.name,
+      c.team,
+      c.role,
+      c.nationality,
+      c.rawTitle,
+      c.titleJp,
+      c.titleEn,
+      c.date
+    ]
+      .join(" ")
+      .toLowerCase()
+      .includes(keyword)
+  );
 }
 
 function filterClipView(clips, view) {
