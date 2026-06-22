@@ -1194,6 +1194,7 @@ img{
 .birthday-today h3{
   margin:0 0 8px;
   color:var(--accent);
+  text-align:center;
 }
 
 .birthday-today-item{
