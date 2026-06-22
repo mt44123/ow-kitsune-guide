@@ -10,7 +10,6 @@ const voiceActor =
 
 voiceLine?.addEventListener("click", () => {
   const text =
-  voiceLine.dataset.speech ||
   voiceLine.dataset.voice ||
   voiceLine.textContent.trim();
 
@@ -170,8 +169,8 @@ function setRandomVoiceLine() {
   const line =
     voiceLines[Math.floor(Math.random() * voiceLines.length)];
 
-voiceLine.dataset.speech =
-  line.speech || line.text;
+voiceLine.dataset.voice =
+  line.text;
   voiceLine.dataset.lang = line.lang;
   voiceLine.dataset.hero = line.hero || "";
 
