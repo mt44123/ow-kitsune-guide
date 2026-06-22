@@ -1633,57 +1633,91 @@ function linkDot(url, cls) {
   return `<a class="${cls} link-dot" href="${url}" target="_blank" rel="noopener">●</a>`;
 }
 
+const REGION_NA = [
+  "canada", "costa rica", "cuba", "dominican republic",
+  "el salvador", "guatemala", "honduras", "jamaica",
+  "mexico", "nicaragua", "panama"
+];
+
+const REGION_PAC = [
+  "australia", "bangladesh", "brunei", "cambodia",
+  "fiji", "hong kong", "india", "indonesia",
+  "laos", "malaysia", "mongolia", "myanmar",
+  "nepal", "new zealand", "pakistan",
+  "papua new guinea", "philippines",
+  "singapore", "sri lanka", "taiwan",
+  "thailand", "timor-leste", "vietnam"
+];
+
+const REGION_SA = [
+  "argentina", "bolivia", "brazil", "chile",
+  "colombia", "ecuador", "guyana",
+  "paraguay", "peru", "suriname",
+  "uruguay", "venezuela"
+];
+
+const REGION_EMEA = [
+  "albania", "algeria", "andorra", "armenia",
+  "austria", "azerbaijan", "bahrain",
+  "belgium", "belarus",
+  "bosnia and herzegovina", "bulgaria",
+  "croatia", "cyprus", "czech republic",
+  "denmark", "egypt", "estonia", "finland",
+  "france", "georgia", "germany", "greece",
+  "hungary", "iraq", "ireland", "israel",
+  "italy", "jordan", "kazakhstan",
+  "kuwait", "latvia", "lebanon", "libya",
+  "lithuania", "luxembourg", "malta",
+  "morocco", "netherlands", "norway",
+  "oman", "palestine", "poland",
+  "portugal", "qatar", "romania",
+  "saudi arabia", "serbia", "slovakia",
+  "slovenia", "south africa", "spain",
+  "sweden", "switzerland", "syria",
+  "tunisia", "turkey", "ukraine",
+  "united arab emirates", "uk", "yemen"
+];
+
 function getNationalityRegionClass(nationality) {
   const nat = String(nationality || "")
-  .split(",")[0]
-  .trim()
-  .toLowerCase();
+    .split(",")[0]
+    .trim()
+    .toLowerCase();
 
-  if (["japan", "jp"].includes(nat)) return "region-jp";
-  if (["south korea", "kr"].includes(nat)) return "region-kr";
-  if (["china", "cn"].includes(nat)) return "region-cn";
-  if (["united states", "usa", "us", "en"].includes(nat)) return "region-na";
+  if (["japan", "jp"].includes(nat)) {
+    return "region-jp";
+  }
 
-  const na = [
-    "canada", "costa rica", "cuba", "dominican republic", "el salvador",
-    "guatemala", "honduras", "jamaica", "mexico", "nicaragua",
-    "panama",
-  ];
+  if (["south korea", "kr"].includes(nat)) {
+    return "region-kr";
+  }
 
-  const pac = [
-    "australia", "bangladesh", "brunei", "cambodia", "fiji",
-    "hong kong", "india", "indonesia", "laos", "malaysia",
-    "mongolia", "myanmar", "nepal", "new zealand", "pakistan",
-    "papua new guinea", "philippines", "singapore", "sri lanka",
-    "taiwan", "thailand", "timor-leste", "vietnam"
-  ];
+  if (["china", "cn"].includes(nat)) {
+    return "region-cn";
+  }
 
-  const sa = [
-    "argentina", "bolivia", "brazil", "chile", "colombia",
-    "ecuador", "guyana", "paraguay", "peru", "suriname",
-    "uruguay", "venezuela"
-  ];
+  if (
+    ["united states", "usa", "us", "en"]
+      .includes(nat)
+  ) {
+    return "region-na";
+  }
 
-  const emea = [
-    "albania", "algeria", "andorra", "armenia", "austria",
-    "azerbaijan", "bahrain", "belgium", "belarus",
-    "bosnia and herzegovina", "bulgaria", "croatia", "cyprus",
-    "czech republic", "denmark", "egypt", "estonia", "finland",
-    "france", "georgia", "germany", "greece", "hungary", "iraq",
-    "ireland", "israel", "italy", "jordan", "kazakhstan",
-    "kuwait", "latvia", "lebanon", "libya", "lithuania",
-    "luxembourg", "malta", "morocco", "netherlands", "norway",
-    "oman", "palestine", "poland", "portugal", "qatar",
-    "romania", "saudi arabia", "serbia", "slovakia", "slovenia",
-    "south africa", "spain", "sweden", "switzerland", "syria",
-    "tunisia", "turkey", "ukraine", "united arab emirates",
-    "uk", "yemen"
-  ];
+  if (REGION_NA.some(x => nat.includes(x))) {
+    return "region-na";
+  }
 
-  if (na.some(x => nat.includes(x))) return "region-na";
-  if (pac.some(x => nat.includes(x))) return "region-pac";
-  if (sa.some(x => nat.includes(x))) return "region-sa";
-  if (emea.some(x => nat.includes(x))) return "region-emea";
+  if (REGION_PAC.some(x => nat.includes(x))) {
+    return "region-pac";
+  }
+
+  if (REGION_SA.some(x => nat.includes(x))) {
+    return "region-sa";
+  }
+
+  if (REGION_EMEA.some(x => nat.includes(x))) {
+    return "region-emea";
+  }
 
   return "region-unknown";
 }
