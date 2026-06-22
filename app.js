@@ -54,6 +54,34 @@ let currentView = params.get("view") || "new";
 let currentData = [];
 let requestId = 0;
 
+let currentLang =
+  localStorage.getItem("siteLang") || "en";
+
+const i18n = {
+  en: {
+    birthdays: "BIRTHDAYS",
+    todayBirthdays: "🎂 Today's Birthdays",
+    noBirthdaysToday: "🦊 No birthdays today.",
+    add: "📅 Add"
+  },
+  ja: {
+    birthdays: "誕生日",
+    todayBirthdays: "🎂 今日の誕生日",
+    noBirthdaysToday: "🦊 今日の誕生日はありません。",
+    add: "📅 追加"
+  },
+  ko: {
+    birthdays: "생일",
+    todayBirthdays: "🎂 오늘의 생일",
+    noBirthdaysToday: "🦊 오늘 생일인 선수가 없습니다.",
+    add: "📅 추가"
+  }
+};
+
+function t(key){
+  return i18n[currentLang]?.[key] || i18n.en[key] || key;
+}
+
 const progressSets = [
   [0, 8, 21, 39, 58, 77, 95],
   [0, 12, 28, 47, 66, 84, 96],
