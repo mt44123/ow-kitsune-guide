@@ -1415,35 +1415,74 @@ function renderYoutube(videos) {
     return;
   }
 
-  app.innerHTML = videos.map(v => {
-    const { mainTitle, subTitles } = buildMediaTitles_(
+  app.innerHTML =
+    videos
+      .map(renderYoutubeCard_)
+      .join("");
+}
+
+function renderYoutubeCard_(v) {
+  const { mainTitle, subTitles } =
+    buildMediaTitles_(
       v.rawTitle || "",
       v.titleJp || "",
       v.titleEn || ""
     );
 
-    return `
-      <a class="card-link youtube-card-link" href="${v.url}" target="_blank" rel="noopener">
-        <div class="youtube-card ${getNationalityRegionClass(v.nationality)}">
-          ${v.thumbnail ? `<img class="youtube-thumb" src="${v.thumbnail}" loading="lazy" alt="">` : ""}
+  return `
+    <a
+      class="card-link youtube-card-link"
+      href="${v.url}"
+      target="_blank"
+      rel="noopener"
+    >
+      <div class="youtube-card ${getNationalityRegionClass(v.nationality)}">
 
-          <div class="youtube-info">
-            <div class="youtube-title">${escapeHtml(mainTitle)}</div>
+        ${
+          v.thumbnail
+            ? `<img
+                 class="youtube-thumb"
+                 src="${v.thumbnail}"
+                 loading="lazy"
+                 alt=""
+               >`
+            : ""
+        }
 
-            ${subTitles.map(t => `
-              <div class="youtube-subtitle">${escapeHtml(t)}</div>
-            `).join("")}
+        <div class="youtube-info">
 
-            <div class="youtube-player">${escapeHtml(v.name || "-")}</div>
-            <div class="youtube-meta">${escapeHtml(v.team || "-")} │ ${escapeHtml(v.role || "-")} │ ${escapeHtml(v.nationality || "-")}</div>
-            <div class="youtube-date">
-              ▶️ ${formatViews(v.views)} ・ 🕓 ${timeAgo(v.date)}
-            </div>
+          <div class="youtube-title">
+            ${escapeHtml(mainTitle)}
           </div>
+
+          ${subTitles.map(t => `
+            <div class="youtube-subtitle">
+              ${escapeHtml(t)}
+            </div>
+          `).join("")}
+
+          <div class="youtube-player">
+            ${escapeHtml(v.name || "-")}
+          </div>
+
+          <div class="youtube-meta">
+            ${escapeHtml(v.team || "-")}
+            │
+            ${escapeHtml(v.role || "-")}
+            │
+            ${escapeHtml(v.nationality || "-")}
+          </div>
+
+          <div class="youtube-date">
+            ▶️ ${formatViews(v.views)}
+            ・
+            🕓 ${timeAgo(v.date)}
+          </div>
+
         </div>
-      </a>
-    `;
-  }).join("");
+      </div>
+    </a>
+  `;
 }
 
 function buildMediaTitles_(raw, jp, en) {
