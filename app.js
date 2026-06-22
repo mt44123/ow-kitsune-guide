@@ -554,62 +554,17 @@ const todayBirthdays = players.filter(p => {
     birthdaysByDay[bornDay].push(p);
   });
 
-  let cells = "";
-
-  for (let i = 0; i < 42; i++) {
-    const dayNum = i - startDay + 1;
-
-    let displayDay = dayNum;
-    let isOtherMonth = false;
-
-    if (dayNum <= 0) {
-      displayDay = prevLastDate + dayNum;
-      isOtherMonth = true;
-    } else if (dayNum > lastDate) {
-      displayDay = dayNum - lastDate;
-      isOtherMonth = true;
-    }
-
-    const isToday =
-      !isOtherMonth &&
-      year === todayY &&
-      month === todayM &&
-      displayDay === todayD;
-
-    const events =
-      !isOtherMonth && birthdaysByDay[displayDay]
-        ? birthdaysByDay[displayDay]
-        : [];
-
-    cells += `
-      <div class="birthday-day ${isOtherMonth ? "other-month" : ""} ${isToday ? "today" : ""}">
-        <div class="birthday-day-number">
-        ${displayDay}
-        </div>
-
-        ${events.map(p => `
-          <div class="birthday-event ${getNationalityRegionClass(p.nationality)}">
-            <strong>
-              🎂 <a
-                class="birthday-player-link"
-                href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
-                target="_blank"
-                rel="noopener"
-              >${escapeHtml(p.name)}</a>
-            </strong>
-            <span>${escapeHtml(p.team || "-")} / ${escapeHtml(p.role || "-")}</span>
-            <span>${p.born ? `Turns ${getAgeOnBirthdayThisYear(p.born, year)}` : ""}</span>
-            <a
-              class="birthday-calendar-link"
-              href="${googleBirthdayUrl(p, year)}"
-              target="_blank"
-              rel="noopener"
-            >📅 Add</a>
-          </div>
-        `).join("")}
-      </div>
-    `;
-  }
+const cells = buildBirthdayCells_(
+  year,
+  month,
+  todayY,
+  todayM,
+  todayD,
+  startDay,
+  lastDate,
+  prevLastDate,
+  birthdaysByDay
+);
 
   const listItems = players
     .filter(p => p.born)
@@ -744,6 +699,94 @@ function buildBirthdayTodaySection_(
 
     </div>
   `;
+}
+
+function buildBirthdayCells_(
+  year,
+  month,
+  todayY,
+  todayM,
+  todayD,
+  startDay,
+  lastDate,
+  prevLastDate,
+  birthdaysByDay
+) {
+  let cells = "";
+
+  for (let i = 0; i < 42; i++) {
+    const dayNum = i - startDay + 1;
+
+    let displayDay = dayNum;
+    let isOtherMonth = false;
+
+    if (dayNum <= 0) {
+      displayDay = prevLastDate + dayNum;
+      isOtherMonth = true;
+
+    } else if (dayNum > lastDate) {
+      displayDay = dayNum - lastDate;
+      isOtherMonth = true;
+    }
+
+    const isToday =
+      !isOtherMonth &&
+      year === todayY &&
+      month === todayM &&
+      displayDay === todayD;
+
+    const events =
+      !isOtherMonth &&
+      birthdaysByDay[displayDay]
+        ? birthdaysByDay[displayDay]
+        : [];
+
+    cells += `
+      <div class="birthday-day ${isOtherMonth ? "other-month" : ""} ${isToday ? "today" : ""}">
+        <div class="birthday-day-number">
+          ${displayDay}
+        </div>
+
+        ${events.map(p => `
+          <div class="birthday-event ${getNationalityRegionClass(p.nationality)}">
+
+            <strong>
+              🎂 <a
+                class="birthday-player-link"
+                href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
+                target="_blank"
+                rel="noopener"
+              >
+                ${escapeHtml(p.name)}
+              </a>
+            </strong>
+
+            <span>
+              ${escapeHtml(p.team || "-")} /
+              ${escapeHtml(p.role || "-")}
+            </span>
+
+            <span>
+              ${p.born ? `Turns ${getAgeOnBirthdayThisYear(p.born, year)}` : ""}
+            </span>
+
+            <a
+              class="birthday-calendar-link"
+              href="${googleBirthdayUrl(p, year)}"
+              target="_blank"
+              rel="noopener"
+            >
+              📅 Add
+            </a>
+
+          </div>
+        `).join("")}
+
+      </div>
+    `;
+  }
+
+  return cells;
 }
 
 function googleBirthdayUrl(p, year) {
