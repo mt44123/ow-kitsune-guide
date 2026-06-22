@@ -1233,7 +1233,7 @@ function filterClips(clips) {
 }
 
 function filterClipView(clips, view) {
-  let result = [...clips];
+  const result = [...clips];
 
   if (view === "jpclips") {
     return result.filter(c =>
@@ -1242,16 +1242,16 @@ function filterClipView(clips, view) {
   }
 
   if (view === "chzzkbestclips") {
-    return sortClipsByViews_(result);
+    return sortByViews_(result);
   }
 
   if (view === "chzzkhotclips" || view === "soophotclips") {
-    return sortClipsByViews_(filterRecentClips_(result, 30));
+    return sortByViews_(
+      filterRecentClips_(result, 30)
+    );
   }
 
-  return result.sort(
-    (a, b) => new Date(b.date) - new Date(a.date)
-  );
+  return sortByDateDesc_(result);
 }
 
 function filterRecentClips_(clips, daysLimit) {
@@ -1265,12 +1265,6 @@ function filterRecentClips_(clips, daysLimit) {
 
     return days <= daysLimit;
   });
-}
-
-function sortClipsByViews_(clips) {
-  return clips.sort(
-    (a, b) => Number(b.views || 0) - Number(a.views || 0)
-  );
 }
 
 function searchPlayerLinksTable() {
