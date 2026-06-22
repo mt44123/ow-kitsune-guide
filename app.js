@@ -1,11 +1,13 @@
 const app = document.getElementById("app");
-
 const updated = document.getElementById("updated");
 const viewNote = document.getElementById("viewNote");
 const pageTitle = document.getElementById("pageTitle");
 const voiceLine = document.getElementById("voiceLine");
-const voiceActor =
-  document.getElementById("voiceActor");
+const voiceActor = document.getElementById("voiceActor");
+
+speechSynthesis.onvoiceschanged = () => {
+  speechSynthesis.getVoices();
+};
 
 voiceLine?.addEventListener("click", () => {
   const text =
@@ -20,16 +22,20 @@ voiceLine?.addEventListener("click", () => {
 
 const voices = speechSynthesis.getVoices();
 
-const voice =
-  voices[
-    Math.floor(Math.random() * voices.length)
-  ];
+if (voices.length) {
+  const voice =
+    voices[Math.floor(Math.random() * voices.length)];
 
-utterance.voice = voice;
+  utterance.voice = voice;
 
-if (voiceActor) {
-  voiceActor.textContent =
-    `${voice.name} (${voice.lang})`;
+  if (voiceActor) {
+    voiceActor.textContent =
+      `${voice.name} (${voice.lang})`;
+  }
+} else {
+  if (voiceActor) {
+    voiceActor.textContent = "Loading voice...";
+  }
 }
 
 utterance.rate = 0.95;
@@ -2057,6 +2063,8 @@ function loadToolsView() {
 }
 
 async function init() {
+  speechSynthesis.getVoices();
+
   loadView(currentView);
 
   await loadVoiceLines();
