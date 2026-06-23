@@ -1249,11 +1249,9 @@ function renderTeamPlayers(teamName, players) {
 
       <div class="team-player-table">
 
-  <div class="team-player-header">
+  <div class="team-player-header desktop-only">
     <div>Name</div>
-    <div>Nat</div>
-    <div>Age (Born)</div>
-    <div>Role</div>
+    <div>Info</div>
     <div>Last Stream</div>
     <div>Links</div>
   </div>
