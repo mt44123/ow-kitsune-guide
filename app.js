@@ -1247,32 +1247,47 @@ function renderTeamPlayers(teamName, players) {
         ${escapeHtml(members[0]?.teamRegion || "-")} / Team
       </div>
 
-      <div class="team-player-list">
-        ${members.map(p => `
-          <div class="team-player-row">
-            <div class="team-player-main">
-              <a
-                class="player-name-link"
-                href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
-                target="_blank"
-                rel="noopener"
-              >
-                ${escapeHtml(p.name || "-")}
-              </a>
-              <span>${escapeHtml(p.role || "-")}</span>
-            </div>
+      <div class="team-player-table">
 
-            <div class="team-player-links">
-              ${linkDot(p.twitchUrl, p.twitchActive ? "tw" : "tw-inactive")}
-              ${linkDot(p.chzzkUrl, "chz")}
-              ${linkDot(p.soopUrl, "soop")}
-              ${linkDot(p.biliUrl, "bili")}
-              ${linkDot(p.youtubeUrl, "yt")}
-              ${linkDot(p.discordUrl, "dc")}
-            </div>
-          </div>
-        `).join("")}
+  <div class="team-player-header">
+    <div>Name</div>
+    <div>Role</div>
+    <div>Links</div>
+  </div>
+
+  ${members.map(p => `
+    <div class="team-player-table-row">
+
+      <div class="team-player-name">
+        <a
+          class="player-name-link"
+          href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
+          target="_blank"
+          rel="noopener"
+        >
+          ${escapeHtml(p.name || "-")}
+        </a>
       </div>
+
+      <div class="team-player-role">
+        ${escapeHtml(p.role || "-")}
+      </div>
+
+      <div class="team-player-links">
+
+        ${linkDot(p.twitchUrl, p.twitchActive ? "tw" : "tw-inactive")}
+        ${linkDot(p.chzzkUrl, "chz")}
+        ${linkDot(p.soopUrl, "soop")}
+        ${linkDot(p.biliUrl, "bili")}
+        ${linkDot(p.youtubeUrl, "yt")}
+        ${linkDot(p.discordUrl, "dc")}
+
+      </div>
+
+    </div>
+  `).join("")}
+
+</div>
     </div>
   `;
 
