@@ -242,7 +242,13 @@ p{
 .soop{ color:#3B82F6; }
 .bili{ color:#FFD700; }
 .yt{ color:#FF0033; }
-.dc{ color:#fff; }
+.dc{
+  color:#fff;
+}
+
+body.light-theme .dc{
+  color:var(--text-main);
+}
 
 #app.table-mode{
   display:block;
@@ -1549,6 +1555,11 @@ img{
 .team-link-tag.dc{
   border-color:#FFFFFF;
   color:#FFFFFF;
+}
+
+body.light-theme .team-link-tag.dc{
+  border-color:var(--text-main);
+  color:var(--text-main);
 }
 
 .team-link-tag:hover{
