@@ -1219,6 +1219,9 @@ img{
 }
 
 .birthday-today-empty{
+  display:flex;
+  justify-content:center;
+  align-items:center;
   text-align:center;
   padding:24px 0;
   color:var(--text-sub);
