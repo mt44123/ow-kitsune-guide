@@ -1162,36 +1162,33 @@ function loadTeamsView() {
 function renderTeams(players) {
   app.className = "teams-mode";
 
-  const teams = buildTeams_(players);
+  const regions = buildTeamRegions_(players);
 
-  if (!teams.length) {
-    app.innerHTML = `<p class="empty">No teams found.</p>`;
+  if (!regions.length) {
+    app.innerHTML = `<p class="empty">No regions found.</p>`;
     return;
   }
 
-  app.innerHTML = teams.map(team => `
+  app.innerHTML = regions.map(region => `
     <button
-      class="team-card ${getTeamRegionClass(team.region, team.name)}"
-      data-team="${escapeHtml(team.name)}"
+      class="team-card ${getTeamRegionClass(region.name)}"
+      data-region="${escapeHtml(region.name)}"
     >
       <div class="team-card-name">
-        ${escapeHtml(team.name)}
+        ${escapeHtml(region.name)}
       </div>
 
       <div class="team-card-meta">
-        ${escapeHtml(team.region || "-")} / ${team.count} players
+        ${region.teamCount} teams / ${region.playerCount} players
       </div>
     </button>
   `).join("");
 
-  document
-    .querySelectorAll(".team-card")
-    .forEach(button => {
-      button.addEventListener("click", () => {
-        const teamName = button.dataset.team;
-        renderTeamPlayers(teamName, players);
-      });
+  document.querySelectorAll(".team-card").forEach(button => {
+    button.addEventListener("click", () => {
+      renderRegionTeams(button.dataset.region, players);
     });
+  });
 }
 
 function buildTeams_(players) {
@@ -1223,7 +1220,79 @@ function buildTeams_(players) {
     });
 }
 
-function renderTeamPlayers(teamName, players) {
+function buildTeamRegions_(players) {
+  const map = new Map();
+
+  players.forEach(p => {
+    const region =
+      String(p.teamRegion || "UNKNOWN").trim() || "UNKNOWN";
+
+    const team =
+      String(p.team || "").trim();
+
+    if (!team || team === "-") return;
+
+    if (!map.has(region)) {
+      map.set(region, {
+        name: region,
+        teams: new Set(),
+        playerCount: 0
+      });
+    }
+
+    map.get(region).teams.add(team);
+    map.get(region).playerCount++;
+  });
+
+  return Array.from(map.values())
+    .map(r => ({
+      name: r.name,
+      teamCount: r.teams.size,
+      playerCount: r.playerCount
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function renderRegionTeams(regionName, players) {
+  app.className = "teams-mode";
+
+  const teams = buildTeams_(players)
+    .filter(team => team.region === regionName);
+
+  app.innerHTML = `
+    <button class="team-back-button" id="regionBackButton">
+      ← Back to Regions
+    </button>
+
+    ${teams.map(team => `
+      <button
+        class="team-card ${getTeamRegionClass(team.region, team.name)}"
+        data-team="${escapeHtml(team.name)}"
+      >
+        <div class="team-card-name">
+          ${escapeHtml(team.name)}
+        </div>
+
+        <div class="team-card-meta">
+          ${escapeHtml(team.region || "-")} / ${team.count} players
+        </div>
+      </button>
+    `).join("")}
+  `;
+
+  document.getElementById("regionBackButton")
+    ?.addEventListener("click", () => {
+      renderTeams(players);
+    });
+
+  document.querySelectorAll(".team-card").forEach(button => {
+    button.addEventListener("click", () => {
+      renderTeamPlayers(button.dataset.team, players, regionName);
+    });
+  });
+}
+
+function renderTeamPlayers(teamName, players, regionName = null) {
   app.className = "team-detail-mode";
   
   const members = players
@@ -1316,7 +1385,11 @@ function renderTeamPlayers(teamName, players) {
   document
     .getElementById("teamBackButton")
     ?.addEventListener("click", () => {
-      renderTeams(players);
+      if (regionName) {
+        renderRegionTeams(regionName, players);
+      } else {
+        renderTeams(players);
+      }
     });
 }
 
