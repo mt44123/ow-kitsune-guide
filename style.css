@@ -12,15 +12,15 @@
 }
 
 body.light-theme{
-  --bg-dark:#F4F4F4;
-  --bg-main:#FFFFFF;
-  --bg-light:#EAEAEA;
+  --bg-dark:#D3B99F;
+  --bg-main:#DFC7AE;
+  --bg-light:#E9D5C1;
 
-  --text-main:#111111;
-  --text-sub:#555555;
-  --text-muted:#777777;
+  --text-main:#210203;
+  --text-sub:#4A2323;
+  --text-muted:#6B4A4A;
 
-  --border:#D0D0D0;
+  --border:#A98E74;
 
   --accent:#B84724;
 }
