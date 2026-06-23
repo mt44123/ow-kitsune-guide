@@ -3161,11 +3161,13 @@ document.addEventListener("click", e => {
 
   if (currentView === "favorites") {
     renderFavorites(currentData);
+    searchPlayerLinksTable();
     return;
   }
 
   if (currentView === "playerlinks") {
     renderPlayerLinks(currentData);
+    searchPlayerLinksTable();
     return;
   }
 
