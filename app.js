@@ -65,6 +65,9 @@ const YOUTUBE_CLIENT_CACHE_MS =  30 * 60 * 1000;
 let youtubeLastUpdated = "";
 const clipLastUpdated = {};
 
+let currentTeamName = "";
+let currentRegionName = null;
+
 function getFavorites_() {
   return JSON.parse(
     localStorage.getItem("favorites") || "[]"
@@ -1451,6 +1454,10 @@ function renderRegionTeams(regionName, players) {
 }
 
 function renderTeamPlayers(teamName, players, regionName = null) {
+
+  currentTeamName = teamName;
+  currentRegionName = regionName;
+
   app.className = "team-detail-mode";
   
  const members = players
@@ -1517,6 +1524,14 @@ function renderTeamPlayers(teamName, players, regionName = null) {
       <div class="team-player-card-row">
 
         <div class="team-player-name">
+
+          <span
+            class="favorite-star"
+            onclick="event.preventDefault();event.stopPropagation();toggleFavoriteTeamUI_(${JSON.stringify(p.name || "")})"
+          >
+            ${isFavorite_(p.name) ? "⭐" : "☆"}
+          </span>
+        
           <a
             class="player-name-link"
             href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
@@ -1525,6 +1540,7 @@ function renderTeamPlayers(teamName, players, regionName = null) {
           >
             ${escapeHtml(p.name || "-")}
           </a>
+        
         </div>
 
         <div class="team-player-nat">
@@ -2018,6 +2034,16 @@ function toggleFavoritePlayerLinksUI_(name) {
   }
 
   renderPlayerLinks(currentData);
+}
+
+function toggleFavoriteTeamUI_(name) {
+  toggleFavorite_(name);
+
+  renderTeamPlayers(
+    currentTeamName,
+    currentData,
+    currentRegionName
+  );
 }
 
 function renderYoutube(videos) {
