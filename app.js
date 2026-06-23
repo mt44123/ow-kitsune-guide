@@ -1419,12 +1419,12 @@ function renderTeamPlayers(teamName, players, regionName = null) {
         </div>
 
         <div class="team-player-links">
-          ${linkTag(p.twitchUrl, "TW")}
-          ${linkTag(p.chzzkUrl, "CHZ")}
-          ${linkTag(p.soopUrl, "SOOP")}
-          ${linkTag(p.biliUrl, "BILI")}
-          ${linkTag(p.youtubeUrl, "YT")}
-          ${linkTag(p.discordUrl, "DC")}
+         ${linkTag(p.twitchUrl, "TW", "tw")}
+        ${linkTag(p.chzzkUrl, "CHZ", "chz")}
+        ${linkTag(p.soopUrl, "SOOP", "soop")}
+        ${linkTag(p.biliUrl, "BILI", "bili")}
+        ${linkTag(p.youtubeUrl, "YT", "yt")}
+        ${linkTag(p.discordUrl, "DC", "dc")}
         </div>
 
       </div>
@@ -2262,12 +2262,12 @@ function linkDot(url, cls) {
   return `<a class="${cls} link-dot" href="${url}" target="_blank" rel="noopener">●</a>`;
 }
 
-function linkTag(url, label) {
+function linkTag(url, label, cls) {
   if (!url) return "";
 
   return `
     <a
-      class="team-link-tag"
+      class="team-link-tag ${cls}"
       href="${url}"
       target="_blank"
       rel="noopener"
