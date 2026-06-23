@@ -221,7 +221,7 @@ const VIEW_GROUPS = {
 
   youtube: ["youtube", "youtubehot", "youtubejp"],
 
-  players: ["playerlinks", "birthdays"]
+  players: ["teams", "playerlinks", "birthdays"]
 };
 
 let currentLiveView =
@@ -242,7 +242,7 @@ let currentYoutubeView =
 let currentPlayerView =
   isPlayerView(currentView)
     ? currentView
-    : "playerlinks";
+    : "teams";
 
 function isLiveView(view) {
   return VIEW_GROUPS.live.includes(view);
