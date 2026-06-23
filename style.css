@@ -744,9 +744,13 @@ img{
 }
 
 .media-icon{
-  color:var(--text-main);
   font-size:20px;
   line-height:1;
+  filter:brightness(0) invert(1);
+}
+
+body.light-theme .media-icon{
+  filter:brightness(0);
 }
 
 .media-label{
