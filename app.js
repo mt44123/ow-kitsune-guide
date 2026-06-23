@@ -2781,7 +2781,9 @@ function updateAllButtonCounts(counts) {
       const count = counts?.[view] ?? "";
 
       button.textContent =
-        `${label} (${count})`;
+        count === ""
+          ? label
+          : `${label} (${count})`;
     });
 
 }
