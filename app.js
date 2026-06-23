@@ -1629,7 +1629,7 @@ app.innerHTML = `
   <div class="discord-note">
      <p>
     *Click player or team names to open Liquipedia.<br>
-    プレイヤー名・チーム名をクリックするとLiquipediaを開きます。皆Liquipediaを見よう。
+    プレイヤー名・チーム名をクリックするとLiquipediaを開きます。
     </p>
     
     <details class="playerlinks-help">
