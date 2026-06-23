@@ -1261,25 +1261,27 @@ function buildTeams_(players) {
     });
 }
 
-function normalizeTeamRegion_(region) {
+function normalizeTeamRegion_(region, team = "") {
   region = String(region || "")
     .replace(/^●\s*/, "")
     .trim();
 
-  if (
-    [
-      "Official OWCS",
-      "KR",
-      "JP",
-      "PAC",
-      "CN",
-      "NA",
-      "EMEA",
-      "SA"
-    ].includes(region)
-  ) {
+  team = String(team || "").trim();
+
+  if ([
+    "Official OWCS",
+    "KR",
+    "JP",
+    "PAC",
+    "CN",
+    "NA",
+    "EMEA",
+    "SA"
+  ].includes(region)) {
     return region;
   }
+
+  if (team === "VARREL") return "JP";
 
   return null;
 }
@@ -1288,7 +1290,7 @@ function buildTeamRegions_(players) {
   const map = new Map();
 
   players.forEach(p => {
-    const region = normalizeTeamRegion_(p.teamRegion);
+    const region = normalizeTeamRegion_(p.teamRegion, p.team)
     
     if (!region) return;
 
@@ -1337,7 +1339,7 @@ function renderRegionTeams(regionName, players) {
 
   const teams = buildTeams_(players)
     .filter(team => {
-      const region = normalizeTeamRegion_(team.region);
+      const region = normalizeTeamRegion_(team.region, team.name)
   
       return region === regionName;
     });
