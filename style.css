@@ -1287,6 +1287,10 @@ img{
     margin:0;
   }
 
+  .tagline{
+    max-width:600px;
+  }
+
   #voiceLine{
     text-align:right;
   }
