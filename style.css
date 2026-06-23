@@ -1266,8 +1266,8 @@ img{
 @media (max-width:900px){
 
   h1{
-    font-size:48px;
-    line-height:1;
+    font-size:36px;
+    line-height:.95;
   }
   
   .title-row{
