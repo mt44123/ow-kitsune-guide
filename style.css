@@ -1686,23 +1686,28 @@ img{
 }
 
 #clipsSubNav button.clip-tab-all{
-  color:#9146FF;
+  background:#9146FF;
+  color:white;
 }
 
 #clipsSubNav button.clip-tab-goats{
-  color:#FFD700;
+  background:var(--accent);
+  color:white;
 }
 
 #clipsSubNav button.clip-tab-jp{
-  color:#E51B23;
+  background:#9146FF;
+  color:white;
 }
 
 #clipsSubNav button.clip-tab-chzzk{
-  color:#00D564;
+  background:#00D564;
+  color:#111;
 }
 
 #clipsSubNav button.clip-tab-soop{
-  color:#3B82F6;
+  background:#2196F3;
+  color:white;
 }
 
 #clipsSubNav button.active.clip-tab-all{
@@ -1716,7 +1721,7 @@ img{
 }
 
 #clipsSubNav button.active.clip-tab-jp{
-  background:#E51B23;
+  background:#9146FF;
   color:white;
 }
 
@@ -1728,4 +1733,13 @@ img{
 #clipsSubNav button.active.clip-tab-soop{
   background:#3B82F6;
   color:white;
+}
+
+#clipsSubNav button{
+  opacity:.65;
+}
+
+#clipsSubNav button.active{
+  opacity:1;
+  transform:translateY(-1px);
 }
