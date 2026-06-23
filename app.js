@@ -1922,6 +1922,19 @@ function toggleFavoriteUI_(name) {
   );
 }
 
+function toggleFavoriteMediaUI_(name) {
+  toggleFavorite_(name);
+
+  if (isYoutubeView(currentView)) {
+    renderYoutube(filterYoutube(currentData));
+    return;
+  }
+
+  if (isClipView(currentView)) {
+    renderClips(filterClips(currentData));
+  }
+}
+
 function renderYoutube(videos) {
   app.className = "youtube-mode";
 
@@ -1977,6 +1990,12 @@ function renderYoutubeCard_(v) {
           `).join("")}
 
           <div class="youtube-player">
+            <span
+              class="favorite-star"
+              onclick="event.preventDefault();event.stopPropagation();toggleFavoriteMediaUI_('${escapeHtml(v.name)}')"
+            >
+              ${isFavorite_(v.name) ? "⭐" : "☆"}
+            </span>
             ${escapeHtml(v.name || "-")}
           </div>
 
@@ -2083,6 +2102,12 @@ function renderClipCard_(c) {
           `).join("")}
 
           <div class="youtube-player">
+            <span
+              class="favorite-star"
+              onclick="event.preventDefault();event.stopPropagation();toggleFavoriteMediaUI_('${escapeHtml(c.name)}')"
+            >
+              ${isFavorite_(c.name) ? "⭐" : "☆"}
+            </span>
             ${escapeHtml(c.name || "-")}
           </div>
 
