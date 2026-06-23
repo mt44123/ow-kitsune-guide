@@ -795,6 +795,7 @@ img{
 
 .search-button.search-active,
 #searchToggle.search-active{
+  box-shadow:none;
   background:var(--accent);
   color:var(--text-main);
   font-weight:bold;
