@@ -1407,30 +1407,34 @@ function renderRegionTeams(regionName, players) {
 function renderTeamPlayers(teamName, players, regionName = null) {
   app.className = "team-detail-mode";
   
-  const members = players
+ const members = players
   .filter(
     p =>
       p.team === teamName &&
       isTeamListMember_(p)
   )
-    .sort((a, b) => {
-  const roleOrder = {
-    tank: 1,
-    dps: 2,
-    sup: 3,
-    coach: 4
-  };
+  .sort((a, b) => {
 
-  const normalizeRole = role =>
-    String(role || "")
-      .replace(/[^\p{L}\p{N}]/gu, "")
-      .toLowerCase();
+    const roleOrder = {
+      TANK: 1,
+      DPS: 2,
+      SUP: 3,
+      COACH: 4
+    };
 
-  return (
-    (roleOrder[normalizeRole(a.role)] || 99) -
-    (roleOrder[normalizeRole(b.role)] || 99)
-  );
-});
+    const roleA =
+      String(a.role || "")
+        .replace(/[^\p{L}\p{N}]/gu, "");
+
+    const roleB =
+      String(b.role || "")
+        .replace(/[^\p{L}\p{N}]/gu, "");
+
+    return (
+      (roleOrder[roleA] || 99) -
+      (roleOrder[roleB] || 99)
+    );
+  });
 
   app.innerHTML = `
     ${renderLiquipediaNote_()}
