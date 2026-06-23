@@ -1483,9 +1483,18 @@ img{
 }
 
 @media (max-width:900px){
-  .team-player-header,
-  .team-player-table-row{
-    grid-template-columns:1.4fr 48px 42px 60px 70px 120px;
-    font-size:12px;
+
+  .team-player-header{
+    display:none;
   }
+
+  .team-player-table-row{
+    display:block;
+    padding:12px 0;
+  }
+
+  .team-player-table-row > div{
+    margin:4px 0;
+  }
+
 }
