@@ -744,6 +744,7 @@ img{
 }
 
 .media-icon{
+  color:var(--text-main);
   font-size:20px;
   line-height:1;
 }
