@@ -1200,7 +1200,7 @@ img{
 /* Today */
 
 .birthday-today{
-  background:var(--bg-light);
+  background:var(--bg-main);
   border:1px solid var(--border);
   border-left:4px solid var(--accent);
   border-radius:10px;
