@@ -1601,3 +1601,11 @@ img{
 .team-detail-card.team-sa{
   border-left:4px solid #22C55E;
 }
+
+.teams-mode .discord-note{
+  grid-column:1 / -1;
+}
+
+.teams-mode .discord-note{
+  grid-column:1 / -1;
+}
