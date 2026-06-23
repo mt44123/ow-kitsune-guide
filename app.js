@@ -2034,12 +2034,6 @@ function filterClips(clips) {
 function filterClipView(clips, view) {
   const result = [...clips];
 
-  if (view === "goatclips") {
-    return result.filter(c =>
-      getFavorites_().includes(c.name)
-    );
-  }
-
   if (view === "jpclips") {
     return result.filter(c =>
       getNationalityRegionClass(c.nationality) === "region-jp"
