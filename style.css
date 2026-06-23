@@ -801,7 +801,7 @@ img{
 }
 
 #searchToggle{
-  background:var(--accent);
+  background:var(--bg-main);
   color:#fff;
   font-weight:700;
 
