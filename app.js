@@ -1220,6 +1220,23 @@ function buildTeams_(players) {
     });
 }
 
+function normalizeTeamRegion_(region) {
+  region = String(region || "").trim();
+
+  if (region === "Official OWCS") {
+    return "Official OWCS";
+  }
+
+  if (
+    ["KR", "JP", "PAC", "CN", "NA", "EMEA", "SA"]
+      .includes(region)
+  ) {
+    return region;
+  }
+
+  return "OTHER";
+}
+
 function buildTeamRegions_(players) {
   const map = new Map();
 
@@ -1284,7 +1301,11 @@ function renderRegionTeams(regionName, players) {
   app.className = "teams-mode";
 
   const teams = buildTeams_(players)
-    .filter(team => team.region === regionName);
+    .filter(team => {
+      const region = normalizeTeamRegion_(team.region);
+  
+      return region === regionName;
+    });
 
   app.innerHTML = `
     <button class="team-back-button" id="regionBackButton">
