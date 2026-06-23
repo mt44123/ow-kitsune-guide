@@ -1100,6 +1100,7 @@ function loadClipsView(view) {
 }
 
 function loadGoatClipsView() {
+  viewNote.textContent = "";
   const now = Date.now();
 
   pageTitle.textContent = "⭐";
@@ -1142,11 +1143,16 @@ function loadGoatClipsView() {
     fetch(CONFIG.API_URL + "?view=chzzkbestclips").then(r => r.json())
   ])
     .then(([twitchNew, twitchHot, soop, chzzkNew, chzzkBest]) => {
+    
       if (currentRequest !== requestId) {
         stopFakeProgress();
         return;
       }
-
+    
+      if (currentView !== "goatclips") {
+        return;
+      }
+    
       finishFakeProgress();
 
       setClipCache_("twitch", twitchNew.clips || []);
