@@ -1160,16 +1160,126 @@ function loadTeamsView() {
 }
 
 function renderTeams(players) {
-  app.className = "";
+  app.className = "teams-mode";
 
-  app.innerHTML = `
-    <div class="card">
-      TEAMS TEST
-      (${players.length} players)
-    </div>
-  `;
+  const teams = buildTeams_(players);
+
+  if (!teams.length) {
+    app.innerHTML = `<p class="empty">No teams found.</p>`;
+    return;
+  }
+
+  app.innerHTML = teams.map(team => `
+    <button
+      class="team-card ${getTeamRegionClass(team.region, team.name)}"
+      data-team="${escapeHtml(team.name)}"
+    >
+      <div class="team-card-name">
+        ${escapeHtml(team.name)}
+      </div>
+
+      <div class="team-card-meta">
+        ${escapeHtml(team.region || "-")} / ${team.count} players
+      </div>
+    </button>
+  `).join("");
+
+  document
+    .querySelectorAll(".team-card")
+    .forEach(button => {
+      button.addEventListener("click", () => {
+        const teamName = button.dataset.team;
+        renderTeamPlayers(teamName, players);
+      });
+    });
 }
 
+function buildTeams_(players) {
+  const map = new Map();
+
+  players.forEach(p => {
+    const team = String(p.team || "").trim();
+    if (!team || team === "-") return;
+
+    if (!map.has(team)) {
+      map.set(team, {
+        name: team,
+        region: p.teamRegion || "",
+        count: 0
+      });
+    }
+
+    map.get(team).count++;
+  });
+
+  return Array.from(map.values())
+    .sort((a, b) => {
+      const regionCompare =
+        String(a.region || "").localeCompare(String(b.region || ""));
+
+      if (regionCompare !== 0) return regionCompare;
+
+      return String(a.name || "").localeCompare(String(b.name || ""));
+    });
+}
+
+function renderTeamPlayers(teamName, players) {
+  const members = players
+    .filter(p => p.team === teamName)
+    .sort((a, b) => {
+      const roleOrder = { TANK: 1, DPS: 2, SUP: 3 };
+      return (roleOrder[a.role] || 99) - (roleOrder[b.role] || 99);
+    });
+
+  app.innerHTML = `
+    <button class="team-back-button" id="teamBackButton">
+      ← Back to Teams
+    </button>
+
+    <div class="team-detail-card ${getTeamRegionClass(members[0]?.teamRegion, teamName)}">
+      <div class="team-detail-title">
+        ${escapeHtml(teamName)}
+      </div>
+
+      <div class="team-detail-meta">
+        ${escapeHtml(members[0]?.teamRegion || "-")} / Team
+      </div>
+
+      <div class="team-player-list">
+        ${members.map(p => `
+          <div class="team-player-row">
+            <div class="team-player-main">
+              <a
+                class="player-name-link"
+                href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
+                target="_blank"
+                rel="noopener"
+              >
+                ${escapeHtml(p.name || "-")}
+              </a>
+              <span>${escapeHtml(p.role || "-")}</span>
+            </div>
+
+            <div class="team-player-links">
+              ${linkDot(p.twitchUrl, p.twitchActive ? "tw" : "tw-inactive")}
+              ${linkDot(p.chzzkUrl, "chz")}
+              ${linkDot(p.soopUrl, "soop")}
+              ${linkDot(p.biliUrl, "bili")}
+              ${linkDot(p.youtubeUrl, "yt")}
+              ${linkDot(p.discordUrl, "dc")}
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    </div>
+  `;
+
+  document
+    .getElementById("teamBackButton")
+    ?.addEventListener("click", () => {
+      renderTeams(players);
+    });
+}
 function loadPlayerLinksView() {
   const now = Date.now();
 
