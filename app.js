@@ -136,8 +136,8 @@ function stopFakeProgress() {
 
 const titles = {
   new: "NEW",
+  goats: "⭐",
   viewers: "HOT",
-  goats: "⭐GOATS",
   kr: "KR",
   en: "EN",
   cn: "CN",
@@ -145,11 +145,12 @@ const titles = {
   intl: "INTL",
   
   youtube: "NEW",
+  youtubegoats: "⭐",
   youtubehot: "HOT",
-  youtubegoats: "⭐GOATS",
   youtubejp: "JP",
 
   clips: "NEW",
+  goatclips: "⭐",
   hotclips: "HOT",
   jpclips: "JP",
   soopclips: "SOOP NEW",
@@ -244,6 +245,7 @@ const VIEW_GROUPS = {
 
   clips: [
     "clips",
+    "goatclips",
     "hotclips",
     "jpclips",
     "soopclips",
@@ -1931,6 +1933,12 @@ function filterClips(clips) {
 
 function filterClipView(clips, view) {
   const result = [...clips];
+
+  if (view === "goatclips") {
+    return result.filter(c =>
+      getFavorites_().includes(c.name)
+    );
+  }
 
   if (view === "jpclips") {
     return result.filter(c =>
