@@ -1439,3 +1439,7 @@ img{
 .team-detail-mode .team-detail-card{
   max-width:900px;
 }
+
+#app.team-detail-mode{
+  display:block !important;
+}
