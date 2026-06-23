@@ -1249,6 +1249,13 @@ function renderTeamPlayers(teamName, players) {
 
       <div class="team-player-table">
 
+  <div class="team-player-header">
+    <div>Name</div>
+    <div>Info</div>
+    <div>Last Stream</div>
+    <div>Links</div>
+  </div>
+
   ${members.map(p => {
     const age = p.born ? getCurrentAgeFromBorn(p.born) : "-";
     const born = p.born ? ` (${p.born})` : "";
