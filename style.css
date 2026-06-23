@@ -1496,7 +1496,9 @@ img{
 
   .stream-clock{
     display:none;
-   .team-player-header,
+  }
+
+  .team-player-header,
   .team-player-card-row{
     display:grid;
     grid-template-columns:
