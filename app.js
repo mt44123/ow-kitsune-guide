@@ -1096,24 +1096,76 @@ function setClipCache_(cacheKey, clips) {
 }
 
 function loadTeamsView() {
-
-  requestId++;
-  stopFakeProgress();
+  const now = Date.now();
 
   pageTitle.textContent = "TEAMS";
   setRandomVoiceLine();
 
-  updated.textContent = playerLinksLastUpdated;
   viewNote.textContent = "";
 
+  if (
+    playerLinksCache &&
+    now - playerLinksCacheTime < PLAYER_LINKS_CLIENT_CACHE_MS
+  ) {
+    requestId++;
+    stopFakeProgress();
+
+    updated.textContent = playerLinksLastUpdated;
+
+    currentData = playerLinksCache;
+    renderTeams(currentData);
+    return;
+  }
+
+  const currentRequest = ++requestId;
+
+  startFakeProgress();
+
+  fetch(CONFIG.API_URL + "?view=playerlinks")
+    .then(res => res.json())
+    .then(data => {
+      if (currentRequest !== requestId) {
+        stopFakeProgress();
+        return;
+      }
+
+      finishFakeProgress();
+
+      playerLinksLastUpdated =
+        data.lastUpdated || "";
+
+      updated.textContent =
+        playerLinksLastUpdated;
+
+      playerLinksCache =
+        data.playerLinks || [];
+
+      playerLinksCacheTime =
+        Date.now();
+
+      currentData = playerLinksCache;
+
+      renderTeams(currentData);
+    })
+    .catch(error => {
+      if (currentRequest !== requestId) return;
+
+      stopFakeProgress();
+
+      app.innerHTML =
+        `<p class="error">Failed to load data.</p>`;
+
+      console.error(error);
+    });
+}
+
+function renderTeams(players) {
   app.className = "";
 
   app.innerHTML = `
     <div class="card">
-      <div class="player-name">🚧 TEAMS</div>
-      <div class="meta">
-        Team view coming soon.
-      </div>
+      TEAMS TEST
+      (${players.length} players)
     </div>
   `;
 }
