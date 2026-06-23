@@ -800,6 +800,10 @@ img{
   font-weight:bold;
 }
 
+#searchToggle{
+  box-shadow:
+    0 0 6px rgba(184,71,36,.5);
+}
 /* CLIPS */
 
 @media (min-width:900px){
