@@ -1199,7 +1199,7 @@ function renderTeams(players) {
     return;
   }
 
-  app.innerHTML = renderLiquipediaNote_() + regions.map(region => `
+  app.innerHTML = regions.map(region => `
     <button
       class="team-card ${getTeamRegionClass(region.name)}"
       data-region="${escapeHtml(region.name)}"
