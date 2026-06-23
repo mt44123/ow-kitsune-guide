@@ -1666,7 +1666,7 @@ function renderTeamPlayers(teamName, players, regionName = null) {
         <div class="team-player-name">
 
           <span
-            class="favorite-star"
+            class="favorite-star ${isFavorite_(p.name) ? "active" : ""}"
             data-favorite-name="${escapeHtml(p.name || "")}"
           >
             ${isFavorite_(p.name) ? "★" : "☆"}
@@ -2137,7 +2137,7 @@ function renderLive(players) {
         <div class="player-name">
 
           <span
-            class="favorite-star"
+            class="favorite-star ${isFavorite_(p.name) ? "active" : ""}"
             data-favorite-name="${escapeHtml(p.name || "")}"
           >
             ${isFavorite_(p.name) ? "★" : "☆"}
@@ -2463,7 +2463,7 @@ app.innerHTML = `
             <td class="name-cell ${getNationalityRegionClass(p.nationality)}">
 
               <span
-                class="favorite-star"
+                class="favorite-star ${isFavorite_(p.name) ? "active" : ""}"
                 data-favorite-name="${escapeHtml(p.name || "")}"
               >
                 ${isFavorite_(p.name) ? "★" : "☆"}
