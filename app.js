@@ -17,6 +17,36 @@ voiceLine?.addEventListener(
 const searchBox = document.getElementById("searchBox");
 const toolsButton =  document.getElementById("toolsButton");
 
+const themeToggle = document.getElementById("themeToggle");
+
+function applyThemeButtonText_() {
+  if (!themeToggle) return;
+
+  themeToggle.textContent =
+    document.body.classList.contains("light-theme")
+      ? "☀️"
+      : "🌙";
+}
+
+if (localStorage.getItem("theme") === "light") {
+  document.body.classList.add("light-theme");
+}
+
+applyThemeButtonText_();
+
+themeToggle?.addEventListener("click", () => {
+  document.body.classList.toggle("light-theme");
+
+  localStorage.setItem(
+    "theme",
+    document.body.classList.contains("light-theme")
+      ? "light"
+      : "dark"
+  );
+
+  applyThemeButtonText_();
+});
+
 toolsButton?.addEventListener(
   "click",
   () => loadToolsView()
