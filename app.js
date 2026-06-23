@@ -2103,7 +2103,7 @@ function renderYoutubeCard_(v) {
           <div class="youtube-player">
             <span
               class="favorite-star"
-              data-favorite-name="${escapeHtml(c.name || "")}"
+              data-favorite-name="${escapeHtml(v.name || "")}"
             >
               ${isFavorite_(v.name) ? "⭐" : "☆"}
             </span>
@@ -2215,7 +2215,7 @@ function renderClipCard_(c) {
           <div class="youtube-player">
             <span
               class="favorite-star"
-              data-favorite-name="${escapeHtml(v.name || "")}"
+              data-favorite-name="${escapeHtml(c.name || "")}"
             >
               ${isFavorite_(c.name) ? "⭐" : "☆"}
             </span>
