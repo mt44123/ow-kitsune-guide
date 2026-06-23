@@ -1029,11 +1029,11 @@ function loadClipsView(view) {
     view === "chzzkhotclips"
   ) {
     viewNote.textContent =
-      "HOT = Most viewed clips from the last 30 days　過去30日以内の人気クリップ";
+      "HOT = Most viewed clips from the last 30 days";
 
   } else if (view === "chzzkbestclips") {
     viewNote.textContent =
-      "BEST = Popular clips 人気クリップ";
+      "BEST = Popular clips";
 
   } else {
     viewNote.textContent = "";
