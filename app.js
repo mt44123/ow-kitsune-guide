@@ -62,6 +62,8 @@ const CLIPS_CLIENT_CACHE_MS = 6 * 60 * 60 * 1000;
 let youtubeCache = null;
 let youtubeCacheTime = 0;
 const YOUTUBE_CLIENT_CACHE_MS =  30 * 60 * 1000;
+let youtubeLastUpdated = "";
+const clipLastUpdated = {};
 
 let birthdaysCache = null;
 let birthdaysCacheTime = 0;
@@ -900,7 +902,7 @@ function getTurnsAgeToday(born) {
 function loadYoutubeView(view) {
   document.body.classList.add("youtube-view");
   document.body.classList.remove("clip-view");
-  
+
   const now = Date.now();
 
   pageTitle.textContent = titles[view] || "YOUTUBE";
@@ -912,6 +914,8 @@ function loadYoutubeView(view) {
   ) {
     requestId++;
     stopFakeProgress();
+
+    updated.textContent = youtubeLastUpdated;
 
     currentData = filterYoutubeView(youtubeCache, view);
     renderYoutube(currentData);
@@ -925,16 +929,15 @@ function loadYoutubeView(view) {
   fetch(CONFIG.API_URL + "?view=youtube")
     .then(res => res.json())
     .then(data => {
+      if (currentRequest !== requestId) {
+        stopFakeProgress();
+        return;
+      }
 
-    if (currentRequest !== requestId) {
-      stopFakeProgress();
-      return;
-    }
-  
-    updated.textContent =
-      data.lastUpdated || "";
-  
-    finishFakeProgress();
+      youtubeLastUpdated = data.lastUpdated || "";
+      updated.textContent = youtubeLastUpdated;
+
+      finishFakeProgress();
 
       youtubeCache = data.videos || [];
       youtubeCacheTime = Date.now();
@@ -977,7 +980,6 @@ function loadClipsView(view) {
   }
 
   const source = getClipSource_(view);
-
   const cached = clipCache[source.cacheKey];
 
   if (
@@ -986,6 +988,9 @@ function loadClipsView(view) {
   ) {
     requestId++;
     stopFakeProgress();
+
+    updated.textContent =
+      clipLastUpdated[source.cacheKey] || "";
 
     currentData = filterClipView(cached.data, view);
     renderClips(currentData);
@@ -1004,8 +1009,11 @@ function loadClipsView(view) {
         return;
       }
 
+      clipLastUpdated[source.cacheKey] =
+        data.lastUpdated || "";
+
       updated.textContent =
-      data.lastUpdated || "";
+        clipLastUpdated[source.cacheKey];
 
       finishFakeProgress();
 
