@@ -1251,7 +1251,9 @@ function renderTeamPlayers(teamName, players) {
 
   <div class="team-player-header desktop-only">
     <div>Name</div>
-    <div>Info</div>
+    <div>Nat</div>
+    <div>Age (Born)</div>
+    <div>Role</div>
     <div>Last Stream</div>
     <div>Links</div>
   </div>
@@ -1274,10 +1276,16 @@ function renderTeamPlayers(teamName, players) {
           </a>
         </div>
 
-        <div class="team-player-meta">
-          <span class="team-nat">${escapeHtml(shortNationality(p.nationality || "-"))}</span>
-          <span class="team-age-born">${age}${born}</span>
-          <span class="team-role">${escapeHtml(p.role || "-")}</span>
+        <div class="team-player-nat">
+          ${escapeHtml(shortNationality(p.nationality || "-"))}
+        </div>
+        
+        <div class="team-player-age">
+          ${age}${born}
+        </div>
+        
+        <div class="team-player-role">
+          ${escapeHtml(p.role || "-")}
         </div>
 
         <div class="team-player-last">
