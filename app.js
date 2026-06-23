@@ -454,9 +454,12 @@ searchBox?.addEventListener("input", () => {
     } else if (isClipView(currentView)) {
       renderClips(filterClips(currentData));
 
-    } else if (currentView === "playerlinks") {
+    } else if (
+      currentView === "playerlinks" ||
+      currentView === "favorites"
+    ) {
       searchPlayerLinksTable();
-
+    
     } else {
       renderLive(filterPlayers(currentData));
     }
@@ -2008,6 +2011,12 @@ function toggleFavoriteMediaUI_(name) {
 
 function toggleFavoritePlayerLinksUI_(name) {
   toggleFavorite_(name);
+
+  if (currentView === "favorites") {
+    renderFavorites(currentData);
+    return;
+  }
+
   renderPlayerLinks(currentData);
 }
 
