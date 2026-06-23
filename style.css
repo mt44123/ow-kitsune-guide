@@ -1619,3 +1619,20 @@ img{
 .teams-mode .discord-note{
   grid-column:1 / -1;
 }
+
+.birthday-today-empty{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  gap:6px;
+  padding:24px 0;
+  color:var(--text-muted);
+}
+
+.birthday-today-request,
+.birthday-today-request-jp{
+  font-size:12px;
+  line-height:1.5;
+}
