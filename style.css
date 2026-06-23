@@ -1696,8 +1696,8 @@ img{
 }
 
 #clipsSubNav button.active.clip-tab-goats{
-  background:#FFD700;
-  color:#111;
+  background:var(--accent);
+  color:white;
 }
 
 #clipsSubNav button.active.clip-tab-jp{
