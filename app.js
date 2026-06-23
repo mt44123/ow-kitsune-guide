@@ -1898,7 +1898,7 @@ function renderLive(players) {
 
           <span
             class="favorite-star"
-            onclick="event.preventDefault();event.stopPropagation();toggleFavoriteUI_('${escapeHtml(p.name)}')"
+            onclick="event.preventDefault();event.stopPropagation();toggleFavoriteUI_(${JSON.stringify(p.name || "")})"
           >
             ${isFavorite_(p.name) ? "⭐" : "☆"}
           </span>
@@ -1992,7 +1992,7 @@ function renderYoutubeCard_(v) {
           <div class="youtube-player">
             <span
               class="favorite-star"
-              onclick="event.preventDefault();event.stopPropagation();toggleFavoriteMediaUI_('${escapeHtml(v.name)}')"
+              onclick="event.preventDefault();event.stopPropagation();toggleFavoriteMediaUI_(${JSON.stringify(v.name || "")})"
             >
               ${isFavorite_(v.name) ? "⭐" : "☆"}
             </span>
@@ -2104,7 +2104,7 @@ function renderClipCard_(c) {
           <div class="youtube-player">
             <span
               class="favorite-star"
-              onclick="event.preventDefault();event.stopPropagation();toggleFavoriteMediaUI_('${escapeHtml(c.name)}')"
+              onclick="event.preventDefault();event.stopPropagation();toggleFavoriteMediaUI_(${JSON.stringify(c.name || "")})"
             >
               ${isFavorite_(c.name) ? "⭐" : "☆"}
             </span>
