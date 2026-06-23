@@ -65,6 +65,33 @@ const YOUTUBE_CLIENT_CACHE_MS =  30 * 60 * 1000;
 let youtubeLastUpdated = "";
 const clipLastUpdated = {};
 
+function getFavorites_() {
+  return JSON.parse(
+    localStorage.getItem("favorites") || "[]"
+  );
+}
+
+function isFavorite_(name) {
+  return getFavorites_().includes(name);
+}
+
+function toggleFavorite_(name) {
+  const favs = getFavorites_();
+
+  const index = favs.indexOf(name);
+
+  if (index >= 0) {
+    favs.splice(index, 1);
+  } else {
+    favs.push(name);
+  }
+
+  localStorage.setItem(
+    "favorites",
+    JSON.stringify(favs)
+  );
+}
+
 let birthdaysCache = null;
 let birthdaysCacheTime = 0;
 const BIRTHDAYS_CLIENT_CACHE_MS = 6 * 60 * 60 * 1000;
@@ -1867,13 +1894,32 @@ function renderLive(players) {
   app.innerHTML = players.map(p => `
     <a class="card-link" href="${p.url}" target="_blank" rel="noopener">
       <div class="card ${getLangClass(p)}">
-        <div class="player-name">${p.name}</div>
+        <div class="player-name">
+
+          <span
+            class="favorite-star"
+            onclick="event.preventDefault();event.stopPropagation();toggleFavoriteUI_('${escapeHtml(p.name)}')"
+          >
+            ${isFavorite_(p.name) ? "⭐" : "☆"}
+          </span>
+        
+          ${p.name}
+        
+        </div>
         <div class="meta">${p.team || "-"} │ ${p.role || "-"} │ ${p.nationality || "-"}</div>
         <div class="stats">${p.platform}　🕓${formatLiveFor(p.startedAt)}　👥${Number(p.viewers || 0).toLocaleString()}</div>
         <div class="title">${p.title || ""}</div>
       </div>
     </a>
   `).join("");
+}
+
+function toggleFavoriteUI_(name) {
+  toggleFavorite_(name);
+
+  renderLive(
+    filterPlayers(currentData)
+  );
 }
 
 function renderYoutube(videos) {
