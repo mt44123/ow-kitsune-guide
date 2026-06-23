@@ -3159,14 +3159,19 @@ document.addEventListener("click", e => {
 
   toggleFavorite_(name);
 
+  const active = isFavorite_(name);
+
+  document
+    .querySelectorAll(
+      `.favorite-star[data-favorite-name="${CSS.escape(name)}"]`
+    )
+    .forEach(s => {
+      s.classList.toggle("active", active);
+      s.textContent = active ? "★" : "☆";
+    });
+
   if (currentView === "favorites") {
     renderFavorites(currentData);
-    searchPlayerLinksTable();
-    return;
-  }
-
-  if (currentView === "playerlinks") {
-    renderPlayerLinks(currentData);
     searchPlayerLinksTable();
     return;
   }
@@ -3180,17 +3185,20 @@ document.addEventListener("click", e => {
     return;
   }
 
-  if (isYoutubeView(currentView)) {
+  if (currentView === "goats") {
+    renderLive(filterPlayers(currentData));
+    return;
+  }
+
+  if (currentView === "youtubegoats") {
     renderYoutube(filterYoutube(currentData));
     return;
   }
 
-  if (isClipView(currentView)) {
+  if (currentView === "goatclips") {
     renderClips(filterClips(currentData));
     return;
   }
-
-  renderLive(filterPlayers(currentData));
 });
 
 async function init() {
