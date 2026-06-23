@@ -1527,7 +1527,7 @@ function renderTeamPlayers(teamName, players, regionName = null) {
 
           <span
             class="favorite-star"
-            onclick="event.preventDefault();event.stopPropagation();toggleFavoriteTeamUI_(${JSON.stringify(p.name || "")})"
+            data-favorite-name="${escapeHtml(p.name || "")}"
           >
             ${isFavorite_(p.name) ? "⭐" : "☆"}
           </span>
@@ -1988,7 +1988,7 @@ function renderLive(players) {
 
           <span
             class="favorite-star"
-            onclick="event.preventDefault();event.stopPropagation();toggleFavoriteUI_(${JSON.stringify(p.name || "")})"
+            data-favorite-name="${escapeHtml(p.name || "")}"
           >
             ${isFavorite_(p.name) ? "⭐" : "☆"}
           </span>
@@ -2314,7 +2314,7 @@ app.innerHTML = `
 
               <span
                 class="favorite-star"
-                onclick="event.preventDefault();event.stopPropagation();toggleFavoritePlayerLinksUI_(${JSON.stringify(p.name || "")})"
+                data-favorite-name="${escapeHtml(p.name || "")}"
               >
                 ${isFavorite_(p.name) ? "⭐" : "☆"}
               </span>
@@ -2993,6 +2993,50 @@ function loadToolsView() {
 </div>
 `;
 }
+
+document.addEventListener("click", e => {
+  const star = e.target.closest(".favorite-star");
+  if (!star) return;
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  const name = star.dataset.favoriteName;
+  if (!name) return;
+
+  toggleFavorite_(name);
+
+  if (currentView === "favorites") {
+    renderFavorites(currentData);
+    return;
+  }
+
+  if (currentView === "playerlinks") {
+    renderPlayerLinks(currentData);
+    return;
+  }
+
+  if (currentView === "teams" && currentTeamName) {
+    renderTeamPlayers(
+      currentTeamName,
+      currentData,
+      currentRegionName
+    );
+    return;
+  }
+
+  if (isYoutubeView(currentView)) {
+    renderYoutube(filterYoutube(currentData));
+    return;
+  }
+
+  if (isClipView(currentView)) {
+    renderClips(filterClips(currentData));
+    return;
+  }
+
+  renderLive(filterPlayers(currentData));
+});
 
 async function init() {
   speechSynthesis.getVoices();
