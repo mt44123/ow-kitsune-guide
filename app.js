@@ -958,6 +958,7 @@ function getTurnsAgeToday(born) {
 }
 
 function loadYoutubeView(view) {
+  viewNote.textContent = "";
   document.body.classList.add("youtube-view");
   document.body.classList.remove("clip-view");
 
@@ -1014,10 +1015,10 @@ function loadYoutubeView(view) {
 }
 
 function loadClipsView(view) {
-  
+  viewNote.textContent = "";
   document.body.classList.add("clip-view");
   document.body.classList.remove("youtube-view");
-
+  
   const now = Date.now();
 
   pageTitle.textContent = titles[view] || view.toUpperCase();
@@ -1699,6 +1700,7 @@ function renderTeamPlayers(teamName, players, regionName = null) {
 }
 
 function loadPlayerLinksView() {
+  viewNote.textContent = "";
   const now = Date.now();
 
   pageTitle.textContent = titles.playerlinks;
@@ -1813,6 +1815,7 @@ function loadFavoritesView() {
 }
 
 function loadLiveView(view) {
+  viewNote.textContent = "";
   const now = Date.now();
 
   pageTitle.textContent =
