@@ -462,7 +462,8 @@ let birthdayCalendarDate = new Date();
 function loadBirthdaysView() {
   const now = Date.now();
 
-  updated.textContent = "";
+  updated.textContent =
+  playerLinksLastUpdated;
   
   viewNote.innerHTML = `
   🌐 Dates are shown based on your device's local date.<br>
@@ -924,12 +925,16 @@ function loadYoutubeView(view) {
   fetch(CONFIG.API_URL + "?view=youtube")
     .then(res => res.json())
     .then(data => {
-      if (currentRequest !== requestId) {
-        stopFakeProgress();
-        return;
-      }
 
-      finishFakeProgress();
+    if (currentRequest !== requestId) {
+      stopFakeProgress();
+      return;
+    }
+  
+    updated.textContent =
+      data.lastUpdated || "";
+  
+    finishFakeProgress();
 
       youtubeCache = data.videos || [];
       youtubeCacheTime = Date.now();
@@ -998,6 +1003,9 @@ function loadClipsView(view) {
         stopFakeProgress();
         return;
       }
+
+      updated.textContent =
+      data.lastUpdated || "";
 
       finishFakeProgress();
 
