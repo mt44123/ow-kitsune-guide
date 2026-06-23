@@ -1525,8 +1525,8 @@ img{
 
   .team-player-header{
     display:grid;
-    grid-template-columns:200px 1fr 120px 240px;
-    gap:16px;
+    grid-template-columns:180px 70px 150px 80px 120px 240px;
+    gap:14px;
     padding:0 0 12px;
     margin-bottom:12px;
     border-bottom:1px solid var(--border);
@@ -1534,4 +1534,36 @@ img{
     color:var(--text-sub);
   }
 
+  .team-player-header div:nth-child(2)::before{ content:"Nat"; }
+  .team-player-header div:nth-child(3)::before{ content:"Age (Born)"; }
+  .team-player-header div:nth-child(4)::before{ content:"Role"; }
+
+  .team-player-header div:nth-child(2),
+  .team-player-header div:nth-child(3),
+  .team-player-header div:nth-child(4){
+    font-size:0;
+  }
+
+  .team-player-card-row{
+    display:grid;
+    grid-template-columns:180px 70px 150px 80px 120px 240px;
+    gap:14px;
+    align-items:center;
+  }
+
+  .team-player-meta{
+    display:contents;
+  }
+
+  .team-player-meta .team-nat,
+  .team-player-meta .team-age-born,
+  .team-player-meta .team-role{
+    display:block;
+  }
+
+  .team-player-card-row .team-player-name,
+  .team-player-meta,
+  .team-player-last{
+    margin-bottom:0;
+  }
 }
