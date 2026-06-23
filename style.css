@@ -1209,7 +1209,7 @@ img{
 }
 
 .birthday-today h3{
-  margin:0 0 8px;
+  margin:0 0 4px;
   color:var(--accent);
   text-align:center;
 }
@@ -1220,11 +1220,13 @@ img{
 
 .birthday-today-empty{
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:24px 0;
-  color:var(--text-sub);
+  gap:4px;
+  padding:8px 0;
+  color:var(--text-muted);
 }
 
 .birthday-today .birthday-event strong,
