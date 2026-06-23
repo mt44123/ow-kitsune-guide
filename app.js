@@ -1224,6 +1224,8 @@ function buildTeams_(players) {
 }
 
 function renderTeamPlayers(teamName, players) {
+  app.className = "team-detail-mode";
+  
   const members = players
     .filter(p => p.team === teamName)
     .sort((a, b) => {
