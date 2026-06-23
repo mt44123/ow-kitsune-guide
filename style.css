@@ -1534,3 +1534,47 @@ img{
     margin-right:8px;
   }
 }
+
+.team-player-card-row{
+  padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.team-player-card-row .team-player-name{
+  font-size:20px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.team-player-meta{
+  color:var(--text-sub);
+  margin-bottom:8px;
+}
+
+.team-player-last{
+  color:var(--text-sub);
+  margin-bottom:10px;
+}
+
+.team-player-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.team-link-tag{
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:8px;
+  background:var(--bg-main);
+  border:1px solid var(--border);
+  color:var(--text-main);
+  font-size:12px;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+.team-link-tag:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
