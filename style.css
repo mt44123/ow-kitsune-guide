@@ -1762,3 +1762,11 @@ body.light-theme .team-link-tag.dc{
   opacity:1;
   transform:translateY(-1px);
 }
+
+.favorite-star{
+  color:var(--text-muted);
+}
+
+.favorite-star.active{
+  color:var(--accent);
+}
