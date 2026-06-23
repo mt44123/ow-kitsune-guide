@@ -1249,60 +1249,53 @@ function renderTeamPlayers(teamName, players) {
 
       <div class="team-player-table">
 
-        <div class="team-player-header">
-          <div>Name</div>
-          <div>Nat</div>
-          <div>Age</div>
-          <div>Role</div>
-          <div>Last</div>
-          <div>Links</div>
+  ${members.map(p => {
+    const age = p.born ? getCurrentAgeFromBorn(p.born) : "-";
+    const born = p.born ? ` (${p.born})` : "";
+
+    return `
+      <div class="team-player-card-row">
+
+        <div class="team-player-name">
+          <a
+            class="player-name-link"
+            href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
+            target="_blank"
+            rel="noopener"
+          >
+            ${escapeHtml(p.name || "-")}
+          </a>
         </div>
-      
-        ${members.map(p => `
-          <div class="team-player-table-row">
-      
-            <div class="team-player-name">
-              <a
-                class="player-name-link"
-                href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
-                target="_blank"
-                rel="noopener"
-              >
-                ${escapeHtml(p.name || "-")}
-              </a>
-            </div>
-      
-            <div>${escapeHtml(shortNationality(p.nationality || "-"))}</div>
-      
-            <div>
-              ${p.born ? getCurrentAgeFromBorn(p.born) : "-"}
-            </div>
-      
-            <div class="team-player-role">
-              ${escapeHtml(p.role || "-")}
-            </div>
-      
-            <div>
-              ${
-                p.lastStreamUrl
-                  ? `<a class="last-stream-link" href="${p.lastStreamUrl}" target="_blank" rel="noopener">${p.lastStreamAge || "-"} ${p.lastStreamPlatform || ""}</a>`
-                  : "-"
-              }
-            </div>
-      
-            <div class="team-player-links">
-              ${linkDot(p.twitchUrl, p.twitchActive ? "tw" : "tw-inactive")}
-              ${linkDot(p.chzzkUrl, "chz")}
-              ${linkDot(p.soopUrl, "soop")}
-              ${linkDot(p.biliUrl, "bili")}
-              ${linkDot(p.youtubeUrl, "yt")}
-              ${linkDot(p.discordUrl, "dc")}
-            </div>
-      
-          </div>
-        `).join("")}
-      
+
+        <div class="team-player-meta">
+          ${escapeHtml(shortNationality(p.nationality || "-"))}
+          • ${age}${born}
+          • ${escapeHtml(p.role || "-")}
+        </div>
+
+        <div class="team-player-last">
+          Last:
+          ${
+            p.lastStreamUrl
+              ? `<a class="last-stream-link" href="${p.lastStreamUrl}" target="_blank" rel="noopener">${p.lastStreamAge || "-"} ${p.lastStreamPlatform || ""}</a>`
+              : "-"
+          }
+        </div>
+
+        <div class="team-player-links">
+          ${linkTag(p.twitchUrl, "TW")}
+          ${linkTag(p.chzzkUrl, "CHZ")}
+          ${linkTag(p.soopUrl, "SOOP")}
+          ${linkTag(p.biliUrl, "BILI")}
+          ${linkTag(p.youtubeUrl, "YT")}
+          ${linkTag(p.discordUrl, "DC")}
+        </div>
+
       </div>
+    `;
+  }).join("")}
+
+</div>
     </div>
   `;
 
@@ -2127,6 +2120,21 @@ function getLangClass(p) {
 function linkDot(url, cls) {
   if (!url) return `<span class="no-link">-</span>`;
   return `<a class="${cls} link-dot" href="${url}" target="_blank" rel="noopener">●</a>`;
+}
+
+function linkTag(url, label) {
+  if (!url) return "";
+
+  return `
+    <a
+      class="team-link-tag"
+      href="${url}"
+      target="_blank"
+      rel="noopener"
+    >
+      ${label}
+    </a>
+  `;
 }
 
 const REGION_NA = [
