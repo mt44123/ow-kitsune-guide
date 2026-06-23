@@ -679,13 +679,10 @@ function buildBirthdayTodaySection_(
             `).join("")
           : `
               <div class="birthday-today-empty">
-                <div>🦊 No birthdays today.</div>
+                <div> No birthdays today.</div>
                 <div class="birthday-today-request">
-                  Missing a birthday? You can submit player updates using the request form at the bottom of this page.
-                </div>
-                
-                <div class="birthday-today-request-jp">
-                  誕生日情報をご存じの場合は、このページ最下部のリクエストフォームからお知らせください。
+                  Missing a birthday? You can submit player updates using the request form at the bottom of this page🦊<br>
+                  誕生日情報をご存じの場合は、このページ最下部のリクエストフォームからお知らせください🦊
                 </div>
               </div>
             `
