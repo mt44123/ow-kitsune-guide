@@ -1241,20 +1241,7 @@ function buildTeamRegions_(players) {
   const map = new Map();
 
   players.forEach(p => {
-    let region =
-      String(p.teamRegion || "").trim();
-
-    if (region === "Official OWCS") {
-      region = "Official OWCS";
-
-    } else if (
-      ["KR", "JP", "PAC", "CN", "NA", "EMEA", "SA"]
-        .includes(region)
-    ) {
-      // keep as-is
-    } else {
-      region = "OTHER";
-    }
+    const region = normalizeTeamRegion_(p.teamRegion);
 
     const team =
       String(p.team || "").trim();
