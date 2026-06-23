@@ -1096,6 +1096,10 @@ function setClipCache_(cacheKey, clips) {
 }
 
 function loadTeamsView() {
+
+  requestId++;
+  stopFakeProgress();
+
   pageTitle.textContent = "TEAMS";
   setRandomVoiceLine();
 
