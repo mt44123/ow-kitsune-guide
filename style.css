@@ -1704,6 +1704,10 @@ body.light-theme .team-link-tag.dc{
   z-index:5;
 }
 
+.favorite-star.active{
+  color:#FFD700;
+}
+
 #clipsSubNav button.clip-tab-all{
   background:#9146FF;
   color:white;
