@@ -1628,8 +1628,8 @@ img{
   justify-content:center;
   align-items:center;
   text-align:center;
-  gap:6px;
-  padding:24px 0;
+  gap:4px;
+  padding:8px 0;
   color:var(--text-muted);
 }
 
