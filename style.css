@@ -1453,7 +1453,7 @@ img{
 .team-player-header,
 .team-player-table-row{
   display:grid;
-  grid-template-columns:1fr 80px 180px;
+  grid-template-columns:1.4fr 70px 50px 80px 90px 150px;
   align-items:center;
 }
 
@@ -1485,6 +1485,7 @@ img{
 @media (max-width:900px){
   .team-player-header,
   .team-player-table-row{
-    grid-template-columns:1fr 60px 120px;
+    grid-template-columns:1.4fr 48px 42px 60px 70px 120px;
+    font-size:12px;
   }
 }
