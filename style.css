@@ -1671,44 +1671,46 @@ img{
 }
 
 #clipsSubNav button.clip-tab-all{
-  border-color:#9146FF;
+  color:#9146FF;
 }
 
 #clipsSubNav button.clip-tab-goats{
-  border-color:#FFD166;
+  color:#FFD700;
 }
 
 #clipsSubNav button.clip-tab-jp{
-  border-color:#F5F5F5;
+  color:#E51B23;
 }
 
 #clipsSubNav button.clip-tab-chzzk{
-  border-color:#00FFA3;
+  color:#00D564;
 }
 
 #clipsSubNav button.clip-tab-soop{
-  border-color:#2D8CFF;
+  color:#3B82F6;
 }
 
 #clipsSubNav button.active.clip-tab-all{
   background:#9146FF;
+  color:white;
 }
 
 #clipsSubNav button.active.clip-tab-goats{
-  background:#FFD166;
+  background:#FFD700;
   color:#111;
 }
 
 #clipsSubNav button.active.clip-tab-jp{
-  background:#F5F5F5;
-  color:#111;
+  background:#E51B23;
+  color:white;
 }
 
 #clipsSubNav button.active.clip-tab-chzzk{
-  background:#00FFA3;
+  background:#00D564;
   color:#111;
 }
 
 #clipsSubNav button.active.clip-tab-soop{
-  background:#2D8CFF;
+  background:#3B82F6;
+  color:white;
 }
