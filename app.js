@@ -1274,10 +1274,9 @@ function renderTeamPlayers(teamName, players) {
         </div>
 
         <div class="team-player-last">
-          Last:
           ${
             p.lastStreamUrl
-              ? `<a class="last-stream-link" href="${p.lastStreamUrl}" target="_blank" rel="noopener">${p.lastStreamAge || "-"} ${p.lastStreamPlatform || ""}</a>`
+              ? `<a class="last-stream-link" href="${p.lastStreamUrl}" target="_blank" rel="noopener">🕓 ${p.lastStreamAge || "-"} ${p.lastStreamPlatform || ""}</a>`
               : "-"
           }
         </div>
