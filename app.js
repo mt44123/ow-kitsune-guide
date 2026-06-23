@@ -166,7 +166,7 @@ function stopFakeProgress() {
 
 const titles = {
   new: "NEW",
-  goats: "⭐",
+  goats: "★",
   viewers: "HOT",
   kr: "KR",
   en: "EN",
@@ -175,12 +175,12 @@ const titles = {
   intl: "INTL",
   
   youtube: "NEW",
-  youtubegoats: "⭐",
+  youtubegoats: "★",
   youtubehot: "HOT",
   youtubejp: "JP",
 
   clips: "NEW",
-  goatclips: "⭐",
+  goatclips: "★",
   hotclips: "HOT",
   jpclips: "JP",
   soopclips: "SOOP NEW",
@@ -1133,7 +1133,7 @@ function loadGoatClipsView() {
   viewNote.textContent = "";
   const now = Date.now();
 
-  pageTitle.textContent = "⭐";
+  pageTitle.textContent = "★";
   setRandomVoiceLine();
   viewNote.textContent =
     "Favorite players' clips from Twitch, CHZZK and SOOP.";
@@ -1798,7 +1798,7 @@ function loadFavoritesView() {
   setRandomVoiceLine();
 
   viewNote.innerHTML = `
-    ⭐ Saved on this browser only.
+    ★ Saved on this browser only.
   `;
 
   if (
@@ -2255,7 +2255,7 @@ function renderYoutubeCard_(v) {
               class="favorite-star"
               data-favorite-name="${escapeHtml(v.name || "")}"
             >
-              ${isFavorite_(v.name) ? "⭐" : "☆"}
+              ${isFavorite_(v.name) ? "★" : "☆"}
             </span>
             ${escapeHtml(v.name || "-")}
           </div>
@@ -2367,7 +2367,7 @@ function renderClipCard_(c) {
               class="favorite-star"
               data-favorite-name="${escapeHtml(c.name || "")}"
             >
-              ${isFavorite_(c.name) ? "⭐" : "☆"}
+              ${isFavorite_(c.name) ? "★" : "☆"}
             </span>
             ${escapeHtml(c.name || "-")}
           </div>
