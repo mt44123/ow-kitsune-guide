@@ -1223,18 +1223,22 @@ function buildTeams_(players) {
 function normalizeTeamRegion_(region) {
   region = String(region || "").trim();
 
-  if (region === "Official OWCS") {
-    return "Official OWCS";
-  }
-
   if (
-    ["KR", "JP", "PAC", "CN", "NA", "EMEA", "SA"]
-      .includes(region)
+    [
+      "Official OWCS",
+      "KR",
+      "JP",
+      "PAC",
+      "CN",
+      "NA",
+      "EMEA",
+      "SA"
+    ].includes(region)
   ) {
     return region;
   }
 
-  return "OTHER";
+  return null;
 }
 
 function buildTeamRegions_(players) {
@@ -1242,6 +1246,8 @@ function buildTeamRegions_(players) {
 
   players.forEach(p => {
     const region = normalizeTeamRegion_(p.teamRegion);
+    
+    if (!region) return;
 
     const team =
       String(p.team || "").trim();
@@ -1260,7 +1266,7 @@ function buildTeamRegions_(players) {
     map.get(region).playerCount++;
   });
 
-  const order = {
+   const order = {
     "Official OWCS": 1,
     KR: 2,
     JP: 3,
@@ -1268,8 +1274,7 @@ function buildTeamRegions_(players) {
     CN: 5,
     NA: 6,
     EMEA: 7,
-    SA: 8,
-    OTHER: 9
+    SA: 8
   };
 
   return Array.from(map.values())
@@ -2383,11 +2388,6 @@ function getTeamRegionClass(region, team) {
     case "SA":
       return "team-sa";
 
-    case "OTHER":
-      return "team-other";
-
-    default:
-      return "team-unknown";
   }
 }
 
