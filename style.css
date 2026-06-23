@@ -1472,6 +1472,7 @@ img{
 }
 
 .team-link-tag{
+  transition:.15s;
   display:inline-block;
   padding:4px 8px;
   border-radius:8px;
@@ -1514,6 +1515,8 @@ img{
 }
 
 .team-link-tag:hover{
+  transform:translateY(-1px);
+  filter:brightness(1.15);
   opacity:.8;
 }
 
