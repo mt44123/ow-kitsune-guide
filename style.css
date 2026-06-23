@@ -1489,6 +1489,11 @@ img{
   color:#9146FF;
 }
 
+.team-link-tag.tw-inactive{
+  border-color:#777;
+  color:#B8A0E6;
+}
+
 .team-link-tag.chz{
   border-color:#00D564;
   color:#00D564;
