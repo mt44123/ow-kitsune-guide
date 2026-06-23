@@ -101,7 +101,7 @@ p{
 .card{
   background:var(--bg-main);
   border-radius:14px;
-  padding:14px;
+  padding:12px;
   transition:.15s;
 }
 
