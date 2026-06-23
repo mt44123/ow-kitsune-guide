@@ -2180,11 +2180,10 @@ function toggleFavoritePlayerLinksUI_(name) {
 
   if (currentView === "favorites") {
     renderFavorites(currentData);
-    searchPlayerLinksTable();
-    return;
+  } else {
+    renderPlayerLinks(currentData);
   }
 
-  renderPlayerLinks(currentData);
   searchPlayerLinksTable();
 }
 
