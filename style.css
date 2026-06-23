@@ -1483,9 +1483,38 @@ img{
   text-decoration:none;
 }
 
+.team-link-tag.tw{
+  border-color:#9146FF;
+  color:#9146FF;
+}
+
+.team-link-tag.chz{
+  border-color:#00D564;
+  color:#00D564;
+}
+
+.team-link-tag.soop{
+  border-color:#3B82F6;
+  color:#3B82F6;
+}
+
+.team-link-tag.bili{
+  border-color:#FFC422;
+  color:#FFC422;
+}
+
+.team-link-tag.yt{
+  border-color:#FF0033;
+  color:#FF0033;
+}
+
+.team-link-tag.dc{
+  border-color:#FFFFFF;
+  color:#FFFFFF;
+}
+
 .team-link-tag:hover{
-  border-color:var(--accent);
-  color:var(--accent);
+  opacity:.8;
 }
 
 .team-player-header{
