@@ -1159,6 +1159,36 @@ function loadTeamsView() {
     });
 }
 
+function renderLiquipediaNote_() {
+  return `
+    <div class="discord-note">
+       <p>
+      *Click player or team names to open Liquipedia.<br>
+      プレイヤー名・チーム名をクリックするとLiquipediaを開きます。
+      </p>
+      
+      <details class="playerlinks-help">
+        <summary>More Info / 詳細</summary>
+  
+        <p>
+        *DC links are Discord server home pages, not invite links.<br>
+        DCはDiscordサーバーのトップページです（招待リンクではありません）
+        </p>
+  
+        <p>
+        *If the Discord app is installed on your mobile device, the link may only open the app and not navigate to the server.<br>
+        Discordアプリがインストールされている場合、アプリが開くだけでサーバーへ移動しないことがあります。
+        </p>
+        
+        <p>Some player and team information is sourced from Liquipedia.<br>
+        Special thanks to the Liquipedia contributors who help keep esports history alive.<br>
+        一部のプレイヤー情報・チーム情報はLiquipediaを参考にしています。<br>
+        eスポーツの歴史を支えているLiquipedia編集者の皆様に感謝します。</p>
+        </details>
+    </div>
+  `;
+}
+
 function renderTeams(players) {
   app.className = "teams-mode";
 
@@ -1169,7 +1199,7 @@ function renderTeams(players) {
     return;
   }
 
-  app.innerHTML = regions.map(region => `
+  app.innerHTML = renderLiquipediaNote_() + regions.map(region => `
     <button
       class="team-card ${getTeamRegionClass(region.name)}"
       data-region="${escapeHtml(region.name)}"
@@ -1356,6 +1386,8 @@ function renderTeamPlayers(teamName, players, regionName = null) {
     });
 
   app.innerHTML = `
+    ${renderLiquipediaNote_()}
+
     <button class="team-back-button" id="teamBackButton">
       ← Back to Teams
     </button>
