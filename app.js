@@ -1221,7 +1221,9 @@ function buildTeams_(players) {
 }
 
 function normalizeTeamRegion_(region) {
-  region = String(region || "").trim();
+  region = String(region || "")
+    .replace(/^●\s*/, "")
+    .trim();
 
   if (
     [
