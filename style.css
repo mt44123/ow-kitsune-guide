@@ -242,6 +242,11 @@ p{
 .soop{ color:#3B82F6; }
 .bili{ color:#FFD700; }
 .yt{ color:#FF0033; }
+
+body.light-theme .bili{
+  color:#8A5A00;
+}
+
 .dc{
   color:#fff;
 }
@@ -1558,6 +1563,11 @@ body.light-theme .tools-page a{
 .team-link-tag.bili{
   border-color:#FFC422;
   color:#FFC422;
+}
+
+body.light-theme .team-link-tag.bili{
+  border-color:#8A5A00;
+  color:#8A5A00;
 }
 
 .team-link-tag.yt{
