@@ -1249,45 +1249,60 @@ function renderTeamPlayers(teamName, players) {
 
       <div class="team-player-table">
 
-  <div class="team-player-header">
-    <div>Name</div>
-    <div>Role</div>
-    <div>Links</div>
-  </div>
-
-  ${members.map(p => `
-    <div class="team-player-table-row">
-
-      <div class="team-player-name">
-        <a
-          class="player-name-link"
-          href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
-          target="_blank"
-          rel="noopener"
-        >
-          ${escapeHtml(p.name || "-")}
-        </a>
+        <div class="team-player-header">
+          <div>Name</div>
+          <div>Nat</div>
+          <div>Age</div>
+          <div>Role</div>
+          <div>Last</div>
+          <div>Links</div>
+        </div>
+      
+        ${members.map(p => `
+          <div class="team-player-table-row">
+      
+            <div class="team-player-name">
+              <a
+                class="player-name-link"
+                href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
+                target="_blank"
+                rel="noopener"
+              >
+                ${escapeHtml(p.name || "-")}
+              </a>
+            </div>
+      
+            <div>${escapeHtml(shortNationality(p.nationality || "-"))}</div>
+      
+            <div>
+              ${p.born ? getCurrentAgeFromBorn(p.born) : "-"}
+            </div>
+      
+            <div class="team-player-role">
+              ${escapeHtml(p.role || "-")}
+            </div>
+      
+            <div>
+              ${
+                p.lastStreamUrl
+                  ? `<a class="last-stream-link" href="${p.lastStreamUrl}" target="_blank" rel="noopener">${p.lastStreamAge || "-"} ${p.lastStreamPlatform || ""}</a>`
+                  : "-"
+              }
+            </div>
+      
+            <div class="team-player-links">
+              ${linkDot(p.twitchUrl, p.twitchActive ? "tw" : "tw-inactive")}
+              ${linkDot(p.chzzkUrl, "chz")}
+              ${linkDot(p.soopUrl, "soop")}
+              ${linkDot(p.biliUrl, "bili")}
+              ${linkDot(p.youtubeUrl, "yt")}
+              ${linkDot(p.discordUrl, "dc")}
+            </div>
+      
+          </div>
+        `).join("")}
+      
       </div>
-
-      <div class="team-player-role">
-        ${escapeHtml(p.role || "-")}
-      </div>
-
-      <div class="team-player-links">
-
-        ${linkDot(p.twitchUrl, p.twitchActive ? "tw" : "tw-inactive")}
-        ${linkDot(p.chzzkUrl, "chz")}
-        ${linkDot(p.soopUrl, "soop")}
-        ${linkDot(p.biliUrl, "bili")}
-        ${linkDot(p.youtubeUrl, "yt")}
-        ${linkDot(p.discordUrl, "dc")}
-
-      </div>
-
-    </div>
-  `).join("")}
-
-</div>
     </div>
   `;
 
@@ -1297,6 +1312,7 @@ function renderTeamPlayers(teamName, players) {
       renderTeams(players);
     });
 }
+
 function loadPlayerLinksView() {
   const now = Date.now();
 
