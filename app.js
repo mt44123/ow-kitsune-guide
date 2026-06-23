@@ -137,6 +137,7 @@ function stopFakeProgress() {
 const titles = {
   new: "NEW",
   viewers: "HOT",
+  goats: "⭐GOATS",
   kr: "KR",
   en: "EN",
   cn: "CN",
@@ -145,6 +146,7 @@ const titles = {
   
   youtube: "NEW",
   youtubehot: "HOT",
+  youtubegoats: "⭐GOATS",
   youtubejp: "JP",
 
   clips: "NEW",
@@ -238,7 +240,7 @@ async function loadVoiceLines() {
 }
 
 const VIEW_GROUPS = {
-  live: ["new", "viewers", "kr", "en", "cn", "jp", "intl"],
+  live: ["new", "viewers", "goats", "kr", "en", "cn", "jp", "intl"],
 
   clips: [
     "clips",
@@ -251,7 +253,7 @@ const VIEW_GROUPS = {
     "chzzkbestclips"
   ],
 
-  youtube: ["youtube", "youtubehot", "youtubejp"],
+  youtube: ["youtube", "youtubehot", "youtubegoats", "youtubejp"],
 
   players: [
     "teams",
@@ -1801,6 +1803,9 @@ function matchLiveViewClient(p, view) {
   const language = String(p.language || "");
 
   switch (view) {
+    case "goats":
+      return getFavorites_().includes(p.name);
+      
     case "kr":
       return (
         platform.includes("CHZZK") ||
@@ -1872,6 +1877,12 @@ function filterYoutubeView(videos, view) {
 
   if (view === "youtubehot") {
     return sortByViews_(result);
+  }
+
+  if (view === "youtubegoats") {
+    return result.filter(v =>
+      getFavorites_().includes(v.name)
+    );
   }
 
   if (view === "youtubejp") {
