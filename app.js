@@ -1761,8 +1761,7 @@ function loadFavoritesView() {
   setRandomVoiceLine();
 
   viewNote.innerHTML = `
-    ⭐ Saved on this browser only.<br>
-    ⭐ この端末・このブラウザだけに保存されます。
+    ⭐ Saved on this browser only.
   `;
 
   if (
