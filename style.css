@@ -901,6 +901,14 @@ img{
   gap:12px;
 }
 
+body.light-theme .tools-link{
+  color:var(--text-main);
+}
+
+body.light-theme .tools-page a{
+  color:var(--text-main);
+}
+
 @media (min-width:900px){
   .tools-page{
     max-width:1100px;
