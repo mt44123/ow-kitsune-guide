@@ -1414,9 +1414,23 @@ function renderTeamPlayers(teamName, players, regionName = null) {
       isTeamListMember_(p)
   )
     .sort((a, b) => {
-      const roleOrder = { TANK: 1, DPS: 2, SUP: 3 };
-      return (roleOrder[a.role] || 99) - (roleOrder[b.role] || 99);
-    });
+  const roleOrder = {
+    tank: 1,
+    dps: 2,
+    sup: 3,
+    coach: 4
+  };
+
+  const normalizeRole = role =>
+    String(role || "")
+      .replace(/[^\p{L}\p{N}]/gu, "")
+      .toLowerCase();
+
+  return (
+    (roleOrder[normalizeRole(a.role)] || 99) -
+    (roleOrder[normalizeRole(b.role)] || 99)
+  );
+});
 
   app.innerHTML = `
     ${renderLiquipediaNote_()}
