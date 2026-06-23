@@ -1487,3 +1487,32 @@ img{
   border-color:var(--accent);
   color:var(--accent);
 }
+
+@media (min-width:900px){
+
+  .team-player-card-row{
+    display:grid;
+    grid-template-columns:
+      180px
+      1fr
+      120px
+      220px;
+
+    align-items:center;
+    gap:16px;
+  }
+
+  .team-player-card-row .team-player-name{
+    margin-bottom:0;
+  }
+
+  .team-player-meta{
+    margin-bottom:0;
+  }
+
+  .team-player-last{
+    margin-bottom:0;
+    text-align:center;
+  }
+
+}
