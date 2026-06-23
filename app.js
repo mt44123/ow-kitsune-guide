@@ -1275,9 +1275,9 @@ function renderTeamPlayers(teamName, players) {
         </div>
 
         <div class="team-player-meta">
-          ${escapeHtml(shortNationality(p.nationality || "-"))}
-          • ${age}${born}
-          • ${escapeHtml(p.role || "-")}
+          <span class="team-nat">${escapeHtml(shortNationality(p.nationality || "-"))}</span>
+          <span class="team-age-born">${age}${born}</span>
+          <span class="team-role">${escapeHtml(p.role || "-")}</span>
         </div>
 
         <div class="team-player-last">
