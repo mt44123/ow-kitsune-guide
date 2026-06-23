@@ -1242,12 +1242,19 @@ function buildTeams_(players) {
     if (!map.has(team)) {
       map.set(team, {
         name: team,
-        region: p.teamRegion || "",
+        region: "",
         count: 0
       });
     }
-
-    map.get(team).count++;
+    
+    const item = map.get(team);
+    const normalizedRegion = normalizeTeamRegion_(p.teamRegion, team);
+    
+    if (normalizedRegion && !item.region) {
+      item.region = normalizedRegion;
+    }
+    
+    item.count++;
   });
 
   return Array.from(map.values())
