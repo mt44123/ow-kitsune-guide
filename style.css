@@ -824,7 +824,7 @@ img{
 
 #searchToggle{
   background:var(--bg-main);
-  color:#fff;
+  color:var(--text-main);
   font-weight:700;
 
   box-shadow:
