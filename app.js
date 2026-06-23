@@ -1669,7 +1669,7 @@ function renderTeamPlayers(teamName, players, regionName = null) {
             class="favorite-star"
             data-favorite-name="${escapeHtml(p.name || "")}"
           >
-            ${isFavorite_(p.name) ? "⭐" : "☆"}
+            ${isFavorite_(p.name) ? "★" : "☆"}
           </span>
         
           <a
@@ -2140,7 +2140,7 @@ function renderLive(players) {
             class="favorite-star"
             data-favorite-name="${escapeHtml(p.name || "")}"
           >
-            ${isFavorite_(p.name) ? "⭐" : "☆"}
+            ${isFavorite_(p.name) ? "★" : "☆"}
           </span>
         
           ${p.name}
@@ -2466,7 +2466,7 @@ app.innerHTML = `
                 class="favorite-star"
                 data-favorite-name="${escapeHtml(p.name || "")}"
               >
-                ${isFavorite_(p.name) ? "⭐" : "☆"}
+                ${isFavorite_(p.name) ? "★" : "☆"}
               </span>
             
               <a
