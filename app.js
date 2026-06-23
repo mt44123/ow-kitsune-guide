@@ -1236,6 +1236,9 @@ function buildTeams_(players) {
   const map = new Map();
 
   players.forEach(p => {
+
+  if (!isTeamListMember_(p)) return;
+
     const team = String(p.team || "").trim();
     if (!team || team === "-") return;
 
@@ -1268,10 +1271,19 @@ function buildTeams_(players) {
     });
 }
 
+function isTeamListMember_(p) {
+  return String(p.teamRegion || "").trim() !== "★OWCS Creator";
+}
+
 function normalizeTeamRegion_(region, team = "") {
+
   region = String(region || "")
     .replace(/^●\s*/, "")
     .trim();
+
+  if (region === "★OWCS Creator") {
+    return null;
+  }
 
   team = String(team || "").trim();
 
@@ -1297,7 +1309,11 @@ function buildTeamRegions_(players) {
   const map = new Map();
 
   players.forEach(p => {
-    const region = normalizeTeamRegion_(p.teamRegion, p.team)
+
+  if (!isTeamListMember_(p)) return;
+
+  const region =
+    normalizeTeamRegion_(p.teamRegion, p.team)
     
     if (!region) return;
 
@@ -1388,7 +1404,11 @@ function renderTeamPlayers(teamName, players, regionName = null) {
   app.className = "team-detail-mode";
   
   const members = players
-    .filter(p => p.team === teamName)
+  .filter(
+    p =>
+      p.team === teamName &&
+      isTeamListMember_(p)
+  )
     .sort((a, b) => {
       const roleOrder = { TANK: 1, DPS: 2, SUP: 3 };
       return (roleOrder[a.role] || 99) - (roleOrder[b.role] || 99);
