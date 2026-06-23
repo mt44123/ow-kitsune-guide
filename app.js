@@ -2358,11 +2358,21 @@ function getTeamRegionClass(region, team) {
   team = String(team || "");
 
   switch (String(region || "").toUpperCase()) {
+
+    case "OFFICIAL OWCS":
+      return "team-official";
+
     case "KR":
       return "team-kr";
 
     case "JP":
       return "team-jp";
+
+    case "PAC":
+      return "team-pac";
+
+    case "CN":
+      return "team-cn";
 
     case "NA":
       return "team-na";
@@ -2370,14 +2380,11 @@ function getTeamRegionClass(region, team) {
     case "EMEA":
       return "team-emea";
 
-    case "CN":
-      return "team-cn";
-
-    case "PAC":
-      return "team-pac";
-
     case "SA":
       return "team-sa";
+
+    case "OTHER":
+      return "team-other";
 
     default:
       return "team-unknown";
