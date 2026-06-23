@@ -1525,3 +1525,48 @@ img{
     justify-content:flex-start;
   }
 }
+
+.team-card.team-official,
+.team-detail-card.team-official{
+  border-left:4px solid #FFD700;
+}
+
+.team-card.team-kr,
+.team-detail-card.team-kr{
+  border-left:4px solid #E51B23;
+}
+
+.team-card.team-jp,
+.team-detail-card.team-jp{
+  border-left:4px solid #F5F5F5;
+}
+
+.team-card.team-pac,
+.team-detail-card.team-pac{
+  border-left:4px solid #FFB6D9;
+}
+
+.team-card.team-cn,
+.team-detail-card.team-cn{
+  border-left:4px solid #FFC422;
+}
+
+.team-card.team-na,
+.team-detail-card.team-na{
+  border-left:4px solid #813AF2;
+}
+
+.team-card.team-emea,
+.team-detail-card.team-emea{
+  border-left:4px solid #00C4C4;
+}
+
+.team-card.team-sa,
+.team-detail-card.team-sa{
+  border-left:4px solid #22C55E;
+}
+
+.team-card.team-other,
+.team-detail-card.team-other{
+  border-left:4px solid #777;
+}
