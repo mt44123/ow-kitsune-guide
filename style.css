@@ -806,10 +806,8 @@ img{
   font-weight:700;
 
   box-shadow:
-    0 0 6px #3E4D6D,
-    0 0 14px #3E4D6D,
-    0 0 24px rgba(62,77,109,.7);
-}
+    0 0 8px #3E4D6D,
+    0 0 16px rgba(62,77,109,.8);
 }
 /* CLIPS */
 
