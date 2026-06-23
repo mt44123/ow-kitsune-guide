@@ -1427,3 +1427,15 @@ img{
   display:flex;
   gap:6px;
 }
+
+.team-detail-mode{
+  display:block;
+}
+
+.team-detail-mode .team-back-button{
+  margin-bottom:16px;
+}
+
+.team-detail-mode .team-detail-card{
+  max-width:900px;
+}
