@@ -801,8 +801,13 @@ img{
 }
 
 #searchToggle{
+  background:var(--accent);
+  color:#fff;
+  font-weight:700;
+
   box-shadow:
-    0 0 6px rgba(184,71,36,.5);
+    0 0 8px rgba(184,71,36,.8),
+    0 0 18px rgba(184,71,36,.5);
 }
 /* CLIPS */
 
