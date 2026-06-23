@@ -1658,3 +1658,14 @@ img{
 .favorite-star:hover{
   opacity:.8;
 }
+
+.favorite-star{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  pointer-events:auto;
+  user-select:none;
+  position:relative;
+  z-index:5;
+}
