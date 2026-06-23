@@ -1654,7 +1654,7 @@ app.innerHTML = `
   </div>
 
   <div class="scroll-note">
-    📱Mobile: Swipe left / right 📱スマホ: 左右にスワイプ
+    ←📱Mobile:Swipe→
   </div>
 
   <div class="player-table-wrap">
