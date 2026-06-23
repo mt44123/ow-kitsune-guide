@@ -1185,9 +1185,20 @@ function renderTeams(players) {
   `).join("");
 
   document.querySelectorAll(".team-card").forEach(button => {
-    button.addEventListener("click", () => {
-      renderRegionTeams(button.dataset.region, players);
-    });
+   button.addEventListener("click", () => {
+  const region = button.dataset.region;
+
+  if (region === "Official OWCS") {
+    renderTeamPlayers(
+      "Overwatch_Champions_Series",
+      players,
+      "Official OWCS"
+    );
+    return;
+  }
+
+  renderRegionTeams(region, players);
+});
   });
 }
 
