@@ -915,7 +915,8 @@ function loadYoutubeView(view) {
     requestId++;
     stopFakeProgress();
 
-    updated.textContent = youtubeLastUpdated;
+    updated.textContent =
+    "Updates every 30 min";
 
     currentData = filterYoutubeView(youtubeCache, view);
     renderYoutube(currentData);
@@ -934,8 +935,8 @@ function loadYoutubeView(view) {
         return;
       }
 
-      youtubeLastUpdated = data.lastUpdated || "";
-      updated.textContent = youtubeLastUpdated;
+      updated.textContent =
+      "Updates every 30 min";
 
       finishFakeProgress();
 
@@ -990,7 +991,7 @@ function loadClipsView(view) {
     stopFakeProgress();
 
     updated.textContent =
-      clipLastUpdated[source.cacheKey] || "";
+    "Updates daily";
 
     currentData = filterClipView(cached.data, view);
     renderClips(currentData);
@@ -1013,7 +1014,7 @@ function loadClipsView(view) {
         data.lastUpdated || "";
 
       updated.textContent =
-        clipLastUpdated[source.cacheKey];
+        "Updates daily";
 
       finishFakeProgress();
 
@@ -1152,12 +1153,15 @@ function loadLiveView(view) {
   setRandomVoiceLine();
 
   if (
-    liveCache &&
-    now - liveCacheTime < LIVE_CLIENT_CACHE_MS
+  liveCache &&
+  now - liveCacheTime < LIVE_CLIENT_CACHE_MS
   ) {
     requestId++;
     stopFakeProgress();
-
+  
+    updated.textContent =
+      "Updates every 5 min";
+  
     renderLiveFromCache(view);
     return;
   }
@@ -1180,7 +1184,7 @@ function loadLiveView(view) {
       liveCacheTime = Date.now();
 
       updated.textContent =
-        data.lastUpdated || "";
+      "Updates every 5 min";
 
       if (data.counts) {
         updateAllButtonCounts(data.counts);
