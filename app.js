@@ -1272,7 +1272,11 @@ function buildTeams_(players) {
 }
 
 function isTeamListMember_(p) {
-  return String(p.teamRegion || "").trim() !== "★OWCS Creator";
+  const region = String(p.teamRegion || "")
+    .replace(/^●\s*/, "")
+    .trim();
+
+  return region !== "★OWCS Creator";
 }
 
 function normalizeTeamRegion_(region, team = "") {
