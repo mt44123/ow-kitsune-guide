@@ -805,12 +805,11 @@ img{
   color:#fff;
   font-weight:700;
 
-  transform:scale(1.03);
-
   box-shadow:
-    0 0 10px rgba(184,71,36,1),
-    0 0 20px rgba(184,71,36,.8),
-    0 0 30px rgba(184,71,36,.5);
+    0 0 6px #3E4D6D,
+    0 0 14px #3E4D6D,
+    0 0 24px rgba(62,77,109,.7);
+}
 }
 /* CLIPS */
 
