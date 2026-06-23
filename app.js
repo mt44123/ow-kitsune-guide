@@ -639,6 +639,7 @@ function buildBirthdayTodaySection_(
       <h3>
         🎂 Today's Birthdays
         (${today.getMonth() + 1}/${today.getDate()})
+        🎂
       </h3>
 
       ${
