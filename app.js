@@ -127,9 +127,10 @@ const titles = {
   chzzkhotclips: "CHZZK HOT",
   chzzkbestclips: "CHZZK BEST",
 
-  playerlinks: "LINKS",
+  teams: "TEAMS",
+  playerlinks: "ALL",
   birthdays: "BIRTHDAYS"
-};
+  };
 
 let voiceLines = [];
 
@@ -443,6 +444,11 @@ function loadView(view) {
 
   if (isClipView(view)) {
     loadClipsView(view);
+    return;
+  }
+
+  if (view === "teams") {
+    loadTeamsView();
     return;
   }
 
@@ -1087,6 +1093,25 @@ function setClipCache_(cacheKey, clips) {
 
   clipCache[cacheKey].data = clips;
   clipCache[cacheKey].time = Date.now();
+}
+
+function loadTeamsView() {
+  pageTitle.textContent = "TEAMS";
+  setRandomVoiceLine();
+
+  updated.textContent = playerLinksLastUpdated;
+  viewNote.textContent = "";
+
+  app.className = "";
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="player-name">🚧 TEAMS</div>
+      <div class="meta">
+        Team view coming soon.
+      </div>
+    </div>
+  `;
 }
 
 function loadPlayerLinksView() {
