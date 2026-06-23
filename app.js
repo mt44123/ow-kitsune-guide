@@ -156,7 +156,8 @@ const titles = {
 
   teams: "TEAMS",
   playerlinks: "ALL",
-  birthdays: "BIRTHDAYS"
+  birthdays: "BIRTHDAYS",
+  favorites: "MY GOATS"
   };
 
 let voiceLines = [];
@@ -249,7 +250,12 @@ const VIEW_GROUPS = {
 
   youtube: ["youtube", "youtubehot", "youtubejp"],
 
-  players: ["teams", "playerlinks", "birthdays"]
+  players: [
+    "teams",
+    "playerlinks",
+    "birthdays",
+    "favorites"
+  ]
 };
 
 let currentLiveView =
@@ -486,6 +492,11 @@ function loadView(view) {
 
   if (view === "birthdays") {
     loadBirthdaysView();
+    return;
+  }
+
+  if (view === "favorites") {
+    loadFavoritesView();
     return;
   }
 
@@ -1935,6 +1946,11 @@ function toggleFavoriteMediaUI_(name) {
   }
 }
 
+function toggleFavoritePlayerLinksUI_(name) {
+  toggleFavorite_(name);
+  renderPlayerLinks(currentData);
+}
+
 function renderYoutube(videos) {
   app.className = "youtube-mode";
 
@@ -2200,6 +2216,14 @@ app.innerHTML = `
             </td>
 
             <td class="name-cell ${getNationalityRegionClass(p.nationality)}">
+
+              <span
+                class="favorite-star"
+                onclick="event.preventDefault();event.stopPropagation();toggleFavoritePlayerLinksUI_(${JSON.stringify(p.name || "")})"
+              >
+                ${isFavorite_(p.name) ? "⭐" : "☆"}
+              </span>
+            
               <a
                 class="player-name-link"
                 href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
@@ -2208,6 +2232,7 @@ app.innerHTML = `
               >
                 ${p.name || ""}
               </a>
+            
             </td>
 
            <td>${shortNationality(p.nationality || "")}</td>
