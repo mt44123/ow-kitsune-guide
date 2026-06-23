@@ -1443,3 +1443,48 @@ img{
 #app.team-detail-mode{
   display:block !important;
 }
+
+/* TEAM DETAIL TABLE */
+
+.team-player-table{
+  margin-top:16px;
+}
+
+.team-player-header,
+.team-player-table-row{
+  display:grid;
+  grid-template-columns:1fr 80px 180px;
+  align-items:center;
+}
+
+.team-player-header{
+  padding:8px 0;
+  border-bottom:1px solid var(--border);
+  font-weight:bold;
+  color:var(--text-muted);
+}
+
+.team-player-table-row{
+  padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.team-player-name{
+  font-weight:600;
+}
+
+.team-player-role{
+  color:var(--text-sub);
+}
+
+.team-player-links{
+  display:flex;
+  gap:8px;
+}
+
+@media (max-width:900px){
+  .team-player-header,
+  .team-player-table-row{
+    grid-template-columns:1fr 60px 120px;
+  }
+}
