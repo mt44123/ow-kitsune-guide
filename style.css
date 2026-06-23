@@ -1689,28 +1689,34 @@ body.light-theme .team-link-tag.dc{
 }
 
 .favorite-star{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  width:32px;
+  height:32px;
+
   cursor:pointer;
+  pointer-events:auto;
+  user-select:none;
+
   margin-right:6px;
   font-size:18px;
+
+  color:var(--text-muted);
+
+  position:relative;
+  z-index:5;
+
+  flex-shrink:0;
 }
 
 .favorite-star:hover{
   opacity:.8;
 }
 
-.favorite-star{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  pointer-events:auto;
-  user-select:none;
-  position:relative;
-  z-index:5;
-}
-
 .favorite-star.active{
-  color:#FFD700;
+  color:var(--accent);
 }
 
 #clipsSubNav button.clip-tab-all{
@@ -1770,12 +1776,4 @@ body.light-theme .team-link-tag.dc{
 #clipsSubNav button.active{
   opacity:1;
   transform:translateY(-1px);
-}
-
-.favorite-star{
-  color:var(--text-muted);
-}
-
-.favorite-star.active{
-  color:var(--accent);
 }
