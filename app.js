@@ -1224,8 +1224,20 @@ function buildTeamRegions_(players) {
   const map = new Map();
 
   players.forEach(p => {
-    const region =
-      String(p.teamRegion || "UNKNOWN").trim() || "UNKNOWN";
+    let region =
+      String(p.teamRegion || "").trim();
+
+    if (region === "Official OWCS") {
+      region = "Official OWCS";
+
+    } else if (
+      ["KR", "JP", "PAC", "CN", "NA", "EMEA", "SA"]
+        .includes(region)
+    ) {
+      // keep as-is
+    } else {
+      region = "OTHER";
+    }
 
     const team =
       String(p.team || "").trim();
@@ -1244,13 +1256,28 @@ function buildTeamRegions_(players) {
     map.get(region).playerCount++;
   });
 
+  const order = {
+    "Official OWCS": 1,
+    KR: 2,
+    JP: 3,
+    PAC: 4,
+    CN: 5,
+    NA: 6,
+    EMEA: 7,
+    SA: 8,
+    OTHER: 9
+  };
+
   return Array.from(map.values())
     .map(r => ({
       name: r.name,
       teamCount: r.teams.size,
       playerCount: r.playerCount
     }))
-    .sort((a, b) => a.name.localeCompare(b.name));
+    .sort((a, b) =>
+      (order[a.name] || 999) -
+      (order[b.name] || 999)
+    );
 }
 
 function renderRegionTeams(regionName, players) {
