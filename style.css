@@ -860,7 +860,7 @@ img{
 .tools-link{
   background:none;
   border:none;
-  color:#f99e1a;
+  color:var(--accent);
   font-size:13px;
   cursor:pointer;
   white-space:nowrap;
@@ -877,7 +877,7 @@ img{
 }
 
 .tools-page a{
-  color:#f99e1a;
+  color:var(--accent);
   text-decoration:none;
 }
 
