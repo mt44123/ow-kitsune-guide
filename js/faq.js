@@ -53,43 +53,71 @@ function loadFaqView() {
         </ul>
       </div>
 
-      <div class="card">
-        <h3>
-          📲 How do I install OW KITSUNE GUIDE as an app?<br>
-          OW KITSUNE GUIDEをアプリとしてインストールするには？
-        </h3>
+    <div class="card">
+      <h3>
+        📲 How do I install OW KITSUNE GUIDE as an app?<br>
+        OW KITSUNE GUIDEをアプリとしてインストールするには？
+      </h3>
 
-        <p>
-          OW KITSUNE GUIDE can be installed as an app on PC and mobile devices.
-        </p>
+      <p>
+        Benefits of installing the app:
+      </p>
 
-        <ul>
-          <li>Faster access</li>
-          <li>App-like window</li>
-          <li>Easier notification management</li>
-        </ul>
+      <ul>
+        <li>Faster access from your desktop or home screen</li>
+        <li>Opens in a dedicated app window</li>
+        <li>Easier notification management</li>
+        <li>May display notifications as "OW KITSUNE GUIDE"</li>
+      </ul>
 
-        <p>
-          When installed as an app, notifications may appear as
-          "OW KITSUNE GUIDE" instead of your browser name.
-        </p>
-        <hr>
-        <p>
-          OW KITSUNE GUIDE はPC・スマホにアプリとしてインストールできます。
-        </p>
+      <p>
+        Installation steps may differ depending on your device and browser.
+      </p>
 
-        <ul>
-          <li>素早く起動できる</li>
-          <li>アプリのように表示される</li>
-          <li>通知を管理しやすい</li>
-        </ul>
+      <ul>
+        <li>Windows Chrome / Edge: Click the install icon near the address bar</li>
+        <li>Android Chrome: Menu → Add to Home screen / Install app</li>
+        <li>iPhone / iPad Safari: Share → Add to Home Screen</li>
+        <li>macOS Chrome / Edge: Click the install icon near the address bar</li>
+        <li>macOS Safari: Share → Add to Dock</li>
+      </ul>
 
-        <p>
-          アプリとしてインストールした場合、
-          通知はブラウザ名ではなく
-          「OW KITSUNE GUIDE」として表示される場合があります。
-        </p>
-      </div>
+      <p>
+        When installed as an app, notifications may appear as
+        "OW KITSUNE GUIDE" instead of your browser name.
+      </p>
+
+      <hr>
+
+      <p>
+        アプリとしてインストールするメリット：
+      </p>
+
+      <ul>
+        <li>デスクトップやホーム画面から素早く起動できる</li>
+        <li>ブラウザではなく専用アプリのように表示される</li>
+        <li>通知を管理しやすい</li>
+        <li>通知が「OW KITSUNE GUIDE」として表示される場合がある</li>
+      </ul>
+
+      <p>
+        インストール方法は端末やブラウザによって異なります。
+      </p>
+
+      <ul>
+        <li>Windows Chrome / Edge：アドレスバー付近のインストールアイコンをクリック</li>
+        <li>Android Chrome：メニュー → ホーム画面に追加 / アプリをインストール</li>
+        <li>iPhone / iPad Safari：共有 → ホーム画面に追加</li>
+        <li>macOS Chrome / Edge：アドレスバー付近のインストールアイコンをクリック</li>
+        <li>macOS Safari：共有 → Dockに追加</li>
+      </ul>
+
+      <p>
+        アプリとしてインストールした場合、
+        通知はブラウザ名ではなく
+        「OW KITSUNE GUIDE」として表示される場合があります。
+      </p>
+    </div>
 
       <div class="card">
         <h3>

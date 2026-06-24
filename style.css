@@ -1868,12 +1868,18 @@ body.light-theme .team-link-tag.dc{
   line-height:1.4;
 }
 
-.faq-jp{
-  margin-top:8px;
-  color:var(--text-muted);
-  font-size:13px;
+.tools-page .card h3{
+  font-size:18px;
+  line-height:1.4;
 }
 
-.faq-en{
-  color:var(--text-sub);
+.tools-page .card h3{
+  font-size:18px;
+  line-height:1.4;
+}
+
+@media (max-width:768px){
+  .tools-page .card h3{
+    font-size:16px;
+  }
 }
