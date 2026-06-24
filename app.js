@@ -485,24 +485,50 @@ searchBox?.addEventListener("input", () => {
   clearTimeout(searchTimer);
 
   searchTimer = setTimeout(() => {
-    if (isYoutubeView(currentView)) {
-      renderYoutube(filterYoutube(currentData));
+   if (currentView === "birthdays") {
+    jumpBirthdaySearch_();
 
-    } else if (isClipView(currentView)) {
-      renderClips(filterClips(currentData));
-
-    } else if (
-      currentView === "playerlinks" ||
-      currentView === "favorites"
-    ) {
-      searchPlayerLinksTable();
-    
-    } else {
-      renderLive(filterPlayers(currentData));
-    }
+  } else if (isYoutubeView(currentView)) {
+    renderYoutube(filterYoutube(currentData));
+  
+  } else if (isClipView(currentView)) {
+    renderClips(filterClips(currentData));
+  
+  } else if (
+    currentView === "playerlinks" ||
+    currentView === "favorites"
+  ) {
+    searchPlayerLinksTable();
+  
+  } else {
+    renderLive(filterPlayers(currentData));
+  }
 
   }, 300);
 });
+
+function jumpBirthdaySearch_() {
+  const keyword = searchBox.value.toLowerCase().trim();
+  if (!keyword) return;
+
+  const hit = currentData.find(p =>
+    [p.name, p.team, p.role, p.nationality]
+      .join(" ")
+      .toLowerCase()
+      .includes(keyword)
+  );
+
+  if (!hit || !hit.born) return;
+
+  const [, month] = hit.born.split("-").map(Number);
+
+  if (!month) return;
+
+  birthdayCalendarDate =
+    new Date(birthdayCalendarDate.getFullYear(), month - 1, 1);
+
+  renderBirthdayCalendar(currentData);
+}
 
 function loadView(view) {
   if (isLiveView(view)) {
