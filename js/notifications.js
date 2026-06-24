@@ -22,7 +22,7 @@ function updateNotifyButton_() {
       : "🔕 Live Notifications: OFF";
   }
 
-updateNotifyButton_();
+  updateNotifyButton_();
 
 notifyButton?.addEventListener(
   "click",
@@ -56,15 +56,18 @@ notifyButton?.addEventListener(
       liveNotificationsEnabled ? "true" : "false"
     );
 
-    updateNotifyButton_();
+        updateNotifyButton_();
 
     if (liveNotificationsEnabled) {
       new Notification(
         "OW KITSUNE GUIDE",
         {
-          body: "LIVE notifications enabled."
+          body: "LIVE notifications enabled.",
+          icon: "./icons/icon-192.png"
         }
       );
+
+      testLiveNotification_();
     }
   }
 );
@@ -122,7 +125,7 @@ function checkLiveNotifications_(players){
         {
           body:
             `${p.platform || ""}\n${p.title || p.titleJp || p.titleEn || ""}`,
-          icon: "icon-192.png"
+          icon: "./icons/icon-192.png"
         }
       );
     }
@@ -157,3 +160,20 @@ setInterval(() => {
     loadLiveView("new");
   }
 }, 5 * 60 * 1000);
+
+function testLiveNotification_() {
+  if (!("Notification" in window)) {
+    alert("Notifications are not supported.");
+    return;
+  }
+
+  if (Notification.permission !== "granted") {
+    alert("Notification permission is: " + Notification.permission);
+    return;
+  }
+
+  new Notification("🦊 OW KITSUNE GUIDE TEST", {
+    body: "If you see this, PC notifications work.",
+    icon: "./icons/icon-192.png"
+  });
+}
