@@ -1,5 +1,5 @@
-let liveNotificationsEnabled =
-  localStorage.getItem("liveNotificationsEnabled") === "true";
+let liveNotificationMode =
+  localStorage.getItem("liveNotificationMode") || "off";
 
 function updateNotifyButton_() {
   if (!notifyButton) return;
@@ -16,10 +16,16 @@ function updateNotifyButton_() {
     return;
   }
 
-  notifyButton.textContent =
-    liveNotificationsEnabled
-      ? "🔔 Live Notifications: ON"
-      : "🔕 Live Notifications: OFF";
+  if (liveNotificationMode === "goats") {
+    notifyButton.textContent =
+      "⭐ Live Notifications: MY GOATS";
+  } else if (liveNotificationMode === "all") {
+    notifyButton.textContent =
+      "🔔 Live Notifications: ALL";
+  } else {
+    notifyButton.textContent =
+      "🔕 Live Notifications: OFF";
+}
   }
 
 updateNotifyButton_();
@@ -43,26 +49,34 @@ notifyButton?.addEventListener(
       }
     }
 
-    liveNotificationsEnabled =
-      !liveNotificationsEnabled;
+    if (liveNotificationMode === "off") {
+      liveNotificationMode = "goats";
+    } else if (liveNotificationMode === "goats") {
+      liveNotificationMode = "all";
+    } else {
+      liveNotificationMode = "off";
+    }
 
-    if (liveNotificationsEnabled && liveCache?.players) {
+    if (liveNotificationMode !== "off" && liveCache?.players) {
       saveLiveState_(liveCache.players);
       liveStateInitialized = true;
     }
-    
+
     localStorage.setItem(
-      "liveNotificationsEnabled",
-      liveNotificationsEnabled ? "true" : "false"
+      "liveNotificationMode",
+      liveNotificationMode
     );
 
-updateNotifyButton_();
+    updateNotifyButton_();
 
-    if (liveNotificationsEnabled) {
+    if (liveNotificationMode !== "off") {
       new Notification(
         "OW KITSUNE GUIDE",
         {
-          body: "LIVE notifications enabled.",
+          body:
+            liveNotificationMode === "goats"
+              ? "Live notifications: MY GOATS"
+              : "Live notifications: ALL",
           icon: "./icons/icon-192.png"
         }
       );
@@ -85,9 +99,9 @@ function checkLiveNotifications_(players){
 
   if (!Array.isArray(players)) return;
 
-  if (!liveNotificationsEnabled) {
-    return;
-  }
+  if (liveNotificationMode === "off") {
+  return;
+}
 
   if (!liveStateInitialized) {
     saveLiveState_(players);
@@ -107,7 +121,12 @@ function checkLiveNotifications_(players){
 
   for (const p of players){
 
-    if (!isFavorite_(p.name)) continue;
+    if (
+      liveNotificationMode === "goats" &&
+      !isFavorite_(p.name)
+    ) {
+      continue;
+    }
 
     const isLive =
       p.status === "LIVE" ||
