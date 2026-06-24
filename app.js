@@ -19,8 +19,9 @@ const toolsButton =  document.getElementById("toolsButton");
 
 const themeToggle = document.getElementById("themeToggle");
 
-const notifyButton =
-  document.getElementById("notifyButton");
+const notifyButton =  document.getElementById("notifyButton");
+const settingsButton =  document.getElementById("settingsButton");
+const settingsMenu =  document.getElementById("settingsMenu");
 
 let liveNotificationsEnabled =
   localStorage.getItem("liveNotificationsEnabled") === "true";
@@ -58,6 +59,32 @@ function updateNotifyButton_() {
 }
 
 updateNotifyButton_();
+
+settingsButton?.addEventListener(
+  "click",
+  e => {
+    e.stopPropagation();
+
+    settingsMenu?.classList.toggle(
+      "settings-hidden"
+    );
+  }
+);
+
+document.addEventListener(
+  "click",
+  e => {
+    if (
+      settingsMenu &&
+      !settingsMenu.contains(e.target) &&
+      e.target !== settingsButton
+    ) {
+      settingsMenu.classList.add(
+        "settings-hidden"
+      );
+    }
+  }
+);
 
 notifyButton?.addEventListener(
   "click",
