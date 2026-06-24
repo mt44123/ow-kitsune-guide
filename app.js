@@ -748,7 +748,7 @@ function buildBirthdayTodaySection_(
       ${
         todayBirthdays.length
           ? todayBirthdays.map(p => `
-              <div class="birthday-event ${getNationalityRegionClass(p.nationality)}">
+              <div class="birthday-event ${getNationalityRegionClass(p.nationality)} ${isFavorite_(p.name) ? "favorite-birthday" : ""}">
 
                 <strong>
                   <a
@@ -843,7 +843,7 @@ function buildBirthdayCells_(
         </div>
 
         ${events.map(p => `
-          <div class="birthday-event ${getNationalityRegionClass(p.nationality)}">
+          <div class="birthday-event ${getNationalityRegionClass(p.nationality)} ${isFavorite_(p.name) ? "favorite-birthday" : ""}">
 
             <strong>
               🎂 <a
@@ -904,7 +904,7 @@ function buildBirthdayList_(
     .filter(p => p.month === month + 1)
     .sort((a, b) => a.day - b.day)
     .map(p => `
-      <div class="birthday-list-item ${getNationalityRegionClass(p.nationality)}">
+      <div class="birthday-list-item ${getNationalityRegionClass(p.nationality)} ${isFavorite_(p.name) ? "favorite-birthday" : ""}">
 
         <div class="birthday-list-date">
           ${month + 1}/${p.day}
