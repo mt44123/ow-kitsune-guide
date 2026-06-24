@@ -31,8 +31,8 @@ function applyThemeButtonText_() {
 
   themeToggle.textContent =
     document.body.classList.contains("light-theme")
-      ? "☀️"
-      : "🌙";
+      ? "🎨 Theme: Light"
+      : "🎨 Theme: Dark";
 }
 
 if (localStorage.getItem("theme") === "light") {
