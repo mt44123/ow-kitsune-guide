@@ -512,7 +512,7 @@ function jumpBirthdaySearch_() {
   if (!keyword) return;
 
   const hit = currentData.find(p =>
-    [p.name, p.team, p.role, p.nationality]
+    [p.name, p.team]
       .join(" ")
       .toLowerCase()
       .includes(keyword)
