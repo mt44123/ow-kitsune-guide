@@ -112,6 +112,11 @@ notifyButton?.addEventListener(
     liveNotificationsEnabled =
       !liveNotificationsEnabled;
 
+    if (liveNotificationsEnabled && liveCache?.players) {
+      saveLiveState_(liveCache.players);
+      liveStateInitialized = true;
+    }
+    
     localStorage.setItem(
       "liveNotificationsEnabled",
       liveNotificationsEnabled ? "true" : "false"
@@ -3370,7 +3375,6 @@ function checkLiveNotifications_(players){
   if (!Array.isArray(players)) return;
 
   if (!liveNotificationsEnabled) {
-    saveLiveState_(players);
     return;
   }
 
