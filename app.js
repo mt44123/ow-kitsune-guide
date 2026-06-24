@@ -22,6 +22,9 @@ const themeToggle = document.getElementById("themeToggle");
 const notifyButton =
   document.getElementById("notifyButton");
 
+let liveNotificationsEnabled =
+  localStorage.getItem("liveNotificationsEnabled") === "true";
+
 function applyThemeButtonText_() {
   if (!themeToggle) return;
 
@@ -45,19 +48,13 @@ function updateNotifyButton_() {
     return;
   }
 
-  switch (Notification.permission) {
-
-    case "granted":
-      notifyButton.textContent = "🔔";
-      break;
-
-    case "denied":
-      notifyButton.textContent = "🚫";
-      break;
-
-    default:
-      notifyButton.textContent = "🔕";
+  if (Notification.permission === "denied") {
+    notifyButton.textContent = "🚫";
+    return;
   }
+
+  notifyButton.textContent =
+    liveNotificationsEnabled ? "🔔" : "🔕";
 }
 
 updateNotifyButton_();
@@ -71,21 +68,33 @@ notifyButton?.addEventListener(
       return;
     }
 
-    const result =
-      await Notification.requestPermission();
+    if (Notification.permission !== "granted") {
+      const result =
+        await Notification.requestPermission();
+
+      if (result !== "granted") {
+        updateNotifyButton_();
+        return;
+      }
+    }
+
+    liveNotificationsEnabled =
+      !liveNotificationsEnabled;
+
+    localStorage.setItem(
+      "liveNotificationsEnabled",
+      liveNotificationsEnabled ? "true" : "false"
+    );
 
     updateNotifyButton_();
 
-    if (result === "granted") {
-
+    if (liveNotificationsEnabled) {
       new Notification(
         "OW KITSUNE GUIDE",
         {
-          body:
-            "LIVE notifications enabled."
+          body: "LIVE notifications enabled."
         }
       );
-
     }
   }
 );
@@ -3328,6 +3337,11 @@ let liveStateInitialized = false;
 function checkLiveNotifications_(players){
 
   if (!Array.isArray(players)) return;
+
+  if (!liveNotificationsEnabled) {
+    saveLiveState_(players);
+    return;
+  }
 
   if (!liveStateInitialized) {
     saveLiveState_(players);
