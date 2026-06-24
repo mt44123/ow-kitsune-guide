@@ -2503,7 +2503,7 @@ app.innerHTML = `
            <td>
               ${
                 String(p.role || "").toLowerCase() === "hero"
-                  ? `${p.age || ""}${p.born ? ` (${p.born})` : ""}`
+                ? `${p.age || ""}${p.born ? ` (${formatHeroBirthday_(p.born)})` : ""}`
                   : `${p.born ? getCurrentAgeFromBorn(p.born) : ""}${p.born ? ` (${p.born})` : ""}`
               }
             </td>
@@ -2522,6 +2522,21 @@ app.innerHTML = `
 `;
 
   setupPlayerLinksSort();
+}
+
+function formatHeroBirthday_(born) {
+  if (!born) return "";
+
+  const [, month, day] =
+    String(born).split("-").map(Number);
+
+  const months = [
+    "January","February","March","April",
+    "May","June","July","August",
+    "September","October","November","December"
+  ];
+
+  return `${months[month - 1]} ${day}`;
 }
 
 function renderFavorites(players) {
