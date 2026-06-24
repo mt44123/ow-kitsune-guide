@@ -1851,3 +1851,12 @@ body.light-theme .team-link-tag.dc{
 .settings-item:hover{
   background:rgba(255,255,255,.08);
 }
+
+.header-row{
+  position:relative;
+  z-index:2000;
+}
+
+.settings-menu{
+  z-index:3000;
+}
