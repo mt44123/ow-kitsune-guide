@@ -22,9 +22,9 @@ function updateNotifyButton_() {
       : "🔕 Live Notifications: OFF";
   }
 
-  updateNotifyButton_();
+updateNotifyButton_();
 
-notifyButton?.addEventListener(
+  notifyButton?.addEventListener(
   "click",
   async () => {
 
@@ -47,6 +47,7 @@ notifyButton?.addEventListener(
       !liveNotificationsEnabled;
 
     if (liveNotificationsEnabled && liveCache?.players) {
+      notifyCurrentFavoriteLives_(liveCache.players);
       saveLiveState_(liveCache.players);
       liveStateInitialized = true;
     }
@@ -56,7 +57,7 @@ notifyButton?.addEventListener(
       liveNotificationsEnabled ? "true" : "false"
     );
 
-        updateNotifyButton_();
+  updateNotifyButton_();
 
     if (liveNotificationsEnabled) {
       new Notification(
@@ -66,8 +67,6 @@ notifyButton?.addEventListener(
           icon: "./icons/icon-192.png"
         }
       );
-
-      testLiveNotification_();
     }
   }
 );
@@ -161,19 +160,29 @@ setInterval(() => {
   }
 }, 5 * 60 * 1000);
 
-function testLiveNotification_() {
-  if (!("Notification" in window)) {
-    alert("Notifications are not supported.");
-    return;
-  }
+function notifyCurrentFavoriteLives_(players) {
+  if (!Array.isArray(players)) return;
+  if (!("Notification" in window)) return;
+  if (Notification.permission !== "granted") return;
 
-  if (Notification.permission !== "granted") {
-    alert("Notification permission is: " + Notification.permission);
-    return;
-  }
+  const favs = getFavorites_();
 
-  new Notification("🦊 OW KITSUNE GUIDE TEST", {
-    body: "If you see this, PC notifications work.",
-    icon: "./icons/icon-192.png"
+  players.forEach(p => {
+    if (!favs.includes(p.name)) return;
+
+    const isLive =
+      p.status === "LIVE" ||
+      p.status === "🔥 LIVE";
+
+    if (!isLive) return;
+
+    new Notification(
+      `🔴 ${p.name} is LIVE now`,
+      {
+        body:
+          `${p.platform || ""}\n${p.title || p.titleJp || p.titleEn || ""}`,
+        icon: "./icons/icon-192.png"
+      }
+    );
   });
 }
