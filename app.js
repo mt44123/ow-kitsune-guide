@@ -2528,15 +2528,9 @@ function formatHeroBirthday_(born) {
   if (!born) return "";
 
   const [, month, day] =
-    String(born).split("-").map(Number);
+    String(born).split("-");
 
-  const months = [
-    "January","February","March","April",
-    "May","June","July","August",
-    "September","October","November","December"
-  ];
-
-  return `${months[month - 1]} ${day}`;
+  return `${month}-${day}`;
 }
 
 function renderFavorites(players) {
