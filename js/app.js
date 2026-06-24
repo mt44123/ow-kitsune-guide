@@ -16,6 +16,7 @@ voiceLine?.addEventListener(
 
 const searchBox = document.getElementById("searchBox");
 const toolsButton =  document.getElementById("toolsButton");
+const faqButton =  document.getElementById("faqButton");
 
 const themeToggle = document.getElementById("themeToggle");
 
@@ -80,6 +81,11 @@ themeToggle?.addEventListener("click", () => {
 toolsButton?.addEventListener(
   "click",
   () => loadToolsView()
+);
+
+faqButton?.addEventListener(
+  "click",
+  () => loadFaqView()
 );
 
 const params = new URLSearchParams(window.location.search);
