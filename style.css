@@ -1873,11 +1873,6 @@ body.light-theme .team-link-tag.dc{
   line-height:1.4;
 }
 
-.tools-page .card h3{
-  font-size:18px;
-  line-height:1.4;
-}
-
 @media (max-width:768px){
   .tools-page .card h3{
     font-size:16px;

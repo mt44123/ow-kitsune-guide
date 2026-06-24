@@ -55,7 +55,7 @@ function loadFaqView() {
 
     <div class="card">
       <h3>
-        📲 How do I install OW KITSUNE GUIDE as an app?<br>
+        💻📲 How do I install OW KITSUNE GUIDE as an app?<br>
         OW KITSUNE GUIDEをアプリとしてインストールするには？
       </h3>
 
