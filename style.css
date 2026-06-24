@@ -1731,6 +1731,7 @@ body.light-theme .team-link-tag.dc{
 
 .favorite-birthday{
   box-shadow:0 0 0 2px var(--accent);
+  background:rgba(184,71,36,.08);
 }
 
 .favorite-birthday strong::before{
