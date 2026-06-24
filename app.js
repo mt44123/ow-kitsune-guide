@@ -2458,7 +2458,11 @@ app.innerHTML = `
             data-name="${(p.name || "").toLowerCase()}"
             data-nationality="${(p.nationality || "").toLowerCase()}"
             data-role="${(p.role || "").toLowerCase()}"
-            data-age="${p.born ? getCurrentAgeFromBorn(p.born) : ""}"
+            data-age="${
+              String(p.role || "").toLowerCase() === "hero"
+                ? (p.age || "")
+                : (p.born ? getCurrentAgeFromBorn(p.born) : "")
+            }"
             data-laststream="${p.lastStreamAge || '9999d'}"
           >
             <td>${p.teamRegion || ""}</td>
