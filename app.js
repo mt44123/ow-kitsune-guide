@@ -55,8 +55,10 @@ function updateNotifyButton_() {
   }
 
   notifyButton.textContent =
-    liveNotificationsEnabled ? "🔔" : "🔕";
-}
+    liveNotificationsEnabled
+      ? "🔔 Live Notifications: ON"
+      : "🔕 Live Notifications: OFF";
+  }
 
 updateNotifyButton_();
 
