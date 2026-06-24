@@ -58,6 +58,15 @@ let currentView = params.get("view") || "new";
 let currentData = [];
 let requestId = 0;
 
+let previousLiveState = {};
+
+try{
+  previousLiveState =
+    JSON.parse(localStorage.getItem("liveState") || "{}");
+}catch{
+  previousLiveState = {};
+}
+
 const progressSets = [
   [0, 8, 21, 39, 58, 77, 95],
   [0, 12, 28, 47, 66, 84, 96],
@@ -1953,6 +1962,8 @@ function loadLiveView(view) {
 function renderLiveFromCache(view) {
   const players = liveCache?.players || [];
 
+  checkLiveNotifications_(players);
+
   currentData = getClientFilteredLivePlayers(players, view);
   renderLive(currentData);
 }
@@ -3255,6 +3266,64 @@ document.addEventListener("click", e => {
     return;
   }
 });
+
+function checkLiveNotifications_(players){
+
+  if (!Array.isArray(players)) return;
+
+  if (!("Notification" in window)) {
+    saveLiveState_(players);
+    return;
+  }
+
+  if (Notification.permission !== "granted") {
+    saveLiveState_(players);
+    return;
+  }
+
+  for (const p of players){
+
+    if (!isFavorite_(p.name)) continue;
+
+    const isLive =
+      p.status === "LIVE" ||
+      p.status === "🔥 LIVE";
+
+    const wasLive =
+      previousLiveState[p.name] || false;
+
+    if (!wasLive && isLive){
+
+      new Notification(
+        `🔴 ${p.name} is LIVE`,
+        {
+          body:
+            `${p.platform || ""}\n${p.title || p.titleJp || p.titleEn || ""}`,
+          icon: "icon-192.png"
+        }
+      );
+    }
+  }
+
+  saveLiveState_(players);
+}
+
+function saveLiveState_(players){
+
+  previousLiveState = {};
+
+  for(const p of players){
+
+    previousLiveState[p.name] =
+      p.status === "LIVE" ||
+      p.status === "🔥 LIVE";
+  }
+
+  localStorage.setItem(
+    "liveState",
+    JSON.stringify(previousLiveState)
+  );
+}
 
 async function init() {
   speechSynthesis.getVoices();
