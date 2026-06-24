@@ -1465,7 +1465,10 @@ function isTeamListMember_(p) {
     .replace(/^●\s*/, "")
     .trim();
 
-  return region !== "★OWCS Creator";
+  return (
+    region !== "★OWCS Creator" &&
+    region !== "HERO"
+  );
 }
 
 function normalizeTeamRegion_(region, team = "") {
