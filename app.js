@@ -2496,9 +2496,12 @@ app.innerHTML = `
 
            <td>${shortNationality(p.nationality || "")}</td>
             <td>${p.role || ""}</td>
-            <td>
-            ${p.born ? getCurrentAgeFromBorn(p.born) : ""}
-            ${p.born ? ` (${p.born})` : ""}
+           <td>
+              ${
+                String(p.role || "").toLowerCase() === "hero"
+                  ? `${p.age || ""}${p.born ? ` (${p.born})` : ""}`
+                  : `${p.born ? getCurrentAgeFromBorn(p.born) : ""}${p.born ? ` (${p.born})` : ""}`
+              }
             </td>
             <td>  ${    p.lastStreamUrl      ? `<a class="last-stream-link" href="${p.lastStreamUrl}" target="_blank" rel="noopener">${p.lastStreamAge || "-"} ${p.lastStreamPlatform || ""}</a>`      : "-"  }</td>
             <td>${linkDot(p.twitchUrl, p.twitchActive ? "tw" : "tw-inactive")}</td>
