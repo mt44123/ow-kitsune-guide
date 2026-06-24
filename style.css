@@ -1729,6 +1729,15 @@ body.light-theme .team-link-tag.dc{
   color:var(--accent);
 }
 
+.favorite-birthday{
+  box-shadow:0 0 0 2px var(--accent);
+}
+
+.favorite-birthday strong::before{
+  content:"★ ";
+  color:var(--accent);
+}
+
 #clipsSubNav button.clip-tab-all{
   background:#9146FF;
   color:white;
