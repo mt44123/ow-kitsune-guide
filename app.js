@@ -903,11 +903,7 @@ function buildBirthdayList_(
           </div>
 
           <div>
-            ${
-              p.born
-                ? `Turns ${getAgeOnBirthdayThisYear(p.born, year)}`
-                : ""
-            }
+            ${getBirthdayAgeText_(p, year)}
           </div>
         </div>
 
