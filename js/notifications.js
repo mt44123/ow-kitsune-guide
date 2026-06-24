@@ -24,7 +24,7 @@ function updateNotifyButton_() {
 
 updateNotifyButton_();
 
-  notifyButton?.addEventListener(
+notifyButton?.addEventListener(
   "click",
   async () => {
 
@@ -47,7 +47,6 @@ updateNotifyButton_();
       !liveNotificationsEnabled;
 
     if (liveNotificationsEnabled && liveCache?.players) {
-      notifyCurrentFavoriteLives_(liveCache.players);
       saveLiveState_(liveCache.players);
       liveStateInitialized = true;
     }
@@ -57,7 +56,7 @@ updateNotifyButton_();
       liveNotificationsEnabled ? "true" : "false"
     );
 
-  updateNotifyButton_();
+updateNotifyButton_();
 
     if (liveNotificationsEnabled) {
       new Notification(
@@ -159,30 +158,3 @@ setInterval(() => {
     loadLiveView("new");
   }
 }, 5 * 60 * 1000);
-
-function notifyCurrentFavoriteLives_(players) {
-  if (!Array.isArray(players)) return;
-  if (!("Notification" in window)) return;
-  if (Notification.permission !== "granted") return;
-
-  const favs = getFavorites_();
-
-  players.forEach(p => {
-    if (!favs.includes(p.name)) return;
-
-    const isLive =
-      p.status === "LIVE" ||
-      p.status === "🔥 LIVE";
-
-    if (!isLive) return;
-
-    new Notification(
-      `🔴 ${p.name} is LIVE now`,
-      {
-        body:
-          `${p.platform || ""}\n${p.title || p.titleJp || p.titleEn || ""}`,
-        icon: "./icons/icon-192.png"
-      }
-    );
-  });
-}
