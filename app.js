@@ -3444,15 +3444,6 @@ setInterval(() => {
   }
 }, 5 * 60 * 1000);
 
-  liveCacheTime = 0;
-
-  if (isLiveView(currentView)) {
-    loadLiveView(currentView);
-  } else {
-    loadLiveView("new");
-  }
-}, 5 * 60 * 1000);
-
 async function init() {
   speechSynthesis.getVoices();
 
