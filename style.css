@@ -128,7 +128,7 @@ p{
 
 .player-name{
   font-size:20px;
-  font-weight:bold;
+  font-weight:600;
   margin-bottom:3px;
 }
 
@@ -142,7 +142,7 @@ p{
   margin-top:5px;
   padding-top:6px;
   border-top:1px solid var(--border);
-  font-weight:bold;
+  font-weight:600;
   font-size:13px;
 }
 
@@ -390,7 +390,7 @@ body.light-theme .dc{
 
 .youtube-title{
   font-size:15px;
-  font-weight:bold;
+  font-weight:600;
   line-height:1.35;
   color:var(--text-main);
   display:-webkit-box;
@@ -413,7 +413,7 @@ body.light-theme .dc{
 .youtube-player{
   margin-top:10px;
   font-size:15px;
-  font-weight:bold;
+  font-weight:600;
   color:var(--accent);
 }
 
