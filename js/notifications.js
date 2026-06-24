@@ -25,8 +25,8 @@ function updateNotifyButton_() {
   } else {
     notifyButton.textContent =
       "🔕 Live Notifications: OFF";
-}
   }
+}
 
 updateNotifyButton_();
 

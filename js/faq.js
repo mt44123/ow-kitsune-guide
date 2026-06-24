@@ -17,11 +17,21 @@ function loadFaqView() {
           Live notifications are experimental.<br>
           Notifications only work while this site is open.
         </p>
+        <ul>
+          <li>MY GOATS: notify only favorite players</li>
+          <li>ALL: notify all tracked players</li>
+          <li>OFF: disable notifications</li>
+        </ul>
         <hr>
         <p>
           ライブ通知は実験機能です。<br>
           サイトを開いている間のみ動作します。
         </p>
+        <ul>
+          <li>MY GOATS：お気に入り選手のみ通知</li>
+          <li>ALL：登録されている全選手を通知</li>
+          <li>OFF：通知しない</li>
+        </ul>
       </div>
 
       <div class="card">
