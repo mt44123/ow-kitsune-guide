@@ -2139,49 +2139,6 @@ function renderLive(players) {
   `).join("");
 }
 
-function toggleFavoriteUI_(name) {
-  toggleFavorite_(name);
-
-  renderLive(
-    filterPlayers(currentData)
-  );
-}
-
-function toggleFavoriteMediaUI_(name) {
-  toggleFavorite_(name);
-
-  if (isYoutubeView(currentView)) {
-    renderYoutube(filterYoutube(currentData));
-    return;
-  }
-
-  if (isClipView(currentView)) {
-    renderClips(filterClips(currentData));
-  }
-}
-
-function toggleFavoritePlayerLinksUI_(name) {
-  toggleFavorite_(name);
-
-  if (currentView === "favorites") {
-    renderFavorites(currentData);
-  } else {
-    renderPlayerLinks(currentData);
-  }
-
-  searchPlayerLinksTable();
-}
-
-function toggleFavoriteTeamUI_(name) {
-  toggleFavorite_(name);
-
-  renderTeamPlayers(
-    currentTeamName,
-    currentData,
-    currentRegionName
-  );
-}
-
 function renderYoutube(videos) {
   app.className = "youtube-mode";
 
