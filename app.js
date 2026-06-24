@@ -19,6 +19,9 @@ const toolsButton =  document.getElementById("toolsButton");
 
 const themeToggle = document.getElementById("themeToggle");
 
+const notifyButton =
+  document.getElementById("notifyButton");
+
 function applyThemeButtonText_() {
   if (!themeToggle) return;
 
@@ -33,6 +36,59 @@ if (localStorage.getItem("theme") === "light") {
 }
 
 applyThemeButtonText_();
+
+function updateNotifyButton_() {
+  if (!notifyButton) return;
+
+  if (!("Notification" in window)) {
+    notifyButton.textContent = "❌";
+    return;
+  }
+
+  switch (Notification.permission) {
+
+    case "granted":
+      notifyButton.textContent = "🔔";
+      break;
+
+    case "denied":
+      notifyButton.textContent = "🚫";
+      break;
+
+    default:
+      notifyButton.textContent = "🔕";
+  }
+}
+
+updateNotifyButton_();
+
+notifyButton?.addEventListener(
+  "click",
+  async () => {
+
+    if (!("Notification" in window)) {
+      alert("Notifications are not supported.");
+      return;
+    }
+
+    const result =
+      await Notification.requestPermission();
+
+    updateNotifyButton_();
+
+    if (result === "granted") {
+
+      new Notification(
+        "OW KITSUNE GUIDE",
+        {
+          body:
+            "LIVE notifications enabled."
+        }
+      );
+
+    }
+  }
+);
 
 themeToggle?.addEventListener("click", () => {
   document.body.classList.toggle("light-theme");
