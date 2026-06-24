@@ -741,7 +741,7 @@ function buildBirthdayTodaySection_(
                 </span>
 
                 <span>
-                  ${p.born ? `Turns ${getTurnsAgeToday(p.born)}` : ""}
+                  ${getBirthdayAgeText_(p)}
                 </span>
 
                 <a
@@ -836,7 +836,7 @@ function buildBirthdayCells_(
             </span>
 
             <span>
-              ${p.born ? `Turns ${getAgeOnBirthdayThisYear(p.born, year)}` : ""}
+              ${getBirthdayAgeText_(p, year)}
             </span>
 
             <a
@@ -985,6 +985,20 @@ function getTurnsAgeToday(born) {
   if (!birthYear) return "";
 
   return new Date().getFullYear() - birthYear;
+}
+
+function getBirthdayAgeText_(p, year = null) {
+  if (!p.born) return "";
+
+  if (String(p.role || "").toLowerCase() === "hero") {
+    return p.age ? `Age ${p.age}` : "";
+  }
+
+  if (year) {
+    return `Turns ${getAgeOnBirthdayThisYear(p.born, year)}`;
+  }
+
+  return `Turns ${getTurnsAgeToday(p.born)}`;
 }
 
 function loadYoutubeView(view) {
