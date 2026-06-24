@@ -10,13 +10,14 @@ function loadFaqView() {
     <div class="tools-page">
 
       <div class="card">
-        <h3>🔔 Live Notifications</h3>
+        <h3>🔔 How do Live Notifications work?<br>
+            ライブ通知はどのように動作しますか？</h3>
 
         <p>
           Live notifications are experimental.<br>
           Notifications only work while this site is open.
         </p>
-
+        <hr>
         <p>
           ライブ通知は実験機能です。<br>
           サイトを開いている間のみ動作します。
@@ -24,48 +25,171 @@ function loadFaqView() {
       </div>
 
       <div class="card">
-        <h3>💻 Notifications don't appear on PC</h3>
+        <h3>
+          💻📱 Why don't notifications appear?<br>
+          通知が表示されないのはなぜですか？
+        </h3>
 
         <p>
-          Check Windows Settings → System →
-          Notifications → Google Chrome.
+          If notifications do not appear, check your browser and operating system notification settings.
         </p>
 
+        <ul>
+          <li>Windows: Settings → System → Notifications → Google Chrome</li>
+          <li>Android: Settings → Notifications → Chrome</li>
+          <li>iPhone / iPad: Settings → Notifications → Safari</li>
+          <li>macOS: System Settings → Notifications → Chrome / Safari</li>
+        </ul>
+        <hr>
         <p>
-          Windows設定 →
-          システム →
-          通知 →
-          Google Chrome を確認してください。
+          通知が表示されない場合は、ブラウザとOSの通知設定を確認してください。
+        </p>
+
+        <ul>
+          <li>Windows：設定 → システム → 通知 → Google Chrome</li>
+          <li>Android：設定 → 通知 → Chrome</li>
+          <li>iPhone / iPad：設定 → 通知 → Safari</li>
+          <li>macOS：システム設定 → 通知 → Chrome / Safari</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>
+          📲 How do I install OW KITSUNE GUIDE as an app?<br>
+          OW KITSUNE GUIDEをアプリとしてインストールするには？
+        </h3>
+
+        <p>
+          OW KITSUNE GUIDE can be installed as an app on PC and mobile devices.
+        </p>
+
+        <ul>
+          <li>Faster access</li>
+          <li>App-like window</li>
+          <li>Easier notification management</li>
+        </ul>
+
+        <p>
+          When installed as an app, notifications may appear as
+          "OW KITSUNE GUIDE" instead of your browser name.
+        </p>
+        <hr>
+        <p>
+          OW KITSUNE GUIDE はPC・スマホにアプリとしてインストールできます。
+        </p>
+
+        <ul>
+          <li>素早く起動できる</li>
+          <li>アプリのように表示される</li>
+          <li>通知を管理しやすい</li>
+        </ul>
+
+        <p>
+          アプリとしてインストールした場合、
+          通知はブラウザ名ではなく
+          「OW KITSUNE GUIDE」として表示される場合があります。
         </p>
       </div>
 
       <div class="card">
-        <h3>📲 Install App</h3>
+        <h3>
+          🕓 How often is the site updated?<br>
+          サイトはどれくらいの頻度で更新されますか？
+        </h3>
 
         <p>
-          OW KITSUNE GUIDE can be installed as an app.
+          Update frequency:
         </p>
 
+        <ul>
+          <li>LIVE: every 5 min</li>
+          <li>YOUTUBE: every 30 min</li>
+          <li>CLIPS: daily</li>
+          <li>PLAYER LINKS: manual update</li>
+        </ul>
+        <hr>
         <p>
-          OW KITSUNE GUIDE はアプリとして
-          インストールできます。
+          更新頻度：
         </p>
+
+        <ul>
+          <li>LIVE：5分ごと</li>
+          <li>YOUTUBE：30分ごと</li>
+          <li>CLIPS：1日ごと</li>
+          <li>PLAYER LINKS：手動更新</li>
+        </ul>
       </div>
 
       <div class="card">
-        <h3>🕓 Update Frequency</h3>
+        <h3>
+          ⭐ What is MY GOATS?<br>
+          MY GOATSとは何ですか？
+        </h3>
 
         <p>
-          LIVE: every 5 min<br>
-          YOUTUBE: every 30 min<br>
-          CLIPS: daily
+          MY GOATS lets you save your favorite players for quick access.
+        </p>
+
+        <ul>
+          <li>Favorite players are marked with ★</li>
+          <li>Shows favorite LIVE streams, videos and clips</li>
+          <li>Used for Live Notifications</li>
+          <li>Stored locally in your browser only</li>
+        </ul>
+
+        <hr>
+
+        <p>
+          MY GOATSではお気に入り選手を保存できます。
+        </p>
+
+        <ul>
+          <li>★でお気に入り登録</li>
+          <li>お気に入り選手のLIVE・動画・クリップを表示</li>
+          <li>ライブ通知でも利用</li>
+          <li>ブラウザ内にのみ保存されます</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>
+          🦊 Where does the data come from?<br>
+          データはどこから取得していますか？
+        </h3>
+
+        <p>
+          OW KITSUNE GUIDE collects publicly available information from multiple sources.
         </p>
 
         <p>
-          LIVE：5分ごと<br>
-          YOUTUBE：30分ごと<br>
-          CLIPS：1日ごと
+          Stream, video and player information may be delayed or occasionally inaccurate.
         </p>
+
+        <ul>
+          <li>Twitch</li>
+          <li>CHZZK</li>
+          <li>SOOP</li>
+          <li>Bilibili</li>
+          <li>YouTube</li>
+          <li>Liquipedia</li>
+        </ul>
+        <hr>
+        <p>
+          OW KITSUNE GUIDE は複数の公開情報ソースからデータを収集しています。
+        </p>
+        
+        <p>
+          配信・動画・選手情報には遅延や誤差が含まれる場合があります。
+        </p>
+
+        <ul>
+          <li>Twitch</li>
+          <li>CHZZK</li>
+          <li>SOOP</li>
+          <li>Bilibili</li>
+          <li>YouTube</li>
+          <li>Liquipedia</li>
+        </ul>
       </div>
 
     </div>
