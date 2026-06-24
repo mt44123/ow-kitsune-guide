@@ -105,3 +105,57 @@ function renderFavorites(players) {
 
   renderPlayerLinks(favoritePlayers);
 }
+
+document.addEventListener("click", e => {
+  const star = e.target.closest(".favorite-star");
+  if (!star) return;
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  const name = star.dataset.favoriteName;
+  if (!name) return;
+
+  toggleFavorite_(name);
+
+  const active = isFavorite_(name);
+
+  document
+    .querySelectorAll(
+      `.favorite-star[data-favorite-name="${CSS.escape(name)}"]`
+    )
+    .forEach(s => {
+      s.classList.toggle("active", active);
+      s.textContent = active ? "★" : "☆";
+    });
+
+  if (currentView === "favorites") {
+    renderFavorites(currentData);
+    searchPlayerLinksTable();
+    return;
+  }
+
+  if (currentView === "teams" && currentTeamName) {
+    renderTeamPlayers(
+      currentTeamName,
+      currentData,
+      currentRegionName
+    );
+    return;
+  }
+
+  if (currentView === "goats") {
+    renderLive(filterPlayers(currentData));
+    return;
+  }
+
+  if (currentView === "youtubegoats") {
+    renderYoutube(filterYoutube(currentData));
+    return;
+  }
+
+  if (currentView === "goatclips") {
+    renderClips(filterClips(currentData));
+    return;
+  }
+});
