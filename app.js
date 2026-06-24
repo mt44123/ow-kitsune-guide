@@ -510,29 +510,6 @@ searchBox?.addEventListener("input", () => {
   }, 300);
 });
 
-function jumpBirthdaySearch_() {
-  const keyword = searchBox.value.toLowerCase().trim();
-  if (!keyword) return;
-
-  const hit = currentData.find(p =>
-    [p.name, p.team]
-      .join(" ")
-      .toLowerCase()
-      .includes(keyword)
-  );
-
-  if (!hit || !hit.born) return;
-
-  const [, month] = hit.born.split("-").map(Number);
-
-  if (!month) return;
-
-  birthdayCalendarDate =
-    new Date(birthdayCalendarDate.getFullYear(), month - 1, 1);
-
-  renderBirthdayCalendar(currentData);
-}
-
 function loadView(view) {
   if (isLiveView(view)) {
     loadLiveView(view);
