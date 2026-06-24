@@ -3456,5 +3456,3 @@ async function init() {
   await loadVoiceLines();
   setRandomVoiceLine();
 }
-
-init();
