@@ -1873,6 +1873,16 @@ body.light-theme .team-link-tag.dc{
   line-height:1.4;
 }
 
+.tools-page .card hr{
+  border:none;
+  border-top:1px solid var(--border);
+  margin:12px 0;
+}
+
+.tools-page .card ul{
+  margin-top:6px;
+}
+
 @media (max-width:768px){
   .tools-page .card h3{
     font-size:16px;
