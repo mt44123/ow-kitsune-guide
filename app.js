@@ -45,12 +45,14 @@ function updateNotifyButton_() {
   if (!notifyButton) return;
 
   if (!("Notification" in window)) {
-    notifyButton.textContent = "❌";
+    notifyButton.textContent =
+      "❌ Notifications: Unsupported";
     return;
   }
-
+  
   if (Notification.permission === "denied") {
-    notifyButton.textContent = "🚫";
+    notifyButton.textContent =
+      "🚫 Notifications: Blocked";
     return;
   }
 
