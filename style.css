@@ -1730,8 +1730,13 @@ body.light-theme .team-link-tag.dc{
 }
 
 .favorite-birthday{
-  box-shadow:0 0 0 2px var(--accent);
-  background:rgba(184,71,36,.08);
+  background:rgba(184,71,36,.15);
+
+  box-shadow:
+    0 0 0 2px var(--accent),
+    0 0 10px rgba(184,71,36,.7),
+    0 0 20px rgba(184,71,36,.5),
+    0 0 30px rgba(184,71,36,.3);
 }
 
 .favorite-birthday strong::before{
