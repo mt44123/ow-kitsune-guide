@@ -1860,3 +1860,10 @@ body.light-theme .team-link-tag.dc{
 .settings-menu{
   z-index:3000;
 }
+
+.settings-note{
+  font-size:11px;
+  color:#999;
+  padding:4px 10px 8px;
+  line-height:1.4;
+}
