@@ -169,11 +169,27 @@ function saveLiveState_(players){
 }
 
 setInterval(() => {
-  liveCacheTime = 0;
-
-  if (isLiveView(currentView)) {
-    loadLiveView(currentView);
-  } else {
-    loadLiveView("new");
-  }
+  refreshLiveNotificationsOnly_();
 }, 5 * 60 * 1000);
+
+function refreshLiveNotificationsOnly_() {
+  if (liveNotificationMode === "off") return;
+
+  fetch(CONFIG.API_URL + "?view=new")
+    .then(res => res.json())
+    .then(data => {
+      const players = data.players || [];
+
+      liveCache = data;
+      liveCacheTime = Date.now();
+
+      if (data.counts) {
+        updateAllButtonCounts(data.counts);
+      }
+
+      checkLiveNotifications_(players);
+    })
+    .catch(error => {
+      console.error("Live notification refresh failed:", error);
+    });
+}
