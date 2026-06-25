@@ -4,12 +4,12 @@ function loadFaqView() {
   updated.textContent = "";
   viewNote.textContent = "";
 
-  app.className = "tools-mode";
+  app.className = "tools-mode faq-mode";
 
   app.innerHTML = `
     <div class="tools-page">
 
-      <div class="card">
+      <div class="card faq-card">
         <h3>🔔 How do Live Notifications work?<br>
             ライブ通知はどのように動作しますか？</h3>
 
@@ -34,7 +34,7 @@ function loadFaqView() {
         </ul>
       </div>
 
-      <div class="card">
+      <div class="card faq-card">
         <h3>
           💻📱 Why don't notifications appear?<br>
           通知が表示されないのはなぜですか？
@@ -63,7 +63,7 @@ function loadFaqView() {
         </ul>
       </div>
 
-    <div class="card">
+    <div class="card faq-card">
       <h3>
         💻📲 How do I install OW KITSUNE GUIDE as an app?<br>
         OW KITSUNE GUIDEをアプリとしてインストールするには？
@@ -129,7 +129,7 @@ function loadFaqView() {
       </p>
     </div>
 
-      <div class="card">
+      <div class="card faq-card">
         <h3>
           🕓 How often is the site updated?<br>
           サイトはどれくらいの頻度で更新されますか？
@@ -158,7 +158,7 @@ function loadFaqView() {
         </ul>
       </div>
 
-      <div class="card">
+      <div class="card faq-card">
         <h3>
           ⭐ What is MY GOATS?<br>
           MY GOATSとは何ですか？
@@ -189,7 +189,7 @@ function loadFaqView() {
         </ul>
       </div>
 
-      <div class="card">
+      <div class="card faq-card">
         <h3>
           🦊 Where does the data come from?<br>
           データはどこから取得していますか？

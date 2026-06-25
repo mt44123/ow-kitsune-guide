@@ -1888,3 +1888,45 @@ body.light-theme .team-link-tag.dc{
     font-size:16px;
   }
 }
+
+.faq-mode .tools-page{
+  max-width:900px;
+  margin:0 auto;
+}
+
+.faq-card{
+  padding:18px 20px;
+}
+
+.faq-card h3{
+  font-size:1rem;
+  font-weight:600;
+  line-height:1.55;
+  margin:0 0 12px;
+}
+
+.faq-card p{
+  font-size:.92rem;
+  font-weight:400;
+  line-height:1.75;
+  margin:10px 0;
+}
+
+.faq-card ul{
+  margin:8px 0 12px 1.2em;
+  padding:0;
+}
+
+.faq-card li{
+  font-size:.92rem;
+  font-weight:400;
+  line-height:1.65;
+  margin:4px 0;
+}
+
+.faq-card hr{
+  border:0;
+  border-top:1px solid var(--border);
+  opacity:.45;
+  margin:16px 0;
+}
