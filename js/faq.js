@@ -13,6 +13,7 @@ function loadFaqView() {
         <h3>🔔 How do Live Notifications work?<br>
             ライブ通知はどのように動作しますか？</h3>
 
+        <h4 class="faq-lang">🇺🇸 English</h4>
         <p>
           Live notifications are experimental.<br>
           Notifications only work while this site is open.
@@ -23,6 +24,7 @@ function loadFaqView() {
           <li>OFF: disable notifications</li>
         </ul>
         <hr>
+        <h4 class="faq-lang">🇯🇵 日本語</h4>
         <p>
           ライブ通知は実験機能です。<br>
           サイトを開いている間のみ動作します。
@@ -39,6 +41,7 @@ function loadFaqView() {
           💻📱 Why don't notifications appear?<br>
           通知が表示されないのはなぜですか？
         </h3>
+        <h4 class="faq-lang">🇺🇸 English</h4>
 
         <p>
           If notifications do not appear, check your browser and operating system notification settings.
@@ -51,6 +54,7 @@ function loadFaqView() {
           <li>macOS: System Settings → Notifications → Chrome / Safari</li>
         </ul>
         <hr>
+        <h4 class="faq-lang">🇯🇵 日本語</h4>
         <p>
           通知が表示されない場合は、ブラウザとOSの通知設定を確認してください。
         </p>
@@ -68,6 +72,7 @@ function loadFaqView() {
         💻📲 How do I install OW KITSUNE GUIDE as an app?<br>
         OW KITSUNE GUIDEをアプリとしてインストールするには？
       </h3>
+      <h4 class="faq-lang">🇺🇸 English</h4>
 
       <p>
         Benefits of installing the app:
@@ -98,6 +103,7 @@ function loadFaqView() {
       </p>
 
       <hr>
+      <h4 class="faq-lang">🇯🇵 日本語</h4>
 
       <p>
         アプリとしてインストールするメリット：
@@ -134,6 +140,7 @@ function loadFaqView() {
           🕓 How often is the site updated?<br>
           サイトはどれくらいの頻度で更新されますか？
         </h3>
+        <h4 class="faq-lang">🇺🇸 English</h4>
 
         <p>
           Update frequency:
@@ -146,6 +153,7 @@ function loadFaqView() {
           <li>PLAYER LINKS: manual update</li>
         </ul>
         <hr>
+        <h4 class="faq-lang">🇯🇵 日本語</h4>
         <p>
           更新頻度：
         </p>
@@ -163,6 +171,7 @@ function loadFaqView() {
           ⭐ What is MY GOATS?<br>
           MY GOATSとは何ですか？
         </h3>
+        <h4 class="faq-lang">🇺🇸 English</h4>
 
         <p>
           MY GOATS lets you save your favorite players for quick access.
@@ -176,6 +185,7 @@ function loadFaqView() {
         </ul>
 
         <hr>
+        <h4 class="faq-lang">🇯🇵 日本語</h4>
 
         <p>
           MY GOATSではお気に入り選手を保存できます。
@@ -194,6 +204,7 @@ function loadFaqView() {
           🦊 Where does the data come from?<br>
           データはどこから取得していますか？
         </h3>
+        <h4 class="faq-lang">🇺🇸 English</h4>
 
         <p>
           OW KITSUNE GUIDE collects publicly available information from multiple sources.
@@ -212,6 +223,7 @@ function loadFaqView() {
           <li>Liquipedia</li>
         </ul>
         <hr>
+        <h4 class="faq-lang">🇯🇵 日本語</h4>
         <p>
           OW KITSUNE GUIDE は複数の公開情報ソースからデータを収集しています。
         </p>

@@ -1889,44 +1889,94 @@ body.light-theme .team-link-tag.dc{
   }
 }
 
+/* =========================
+   FAQ
+========================= */
+
 .faq-mode .tools-page{
   max-width:900px;
   margin:0 auto;
 }
 
 .faq-card{
-  padding:18px 20px;
+  padding:20px 22px;
+}
+
+.faq-card:hover{
+  background:var(--bg-main);
+  transform:none;
 }
 
 .faq-card h3{
+  margin:0 0 14px;
   font-size:1rem;
-  font-weight:600;
+  font-weight:700;
   line-height:1.55;
-  margin:0 0 12px;
+}
+
+.faq-lang{
+  margin:18px 0 8px;
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--text-muted);
 }
 
 .faq-card p{
+  margin:8px 0;
   font-size:.92rem;
   font-weight:400;
-  line-height:1.75;
-  margin:10px 0;
+  line-height:1.85;
+  color:var(--text-sub);
 }
 
 .faq-card ul{
-  margin:8px 0 12px 1.2em;
-  padding:0;
+  margin:12px 0;
+  padding:12px 18px;
+
+  background:var(--bg-light);
+
+  border:1px solid var(--border);
+  border-radius:10px;
 }
 
 .faq-card li{
+  margin:5px 0;
   font-size:.92rem;
   font-weight:400;
-  line-height:1.65;
-  margin:4px 0;
+  line-height:1.75;
+  color:var(--text-main);
 }
 
 .faq-card hr{
+  margin:22px 0;
   border:0;
   border-top:1px solid var(--border);
-  opacity:.45;
-  margin:16px 0;
+  opacity:.35;
+}
+
+.faq-card a{
+  color:var(--accent);
+}
+
+body.light-theme .faq-card a{
+  color:var(--text-main);
+}
+
+@media (max-width:768px){
+
+  .faq-card{
+    padding:16px;
+  }
+
+  .faq-card h3{
+    font-size:.95rem;
+  }
+
+  .faq-card p,
+  .faq-card li{
+    font-size:.9rem;
+  }
+
 }
