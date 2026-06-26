@@ -2004,3 +2004,24 @@ body.light-theme .faq-card a{
   -webkit-line-clamp:1;
   overflow:hidden;
 }
+
+.youtube-list-layout .youtube-card{
+  display:grid;
+  grid-template-columns:160px 1fr;
+}
+
+.youtube-list-layout .youtube-thumb{
+  width:160px;
+  height:100%;
+  aspect-ratio:16 / 9;
+}
+
+.youtube-list-layout .youtube-info{
+  min-width:0;
+}
+
+@media (max-width:768px){
+  .youtube-list-layout .youtube-card{
+    grid-template-columns:120px 1fr;
+  }
+}

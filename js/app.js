@@ -21,6 +21,7 @@ const faqButton =  document.getElementById("faqButton");
 const themeToggle = document.getElementById("themeToggle");
 
 const liveTitleModeButton =  document.getElementById("liveTitleModeButton");
+const youtubeLayoutButton =  document.getElementById("youtubeLayoutButton");
 
 const notifyButton =  document.getElementById("notifyButton");
 const settingsButton =  document.getElementById("settingsButton");
@@ -69,6 +70,25 @@ function applyLiveTitleMode_() {
 }
 
 applyLiveTitleMode_();
+
+let youtubeLayout =
+  localStorage.getItem("youtubeLayout") || "grid";
+
+function applyYoutubeLayout_() {
+  document.body.classList.toggle(
+    "youtube-list-layout",
+    youtubeLayout === "list"
+  );
+
+  if (!youtubeLayoutButton) return;
+
+  youtubeLayoutButton.textContent =
+    youtubeLayout === "list"
+      ? "🎬 YouTube Layout: LIST"
+      : "🎬 YouTube Layout: GRID";
+}
+
+applyYoutubeLayout_();
 
 settingsButton?.addEventListener(
   "click",
@@ -127,6 +147,20 @@ liveTitleModeButton?.addEventListener("click", () => {
   if (isLiveView(currentView)) {
     renderLive(currentData);
   }
+});
+
+youtubeLayoutButton?.addEventListener("click", () => {
+  youtubeLayout =
+    youtubeLayout === "grid"
+      ? "list"
+      : "grid";
+
+  localStorage.setItem(
+    "youtubeLayout",
+    youtubeLayout
+  );
+
+  applyYoutubeLayout_();
 });
 
 toolsButton?.addEventListener(
