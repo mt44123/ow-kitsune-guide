@@ -2005,23 +2005,68 @@ body.light-theme .faq-card a{
   overflow:hidden;
 }
 
+/* =========================
+   YouTube Layout: LIST
+========================= */
+
 .youtube-list-layout .youtube-card{
   display:grid;
-  grid-template-columns:160px 1fr;
+  grid-template-columns:160px minmax(0,1fr);
+  gap:12px;
+  align-items:start;
 }
 
 .youtube-list-layout .youtube-thumb{
   width:160px;
-  height:100%;
   aspect-ratio:16 / 9;
+  height:auto;
+  object-fit:cover;
+  margin:0;
+  border-radius:10px 0 0 10px;
 }
 
 .youtube-list-layout .youtube-info{
   min-width:0;
+  padding:10px 10px 10px 0;
+}
+
+.youtube-list-layout .youtube-title{
+  -webkit-line-clamp:2;
+}
+
+.youtube-list-layout .youtube-subtitle{
+  -webkit-line-clamp:1;
 }
 
 @media (max-width:768px){
+
   .youtube-list-layout .youtube-card{
-    grid-template-columns:120px 1fr;
+    grid-template-columns:120px minmax(0,1fr);
+    gap:10px;
   }
+
+  .youtube-list-layout .youtube-thumb{
+    width:120px;
+  }
+
+  .youtube-list-layout .youtube-info{
+    padding:8px 8px 8px 0;
+  }
+
+}
+
+@media (min-width:900px) and (max-width:1199px){
+
+  .youtube-list-layout #app.youtube-mode{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+}
+
+@media (min-width:1200px){
+
+  .youtube-list-layout #app.youtube-mode{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+
 }
