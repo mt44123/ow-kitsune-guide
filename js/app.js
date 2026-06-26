@@ -92,10 +92,10 @@ function updateViewActionButton_(view = currentView) {
 
     viewActionButton.textContent =
       liveTitleMode === "full"
-        ? "📝 FULL"
+        ? "📝 Full"
         : liveTitleMode === "short"
-          ? "📝 SHORT"
-          : "📝 OFF";
+          ? "📝 Short"
+          : "📝 Off";
 
     return;
   }
@@ -105,8 +105,8 @@ function updateViewActionButton_(view = currentView) {
 
     viewActionButton.textContent =
       youtubeLayout === "grid"
-        ? "▦ GRID"
-        : "☰ LIST";
+        ? "▦ Grid"
+        : "☰ List";
 
     return;
   }
@@ -116,8 +116,8 @@ function updateViewActionButton_(view = currentView) {
 
     viewActionButton.textContent =
       clipLayout === "grid"
-        ? "▦ GRID"
-        : "☰ LIST";
+        ? "▦ Grid"
+        : "☰ List";
 
     return;
   }
