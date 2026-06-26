@@ -1334,12 +1334,12 @@ margin-bottom:var(--space-3xl);
 }
 
 .team-detail-mode .team-detail-card{
-  max-width:1400px;
+  max-width:1300px;
   margin:0 auto;
 }
 
 .team-detail-mode .discord-note{
-  max-width:1400px;
+  max-width:1300px;
   margin:0 auto var(--space-lg);
 }
 
