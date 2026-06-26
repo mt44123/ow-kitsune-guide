@@ -123,24 +123,6 @@
       </button>
 
       <button
-        id="liveTitleModeButton"
-        class="settings-item"
-      >
-        📝 LIVE Stream Titles: FULL
-      </button>
-
-      <button
-        id="youtubeLayoutButton"
-        class="settings-item"
-      >
-        🎬 YouTube Layout: GRID
-      </button>
-
-      <button id="clipLayoutButton" class="settings-item">
-        🎞️ Clips Layout: GRID
-      </button>
-
-      <button
         id="toolsButton"
         class="settings-item"
       >
@@ -241,16 +223,19 @@
 <div class="title-row">
   <div class="title-top">
     <div class="page-title-block">
-      <h2 id="pageTitle">NEW</h2>
-      <div id="updated" class="updated"></div>
-    </div>
+      <div class="page-title-line">
+        <h2 id="pageTitle">NEW</h2>
+        <button id="viewActionButton" class="view-action-button"></button>
+      </div>
 
-    <div id="voiceLine"></div>
+    <div id="updated" class="updated"></div>
   </div>
+
+  <div id="voiceLine"></div>
+</div>
 
   <div id="voiceActor"></div>
 </div>
-
 <div id="viewNote" class="updated"></div>
 
 <div id="app"></div>

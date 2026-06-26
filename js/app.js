@@ -4,6 +4,7 @@ const viewNote = document.getElementById("viewNote");
 const pageTitle = document.getElementById("pageTitle");
 const voiceLine = document.getElementById("voiceLine");
 const voiceActor = document.getElementById("voiceActor");
+const viewActionButton = document.getElementById("viewActionButton");
 
 speechSynthesis.onvoiceschanged = () => {
   speechSynthesis.getVoices();
@@ -19,10 +20,6 @@ const toolsButton =  document.getElementById("toolsButton");
 const faqButton =  document.getElementById("faqButton");
 
 const themeToggle = document.getElementById("themeToggle");
-
-const liveTitleModeButton =  document.getElementById("liveTitleModeButton");
-const youtubeLayoutButton =  document.getElementById("youtubeLayoutButton");
-const clipLayoutButton = document.getElementById("clipLayoutButton");
 
 const notifyButton =  document.getElementById("notifyButton");
 const settingsButton =  document.getElementById("settingsButton");
@@ -59,15 +56,6 @@ function applyLiveTitleMode_() {
   if (liveTitleMode === "off") {
     document.body.classList.add("hide-live-title");
   }
-
-  if (!liveTitleModeButton) return;
-
-  liveTitleModeButton.textContent =
-    liveTitleMode === "full"
-      ? "📝 LIVE Stream Titles: FULL"
-      : liveTitleMode === "short"
-        ? "📝 LIVE Stream Titles: SHORT"
-        : "📝 LIVE Stream Titles: OFF";
 }
 
 applyLiveTitleMode_();
@@ -80,13 +68,6 @@ function applyYoutubeLayout_() {
     "youtube-list-layout",
     youtubeLayout === "list"
   );
-
-  if (!youtubeLayoutButton) return;
-
-  youtubeLayoutButton.textContent =
-    youtubeLayout === "list"
-      ? "🎬 YouTube Layout: LIST"
-      : "🎬 YouTube Layout: GRID";
 }
 
 applyYoutubeLayout_();
@@ -99,16 +80,49 @@ function applyClipLayout_() {
     "clip-list-layout",
     clipLayout === "list"
   );
-
-  if (!clipLayoutButton) return;
-
-  clipLayoutButton.textContent =
-    clipLayout === "list"
-      ? "🎞️ Clips Layout: LIST"
-      : "🎞️ Clips Layout: GRID";
 }
 
 applyClipLayout_();
+
+function updateViewActionButton_() {
+  if (!viewActionButton) return;
+
+  viewActionButton.hidden = false;
+
+  if (isLiveView(currentView)) {
+
+    viewActionButton.textContent =
+      liveTitleMode === "full"
+        ? "📝 FULL"
+        : liveTitleMode === "short"
+          ? "📝 SHORT"
+          : "📝 OFF";
+
+    return;
+  }
+
+  if (isYoutubeView(currentView)) {
+
+    viewActionButton.textContent =
+      youtubeLayout === "grid"
+        ? "▦ GRID"
+        : "☰ LIST";
+
+    return;
+  }
+
+  if (isClipView(currentView)) {
+
+    viewActionButton.textContent =
+      clipLayout === "grid"
+        ? "▦ GRID"
+        : "☰ LIST";
+
+    return;
+  }
+
+  viewActionButton.hidden = true;
+}
 
 settingsButton?.addEventListener(
   "click",
@@ -149,52 +163,49 @@ themeToggle?.addEventListener("click", () => {
   applyThemeButtonText_();
 });
 
-liveTitleModeButton?.addEventListener("click", () => {
-  liveTitleMode =
-    liveTitleMode === "full"
-      ? "short"
-      : liveTitleMode === "short"
-        ? "off"
-        : "full";
-
-  localStorage.setItem(
-    "liveTitleMode",
-    liveTitleMode
-  );
-
-  applyLiveTitleMode_();
-
+viewActionButton?.addEventListener("click", () => {
   if (isLiveView(currentView)) {
+    liveTitleMode =
+      liveTitleMode === "full"
+        ? "short"
+        : liveTitleMode === "short"
+          ? "off"
+          : "full";
+
+    localStorage.setItem("liveTitleMode", liveTitleMode);
+
+    applyLiveTitleMode_();
+    updateViewActionButton_();
     renderLive(currentData);
+    return;
   }
-});
 
-youtubeLayoutButton?.addEventListener("click", () => {
-  youtubeLayout =
-    youtubeLayout === "grid"
-      ? "list"
-      : "grid";
+  if (isYoutubeView(currentView)) {
+    youtubeLayout =
+      youtubeLayout === "grid"
+        ? "list"
+        : "grid";
 
-  localStorage.setItem(
-    "youtubeLayout",
-    youtubeLayout
-  );
+    localStorage.setItem("youtubeLayout", youtubeLayout);
 
-  applyYoutubeLayout_();
-});
+    applyYoutubeLayout_();
+    updateViewActionButton_();
+    renderYoutube(currentData);
+    return;
+  }
 
-clipLayoutButton?.addEventListener("click", () => {
-  clipLayout =
-    clipLayout === "grid"
-      ? "list"
-      : "grid";
+  if (isClipView(currentView)) {
+    clipLayout =
+      clipLayout === "grid"
+        ? "list"
+        : "grid";
 
-  localStorage.setItem(
-    "clipLayout",
-    clipLayout
-  );
+    localStorage.setItem("clipLayout", clipLayout);
 
-  applyClipLayout_();
+    applyClipLayout_();
+    updateViewActionButton_();
+    renderClips(currentData);
+  }
 });
 
 toolsButton?.addEventListener(
@@ -636,6 +647,9 @@ searchBox?.addEventListener("input", () => {
 });
 
 function loadView(view) {
+
+  updateViewActionButton_();
+
   if (isLiveView(view)) {
     loadLiveView(view);
     return;

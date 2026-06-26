@@ -1,39 +1,27 @@
 /* =========================================================
    OW KITSUNE GUIDE - STYLE.CSS
 
-  /* @SECTION: THEME */
+   QUICK SEARCH
 
-  /* @SECTION: RESET */
+   @SECTION: THEME
+   @SECTION: RESET
+   @SECTION: LAYOUT
+   @SECTION: NAVIGATION
+   @SECTION: SETTINGS
+   @SECTION: COMMON-CARDS
+   @SECTION: LIVE
+   @SECTION: YOUTUBE
+   @SECTION: CLIPS
+   @SECTION: PLAYER-LINKS
+   @SECTION: TEAMS
+   @SECTION: BIRTHDAYS
+   @SECTION: TOOLS
+   @SECTION: FAQ
+   @SECTION: UTILITIES
+   @SECTION: RESPONSIVE
+   @SECTION: REVIEW
 
-  /* @SECTION: LAYOUT */
-
-  /* @SECTION: NAVIGATION */
-
-  /* @SECTION: SETTINGS */
-
-  /* @SECTION: COMMON-CARDS */
-
-  /* @SECTION: LIVE */
-
-  /* @SECTION: YOUTUBE */
-
-  /* @SECTION: CLIPS */
-
-  /* @SECTION: PLAYER-LINKS */
-
-  /* @SECTION: TEAMS */
-
-  /* @SECTION: BIRTHDAYS */
-
-  /* @SECTION: TOOLS */
-
-  /* @SECTION: FAQ */
-
-  /* @SECTION: UTILITIES */
-
-  /* @SECTION: RESPONSIVE */
-
-  /* @SECTION: REVIEW */
+   ========================================================= */
 /* =========================================================
    1. THEME
    ========================================================= */
@@ -2028,6 +2016,40 @@ color:var(--text-main);
    15. UTILITIES
    ========================================================= */
 /* @SECTION: UTILITIES */
+
+.page-title-line{
+  display:flex;
+  align-items:center;
+  gap:var(--space-md);
+}
+
+.view-action-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:4px 10px;
+
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+
+  background:var(--bg-main);
+  color:var(--text-main);
+
+  font-size:12px;
+  font-weight:700;
+
+  cursor:pointer;
+  white-space:nowrap;
+
+  transition:var(--transition-fast);
+}
+
+.view-action-button:hover{
+  background:var(--bg-light);
+  border-color:var(--accent);
+}
+
 .updated{
 color:var(--text-muted);
   font-size:12px;
