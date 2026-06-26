@@ -126,6 +126,8 @@ body.light-theme{
 
    /* SP */
   --accent-gold:#8A5A00;
+  --region-cn:var(--accent-gold);
+  --platform-bilibili:var(--accent-gold);
 }
 
 /* =========================================================
