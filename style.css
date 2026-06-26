@@ -1,12 +1,14 @@
 /* =========================================================
    OW KITSUNE GUIDE - ORGANIZED STYLE.CSS
 
-   Round 2:
-   - Kept Round 1 section order
-   - Merged exact same selectors where safe
-   - Removed exact duplicate declaration blocks where safe
-   - Did not intentionally change colors, selector names, or property values
-   - Did not convert colors to variables yet
+   Round 3:
+   - Kept Round 2 organization
+   - Added accent / region / platform color variables
+   - Replaced repeated hard-coded palette colors with variables
+   - Unified paired colors:
+     NA=Twitch, KR=YouTube, CN=Bilibili, JP=Discord,
+     SA=CHZZK, EMEA=SOOP
+   - Did not intentionally change layout or spacing
    ========================================================= */
 
 /* =========================================================
@@ -14,20 +16,51 @@
    ========================================================= */
 
 :root{
---bg-dark:#111111;
+  /* Accent Palette */
+  --accent-red:#FF0033;
+  --accent-pink:#FFB6D9;
+  --accent-white:#e5e5e9;
+  --accent-orange:#B84724;
+  --accent-gold:#FFC422;
+  --accent-cyan:#00C4C4;
+  --accent-blue:#3B82F6;
+  --accent-purple:#813AF2;
+  --accent-green:#00D564;
+
+  /* Region Colors */
+  --region-na:var(--accent-purple);
+  --region-kr:var(--accent-red);
+  --region-cn:var(--accent-gold);
+  --region-jp:var(--accent-white);
+  --region-sa:var(--accent-green);
+  --region-emea:var(--accent-blue);
+  --region-pac:var(--accent-pink);
+  --region-other:var(--accent-cyan);
+  --region-unknown:#555;
+
+  /* Platform Colors */
+  --platform-twitch:var(--accent-purple);
+  --platform-youtube:var(--accent-red);
+  --platform-bilibili:var(--accent-gold);
+  --platform-discord:var(--accent-white);
+  --platform-chzzk:var(--accent-green);
+  --platform-soop:var(--accent-blue);
+
+  /* UI Colors */
+  --bg-dark:#111111;
   --bg-main:#111A2D;
   --bg-light:#1D253A;
 
-  --text-main:#e5e5e9;
+  --text-main:var(--accent-white);
   --text-sub:rgba(255,255,255,.7);
   --text-muted:rgba(255,255,255,.45);
 
-  --accent:#B84724;
+  --accent:var(--accent-orange);
   --border:#3E4D6D;
 }
 
 body.light-theme{
---bg-dark:#D3B99F;
+  --bg-dark:#D3B99F;
   --bg-main:#DFC7AE;
   --bg-light:#E9D5C1;
 
@@ -36,8 +69,11 @@ body.light-theme{
   --text-muted:#6B4A4A;
 
   --border:#A98E74;
+  --accent:var(--accent-orange);
 
-  --accent:#B84724;
+  --region-jp:var(--text-main);
+  --platform-discord:var(--text-main);
+  --platform-bilibili:#8A5A00;
 }
 
 /* =========================================================
@@ -345,7 +381,7 @@ background:var(--bg-main);
   font-weight:700;
 
   box-shadow:
-    0 0 8px #3E4D6D,
+    0 0 8px var(--border),
     0 0 16px rgba(62,77,109,.8);
 }
 
@@ -557,23 +593,23 @@ color:var(--accent);
 /* SHORT */
 
 .card.lang-en{
-border-left-color:#813AF2;
+border-left-color:var(--region-na);
 }
 
 .card.lang-kr{
-border-left-color:#E51B23;
+border-left-color:var(--region-kr);
 }
 
 .card.lang-intl{
-border-left-color:#00C4C4;
+border-left-color:var(--region-other);
 }
 
 .card.lang-cn{
-border-left-color:#FFC422;
+border-left-color:var(--region-cn);
 }
 
 .card.lang-jp{
-border-left-color:#e5e5e9;
+border-left-color:var(--region-jp);
 }
 
 .hide-live-title .title{
@@ -696,35 +732,35 @@ margin-top:8px;
 }
 
 .youtube-card.region-na{
-border-left-color:#813AF2;
+border-left-color:var(--region-na);
 }
 
 .youtube-card.region-kr{
-border-left-color:#E51B23;
+border-left-color:var(--region-kr);
 }
 
 .youtube-card.region-cn{
-border-left-color:#FFC422;
+border-left-color:var(--region-cn);
 }
 
 .youtube-card.region-emea{
-border-left-color:#00C4C4;
+border-left-color:var(--region-other);
 }
 
 .youtube-card.region-jp{
-border-left-color:#e5e5e9;
+border-left-color:var(--region-jp);
 }
 
 .youtube-card.region-pac{
-border-left-color:#FFB6D9;
+border-left-color:var(--region-pac);
 }
 
 .youtube-card.region-sa{
-border-left-color:#22C55E;
+border-left-color:var(--region-sa);
 }
 
 .youtube-card.region-unknown{
-border-left-color:#555;
+border-left-color:var(--region-unknown);
 }
 
 .youtube-list-layout .youtube-card{
@@ -761,7 +797,7 @@ min-width:0;
    ========================================================= */
 
 #clipsSubNav button.clip-tab-all{
-background:#9146FF;
+background:var(--platform-twitch);
   color:white;
 }
 
@@ -771,22 +807,22 @@ background:var(--accent);
 }
 
 #clipsSubNav button.clip-tab-jp{
-background:#9146FF;
+background:var(--platform-twitch);
   color:white;
 }
 
 #clipsSubNav button.clip-tab-chzzk{
-background:#00D564;
+background:var(--platform-chzzk);
   color:#111;
 }
 
 #clipsSubNav button.clip-tab-soop{
-background:#2196F3;
+background:var(--platform-soop);
   color:white;
 }
 
 #clipsSubNav button.active.clip-tab-all{
-background:#9146FF;
+background:var(--platform-twitch);
   color:white;
 }
 
@@ -796,17 +832,17 @@ background:var(--accent);
 }
 
 #clipsSubNav button.active.clip-tab-jp{
-background:#9146FF;
+background:var(--platform-twitch);
   color:white;
 }
 
 #clipsSubNav button.active.clip-tab-chzzk{
-background:#00D564;
+background:var(--platform-chzzk);
   color:#111;
 }
 
 #clipsSubNav button.active.clip-tab-soop{
-background:#3B82F6;
+background:var(--platform-soop);
   color:white;
 }
 
@@ -900,31 +936,31 @@ color:var(--text-muted);
 }
 
 .tw{
-color:#9146FF;
+color:var(--platform-twitch);
 }
 
 .chz{
-color:#00D564;
+color:var(--platform-chzzk);
 }
 
 .soop{
-color:#3B82F6;
+color:var(--platform-soop);
 }
 
 .bili{
-color:#FFD700;
+color:var(--platform-bilibili);
 }
 
 .yt{
-color:#FF0033;
+color:var(--platform-youtube);
 }
 
 body.light-theme .bili{
-color:#8A5A00;
+color:var(--platform-bilibili);
 }
 
 .dc{
-color:#e5e5e9;
+color:var(--platform-discord);
 }
 
 body.light-theme .dc{
@@ -980,39 +1016,39 @@ text-align:center;
 
 .player-table td.name-cell{
 padding-left:10px !important;
-  box-shadow:inset 3px 0 0 #555;
+  box-shadow:inset 3px 0 0 var(--region-unknown);
 }
 
 .player-table td.name-cell.region-na{
-box-shadow:inset 3px 0 0 #813AF2;
+box-shadow:inset 3px 0 0 var(--region-na);
 }
 
 .player-table td.name-cell.region-kr{
-box-shadow:inset 3px 0 0 #E51B23;
+box-shadow:inset 3px 0 0 var(--region-kr);
 }
 
 .player-table td.name-cell.region-cn{
-box-shadow:inset 3px 0 0 #FFC422;
+box-shadow:inset 3px 0 0 var(--region-cn);
 }
 
 .player-table td.name-cell.region-emea{
-box-shadow:inset 3px 0 0 #00C4C4;
+box-shadow:inset 3px 0 0 var(--region-other);
 }
 
 .player-table td.name-cell.region-jp{
-box-shadow:inset 3px 0 0 #e5e5e9;
+box-shadow:inset 3px 0 0 var(--region-jp);
 }
 
 .player-table td.name-cell.region-pac{
-box-shadow:inset 3px 0 0 #FFB6D9;
+box-shadow:inset 3px 0 0 var(--region-pac);
 }
 
 .player-table td.name-cell.region-sa{
-box-shadow:inset 3px 0 0 #22C55E;
+box-shadow:inset 3px 0 0 var(--region-sa);
 }
 
 .player-table td.name-cell.region-unknown{
-box-shadow:inset 3px 0 0 #555;
+box-shadow:inset 3px 0 0 var(--region-unknown);
 }
 
 #app.table-mode .player-table th:nth-child(3),
@@ -1065,7 +1101,7 @@ text-decoration:underline;
 }
 
 .tw-inactive{
-color:#ddd6ff;
+color:var(--text-sub);
 }
 
 /* =========================================================
@@ -1093,31 +1129,31 @@ padding-left:10px !important;
 }
 
 .player-table td.team-cell.team-kr{
-box-shadow:inset 3px 0 0 #E51B23;
+box-shadow:inset 3px 0 0 var(--region-kr);
 }
 
 .player-table td.team-cell.team-jp{
-box-shadow:inset 3px 0 0 #e5e5e9;
+box-shadow:inset 3px 0 0 var(--region-jp);
 }
 
 .player-table td.team-cell.team-na{
-box-shadow:inset 3px 0 0 #813AF2;
+box-shadow:inset 3px 0 0 var(--region-na);
 }
 
 .player-table td.team-cell.team-emea{
-box-shadow:inset 3px 0 0 #00C4C4;
+box-shadow:inset 3px 0 0 var(--region-other);
 }
 
 .player-table td.team-cell.team-cn{
-box-shadow:inset 3px 0 0 #FFC422;
+box-shadow:inset 3px 0 0 var(--region-cn);
 }
 
 .player-table td.team-cell.team-pac{
-box-shadow:inset 3px 0 0 #FFB6D9;
+box-shadow:inset 3px 0 0 var(--region-pac);
 }
 
 .player-table td.team-cell.team-sa{
-box-shadow:inset 3px 0 0 #22C55E;
+box-shadow:inset 3px 0 0 var(--region-sa);
 }
 
 .player-name-link,
@@ -1276,8 +1312,8 @@ transition:.15s;
 }
 
 .team-link-tag.tw{
-border-color:#9146FF;
-  color:#9146FF;
+border-color:var(--platform-twitch);
+  color:var(--platform-twitch);
 }
 
 .team-link-tag.tw-inactive{
@@ -1286,33 +1322,33 @@ border-color:#777;
 }
 
 .team-link-tag.chz{
-border-color:#00D564;
-  color:#00D564;
+border-color:var(--platform-chzzk);
+  color:var(--platform-chzzk);
 }
 
 .team-link-tag.soop{
-border-color:#3B82F6;
-  color:#3B82F6;
+border-color:var(--platform-soop);
+  color:var(--platform-soop);
 }
 
 .team-link-tag.bili{
-border-color:#FFC422;
-  color:#FFC422;
+border-color:var(--platform-bilibili);
+  color:var(--platform-bilibili);
 }
 
 body.light-theme .team-link-tag.bili{
-border-color:#8A5A00;
-  color:#8A5A00;
+border-color:var(--platform-bilibili);
+  color:var(--platform-bilibili);
 }
 
 .team-link-tag.yt{
-border-color:#FF0033;
-  color:#FF0033;
+border-color:var(--platform-youtube);
+  color:var(--platform-youtube);
 }
 
 .team-link-tag.dc{
-border-color:#FFFFFF;
-  color:#FFFFFF;
+border-color:var(--platform-discord);
+  color:var(--platform-discord);
 }
 
 body.light-theme .team-link-tag.dc{
@@ -1332,42 +1368,42 @@ display:none;
 
 .team-card.team-official,
 .team-detail-card.team-official{
-border-left:4px solid #555;
+border-left:4px solid var(--region-unknown);
 }
 
 .team-card.team-kr,
 .team-detail-card.team-kr{
-border-left:4px solid #E51B23;
+border-left:4px solid var(--region-kr);
 }
 
 .team-card.team-jp,
 .team-detail-card.team-jp{
-border-left:4px solid #e5e5e9;
+border-left:4px solid var(--region-jp);
 }
 
 .team-card.team-pac,
 .team-detail-card.team-pac{
-border-left:4px solid #FFB6D9;
+border-left:4px solid var(--region-pac);
 }
 
 .team-card.team-cn,
 .team-detail-card.team-cn{
-border-left:4px solid #FFC422;
+border-left:4px solid var(--region-cn);
 }
 
 .team-card.team-na,
 .team-detail-card.team-na{
-border-left:4px solid #813AF2;
+border-left:4px solid var(--region-na);
 }
 
 .team-card.team-emea,
 .team-detail-card.team-emea{
-border-left:4px solid #00C4C4;
+border-left:4px solid var(--region-other);
 }
 
 .team-card.team-sa,
 .team-detail-card.team-sa{
-border-left:4px solid #22C55E;
+border-left:4px solid var(--region-sa);
 }
 
 .teams-mode .discord-note{
@@ -1558,35 +1594,35 @@ color:var(--accent);
 }
 
 .birthday-event.region-na{
-border-left-color:#813AF2;
+border-left-color:var(--region-na);
 }
 
 .birthday-event.region-kr{
-border-left-color:#E51B23;
+border-left-color:var(--region-kr);
 }
 
 .birthday-event.region-cn{
-border-left-color:#FFC422;
+border-left-color:var(--region-cn);
 }
 
 .birthday-event.region-emea{
-border-left-color:#00C4C4;
+border-left-color:var(--region-other);
 }
 
 .birthday-event.region-jp{
-border-left-color:#e5e5e9;
+border-left-color:var(--region-jp);
 }
 
 .birthday-event.region-pac{
-border-left-color:#FFB6D9;
+border-left-color:var(--region-pac);
 }
 
 .birthday-event.region-sa{
-border-left-color:#22C55E;
+border-left-color:var(--region-sa);
 }
 
 .birthday-event.region-unknown{
-border-left-color:#555;
+border-left-color:var(--region-unknown);
 }
 
 .birthday-day.today{
@@ -1646,35 +1682,35 @@ color:var(--accent);
 }
 
 .birthday-list-item.region-na{
-border-left-color:#813AF2;
+border-left-color:var(--region-na);
 }
 
 .birthday-list-item.region-kr{
-border-left-color:#E51B23;
+border-left-color:var(--region-kr);
 }
 
 .birthday-list-item.region-cn{
-border-left-color:#FFC422;
+border-left-color:var(--region-cn);
 }
 
 .birthday-list-item.region-emea{
-border-left-color:#00C4C4;
+border-left-color:var(--region-other);
 }
 
 .birthday-list-item.region-jp{
-border-left-color:#e5e5e9;
+border-left-color:var(--region-jp);
 }
 
 .birthday-list-item.region-pac{
-border-left-color:#FFB6D9;
+border-left-color:var(--region-pac);
 }
 
 .birthday-list-item.region-sa{
-border-left-color:#22C55E;
+border-left-color:var(--region-sa);
 }
 
 .birthday-list-item.region-unknown{
-border-left-color:#555;
+border-left-color:var(--region-unknown);
 }
 
 .birthday-today{
