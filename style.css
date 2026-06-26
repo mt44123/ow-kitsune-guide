@@ -3,7 +3,7 @@
   --bg-main:#111A2D;
   --bg-light:#1D253A;
 
-  --text-main:#F2F2F2;
+  --text-main:#e5e5e9;
   --text-sub:rgba(255,255,255,.7);
   --text-muted:rgba(255,255,255,.45);
 
@@ -248,7 +248,7 @@ body.light-theme .bili{
 }
 
 .dc{
-  color:#fff;
+  color:#e5e5e9;
 }
 
 body.light-theme .dc{
@@ -517,7 +517,7 @@ body.light-theme .dc{
 
 /* JP（独自） */
 .card.lang-jp{
-  border-left-color:#F5F5F5;
+  border-left-color:#e5e5e9;
 }
 
 /* NA = EN */
@@ -542,7 +542,7 @@ body.light-theme .dc{
 
 /* JP */
 .youtube-card.region-jp{
-  border-left-color:#F5F5F5;
+  border-left-color:#e5e5e9;
 }
 
 /* PAC */
@@ -581,7 +581,7 @@ body.light-theme .dc{
 }
 
 .player-table td.name-cell.region-jp{
-  box-shadow:inset 3px 0 0 #F5F5F5;
+  box-shadow:inset 3px 0 0 #e5e5e9;
 }
 
 .player-table td.name-cell.region-pac{
@@ -607,7 +607,7 @@ body.light-theme .dc{
 
 /* JP */
 .player-table td.team-cell.team-jp{
-  box-shadow:inset 3px 0 0 #F5F5F5;
+  box-shadow:inset 3px 0 0 #e5e5e9;
 }
 
 /* NA */
@@ -1142,7 +1142,7 @@ body.light-theme .tools-page a{
 }
 
 .birthday-event.region-jp{
-  border-left-color:#F5F5F5;
+  border-left-color:#e5e5e9;
 }
 
 .birthday-event.region-pac{
@@ -1238,7 +1238,7 @@ body.light-theme .tools-page a{
 .birthday-list-item.region-kr{ border-left-color:#E51B23; }
 .birthday-list-item.region-cn{ border-left-color:#FFC422; }
 .birthday-list-item.region-emea{ border-left-color:#00C4C4; }
-.birthday-list-item.region-jp{ border-left-color:#F5F5F5; }
+.birthday-list-item.region-jp{ border-left-color:#e5e5e9; }
 .birthday-list-item.region-pac{ border-left-color:#FFB6D9; }
 .birthday-list-item.region-sa{ border-left-color:#22C55E; }
 .birthday-list-item.region-unknown{ border-left-color:#555; }
@@ -1653,7 +1653,7 @@ body.light-theme .team-link-tag.dc{
 
 .team-card.team-jp,
 .team-detail-card.team-jp{
-  border-left:4px solid #F5F5F5;
+  border-left:4px solid #e5e5e9;
 }
 
 .team-card.team-pac,
