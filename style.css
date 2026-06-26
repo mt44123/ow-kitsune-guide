@@ -2237,7 +2237,7 @@ color:var(--text-sub);
 
 /* CLIPS */
 
-@media (min-width:900px){
+@media (min-width:1600px){
 
   body.clip-view #app.youtube-mode{
     grid-template-columns:repeat(5,minmax(0,1fr));
@@ -2245,12 +2245,34 @@ color:var(--text-sub);
 
 }
 
-/* CLIPS mobile */
+@media (min-width:1300px) and (max-width:1599px){
 
-@media (max-width:900px){
+  body.clip-view #app.youtube-mode{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+
+}
+
+@media (min-width:900px) and (max-width:1299px){
+
+  body.clip-view #app.youtube-mode{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+
+}
+
+@media (min-width:600px) and (max-width:899px){
 
   body.clip-view #app.youtube-mode{
     grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+}
+
+@media (max-width:599px){
+
+  body.clip-view #app.youtube-mode{
+    grid-template-columns:1fr;
   }
 
 }
