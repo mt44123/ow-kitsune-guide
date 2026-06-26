@@ -1,11 +1,12 @@
 /* =========================================================
    OW KITSUNE GUIDE - ORGANIZED STYLE.CSS
 
-   Round 5:
-   - Kept Round 4 organization and design tokens
-   - Added shared media-card grouping for repeated YouTube/Clips-ready parts
-   - Kept YouTube and Clips layout / column counts separate
-   - Did not intentionally change layout, selector names, or visual values
+   Round 7:
+   - Kept Round 6 organization and layout behavior
+   - Added state colors, inactive Twitch, clip tab colors, and text-on-color tokens
+   - Replaced remaining color literals in normal CSS rules where safe
+   - Kept color literals only inside theme / token definitions
+   - Did not intentionally change spacing, layout, or selector names
    ========================================================= */
 
 /* =========================================================
@@ -16,7 +17,7 @@
   /* Accent Palette */
   --accent-red:#FF0033;
   --accent-pink:#FFB6D9;
-  --accent-white:#e5e5e9;
+  --accent-var(--color-on-light):#e5e5e9;
   --accent-orange:#B84724;
   --accent-gold:#FFC422;
   --accent-cyan:#00C4C4;
@@ -28,7 +29,7 @@
   --region-na:var(--accent-purple);
   --region-kr:var(--accent-red);
   --region-cn:var(--accent-gold);
-  --region-jp:var(--accent-white);
+  --region-jp:var(--accent-var(--color-on-light));
   --region-sa:var(--accent-green);
   --region-emea:var(--accent-blue);
   --region-pac:var(--accent-pink);
@@ -37,23 +38,45 @@
 
   /* Platform Colors */
   --platform-twitch:var(--accent-purple);
+  --platform-twitch-inactive:#ddd6ff;
   --platform-youtube:var(--accent-red);
   --platform-bilibili:var(--accent-gold);
-  --platform-discord:var(--accent-white);
+  --platform-discord:var(--accent-var(--color-on-light));
   --platform-chzzk:var(--accent-green);
   --platform-soop:var(--accent-blue);
 
   /* UI Colors */
-  --bg-dark:#111111;
-  --bg-main:#111A2D;
+  --bg-dark:var(--color-on-dark)111;
+  --bg-main:var(--color-on-dark)A2D;
   --bg-light:#1D253A;
 
-  --text-main:var(--accent-white);
+  --text-main:var(--accent-var(--color-on-light));
   --text-sub:rgba(255,255,255,.7);
   --text-muted:rgba(255,255,255,.45);
 
   --accent:var(--accent-orange);
   --border:#3E4D6D;
+
+  /* Text-on-color */
+  --color-on-dark:#111;
+  --color-on-light:#fff;
+
+  /* State Colors */
+  --state-warning:var(--accent-gold);
+  --state-error:var(--accent-red);
+  --state-success:var(--accent-green);
+  --state-offline:#777;
+  --state-muted:#999;
+
+  /* Clips SubNav Colors */
+  --clip-tab-all:var(--platform-twitch);
+  --clip-tab-goats:var(--accent);
+  --clip-tab-jp:var(--platform-twitch);
+  --clip-tab-chzzk:var(--platform-chzzk);
+  --clip-tab-soop:var(--platform-soop);
+  --clip-tab-text-light:var(--color-on-light);
+  --clip-tab-text-dark:var(--color-on-dark);
+
 
   /* Typography */
   --font-title:'Jura',sans-serif;
@@ -81,6 +104,19 @@
   /* Motion */
   --transition-fast:.15s;
 
+  /* Theme-aware Transparent Colors */
+  --surface-hover:rgba(255,255,255,.08);
+  --surface-soft:rgba(255,255,255,.06);
+  --line-soft:rgba(255,255,255,.08);
+
+  --favorite-bg:rgba(184,71,36,.15);
+  --favorite-glow-strong:rgba(184,71,36,.7);
+  --favorite-glow-mid:rgba(184,71,36,.5);
+  --favorite-glow-soft:rgba(184,71,36,.3);
+
+  --search-glow:rgba(62,77,109,.8);
+
+
 }
 
 body.light-theme{
@@ -98,6 +134,23 @@ body.light-theme{
   --region-jp:var(--text-main);
   --platform-discord:var(--text-main);
   --platform-bilibili:#8A5A00;
+  --platform-twitch-inactive:#8E79C9;
+
+  --state-offline:#777;
+  --state-muted:#6B4A4A;
+
+
+  --surface-hover:rgba(0,0,0,.06);
+  --surface-soft:rgba(0,0,0,.04);
+  --line-soft:rgba(0,0,0,.12);
+
+  --favorite-bg:rgba(184,71,36,.12);
+  --favorite-glow-strong:rgba(184,71,36,.35);
+  --favorite-glow-mid:rgba(184,71,36,.24);
+  --favorite-glow-soft:rgba(184,71,36,.16);
+
+  --search-glow:rgba(62,77,109,.35);
+
 }
 
 /* =========================================================
@@ -255,7 +308,7 @@ position:absolute;
   margin:-1px;
   overflow:hidden;
   clip:rect(0,0,0,0);
-  white-space:nowrap;
+  var(--color-on-light)-space:nowrap;
   border:0;
 }
 
@@ -290,7 +343,7 @@ background:var(--bg-main);
 .media-label{
 font-size:11px;
   line-height:1.1;
-  white-space:pre-line;
+  var(--color-on-light)-space:pre-line;
   text-align:center;
 }
 
@@ -347,7 +400,7 @@ height:32px;
 
   padding:2px 8px;
   font-size:12px;
-  white-space:nowrap;
+  var(--color-on-light)-space:nowrap;
 }
 
 .sticky-header{
@@ -406,7 +459,7 @@ background:var(--bg-main);
 
   box-shadow:
     0 0 8px var(--border),
-    0 0 16px rgba(62,77,109,.8);
+    0 0 16px var(--search-glow);
 }
 
 .lang-switch{
@@ -439,7 +492,7 @@ background:none;
   color:var(--accent);
   font-size:13px;
   cursor:pointer;
-  white-space:nowrap;
+  var(--color-on-light)-space:nowrap;
   padding:0;
   margin-top:var(--space-md);
 }
@@ -491,12 +544,12 @@ width:100%;
 }
 
 .settings-item:hover{
-background:rgba(255,255,255,.08);
+background:var(--surface-hover);
 }
 
 .settings-note{
 font-size:11px;
-  color:#999;
+  color:var(--state-muted);
   padding:4px 10px 8px;
   line-height:1.4;
 }
@@ -826,53 +879,53 @@ min-width:0;
    ========================================================= */
 
 #clipsSubNav button.clip-tab-all{
-background:var(--platform-twitch);
-  color:white;
+background:var(--clip-tab-all);
+  color:var(--clip-tab-text-light);
 }
 
 #clipsSubNav button.clip-tab-goats{
-background:var(--accent);
-  color:white;
+background:var(--clip-tab-goats);
+  color:var(--clip-tab-text-light);
 }
 
 #clipsSubNav button.clip-tab-jp{
-background:var(--platform-twitch);
-  color:white;
+background:var(--clip-tab-jp);
+  color:var(--clip-tab-text-light);
 }
 
 #clipsSubNav button.clip-tab-chzzk{
-background:var(--platform-chzzk);
-  color:#111;
+background:var(--clip-tab-chzzk);
+  color:var(--clip-tab-text-dark);
 }
 
 #clipsSubNav button.clip-tab-soop{
-background:var(--platform-soop);
-  color:white;
+background:var(--clip-tab-soop);
+  color:var(--clip-tab-text-light);
 }
 
 #clipsSubNav button.active.clip-tab-all{
-background:var(--platform-twitch);
-  color:white;
+background:var(--clip-tab-all);
+  color:var(--clip-tab-text-light);
 }
 
 #clipsSubNav button.active.clip-tab-goats{
-background:var(--accent);
-  color:white;
+background:var(--clip-tab-goats);
+  color:var(--clip-tab-text-light);
 }
 
 #clipsSubNav button.active.clip-tab-jp{
-background:var(--platform-twitch);
-  color:white;
+background:var(--clip-tab-jp);
+  color:var(--clip-tab-text-light);
 }
 
 #clipsSubNav button.active.clip-tab-chzzk{
-background:var(--platform-chzzk);
-  color:#111;
+background:var(--clip-tab-chzzk);
+  color:var(--clip-tab-text-dark);
 }
 
 #clipsSubNav button.active.clip-tab-soop{
-background:var(--platform-soop);
-  color:white;
+background:var(--clip-tab-soop);
+  color:var(--clip-tab-text-light);
 }
 
 #clipsSubNav button{
@@ -910,7 +963,7 @@ width:max-content;
 .player-table td{
 padding:6px 8px;
   border-bottom:1px solid var(--border);
-  white-space:nowrap;
+  var(--color-on-light)-space:nowrap;
   text-align:left;
 }
 
@@ -1222,7 +1275,7 @@ transform:translateY(-2px);
 font-size:18px;
   font-weight:700;
   margin-bottom:var(--space-sm);
-  white-space:nowrap;
+  var(--color-on-light)-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
@@ -1272,7 +1325,7 @@ display:flex;
   align-items:center;
   gap:var(--space-xl);
   padding:8px 0;
-  border-top:1px solid rgba(255,255,255,.08);
+  border-top:1px solid var(--line-soft);
 }
 
 .team-player-main{
@@ -1308,7 +1361,7 @@ display:block !important;
 
 .team-player-card-row{
 padding:14px 0;
-  border-bottom:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid var(--line-soft);
 }
 
 .team-player-card-row .team-player-name{
@@ -1346,8 +1399,8 @@ border-color:var(--platform-twitch);
 }
 
 .team-link-tag.tw-inactive{
-border-color:#777;
-  color:#B8A0E6;
+border-color:var(--state-offline);
+  color:var(--platform-twitch-inactive);
 }
 
 .team-link-tag.chz{
@@ -1598,7 +1651,7 @@ font-size:15px;
 
   overflow:hidden;
   text-overflow:ellipsis;
-  white-space:nowrap;
+  var(--color-on-light)-space:nowrap;
 }
 
 .birthday-event span{
@@ -1609,7 +1662,7 @@ font-size:13px;
 
   overflow:hidden;
   text-overflow:ellipsis;
-  white-space:nowrap;
+  var(--color-on-light)-space:nowrap;
 }
 
 .birthday-player-link{
@@ -1794,13 +1847,13 @@ font-size:12px;
 }
 
 .favorite-birthday{
-background:rgba(184,71,36,.15);
+background:var(--favorite-bg);
 
   box-shadow:
     0 0 0 2px var(--accent),
-    0 0 10px rgba(184,71,36,.7),
-    0 0 20px rgba(184,71,36,.5),
-    0 0 30px rgba(184,71,36,.3);
+    0 0 10px var(--favorite-glow-strong),
+    0 0 20px var(--favorite-glow-mid),
+    0 0 30px var(--favorite-glow-soft);
 }
 
 .favorite-birthday strong::before{
@@ -2082,7 +2135,7 @@ color:var(--text-sub);
   }
 
   .tagline{
-    white-space:nowrap;
+    var(--color-on-light)-space:nowrap;
     font-size:12px;
   }
 
