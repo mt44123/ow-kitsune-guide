@@ -1223,8 +1223,9 @@ color:var(--accent);
 }
 
 .teams-mode{
-display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 280px));
+  justify-content:center;
   gap:var(--space-xl);
 }
 
