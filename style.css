@@ -1,10 +1,10 @@
 /* =========================================================
    OW KITSUNE GUIDE - ORGANIZED STYLE.CSS
 
-   Round 4:
-   - Kept Round 3 organization and color variables
-   - Added typography / radius / spacing / motion tokens
-   - Replaced repeated common UI values with variables
+   Round 5:
+   - Kept Round 4 organization and design tokens
+   - Added shared media-card grouping for repeated YouTube/Clips-ready parts
+   - Kept YouTube and Clips layout / column counts separate
    - Did not intentionally change layout, selector names, or visual values
    ========================================================= */
 
@@ -650,6 +650,11 @@ display:-webkit-box;
 /* =========================================================
    8. YOUTUBE
    ========================================================= */
+
+/* Shared media-card parts:
+   YouTube and Clips can share typography/card primitives,
+   but keep grid columns, thumbnail size, and layout modes separate. */
+
 
 /* NA = EN */
 
