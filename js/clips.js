@@ -297,7 +297,7 @@ function filterRecentClips_(clips, daysLimit) {
 }
 
 function renderClips(clips) {
-  app.className = "youtube-mode";
+  app.className = "clip-mode";
 
   if (!clips.length) {
     app.innerHTML = `<p class="empty">No clips found.</p>`;
