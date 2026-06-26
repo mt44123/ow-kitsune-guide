@@ -1,14 +1,11 @@
 /* =========================================================
    OW KITSUNE GUIDE - ORGANIZED STYLE.CSS
 
-   Round 3:
-   - Kept Round 2 organization
-   - Added accent / region / platform color variables
-   - Replaced repeated hard-coded palette colors with variables
-   - Unified paired colors:
-     NA=Twitch, KR=YouTube, CN=Bilibili, JP=Discord,
-     SA=CHZZK, EMEA=SOOP
-   - Did not intentionally change layout or spacing
+   Round 4:
+   - Kept Round 3 organization and color variables
+   - Added typography / radius / spacing / motion tokens
+   - Replaced repeated common UI values with variables
+   - Did not intentionally change layout, selector names, or visual values
    ========================================================= */
 
 /* =========================================================
@@ -57,6 +54,33 @@
 
   --accent:var(--accent-orange);
   --border:#3E4D6D;
+
+  /* Typography */
+  --font-title:'Jura',sans-serif;
+  --font-body:Arial,sans-serif;
+
+  /* Radius */
+  --radius-xs:6px;
+  --radius-sm:8px;
+  --radius-md:10px;
+  --radius-lg:12px;
+  --radius-xl:14px;
+
+  /* Spacing */
+  --space-2xs:2px;
+  --space-xs:4px;
+  --space-sm:6px;
+  --space-md:8px;
+  --space-lg:10px;
+  --space-xl:12px;
+  --space-2xl:14px;
+  --space-3xl:16px;
+  --space-4xl:20px;
+  --space-5xl:22px;
+
+  /* Motion */
+  --transition-fast:.15s;
+
 }
 
 body.light-theme{
@@ -89,15 +113,15 @@ box-sizing:border-box;
 body{
 background:var(--bg-dark);
   color:var(--text-main);
-  font-family:Arial,sans-serif;
+  font-family:var(--font-body);
   margin:0;
-  padding:16px;
+  padding:var(--space-3xl);
 
 overflow-x:clip;
 }
 
 h1{
-font-family:'Jura',sans-serif;
+font-family:var(--font-title);
   font-weight:700;
   font-size:48px;
   margin:0 0 4px;
@@ -123,7 +147,7 @@ max-width:100%;
 #app{
 margin-top:16px;
   display:grid;
-  gap:12px;
+  gap:var(--space-xl);
 }
 
 #pageTitle{
@@ -150,7 +174,7 @@ margin:4px 0;
 display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:12px;
+  gap:var(--space-xl);
   flex-wrap:wrap;
 
 gap:0;
@@ -246,7 +270,7 @@ position:relative;
 .nav{
 display:flex;
   flex-wrap:wrap;
-  gap:8px;
+  gap:var(--space-md);
   margin:8px 0;
 }
 
@@ -254,8 +278,8 @@ display:flex;
 background:var(--bg-main);
   color:var(--text-main);
   border:none;
-  border-radius:10px;
-  padding:4px;
+  border-radius:var(--radius-md);
+  padding:var(--space-xs);
   font-size:13px;
   cursor:pointer;
   width:64px;
@@ -279,10 +303,10 @@ background:var(--accent);
 #searchBox{
 width:100%;
   box-sizing:border-box;
-  padding:12px;
-  border-radius:10px;
+  padding:var(--space-xl);
+  border-radius:var(--radius-md);
   border:1px solid var(--border);
-  margin-bottom:12px;
+  margin-bottom:var(--space-xl);
   background:var(--bg-main);
   color:var(--text-main);
   font-size:16px;
@@ -299,7 +323,7 @@ background:var(--bg-main);
 .nav button.media-nav{
 width:64px;
   height:50px;
-  padding:4px;
+  padding:var(--space-xs);
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -341,7 +365,7 @@ position:sticky;
 
 .main-nav{
 display:flex;
-  gap:8px;
+  gap:var(--space-md);
   overflow-x:auto;
   flex-wrap:nowrap;
 }
@@ -352,7 +376,7 @@ flex:0 0 auto;
 
 .sub-nav{
 display:flex;
-  gap:6px;
+  gap:var(--space-sm);
   flex-wrap:nowrap;
   overflow-x:auto;
 
@@ -387,16 +411,16 @@ background:var(--bg-main);
 
 .lang-switch{
 display:flex;
-  gap:6px;
+  gap:var(--space-sm);
   justify-content:flex-end;
-  margin-top:6px;
+  margin-top:var(--space-sm);
 }
 
 .lang-switch button{
 background:var(--bg-main);
   color:var(--text-main);
   border:1px solid var(--border);
-  border-radius:8px;
+  border-radius:var(--radius-sm);
   padding:4px 8px;
   cursor:pointer;
 }
@@ -417,7 +441,7 @@ background:none;
   cursor:pointer;
   white-space:nowrap;
   padding:0;
-  margin-top:8px;
+  margin-top:var(--space-md);
 }
 
 body.light-theme .tools-link{
@@ -431,15 +455,15 @@ position:absolute;
 
   display:flex;
   flex-direction:column;
-  gap:6px;
+  gap:var(--space-sm);
 
   min-width:220px;
 
-  padding:8px;
+  padding:var(--space-md);
 
   background:var(--bg-light);
   border:1px solid var(--border);
-  border-radius:12px;
+  border-radius:var(--radius-lg);
 
   z-index:1000;
 
@@ -459,7 +483,7 @@ width:100%;
   color:var(--text-main);
 
   border:none;
-  border-radius:8px;
+  border-radius:var(--radius-sm);
 
   padding:10px 12px;
 
@@ -488,9 +512,9 @@ color:inherit;
 
 .card{
 background:var(--bg-main);
-  border-radius:14px;
-  padding:12px;
-  transition:.15s;
+  border-radius:var(--radius-xl);
+  padding:var(--space-xl);
+  transition:var(--transition-fast);
 
 border-left:4px solid var(--border);
 }
@@ -535,8 +559,8 @@ margin-top:5px;
 width:100%;
   height:160px;
   object-fit:cover;
-  border-radius:10px;
-  margin-bottom:8px;
+  border-radius:var(--radius-md);
+  margin-bottom:var(--space-md);
 }
 
 .favorite-star{
@@ -648,7 +672,7 @@ display:-webkit-box;
 #app.youtube-mode{
 display:grid;
   grid-template-columns:1fr;
-  gap:12px;
+  gap:var(--space-xl);
   width:100%;
   max-width:100%;
 }
@@ -664,9 +688,9 @@ display:block;
 width:100%;
   max-width:100%;
   background:var(--bg-main);
-  border-radius:14px;
+  border-radius:var(--radius-xl);
   overflow:hidden;
-  transition:.15s;
+  transition:var(--transition-fast);
   border-left:4px solid var(--border);
 }
 
@@ -684,7 +708,7 @@ display:block;
 }
 
 .youtube-info{
-padding:12px;
+padding:var(--space-xl);
 }
 
 .youtube-title{
@@ -699,7 +723,7 @@ font-size:15px;
 }
 
 .youtube-subtitle{
-margin-top:6px;
+margin-top:var(--space-sm);
   color:var(--text-sub);
   font-size:12px;
   line-height:1.35;
@@ -710,7 +734,7 @@ margin-top:6px;
 }
 
 .youtube-player{
-margin-top:10px;
+margin-top:var(--space-lg);
   font-size:15px;
   font-weight:600;
   color:var(--accent);
@@ -723,7 +747,7 @@ margin-top:3px;
 }
 
 .youtube-date{
-margin-top:8px;
+margin-top:var(--space-md);
   padding-top:8px;
   border-top:1px solid var(--border);
   color:var(--text-sub);
@@ -766,7 +790,7 @@ border-left-color:var(--region-unknown);
 .youtube-list-layout .youtube-card{
 display:grid;
   grid-template-columns:160px minmax(0,1fr);
-  gap:12px;
+  gap:var(--space-xl);
   align-items:start;
 }
 
@@ -866,7 +890,7 @@ opacity:1;
 .player-table-wrap{
 overflow-x:auto;
   background:var(--bg-dark);
-  border-radius:12px;
+  border-radius:var(--radius-lg);
   border:1px solid var(--border);
 }
 
@@ -1071,12 +1095,12 @@ background:var(--bg-light);
 .scroll-note{
 color:var(--text-muted);
   font-size:12px;
-  margin-bottom:8px;
+  margin-bottom:var(--space-md);
   text-align:center;
 }
 
 .playerlinks-help{
-margin-top:8px;
+margin-top:var(--space-md);
   color:var(--text-muted);
 }
 
@@ -1170,18 +1194,18 @@ color:var(--accent);
 .teams-mode{
 display:grid;
   grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:12px;
+  gap:var(--space-xl);
 }
 
 .team-card{
 background:var(--bg-light);
   border:1px solid var(--border);
-  border-radius:12px;
-  padding:14px;
+  border-radius:var(--radius-lg);
+  padding:var(--space-2xl);
   text-align:left;
   cursor:pointer;
   color:var(--text-main);
-  transition:.15s;
+  transition:var(--transition-fast);
 }
 
 .team-card:hover{
@@ -1192,7 +1216,7 @@ transform:translateY(-2px);
 .team-card-name{
 font-size:18px;
   font-weight:700;
-  margin-bottom:6px;
+  margin-bottom:var(--space-sm);
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
@@ -1204,10 +1228,10 @@ color:var(--text-muted);
 }
 
 .team-back-button{
-margin-bottom:12px;
+margin-bottom:var(--space-xl);
   padding:8px 12px;
   border:none;
-  border-radius:8px;
+  border-radius:var(--radius-sm);
   background:var(--bg-light);
   color:var(--text-main);
   cursor:pointer;
@@ -1216,8 +1240,8 @@ margin-bottom:12px;
 .team-detail-card{
 background:var(--bg-light);
   border:1px solid var(--border);
-  border-radius:12px;
-  padding:16px;
+  border-radius:var(--radius-lg);
+  padding:var(--space-3xl);
 }
 
 .team-detail-title{
@@ -1227,38 +1251,38 @@ font-size:24px;
 
 .team-detail-meta{
 color:var(--text-muted);
-  margin-top:4px;
-  margin-bottom:16px;
+  margin-top:var(--space-xs);
+  margin-bottom:var(--space-3xl);
 }
 
 .team-player-list{
 display:flex;
   flex-direction:column;
-  gap:10px;
+  gap:var(--space-lg);
 }
 
 .team-player-row{
 display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:12px;
+  gap:var(--space-xl);
   padding:8px 0;
   border-top:1px solid rgba(255,255,255,.08);
 }
 
 .team-player-main{
 display:flex;
-  gap:10px;
+  gap:var(--space-lg);
   align-items:center;
 }
 
 .team-player-links{
 display:flex;
-  gap:6px;
+  gap:var(--space-sm);
 
 display:flex;
   flex-wrap:wrap;
-  gap:6px;
+  gap:var(--space-sm);
 }
 
 .team-detail-mode{
@@ -1266,7 +1290,7 @@ display:block;
 }
 
 .team-detail-mode .team-back-button{
-margin-bottom:16px;
+margin-bottom:var(--space-3xl);
 }
 
 .team-detail-mode .team-detail-card{
@@ -1285,24 +1309,24 @@ padding:14px 0;
 .team-player-card-row .team-player-name{
 font-size:20px;
   font-weight:700;
-  margin-bottom:6px;
+  margin-bottom:var(--space-sm);
 }
 
 .team-player-meta{
 color:var(--text-sub);
-  margin-bottom:8px;
+  margin-bottom:var(--space-md);
 }
 
 .team-player-last{
 color:var(--text-sub);
-  margin-bottom:10px;
+  margin-bottom:var(--space-lg);
 }
 
 .team-link-tag{
-transition:.15s;
+transition:var(--transition-fast);
   display:inline-block;
   padding:4px 8px;
-  border-radius:8px;
+  border-radius:var(--radius-sm);
   background:var(--bg-main);
   border:1px solid var(--border);
   color:var(--text-main);
@@ -1434,9 +1458,9 @@ width:100%;
 
   background:var(--bg-main);
   border:1px solid var(--border);
-  border-radius:14px;
+  border-radius:var(--radius-xl);
 
-  padding:10px;
+  padding:var(--space-lg);
 }
 
 .birthday-calendar-header{
@@ -1444,7 +1468,7 @@ display:flex;
   align-items:center;
   justify-content:space-between;
 
-  margin-bottom:10px;
+  margin-bottom:var(--space-lg);
 }
 
 .birthday-calendar-header button{
@@ -1484,7 +1508,7 @@ text-align:center;
 display:grid;
   grid-template-columns:repeat(7,minmax(0,1fr));
 
-  margin-bottom:4px;
+  margin-bottom:var(--space-xs);
 
   color:var(--text-sub);
 
@@ -1497,7 +1521,7 @@ display:grid;
 .birthday-weekdays div{
 background:var(--bg-light);
   padding:8px 0;
-  border-radius:6px;
+  border-radius:var(--radius-xs);
 }
 
 .birthday-grid{
@@ -1515,7 +1539,7 @@ min-height:240px;
   border-right:1px solid var(--border);
   border-bottom:1px solid var(--border);
 
-  padding:6px;
+  padding:var(--space-sm);
 
 overflow:hidden;
 }
@@ -1534,11 +1558,11 @@ background:var(--bg-light);
   border:1px solid var(--border);
   border-left:4px solid var(--accent);
 
-  border-radius:6px;
+  border-radius:var(--radius-xs);
 
-  padding:8px;
+  padding:var(--space-md);
 
-  margin-bottom:4px;
+  margin-bottom:var(--space-xs);
 
   color:var(--text-main);
 
@@ -1558,7 +1582,7 @@ text-align:center;
   font-size:15px;
   font-weight:bold;
   
-  margin-bottom:4px;
+  margin-bottom:var(--space-xs);
 }
 
 .birthday-event strong{
@@ -1650,22 +1674,22 @@ text-decoration:underline;
 
 .birthday-list{
 display:none;
-  margin-top:12px;
+  margin-top:var(--space-xl);
 }
 
 .birthday-list-item{
 display:grid;
   grid-template-columns:52px 1fr auto;
-  gap:8px;
+  gap:var(--space-md);
   align-items:center;
 
   background:var(--bg-light);
   border:1px solid var(--border);
   border-left:4px solid var(--accent);
-  border-radius:8px;
+  border-radius:var(--radius-sm);
 
-  padding:8px;
-  margin-bottom:8px;
+  padding:var(--space-md);
+  margin-bottom:var(--space-md);
 
   font-size:12px;
 }
@@ -1717,9 +1741,9 @@ border-left-color:var(--region-unknown);
 background:var(--bg-main);
   border:1px solid var(--border);
   border-left:4px solid var(--accent);
-  border-radius:10px;
-  padding:12px;
-  margin-bottom:12px;
+  border-radius:var(--radius-md);
+  padding:var(--space-xl);
+  margin-bottom:var(--space-xl);
 }
 
 .birthday-today h3{
@@ -1738,7 +1762,7 @@ display:flex;
   justify-content:center;
   align-items:center;
   text-align:center;
-  gap:4px;
+  gap:var(--space-xs);
   padding:8px 0;
   color:var(--text-muted);
 }
@@ -1784,7 +1808,7 @@ content:"★ ";
    ========================================================= */
 
 .tools-page .card{
-padding:16px;
+padding:var(--space-3xl);
 }
 
 .tools-page h3{
@@ -1813,7 +1837,7 @@ margin:4px 0 0;
 
 .tools-page{
 display:grid;
-  gap:12px;
+  gap:var(--space-xl);
 }
 
 body.light-theme .tools-page a{
@@ -1836,7 +1860,7 @@ border:none;
 }
 
 .tools-page .card ul{
-margin-top:6px;
+margin-top:var(--space-sm);
 }
 
 /* =========================================================
@@ -1892,7 +1916,7 @@ margin:12px 0;
   background:var(--bg-light);
 
   border:1px solid var(--border);
-  border-radius:10px;
+  border-radius:var(--radius-md);
 }
 
 .faq-card li{
@@ -1945,9 +1969,9 @@ color:var(--text-sub);
 .discord-note{
 background:var(--bg-main);
   border:1px solid var(--border);
-  border-radius:12px;
+  border-radius:var(--radius-lg);
   padding:10px 12px;
-  margin-bottom:10px;
+  margin-bottom:var(--space-lg);
   color:var(--text-sub);
   font-size:12px;
   line-height:1.4;
@@ -2038,7 +2062,7 @@ color:var(--text-sub);
   .title-row{
     flex-direction:column;
     align-items:stretch;
-    gap:2px;
+    gap:var(--space-2xs);
   }
 
   .title-top{
@@ -2084,13 +2108,13 @@ color:var(--text-sub);
       120px
       240px;
 
-    gap:14px;
+    gap:var(--space-2xl);
     align-items:center;
   }
 
   .team-player-header{
     padding:0 0 12px;
-    margin-bottom:12px;
+    margin-bottom:var(--space-xl);
     border-bottom:1px solid var(--border);
     font-weight:700;
     color:var(--text-sub);
@@ -2114,7 +2138,7 @@ color:var(--text-sub);
 @media (max-width:768px){
 
   .faq-card{
-    padding:16px;
+    padding:var(--space-3xl);
   }
 
   .faq-card h3{
@@ -2132,7 +2156,7 @@ color:var(--text-sub);
 
   .youtube-list-layout .youtube-card{
     grid-template-columns:120px minmax(0,1fr);
-    gap:10px;
+    gap:var(--space-lg);
   }
 
   .youtube-list-layout .youtube-thumb{
@@ -2191,7 +2215,7 @@ color:var(--text-sub);
 
   .birthday-day{
     min-height:90px;
-    padding:4px;
+    padding:var(--space-xs);
   }
 
   .birthday-event{
