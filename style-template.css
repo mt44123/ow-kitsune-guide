@@ -1,0 +1,52 @@
+/* =========================================================
+   THEME TEMPLATE
+   ========================================================= */
+
+body.THEME-NAME{
+
+  /* Accent Palette */
+
+  --accent-red:
+  --accent-pink:
+  --accent-orange:
+  --accent-gold:
+
+  --accent-purple:
+  --accent-blue:
+  --accent-cyan:
+  --accent-green:
+
+  --accent-white:
+  --accent-gray:
+  --accent-black:
+
+
+  /* Base UI */
+
+  --bg-dark:
+  --bg-main:
+  --bg-light:
+
+  --text-main:
+  --text-sub:
+  --text-muted:
+
+  --accent:
+  --border:
+
+
+  /* Transparent */
+
+  --surface-hover:
+  --surface-soft:
+  --line-soft:
+
+  --favorite-bg:
+
+  --favorite-glow-soft:
+  --favorite-glow-mid:
+  --favorite-glow-strong:
+
+  --search-glow:
+
+}

@@ -14,10 +14,16 @@
    ========================================================= */
 
 :root{
-  /* Accent Palette */
+
+  /* =========================
+     ACCENT PALETTE
+  ========================= */
+
   --accent-red:#FF0033;
   --accent-pink:#FFB6D9;
   --accent-white:#e5e5e9;
+  --accent-black:#111111;
+  --accent-gray:#777777;
   --accent-orange:#B84724;
   --accent-gold:#FFC422;
   --accent-cyan:#00C4C4;
@@ -25,7 +31,10 @@
   --accent-purple:#813AF2;
   --accent-green:#00D564;
 
-  /* Region Colors */
+  /* =========================
+     REGION COLORS
+  ========================= */
+
   --region-na:var(--accent-purple);
   --region-kr:var(--accent-red);
   --region-cn:var(--accent-gold);
@@ -34,18 +43,25 @@
   --region-emea:var(--accent-blue);
   --region-pac:var(--accent-pink);
   --region-other:var(--accent-cyan);
-  --region-unknown:#555;
+  --region-unknown:var(--accent-gray);
 
-  /* Platform Colors */
+  /* =========================
+     PLATFORM COLORS
+  ========================= */
+
   --platform-twitch:var(--accent-purple);
+  --platform-twitch-inactive:var(--accent-pink);
   --platform-youtube:var(--accent-red);
   --platform-bilibili:var(--accent-gold);
   --platform-discord:var(--accent-white);
   --platform-chzzk:var(--accent-green);
   --platform-soop:var(--accent-blue);
 
-  /* UI Colors */
-  --bg-dark:#111111;
+  /* =========================
+     BASE UI COLORS
+  ========================= */
+
+  --bg-dark:var(--accent-black);
   --bg-main:#111A2D;
   --bg-light:#1D253A;
 
@@ -56,7 +72,25 @@
   --accent:var(--accent-orange);
   --border:#3E4D6D;
 
-  /* Typography */
+  /* =========================
+     TRANSPARENT COLORS
+  ========================= */
+
+  --surface-hover:rgba(255,255,255,.08);
+  --surface-soft:rgba(255,255,255,.06);
+  --line-soft:rgba(255,255,255,.08);
+
+  --favorite-bg:rgba(184,71,36,.15);
+  --favorite-glow-strong:rgba(184,71,36,.7);
+  --favorite-glow-mid:rgba(184,71,36,.5);
+  --favorite-glow-soft:rgba(184,71,36,.3);
+
+  --search-glow:rgba(62,77,109,.8);
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
   --font-title:'Jura',sans-serif;
   --font-body:Arial,sans-serif;
 
@@ -81,20 +115,6 @@
 
   /* Motion */
   --transition-fast:.15s;
-
-  /* Theme-aware Transparent Colors */
-  --surface-hover:rgba(255,255,255,.08);
-  --surface-soft:rgba(255,255,255,.06);
-  --line-soft:rgba(255,255,255,.08);
-
-  --favorite-bg:rgba(184,71,36,.15);
-  --favorite-glow-strong:rgba(184,71,36,.7);
-  --favorite-glow-mid:rgba(184,71,36,.5);
-  --favorite-glow-soft:rgba(184,71,36,.3);
-
-  --search-glow:rgba(62,77,109,.8);
-
-
 }
 
 body.light-theme{
@@ -853,52 +873,52 @@ min-width:0;
 
 #clipsSubNav button.clip-tab-all{
 background:var(--platform-twitch);
-  color:white;
+  color:var(--accent-white);
 }
 
 #clipsSubNav button.clip-tab-goats{
 background:var(--accent);
-  color:white;
+  color:var(--accent-white);
 }
 
 #clipsSubNav button.clip-tab-jp{
 background:var(--platform-twitch);
-  color:white;
+  color:var(--accent-white)
 }
 
 #clipsSubNav button.clip-tab-chzzk{
 background:var(--platform-chzzk);
-  color:#111;
+  color:var(--accent-black);
 }
 
 #clipsSubNav button.clip-tab-soop{
 background:var(--platform-soop);
-  color:white;
+  color:var(--accent-white);
 }
 
 #clipsSubNav button.active.clip-tab-all{
 background:var(--platform-twitch);
-  color:white;
+  color:var(--accent-white);
 }
 
 #clipsSubNav button.active.clip-tab-goats{
 background:var(--accent);
-  color:white;
+  color:var(--accent-white);
 }
 
 #clipsSubNav button.active.clip-tab-jp{
 background:var(--platform-twitch);
-  color:white;
+  color:var(--accent-white);
 }
 
 #clipsSubNav button.active.clip-tab-chzzk{
 background:var(--platform-chzzk);
-  color:#111;
+  color:var(--accent-black);
 }
 
 #clipsSubNav button.active.clip-tab-soop{
 background:var(--platform-soop);
-  color:white;
+  color:var(--accent-white);
 }
 
 #clipsSubNav button{
@@ -1156,7 +1176,7 @@ text-decoration:underline;
 }
 
 .tw-inactive{
-color:var(--text-sub);
+color:var(--platform-twitch-inactive);
 }
 
 /* =========================================================
@@ -1372,8 +1392,8 @@ border-color:var(--platform-twitch);
 }
 
 .team-link-tag.tw-inactive{
-border-color:#777;
-  color:#B8A0E6;
+  border-color:var(--accent-gray);
+  color:var(--platform-twitch-inactive);
 }
 
 .team-link-tag.chz{
