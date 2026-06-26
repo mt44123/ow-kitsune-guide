@@ -50,7 +50,7 @@
   ========================= */
 
   --platform-twitch:var(--accent-purple);
-  --platform-twitch-inactive:var(--accent-pink);
+  --platform-twitch-inactive:var(--accent-gray);
   --platform-youtube:var(--accent-red);
   --platform-bilibili:var(--accent-gold);
   --platform-discord:var(--text-main);
