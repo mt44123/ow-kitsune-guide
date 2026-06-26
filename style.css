@@ -1980,3 +1980,20 @@ body.light-theme .faq-card a{
   }
 
 }
+
+/* =========================
+   LIVE Stream Title Display
+========================= */
+
+/* OFF */
+.hide-live-title .title{
+  display:none;
+}
+
+/* SHORT */
+.short-live-title .title{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:1;
+  overflow:hidden;
+}

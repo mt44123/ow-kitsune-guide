@@ -20,6 +20,8 @@ const faqButton =  document.getElementById("faqButton");
 
 const themeToggle = document.getElementById("themeToggle");
 
+const liveTitleModeButton =  document.getElementById("liveTitleModeButton");
+
 const notifyButton =  document.getElementById("notifyButton");
 const settingsButton =  document.getElementById("settingsButton");
 const settingsMenu =  document.getElementById("settingsMenu");
@@ -38,6 +40,35 @@ if (localStorage.getItem("theme") === "light") {
 }
 
 applyThemeButtonText_();
+
+let liveTitleMode =
+  localStorage.getItem("liveTitleMode") || "full";
+
+function applyLiveTitleMode_() {
+  document.body.classList.remove(
+    "short-live-title",
+    "hide-live-title"
+  );
+
+  if (liveTitleMode === "short") {
+    document.body.classList.add("short-live-title");
+  }
+
+  if (liveTitleMode === "off") {
+    document.body.classList.add("hide-live-title");
+  }
+
+  if (!liveTitleModeButton) return;
+
+  liveTitleModeButton.textContent =
+    liveTitleMode === "full"
+      ? "📝 LIVE Stream Titles: FULL"
+      : liveTitleMode === "short"
+        ? "📝 LIVE Stream Titles: SHORT"
+        : "📝 LIVE Stream Titles: OFF";
+}
+
+applyLiveTitleMode_();
 
 settingsButton?.addEventListener(
   "click",
@@ -76,6 +107,26 @@ themeToggle?.addEventListener("click", () => {
   );
 
   applyThemeButtonText_();
+});
+
+liveTitleModeButton?.addEventListener("click", () => {
+  liveTitleMode =
+    liveTitleMode === "full"
+      ? "short"
+      : liveTitleMode === "short"
+        ? "off"
+        : "full";
+
+  localStorage.setItem(
+    "liveTitleMode",
+    liveTitleMode
+  );
+
+  applyLiveTitleMode_();
+
+  if (isLiveView(currentView)) {
+    renderLive(currentData);
+  }
 });
 
 toolsButton?.addEventListener(
