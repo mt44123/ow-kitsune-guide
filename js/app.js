@@ -84,12 +84,11 @@ function applyClipLayout_() {
 
 applyClipLayout_();
 
-function updateViewActionButton_() {
+function updateViewActionButton_(view = currentView) {
   if (!viewActionButton) return;
 
-  viewActionButton.hidden = false;
-
-  if (isLiveView(currentView)) {
+  if (isLiveView(view)) {
+    viewActionButton.hidden = false;
 
     viewActionButton.textContent =
       liveTitleMode === "full"
@@ -101,7 +100,8 @@ function updateViewActionButton_() {
     return;
   }
 
-  if (isYoutubeView(currentView)) {
+  if (isYoutubeView(view)) {
+    viewActionButton.hidden = false;
 
     viewActionButton.textContent =
       youtubeLayout === "grid"
@@ -111,7 +111,8 @@ function updateViewActionButton_() {
     return;
   }
 
-  if (isClipView(currentView)) {
+  if (isClipView(view)) {
+    viewActionButton.hidden = false;
 
     viewActionButton.textContent =
       clipLayout === "grid"
@@ -122,6 +123,7 @@ function updateViewActionButton_() {
   }
 
   viewActionButton.hidden = true;
+  viewActionButton.textContent = "";
 }
 
 settingsButton?.addEventListener(
@@ -648,7 +650,7 @@ searchBox?.addEventListener("input", () => {
 
 function loadView(view) {
 
-  updateViewActionButton_();
+  updateViewActionButton_(view);
 
   if (isLiveView(view)) {
     loadLiveView(view);
