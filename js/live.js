@@ -158,8 +158,8 @@ function renderLive(players) {
   }
 
   app.innerHTML = players.map(p => `
-    <a class="card-link" href="${p.url}" target="_blank" rel="noopener">
-      <div class="card ${getLangClass(p)}">
+  <a class="card-link" href="${p.url}" target="_blank" rel="noopener">
+    <div class="card live-card ${getLangClass(p)}">
         <div class="player-name">
 
           <span
