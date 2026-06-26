@@ -22,6 +22,7 @@ const themeToggle = document.getElementById("themeToggle");
 
 const liveTitleModeButton =  document.getElementById("liveTitleModeButton");
 const youtubeLayoutButton =  document.getElementById("youtubeLayoutButton");
+const clipLayoutButton = document.getElementById("clipLayoutButton");
 
 const notifyButton =  document.getElementById("notifyButton");
 const settingsButton =  document.getElementById("settingsButton");
@@ -89,6 +90,25 @@ function applyYoutubeLayout_() {
 }
 
 applyYoutubeLayout_();
+
+let clipLayout =
+  localStorage.getItem("clipLayout") || "grid";
+
+function applyClipLayout_() {
+  document.body.classList.toggle(
+    "clip-list-layout",
+    clipLayout === "list"
+  );
+
+  if (!clipLayoutButton) return;
+
+  clipLayoutButton.textContent =
+    clipLayout === "list"
+      ? "🎞️ Clips Layout: LIST"
+      : "🎞️ Clips Layout: GRID";
+}
+
+applyClipLayout_();
 
 settingsButton?.addEventListener(
   "click",
@@ -161,6 +181,20 @@ youtubeLayoutButton?.addEventListener("click", () => {
   );
 
   applyYoutubeLayout_();
+});
+
+clipLayoutButton?.addEventListener("click", () => {
+  clipLayout =
+    clipLayout === "grid"
+      ? "list"
+      : "grid";
+
+  localStorage.setItem(
+    "clipLayout",
+    clipLayout
+  );
+
+  applyClipLayout_();
 });
 
 toolsButton?.addEventListener(

@@ -1,20 +1,44 @@
 /* =========================================================
-   OW KITSUNE GUIDE - ORGANIZED STYLE.CSS
+   OW KITSUNE GUIDE - STYLE.CSS
 
-   Round 6:
-   - Kept Round 5 organization and layout behavior
-   - Added theme-aware alpha / overlay variables
-   - Replaced hard-coded rgba(...) values where safe
-   - Improved future light-theme compatibility
-   - Did not intentionally change spacing, layout, or selector names
-   ========================================================= */
+  /* @SECTION: THEME */
 
+  /* @SECTION: RESET */
+
+  /* @SECTION: LAYOUT */
+
+  /* @SECTION: NAVIGATION */
+
+  /* @SECTION: SETTINGS */
+
+  /* @SECTION: COMMON-CARDS */
+
+  /* @SECTION: LIVE */
+
+  /* @SECTION: YOUTUBE */
+
+  /* @SECTION: CLIPS */
+
+  /* @SECTION: PLAYER-LINKS */
+
+  /* @SECTION: TEAMS */
+
+  /* @SECTION: BIRTHDAYS */
+
+  /* @SECTION: TOOLS */
+
+  /* @SECTION: FAQ */
+
+  /* @SECTION: UTILITIES */
+
+  /* @SECTION: RESPONSIVE */
+
+  /* @SECTION: REVIEW */
 /* =========================================================
    1. THEME
    ========================================================= */
-
+/* @SECTION: THEME */
 :root{
-
   /* =========================
      ACCENT PALETTE
   ========================= */
@@ -133,7 +157,7 @@ body.light-theme{
 /* =========================================================
    2. RESET / BASE
    ========================================================= */
-
+/* @SECTION: RESET */
 *,
 *::before,
 *::after{
@@ -173,7 +197,7 @@ max-width:100%;
 /* =========================================================
    3. LAYOUT / HEADER
    ========================================================= */
-
+/* @SECTION: LAYOUT */
 #app{
 margin-top:16px;
   display:grid;
@@ -296,7 +320,7 @@ position:relative;
 /* =========================================================
    4. NAVIGATION / SEARCH
    ========================================================= */
-
+/* @SECTION: NAVIGATION */
 .nav{
 display:flex;
   flex-wrap:wrap;
@@ -458,7 +482,7 @@ background:var(--accent);
 /* =========================================================
    5. SETTINGS
    ========================================================= */
-
+/* @SECTION: SETTINGS */
 .tools-link{
 background:none;
   border:none;
@@ -530,7 +554,7 @@ font-size:11px;
 /* =========================================================
    6. COMMON CARD
    ========================================================= */
-
+/* @SECTION: COMMON-CARDS */
 .card-link{
 color:inherit;
   text-decoration:none;
@@ -623,17 +647,7 @@ color:var(--accent);
 /* =========================================================
    7. LIVE
    ========================================================= */
-
-/* NA */
-
-/* ASIA */
-
-/* EMEA */
-
-/* CHINA */
-
-/* JP（独自） */
-
+/* @SECTION: LIVE */
 /* =========================
    LIVE Stream Title Display
 ========================= */
@@ -676,25 +690,10 @@ display:-webkit-box;
 /* =========================================================
    8. YOUTUBE
    ========================================================= */
-
+/* @SECTION: YOUTUBE */
 /* Shared media-card parts:
    YouTube and Clips can share typography/card primitives,
    but keep grid columns, thumbnail size, and layout modes separate. */
-
-
-/* NA = EN */
-
-/* KR */
-
-/* CN */
-
-/* EMEA = INTL */
-
-/* JP */
-
-/* PAC */
-
-/* SA */
 
 /* =========================
    YouTube Layout: LIST
@@ -850,6 +849,14 @@ min-width:0;
 /* =========================================================
    9. CLIPS
    ========================================================= */
+/* @SECTION: CLIPS */
+#app.clip-mode{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--space-xl);
+  width:100%;
+  max-width:100%;
+}
 
 #clipsSubNav button.clip-tab-all{
 background:var(--platform-twitch);
@@ -910,12 +917,57 @@ opacity:1;
   transform:translateY(-1px);
 }
 
+body.clip-list-layout.clip-view .youtube-card{
+  display:grid;
+  grid-template-columns:160px minmax(0,1fr);
+  gap:var(--space-xl);
+  align-items:start;
+}
+
+body.clip-list-layout.clip-view .youtube-thumb{
+  width:160px;
+  aspect-ratio:16 / 9;
+  height:auto;
+  object-fit:cover;
+  margin:0;
+  border-radius:10px 0 0 10px;
+}
+
+body.clip-list-layout.clip-view .youtube-info{
+  min-width:0;
+  padding:10px 10px 10px 0;
+}
+
+body.clip-list-layout.clip-view .youtube-title{
+  -webkit-line-clamp:2;
+}
+
+body.clip-list-layout.clip-view .youtube-subtitle{
+  -webkit-line-clamp:1;
+}
+
+@media (max-width:768px){
+
+  body.clip-list-layout.clip-view .youtube-card{
+    grid-template-columns:120px minmax(0,1fr);
+    gap:var(--space-lg);
+  }
+
+  body.clip-list-layout.clip-view .youtube-thumb{
+    width:120px;
+  }
+
+  body.clip-list-layout.clip-view .youtube-info{
+    padding:8px 8px 8px 0;
+  }
+
+}
+
 /* =========================================================
    10. PLAYER LINKS / TABLE
    ========================================================= */
-
+/* @SECTION: PLAYER-LINKS */
 /* PLAYER LINKS column width */
-
 /* PLAYER LINKS sticky Name column */
 
 .player-table-wrap{
@@ -1162,21 +1214,7 @@ color:var(--platform-twitch-inactive);
 /* =========================================================
    11. TEAMS
    ========================================================= */
-
-/* KR */
-
-/* JP */
-
-/* NA */
-
-/* EMEA */
-
-/* CN */
-
-/* PAC */
-
-/* SA */
-
+/* @SECTION: TEAMS */
 /* ===== TEAMS ===== */
 
 .player-table td.team-cell{
@@ -1483,15 +1521,13 @@ grid-column:1 / -1;
 /* =========================================================
    12. BIRTHDAYS
    ========================================================= */
-
+/* @SECTION: BIRTHDAYS */
 /* =========================
    BIRTHDAY CALENDAR
 ========================= */
 
 /* Region Colors */
-
 /* Today Highlight */
-
 /* Today */
 
 #app.birthday-calendar-mode{
@@ -1852,7 +1888,7 @@ content:"★ ";
 /* =========================================================
    13. TOOLS
    ========================================================= */
-
+/* @SECTION: TOOLS */
 .tools-page .card{
 padding:var(--space-3xl);
 }
@@ -1912,7 +1948,7 @@ margin-top:var(--space-sm);
 /* =========================================================
    14. FAQ
    ========================================================= */
-
+/* @SECTION: FAQ */
 /* =========================
    FAQ
 ========================= */
@@ -1991,7 +2027,7 @@ color:var(--text-main);
 /* =========================================================
    15. UTILITIES
    ========================================================= */
-
+/* @SECTION: UTILITIES */
 .updated{
 color:var(--text-muted);
   font-size:12px;
@@ -2042,7 +2078,7 @@ color:var(--text-sub);
 /* =========================================================
    16. RESPONSIVE
    ========================================================= */
-
+/* @SECTION: RESPONSIVE */
 @media (min-width:900px){
 
   #app{
@@ -2234,7 +2270,7 @@ color:var(--text-sub);
 /* =========================================================
    17. REVIEW / UNCATEGORIZED
    ========================================================= */
-
+/* @SECTION: REVIEW */
 /* CLIPS */
 @media (min-width:1600px){
 
@@ -2272,7 +2308,7 @@ color:var(--text-sub);
 /* CLIPS List */
 @media (max-width:899px){
 
-  body.youtube-list-layout.clip-view #app.clip-mode{
+  body.clip-list-layout.clip-view #app.clip-mode{
     grid-template-columns:1fr;
   }
 
