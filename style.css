@@ -2045,6 +2045,10 @@ color:var(--text-main);
   transition:var(--transition-fast);
 }
 
+.view-action-button[hidden]{
+  display:none;
+}
+
 .view-action-button:hover{
   background:var(--bg-light);
   border-color:var(--accent);
