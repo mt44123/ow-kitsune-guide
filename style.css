@@ -38,7 +38,7 @@
   --region-na:var(--accent-purple);
   --region-kr:var(--accent-red);
   --region-cn:var(--accent-gold);
-  --region-jp:var(--accent-white);
+  --region-jp:var(--text-main);
   --region-sa:var(--accent-green);
   --region-emea:var(--accent-blue);
   --region-pac:var(--accent-pink);
@@ -53,7 +53,7 @@
   --platform-twitch-inactive:var(--accent-pink);
   --platform-youtube:var(--accent-red);
   --platform-bilibili:var(--accent-gold);
-  --platform-discord:var(--accent-white);
+  --platform-discord:var(--text-main);
   --platform-chzzk:var(--accent-green);
   --platform-soop:var(--accent-blue);
 
@@ -64,28 +64,18 @@
   --bg-dark:var(--accent-black);
   --bg-main:#111A2D;
   --bg-light:#1D253A;
+  --border:#3E4D6D;
 
   --text-main:var(--accent-white);
   --text-sub:rgba(255,255,255,.7);
   --text-muted:rgba(255,255,255,.45);
 
   --accent:var(--accent-orange);
-  --border:#3E4D6D;
-
-  /* =========================
-     TRANSPARENT COLORS
-  ========================= */
-
-  --surface-hover:rgba(255,255,255,.08);
-  --surface-soft:rgba(255,255,255,.06);
-  --line-soft:rgba(255,255,255,.08);
 
   --favorite-bg:rgba(184,71,36,.15);
   --favorite-glow-strong:rgba(184,71,36,.7);
   --favorite-glow-mid:rgba(184,71,36,.5);
   --favorite-glow-soft:rgba(184,71,36,.3);
-
-  --search-glow:rgba(62,77,109,.8);
 
 /* =========================
    TYPOGRAPHY
@@ -128,22 +118,14 @@ body.light-theme{
 
   --border:#A98E74;
   --accent:var(--accent-orange);
-
-  --region-jp:var(--text-main);
-  --platform-discord:var(--text-main);
-  --platform-bilibili:#8A5A00;
-
-  --surface-hover:rgba(0,0,0,.06);
-  --surface-soft:rgba(0,0,0,.04);
-  --line-soft:rgba(0,0,0,.12);
-
+ 
   --favorite-bg:rgba(184,71,36,.12);
   --favorite-glow-strong:rgba(184,71,36,.35);
   --favorite-glow-mid:rgba(184,71,36,.24);
   --favorite-glow-soft:rgba(184,71,36,.16);
 
-  --search-glow:rgba(62,77,109,.35);
-
+   /* SP */
+  --accent-gold:#8A5A00;
 }
 
 /* =========================================================
@@ -446,13 +428,9 @@ box-shadow:none;
 }
 
 #searchToggle{
-background:var(--bg-main);
+  background:var(--bg-main);
   color:var(--text-main);
   font-weight:700;
-
-  box-shadow:
-    0 0 8px var(--border),
-    0 0 16px var(--search-glow);
 }
 
 .lang-switch{
@@ -537,7 +515,7 @@ width:100%;
 }
 
 .settings-item:hover{
-background:var(--surface-hover);
+    background:var(--border);
 }
 
 .settings-note{
@@ -1318,7 +1296,7 @@ display:flex;
   align-items:center;
   gap:var(--space-xl);
   padding:8px 0;
-  border-top:1px solid var(--line-soft);
+  border-top:1px solid var(--border);
 }
 
 .team-player-main{
@@ -1354,7 +1332,7 @@ display:block !important;
 
 .team-player-card-row{
 padding:14px 0;
-  border-bottom:1px solid var(--line-soft);
+  border-bottom:1px solid var(--border);
 }
 
 .team-player-card-row .team-player-name{
