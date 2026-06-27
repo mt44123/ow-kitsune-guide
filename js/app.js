@@ -48,26 +48,43 @@ function matchesSearch_(haystack, query) {
 const toolsButton =  document.getElementById("toolsButton");
 const faqButton =  document.getElementById("faqButton");
 
-const themeToggle = document.getElementById("themeToggle");
-
 const notifyButton =  document.getElementById("notifyButton");
 const settingsButton =  document.getElementById("settingsButton");
 const settingsMenu =  document.getElementById("settingsMenu");
 
-function applyThemeButtonText_() {
-  if (!themeToggle) return;
+const themeSelect = document.getElementById("themeSelect");
 
-  themeToggle.textContent =
-    document.body.classList.contains("light-theme")
-      ? "🎨 Theme: Light"
-      : "🎨 Theme: Dark";
+function applyTheme_(theme) {
+  document.body.classList.remove(
+    "light-theme",
+    "theme-midnight"
+  );
+
+  if (theme === "light") {
+    document.body.classList.add("light-theme");
+  }
+
+  if (theme === "midnight") {
+    document.body.classList.add("theme-midnight");
+  }
+
+  if (themeSelect) {
+    themeSelect.value = theme;
+  }
 }
 
-if (localStorage.getItem("theme") === "light") {
-  document.body.classList.add("light-theme");
-}
+let currentTheme =
+  localStorage.getItem("theme") || "dark";
 
-applyThemeButtonText_();
+applyTheme_(currentTheme);
+
+themeSelect?.addEventListener("change", () => {
+  currentTheme = themeSelect.value;
+
+  localStorage.setItem("theme", currentTheme);
+
+  applyTheme_(currentTheme);
+});
 
 let liveTitleMode =
   localStorage.getItem("liveTitleMode") || "full";
@@ -211,19 +228,6 @@ document.addEventListener(
     }
   }
 );
-
-themeToggle?.addEventListener("click", () => {
-  document.body.classList.toggle("light-theme");
-
-  localStorage.setItem(
-    "theme",
-    document.body.classList.contains("light-theme")
-      ? "light"
-      : "dark"
-  );
-
-  applyThemeButtonText_();
-});
 
 viewActionButton?.addEventListener("click", () => {
   if (isLiveView(currentView)) {

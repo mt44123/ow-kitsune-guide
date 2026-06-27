@@ -141,6 +141,53 @@ body.light-theme{
   --platform-bilibili:var(--accent-gold);
 }
 
+body.theme-midnight{
+
+  --accent:#B5B5B5;
+
+  --accent-red:#9A6068;
+  --accent-pink:#B8A7B0;
+  --accent-white:#E2E4E8;
+  --accent-black:#090B0F;
+  --accent-gray:#7A7F88;
+  --accent-orange:#8E786C;
+  --accent-gold:#A89C7A;
+  --accent-cyan:#7E9DA6;
+  --accent-blue:#7D95B8;
+  --accent-purple:#8B81A9;
+  --accent-green:#7FA08A;
+
+  --bg-dark:#090B0F;
+  --bg-main:#12161C;
+  --bg-light:#1B212A;
+
+  --border:#313844;
+
+  --text-main:#E2E4E8;
+  --text-sub:rgba(226,228,232,.72);
+  --text-muted:rgba(226,228,232,.45);
+
+  --favorite-bg:rgba(181,181,181,.12);
+  --favorite-glow-strong:rgba(181,181,181,.35);
+  --favorite-glow-mid:rgba(181,181,181,.22);
+  --favorite-glow-soft:rgba(181,181,181,.12);
+}
+
+.theme-select-wrap{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.theme-select{
+  width:100%;
+  padding:8px 10px;
+  border-radius:var(--radius-sm);
+  border:1px solid var(--border);
+  background:var(--bg-main);
+  color:var(--text-main);
+}
+
 /* =========================================================
    2. RESET / BASE
    ========================================================= */

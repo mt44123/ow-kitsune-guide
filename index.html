@@ -115,12 +115,14 @@
         🧪 Experimental. See FAQ for details.
       </div>
   
-      <button
-        id="themeToggle"
-        class="settings-item"
-      >
-        🎨 Theme: Dark
-      </button>
+      <label class="settings-item theme-select-wrap">
+        <span>🎨 Theme</span>
+        <select id="themeSelect" class="theme-select">
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+          <option value="midnight">Midnight</option>
+        </select>
+      </label>
 
       <button
         id="toolsButton"
