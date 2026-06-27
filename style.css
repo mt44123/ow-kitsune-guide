@@ -1244,8 +1244,8 @@ color:var(--platform-twitch-inactive);
 }
 
 .link-icon .platform-icon{
-  width:16px;
-  height:16px;
+  width:18px;
+  height:18px;
 }
 
 .link-icon:hover{
@@ -1401,10 +1401,6 @@ display:flex;
   align-items:center;
 }
 
-.team-player-links{
-display:flex;
-  gap:var(--space-sm);
-
 display:flex;
   flex-wrap:wrap;
   gap:var(--space-sm);
@@ -1466,51 +1462,6 @@ transition:var(--transition-fast);
   text-decoration:none;
 }
 
-.team-link-tag.tw{
-border-color:var(--platform-twitch);
-  color:var(--platform-twitch);
-}
-
-.team-link-tag.tw-inactive{
-  border-color:var(--accent-gray);
-  color:var(--platform-twitch-inactive);
-}
-
-.team-link-tag.chz{
-border-color:var(--platform-chzzk);
-  color:var(--platform-chzzk);
-}
-
-.team-link-tag.soop{
-border-color:var(--platform-soop);
-  color:var(--platform-soop);
-}
-
-.team-link-tag.bili{
-border-color:var(--platform-bilibili);
-  color:var(--platform-bilibili);
-}
-
-body.light-theme .team-link-tag.bili{
-border-color:var(--platform-bilibili);
-  color:var(--platform-bilibili);
-}
-
-.team-link-tag.yt{
-border-color:var(--platform-youtube);
-  color:var(--platform-youtube);
-}
-
-.team-link-tag.dc{
-border-color:var(--platform-discord);
-  color:var(--platform-discord);
-}
-
-body.light-theme .team-link-tag.dc{
-border-color:var(--text-main);
-  color:var(--text-main);
-}
-
 .team-link-tag:hover{
 transform:translateY(-1px);
   filter:brightness(1.15);
@@ -1563,6 +1514,44 @@ border-left:4px solid var(--region-sa);
 
 .teams-mode .discord-note{
 grid-column:1 / -1;
+}
+
+.team-link-icon .platform-icon{
+  width:18px;
+  height:18px;
+}
+
+.team-link-icon.tw-inactive{
+  opacity:.35;
+  filter:grayscale(1);
+}
+
+.team-player-links{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
+.team-link-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  width:20px;
+  height:20px;
+
+  padding:0;
+}
+
+.team-link-icon .platform-icon{
+  width:18px;
+  height:18px;
+}
+
+.team-link-icon.tw-inactive{
+  opacity:.35;
+  filter:grayscale(1);
 }
 
 /* =========================================================

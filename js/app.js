@@ -807,14 +807,37 @@ function linkDot(url, type) {
 function linkTag(url, label, cls) {
   if (!url) return "";
 
+  const type = cls || "";
+  const icons = {
+    tw: { name: "Twitch", src: "./icons/twitch.png" },
+    "tw-inactive": { name: "Twitch", src: "./icons/twitch.png" },
+    chz: { name: "CHZZK", src: "./icons/chzzk.png" },
+    soop: { name: "SOOP", src: "./icons/soop.png" },
+    bili: { name: "Bilibili", src: "./icons/bilibili.png" },
+    yt: { name: "YouTube", src: "./icons/youtube.png" },
+    dc: { name: "Discord", src: "./icons/discord.png" }
+  };
+
+  const icon = icons[type];
+
+  if (!icon) {
+    return "";
+  }
+
   return `
     <a
-      class="team-link-tag ${cls}"
+      class="team-link-tag team-link-icon ${type}"
       href="${url}"
       target="_blank"
       rel="noopener"
+      title="${icon.name}"
+      aria-label="${icon.name}"
     >
-      ${label}
+      <img
+        class="platform-icon"
+        src="${icon.src}"
+        alt="${icon.name}"
+      >
     </a>
   `;
 }
