@@ -2455,6 +2455,7 @@ color:var(--text-sub);
 
   .team-player-card-row{
     display:block;
+    text-align:left;
     padding:18px 0;
   }
 
