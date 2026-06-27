@@ -2485,27 +2485,20 @@ color:var(--text-sub);
 
   .team-player-nat,
   .team-player-age,
-  .team-player-role{
-    display:inline;
+  .team-player-role,
+  .team-player-last{
+    display:inline-block;
+    margin:0 4px;
     font-size:14px;
     line-height:1.4;
-  }
-
-  .team-player-nat::after,
-  .team-player-age::after{
-    content:" • ";
-    color:var(--text-muted);
-  }
-
-  .team-player-last{
-    display:flex;
-    justify-content:center;
-    margin:6px 0 8px;
+    vertical-align:middle;
   }
 
   .team-player-links{
+    display:flex;
     justify-content:center;
     gap:10px;
+    margin-top:8px;
   }
 
 }
