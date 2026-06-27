@@ -318,7 +318,13 @@ function renderTeamPlayers(teamName, players, regionName = null) {
 
   app.className = "team-detail-mode";
   
- const members = players
+ const official = players.find(
+  p =>
+    p.teamRegion === "● Team Official" &&
+    p.team === teamName
+);
+
+const members = players
   .filter(
     p =>
       p.team === teamName &&
@@ -364,6 +370,20 @@ function renderTeamPlayers(teamName, players, regionName = null) {
         >
           ${escapeHtml(teamName)}
         </a>
+      </div>
+      <div class="team-official-links">
+        ${
+          official
+            ? `
+                ${linkTag(official.youtubeUrl, "", "yt")}
+                ${linkTag(official.twitchUrl, "", "tw")}
+                ${linkTag(official.chzzkUrl, "", "chz")}
+                ${linkTag(official.soopUrl, "", "soop")}
+                ${linkTag(official.biliUrl, "", "bili")}
+                ${linkTag(official.discordUrl, "", "dc")}
+              `
+            : ""
+        }
       </div>
 
       <div class="team-detail-meta">
