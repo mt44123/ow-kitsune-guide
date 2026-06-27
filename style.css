@@ -1510,11 +1510,6 @@ border-left:4px solid var(--region-sa);
 grid-column:1 / -1;
 }
 
-.team-link-icon .platform-icon{
-  width:18px;
-  height:18px;
-}
-
 .team-link-icon.tw-inactive{
   opacity:.35;
   filter:grayscale(1);
