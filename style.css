@@ -1573,6 +1573,18 @@ grid-column:1 / -1;
   box-shadow:none;
 }
 
+.team-detail-title,
+.team-detail-meta,
+.team-official-links{
+  text-align:center;
+}
+
+.team-official-links{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+}
+
 /* =========================================================
    12. BIRTHDAYS
    ========================================================= */
@@ -2435,6 +2447,26 @@ color:var(--text-sub);
 
   .live-card .title{
     -webkit-line-clamp:2;
+  }
+
+}
+
+@media (max-width:900px){
+
+  .team-player-card-row{
+    text-align:center;
+  }
+
+  .team-player-name,
+  .team-player-nat,
+  .team-player-age,
+  .team-player-role,
+  .team-player-last{
+    text-align:center;
+  }
+
+  .team-player-links{
+    justify-content:center;
   }
 
 }
