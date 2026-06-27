@@ -355,7 +355,14 @@ function renderTeamPlayers(teamName, players, regionName = null) {
 
     <div class="team-detail-card ${getTeamRegionClass(members[0]?.teamRegion, teamName)}">
       <div class="team-detail-title">
-        ${escapeHtml(teamName)}
+        <a
+          class="team-link"
+          href="https://liquipedia.net/overwatch/${encodeURIComponent(teamName)}"
+          target="_blank"
+          rel="noopener"
+        >
+          ${escapeHtml(teamName)}
+        </a>
       </div>
 
       <div class="team-detail-meta">
