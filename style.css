@@ -1616,6 +1616,7 @@ color:var(--accent);
 
 .team-card{
   background:var(--bg-main);
+  border:1px solid var(--border);
   border-radius:var(--radius-lg);
   padding:var(--space-2xl);
   text-align:left;
@@ -1879,6 +1880,32 @@ grid-column:1 / -1;
   justify-content:flex-start;
   gap:10px;
 }
+
+.team-card,
+.team-detail-card,
+.team-back-button{
+  border:none;
+}
+
+.team-card.team-official,
+.team-card.team-kr,
+.team-card.team-jp,
+.team-card.team-pac,
+.team-card.team-cn,
+.team-card.team-na,
+.team-card.team-emea,
+.team-card.team-sa{
+  border-left:4px solid currentColor;
+}
+
+.team-card.team-official{ border-left-color:var(--region-unknown); }
+.team-card.team-kr{ border-left-color:var(--region-kr); }
+.team-card.team-jp{ border-left-color:var(--region-jp); }
+.team-card.team-pac{ border-left-color:var(--region-pac); }
+.team-card.team-cn{ border-left-color:var(--region-cn); }
+.team-card.team-na{ border-left-color:var(--region-na); }
+.team-card.team-emea{ border-left-color:var(--region-other); }
+.team-card.team-sa{ border-left-color:var(--region-sa); }
 
 /* =========================================================
    12. BIRTHDAYS
