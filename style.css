@@ -215,7 +215,6 @@ margin:4px 0;
 display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:var(--space-xl);
   flex-wrap:wrap;
 
 gap:0;
@@ -2039,7 +2038,9 @@ color:var(--text-main);
   align-items:center;
   justify-content:center;
 
-  padding:4px 10px;
+  min-width:72px;
+  min-height:36px;
+  padding:6px 12px;
 
   border:1px solid var(--border);
   border-radius:var(--radius-sm);
@@ -2047,11 +2048,18 @@ color:var(--text-main);
   background:var(--bg-main);
   color:var(--text-main);
 
-  font-size:12px;
+  font-size:13px;
   font-weight:700;
+  line-height:1;
 
   cursor:pointer;
   white-space:nowrap;
+
+  user-select:none;
+  -webkit-user-select:none;
+
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
 
   transition:var(--transition-fast);
 }
