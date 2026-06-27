@@ -197,7 +197,7 @@ body.theme-midnight{
 body.theme-limegreen{
 
   --accent:#CFFF08;
-  --accent-text:var(--bg-light);
+  --accent-text:var(--bg-main);
 
   --bg-dark:#090B0F;
   --bg-main:#12161C;
@@ -464,14 +464,11 @@ width:64px;
 .media-icon{
 font-size:20px;
   line-height:1;
-  filter:brightness(0) invert(1);
+  filter:none;
+  color:var(--text-main);
 }
 
 .nav button.active .media-icon{
-color:var(--accent-text);
-}
-
-body.light-theme .media-icon{
 color:var(--accent-text);
 }
 
