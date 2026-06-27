@@ -965,26 +965,59 @@ function formatViews(views) {
   return views.toLocaleString();
 }
 
-function getPlatformIcon_(platform) {
+function getPlatformIcons_(platform) {
   const text = String(platform || "").toUpperCase();
 
+  const icons = [];
+
   if (text.includes("TWITCH")) {
-    return "./icons/twitch.png";
+    icons.push({
+      name: "Twitch",
+      src: "./icons/twitch.png"
+    });
   }
 
   if (text.includes("CHZZK")) {
-    return "./icons/chzzk.png";
+    icons.push({
+      name: "CHZZK",
+      src: "./icons/chzzk.png"
+    });
   }
 
   if (text.includes("SOOP")) {
-    return "./icons/soop.png";
+    icons.push({
+      name: "SOOP",
+      src: "./icons/soop.png"
+    });
   }
 
   if (text.includes("BILIBILI")) {
-    return "./icons/bilibili.png";
+    icons.push({
+      name: "Bilibili",
+      src: "./icons/bilibili.png"
+    });
   }
 
-  return "";
+  return icons;
+}
+
+function renderPlatformIcons_(platform) {
+  const icons = getPlatformIcons_(platform);
+
+  if (!icons.length) {
+    return `<span>${platform || ""}</span>`;
+  }
+
+  return icons
+    .map(icon => `
+      <img
+        class="platform-icon"
+        src="${icon.src}"
+        alt="${icon.name}"
+        title="${icon.name}"
+      >
+    `)
+    .join("");
 }
 
 function updateAllButtonCounts(counts) {

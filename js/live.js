@@ -159,8 +159,8 @@ function renderLive(players) {
   }
 
   app.innerHTML = players.map(p => `
-  <a class="card-link" href="${p.url}" target="_blank" rel="noopener">
-    <div class="card live-card ${getLangClass(p)}">
+    <a class="card-link" href="${p.url}" target="_blank" rel="noopener">
+      <div class="card live-card ${getLangClass(p)}">
         <div class="player-name">
 
           <span
@@ -169,27 +169,24 @@ function renderLive(players) {
           >
             ${isFavorite_(p.name) ? "★" : "☆"}
           </span>
-        
-          ${p.name}
-        
+
+          ${escapeHtml(p.name || "")}
+
         </div>
-        <div class="meta">${p.team || "-"} │ ${p.role || "-"} │ ${p.nationality || "-"}</div>
+
+        <div class="meta">
+          ${escapeHtml(p.team || "-")} │ ${escapeHtml(p.role || "-")} │ ${escapeHtml(p.nationality || "-")}
+        </div>
+
         <div class="stats live-stats">
-          ${
-            getPlatformIcon_(p.platform)
-              ? `<img
-                  class="platform-icon"
-                  src="${getPlatformIcon_(p.platform)}"
-                  alt="${escapeHtml(p.platform || "")}"
-                  title="${escapeHtml(p.platform || "")}"
-                >`
-              : escapeHtml(p.platform || "")
-          }
+          <span class="platform-icons">
+            ${renderPlatformIcons_(p.platform)}
+          </span>
           <span>🕓${formatLiveFor(p.startedAt)}</span>
           <span>👥${Number(p.viewers || 0).toLocaleString()}</span>
         </div>
 
-        <div class="title">${p.title || ""}</div>
+        <div class="title">${escapeHtml(p.title || "")}</div>
       </div>
     </a>
   `).join("");
