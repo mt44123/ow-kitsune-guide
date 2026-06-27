@@ -2483,29 +2483,17 @@ color:var(--text-sub);
     margin-bottom:8px !important;
   }
 
-  .team-player-meta{
-  display:inline-flex;
-  align-items:center;
-  justify-content:flex-start;
-  gap:8px;
-
-  width:max-content;
-  max-width:100%;
-
-  margin:0 auto 8px;
-  text-align:left;
-}
-
-.team-player-nat,
-.team-player-age,
-.team-player-role,
-.team-player-last{
-  display:inline-flex;
-  align-items:center;
-  margin:0;
-  font-size:14px;
-  line-height:1.4;
-}
+  .team-player-nat,
+  .team-player-age,
+  .team-player-role,
+  .team-player-last{
+    display:inline-block;
+    vertical-align:middle;
+    margin:0 6px;
+    text-align:left;
+    font-size:14px;
+    line-height:1.4;
+  }
 
   .team-player-links{
     display:flex;
