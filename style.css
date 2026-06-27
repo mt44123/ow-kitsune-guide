@@ -467,8 +467,17 @@ font-size:20px;
   filter:brightness(0) invert(1);
 }
 
+.nav button.active .media-icon{
+filter:brightness(0);
+}
+
 body.light-theme .media-icon{
 filter:brightness(0);
+}
+
+.search-button.search-active .media-icon,
+#searchToggle.search-active .media-icon{
+  filter:brightness(0);
 }
 
 .sub-nav button{
