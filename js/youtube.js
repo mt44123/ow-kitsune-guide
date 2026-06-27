@@ -92,7 +92,7 @@ function filterYoutubeView(videos, view) {
 
   result = result.filter(v =>
     currentRoleFilter === "all" ||
-    v.role === currentRoleFilter
+    String(v.role || "").includes(currentRoleFilter)
   );
 
   if (view === "youtubehot") {

@@ -74,7 +74,7 @@ function getClientFilteredLivePlayers(players, view) {
     .filter(p => matchLiveViewClient(p, view))
     .filter(p =>
       currentRoleFilter === "all" ||
-      p.role === currentRoleFilter
+      String(p.role || "").includes(currentRoleFilter)
     )
     .sort((a, b) => {
       if (
