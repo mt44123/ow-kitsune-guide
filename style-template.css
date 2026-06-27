@@ -20,6 +20,23 @@ body.THEME-NAME{
   --accent-gray:
   --accent-black:
 
+  --region-na:var(--accent-purple);
+  --region-kr:var(--accent-red);
+  --region-cn:var(--accent-gold);
+  --region-jp:var(--text-main);
+  --region-sa:var(--accent-green);
+  --region-emea:var(--accent-blue);
+  --region-pac:var(--accent-pink);
+  --region-other:var(--accent-cyan);
+  --region-unknown:var(--accent-gray);
+
+  --platform-twitch:var(--accent-purple);
+  --platform-twitch-inactive:var(--accent-gray);
+  --platform-youtube:var(--accent-red);
+  --platform-bilibili:var(--accent-gold);
+  --platform-discord:var(--text-main);
+  --platform-chzzk:var(--accent-green);
+  --platform-soop:var(--accent-blue);
 
   /* Base UI */
 

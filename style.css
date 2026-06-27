@@ -171,6 +171,24 @@ body.theme-midnight{
   --favorite-glow-strong:rgba(181,181,181,.35);
   --favorite-glow-mid:rgba(181,181,181,.22);
   --favorite-glow-soft:rgba(181,181,181,.12);
+
+    --region-na:var(--accent-purple);
+  --region-kr:var(--accent-red);
+  --region-cn:var(--accent-gold);
+  --region-jp:var(--text-main);
+  --region-sa:var(--accent-green);
+  --region-emea:var(--accent-blue);
+  --region-pac:var(--accent-pink);
+  --region-other:var(--accent-cyan);
+  --region-unknown:var(--accent-gray);
+
+  --platform-twitch:var(--accent-purple);
+  --platform-twitch-inactive:var(--accent-gray);
+  --platform-youtube:var(--accent-red);
+  --platform-bilibili:var(--accent-gold);
+  --platform-discord:var(--text-main);
+  --platform-chzzk:var(--accent-green);
+  --platform-soop:var(--accent-blue);
 }
 
 .theme-select-wrap{
