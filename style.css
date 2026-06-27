@@ -415,6 +415,7 @@ body.theme-yellowblue{
   --bg-light:#FFFFFF;
 
   --border:#C6D2E6;
+  --card-shadow:rgba(198,210,230,.28);
 
   --text-main:#20345F;
   --text-sub:rgba(32,52,95,.72);
