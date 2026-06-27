@@ -2477,6 +2477,7 @@ color:var(--text-sub);
 
   .team-player-links{
     display:flex;
+    justify-content:flex-start;
     gap:10px;
     margin-top:8px;
   }
