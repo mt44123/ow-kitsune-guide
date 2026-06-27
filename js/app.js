@@ -1048,28 +1048,28 @@ function getPlatformIcons_(platform) {
 
   const icons = [];
 
-  if (text.includes("TWITCH")) {
+  if (text.includes("TWITCH") || text.includes("🟣")) {
     icons.push({
       name: "Twitch",
       src: "./icons/twitch.png"
     });
   }
 
-  if (text.includes("CHZZK")) {
+  if (text.includes("CHZZK") || text.includes("🟢")) {
     icons.push({
       name: "CHZZK",
       src: "./icons/chzzk.png"
     });
   }
 
-  if (text.includes("SOOP")) {
+  if (text.includes("SOOP") || text.includes("🔵")) {
     icons.push({
       name: "SOOP",
       src: "./icons/soop.png"
     });
   }
 
-  if (text.includes("BILIBILI")) {
+  if (text.includes("BILIBILI") || text.includes("🟡")) {
     icons.push({
       name: "Bilibili",
       src: "./icons/bilibili.png"
