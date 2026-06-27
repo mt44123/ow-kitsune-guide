@@ -1616,7 +1616,6 @@ color:var(--accent);
 
 .team-card{
   background:var(--bg-main);
-  border:1px solid var(--border);
   border-radius:var(--radius-lg);
   padding:var(--space-2xl);
   text-align:left;
