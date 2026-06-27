@@ -281,7 +281,11 @@ faqButton?.addEventListener(
 );
 
 const params = new URLSearchParams(window.location.search);
+
 let currentView = params.get("view") || "new";
+
+let currentRoleFilter =
+  localStorage.getItem("roleFilter") || "all";
 
 let currentData = [];
 let requestId = 0;
@@ -539,8 +543,10 @@ function updateNavState(view) {
   const playersButton = document.querySelector('[data-section="players"]');
 
   const liveSubNav = document.getElementById("liveSubNav");
+  const liveRoleSubNav = document.getElementById("liveRoleSubNav");
   const clipsSubNav = document.getElementById("clipsSubNav");
   const youtubeSubNav = document.getElementById("youtubeSubNav");
+  const youtubeRoleSubNav = document.getElementById("youtubeRoleSubNav");
   const playerSubNav = document.getElementById("playerSubNav");
 
   document
@@ -552,13 +558,16 @@ function updateNavState(view) {
     .forEach(b => b.classList.remove("active"));
 
   if (liveSubNav) liveSubNav.style.display = "none";
+  if (liveRoleSubNav) liveRoleSubNav.style.display = "none";
   if (clipsSubNav) clipsSubNav.style.display = "none";
   if (youtubeSubNav) youtubeSubNav.style.display = "none";
+  if (youtubeRoleSubNav) youtubeRoleSubNav.style.display = "none";
   if (playerSubNav) playerSubNav.style.display = "none";
 
   if (isLiveView(view)) {
     liveButton?.classList.add("active");
     if (liveSubNav) liveSubNav.style.display = "flex";
+    if (liveRoleSubNav) liveRoleSubNav.style.display = "flex";
 
     document
       .querySelector(`#liveSubNav button[data-view="${view}"]`)
@@ -575,6 +584,7 @@ function updateNavState(view) {
   } else if (isYoutubeView(view)) {
     youtubeButton?.classList.add("active");
     if (youtubeSubNav) youtubeSubNav.style.display = "flex";
+    if (youtubeRoleSubNav) youtubeRoleSubNav.style.display = "flex";
 
     document
       .querySelector(`#youtubeSubNav button[data-view="${view}"]`)
@@ -593,6 +603,10 @@ function updateNavState(view) {
       .querySelector(`.main-nav button[data-view="${view}"]`)
       ?.classList.add("active");
   }
+
+  document
+    .querySelectorAll(`[data-role-filter="${currentRoleFilter}"]`)
+    .forEach(b => b.classList.add("active"));
 
   document.body.classList.toggle(
     "has-sub-nav",
@@ -638,6 +652,20 @@ document
   .querySelectorAll(".sub-nav button")
   .forEach(button => {
     button.addEventListener("click", () => {
+
+      if (button.dataset.roleFilter) {
+        currentRoleFilter = button.dataset.roleFilter;
+
+        localStorage.setItem(
+          "roleFilter",
+          currentRoleFilter
+        );
+
+        updateNavState(currentView);
+        loadView(currentView);
+        return;
+      }
+
       currentView = button.dataset.view;
 
       if (isLiveView(currentView)) {

@@ -76,22 +76,27 @@ function filterYoutube(videos) {
 }
 
 function filterYoutubeView(videos, view) {
-  const result = [...videos];
-
-  if (view === "youtubehot") {
-    return sortByViews_(result);
-  }
+  let result = [...videos];
 
   if (view === "youtubegoats") {
-    return result.filter(v =>
+    result = result.filter(v =>
       getFavorites_().includes(v.name)
     );
   }
 
   if (view === "youtubejp") {
-    return result.filter(v =>
+    result = result.filter(v =>
       getNationalityRegionClass(v.nationality) === "region-jp"
     );
+  }
+
+  result = result.filter(v =>
+    currentRoleFilter === "all" ||
+    v.role === currentRoleFilter
+  );
+
+  if (view === "youtubehot") {
+    return sortByViews_(result);
   }
 
   return sortByDateDesc_(result);

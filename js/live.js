@@ -72,6 +72,10 @@ function renderLiveFromCache(view) {
 function getClientFilteredLivePlayers(players, view) {
   return players
     .filter(p => matchLiveViewClient(p, view))
+    .filter(p =>
+      currentRoleFilter === "all" ||
+      p.role === currentRoleFilter
+    )
     .sort((a, b) => {
       if (
         view === "viewers" ||
@@ -84,7 +88,10 @@ function getClientFilteredLivePlayers(players, view) {
         return Number(b.viewers || 0) - Number(a.viewers || 0);
       }
 
-      return getLiveMinutesClient(a.startedAt) - getLiveMinutesClient(b.startedAt);
+      return (
+        getLiveMinutesClient(a.startedAt) -
+        getLiveMinutesClient(b.startedAt)
+      );
     });
 }
 
