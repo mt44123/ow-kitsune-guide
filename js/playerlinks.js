@@ -156,7 +156,16 @@ app.innerHTML = `
                   : `${p.born ? getCurrentAgeFromBorn(p.born) : ""}${p.born ? ` (${p.born})` : ""}`
               }
             </td>
-            <td>  ${    p.lastStreamUrl      ? `<a class="last-stream-link" href="${p.lastStreamUrl}" target="_blank" rel="noopener">${p.lastStreamAge || "-"} ${p.lastStreamPlatform || ""}</a>`      : "-"  }</td>
+            <td>
+              ${
+                p.lastStreamUrl
+                  ? `<a class="last-stream-link" href="${p.lastStreamUrl}" target="_blank" rel="noopener">
+                      ${renderPlatformIcons_(p.lastStreamPlatform)}
+                      <span>${p.lastStreamAge || "-"}</span>
+                    </a>`
+                  : "-"
+              }
+            </td>
             <td>${linkDot(p.twitchUrl, p.twitchActive ? "tw" : "tw-inactive")}</td>
             <td>${linkDot(p.chzzkUrl, "chz")}</td>
             <td>${linkDot(p.soopUrl, "soop")}</td>
