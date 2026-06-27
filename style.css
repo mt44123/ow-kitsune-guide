@@ -145,17 +145,17 @@ body.theme-midnight{
 
   --accent:#6D6D6D;
 
-  --accent-red:#9A6068;
-  --accent-pink:#B8A7B0;
-  --accent-white:#E2E4E8;
+  --accent-red:#C86B74; 
+  --accent-pink:#D9B5C8;
+  --accent-white:#E6E8EC;
   --accent-black:#090B0F;
   --accent-gray:#7A7F88;
-  --accent-orange:#8E786C;
-  --accent-gold:#A89C7A;
-  --accent-cyan:#7E9DA6;
-  --accent-blue:#7D95B8;
-  --accent-purple:#8B81A9;
-  --accent-green:#7FA08A;
+  --accent-orange:#B88763;
+  --accent-gold:#C7B36A;
+  --accent-green:#73B58A;
+  --accent-cyan:#6FB5C0;
+  --accent-blue:#7A98D8;
+  --accent-purple:#9A88D6;
 
   --bg-dark:#090B0F;
   --bg-main:#12161C;
