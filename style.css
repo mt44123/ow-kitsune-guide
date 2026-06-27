@@ -382,6 +382,7 @@ filter:brightness(0);
 }
 
 .sub-nav button{
+  width:auto;
   height:32px;
   min-height:32px;
 
@@ -392,6 +393,8 @@ filter:brightness(0);
 
   border-radius:var(--radius-sm);
   white-space:nowrap;
+
+  flex:0 0 auto;
 }
 
 .sticky-header{
