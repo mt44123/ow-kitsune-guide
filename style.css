@@ -1555,6 +1555,24 @@ grid-column:1 / -1;
   opacity:.35;
   filter:grayscale(1);
 }
+
+@media (max-width:900px){
+
+  .team-player-links{
+    gap:8px;
+  }
+
+  .team-link-icon{
+    width:36px;
+    height:36px;
+  }
+
+  .team-link-icon .platform-icon{
+    width:18px;
+    height:18px;
+  }
+
+}
 /* =========================================================
    12. BIRTHDAYS
    ========================================================= */
