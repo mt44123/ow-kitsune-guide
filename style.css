@@ -1576,12 +1576,12 @@ grid-column:1 / -1;
 .team-detail-title,
 .team-detail-meta,
 .team-official-links{
-  text-align:center;
+  text-align:left;
 }
 
 .team-official-links{
   display:flex;
-  justify-content:center;
+  justify-content:flex-start;
   gap:10px;
 }
 
