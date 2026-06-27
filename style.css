@@ -2474,37 +2474,38 @@ color:var(--text-sub);
 @media (max-width:900px){
 
   .team-player-card-row{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:6px 8px;
+    display:block;
     text-align:center;
-    align-items:center;
+    padding:18px 0;
   }
 
   .team-player-name{
-    grid-column:1 / -1;
-    margin-bottom:2px !important;
+    margin-bottom:8px !important;
   }
 
   .team-player-nat,
   .team-player-age,
   .team-player-role{
+    display:inline;
     font-size:14px;
-    line-height:1.25;
+    line-height:1.4;
+  }
+
+  .team-player-nat::after,
+  .team-player-age::after{
+    content:" • ";
+    color:var(--text-muted);
   }
 
   .team-player-last{
-    grid-column:1 / -1;
     display:flex;
     justify-content:center;
-    margin-bottom:0;
+    margin:6px 0 8px;
   }
 
   .team-player-links{
-    grid-column:1 / -1;
     justify-content:center;
     gap:10px;
-    margin-top:4px;
   }
 
 }
