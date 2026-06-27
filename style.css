@@ -885,16 +885,6 @@ min-width:0;
   line-height:1;
 }
 
-#youtubeSubNav button.youtube-tab{
-  background:var(--platform-youtube);
-  color:var(--accent-white);
-}
-
-#youtubeSubNav button.youtube-tab-goats{
-  background:var(--accent);
-  color:var(--accent-white);
-}
-
 #youtubeSubNav button{
   opacity:.65;
 }
@@ -914,56 +904,6 @@ min-width:0;
   gap:var(--space-xl);
   width:100%;
   max-width:100%;
-}
-
-#clipsSubNav button.clip-tab-all{
-background:var(--platform-twitch);
-  color:var(--accent-white);
-}
-
-#clipsSubNav button.clip-tab-goats{
-background:var(--accent);
-  color:var(--accent-white);
-}
-
-#clipsSubNav button.clip-tab-jp{
-background:var(--platform-twitch);
-  color:var(--accent-white)
-}
-
-#clipsSubNav button.clip-tab-chzzk{
-background:var(--platform-chzzk);
-  color:var(--accent-black);
-}
-
-#clipsSubNav button.clip-tab-soop{
-background:var(--platform-soop);
-  color:var(--accent-white);
-}
-
-#clipsSubNav button.active.clip-tab-all{
-background:var(--platform-twitch);
-  color:var(--accent-white);
-}
-
-#clipsSubNav button.active.clip-tab-goats{
-background:var(--accent);
-  color:var(--accent-white);
-}
-
-#clipsSubNav button.active.clip-tab-jp{
-background:var(--platform-twitch);
-  color:var(--accent-white);
-}
-
-#clipsSubNav button.active.clip-tab-chzzk{
-background:var(--platform-chzzk);
-  color:var(--accent-black);
-}
-
-#clipsSubNav button.active.clip-tab-soop{
-background:var(--platform-soop);
-  color:var(--accent-white);
 }
 
 #clipsSubNav button{
