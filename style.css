@@ -197,6 +197,7 @@ body.theme-midnight{
 body.theme-limegreen{
 
   --accent:#CFFF08;
+  --accent-text:var(--bg-light);
 
   --bg-dark:#090B0F;
   --bg-main:#12161C;
