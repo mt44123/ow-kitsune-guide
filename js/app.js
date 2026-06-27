@@ -55,22 +55,43 @@ const settingsMenu =  document.getElementById("settingsMenu");
 const themeSelect = document.getElementById("themeSelect");
 
 function applyTheme_(theme) {
+
   document.body.classList.remove(
     "light-theme",
     "theme-midnight",
-    "theme-limegreen"
+
+    "theme-limegreen",
+    "theme-blackgold",
+    "theme-blackred",
+    "theme-blackgreen",
+    "theme-blazingblue",
+
+    "theme-whiteblue",
+    "theme-whitered",
+    "theme-yellowblue",
+    "theme-whitepink",
+    "theme-cyanpink"
   );
 
-  if (theme === "light") {
-    document.body.classList.add("light-theme");
-  }
+  const classMap = {
+    light: "light-theme",
+    midnight: "theme-midnight",
 
-  if (theme === "midnight") {
-    document.body.classList.add("theme-midnight");
-  }
+    limegreen: "theme-limegreen",
+    blackgold: "theme-blackgold",
+    blackred: "theme-blackred",
+    blackgreen: "theme-blackgreen",
+    blazingblue: "theme-blazingblue",
 
-  if (theme === "limegreen") {
-    document.body.classList.add("theme-limegreen");
+    whiteblue: "theme-whiteblue",
+    whitered: "theme-whitered",
+    yellowblue: "theme-yellowblue",
+    whitepink: "theme-whitepink",
+    cyanpink: "theme-cyanpink"
+  };
+
+  if (classMap[theme]) {
+    document.body.classList.add(classMap[theme]);
   }
 
   if (themeSelect) {
