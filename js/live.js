@@ -174,7 +174,21 @@ function renderLive(players) {
         
         </div>
         <div class="meta">${p.team || "-"} │ ${p.role || "-"} │ ${p.nationality || "-"}</div>
-        <div class="stats">${p.platform}　🕓${formatLiveFor(p.startedAt)}　👥${Number(p.viewers || 0).toLocaleString()}</div>
+        <div class="stats live-stats">
+          ${
+            getPlatformIcon_(p.platform)
+              ? `<img
+                  class="platform-icon"
+                  src="${getPlatformIcon_(p.platform)}"
+                  alt="${escapeHtml(p.platform || "")}"
+                  title="${escapeHtml(p.platform || "")}"
+                >`
+              : escapeHtml(p.platform || "")
+          }
+          <span>🕓${formatLiveFor(p.startedAt)}</span>
+          <span>👥${Number(p.viewers || 0).toLocaleString()}</span>
+        </div>
+
         <div class="title">${p.title || ""}</div>
       </div>
     </a>

@@ -965,6 +965,28 @@ function formatViews(views) {
   return views.toLocaleString();
 }
 
+function getPlatformIcon_(platform) {
+  const text = String(platform || "").toUpperCase();
+
+  if (text.includes("TWITCH")) {
+    return "./icons/twitch.png";
+  }
+
+  if (text.includes("CHZZK")) {
+    return "./icons/chzzk.png";
+  }
+
+  if (text.includes("SOOP")) {
+    return "./icons/soop.png";
+  }
+
+  if (text.includes("BILIBILI")) {
+    return "./icons/bilibili.png";
+  }
+
+  return "";
+}
+
 function updateAllButtonCounts(counts) {
 
   document
