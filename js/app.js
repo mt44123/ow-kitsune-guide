@@ -942,6 +942,9 @@ function getTeamRegionClass(region, team) {
 
   switch (String(region || "").toUpperCase()) {
 
+    case "● TEAM OFFICIAL":
+      return "team-official-account";
+    
     case "OFFICIAL OWCS":
       return "team-official";
 
@@ -965,10 +968,6 @@ function getTeamRegionClass(region, team) {
 
     case "SA":
       return "team-sa";
-
-    case "● TEAM OFFICIAL":
-      return "team-official-account";
-
   }
 }
 
