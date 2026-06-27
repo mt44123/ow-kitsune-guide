@@ -181,6 +181,7 @@ function isTeamListMember_(p) {
 
   return (
     region !== "★OWCS Creator" &&
+    region !== "● Team Official" &&
     region !== "HERO"
   );
 }
