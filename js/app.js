@@ -752,9 +752,13 @@ function loadView(view) {
 
 function getLangClass(p) {
   const platform = String(p.platform || "");
-  const language = String(p.language || "");
+  const language = String(p.language || "").toUpperCase();
 
-  if (platform.includes("CHZZK") || platform.includes("SOOP") || language === "KO") {
+  if (
+    platform.includes("CHZZK") ||
+    platform.includes("SOOP") ||
+    language === "KO"
+  ) {
     return "lang-kr";
   }
 
@@ -766,7 +770,10 @@ function getLangClass(p) {
     return "lang-en";
   }
 
-  if (platform.includes("BILIBILI")) {
+  if (
+    platform.includes("BILIBILI") ||
+    language.startsWith("ZH")
+  ) {
     return "lang-cn";
   }
 

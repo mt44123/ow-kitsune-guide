@@ -90,7 +90,7 @@ function getClientFilteredLivePlayers(players, view) {
 
 function matchLiveViewClient(p, view) {
   const platform = String(p.platform || "");
-  const language = String(p.language || "");
+  const language = String(p.language || "").toUpperCase();
 
   switch (view) {
     case "goats":
@@ -110,7 +110,10 @@ function matchLiveViewClient(p, view) {
       return language === "EN";
 
     case "cn":
-      return platform.includes("BILIBILI");
+      return (
+        platform.includes("BILIBILI") ||
+        language.startsWith("ZH")
+      );
 
     case "intl":
       return (
@@ -120,7 +123,8 @@ function matchLiveViewClient(p, view) {
         language &&
         language !== "KO" &&
         language !== "JA" &&
-        language !== "EN"
+        language !== "EN" &&
+        !language.startsWith("ZH")
       );
 
     default:
