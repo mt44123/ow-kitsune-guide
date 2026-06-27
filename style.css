@@ -76,6 +76,7 @@
   --bg-main:#111A2D;
   --bg-light:#1D253A;
   --border:#3E4D6D;
+  --card-shadow:rgba(62,77,109,.28);
 
   --text-main:var(--accent-white);
   --text-sub:rgba(255,255,255,.7);
@@ -83,7 +84,7 @@
 
   --accent:#FE5002;
   --accent-text:var(--text-main);
-
+  
   --favorite-bg:rgba(184,71,36,.15);
   --favorite-glow-strong:rgba(184,71,36,.7);
   --favorite-glow-mid:rgba(184,71,36,.5);
@@ -129,6 +130,7 @@ body.light-theme{
   --text-muted:#6B4A4A;
 
   --border:#A98E74;
+  --card-shadow:rgba(169,142,116,.28);
   --accent:var(--accent-orange);
   --accent-text:var(--text-main);
  
@@ -162,6 +164,7 @@ body.theme-midnight{
   --bg-light:#1B212A;
 
   --border:#313844;
+  --card-shadow:rgba(49,56,68,.28);
 
   --text-main:#E2E4E8;
   --text-sub:rgba(226,228,232,.72);
@@ -204,6 +207,7 @@ body.theme-limegreen{
   --bg-light:#1B212A;
 
   --border:#313844;
+  --card-shadow:rgba(49,56,68,.28);
 
   --text-main:#E2E4E8;
   --text-sub:rgba(226,228,232,.72);
@@ -226,7 +230,9 @@ body.theme-blackred{
   --bg-light:#1B212A;
 
   --border:#313844;
+  --card-shadow:rgba(49,56,68,.28);
 
+  
   --text-main:#E2E4E8;
   --text-sub:rgba(226,228,232,.72);
   --text-muted:rgba(226,228,232,.45);
@@ -248,6 +254,7 @@ body.theme-blackgreen{
   --bg-light:#1B212A;
 
   --border:#313844;
+  --card-shadow:rgba(49,56,68,.28);
 
   --text-main:#E2E4E8;
   --text-sub:rgba(226,228,232,.72);
@@ -270,6 +277,7 @@ body.theme-blackgold{
   --bg-light:#252525;
 
   --border:#4A3A12;
+  --card-shadow:rgba(74,58,18,.28);
 
   --text-main:#F2F2F2;
   --text-sub:rgba(242,242,242,.72);
@@ -292,6 +300,7 @@ body.theme-blazingblue{
   --bg-light:#12355C;
 
   --border:#1E4F7C;
+  --card-shadow:rgba(30,79,124,.28);
 
   --text-main:#F4F7FB;
   --text-sub:rgba(244,247,251,.72);
@@ -314,6 +323,7 @@ body.theme-whitered{
   --bg-light:#FFFFFF;
 
   --border:#D7DCE4;
+  --card-shadow:rgba(215,220,228,.18);
 
   --text-main:#1E232B;
   --text-sub:rgba(30,35,43,.72);
@@ -336,6 +346,7 @@ body.theme-whiteblue{
   --bg-light:#FFFFFF;
 
   --border:#C9D4E5;
+  --card-shadow:rgba(201,212,229,.18);
 
   --text-main:#1A2340;
   --text-sub:rgba(26,35,64,.72);
@@ -353,11 +364,12 @@ body.theme-whitepink{
   --accent:#F56CA4;
   --accent-text:#FFFFFF;
 
-  --bg-dark:#E8D7E2;
+  --bg-dark:#F8F4F7;
   --bg-main:#FCF9FB;
   --bg-light:#FFFFFF;
 
   --border:#E8D7E2;
+  --card-shadow:rgba(232,215,226,.18);
 
   --text-main:#4A3540;
   --text-sub:rgba(74,53,64,.72);
@@ -380,6 +392,7 @@ body.theme-cyanpink{
   --bg-light:#FFFFFF;
 
   --border:#BDECF3;
+  --card-shadow:rgba(140,210,225,.30);
 
   --text-main:#1A2730;
   --text-sub:rgba(26,39,48,.72);
@@ -1044,6 +1057,7 @@ width:100%;
   overflow:hidden;
   transition:var(--transition-fast);
   border-left:4px solid var(--border);
+  box-shadow:var(--card-shadow);
 }
 
 .youtube-card:hover{
@@ -1625,6 +1639,7 @@ color:var(--accent);
   cursor:pointer;
   color:var(--text-main);
   transition:var(--transition-fast);
+  box-shadow:var(--card-shadow);
 }
 
 .team-card:hover{
@@ -1670,6 +1685,7 @@ color:var(--text-muted);
   border:1px solid var(--border);
   border-radius:var(--radius-lg);
   padding:var(--space-3xl);
+  box-shadow:var(--card-shadow);
 }
 
 .team-detail-title{
@@ -2160,6 +2176,7 @@ display:grid;
   border:1px solid var(--border);
   border-left:4px solid var(--accent);
   border-radius:var(--radius-sm);
+  box-shadow:var(--card-shadow);
 
   padding:var(--space-md);
   margin-bottom:var(--space-md);
@@ -2217,6 +2234,7 @@ background:var(--bg-main);
   border-radius:var(--radius-md);
   padding:var(--space-xl);
   margin-bottom:var(--space-xl);
+  box-shadow:var(--card-shadow);
 }
 
 .birthday-today h3{
@@ -2247,6 +2265,7 @@ text-align:center;
 
 .birthday-today .birthday-event{
 text-align:center;
+box-shadow:var(--card-shadow);
 }
 
 .birthday-today .birthday-calendar-link{
@@ -2497,6 +2516,7 @@ background:var(--bg-main);
   color:var(--text-sub);
   font-size:12px;
   line-height:1.4;
+  box-shadow:var(--card-shadow);
 }
 
 .feedback-link{
