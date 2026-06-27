@@ -462,16 +462,14 @@ width:64px;
 }
 
 .media-icon{
-font-size:20px;
-  line-height:1;
-  filter:none;
+  width:22px;
+  height:22px;
+  display:block;
+  flex-shrink:0;
   color:var(--text-main);
 }
 
-.nav button.active .media-icon{
-color:var(--accent-text);
-}
-
+.nav button.active .media-icon,
 .search-button.search-active .media-icon,
 #searchToggle.search-active .media-icon{
   color:var(--accent-text);
