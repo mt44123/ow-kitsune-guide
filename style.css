@@ -1568,6 +1568,13 @@ grid-column:1 / -1;
   }
 
 }
+
+.player-table td.team-cell.team-official-account,
+.player-table td.name-cell.team-official-account{
+  box-shadow:inset 3px 0 0 var(--accent);
+}
+
+
 /* =========================================================
    12. BIRTHDAYS
    ========================================================= */

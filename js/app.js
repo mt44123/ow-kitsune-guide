@@ -966,6 +966,9 @@ function getTeamRegionClass(region, team) {
     case "SA":
       return "team-sa";
 
+    case "● TEAM OFFICIAL":
+      return "team-official-account";
+
   }
 }
 
