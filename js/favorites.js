@@ -23,9 +23,12 @@ function toggleFavorite_(name) {
     "favorites",
     JSON.stringify(favs)
   );
+
+  updateFavoriteCounts_();
 }
 
 function loadFavoritesView() {
+  updateFavoriteCounts_();
   const now = Date.now();
 
   pageTitle.textContent = "MY GOATS";

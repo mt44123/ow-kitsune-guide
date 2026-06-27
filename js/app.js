@@ -126,6 +126,37 @@ function updateViewActionButton_(view = currentView) {
   viewActionButton.textContent = "";
 }
 
+function updateFavoriteCounts_() {
+  const favs = getFavorites_();
+
+  const favoriteCount = favs.length;
+
+  const livePlayers = liveCache?.players || [];
+
+  const liveCount = livePlayers.filter(
+    p => favs.includes(p.name)
+  ).length;
+
+  document
+    .querySelectorAll(
+      '[data-view="goats"], [data-view="youtubegoats"], [data-view="goatclips"], [data-view="favorites"]'
+    )
+    .forEach(btn => {
+      switch (btn.dataset.view) {
+        case "goats":
+          btn.textContent = `★ (${liveCount})`;
+          break;
+
+        case "favorites":
+          btn.textContent = `★ (${favoriteCount})`;
+          break;
+
+        default:
+          btn.textContent = "★";
+      }
+    });
+}
+
 settingsButton?.addEventListener(
   "click",
   e => {
