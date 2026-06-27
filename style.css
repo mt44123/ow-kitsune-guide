@@ -2454,28 +2454,7 @@ color:var(--text-sub);
 @media (max-width:900px){
 
   .team-player-card-row{
-    text-align:center;
-  }
-
-  .team-player-name,
-  .team-player-nat,
-  .team-player-age,
-  .team-player-role,
-  .team-player-last{
-    text-align:center;
-  }
-
-  .team-player-links{
-    justify-content:center;
-  }
-
-}
-
-@media (max-width:900px){
-
-  .team-player-card-row{
     display:block;
-    text-align:center;
     padding:18px 0;
   }
 
@@ -2497,7 +2476,6 @@ color:var(--text-sub);
 
   .team-player-links{
     display:flex;
-    justify-content:center;
     gap:10px;
     margin-top:8px;
   }
