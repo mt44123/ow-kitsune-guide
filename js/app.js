@@ -938,13 +938,15 @@ function shortNationality(nationality) {
 }
 
 function getTeamRegionClass(region, team) {
-  team = String(team || "");
+  const r = String(region || "")
+    .replace(/^●\s*/, "")
+    .trim()
+    .toUpperCase();
 
-  switch (String(region || "").toUpperCase()) {
-
-    case "● TEAM OFFICIAL":
+  switch (r) {
+    case "TEAM OFFICIAL":
       return "team-official-account";
-    
+
     case "OFFICIAL OWCS":
       return "team-official";
 
@@ -968,6 +970,9 @@ function getTeamRegionClass(region, team) {
 
     case "SA":
       return "team-sa";
+
+    default:
+      return "team-unknown";
   }
 }
 
