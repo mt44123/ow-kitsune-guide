@@ -161,7 +161,7 @@ app.innerHTML = `
                 p.lastStreamUrl
                   ? `<a class="last-stream-link" href="${p.lastStreamUrl}" target="_blank" rel="noopener">
                       ${renderPlatformIcons_(p.lastStreamPlatform)}
-                      <span>${p.lastStreamAge || "-"}</span>
+                      <span>${cleanLastStreamAge_(p.lastStreamAge)}</span>
                     </a>`
                   : "-"
               }
@@ -180,6 +180,12 @@ app.innerHTML = `
 `;
 
   setupPlayerLinksSort();
+}
+
+function cleanLastStreamAge_(value) {
+  return String(value || "-")
+    .replace(/^[🟣🟢🔵🟡]\s*/, "")
+    .trim();
 }
 
 function formatHeroBirthday_(born) {
