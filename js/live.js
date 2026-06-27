@@ -139,15 +139,21 @@ function getLiveMinutesClient(startedAt) {
 }
 
 function filterPlayers(players) {
-  const keyword = searchBox.value.toLowerCase().trim();
-  if (!keyword) return players;
+  const query = searchBox.value;
+  if (!query.trim()) return players;
 
-  return players.filter(p =>
-    [p.name, p.team, p.role, p.nationality, p.platform, p.title]
-      .join(" ")
-      .toLowerCase()
-      .includes(keyword)
-  );
+  return players.filter(p => {
+    const haystack = [
+      p.name,
+      p.team,
+      p.role,
+      p.nationality,
+      p.platform,
+      p.title
+    ].join(" ");
+
+    return matchesSearch_(haystack, query);
+  });
 }
 
 function renderLive(players) {

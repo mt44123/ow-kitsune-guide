@@ -337,11 +337,11 @@ function compareText_(aValue, bValue, dir) {
 }
 
 function searchPlayerLinksTable() {
-  const keyword = searchBox.value.toLowerCase().trim();
+  const query = searchBox.value;
   const rows = document.querySelectorAll(".player-table tbody tr");
 
   rows.forEach(row => {
-    const text = [
+    const haystack = [
       row.dataset.teamRegion,
       row.dataset.team,
       row.dataset.name,
@@ -350,7 +350,7 @@ function searchPlayerLinksTable() {
     ].join(" ");
 
     row.style.display =
-      !keyword || text.includes(keyword)
+      matchesSearch_(haystack, query)
         ? ""
         : "none";
   });

@@ -16,6 +16,35 @@ voiceLine?.addEventListener(
 );
 
 const searchBox = document.getElementById("searchBox");
+
+function matchesSearch_(haystack, query) {
+  const tokens = String(query || "")
+    .toLowerCase()
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+
+  if (!tokens.length) return true;
+
+  const include = [];
+  const exclude = [];
+
+  tokens.forEach(token => {
+    if (token.startsWith("-") && token.length > 1) {
+      exclude.push(token.slice(1));
+    } else {
+      include.push(token);
+    }
+  });
+
+  const text = String(haystack || "").toLowerCase();
+
+  return (
+    include.every(word => text.includes(word)) &&
+    exclude.every(word => !text.includes(word))
+  );
+}
+
 const toolsButton =  document.getElementById("toolsButton");
 const faqButton =  document.getElementById("faqButton");
 

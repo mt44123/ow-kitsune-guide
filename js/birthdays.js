@@ -453,15 +453,19 @@ function getBirthdayAgeText_(p, year = null) {
 }
 
 function jumpBirthdaySearch_() {
-  const keyword = searchBox.value.toLowerCase().trim();
-  if (!keyword) return;
+  const query = searchBox.value;
+  if (!query.trim()) return;
 
-  const hit = currentData.find(p =>
-    [p.name, p.team]
-      .join(" ")
-      .toLowerCase()
-      .includes(keyword)
-  );
+  const hit = currentData.find(p => {
+    const haystack = [
+      p.name,
+      p.team,
+      p.role,
+      p.nationality
+    ].join(" ");
+
+    return matchesSearch_(haystack, query);
+  });
 
   if (!hit || !hit.born) return;
 
@@ -474,4 +478,3 @@ function jumpBirthdaySearch_() {
 
   renderBirthdayCalendar(currentData);
 }
-

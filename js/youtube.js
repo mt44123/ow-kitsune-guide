@@ -56,15 +56,23 @@ function loadYoutubeView(view) {
 }
 
 function filterYoutube(videos) {
-  const keyword = searchBox.value.toLowerCase().trim();
-  if (!keyword) return videos;
+  const query = searchBox.value;
+  if (!query.trim()) return videos;
 
-  return videos.filter(v =>
-    [v.name, v.team, v.role, v.nationality, v.rawTitle, v.titleJp, v.titleEn, v.date]
-      .join(" ")
-      .toLowerCase()
-      .includes(keyword)
-  );
+  return videos.filter(v => {
+    const haystack = [
+      v.name,
+      v.team,
+      v.role,
+      v.nationality,
+      v.rawTitle,
+      v.titleJp,
+      v.titleEn,
+      v.date
+    ].join(" ");
+
+    return matchesSearch_(haystack, query);
+  });
 }
 
 function filterYoutubeView(videos, view) {

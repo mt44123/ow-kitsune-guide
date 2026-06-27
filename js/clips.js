@@ -239,13 +239,11 @@ function setClipCache_(cacheKey, clips) {
 }
 
 function filterClips(clips) {
-  const keyword =
-    searchBox.value.toLowerCase().trim();
+  const query = searchBox.value;
+  if (!query.trim()) return clips;
 
-  if (!keyword) return clips;
-
-  return clips.filter(c =>
-    [
+  return clips.filter(c => {
+    const haystack = [
       c.name,
       c.team,
       c.role,
@@ -254,11 +252,10 @@ function filterClips(clips) {
       c.titleJp,
       c.titleEn,
       c.date
-    ]
-      .join(" ")
-      .toLowerCase()
-      .includes(keyword)
-  );
+    ].join(" ");
+
+    return matchesSearch_(haystack, query);
+  });
 }
 
 function filterClipView(clips, view) {
