@@ -382,8 +382,10 @@ filter:brightness(0);
 }
 
 .sub-nav button{
-  min-height:36px;
-  width:auto;
+  height:36px;
+  min-height:unset;
+
+  padding:0 12px;
 
   font-size:13px;
   font-weight:700;
@@ -2040,8 +2042,10 @@ color:var(--text-main);
   justify-content:center;
 
   min-width:72px;
-  min-height:36px;
-  padding:6px 12px;
+  height:36px;
+  min-height:unset;
+
+  padding:0 12px;
 
   background:var(--bg-main);
   color:var(--text-main);
