@@ -57,7 +57,8 @@ const themeSelect = document.getElementById("themeSelect");
 function applyTheme_(theme) {
   document.body.classList.remove(
     "light-theme",
-    "theme-midnight"
+    "theme-midnight",
+    "theme-limegreen"
   );
 
   if (theme === "light") {
@@ -66,6 +67,10 @@ function applyTheme_(theme) {
 
   if (theme === "midnight") {
     document.body.classList.add("theme-midnight");
+  }
+
+  if (theme === "limegreen") {
+    document.body.classList.add("theme-limegreen");
   }
 
   if (themeSelect) {

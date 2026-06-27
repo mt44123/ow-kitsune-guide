@@ -191,6 +191,27 @@ body.theme-midnight{
   --platform-soop:var(--accent-blue);
 }
 
+body.theme-limegreen{
+
+  --accent:#CFFF08;
+
+  --bg-dark:#090B0F;
+  --bg-main:#12161C;
+  --bg-light:#1B212A;
+
+  --border:#313844;
+
+  --text-main:#E2E4E8;
+  --text-sub:rgba(226,228,232,.72);
+  --text-muted:rgba(226,228,232,.45);
+
+  --favorite-bg:rgba(207,255,8,.12);
+  --favorite-glow-strong:rgba(207,255,8,.55);
+  --favorite-glow-mid:rgba(207,255,8,.38);
+  --favorite-glow-soft:rgba(207,255,8,.22);
+
+}
+
 .theme-select-wrap{
   display:flex;
   flex-direction:column;
