@@ -19,7 +19,6 @@
    @SECTION: FAQ
    @SECTION: UTILITIES
    @SECTION: RESPONSIVE
-   @SECTION: REVIEW
 
    ========================================================= */
 /* =========================================================
@@ -640,8 +639,6 @@ color:var(--accent);
    LIVE Stream Title Display
 ========================= */
 
-/* OFF */
-
 /* SHORT */
 
 .card.lang-en{
@@ -673,6 +670,20 @@ display:-webkit-box;
   -webkit-box-orient:vertical;
   -webkit-line-clamp:1;
   overflow:hidden;
+}
+
+.live-card,
+.live-card *{
+  min-width:0;
+}
+
+.live-card{
+  overflow:hidden;
+}
+
+.live-card .title{
+  overflow-wrap:anywhere;
+  word-break:break-word;
 }
 
 /* =========================================================
@@ -2293,11 +2304,6 @@ color:var(--text-sub);
 
 }
 
-/* =========================================================
-   17. REVIEW / UNCATEGORIZED
-   ========================================================= */
-/* @SECTION: REVIEW */
-/* CLIPS */
 @media (min-width:1600px){
 
   body.clip-view #app.clip-mode{
@@ -2356,4 +2362,12 @@ color:var(--text-sub);
   .birthday-month{
     font-size:24px;
   }
+}
+
+@media (max-width:900px){
+
+  .live-card .title{
+    -webkit-line-clamp:2;
+  }
+
 }
