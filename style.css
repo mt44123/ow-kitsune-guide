@@ -382,14 +382,15 @@ filter:brightness(0);
 }
 
 .sub-nav button{
-  height:36px;
-  min-height:unset;
+  height:32px;
+  min-height:32px;
 
-  padding:0 12px;
+  padding:2px 8px;
 
-  font-size:13px;
+  font-size:12px;
   font-weight:700;
 
+  border-radius:var(--radius-sm);
   white-space:nowrap;
 }
 
