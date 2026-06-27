@@ -2470,3 +2470,41 @@ color:var(--text-sub);
   }
 
 }
+
+@media (max-width:900px){
+
+  .team-player-card-row{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:6px 8px;
+    text-align:center;
+    align-items:center;
+  }
+
+  .team-player-name{
+    grid-column:1 / -1;
+    margin-bottom:2px !important;
+  }
+
+  .team-player-nat,
+  .team-player-age,
+  .team-player-role{
+    font-size:14px;
+    line-height:1.25;
+  }
+
+  .team-player-last{
+    grid-column:1 / -1;
+    display:flex;
+    justify-content:center;
+    margin-bottom:0;
+  }
+
+  .team-player-links{
+    grid-column:1 / -1;
+    justify-content:center;
+    gap:10px;
+    margin-top:4px;
+  }
+
+}
