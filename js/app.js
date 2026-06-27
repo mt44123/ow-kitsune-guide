@@ -744,9 +744,64 @@ function getLangClass(p) {
   return "lang-intl";
 }
 
-function linkDot(url, cls) {
-  if (!url) return `<span class="no-link">-</span>`;
-  return `<a class="${cls} link-dot" href="${url}" target="_blank" rel="noopener">●</a>`;
+function linkDot(url, type) {
+  if (!url) {
+    return `<span class="no-link">-</span>`;
+  }
+
+  const icons = {
+    tw: {
+      name: "Twitch",
+      src: "./icons/twitch.png"
+    },
+    "tw-inactive": {
+      name: "Twitch",
+      src: "./icons/twitch.png"
+    },
+    chz: {
+      name: "CHZZK",
+      src: "./icons/chzzk.png"
+    },
+    soop: {
+      name: "SOOP",
+      src: "./icons/soop.png"
+    },
+    bili: {
+      name: "Bilibili",
+      src: "./icons/bilibili.png"
+    },
+    yt: {
+      name: "YouTube",
+      src: "./icons/youtube.png"
+    },
+    dc: {
+      name: "Discord",
+      src: "./icons/discord.png"
+    }
+  };
+
+  const icon = icons[type];
+
+  if (!icon) {
+    return `<a class="link-dot ${type}" href="${url}" target="_blank" rel="noopener">●</a>`;
+  }
+
+  return `
+    <a
+      class="link-icon ${type}"
+      href="${url}"
+      target="_blank"
+      rel="noopener"
+      title="${icon.name}"
+      aria-label="${icon.name}"
+    >
+      <img
+        class="platform-icon"
+        src="${icon.src}"
+        alt="${icon.name}"
+      >
+    </a>
+  `;
 }
 
 function linkTag(url, label, cls) {
