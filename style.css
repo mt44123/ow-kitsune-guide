@@ -375,7 +375,7 @@ body.theme-cyanpink{
   --accent:#FF4F78;
   --accent-text:#FFFFFF;
 
-  --bg-dark:#EAFBFD;
+  --bg-dark:#BDECF3;
   --bg-main:#F7FEFF;
   --bg-light:#FFFFFF;
 
@@ -412,6 +412,9 @@ body.theme-yellowblue{
   --favorite-glow-mid:rgba(245,208,0,.24);
   --favorite-glow-soft:rgba(245,208,0,.16);
 
+  --accent-gold:#F5D000;
+  --region-cn:var(--accent-gold);
+  --platform-bilibili:var(--accent-gold);
 }
 
 .theme-select-wrap{
