@@ -1259,6 +1259,10 @@ color:var(--platform-twitch-inactive);
   display:inline-flex;
   align-items:center;
 }
+
+.last-stream-link span{
+  line-height:1;
+}
 /* =========================================================
    11. TEAMS
    ========================================================= */
