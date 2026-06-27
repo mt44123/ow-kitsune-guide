@@ -67,7 +67,7 @@ function renderLiquipediaNote_() {
     <div class="discord-note">
        <p>
       *Click player or team names to open Liquipedia.<br>
-      プレイヤー名・チーム名をクリックするとLiquipediaを開きます。
+      プレイヤー・チーム名をクリックしてLiquipediaを開きます。
       </p>
       
       <details class="playerlinks-help">
