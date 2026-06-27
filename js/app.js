@@ -338,7 +338,7 @@ function stopFakeProgress() {
 
 const titles = {
   new: "NEW",
-  goats: "★",
+  goats: "★MY GOATS",
   viewers: "HOT",
   kr: "KR",
   en: "EN",
@@ -347,12 +347,12 @@ const titles = {
   intl: "INTL",
   
   youtube: "NEW",
-  youtubegoats: "★",
+  youtubegoats: "★MY GOATS",
   youtubehot: "HOT",
   youtubejp: "JP",
 
   clips: "NEW",
-  goatclips: "★",
+  goatclips: "★MY GOATS",
   hotclips: "HOT",
   jpclips: "JP",
   soopclips: "SOOP NEW",
@@ -365,7 +365,7 @@ const titles = {
   teams: "TEAMS",
   playerlinks: "ALL",
   birthdays: "BIRTHDAYS",
-  favorites: "MY GOATS"
+  favorites: "★MY GOATS"
   };
 
 let voiceLines = [];
