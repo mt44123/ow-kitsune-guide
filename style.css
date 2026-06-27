@@ -82,6 +82,7 @@
   --text-muted:rgba(255,255,255,.45);
 
   --accent:var(--accent-orange);
+  --accent-text:var(--text-main);
 
   --favorite-bg:rgba(184,71,36,.15);
   --favorite-glow-strong:rgba(184,71,36,.7);
@@ -129,6 +130,7 @@ body.light-theme{
 
   --border:#A98E74;
   --accent:var(--accent-orange);
+  --accent-text:var(--text-main);
  
   --favorite-bg:rgba(184,71,36,.12);
   --favorite-glow-strong:rgba(184,71,36,.35);
@@ -142,8 +144,6 @@ body.light-theme{
 }
 
 body.theme-midnight{
-
-  --accent:#6D6D6D;
 
   --accent-red:#C86B74; 
   --accent-pink:#D9B5C8;
@@ -166,6 +166,9 @@ body.theme-midnight{
   --text-main:#E2E4E8;
   --text-sub:rgba(226,228,232,.72);
   --text-muted:rgba(226,228,232,.45);
+
+  --accent:#6D6D6D;
+  --accent-text:var(--text-main);
 
   --favorite-bg:rgba(181,181,181,.12);
   --favorite-glow-strong:rgba(181,181,181,.35);
@@ -422,7 +425,7 @@ font-size:11px;
 
 .nav button.active{
 background:var(--accent);
-  color:var(--text-main);
+  color:var(--accent-text);
   font-weight:bold;
 }
 
@@ -528,7 +531,7 @@ display:none;
 #searchToggle.search-active{
 box-shadow:none;
   background:var(--accent);
-  color:var(--text-main);
+  color:var(--accent-text);
   font-weight:bold;
 }
 
@@ -556,6 +559,7 @@ background:var(--bg-main);
 
 .lang-switch button.active{
 background:var(--accent);
+color:var(--accent-text);
 }
 
 /* =========================================================
