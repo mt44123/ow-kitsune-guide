@@ -2968,30 +2968,6 @@ color:var(--text-sub);
 
 }
 
-.mute-button{
-  border:none;
-  background:transparent;
-  color:var(--text-muted);
-  cursor:pointer;
-  font-size:16px;
-  padding:0 4px;
-}
-
-.mute-button:hover{
-  color:var(--accent);
-}
-
-.mute-button.active{
-  color:var(--accent);
-}
-
-.card-name-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-}
-
 .card-name-row{
   display:flex;
   align-items:center;
@@ -3000,13 +2976,23 @@ color:var(--text-sub);
 }
 
 .mute-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
   border:none;
   background:none;
   padding:2px 4px;
+
   cursor:pointer;
   color:var(--text-muted);
-  font-size:16px;
   line-height:1;
+}
+
+.mute-button .media-icon{
+  width:18px;
+  height:18px;
+  display:block;
 }
 
 .mute-button:hover,
@@ -3045,6 +3031,12 @@ color:var(--text-sub);
   border-radius:var(--radius-sm);
   cursor:pointer;
   padding:4px 8px;
+}
+
+.muted-player-row button .media-icon{
+  width:18px;
+  height:18px;
+  display:block;
 }
 
 .muted-player-row button:hover,
