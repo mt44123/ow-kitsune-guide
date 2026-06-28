@@ -16,6 +16,11 @@ voiceLine?.addEventListener(
 );
 
 const searchBox = document.getElementById("searchBox");
+const mutedPlayersButton =
+  document.getElementById("mutedPlayersButton");
+
+const mutedPlayersPanel =
+  document.getElementById("mutedPlayersPanel");
 
 function matchesSearch_(haystack, query) {
   const tokens = String(query || "")
@@ -75,6 +80,8 @@ function toggleMutedPlayer_(name) {
     MUTED_PLAYERS_KEY,
     JSON.stringify(next)
   );
+  updateMutedPlayersButton_();
+  renderMutedPlayersPanel_();
 }
 
 function muteButton_(name) {
@@ -104,6 +111,89 @@ document.addEventListener("click", e => {
 
   loadView(currentView);
 }, true);
+
+document.addEventListener("click", e => {
+  const button = e.target.closest("[data-unmute-player]");
+  if (!button) return;
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  toggleMutedPlayer_(button.dataset.unmutePlayer);
+
+  updateMutedPlayersButton_();
+  renderMutedPlayersPanel_();
+  loadView(currentView);
+});
+
+document.addEventListener("click", e => {
+  const button = e.target.closest("#clearMutedPlayersButton");
+  if (!button) return;
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  localStorage.setItem(
+    MUTED_PLAYERS_KEY,
+    JSON.stringify([])
+  );
+
+  updateMutedPlayersButton_();
+  renderMutedPlayersPanel_();
+  loadView(currentView);
+});
+
+function updateMutedPlayersButton_() {
+  if (!mutedPlayersButton) return;
+
+  const count = getMutedPlayers_().length;
+
+  mutedPlayersButton.textContent =
+    `🙈 Muted Players (${count})`;
+}
+
+function renderMutedPlayersPanel_() {
+  if (!mutedPlayersPanel) return;
+
+  const muted = getMutedPlayers_();
+
+  if (!muted.length) {
+    mutedPlayersPanel.innerHTML =
+      `<div class="muted-empty">No muted players.</div>`;
+    return;
+  }
+
+  mutedPlayersPanel.innerHTML = `
+    ${muted.map(name => `
+      <div class="muted-player-row">
+        <span>${escapeHtml(name)}</span>
+        <button
+          type="button"
+          data-unmute-player="${escapeHtml(name)}"
+        >
+          ✕
+        </button>
+      </div>
+    `).join("")}
+
+    <button
+      type="button"
+      class="muted-clear-button"
+      id="clearMutedPlayersButton"
+    >
+      Clear All
+    </button>
+  `;
+}
+
+mutedPlayersButton?.addEventListener("click", e => {
+  e.stopPropagation();
+
+  settingsMenu.classList.add("settings-hidden");
+  mutedPlayersPanel?.classList.add("settings-hidden");
+
+  renderMutedPlayersPanel_();
+});
 
 const toolsButton =  document.getElementById("toolsButton");
 const faqButton =  document.getElementById("faqButton");
@@ -181,6 +271,8 @@ themeSelect?.addEventListener("change", () => {
 
   applyTheme_(currentTheme);
 });
+
+updateMutedPlayersButton_();
 
 let liveTitleMode =
   localStorage.getItem("liveTitleMode") || "full";

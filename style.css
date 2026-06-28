@@ -2992,6 +2992,13 @@ color:var(--text-sub);
   gap:8px;
 }
 
+.card-name-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
 .mute-button{
   border:none;
   background:none;
@@ -3005,4 +3012,48 @@ color:var(--text-sub);
 .mute-button:hover,
 .mute-button.active{
   color:var(--accent);
+}
+
+.muted-players-panel{
+  padding:8px 10px;
+  border-top:1px solid var(--border);
+
+  max-height:220px;
+  overflow-y:auto;
+}
+
+.muted-empty{
+  color:var(--text-muted);
+  font-size:12px;
+}
+
+.muted-player-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:6px 0;
+  color:var(--text-main);
+  font-size:12px;
+}
+
+.muted-player-row button,
+.muted-clear-button{
+  border:none;
+  background:var(--button-bg);
+  color:var(--text-main);
+  border-radius:var(--radius-sm);
+  cursor:pointer;
+  padding:4px 8px;
+}
+
+.muted-player-row button:hover,
+.muted-clear-button:hover{
+  background:var(--accent);
+  color:var(--accent-text);
+}
+
+.muted-clear-button{
+  width:100%;
+  margin-top:8px;
 }
