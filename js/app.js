@@ -45,6 +45,66 @@ function matchesSearch_(haystack, query) {
   );
 }
 
+const MUTED_PLAYERS_KEY = "mutedPlayers";
+
+function getMutedPlayers_() {
+  try {
+    return JSON.parse(
+      localStorage.getItem(MUTED_PLAYERS_KEY) || "[]"
+    );
+  } catch (e) {
+    return [];
+  }
+}
+
+function isMutedPlayer_(name) {
+  return getMutedPlayers_().includes(String(name || ""));
+}
+
+function toggleMutedPlayer_(name) {
+  const playerName = String(name || "");
+  if (!playerName) return;
+
+  const muted = getMutedPlayers_();
+
+  const next = muted.includes(playerName)
+    ? muted.filter(n => n !== playerName)
+    : [...muted, playerName];
+
+  localStorage.setItem(
+    MUTED_PLAYERS_KEY,
+    JSON.stringify(next)
+  );
+}
+
+function muteButton_(name) {
+  const muted = isMutedPlayer_(name);
+
+  return `
+    <button
+      class="mute-button ${muted ? "active" : ""}"
+      type="button"
+      data-mute-player="${escapeHtml(name)}"
+      title="${muted ? "Unmute" : "Mute"}"
+    >
+      ${muted ? "🙉" : "🙈"}
+    </button>
+  `;
+}
+
+document.addEventListener("click", e => {
+  const button = e.target.closest("[data-mute-player]");
+  if (!button) return;
+
+  e.preventDefault();
+  e.stopPropagation();
+  e.stopImmediatePropagation();
+
+  toggleMutedPlayer_(button.dataset.mutePlayer);
+
+  loadView(currentView);
+}, true);
+
 const toolsButton =  document.getElementById("toolsButton");
 const faqButton =  document.getElementById("faqButton");
 

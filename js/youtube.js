@@ -57,9 +57,18 @@ function loadYoutubeView(view) {
 
 function filterYoutube(videos) {
   const query = searchBox.value;
-  if (!query.trim()) return videos;
+  const muted = getMutedPlayers_();
 
   return videos.filter(v => {
+
+    if (muted.includes(v.name)) {
+      return false;
+    }
+
+    if (!query.trim()) {
+      return true;
+    }
+
     const haystack = [
       v.name,
       v.team,
@@ -156,14 +165,18 @@ function renderYoutubeCard_(v) {
             </div>
           `).join("")}
 
-          <div class="youtube-player">
-            <span
-              class="favorite-star ${isFavorite_(v.name) ? "active" : ""}"
-              data-favorite-name="${escapeHtml(v.name || "")}"
-            >
-              ${isFavorite_(v.name) ? "★" : "☆"}
+          <div class="youtube-player card-name-row">
+            <span>
+              <span
+                class="favorite-star ${isFavorite_(v.name) ? "active" : ""}"
+                data-favorite-name="${escapeHtml(v.name || "")}"
+              >
+                ${isFavorite_(v.name) ? "★" : "☆"}
+              </span>
+              ${escapeHtml(v.name || "-")}
             </span>
-            ${escapeHtml(v.name || "-")}
+
+            ${muteButton_(v.name)}
           </div>
 
           <div class="youtube-meta">

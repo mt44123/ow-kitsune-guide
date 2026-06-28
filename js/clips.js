@@ -240,9 +240,18 @@ function setClipCache_(cacheKey, clips) {
 
 function filterClips(clips) {
   const query = searchBox.value;
-  if (!query.trim()) return clips;
+  const muted = getMutedPlayers_();
 
   return clips.filter(c => {
+
+    if (muted.includes(c.name)) {
+      return false;
+    }
+
+    if (!query.trim()) {
+      return true;
+    }
+
     const haystack = [
       c.name,
       c.team,
@@ -346,14 +355,18 @@ function renderClipCard_(c) {
             </div>
           `).join("")}
 
-          <div class="youtube-player">
-            <span
-              class="favorite-star ${isFavorite_(c.name) ? "active" : ""}"
-              data-favorite-name="${escapeHtml(c.name || "")}"
-            >
-              ${isFavorite_(c.name) ? "★" : "☆"}
+          <div class="youtube-player card-name-row">
+            <span>
+              <span
+                class="favorite-star ${isFavorite_(c.name) ? "active" : ""}"
+                data-favorite-name="${escapeHtml(c.name || "")}"
+              >
+                ${isFavorite_(c.name) ? "★" : "☆"}
+              </span>
+              ${escapeHtml(c.name || "-")}
             </span>
-            ${escapeHtml(c.name || "-")}
+
+            ${muteButton_(c.name)}
           </div>
 
           <div class="youtube-meta">

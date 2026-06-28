@@ -151,9 +151,18 @@ function getLiveMinutesClient(startedAt) {
 
 function filterPlayers(players) {
   const query = searchBox.value;
-  if (!query.trim()) return players;
+  const muted = getMutedPlayers_();
 
   return players.filter(p => {
+
+    if (muted.includes(p.name)) {
+      return false;
+    }
+
+    if (!query.trim()) {
+      return true;
+    }
+
     const haystack = [
       p.name,
       p.team,
@@ -178,16 +187,20 @@ function renderLive(players) {
   app.innerHTML = players.map(p => `
     <a class="card-link" href="${p.url}" target="_blank" rel="noopener">
       <div class="card live-card ${getLangClass(p)}">
-        <div class="player-name">
+        <div class="player-name card-name-row">
 
-          <span
-            class="favorite-star ${isFavorite_(p.name) ? "active" : ""}"
-            data-favorite-name="${escapeHtml(p.name || "")}"
-          >
-            ${isFavorite_(p.name) ? "★" : "☆"}
+          <span>
+            <span
+              class="favorite-star ${isFavorite_(p.name) ? "active" : ""}"
+              data-favorite-name="${escapeHtml(p.name || "")}"
+            >
+              ${isFavorite_(p.name) ? "★" : "☆"}
+            </span>
+
+            ${escapeHtml(p.name || "")}
           </span>
 
-          ${escapeHtml(p.name || "")}
+          ${muteButton_(p.name)}
 
         </div>
 
