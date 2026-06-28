@@ -85,6 +85,7 @@ function applyTheme_(theme) {
 
     whiteblue: "theme-whiteblue",
     whitered: "theme-whitered",
+    whiteorange: "theme-whiteorange",
     yellowblue: "theme-yellowblue",
     whitepink: "theme-whitepink",
     cyanpink: "theme-cyanpink"
