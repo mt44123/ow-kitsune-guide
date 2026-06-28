@@ -85,43 +85,122 @@ function toggleMutedPlayer_(name) {
 }
 
 function muteButton_(name) {
-  const muted = isMutedPlayer_(name);
-
   return `
     <button
-      class="mute-button ${muted ? "active" : ""}"
+      class="mute-button"
       type="button"
-      data-mute-player="${escapeHtml(name)}"
-      title="${muted ? "Unmute" : "Mute"}"
-      aria-label="${muted ? "Unmute" : "Mute"}"
+      data-player-menu="${escapeHtml(name)}"
+      aria-label="Player menu"
+      title="Player menu"
     >
-      ${
-        muted
-          ? `
-          <svg class="media-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
-            <path fill="currentColor" d="M620-520q25 0 42.5-17.5T680-580q0-25-17.5-42.5T620-640q-25 0-42.5 17.5T560-580q0 25 17.5 42.5T620-520Zm-280 0q25 0 42.5-17.5T400-580q0-25-17.5-42.5T340-640q-25 0-42.5 17.5T280-580q0 25 17.5 42.5T340-520Zm263.5 221.5Q659-337 684-400h-66q-22 37-58.5 58.5T480-320q-43 0-79.5-21.5T342-400h-66q25 63 80.5 101.5T480-260q68 0 123.5-38.5ZM324-111.5Q251-143 197-197t-85.5-127Q80-397 80-480t31.5-156Q143-709 197-763t127-85.5Q397-880 480-880t156 31.5Q709-817 763-763t85.5 127Q880-563 880-480t-31.5 156Q817-251 763-197t-127 85.5Q563-80 480-80t-156-31.5Z"/>
-          </svg>`
-          : `
-          <svg class="media-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
-            <path fill="currentColor" d="M480-260q39 0 75-17.5t67-52.5l-44-40q-22 24-47 36.5T480-321q-26 0-51-12.5T382-370l-44 40q32 35 67.5 52.5T480-260ZM324-111.5Q251-143 197-197t-85.5-127Q80-397 80-480t31.5-156Q143-709 197-763t127-85.5Q397-880 480-880t156 31.5Q709-817 763-763t85.5 127Q880-563 880-480t-31.5 156Q817-251 763-197t-127 85.5Q563-80 480-80t-156-31.5Zm86-399q28-30.5 39-72.5l-58-14q-5 22-17.5 39.5T340-540q-21 0-33.5-17.5T289-597l-58 14q11 42 39 72.5t70 30.5q42 0 70-30.5Zm280 0q28-30.5 39-72.5l-58-14q-5 22-17.5 39.5T620-540q-21 0-33.5-17.5T569-597l-58 14q11 42 39 72.5t70 30.5q42 0 70-30.5Z"/>
-          </svg>`
-      }
+      ⋯
     </button>
   `;
 }
 
+let playerContextMenu = null;
+
+function openPlayerMenu_(button, player) {
+
+  closePlayerMenu_();
+
+  playerContextMenu = document.createElement("div");
+  playerContextMenu.className = "player-context-menu";
+
+  playerContextMenu.innerHTML = `
+    <button data-action="liquipedia">
+      Open Liquipedia
+    </button>
+
+    <button data-action="mute">
+      ${
+        isMutedPlayer_(player.name)
+          ? "Unmute Player"
+          : "Mute Player"
+      }
+    </button>
+  `;
+
+  document.body.appendChild(playerContextMenu);
+
+  const rect = button.getBoundingClientRect();
+
+  playerContextMenu.style.left =
+    `${rect.right + window.scrollX - 180}px`;
+
+  playerContextMenu.style.top =
+     `${rect.bottom + window.scrollY + 6}px`;
+
+    playerContextMenu.addEventListener("click", e => {
+    const menuButton = e.target.closest("button");
+    if (!menuButton) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const action = menuButton.dataset.action;
+
+    if (action === "liquipedia") {
+      const url =
+        player.liquipedia ||
+        `https://liquipedia.net/overwatch/${encodeURIComponent(player.name)}`;
+
+      window.open(url, "_blank", "noopener");
+    }
+
+    if (action === "mute") {
+      toggleMutedPlayer_(player.name);
+
+      closePlayerMenu_();
+
+      if (isLiveView(currentView)) {
+        renderLive(filterPlayers(currentData));
+      } else if (isYoutubeView(currentView)) {
+        renderYoutube(filterYoutube(currentData));
+      } else if (isClipView(currentView)) {
+        renderClips(filterClips(currentData));
+      }
+
+      return;
+    }
+
+    closePlayerMenu_();
+      });
+    }
+
 document.addEventListener("click", e => {
-  const button = e.target.closest("[data-mute-player]");
+  if (
+    playerContextMenu &&
+    !playerContextMenu.contains(e.target) &&
+    !e.target.closest("[data-player-menu]")
+  ) {
+    closePlayerMenu_();
+  }
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    closePlayerMenu_();
+  }
+});
+
+function closePlayerMenu_() {
+  playerContextMenu?.remove();
+  playerContextMenu = null;
+}
+
+document.addEventListener("click", e => {
+  const button = e.target.closest("[data-player-menu]");
   if (!button) return;
 
   e.preventDefault();
   e.stopPropagation();
-  e.stopImmediatePropagation();
 
-  toggleMutedPlayer_(button.dataset.mutePlayer);
-
-  loadView(currentView);
-}, true);
+  openPlayerMenu_(button, {
+    name: button.dataset.playerMenu,
+    liquipedia: button.dataset.liquipedia || ""
+  });
+});
 
 document.addEventListener("click", e => {
   const button = e.target.closest("[data-unmute-player]");

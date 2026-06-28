@@ -3053,3 +3053,43 @@ color:var(--text-sub);
   width:100%;
   margin-top:8px;
 }
+
+.player-context-menu{
+  position:absolute;
+  min-width:180px;
+
+  background:var(--bg-light);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+
+  box-shadow:0 10px 24px rgba(0,0,0,.28);
+
+  padding:6px;
+  z-index:5000;
+}
+
+.player-context-menu button{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  padding:10px 12px;
+
+  border:none;
+  border-radius:var(--radius-sm);
+
+  background:transparent;
+  color:var(--text-main);
+
+  font-size:13px;
+  font-weight:600;
+  text-align:left;
+
+  cursor:pointer;
+}
+
+.player-context-menu button:hover{
+  background:var(--button-bg);
+  color:var(--accent);
+}
