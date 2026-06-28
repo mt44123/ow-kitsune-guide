@@ -19,7 +19,7 @@ function loadYoutubeView(view) {
     "Updates every 30 min";
 
     currentData = filterYoutubeView(youtubeCache, view);
-    renderYoutube(currentData);
+    renderYoutube(filterYoutube(currentData));
     return;
   }
 
@@ -44,7 +44,7 @@ function loadYoutubeView(view) {
       youtubeCacheTime = Date.now();
 
       currentData = filterYoutubeView(youtubeCache, view);
-      renderYoutube(currentData);
+      renderYoutube(filterYoutube(currentData));
     })
     .catch(error => {
       if (currentRequest !== requestId) return;

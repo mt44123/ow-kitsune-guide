@@ -65,7 +65,7 @@ function renderLiveFromCache(view) {
   checkLiveNotifications_(players);
 
   currentData = getClientFilteredLivePlayers(players, view);
-  renderLive(currentData);
+  renderLive(filterPlayers(currentData));
   updateFavoriteCounts_();
 }
 

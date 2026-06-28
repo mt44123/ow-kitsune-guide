@@ -43,7 +43,7 @@ function loadClipsView(view) {
     "Updates daily";
 
     currentData = filterClipView(cached.data, view);
-    renderClips(currentData);
+    renderClips(filterClips(currentData));
     return;
   }
 
@@ -72,7 +72,7 @@ function loadClipsView(view) {
       setClipCache_(source.cacheKey, clips);
 
       currentData = filterClipView(clips, view);
-      renderClips(currentData);
+      renderClips(filterClips(currentData));
     })
     .catch(error => {
       if (currentRequest !== requestId) return;
