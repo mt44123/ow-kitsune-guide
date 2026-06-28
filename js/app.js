@@ -134,7 +134,16 @@ document.addEventListener("click", e => {
 
   updateMutedPlayersButton_();
   renderMutedPlayersPanel_();
-  loadView(currentView);
+
+  if (isLiveView(currentView)) {
+    renderLive(filterPlayers(currentData));
+
+  } else if (isYoutubeView(currentView)) {
+    renderYoutube(filterYoutube(currentData));
+
+  } else if (isClipView(currentView)) {
+    renderClips(filterClips(currentData));
+  }
 });
 
 document.addEventListener("click", e => {
