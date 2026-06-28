@@ -425,9 +425,8 @@ document.addEventListener(
       !settingsMenu.contains(e.target) &&
       e.target !== settingsButton
     ) {
-      settingsMenu.classList.add(
-        "settings-hidden"
-      );
+      settingsMenu.classList.add("settings-hidden");
+      mutedPlayersPanel?.classList.add("settings-hidden");
     }
   }
 );
