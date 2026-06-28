@@ -74,7 +74,7 @@ function applyTheme_(theme) {
     "theme-yellowblue",
     "theme-whitepink",
     "theme-cyanpink",
-    "theme-whitepurple"
+    "theme-dreampurple"
     
   );
 
@@ -96,7 +96,7 @@ function applyTheme_(theme) {
     yellowblue: "theme-yellowblue",
     whitepink: "theme-whitepink",
     cyanpink: "theme-cyanpink",
-    whitepurple: "theme-whitepurple"
+    dreampurple: "theme-dreampurple"
     
   };
 
