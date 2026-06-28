@@ -64,11 +64,12 @@ function applyTheme_(theme) {
     "theme-blackgold",
     "theme-blackred",
     "theme-blackgreen",
+    "theme-blackorange",
     "theme-blazingblue",
 
     "theme-whiteblue",
     "theme-whitered",
-    "theme-whiteorange",
+    
     "theme-yellowblue",
     "theme-whitepink",
     "theme-cyanpink"
@@ -82,11 +83,11 @@ function applyTheme_(theme) {
     blackgold: "theme-blackgold",
     blackred: "theme-blackred",
     blackgreen: "theme-blackgreen",
+    blackorange: "theme-blackorange",
     blazingblue: "theme-blazingblue",
 
     whiteblue: "theme-whiteblue",
-    whitered: "theme-whitered",
-    whiteorange: "theme-whiteorange",
+    whitered: "theme-whitered",    
     yellowblue: "theme-yellowblue",
     whitepink: "theme-whitepink",
     cyanpink: "theme-cyanpink"

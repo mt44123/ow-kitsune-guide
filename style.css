@@ -444,27 +444,27 @@ body.theme-yellowblue{
   --platform-bilibili:var(--accent-gold);
 }
 
-body.theme-whiteorange{
+body.theme-blackorange{
 
   --accent:#FF5A00;
   --accent-text:#FFFFFF;
-  --button-bg:#FFE4D2;
+  --button-bg:#3A2317;
 
-  --bg-dark:#F1E7DF;
-  --bg-main:#FFF7F2;
-  --bg-light:#FFFFFF;
+  --bg-dark:#0A0A0A;
+  --bg-main:#171717;
+  --bg-light:#252525;
 
-  --border:#E8CFC0;
-  --card-shadow:rgba(232,207,192,.24);
+  --border:#4D3628;
+  --card-shadow:rgba(77,54,40,.28);
 
-  --text-main:#252525;
-  --text-sub:rgba(37,37,37,.72);
-  --text-muted:rgba(37,37,37,.45);
+  --text-main:#F2F2F2;
+  --text-sub:rgba(242,242,242,.72);
+  --text-muted:rgba(242,242,242,.45);
 
-  --favorite-bg:rgba(255,90,0,.10);
-  --favorite-glow-strong:rgba(255,90,0,.35);
-  --favorite-glow-mid:rgba(255,90,0,.24);
-  --favorite-glow-soft:rgba(255,90,0,.16);
+  --favorite-bg:rgba(255,90,0,.12);
+  --favorite-glow-strong:rgba(255,90,0,.55);
+  --favorite-glow-mid:rgba(255,90,0,.38);
+  --favorite-glow-soft:rgba(255,90,0,.22);
 
 }
 
