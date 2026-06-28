@@ -517,6 +517,59 @@ body.theme-whitepurple{
 
 }
 
+body.theme-whitegray{
+  --accent-red:#C86B74; 
+  --accent-pink:#D9B5C8;
+  --accent-white:#E6E8EC;
+  --accent-black:#090B0F;
+  --accent-gray:#7A7F88;
+  --accent-orange:#B88763;
+  --accent-gold:#C7B36A;
+  --accent-green:#73B58A;
+  --accent-cyan:#6FB5C0;
+  --accent-blue:#7A98D8;
+  --accent-purple:#9A88D6;
+
+  --accent:#5A616B;
+  --accent-text:#FFFFFF;
+  --button-bg:#ECEEF2;
+
+  --bg-dark:#E4E7EC;
+  --bg-main:#F5F7FA;
+  --bg-light:#FFFFFF;
+
+  --border:#D4D9E1;
+  --card-shadow:rgba(212,217,225,.18);
+
+  --text-main:#23272F;
+  --text-sub:rgba(35,39,47,.72);
+  --text-muted:rgba(35,39,47,.45);
+
+  --favorite-bg:rgba(90,97,107,.10);
+  --favorite-glow-strong:rgba(90,97,107,.35);
+  --favorite-glow-mid:rgba(90,97,107,.24);
+  --favorite-glow-soft:rgba(90,97,107,.16);
+
+    --region-na:var(--accent-purple);
+  --region-kr:var(--accent-red);
+  --region-cn:var(--accent-gold);
+  --region-jp:var(--text-main);
+  --region-sa:var(--accent-green);
+  --region-emea:var(--accent-blue);
+  --region-pac:var(--accent-pink);
+  --region-other:var(--accent-cyan);
+  --region-unknown:var(--accent-gray);
+
+  --platform-twitch:var(--accent-purple);
+  --platform-twitch-inactive:var(--accent-gray);
+  --platform-youtube:var(--accent-red);
+  --platform-bilibili:var(--accent-gold);
+  --platform-discord:var(--text-main);
+  --platform-chzzk:var(--accent-green);
+  --platform-soop:var(--accent-blue);
+
+}
+
 .theme-select-wrap{
   display:flex;
   flex-direction:column;

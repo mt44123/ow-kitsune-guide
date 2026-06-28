@@ -68,9 +68,9 @@ function applyTheme_(theme) {
     "theme-blackpurple",
     "theme-blazingblue",
 
+    "theme-whitegray",
     "theme-whiteblue",
-    "theme-whitered",
-    
+    "theme-whitered",    
     "theme-yellowblue",
     "theme-whitepink",
     "theme-cyanpink",
@@ -90,6 +90,7 @@ function applyTheme_(theme) {
     blackpurple: "theme-blackpurple",
     blazingblue: "theme-blazingblue",
 
+    Whitegray: "theme-whitegray",
     whiteblue: "theme-whiteblue",
     whitered: "theme-whitered",    
     yellowblue: "theme-yellowblue",
