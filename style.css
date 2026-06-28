@@ -492,6 +492,30 @@ body.theme-blackpurple{
 
 }
 
+body.theme-whitepurple{
+
+  --accent:#8B4DDB;
+  --accent-text:#FFFFFF;
+  --button-bg:#EFE4FF;
+
+  --bg-dark:#E8DFF5;
+  --bg-main:#F7F4FC;
+  --bg-light:#FFFFFF;
+
+  --border:#D9CBEF;
+  --card-shadow:rgba(217,203,239,.18);
+
+  --text-main:#33264D;
+  --text-sub:rgba(51,38,77,.72);
+  --text-muted:rgba(51,38,77,.45);
+
+  --favorite-bg:rgba(139,77,219,.10);
+  --favorite-glow-strong:rgba(139,77,219,.35);
+  --favorite-glow-mid:rgba(139,77,219,.24);
+  --favorite-glow-soft:rgba(139,77,219,.16);
+
+}
+
 .theme-select-wrap{
   display:flex;
   flex-direction:column;

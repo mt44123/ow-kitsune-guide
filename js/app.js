@@ -73,7 +73,9 @@ function applyTheme_(theme) {
     
     "theme-yellowblue",
     "theme-whitepink",
-    "theme-cyanpink"
+    "theme-cyanpink",
+    "theme-whitepurple"
+    
   );
 
   const classMap = {
@@ -92,7 +94,9 @@ function applyTheme_(theme) {
     whitered: "theme-whitered",    
     yellowblue: "theme-yellowblue",
     whitepink: "theme-whitepink",
-    cyanpink: "theme-cyanpink"
+    cyanpink: "theme-cyanpink",
+    whitepurple: "theme-whitepurple"
+    
   };
 
   if (classMap[theme]) {
