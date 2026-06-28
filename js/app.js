@@ -205,8 +205,7 @@ function renderMutedPlayersPanel_() {
 mutedPlayersButton?.addEventListener("click", e => {
   e.stopPropagation();
 
-  settingsMenu.classList.add("settings-hidden");
-  mutedPlayersPanel?.classList.add("settings-hidden");
+  mutedPlayersPanel?.classList.toggle("settings-hidden");
 
   renderMutedPlayersPanel_();
 });
