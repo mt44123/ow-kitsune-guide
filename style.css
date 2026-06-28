@@ -494,25 +494,25 @@ body.theme-blackpurple{
 
 body.theme-whitepurple{
 
-  --accent:#8B4DDB;
+  --accent:#8A5CF5;
   --accent-text:#FFFFFF;
-  --button-bg:#EFE4FF;
+  --button-bg:#EFE8FF;
 
-  --bg-dark:#E8DFF5;
-  --bg-main:#F7F4FC;
+  --bg-dark:#EADCF8;
+  --bg-main:#F8F4FD;
   --bg-light:#FFFFFF;
 
-  --border:#D9CBEF;
-  --card-shadow:rgba(217,203,239,.18);
+  --border:#D8C8EE;
+  --card-shadow:rgba(216,200,238,.18);
 
-  --text-main:#33264D;
-  --text-sub:rgba(51,38,77,.72);
-  --text-muted:rgba(51,38,77,.45);
+  --text-main:#382A56;
+  --text-sub:rgba(56,42,86,.72);
+  --text-muted:rgba(56,42,86,.45);
 
-  --favorite-bg:rgba(139,77,219,.10);
-  --favorite-glow-strong:rgba(139,77,219,.35);
-  --favorite-glow-mid:rgba(139,77,219,.24);
-  --favorite-glow-soft:rgba(139,77,219,.16);
+  --favorite-bg:rgba(138,92,245,.10);
+  --favorite-glow-strong:rgba(138,92,245,.35);
+  --favorite-glow-mid:rgba(138,92,245,.24);
+  --favorite-glow-soft:rgba(138,92,245,.16);
 
 }
 
