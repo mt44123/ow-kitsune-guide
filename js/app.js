@@ -90,7 +90,7 @@ function applyTheme_(theme) {
     blackpurple: "theme-blackpurple",
     blazingblue: "theme-blazingblue",
 
-    Whitegray: "theme-whitegray",
+    whitegray: "theme-whitegray",
     whiteblue: "theme-whiteblue",
     whitered: "theme-whitered",    
     yellowblue: "theme-yellowblue",
