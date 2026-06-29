@@ -3276,3 +3276,13 @@ color:var(--text-sub);
   background:var(--accent);
   color:var(--accent-text);
 }
+
+.page-title-link{
+  cursor:pointer;
+}
+
+.page-title-link:hover{
+  color:var(--accent);
+  text-decoration:underline;
+  text-underline-offset:6px;
+}

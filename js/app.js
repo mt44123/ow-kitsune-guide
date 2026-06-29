@@ -396,6 +396,32 @@ function updateViewActionButton_(view = currentView) {
   viewActionButton.textContent = "";
 }
 
+function updatePageTitleLink_(view = currentView) {
+  const isGoatsMediaView =
+    view === "goats" ||
+    view === "youtubegoats" ||
+    view === "goatclips";
+
+  pageTitle.classList.toggle(
+    "page-title-link",
+    isGoatsMediaView
+  );
+
+  pageTitle.onclick = isGoatsMediaView
+    ? () => {
+        currentView = "favorites";
+        currentPlayerView = "favorites";
+
+        searchBox.value = "";
+
+        history.replaceState({}, "", "?view=favorites");
+
+        updateNavState(currentView);
+        loadView(currentView);
+      }
+    : null;
+}
+
 function updateFavoriteCounts_() {
   const favs = getFavorites_();
 
@@ -1000,6 +1026,8 @@ searchBox?.addEventListener("input", () => {
 });
 
 function loadView(view) {
+
+  updatePageTitleLink_(view);
 
   if (isPlayerView(view)) {
     currentPlayerView = view;
