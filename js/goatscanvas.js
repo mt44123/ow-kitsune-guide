@@ -43,6 +43,9 @@ function shareGoatsImage_() {
   const qr = new Image();
   qr.src = "./icons/qr.svg";
 
+  const orangeLine = new Image();
+  orangeLine.src = "./icons/orangeline.png";
+
   const width = 1200;
   const padding = 80;
   const fontTitle = "'Jura', sans-serif";
@@ -386,14 +389,38 @@ const drawQrAndShare = () => {
   finishShare();
 };
 
-if (qr.complete) {
-  drawQrAndShare();
-} else {
-  qr.onload = drawQrAndShare;
+const drawHeaderLine = () => {
 
-  qr.onerror = () => {
-    console.warn("QR image could not be loaded.");
-    finishShare();
+  ctx.drawImage(
+    orangeLine,
+    width / 2 - 300,
+    190,
+    600,
+    34
+  );
+
+  if (qr.complete) {
+    drawQrAndShare();
+  } else {
+    qr.onload = drawQrAndShare;
+    qr.onerror = finishShare;
+  }
+};
+
+if (orangeLine.complete) {
+  drawHeaderLine();
+} else {
+  orangeLine.onload = drawHeaderLine;
+
+  orangeLine.onerror = () => {
+    console.warn("Orange line could not be loaded.");
+
+    if (qr.complete) {
+      drawQrAndShare();
+    } else {
+      qr.onload = drawQrAndShare;
+      qr.onerror = finishShare;
+    }
   };
 }
 }
@@ -405,6 +432,11 @@ function buildGoatsShareText_(players) {
     `${players.length} Player${players.length === 1 ? "" : "s"}`,
     "",
     "Where Are the GOATs?",
+    "",
+    "OW KITSUNE GUIDE",
+    "Live streams, videos, clips and links from Overwatch pro players.",
+    "Follow your favorite players across Twitch, CHZZK, SOOP, Bilibili and YouTube.",
+    "",
     "https://ow-kitsune-guide.pages.dev/",
     "",
     "#OWCS #Overwatch #OWKitsuneGuide"
