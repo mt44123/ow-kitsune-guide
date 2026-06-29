@@ -3112,10 +3112,9 @@ color:var(--text-sub);
 
 @media (min-width:901px){
 
-  #app.muted-mode{
+  .muted-mode .player-table-wrap{
     max-width:900px;
-    margin-left:auto;
-    margin-right:auto;
+    margin-inline:auto;
   }
 
 }

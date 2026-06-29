@@ -1068,8 +1068,7 @@ function renderMutedPlayersView() {
     matchesSearch_(name, searchBox.value)
   );
 
-  app.className = "";
-  app.classList.add("table-mode");
+  app.className = "table-mode muted-mode";
 
   viewNote.innerHTML = `
     ◆ Players hidden from LIVE, YouTube and Clips.
