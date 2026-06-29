@@ -300,26 +300,6 @@ function shareGoatsImage_() {
   drawGlow_(ctx, 80, height - 80, 420, accent, 0.22);
   drawGlow_(ctx, width * 0.5, height * 0.15, 520, accent, 0.10);
 
-  ctx.save();
-
-  ctx.shadowColor = "rgba(0,0,0,.32)";
-  ctx.shadowBlur = 14;
-  ctx.shadowOffsetY = 5;
-
-  ctx.fillStyle = bgLight;
-  roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
-  ctx.fill();
-
-  ctx.strokeStyle = "rgba(255,255,255,.08)";
-  ctx.lineWidth = 1;
-
-  ctx.beginPath();
-  ctx.moveTo(width / 2 - 230, 158);
-  ctx.lineTo(width / 2 + 230, 158);
-  ctx.stroke();
-
-  ctx.restore();
-
   ctx.textAlign = "center";
 
   ctx.fillStyle = textMain;
@@ -369,9 +349,17 @@ function shareGoatsImage_() {
     const roleIcon =
       getCanvasRoleIcon_(p.role);
 
+    ctx.save();
+
+    ctx.shadowColor = "rgba(0,0,0,.28)";
+    ctx.shadowBlur = 12;
+    ctx.shadowOffsetY = 4;
+
     ctx.fillStyle = bgLight;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
     ctx.fill();
+
+    ctx.restore();
 
     ctx.fillStyle = regionColor;
     roundRect_(ctx, x, y, 9, cardHeight, 6);
