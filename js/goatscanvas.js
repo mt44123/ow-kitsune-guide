@@ -212,6 +212,24 @@ function shareGoatsImage_() {
     roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
     ctx.stroke();
 
+    // 名前背景
+    ctx.fillStyle = "rgba(255,255,255,.07)";
+    ctx.strokeStyle = "rgba(255,255,255,.10)";
+    ctx.lineWidth = 1;
+
+    roundRect_(
+      ctx,
+      x + 18,
+      y + 12,
+      columnWidth - 36,
+      40,
+      10
+    );
+
+    ctx.fill();
+    ctx.stroke();
+
+    // 名前
     ctx.fillStyle = textMain;
 
     const name = p.name || "";
