@@ -130,15 +130,30 @@ function shareGoatsImage_() {
 
     ctx.save();
 
-    ctx.shadowColor = "rgba(0,0,0,.32)";
-    ctx.shadowBlur = 14;
-    ctx.shadowOffsetY = 5;
+    ctx.shadowColor = hexToRgba_(accent, 0.18);
+    ctx.shadowBlur = 18;
+    ctx.shadowOffsetY = 0;
 
     ctx.fillStyle = bgLight;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
     ctx.fill();
 
     ctx.restore();
+
+    const cardShine = ctx.createLinearGradient(
+      x,
+      y,
+      x,
+      y + cardHeight
+    );
+
+    cardShine.addColorStop(0, "rgba(255,255,255,0.08)");
+    cardShine.addColorStop(0.45, "rgba(255,255,255,0.025)");
+    cardShine.addColorStop(1, "rgba(255,255,255,0)");
+
+    ctx.fillStyle = cardShine;
+    roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
+    ctx.fill();
 
     const regionGlow = ctx.createLinearGradient(
       x,
