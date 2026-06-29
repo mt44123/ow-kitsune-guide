@@ -342,7 +342,7 @@ const qrX =
   width - padding - qrSize;
 
 const qrY =
-  footerY - 36;
+  footerY - 6;
 
 const drawQrAndShare = () => {
   ctx.fillStyle = bgLight;
@@ -385,7 +385,7 @@ const drawQrAndShare = () => {
   ctx.fillText(
     "Scan Me",
     qrX + qrSize / 2,
-    qrY + qrSize + 24
+    qrY + qrSize + 20
   );
 
   ctx.textAlign = "left";
