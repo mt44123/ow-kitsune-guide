@@ -334,23 +334,24 @@ function drawGlow_(ctx, x, y, radius, color, alpha) {
 }
 
 function hexToRgba_(color, alpha) {
-  const ctx = document.createElement("canvas").getContext("2d");
+  const probe = document.createElement("span");
+  probe.style.color = color;
+  document.body.appendChild(probe);
 
-  ctx.fillStyle = color;
-  const normalized = ctx.fillStyle;
+  const computed = getComputedStyle(probe).color;
+  probe.remove();
 
-  if (!normalized.startsWith("#")) {
-    return color.replace(
-      /rgba?\(([^)]+)\)/,
-      `rgba($1, ${alpha})`
-    );
+  const match = computed.match(
+    /rgba?\((\d+),\s*(\d+),\s*(\d+)/
+  );
+
+  if (!match) {
+    return `rgba(255,255,255,${alpha})`;
   }
 
-  const hex = normalized.slice(1);
-
-  const r = parseInt(hex.slice(0, 2), 16);
-  const g = parseInt(hex.slice(2, 4), 16);
-  const b = parseInt(hex.slice(4, 6), 16);
+  const r = match[1];
+  const g = match[2];
+  const b = match[3];
 
   return `rgba(${r},${g},${b},${alpha})`;
 }
