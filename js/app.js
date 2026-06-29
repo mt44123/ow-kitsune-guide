@@ -232,6 +232,7 @@ document.addEventListener("click", e => {
   loadView(currentView);
 });
 
+const refreshDataButton =  document.getElementById("refreshDataButton");
 const toolsButton =  document.getElementById("toolsButton");
 const faqButton =  document.getElementById("faqButton");
 
@@ -495,6 +496,18 @@ viewActionButton?.addEventListener("click", () => {
   }
 });
 
+refreshDataButton?.addEventListener("click", () => {
+
+  settingsMenu?.classList.add("settings-hidden");
+
+  clearClientCache_();
+
+  searchBox.value = "";
+
+  loadView(currentView);
+
+});
+
 toolsButton?.addEventListener(
   "click",
   () => loadToolsView()
@@ -592,6 +605,26 @@ function finishFakeProgress() {
 
 function stopFakeProgress() {
   clearInterval(progressTimer);
+}
+
+function clearClientCache_() {
+
+  liveCache = null;
+  liveCacheTime = 0;
+
+  youtubeCache = null;
+  youtubeCacheTime = 0;
+
+  playerLinksCache = null;
+  playerLinksCacheTime = 0;
+
+  birthdaysCache = null;
+  birthdaysCacheTime = 0;
+
+  Object.values(clipCache).forEach(cache => {
+    cache.data = null;
+    cache.time = 0;
+  });
 }
 
 const titles = {
