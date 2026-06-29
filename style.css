@@ -20,6 +20,7 @@
    @SECTION: UTILITIES
    @SECTION: RESPONSIVE
    @SECTION: MUTE
+   @SECTION: EXPORT
 
    ========================================================= */
 /* =========================================================
@@ -3117,4 +3118,31 @@ color:var(--text-sub);
     margin-inline:auto;
   }
 
+}
+
+/* =========================================================
+   18. EXPORT
+   ========================================================= */
+/* @SECTION: EXPORT */
+
+.goats-export-box{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-bottom:14px;
+  flex-wrap:wrap;
+}
+
+.goats-export-button{
+  border:1px solid var(--border);
+  background:var(--bg-main);
+  color:var(--text-main);
+  border-radius:999px;
+  padding:8px 14px;
+  font:inherit;
+  cursor:pointer;
+}
+
+.goats-export-button:hover{
+  background:var(--bg-light);
 }

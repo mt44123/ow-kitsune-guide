@@ -107,9 +107,148 @@ function renderFavorites(players) {
   }
 
   renderPlayerLinks(favoritePlayers);
+
+  const wrap = app.querySelector(".player-table-wrap");
+
+  if (wrap && !wrap.querySelector(".goats-export-box")) {
+    wrap.insertAdjacentHTML(
+      "afterbegin",
+      `
+        <div class="goats-export-box">
+          <button class="goats-export-button" data-goats-export="copy">
+            Copy List
+          </button>
+          <button class="goats-export-button" data-goats-export="share">
+            Share
+          </button>
+          <button class="goats-export-button" data-goats-export="image">
+            Export Image
+          </button>
+        </div>
+      `
+    );
+  }
+}
+
+function buildGoatsExportText_() {
+  const favs = getFavorites_();
+
+  return [
+    "My GOATs on OW KITSUNE GUIDE 🦊",
+    "",
+    ...favs.map(name => `★ ${name}`),
+    "",
+    "https://ow-kitsune-guide.pages.dev/"
+  ].join("\n");
+}
+
+function copyGoatsList_() {
+  const text = buildGoatsExportText_();
+
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      alert("MY GOATS list copied!");
+    })
+    .catch(() => {
+      alert("Copy failed.");
+    });
+}
+
+function shareGoatsList_() {
+  const text = buildGoatsExportText_();
+
+  if (!navigator.share) {
+    copyGoatsList_();
+    return;
+  }
+
+  navigator.share({
+    title: "My GOATs",
+    text
+  }).catch(() => {});
+}
+
+function exportGoatsImage_() {
+  const favs = getFavorites_();
+
+  if (!favs.length) return;
+
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+
+  const width = 1200;
+  const padding = 80;
+  const lineHeight = 52;
+  const headerHeight = 190;
+  const footerHeight = 110;
+
+  const height =
+    headerHeight +
+    favs.length * lineHeight +
+    footerHeight;
+
+  canvas.width = width;
+  canvas.height = height;
+
+  ctx.fillStyle = "#111A2D";
+  ctx.fillRect(0, 0, width, height);
+
+  ctx.fillStyle = "#FFFFFF";
+  ctx.font = "700 54px sans-serif";
+  ctx.fillText("MY GOATS", padding, 95);
+
+  ctx.fillStyle = "#B84724";
+  ctx.font = "700 34px sans-serif";
+  ctx.fillText("OW KITSUNE GUIDE 🦊", padding, 145);
+
+  ctx.fillStyle = "#FFFFFF";
+  ctx.font = "600 36px sans-serif";
+
+  favs.forEach((name, index) => {
+    ctx.fillText(
+      `★ ${name}`,
+      padding,
+      headerHeight + index * lineHeight
+    );
+  });
+
+  ctx.fillStyle = "rgba(255,255,255,.65)";
+  ctx.font = "28px sans-serif";
+  ctx.fillText(
+    "https://ow-kitsune-guide.pages.dev/",
+    padding,
+    height - 60
+  );
+
+  const link = document.createElement("a");
+  link.download = "ow-kitsune-my-goats.png";
+  link.href = canvas.toDataURL("image/png");
+  link.click();
 }
 
 document.addEventListener("click", e => {
+    const goatsExport = e.target.closest("[data-goats-export]");
+  if (goatsExport) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const type = goatsExport.dataset.goatsExport;
+
+    if (type === "copy") {
+      copyGoatsList_();
+    }
+
+    if (type === "share") {
+      shareGoatsList_();
+    }
+
+    if (type === "image") {
+      exportGoatsImage_();
+    }
+
+    return;
+  }
+
   const star = e.target.closest(".favorite-star");
   if (!star) return;
 
@@ -162,4 +301,3 @@ document.addEventListener("click", e => {
     return;
   }
 });
-
