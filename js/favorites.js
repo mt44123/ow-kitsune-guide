@@ -323,17 +323,23 @@ function shareGoatsImage_() {
   const listTop = headerHeight;
   const columnGap = 34;
   const listWidth = width - padding * 2;
+
   const columnWidth =
     useTwoColumns
-      ? (listWidth - columnGap) / 2
+      ? 500
       : listWidth;
+
+  const listLeft =
+    useTwoColumns
+      ? (width - columnWidth * 2 - columnGap) / 2
+      : padding;
 
   players.forEach((p, index) => {
     const column = useTwoColumns ? index % 2 : 0;
     const row = useTwoColumns ? Math.floor(index / 2) : index;
 
     const x =
-      padding +
+      listLeft +
       column * (columnWidth + columnGap);
 
     const y =
