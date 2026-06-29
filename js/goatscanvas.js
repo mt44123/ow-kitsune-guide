@@ -57,7 +57,7 @@ function shareGoatsImage_() {
     players.length / (useTwoColumns ? 2 : 1)
   );
 
-  const cardHeight = 96;
+  const cardHeight = 104;
   const cardGap = 12;
   const headerHeight = 270;
   const footerHeight = 170;
@@ -284,7 +284,7 @@ function shareGoatsImage_() {
     useTwoColumns && name.length > 14
       ? 26
       : 32;
-      
+
   ctx.save();
 
   ctx.shadowColor = accent;
@@ -296,7 +296,7 @@ function shareGoatsImage_() {
   ctx.fillText(
     name,
     x + 32,
-    y + 40,
+    y + 42,
     columnWidth - 56
   );
 
@@ -317,7 +317,7 @@ function shareGoatsImage_() {
     ctx.fillText(
       meta,
       x + 32,
-      y + 72,
+      y + 74,
       columnWidth - 56
     );
   });
