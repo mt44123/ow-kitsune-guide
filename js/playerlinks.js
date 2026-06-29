@@ -54,7 +54,8 @@ function loadPlayerLinksView() {
     });
 }
 
-function renderPlayerLinks(players) {
+function renderPlayerLinks(players, options = {}) {
+  const showGoatsExport = options.showGoatsExport === true;
   app.className = "table-mode";
 
   if (!players.length) {
@@ -76,8 +77,28 @@ function renderPlayerLinks(players) {
 app.innerHTML = `
   ${renderLiquipediaNote_()}
 
-  <div class="scroll-note">
-    ←📱Mobile:Swipe→
+    <div class="player-table-top">
+    <div class="scroll-note">
+      ←📱Mobile:Swipe→
+    </div>
+
+    ${
+      showGoatsExport
+        ? `
+          <div class="goats-export-box">
+            <button class="goats-export-button" data-goats-export="copy">
+              Copy List
+            </button>
+            <button class="goats-export-button" data-goats-export="share">
+              Share
+            </button>
+            <button class="goats-export-button" data-goats-export="image">
+              Export Image
+            </button>
+          </div>
+        `
+        : ""
+    }
   </div>
 
   <div class="player-table-wrap">

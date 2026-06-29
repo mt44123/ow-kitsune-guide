@@ -3125,11 +3125,20 @@ color:var(--text-sub);
    ========================================================= */
 /* @SECTION: EXPORT */
 
+.player-table-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  max-width:900px;
+  margin:0 auto 12px;
+  flex-wrap:wrap;
+}
+
 .goats-export-box{
   display:flex;
   justify-content:flex-end;
   gap:10px;
-  margin-bottom:14px;
   flex-wrap:wrap;
 }
 

@@ -106,28 +106,9 @@ function renderFavorites(players) {
     return;
   }
 
-  renderPlayerLinks(favoritePlayers);
-
-  const wrap = app.querySelector(".player-table-wrap");
-
-  if (wrap && !wrap.querySelector(".goats-export-box")) {
-    wrap.insertAdjacentHTML(
-      "afterbegin",
-      `
-        <div class="goats-export-box">
-          <button class="goats-export-button" data-goats-export="copy">
-            Copy List
-          </button>
-          <button class="goats-export-button" data-goats-export="share">
-            Share
-          </button>
-          <button class="goats-export-button" data-goats-export="image">
-            Export Image
-          </button>
-        </div>
-      `
-    );
-  }
+  renderPlayerLinks(favoritePlayers, {
+    showGoatsExport: true
+  });
 }
 
 function buildGoatsExportText_() {
@@ -227,7 +208,7 @@ function exportGoatsImage_() {
 }
 
 document.addEventListener("click", e => {
-    const goatsExport = e.target.closest("[data-goats-export]");
+  const goatsExport = e.target.closest("[data-goats-export]");
   if (goatsExport) {
     e.preventDefault();
     e.stopPropagation();
