@@ -130,8 +130,9 @@ function shareGoatsImage_() {
 
     ctx.save();
 
-    ctx.shadowColor = hexToRgba_(accent, 0.18);
-    ctx.shadowBlur = 18;
+    ctx.shadowColor = accent;
+    ctx.globalAlpha = 0.32;
+    ctx.shadowBlur = 22;
     ctx.shadowOffsetY = 0;
 
     ctx.fillStyle = bgLight;
@@ -139,6 +140,10 @@ function shareGoatsImage_() {
     ctx.fill();
 
     ctx.restore();
+
+    ctx.fillStyle = bgLight;
+    roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
+    ctx.fill();
 
     const cardShine = ctx.createLinearGradient(
       x,
