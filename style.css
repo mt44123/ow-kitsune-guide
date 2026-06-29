@@ -3155,3 +3155,9 @@ color:var(--text-sub);
 .goats-export-button:hover{
   background:var(--bg-light);
 }
+
+.goats-empty-actions{
+  display:flex;
+  justify-content:center;
+  margin:16px 0;
+}

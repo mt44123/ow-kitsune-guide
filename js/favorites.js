@@ -97,8 +97,14 @@ function renderFavorites(players) {
   );
 
   if (!favoritePlayers.length) {
-    app.className = "";
+    app.className = "table-mode";
     app.innerHTML = `
+      <div class="goats-empty-actions">
+        <button class="goats-export-button" data-goats-export="import">
+          Import Backup
+        </button>
+      </div>
+
       <p class="empty">
         No GOATs yet.<br>
         Tap ☆ on players to add them here.<br>
@@ -167,19 +173,27 @@ function importGoatsBackupCode_() {
       return;
     }
 
-    const current = getFavorites_();
+   const imported = favs.filter(name =>
+    typeof name === "string"
+  );
 
-    const merged = Array.from(
-      new Set([
-        ...current,
-        ...favs.filter(name => typeof name === "string")
-      ])
-    );
+  const replace = confirm(
+    "Replace current MY GOATS?\n\nOK = Replace\nCancel = Add to current list"
+  );
 
-    localStorage.setItem(
-      "favorites",
-      JSON.stringify(merged)
-    );
+  const nextFavs = replace
+    ? imported
+    : Array.from(
+        new Set([
+          ...getFavorites_(),
+          ...imported
+        ])
+      );
+
+  localStorage.setItem(
+    "favorites",
+    JSON.stringify(nextFavs)
+  );
 
     updateFavoriteCounts_();
 
@@ -187,7 +201,10 @@ function importGoatsBackupCode_() {
 
     if (currentView === "favorites") {
       renderFavorites(currentData);
-      searchPlayerLinksTable();
+
+      if (document.querySelector(".player-table")) {
+        searchPlayerLinksTable();
+      }
     }
 
   } catch (error) {
@@ -207,7 +224,7 @@ function shareGoatsList_() {
   navigator.share({
     title: "Backup MY GOATS",
     text:
-      "Import my MY GOATS on OW KITSUNE GUIDE 🦊\n\n" +
+      "Import MY GOATS on OW KITSUNE GUIDE 🦊\n\n" +
       code
   }).catch(() => {});
 }
@@ -279,12 +296,12 @@ document.addEventListener("click", e => {
     const type = goatsExport.dataset.goatsExport;
 
     if (type === "backup") {
-        copyGoatsBackupCode_();
-      }
+      copyGoatsBackupCode_();
+    }
 
     if (type === "import") {
-        importGoatsBackupCode_();
-      }
+      importGoatsBackupCode_();
+    }
 
     if (type === "share") {
       shareGoatsList_();
@@ -321,7 +338,11 @@ document.addEventListener("click", e => {
 
   if (currentView === "favorites") {
     renderFavorites(currentData);
-    searchPlayerLinksTable();
+
+    if (document.querySelector(".player-table")) {
+      searchPlayerLinksTable();
+    }
+
     return;
   }
 
