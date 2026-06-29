@@ -236,26 +236,27 @@ function importGoatsBackupCode_() {
   }
 
 function shareGoatsImage_() {
-  const favs = getFavorites_();
+  const favNames = getFavorites_();
 
-  if (!favs.length) return;
+  if (!favNames.length) return;
+
+  const players = favNames.map(name => {
+    const player = (currentData || []).find(p =>
+      p.name === name
+    );
+
+    return player || { name };
+  });
 
   const bodyStyle = getComputedStyle(document.body);
 
-  const bgDark =
-    bodyStyle.getPropertyValue("--bg-dark").trim() || "#111A2D";
-  const bgMain =
-    bodyStyle.getPropertyValue("--bg-main").trim() || "#111A2D";
-  const bgLight =
-    bodyStyle.getPropertyValue("--bg-light").trim() || "#1D253A";
-  const accent =
-    bodyStyle.getPropertyValue("--accent").trim() || "#B84724";
-  const textMain =
-    bodyStyle.getPropertyValue("--text-main").trim() || "#FFFFFF";
-  const textSub =
-    bodyStyle.getPropertyValue("--text-sub").trim() || "rgba(255,255,255,.7)";
-  const textMuted =
-    bodyStyle.getPropertyValue("--text-muted").trim() || "rgba(255,255,255,.45)";
+  const bgDark = bodyStyle.getPropertyValue("--bg-dark").trim() || "#111A2D";
+  const bgMain = bodyStyle.getPropertyValue("--bg-main").trim() || "#111A2D";
+  const bgLight = bodyStyle.getPropertyValue("--bg-light").trim() || "#1D253A";
+  const accent = bodyStyle.getPropertyValue("--accent").trim() || "#B84724";
+  const textMain = bodyStyle.getPropertyValue("--text-main").trim() || "#FFFFFF";
+  const textSub = bodyStyle.getPropertyValue("--text-sub").trim() || "rgba(255,255,255,.7)";
+  const textMuted = bodyStyle.getPropertyValue("--text-muted").trim() || "rgba(255,255,255,.45)";
 
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -265,17 +266,18 @@ function shareGoatsImage_() {
   const fontTitle = "'Jura', sans-serif";
   const fontBody = "'Jura', Arial, sans-serif";
 
-  const useTwoColumns = favs.length > 12;
+  const useTwoColumns = players.length > 12;
   const columns = useTwoColumns ? 2 : 1;
-  const rows = Math.ceil(favs.length / columns);
+  const rows = Math.ceil(players.length / columns);
 
-  const lineHeight = useTwoColumns ? 50 : 54;
-  const headerHeight = 280;
-  const footerHeight = 150;
+  const cardHeight = 72;
+  const cardGap = 12;
+  const headerHeight = 300;
+  const footerHeight = 170;
 
   const height =
     headerHeight +
-    rows * lineHeight +
+    rows * (cardHeight + cardGap) +
     footerHeight;
 
   canvas.width = width;
@@ -293,25 +295,25 @@ function shareGoatsImage_() {
   ctx.fill();
 
   ctx.fillStyle = bgLight;
-  roundRect_(ctx, padding, 76, width - padding * 2, 158, 24);
+  roundRect_(ctx, padding, 76, width - padding * 2, 170, 24);
   ctx.fill();
 
   ctx.textAlign = "center";
 
   ctx.fillStyle = textMain;
   ctx.font = `800 62px ${fontTitle}`;
-  ctx.fillText("MY GOATS", width / 2, 140);
+  ctx.fillText("MY GOATS", width / 2, 145);
 
   ctx.fillStyle = textSub;
   ctx.font = `700 28px ${fontBody}`;
-  ctx.fillText("OW KITSUNE GUIDE 🦊", width / 2, 182);
+  ctx.fillText("OW KITSUNE GUIDE 🦊", width / 2, 188);
 
   ctx.fillStyle = accent;
-  ctx.font = `700 24px ${fontBody}`;
+  ctx.font = `700 26px ${fontBody}`;
   ctx.fillText(
-    `${favs.length} GOAT${favs.length === 1 ? "" : "s"}`,
+    `${players.length} Player${players.length === 1 ? "" : "s"}`,
     width / 2,
-    214
+    224
   );
 
   ctx.textAlign = "left";
@@ -324,14 +326,9 @@ function shareGoatsImage_() {
       ? (listWidth - columnGap) / 2
       : listWidth;
 
-  favs.forEach((name, index) => {
-    const column = useTwoColumns
-      ? index % 2
-      : 0;
-
-    const row = useTwoColumns
-      ? Math.floor(index / 2)
-      : index;
+  players.forEach((p, index) => {
+    const column = useTwoColumns ? index % 2 : 0;
+    const row = useTwoColumns ? Math.floor(index / 2) : index;
 
     const x =
       padding +
@@ -339,47 +336,56 @@ function shareGoatsImage_() {
 
     const y =
       listTop +
-      row * lineHeight;
+      row * (cardHeight + cardGap);
 
-    ctx.fillStyle =
-      row % 2 === 0
-        ? "rgba(255,255,255,.04)"
-        : "rgba(255,255,255,.02)";
+    const regionColor = getCanvasRegionColor_(p.teamRegion || p.nationality);
 
-    roundRect_(
-      ctx,
-      x,
-      y - 38,
-      columnWidth,
-      44,
-      12
-    );
+    ctx.fillStyle = bgLight;
+    roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
+    ctx.fill();
+
+    ctx.fillStyle = regionColor;
+    roundRect_(ctx, x, y, 7, cardHeight, 6);
     ctx.fill();
 
     ctx.fillStyle = accent;
-    ctx.font = `700 30px ${fontBody}`;
-    ctx.fillText("★", x + 20, y);
+    ctx.font = `700 28px ${fontBody}`;
+    ctx.fillText("★", x + 26, y + 45);
 
     ctx.fillStyle = textMain;
 
+    const name = p.name || "";
     const nameFontSize =
       useTwoColumns && name.length > 14
-        ? 26
-        : 32;
+        ? 25
+        : 31;
 
-    ctx.font = `700 ${nameFontSize}px ${fontBody}`;
+    ctx.font = `800 ${nameFontSize}px ${fontBody}`;
+    ctx.fillText(name, x + 72, y + 35, columnWidth - 92);
+
+    ctx.fillStyle = textMuted;
+    ctx.font = `600 18px ${fontBody}`;
     ctx.fillText(
-      name,
-      x + 62,
-      y,
-      columnWidth - 82
+      p.team || "No team",
+      x + 72,
+      y + 59,
+      columnWidth - 92
     );
   });
 
-  const footerY = height - 105;
+  const footerY = height - 120;
 
   ctx.fillStyle = accent;
-  ctx.fillRect(padding, footerY - 28, width - padding * 2, 3);
+  ctx.fillRect(padding, footerY - 24, width - padding * 2, 3);
+
+  const dateText = new Date().toLocaleDateString(
+    undefined,
+    {
+      year: "numeric",
+      month: "short",
+      day: "numeric"
+    }
+  );
 
   ctx.textAlign = "center";
 
@@ -388,8 +394,12 @@ function shareGoatsImage_() {
   ctx.fillText("Where Are the GOATs?", width / 2, footerY + 20);
 
   ctx.fillStyle = textMuted;
-  ctx.font = `500 24px ${fontBody}`;
-  ctx.fillText("ow-kitsune-guide.pages.dev", width / 2, footerY + 58);
+  ctx.font = `500 22px ${fontBody}`;
+  ctx.fillText(`Generated ${dateText}`, width / 2, footerY + 55);
+
+  ctx.fillStyle = textMuted;
+  ctx.font = `500 22px ${fontBody}`;
+  ctx.fillText("ow-kitsune-guide.pages.dev", width / 2, footerY + 86);
 
   ctx.textAlign = "left";
 
@@ -421,6 +431,41 @@ function shareGoatsImage_() {
 
     URL.revokeObjectURL(link.href);
   }, "image/png");
+}
+
+function getCanvasRegionColor_(region) {
+  const bodyStyle = getComputedStyle(document.body);
+  const key = String(region || "").toLowerCase();
+
+  if (key.includes("kr")) {
+    return bodyStyle.getPropertyValue("--region-kr").trim();
+  }
+
+  if (key.includes("jp")) {
+    return bodyStyle.getPropertyValue("--region-jp").trim();
+  }
+
+  if (key.includes("cn")) {
+    return bodyStyle.getPropertyValue("--region-cn").trim();
+  }
+
+  if (key.includes("na")) {
+    return bodyStyle.getPropertyValue("--region-na").trim();
+  }
+
+  if (key.includes("emea")) {
+    return bodyStyle.getPropertyValue("--region-emea").trim();
+  }
+
+  if (key.includes("pac")) {
+    return bodyStyle.getPropertyValue("--region-pac").trim();
+  }
+
+  if (key.includes("sa")) {
+    return bodyStyle.getPropertyValue("--region-sa").trim();
+  }
+
+  return bodyStyle.getPropertyValue("--region-unknown").trim() || "#777777";
 }
 
 function roundRect_(ctx, x, y, width, height, radius) {
