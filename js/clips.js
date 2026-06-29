@@ -385,9 +385,7 @@ function renderClipCard_(c) {
               ${youtubeViewsIcon_()}
               <span>${Number(c.views || 0).toLocaleString()} views</span>
             </span>
-
-            ・
-
+            
             <span class="youtube-stat-item">
               ${youtubeTimeIcon_()}
               <span>${timeAgo(c.date)}</span>

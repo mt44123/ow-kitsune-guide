@@ -208,9 +208,7 @@ function renderYoutubeCard_(v) {
             <span class="youtube-stat-item">
               ${youtubeViewsIcon_()}
               <span>${formatViews(v.views)}</span>
-            </span>
-
-            ・
+            </span>           
 
             <span class="youtube-stat-item">
               ${youtubeTimeIcon_()}
