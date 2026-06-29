@@ -112,15 +112,22 @@ function shareGoatsImage_() {
   const columnGap = 34;
   const listWidth = width - padding * 2;
 
-  const columnWidth =
-    useTwoColumns
-      ? 500
-      : listWidth;
+  let columnWidth;
 
-  const listLeft =
-    useTwoColumns
-      ? (width - columnWidth * 2 - columnGap) / 2
-      : padding;
+    if (useTwoColumns) {
+      columnWidth = 500;
+    } else if (players.length <= 4) {
+      columnWidth = 700;
+    } else if (players.length <= 8) {
+      columnWidth = 820;
+    } else {
+      columnWidth = listWidth;
+    }
+
+    const listLeft =
+      useTwoColumns
+        ? (width - columnWidth * 2 - columnGap) / 2
+        : (width - columnWidth) / 2;
 
   players.forEach((p, index) => {
     const column = useTwoColumns ? index % 2 : 0;
