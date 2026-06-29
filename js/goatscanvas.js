@@ -35,9 +35,7 @@ function shareGoatsImage_() {
     bodyStyle.getPropertyValue("--accent").trim() ||
     "#FE5002";
 
-  const border =
-    bodyStyle.getPropertyValue("--border").trim() ||
-    "rgba(255,255,255,.12)";
+  const border = "rgba(255,255,255,.26)";
 
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -75,9 +73,16 @@ function shareGoatsImage_() {
 
   ctx.textAlign = "center";
 
+  ctx.save();
+
+  ctx.shadowColor = accent;
+  ctx.shadowBlur = 24;
+
   ctx.fillStyle = textMain;
   ctx.font = `800 62px ${fontTitle}`;
   ctx.fillText("MY GOATS", width / 2, 135);
+
+  ctx.restore();
 
   ctx.fillStyle = textSub;
   ctx.font = `700 28px ${fontBody}`;
@@ -135,8 +140,8 @@ function shareGoatsImage_() {
     ctx.save();
 
     ctx.shadowColor = accent;
-    ctx.shadowBlur = 8;
-    ctx.globalAlpha = 0.14;
+    ctx.shadowBlur = 14;
+    ctx.shadowOffsetX = 0;
     ctx.shadowOffsetY = 0;
 
     ctx.fillStyle = bgLight;
@@ -148,6 +153,19 @@ function shareGoatsImage_() {
     ctx.fillStyle = bgLight;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
     ctx.fill();
+
+    ctx.save();
+
+    ctx.strokeStyle = hexToRgba_(accent, 0.35);
+    ctx.lineWidth = 2;
+
+    ctx.shadowColor = accent;
+    ctx.shadowBlur = 18;
+
+    roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
+    ctx.stroke();
+
+    ctx.restore();
 
     const cardShine = ctx.createLinearGradient(
       x,
