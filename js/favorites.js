@@ -240,7 +240,6 @@ function shareGoatsImage_() {
 
   if (!favs.length) return;
 
-  const rootStyle = getComputedStyle(document.documentElement);
   const bodyStyle = getComputedStyle(document.body);
 
   const bgDark =
