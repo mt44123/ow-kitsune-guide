@@ -117,6 +117,7 @@ app.innerHTML = `
           <th>SOOP</th>
           <th>BILI</th>
           <th>YT</th>
+          <th>X</th>
           <th>DC*</th>
         </tr>
       </thead>
@@ -192,6 +193,7 @@ app.innerHTML = `
             <td>${linkDot(p.soopUrl, "soop")}</td>
             <td>${linkDot(p.biliUrl, "bili")}</td>
             <td>${linkDot(p.youtubeUrl, "yt")}</td>
+            <td>${linkDot(p.xUrl, "x")}</td>
             <td>${linkDot(p.discordUrl, "dc")}</td>
           </tr>
         `).join("")}

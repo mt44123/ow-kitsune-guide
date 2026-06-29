@@ -1213,7 +1213,11 @@ function linkDot(url, type) {
     dc: {
       name: "Discord",
       src: "./icons/discord.png"
-    }
+    },
+    x: {
+      name: "X",
+      src: "./icons/x.png"
+    },
   };
 
   const icon = icons[type];
@@ -1251,7 +1255,8 @@ function linkTag(url, label, cls) {
     soop: { name: "SOOP", src: "./icons/soop.png" },
     bili: { name: "Bilibili", src: "./icons/bilibili.png" },
     yt: { name: "YouTube", src: "./icons/youtube.png" },
-    dc: { name: "Discord", src: "./icons/discord.png" }
+    dc: { name: "Discord", src: "./icons/discord.png" },
+    x: {  name: "X",  src: "./icons/x.png"},
   };
 
   const icon = icons[type];

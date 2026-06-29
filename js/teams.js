@@ -380,6 +380,7 @@ const members = players
                 ${linkTag(official.chzzkUrl, "", "chz")}
                 ${linkTag(official.soopUrl, "", "soop")}
                 ${linkTag(official.biliUrl, "", "bili")}
+                ${linkTag(official.xUrl, "", "x")}
                 ${linkTag(official.discordUrl, "", "dc")}
               `
             : ""
@@ -461,6 +462,7 @@ const members = players
         ${linkTag(p.soopUrl, "SOOP", "soop")}
         ${linkTag(p.biliUrl, "BILI", "bili")}
         ${linkTag(p.youtubeUrl, "YT", "yt")}
+        ${linkTag(p.xUrl, "X", "x")}
         ${linkTag(p.discordUrl, "DC", "dc")}
         </div>
 
