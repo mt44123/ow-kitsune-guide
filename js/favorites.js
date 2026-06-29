@@ -177,11 +177,30 @@ function importGoatsBackupCode_() {
     typeof name === "string"
   );
 
-  const replace = confirm(
-    "Replace current MY GOATS?\n\nOK = Replace\nCancel = Add to current list"
-  );
+  const mode = prompt(
+  "Import Backup\n\n" +
+  "1 = Replace current MY GOATS\n" +
+  "2 = Add to current list\n" +
+  "3 = Cancel\n\n" +
+  "バックアップをインポートします。\n\n" +
+  "1 = 今のMY GOATSを置き換える\n" +
+  "2 = 今のリストに追加する\n" +
+  "3 = キャンセル"
+);
 
-  const nextFavs = replace
+if (mode === null || mode.trim() === "3") {
+  return;
+}
+
+const choice = mode.trim();
+
+if (choice !== "1" && choice !== "2") {
+  alert("Import canceled.");
+  return;
+}
+
+const nextFavs =
+  choice === "1"
     ? imported
     : Array.from(
         new Set([
