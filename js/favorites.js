@@ -298,19 +298,19 @@ function shareGoatsImage_() {
   // ===== Accent Glow =====
   ctx.save();
 
-  ctx.globalAlpha = 0.22;
-  ctx.shadowBlur = 180;
+  ctx.globalAlpha = 0.08;
+  ctx.shadowBlur = 260;
   ctx.shadowColor = accent;
-  ctx.fillStyle = accent;
+  ctx.fillStyle = "rgba(255,255,255,0.01)";
 
   // 右上の発光
   ctx.beginPath();
-  ctx.arc(width - 120, 120, 120, 0, Math.PI * 2);
+  ctx.arc(width + 40, -40, 160, 0, Math.PI * 2);
   ctx.fill();
 
   // 左下の発光
   ctx.beginPath();
-  ctx.arc(120, height - 120, 150, 0, Math.PI * 2);
+  ctx.arc(-60, height + 40, 180, 0, Math.PI * 2);
   ctx.fill();
 
   ctx.restore();
@@ -483,18 +483,27 @@ function buildGoatsShareText_(players) {
   ].join("\n");
 }
 
-function getCanvasRegionLabel_(region) {
-  const key = String(region || "").toLowerCase();
+function getCanvasRegionLabel_(nationality) {
+  const cls = getNationalityRegionClass(nationality);
 
-  if (key.includes("kr")) return "KR";
-  if (key.includes("jp")) return "JP";
-  if (key.includes("cn")) return "CN";
-  if (key.includes("na")) return "NA";
-  if (key.includes("emea")) return "EMEA";
-  if (key.includes("pac")) return "PAC";
-  if (key.includes("sa")) return "SA";
-
-  return "";
+  switch (cls) {
+    case "region-kr":
+      return "KR";
+    case "region-jp":
+      return "JP";
+    case "region-cn":
+      return "CN";
+    case "region-na":
+      return "NA";
+    case "region-emea":
+      return "EMEA";
+    case "region-pac":
+      return "PAC";
+    case "region-sa":
+      return "SA";
+    default:
+      return "";
+  }
 }
 
 function getCanvasRoleIcon_(role) {
@@ -508,39 +517,28 @@ function getCanvasRoleIcon_(role) {
   return "";
 }
 
-function getCanvasRegionColor_(region) {
+function getCanvasRegionColor_(nationality) {
   const bodyStyle = getComputedStyle(document.body);
-  const key = String(region || "").toLowerCase();
+  const cls = getNationalityRegionClass(nationality);
 
-  if (key.includes("kr")) {
-    return bodyStyle.getPropertyValue("--region-kr").trim();
+  switch (cls) {
+    case "region-kr":
+      return bodyStyle.getPropertyValue("--region-kr").trim();
+    case "region-jp":
+      return bodyStyle.getPropertyValue("--region-jp").trim();
+    case "region-cn":
+      return bodyStyle.getPropertyValue("--region-cn").trim();
+    case "region-na":
+      return bodyStyle.getPropertyValue("--region-na").trim();
+    case "region-emea":
+      return bodyStyle.getPropertyValue("--region-emea").trim();
+    case "region-pac":
+      return bodyStyle.getPropertyValue("--region-pac").trim();
+    case "region-sa":
+      return bodyStyle.getPropertyValue("--region-sa").trim();
+    default:
+      return bodyStyle.getPropertyValue("--region-unknown").trim() || "#777777";
   }
-
-  if (key.includes("jp")) {
-    return bodyStyle.getPropertyValue("--region-jp").trim();
-  }
-
-  if (key.includes("cn")) {
-    return bodyStyle.getPropertyValue("--region-cn").trim();
-  }
-
-  if (key.includes("na")) {
-    return bodyStyle.getPropertyValue("--region-na").trim();
-  }
-
-  if (key.includes("emea")) {
-    return bodyStyle.getPropertyValue("--region-emea").trim();
-  }
-
-  if (key.includes("pac")) {
-    return bodyStyle.getPropertyValue("--region-pac").trim();
-  }
-
-  if (key.includes("sa")) {
-    return bodyStyle.getPropertyValue("--region-sa").trim();
-  }
-
-  return bodyStyle.getPropertyValue("--region-unknown").trim() || "#777777";
 }
 
 function roundRect_(ctx, x, y, width, height, radius) {
