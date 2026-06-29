@@ -348,10 +348,10 @@ function shareGoatsImage_() {
       row * (cardHeight + cardGap);
 
     const regionColor =
-      getCanvasRegionColor_(p.teamRegion || p.nationality);
+      getCanvasRegionColor_(p.nationality);
 
     const regionLabel =
-      getCanvasRegionLabel_(p.teamRegion || p.nationality);
+      getCanvasRegionLabel_(p.nationality);
 
     const roleIcon =
       getCanvasRoleIcon_(p.role);
@@ -474,13 +474,13 @@ function buildGoatsShareText_(players) {
 function getCanvasRegionLabel_(region) {
   const key = String(region || "").toLowerCase();
 
-  if (key.includes("kr")) return "🇰🇷 KR";
-  if (key.includes("jp")) return "🇯🇵 JP";
-  if (key.includes("cn")) return "🇨🇳 CN";
-  if (key.includes("na")) return "🇺🇸 NA";
-  if (key.includes("emea")) return "🇪🇺 EMEA";
-  if (key.includes("pac")) return "🌏 PAC";
-  if (key.includes("sa")) return "🌎 SA";
+  if (key.includes("kr")) return "KR";
+  if (key.includes("jp")) return "JP";
+  if (key.includes("cn")) return "CN";
+  if (key.includes("na")) return "NA";
+  if (key.includes("emea")) return "EMEA";
+  if (key.includes("pac")) return "PAC";
+  if (key.includes("sa")) return "SA";
 
   return "";
 }
