@@ -16,11 +16,6 @@ voiceLine?.addEventListener(
 );
 
 const searchBox = document.getElementById("searchBox");
-const mutedPlayersButton =
-  document.getElementById("mutedPlayersButton");
-
-const mutedPlayersPanel =
-  document.getElementById("mutedPlayersPanel");
 
 function matchesSearch_(haystack, query) {
   const tokens = String(query || "")
@@ -80,8 +75,6 @@ function toggleMutedPlayer_(name) {
     MUTED_PLAYERS_KEY,
     JSON.stringify(next)
   );
-  updateMutedPlayersButton_();
-  renderMutedPlayersPanel_();
 }
 
 function muteButton_(name) {
@@ -221,18 +214,7 @@ document.addEventListener("click", e => {
 
   toggleMutedPlayer_(button.dataset.unmutePlayer);
 
-  updateMutedPlayersButton_();
-  renderMutedPlayersPanel_();
-
-  if (isLiveView(currentView)) {
-    renderLive(filterPlayers(currentData));
-
-  } else if (isYoutubeView(currentView)) {
-    renderYoutube(filterYoutube(currentData));
-
-  } else if (isClipView(currentView)) {
-    renderClips(filterClips(currentData));
-  }
+  loadView(currentView);
 });
 
 document.addEventListener("click", e => {
@@ -247,60 +229,7 @@ document.addEventListener("click", e => {
     JSON.stringify([])
   );
 
-  updateMutedPlayersButton_();
-  renderMutedPlayersPanel_();
   loadView(currentView);
-});
-
-function updateMutedPlayersButton_() {
-  if (!mutedPlayersButton) return;
-
-  const count = getMutedPlayers_().length;
-
-  mutedPlayersButton.textContent =
-    `👻 Muted Players (${count})`;
-}
-
-function renderMutedPlayersPanel_() {
-  if (!mutedPlayersPanel) return;
-
-  const muted = getMutedPlayers_();
-
-  if (!muted.length) {
-    mutedPlayersPanel.innerHTML =
-      `<div class="muted-empty">No muted players.</div>`;
-    return;
-  }
-
-  mutedPlayersPanel.innerHTML = `
-    ${muted.map(name => `
-      <div class="muted-player-row">
-        <span>${escapeHtml(name)}</span>
-        <button
-          type="button"
-          data-unmute-player="${escapeHtml(name)}"
-        >
-          ✕
-        </button>
-      </div>
-    `).join("")}
-
-    <button
-      type="button"
-      class="muted-clear-button"
-      id="clearMutedPlayersButton"
-    >
-      Clear All
-    </button>
-  `;
-}
-
-mutedPlayersButton?.addEventListener("click", e => {
-  e.stopPropagation();
-
-  mutedPlayersPanel?.classList.toggle("settings-hidden");
-
-  renderMutedPlayersPanel_();
 });
 
 const toolsButton =  document.getElementById("toolsButton");
@@ -379,8 +308,6 @@ themeSelect?.addEventListener("change", () => {
 
   applyTheme_(currentTheme);
 });
-
-updateMutedPlayersButton_();
 
 let liveTitleMode =
   localStorage.getItem("liveTitleMode") || "full";
@@ -519,7 +446,6 @@ document.addEventListener(
       e.target !== settingsButton
     ) {
       settingsMenu.classList.add("settings-hidden");
-      mutedPlayersPanel?.classList.add("settings-hidden");
     }
   }
 );
@@ -697,8 +623,9 @@ const titles = {
   teams: "TEAMS",
   playerlinks: "ALL",
   birthdays: "BIRTHDAYS",
-  favorites: "★MY GOATS"
-  };
+  favorites: "★MY GOATS",
+  muted: "◆MUTED"
+};
 
 let voiceLines = [];
 
@@ -795,7 +722,8 @@ const VIEW_GROUPS = {
     "teams",
     "playerlinks",
     "birthdays",
-    "favorites"
+    "favorites",
+    "muted"
   ]
 };
 
@@ -1023,10 +951,13 @@ searchBox?.addEventListener("input", () => {
     renderClips(filterClips(currentData));
   
   } else if (
-    currentView === "playerlinks" ||
-    currentView === "favorites"
-  ) {
-    searchPlayerLinksTable();
+  currentView === "playerlinks" ||
+  currentView === "favorites"
+) {
+  searchPlayerLinksTable();
+
+} else if (currentView === "muted") {
+  renderMutedPlayersView();
   
   } else {
     renderLive(filterPlayers(currentData));
@@ -1074,7 +1005,82 @@ function loadView(view) {
     return;
   }
 
+  if (view === "muted") {
+    loadMutedPlayersView();
+    return;
+}
+
   loadLiveView("new");
+}
+
+function loadMutedPlayersView() {
+
+  pageTitle.textContent = "◆MUTED";
+  setRandomVoiceLine();
+
+  currentData = getMutedPlayers_();
+
+  renderMutedPlayersView();
+}
+
+function renderMutedPlayersView() {
+  const muted = getMutedPlayers_().filter(name =>
+    matchesSearch_(name, searchBox.value)
+  );
+
+  app.className = "";
+  app.classList.add("table-mode");
+
+  viewNote.innerHTML = `
+    ◆ Players hidden from LIVE, YouTube and Clips.
+  `;
+
+  if (!muted.length) {
+    app.innerHTML = `
+      <p class="empty">No muted players.</p>
+    `;
+    return;
+  }
+
+  app.innerHTML = `
+    <div class="player-table-wrap">
+      <table class="player-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          ${muted.map(name => `
+            <tr>
+              <td class="name-cell">
+                ${escapeHtml(name)}
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="muted-clear-button"
+                  data-unmute-player="${escapeHtml(name)}"
+                >
+                  Unmute
+                </button>
+              </td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    </div>
+
+    <button
+      type="button"
+      class="muted-clear-button"
+      id="clearMutedPlayersButton"
+    >
+      Clear All
+    </button>
+  `;
 }
 
 function getLangClass(p) {
