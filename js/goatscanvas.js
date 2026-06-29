@@ -414,7 +414,7 @@ function buildGoatsShareText_(players) {
     "Where Are the GOATs?",
     "https://ow-kitsune-guide.pages.dev/",
     "",
-    "#OWCS #Overwatch2 #OWKitsuneGuide"
+    "#OWCS #Overwatch #OWKitsuneGuide"
   ].join("\n");
 }
 
