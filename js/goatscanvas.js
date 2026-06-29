@@ -143,15 +143,6 @@ function shareGoatsImage_() {
     const roleIcon =
       getCanvasRoleIcon_(p.role);
 
-    ctx.save();
-
-    ctx.shadowColor = accent;
-    ctx.shadowBlur = 14;
-    ctx.shadowOffsetX = 0;
-    ctx.shadowOffsetY = 0;
-
-    ctx.restore();
-
     ctx.fillStyle = bgLight;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
     ctx.fill();
@@ -543,7 +534,10 @@ function roundRect_(ctx, x, y, width, height, radius) {
   ctx.closePath();
 }
 
-function showGoatsShareModal_(blob, shareText) {
+function showGoatsShareModal_(blob, shareText, options = {}) {
+  const shareTitle = options.shareTitle || "MY GOATS";
+  const modalTitle = options.title || "Share Your GOATs";
+  const fileName = options.fileName || "ow-kitsune-my-goats.png";
   const oldModal =
     document.querySelector(".goats-share-modal");
 
@@ -564,7 +558,7 @@ function showGoatsShareModal_(blob, shareText) {
         ×
       </button>
 
-      <h3>Share Your GOATs</h3>
+      <h3>${escapeHtml(modalTitle)}</h3>
 
       <img
         class="goats-share-preview"
@@ -588,7 +582,7 @@ function showGoatsShareModal_(blob, shareText) {
 
         <a
           href="${url}"
-          download="ow-kitsune-my-goats.png"
+          download="${escapeHtml(fileName)}"
         >
           Download PNG
         </a>
@@ -621,7 +615,7 @@ function showGoatsShareModal_(blob, shareText) {
 
       const file = new File(
         [blob],
-        "ow-kitsune-my-goats.png",
+        fileName,
         {
           type: "image/png"
         }
@@ -634,7 +628,7 @@ function showGoatsShareModal_(blob, shareText) {
         try {
 
           await navigator.share({
-            title: "MY GOATS",
+            title: shareTitle,
             text: shareText,
             files: [file]
           });
@@ -661,3 +655,41 @@ function escapeHtml(text) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
+
+function buildSiteShareText_() {
+  return [
+    "🦊 OW KITSUNE GUIDE",
+    "Where Are the GOATs?",
+    "",
+    "Live streams, videos, clips and links from Overwatch pro players.",
+    "Track Twitch, CHZZK, SOOP, Bilibili, YouTube, birthdays and player links in one place.",
+    "",
+    "https://ow-kitsune-guide.pages.dev/",
+    "",
+    "#OWCS #Overwatch #OWKitsuneGuide"
+  ].join("\n");
+}
+
+function shareSite_() {
+  fetch("./og-image.png")
+    .then(res => res.blob())
+    .then(blob => {
+      showGoatsShareModal_(
+        blob,
+        buildSiteShareText_(),
+        {
+          title: "Share OW KITSUNE GUIDE",
+          shareTitle: "OW KITSUNE GUIDE",
+          fileName: "ow-kitsune-guide.png"
+        }
+      );
+    })
+    .catch(error => {
+      console.error(error);
+      alert("Failed to prepare site share image.");
+    });
+}
+
+document
+  .getElementById("shareSiteButton")
+  ?.addEventListener("click", shareSite_);
