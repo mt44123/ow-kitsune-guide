@@ -292,22 +292,28 @@ function shareGoatsImage_() {
   canvas.width = width;
   canvas.height = height;
 
-  ctx.fillStyle = bgDark;
+  ctx.fillStyle = bgMain;
   ctx.fillRect(0, 0, width, height);
 
-  const bgGradient = ctx.createLinearGradient(
-    0,
-    0,
-    width,
-    height
-  );
+  // ===== Accent Glow =====
+  ctx.save();
 
-  bgGradient.addColorStop(0, bgDark);
-  bgGradient.addColorStop(0.6, bgMain);
-  bgGradient.addColorStop(1, bgDark);
+  ctx.globalAlpha = 0.22;
+  ctx.shadowBlur = 180;
+  ctx.shadowColor = accent;
+  ctx.fillStyle = accent;
 
-  ctx.fillStyle = bgGradient;
-  ctx.fillRect(0, 0, width, height);
+  // 右上の発光
+  ctx.beginPath();
+  ctx.arc(width - 120, 120, 120, 0, Math.PI * 2);
+  ctx.fill();
+
+  // 左下の発光
+  ctx.beginPath();
+  ctx.arc(120, height - 120, 150, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.restore();
 
   ctx.fillStyle = bgLight;
   roundRect_(ctx, padding, 76, width - padding * 2, 170, 24);
