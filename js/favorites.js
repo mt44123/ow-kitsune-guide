@@ -240,14 +240,32 @@ function shareGoatsImage_() {
 
   if (!favs.length) return;
 
+  const rootStyle = getComputedStyle(document.documentElement);
+  const bodyStyle = getComputedStyle(document.body);
+
+  const bgDark =
+    bodyStyle.getPropertyValue("--bg-dark").trim() || "#111A2D";
+  const bgMain =
+    bodyStyle.getPropertyValue("--bg-main").trim() || "#111A2D";
+  const bgLight =
+    bodyStyle.getPropertyValue("--bg-light").trim() || "#1D253A";
+  const accent =
+    bodyStyle.getPropertyValue("--accent").trim() || "#B84724";
+  const textMain =
+    bodyStyle.getPropertyValue("--text-main").trim() || "#FFFFFF";
+  const textSub =
+    bodyStyle.getPropertyValue("--text-sub").trim() || "rgba(255,255,255,.7)";
+  const textMuted =
+    bodyStyle.getPropertyValue("--text-muted").trim() || "rgba(255,255,255,.45)";
+
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
 
   const width = 1200;
   const padding = 80;
-  const lineHeight = 52;
-  const headerHeight = 190;
-  const footerHeight = 110;
+  const lineHeight = 54;
+  const headerHeight = 260;
+  const footerHeight = 150;
 
   const height =
     headerHeight +
@@ -257,35 +275,69 @@ function shareGoatsImage_() {
   canvas.width = width;
   canvas.height = height;
 
-  ctx.fillStyle = "#111A2D";
+  ctx.fillStyle = bgDark;
   ctx.fillRect(0, 0, width, height);
 
-  ctx.fillStyle = "#FFFFFF";
-  ctx.font = "700 54px sans-serif";
-  ctx.fillText("MY GOATS", padding, 95);
+  ctx.fillStyle = bgMain;
+  roundRect_(ctx, 40, 40, width - 80, height - 80, 32);
+  ctx.fill();
 
-  ctx.fillStyle = "#B84724";
-  ctx.font = "700 34px sans-serif";
-  ctx.fillText("OW KITSUNE GUIDE 🦊", padding, 145);
+  ctx.fillStyle = accent;
+  roundRect_(ctx, 40, 40, 12, height - 80, 8);
+  ctx.fill();
 
-  ctx.fillStyle = "#FFFFFF";
+  ctx.fillStyle = bgLight;
+  roundRect_(ctx, padding, 76, width - padding * 2, 140, 24);
+  ctx.fill();
+
+  ctx.fillStyle = accent;
+  ctx.font = "700 42px sans-serif";
+  ctx.fillText("★", padding + 34, 132);
+
+  ctx.fillStyle = textMain;
+  ctx.font = "800 58px sans-serif";
+  ctx.fillText("MY GOATS", padding + 90, 136);
+
+  ctx.fillStyle = textSub;
+  ctx.font = "700 30px sans-serif";
+  ctx.fillText("OW KITSUNE GUIDE 🦊", padding + 94, 178);
+
+  ctx.fillStyle = accent;
+  ctx.font = "700 26px sans-serif";
+  ctx.fillText(`${favs.length} GOAT${favs.length === 1 ? "" : "s"}`, width - padding - 170, 132);
+
+  ctx.fillStyle = textMain;
   ctx.font = "600 36px sans-serif";
 
   favs.forEach((name, index) => {
-    ctx.fillText(
-      `★ ${name}`,
-      padding,
-      headerHeight + index * lineHeight
-    );
+    const y = headerHeight + index * lineHeight;
+
+    ctx.fillStyle = index % 2 === 0
+      ? "rgba(255,255,255,.04)"
+      : "rgba(255,255,255,.02)";
+
+    roundRect_(ctx, padding, y - 38, width - padding * 2, 44, 12);
+    ctx.fill();
+
+    ctx.fillStyle = accent;
+    ctx.fillText("★", padding + 20, y);
+
+    ctx.fillStyle = textMain;
+    ctx.fillText(name, padding + 72, y);
   });
 
-  ctx.fillStyle = "rgba(255,255,255,.65)";
-  ctx.font = "28px sans-serif";
-  ctx.fillText(
-    "https://ow-kitsune-guide.pages.dev/",
-    padding,
-    height - 60
-  );
+  const footerY = height - 105;
+
+  ctx.fillStyle = accent;
+  ctx.fillRect(padding, footerY - 28, width - padding * 2, 3);
+
+  ctx.fillStyle = textSub;
+  ctx.font = "700 28px sans-serif";
+  ctx.fillText("Where Are the GOATs?", padding, footerY + 20);
+
+  ctx.fillStyle = textMuted;
+  ctx.font = "24px sans-serif";
+  ctx.fillText("ow-kitsune-guide.pages.dev", padding, footerY + 58);
 
   canvas.toBlob(blob => {
     if (!blob) return;
