@@ -40,6 +40,9 @@ function shareGoatsImage_() {
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
 
+  const qr = new Image();
+  qr.src = "./icons/qr.svg";
+
   const width = 1200;
   const padding = 80;
   const fontTitle = "'Jura', sans-serif";
@@ -292,40 +295,114 @@ function shareGoatsImage_() {
 
   ctx.textAlign = "left";
 
-  canvas.toBlob(blob => {
-    if (!blob) return;
+  const finishShare = () => {
 
-    const file = new File(
-      [blob],
-      "ow-kitsune-my-goats.png",
-      { type: "image/png" }
-    );
+    canvas.toBlob(blob => {
 
-    if (
-      navigator.canShare &&
-      navigator.canShare({ files: [file] })
-    ) {
-      navigator.share({
-        title: "MY GOATS",
-        text: shareText,
-        files: [file]
-      }).catch(() => {});
-      return;
-    }
+      if (!blob) return;
 
-    navigator.clipboard?.writeText(shareText).catch(() => {});
+      const file = new File(
+        [blob],
+        "ow-kitsune-my-goats.png",
+        { type: "image/png" }
+      );
 
-    const url = URL.createObjectURL(blob);
+      if (
+        navigator.canShare &&
+        navigator.canShare({ files: [file] })
+      ) {
+        navigator.share({
+          title: "MY GOATS",
+          text: shareText,
+          files: [file]
+        }).catch(() => {});
+        return;
+      }
 
-    const link = document.createElement("a");
-    link.download = "ow-kitsune-my-goats.png";
-    link.href = url;
-    link.click();
+      navigator.clipboard?.writeText(shareText).catch(() => {});
 
-    setTimeout(() => {
-      URL.revokeObjectURL(url);
-    }, 1000);
-  }, "image/png");
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.download = "ow-kitsune-my-goats.png";
+      link.href = url;
+      link.click();
+
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+      }, 1000);
+
+    }, "image/png");
+
+  };
+
+  const qrSize = 84;
+
+const qrX =
+  width - padding - qrSize;
+
+const qrY =
+  footerY - 36;
+
+const drawQrAndShare = () => {
+  ctx.fillStyle = bgLight;
+
+  roundRect_(
+    ctx,
+    qrX - 10,
+    qrY - 10,
+    qrSize + 20,
+    qrSize + 40,
+    14
+  );
+  ctx.fill();
+
+  ctx.strokeStyle = border;
+  ctx.lineWidth = 1;
+
+  roundRect_(
+    ctx,
+    qrX - 10,
+    qrY - 10,
+    qrSize + 20,
+    qrSize + 40,
+    14
+  );
+  ctx.stroke();
+
+  ctx.drawImage(
+    qr,
+    qrX,
+    qrY,
+    qrSize,
+    qrSize
+  );
+
+  ctx.textAlign = "center";
+  ctx.fillStyle = textMuted;
+  ctx.font = `600 15px ${fontBody}`;
+
+  ctx.fillText(
+    "Scan Me",
+    qrX + qrSize / 2,
+    qrY + qrSize + 24
+  );
+
+  ctx.textAlign = "left";
+
+  finishShare();
+};
+
+if (qr.complete) {
+  drawQrAndShare();
+} else {
+  qr.onload = drawQrAndShare;
+
+  qr.onerror = () => {
+    console.warn("QR image could not be loaded.");
+    finishShare();
+  };
+}
 }
 
 function buildGoatsShareText_(players) {
