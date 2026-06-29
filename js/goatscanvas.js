@@ -214,29 +214,6 @@ function shareGoatsImage_() {
 
   ctx.restore();
 
-  // Liquid edge highlight
-  ctx.save();
-  roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
-  ctx.clip();
-
-  const edgeLight = ctx.createLinearGradient(
-    x,
-    y,
-    x,
-    y + cardHeight
-  );
-
-  edgeLight.addColorStop(0.00, "rgba(255,255,255,0.22)");
-  edgeLight.addColorStop(0.08, "rgba(255,255,255,0.055)");
-  edgeLight.addColorStop(0.50, "rgba(255,255,255,0)");
-  edgeLight.addColorStop(0.92, "rgba(255,255,255,0.035)");
-  edgeLight.addColorStop(1.00, "rgba(255,255,255,0.12)");
-
-  ctx.fillStyle = edgeLight;
-  ctx.fillRect(x, y, columnWidth, cardHeight);
-
-  ctx.restore();
-
   // Neon outer glow
   ctx.save();
   ctx.strokeStyle = hexToRgba_(accent, 0.24);
