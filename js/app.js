@@ -1110,15 +1110,15 @@ function renderMutedPlayersView() {
           `).join("")}
         </tbody>
       </table>
-    </div>
 
-    <button
-      type="button"
-      class="muted-clear-button"
-      id="clearMutedPlayersButton"
-    >
-      Clear All
-    </button>
+      <button
+        type="button"
+        class="muted-clear-button"
+        id="clearMutedPlayersButton"
+      >
+        Clear All
+      </button>
+    </div>
   `;
 }
 
