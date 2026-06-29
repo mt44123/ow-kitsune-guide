@@ -35,8 +35,7 @@ function loadFavoritesView() {
   setRandomVoiceLine();
 
   viewNote.innerHTML = `
-    ★ Saved on this browser only.<br>
-    Use <b>★Backup</b> and <b>★Import</b> to move them to another device.<br>
+    ★ Saved on this browser only. Use <b>★Backup</b> and <b>★Import</b> to move them to another device.<br>
     このブラウザにのみ保存されます。<b>★Backup</b> と <b>★Import</b> で別のデバイスへ引き継げます。
   `;
 
@@ -378,14 +377,15 @@ function shareGoatsImage_() {
   ctx.fillStyle = accent;
   ctx.fillRect(padding, footerY - 24, width - padding * 2, 3);
 
-  const dateText = new Date().toLocaleDateString(
-    undefined,
-    {
-      year: "numeric",
-      month: "short",
-      day: "numeric"
-    }
-  );
+  const months = [
+    "Jan","Feb","Mar","Apr","May","Jun",
+    "Jul","Aug","Sep","Oct","Nov","Dec"
+  ];
+
+  const now = new Date();
+
+  const dateText =
+    `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
 
   ctx.textAlign = "center";
 
