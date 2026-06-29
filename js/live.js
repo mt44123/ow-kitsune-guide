@@ -176,6 +176,22 @@ function filterPlayers(players) {
   });
 }
 
+function liveTimeIcon_() {
+  return `
+    <svg class="live-stat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
+      <path fill="currentColor" d="m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/>
+    </svg>
+  `;
+}
+
+function liveViewersIcon_() {
+  return `
+    <svg class="live-stat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
+      <path fill="currentColor" d="M40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm720 0v-120q0-44-24.5-84.5T666-434q51 6 96 20.5t84 35.5q36 20 55 44.5t19 53.5v120H760ZM247-527q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47Zm466 0q-47 47-113 47-11 0-28-2.5t-28-5.5q27-32 41.5-71t14.5-81q0-42-14.5-81T544-792q14-5 28-6.5t28-1.5q66 0 113 47t47 113q0 66-47 113Z"/>
+    </svg>
+  `;
+}
+
 function renderLive(players) {
   app.className = "";
 
@@ -212,8 +228,15 @@ function renderLive(players) {
           <span class="platform-icons">
             ${renderPlatformIcons_(p.platform)}
           </span>
-          <span>🕓${formatLiveFor(p.startedAt)}</span>
-          <span>👥${Number(p.viewers || 0).toLocaleString()}</span>
+          <span class="live-stat-item">
+            ${liveTimeIcon_()}
+            <span>${formatLiveFor(p.startedAt)}</span>
+          </span>
+
+          <span class="live-stat-item">
+            ${liveViewersIcon_()}
+            <span>${Number(p.viewers || 0).toLocaleString()}</span>
+          </span>
         </div>
 
         <div class="title">${escapeHtml(p.title || "")}</div>

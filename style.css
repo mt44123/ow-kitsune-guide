@@ -1183,6 +1183,20 @@ display:-webkit-box;
   gap:5px;
   flex-shrink:0;
 }
+
+.live-stat-item{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+}
+
+.live-stat-icon{
+  width:16px;
+  height:16px;
+  display:block;
+  flex-shrink:0;
+  color:inherit;
+}
 /* =========================================================
    8. YOUTUBE
    ========================================================= */
