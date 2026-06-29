@@ -140,7 +140,7 @@ function shareGoatsImage_() {
 
     ctx.fillStyle = textMuted;
     ctx.font = `700 22px ${fontBody}`;
-    ctx.fillText("★", x + 22, y + 50);
+    ctx.fillText("★", x + 22, y + 54);
 
     ctx.fillStyle = textMain;
 
@@ -151,7 +151,7 @@ function shareGoatsImage_() {
         : 32;
 
     ctx.font = `800 ${nameFontSize}px ${fontBody}`;
-    ctx.fillText(name, x + 56, y + 35, columnWidth - 230);
+    ctx.fillText(name, x + 56, y + 40, columnWidth - 230);
 
     const info = [
       regionLabel,
@@ -163,7 +163,7 @@ function shareGoatsImage_() {
     ctx.fillText(
       info,
       x + 56,
-      y + 66
+      y + 74
     );
 
     if (p.team && p.team !== "No team") {
@@ -172,7 +172,7 @@ function shareGoatsImage_() {
       ctx.fillText(
         p.team,
         x + columnWidth - 20,
-        y + 35,
+        y + 40,
         columnWidth - 220
       );
       ctx.textAlign = "left";
