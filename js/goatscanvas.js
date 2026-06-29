@@ -25,7 +25,7 @@ function shareGoatsImage_() {
 
   // Canvas fixed brand colors
   const bgMain = "#18233A";
-  const bgLight = "#26334D";
+  const bgLight = "#344662";
   const textMain = "#FFFFFF";
   const textSub = "rgba(255,255,255,.82)";
   const textMuted = "rgba(255,255,255,.62)";
@@ -210,24 +210,7 @@ function shareGoatsImage_() {
     ctx.strokeStyle = border;
     ctx.lineWidth = 1.5;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
-    ctx.stroke();
-
-    // 名前背景
-    ctx.fillStyle = "rgba(255,255,255,.07)";
-    ctx.strokeStyle = "rgba(255,255,255,.10)";
-    ctx.lineWidth = 1;
-
-    roundRect_(
-      ctx,
-      x + 18,
-      y + 12,
-      columnWidth - 36,
-      40,
-      10
-    );
-
-    ctx.fill();
-    ctx.stroke();
+    ctx.stroke(); 
 
     // 名前
     ctx.fillStyle = textMain;
