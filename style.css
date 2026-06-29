@@ -19,6 +19,7 @@
    @SECTION: FAQ
    @SECTION: UTILITIES
    @SECTION: RESPONSIVE
+   @SECTION: MUTE
 
    ========================================================= */
 /* =========================================================
@@ -957,8 +958,6 @@ position:absolute;
   border:1px solid var(--border);
   border-radius:var(--radius-lg);
 
-  z-index:1000;
-
 z-index:3000;
 }
 
@@ -982,15 +981,31 @@ width:100%;
   cursor:pointer;
 }
 
-.settings-item:hover{
-    background:var(--border);
-}
-
 .settings-note{
 font-size:11px;
   color:#999;
   padding:4px 10px 8px;
   line-height:1.4;
+}
+
+.tools-link,
+.settings-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.settings-icon{
+  width:20px;
+  height:20px;
+  display:block;
+  flex-shrink:0;
+  color:inherit;
+}
+
+.settings-item:hover{
+  background:var(--border);
+  color:var(--accent);
 }
 
 /* =========================================================
