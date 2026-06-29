@@ -2975,23 +2975,36 @@ color:var(--text-sub);
   gap:8px;
 }
 
+/* =========================================================
+   17. MUTE
+   ========================================================= */
+/* @SECTION: MUTE */
+
 .mute-button{
+  width:32px;
+  height:32px;
+
   display:inline-flex;
   align-items:center;
   justify-content:center;
 
+  padding:0;
+
   border:none;
-  background:none;
-  padding:2px 4px;
+  border-radius:50%;
+
+  background:transparent;
+  color:var(--text-muted);
 
   cursor:pointer;
-  color:var(--text-muted);
   line-height:1;
+
+  transition:var(--transition-fast);
 }
 
 .mute-button .media-icon{
-  width:18px;
-  height:18px;
+  width:22px;
+  height:22px;
   display:block;
 
   color:inherit;
@@ -2999,6 +3012,7 @@ color:var(--text-sub);
 
 .mute-button:hover,
 .mute-button.active{
+  background:var(--button-bg);
   color:var(--accent);
 }
 
@@ -3020,7 +3034,9 @@ color:var(--text-sub);
   align-items:center;
   justify-content:space-between;
   gap:8px;
+
   padding:6px 0;
+
   color:var(--text-main);
   font-size:12px;
 }
@@ -3028,19 +3044,15 @@ color:var(--text-sub);
 .muted-player-row button,
 .muted-clear-button{
   border:none;
+  border-radius:var(--radius-sm);
+
   background:var(--button-bg);
   color:var(--text-main);
-  border-radius:var(--radius-sm);
+
   cursor:pointer;
   padding:4px 8px;
-}
 
-.muted-player-row button .media-icon{
-  width:18px;
-  height:18px;
-  display:block;
-
-  color:inherit;
+  transition:var(--transition-fast);
 }
 
 .muted-player-row button:hover,
@@ -3058,18 +3070,20 @@ color:var(--text-sub);
   position:absolute;
   min-width:180px;
 
+  padding:6px;
+
   background:var(--bg-light);
   border:1px solid var(--border);
   border-radius:var(--radius-lg);
 
   box-shadow:0 10px 24px rgba(0,0,0,.28);
 
-  padding:6px;
   z-index:5000;
 }
 
 .player-context-menu button{
   width:100%;
+
   display:flex;
   align-items:center;
   gap:10px;
@@ -3087,6 +3101,8 @@ color:var(--text-sub);
   text-align:left;
 
   cursor:pointer;
+
+  transition:var(--transition-fast);
 }
 
 .player-context-menu button:hover{
