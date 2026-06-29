@@ -151,7 +151,7 @@ function shareGoatsImage_() {
         : 32;
 
     ctx.font = `800 ${nameFontSize}px ${fontBody}`;
-    ctx.fillText(name, x + 56, y + 35, columnWidth - 70);
+    ctx.fillText(name, x + 56, y + 35, columnWidth - 230);
 
     const info = [
       regionLabel,
@@ -163,16 +163,19 @@ function shareGoatsImage_() {
     ctx.fillText(
       info,
       x + 56,
-      y + 60
+      y + 66
     );
 
     if (p.team && p.team !== "No team") {
+      ctx.textAlign = "right";
+      ctx.font = `600 16px ${fontBody}`;
       ctx.fillText(
         p.team,
-        x + 56,
-        y + 82,
-        columnWidth - 70
+        x + columnWidth - 20,
+        y + 35,
+        columnWidth - 220
       );
+      ctx.textAlign = "left";
     }
   });
 
