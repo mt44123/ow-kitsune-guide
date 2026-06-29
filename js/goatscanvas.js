@@ -132,13 +132,20 @@ function shareGoatsImage_() {
 
     ctx.restore();
 
-    ctx.fillStyle = regionColor;
-    roundRect_(ctx, x, y, 9, cardHeight, 6);
-    ctx.fill();
+    const regionGlow = ctx.createLinearGradient(
+      x,
+      y,
+      x + columnWidth,
+      y
+    );
 
-   ctx.fillStyle = textMuted;
-    ctx.font = `700 20px ${fontBody}`;
-    ctx.fillText("★", x + 24, y + 54);
+    regionGlow.addColorStop(0, hexToRgba_(regionColor, 0.26));
+    regionGlow.addColorStop(0.28, hexToRgba_(regionColor, 0.08));
+    regionGlow.addColorStop(1, hexToRgba_(regionColor, 0));
+
+    ctx.fillStyle = regionGlow;
+    roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
+    ctx.fill();
 
     ctx.fillStyle = textMain;
 
@@ -151,9 +158,9 @@ function shareGoatsImage_() {
     ctx.font = `800 ${nameFontSize}px ${fontBody}`;
     ctx.fillText(
       name,
-      x + 64,
+      x + 32,
       y + 40,
-      columnWidth - 88
+      columnWidth - 56
     );
 
     const meta = [
@@ -170,9 +177,9 @@ function shareGoatsImage_() {
     ctx.font = `600 18px ${fontBody}`;
     ctx.fillText(
       meta,
-      x + 64,
+      x + 32,
       y + 72,
-      columnWidth - 88
+      columnWidth - 56
     );
   });
 
