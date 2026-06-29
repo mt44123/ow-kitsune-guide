@@ -789,3 +789,10 @@ function shareSite_() {
 document
   .getElementById("shareSiteButton")
   ?.addEventListener("click", shareSite_);
+
+document
+  .getElementById("shareGoatsButton")
+  ?.addEventListener("click", () => {
+    settingsMenu?.classList.add("settings-hidden");
+    shareGoatsImage_();
+  });
