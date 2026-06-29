@@ -86,8 +86,11 @@ app.innerHTML = `
       showGoatsExport
         ? `
           <div class="goats-export-box">
-            <button class="goats-export-button" data-goats-export="copylink">
+            <button class="goats-export-button" data-goats-export="backup">
               Backup MY GOATS
+            </button>
+            <button class="goats-export-button" data-goats-export="import">
+              Import Backup
             </button>
             <button class="goats-export-button" data-goats-export="share">
               Share

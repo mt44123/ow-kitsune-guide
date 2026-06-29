@@ -36,8 +36,8 @@ function loadFavoritesView() {
 
   viewNote.innerHTML = `
     ★ Saved on this browser only.<br>
-    Use <b>Backup MY GOATS</b> to transfer them to another device.<br>
-    このブラウザにのみ保存されます。<b>Backup MY GOATS</b> を使って別のデバイスへ引き継げます。
+    Use <b>Backup MY GOATS</b> and <b>Import Backup</b> to move them to another device.<br>
+    このブラウザにのみ保存されます。<b>Backup MY GOATS</b> と <b>Import Backup</b> で別のデバイスへ引き継げます。
   `;
 
   if (
@@ -113,23 +113,25 @@ function renderFavorites(players) {
   });
 }
 
-function buildGoatsShareLink_() {
+function buildGoatsBackupCode_() {
   const favs = getFavorites_();
 
-  const encoded = encodeURIComponent(
-    btoa(unescape(encodeURIComponent(JSON.stringify(favs))))
+  const encoded = btoa(
+    unescape(
+      encodeURIComponent(JSON.stringify(favs))
+    )
   );
 
-  return `${location.origin}${location.pathname}?goats=${encoded}`;
+  return `OWKG:${encoded}`;
 }
 
-function copyGoatsShareLink_() {
-  const url = buildGoatsShareLink_();
+function copyGoatsBackupCode_() {
+  const code = buildGoatsBackupCode_();
 
-  navigator.clipboard.writeText(url)
+  navigator.clipboard.writeText(code)
     .then(() => {
       alert(
-        "Backup link copied!\nOpen it on another device to import your MY GOATS."
+        "Backup code copied!\nPaste it with Import Backup on another device."
       );
     })
     .catch(() => {
@@ -137,18 +139,76 @@ function copyGoatsShareLink_() {
     });
 }
 
+function importGoatsBackupCode_() {
+  const code = prompt(
+    "Paste your OW KITSUNE GUIDE backup code:"
+  );
+
+  if (!code) return;
+
+  try {
+    const cleaned = code.trim();
+
+    if (!cleaned.startsWith("OWKG:")) {
+      alert("Invalid backup code.");
+      return;
+    }
+
+    const encoded = cleaned.replace("OWKG:", "");
+
+    const favs = JSON.parse(
+      decodeURIComponent(
+        escape(atob(encoded))
+      )
+    );
+
+    if (!Array.isArray(favs)) {
+      alert("Invalid backup code.");
+      return;
+    }
+
+    const current = getFavorites_();
+
+    const merged = Array.from(
+      new Set([
+        ...current,
+        ...favs.filter(name => typeof name === "string")
+      ])
+    );
+
+    localStorage.setItem(
+      "favorites",
+      JSON.stringify(merged)
+    );
+
+    updateFavoriteCounts_();
+
+    alert("MY GOATS imported!");
+
+    if (currentView === "favorites") {
+      renderFavorites(currentData);
+      searchPlayerLinksTable();
+    }
+
+  } catch (error) {
+    console.error(error);
+    alert("Failed to import backup.");
+  }
+}
+
 function shareGoatsList_() {
-  const url = buildGoatsShareLink_();
+  const code = buildGoatsBackupCode_();
 
   if (!navigator.share) {
-    copyGoatsShareLink_();
+    copyGoatsBackupCode_();
     return;
   }
 
   navigator.share({
     title: "Backup MY GOATS",
-    text: "Import my GOATs on OW KITSUNE GUIDE 🦊",
-    url
+    text:
+      "Import my MY GOATS on OW KITSUNE GUIDE 🦊\n\n" +
+      code
   }).catch(() => {});
 }
 
@@ -218,9 +278,13 @@ document.addEventListener("click", e => {
 
     const type = goatsExport.dataset.goatsExport;
 
-    if (type === "copylink") {
-      copyGoatsShareLink_();
-    }
+    if (type === "backup") {
+        copyGoatsBackupCode_();
+      }
+
+    if (type === "import") {
+        importGoatsBackupCode_();
+      }
 
     if (type === "share") {
       shareGoatsList_();
@@ -285,48 +349,3 @@ document.addEventListener("click", e => {
     return;
   }
 });
-
-function importGoatsFromUrl_() {
-  const params = new URLSearchParams(location.search);
-  const encoded = params.get("goats");
-
-  if (!encoded) return;
-
-  try {
-    const favs = JSON.parse(
-      decodeURIComponent(escape(atob(decodeURIComponent(encoded))))
-    );
-
-    if (!Array.isArray(favs)) return;
-
-    const current = getFavorites_();
-
-    const merged = Array.from(
-      new Set([
-        ...current,
-        ...favs.filter(name => typeof name === "string")
-      ])
-    );
-
-    localStorage.setItem(
-      "favorites",
-      JSON.stringify(merged)
-    );
-
-    updateFavoriteCounts_();
-
-    alert("MY GOATS imported!");
-
-    history.replaceState(
-      null,
-      "",
-      location.origin + location.pathname
-    );
-
-  } catch (error) {
-    console.error(error);
-    alert("Failed to import MY GOATS.");
-  }
-}
-
-importGoatsFromUrl_();
