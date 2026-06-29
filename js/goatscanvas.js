@@ -390,7 +390,7 @@ const drawHeaderLine = () => {
   ctx.drawImage(
     orangeLine,
     width / 2 - 300,
-    190,
+    232,
     600,
     34
   );
