@@ -262,13 +262,20 @@ function shareGoatsImage_() {
 
   const width = 1200;
   const padding = 80;
-  const lineHeight = 54;
-  const headerHeight = 260;
+  const fontTitle = "'Jura', sans-serif";
+  const fontBody = "'Jura', Arial, sans-serif";
+
+  const useTwoColumns = favs.length > 12;
+  const columns = useTwoColumns ? 2 : 1;
+  const rows = Math.ceil(favs.length / columns);
+
+  const lineHeight = useTwoColumns ? 50 : 54;
+  const headerHeight = 280;
   const footerHeight = 150;
 
   const height =
     headerHeight +
-    favs.length * lineHeight +
+    rows * lineHeight +
     footerHeight;
 
   canvas.width = width;
@@ -286,43 +293,91 @@ function shareGoatsImage_() {
   ctx.fill();
 
   ctx.fillStyle = bgLight;
-  roundRect_(ctx, padding, 76, width - padding * 2, 140, 24);
+  roundRect_(ctx, padding, 76, width - padding * 2, 158, 24);
   ctx.fill();
 
+  ctx.textAlign = "center";
+
   ctx.fillStyle = accent;
-  ctx.font = "700 42px sans-serif";
-  ctx.fillText("★", padding + 34, 132);
+  ctx.font = `800 34px ${fontTitle}`;
+  ctx.fillText("★", width / 2, 118);
 
   ctx.fillStyle = textMain;
-  ctx.font = "800 58px sans-serif";
-  ctx.fillText("MY GOATS", padding + 90, 136);
+  ctx.font = `800 62px ${fontTitle}`;
+  ctx.fillText("MY GOATS", width / 2, 164);
 
   ctx.fillStyle = textSub;
-  ctx.font = "700 30px sans-serif";
-  ctx.fillText("OW KITSUNE GUIDE 🦊", padding + 94, 178);
+  ctx.font = `700 28px ${fontBody}`;
+  ctx.fillText("OW KITSUNE GUIDE 🦊", width / 2, 202);
 
   ctx.fillStyle = accent;
-  ctx.font = "700 26px sans-serif";
-  ctx.fillText(`${favs.length} GOAT${favs.length === 1 ? "" : "s"}`, width - padding - 170, 132);
+  ctx.font = `700 24px ${fontBody}`;
+  ctx.fillText(
+    `${favs.length} GOAT${favs.length === 1 ? "" : "s"}`,
+    width / 2,
+    230
+  );
 
-  ctx.fillStyle = textMain;
-  ctx.font = "600 36px sans-serif";
+  ctx.textAlign = "left";
+
+  const listTop = headerHeight;
+  const columnGap = 34;
+  const listWidth = width - padding * 2;
+  const columnWidth =
+    useTwoColumns
+      ? (listWidth - columnGap) / 2
+      : listWidth;
 
   favs.forEach((name, index) => {
-    const y = headerHeight + index * lineHeight;
+    const column = useTwoColumns
+      ? index % 2
+      : 0;
 
-    ctx.fillStyle = index % 2 === 0
-      ? "rgba(255,255,255,.04)"
-      : "rgba(255,255,255,.02)";
+    const row = useTwoColumns
+      ? Math.floor(index / 2)
+      : index;
 
-    roundRect_(ctx, padding, y - 38, width - padding * 2, 44, 12);
+    const x =
+      padding +
+      column * (columnWidth + columnGap);
+
+    const y =
+      listTop +
+      row * lineHeight;
+
+    ctx.fillStyle =
+      row % 2 === 0
+        ? "rgba(255,255,255,.04)"
+        : "rgba(255,255,255,.02)";
+
+    roundRect_(
+      ctx,
+      x,
+      y - 38,
+      columnWidth,
+      44,
+      12
+    );
     ctx.fill();
 
     ctx.fillStyle = accent;
-    ctx.fillText("★", padding + 20, y);
+    ctx.font = `700 30px ${fontBody}`;
+    ctx.fillText("★", x + 20, y);
 
     ctx.fillStyle = textMain;
-    ctx.fillText(name, padding + 72, y);
+
+    const nameFontSize =
+      useTwoColumns && name.length > 14
+        ? 26
+        : 32;
+
+    ctx.font = `700 ${nameFontSize}px ${fontBody}`;
+    ctx.fillText(
+      name,
+      x + 62,
+      y,
+      columnWidth - 82
+    );
   });
 
   const footerY = height - 105;
@@ -330,13 +385,17 @@ function shareGoatsImage_() {
   ctx.fillStyle = accent;
   ctx.fillRect(padding, footerY - 28, width - padding * 2, 3);
 
+  ctx.textAlign = "center";
+
   ctx.fillStyle = textSub;
-  ctx.font = "700 28px sans-serif";
-  ctx.fillText("Where Are the GOATs?", padding, footerY + 20);
+  ctx.font = `700 28px ${fontBody}`;
+  ctx.fillText("Where Are the GOATs?", width / 2, footerY + 20);
 
   ctx.fillStyle = textMuted;
-  ctx.font = "24px sans-serif";
-  ctx.fillText("ow-kitsune-guide.pages.dev", padding, footerY + 58);
+  ctx.font = `500 24px ${fontBody}`;
+  ctx.fillText("ow-kitsune-guide.pages.dev", width / 2, footerY + 58);
+
+  ctx.textAlign = "left";
 
   canvas.toBlob(blob => {
     if (!blob) return;
