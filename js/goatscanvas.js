@@ -424,11 +424,6 @@ if (orangeLine.complete) {
 function buildGoatsShareText_(players) {
   return [
     "🦊 MY GOATS",
-    "",
-    `${players.length} Player${players.length === 1 ? "" : "s"}`,
-    "",
-    "Where Are the GOATs?",
-    "",
     "OW KITSUNE GUIDE",
     "Live streams, videos, clips and links from Overwatch pro players.",
     "Follow your favorite players across Twitch, CHZZK, SOOP, Bilibili and YouTube.",
@@ -568,12 +563,12 @@ function showGoatsShareModal_(blob, shareText) {
         ×
       </button>
 
-      <h3>Share MY GOATS</h3>
+      <h3>Share Your GOATs</h3>
 
       <img
         class="goats-share-preview"
         src="${url}"
-        alt="MY GOATS share image"
+        alt="Your GOATs share image"
       >
 
       <textarea
@@ -582,8 +577,12 @@ function showGoatsShareModal_(blob, shareText) {
       >${escapeHtml(shareText)}</textarea>
 
       <div class="goats-share-actions">
-        <button type="button" data-goats-copy-text>
-          Copy Text
+
+        <button
+          type="button"
+          data-goats-share
+        >
+          Share Social
         </button>
 
         <a
@@ -592,6 +591,7 @@ function showGoatsShareModal_(blob, shareText) {
         >
           Download PNG
         </a>
+
       </div>
     </div>
   `;
@@ -615,16 +615,40 @@ function showGoatsShareModal_(blob, shareText) {
     .addEventListener("click", close);
 
   modal
-    .querySelector("[data-goats-copy-text]")
-    .addEventListener("click", () => {
-      navigator.clipboard
-        ?.writeText(shareText)
-        .then(() => {
-          alert("Share text copied!");
-        })
-        .catch(() => {
-          alert("Copy failed.");
-        });
+    .querySelector("[data-goats-share]")
+    .addEventListener("click", async () => {
+
+      const file = new File(
+        [blob],
+        "ow-kitsune-my-goats.png",
+        {
+          type: "image/png"
+        }
+      );
+
+      if (
+        navigator.canShare &&
+        navigator.canShare({ files: [file] })
+      ) {
+        try {
+
+          await navigator.share({
+            title: "MY GOATS",
+            text: shareText,
+            files: [file]
+          });
+
+          close();
+
+        } catch (e) {}
+      } else {
+
+        alert(
+          "Windows Share is not available in this browser."
+        );
+
+      }
+
     });
 }
 
