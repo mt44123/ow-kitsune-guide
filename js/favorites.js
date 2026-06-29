@@ -273,7 +273,7 @@ function shareGoatsImage_() {
   const width = 1200;
   const padding = 80;
   const fontTitle = "'Jura', sans-serif";
-  const fontBody = "'Jura', Arial, sans-serif";
+  const fontBody = "Arial, sans-serif";
 
   const useTwoColumns = players.length > 12;
   const columns = useTwoColumns ? 2 : 1;
@@ -300,9 +300,25 @@ function shareGoatsImage_() {
   drawGlow_(ctx, 80, height - 80, 420, accent, 0.22);
   drawGlow_(ctx, width * 0.5, height * 0.15, 520, accent, 0.10);
 
+  ctx.save();
+
+  ctx.shadowColor = "rgba(0,0,0,.32)";
+  ctx.shadowBlur = 14;
+  ctx.shadowOffsetY = 5;
+
   ctx.fillStyle = bgLight;
-  roundRect_(ctx, padding, 76, width - padding * 2, 170, 24);
+  roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
   ctx.fill();
+
+  ctx.strokeStyle = "rgba(255,255,255,.08)";
+  ctx.lineWidth = 1;
+
+  ctx.beginPath();
+  ctx.moveTo(width / 2 - 230, 158);
+  ctx.lineTo(width / 2 + 230, 158);
+  ctx.stroke();
+
+  ctx.restore();
 
   ctx.textAlign = "center";
 
