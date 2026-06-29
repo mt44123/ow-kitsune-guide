@@ -31,7 +31,7 @@ function loadFavoritesView() {
   updateFavoriteCounts_();
   const now = Date.now();
 
-  pageTitle.textContent = "MY GOATS";
+  pageTitle.textContent = "★MY GOATS";
   setRandomVoiceLine();
 
   viewNote.innerHTML = `
