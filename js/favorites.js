@@ -35,7 +35,9 @@ function loadFavoritesView() {
   setRandomVoiceLine();
 
   viewNote.innerHTML = `
-    ★ Saved on this browser only.
+    ★ Saved on this browser only.<br>
+    Use <b>Backup MY GOATS</b> to transfer them to another device.<br>
+    このブラウザにのみ保存されます。<b>Backup MY GOATS</b> を使って別のデバイスへ引き継げます。
   `;
 
   if (
@@ -111,24 +113,24 @@ function renderFavorites(players) {
   });
 }
 
-function buildGoatsExportText_() {
+function buildGoatsShareLink_() {
   const favs = getFavorites_();
 
-  return [
-    "My GOATs on OW KITSUNE GUIDE 🦊",
-    "",
-    ...favs.map(name => `★ ${name}`),
-    "",
-    "https://ow-kitsune-guide.pages.dev/"
-  ].join("\n");
+  const encoded = encodeURIComponent(
+    btoa(unescape(encodeURIComponent(JSON.stringify(favs))))
+  );
+
+  return `${location.origin}${location.pathname}?goats=${encoded}`;
 }
 
-function copyGoatsList_() {
-  const text = buildGoatsExportText_();
+function copyGoatsShareLink_() {
+  const url = buildGoatsShareLink_();
 
-  navigator.clipboard.writeText(text)
+  navigator.clipboard.writeText(url)
     .then(() => {
-      alert("MY GOATS list copied!");
+      alert(
+        "Backup link copied!\nOpen it on another device to import your MY GOATS."
+      );
     })
     .catch(() => {
       alert("Copy failed.");
@@ -136,16 +138,17 @@ function copyGoatsList_() {
 }
 
 function shareGoatsList_() {
-  const text = buildGoatsExportText_();
+  const url = buildGoatsShareLink_();
 
   if (!navigator.share) {
-    copyGoatsList_();
+    copyGoatsShareLink_();
     return;
   }
 
   navigator.share({
-    title: "My GOATs",
-    text
+    title: "Backup MY GOATS",
+    text: "Import my GOATs on OW KITSUNE GUIDE 🦊",
+    url
   }).catch(() => {});
 }
 
@@ -215,8 +218,8 @@ document.addEventListener("click", e => {
 
     const type = goatsExport.dataset.goatsExport;
 
-    if (type === "copy") {
-      copyGoatsList_();
+    if (type === "copylink") {
+      copyGoatsShareLink_();
     }
 
     if (type === "share") {
@@ -282,3 +285,48 @@ document.addEventListener("click", e => {
     return;
   }
 });
+
+function importGoatsFromUrl_() {
+  const params = new URLSearchParams(location.search);
+  const encoded = params.get("goats");
+
+  if (!encoded) return;
+
+  try {
+    const favs = JSON.parse(
+      decodeURIComponent(escape(atob(decodeURIComponent(encoded))))
+    );
+
+    if (!Array.isArray(favs)) return;
+
+    const current = getFavorites_();
+
+    const merged = Array.from(
+      new Set([
+        ...current,
+        ...favs.filter(name => typeof name === "string")
+      ])
+    );
+
+    localStorage.setItem(
+      "favorites",
+      JSON.stringify(merged)
+    );
+
+    updateFavoriteCounts_();
+
+    alert("MY GOATS imported!");
+
+    history.replaceState(
+      null,
+      "",
+      location.origin + location.pathname
+    );
+
+  } catch (error) {
+    console.error(error);
+    alert("Failed to import MY GOATS.");
+  }
+}
+
+importGoatsFromUrl_();
