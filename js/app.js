@@ -1001,6 +1001,10 @@ searchBox?.addEventListener("input", () => {
 
 function loadView(view) {
 
+  if (isPlayerView(view)) {
+    currentPlayerView = view;
+  }
+
   updateViewActionButton_(view);
 
   if (isLiveView(view)) {
@@ -1048,7 +1052,10 @@ function loadView(view) {
 
 function loadMutedPlayersView() {
 
+  stopFakeProgress();
+
   pageTitle.textContent = "◆MUTED";
+  updated.textContent = "";
   setRandomVoiceLine();
 
   currentData = getMutedPlayers_();
