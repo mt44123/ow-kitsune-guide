@@ -25,7 +25,7 @@ function shareGoatsImage_() {
 
   // Canvas fixed brand colors
   const bgMain = "#18233A";
-  const bgLight = "#344662";
+  const bgLight = "#26334D";
   const textMain = "#FFFFFF";
   const textSub = "rgba(255,255,255,.82)";
   const textMuted = "rgba(255,255,255,.62)";
@@ -150,67 +150,60 @@ function shareGoatsImage_() {
     const roleIcon =
       getCanvasRoleIcon_(p.role);
 
-    ctx.fillStyle = bgLight;
-    roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
-    ctx.fill();
+  // Glass card base
+  const glass = ctx.createLinearGradient(x, y, x, y + cardHeight);
+  glass.addColorStop(0, "rgba(255,255,255,0.16)");
+  glass.addColorStop(0.45, "rgba(255,255,255,0.075)");
+  glass.addColorStop(1, "rgba(255,255,255,0.045)");
 
-    ctx.save();
+  ctx.fillStyle = glass;
+  roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
+  ctx.fill();
 
-    ctx.strokeStyle = hexToRgba_(accent, 0.35);
-    ctx.lineWidth = 2;
+  // Soft inner shadow
+  const inner = ctx.createLinearGradient(x, y, x, y + cardHeight);
+  inner.addColorStop(0, "rgba(255,255,255,0.16)");
+  inner.addColorStop(0.12, "rgba(255,255,255,0.04)");
+  inner.addColorStop(1, "rgba(0,0,0,0.16)");
 
-    ctx.shadowColor = accent;
-    ctx.shadowBlur = 18;
+  ctx.fillStyle = inner;
+  roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
+  ctx.fill();
 
-    roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
-    ctx.stroke();
+  // Region tint
+  const regionGlow = ctx.createLinearGradient(x, y, x + columnWidth, y);
+  regionGlow.addColorStop(0, hexToRgba_(regionColor, 0.22));
+  regionGlow.addColorStop(0.18, hexToRgba_(regionColor, 0.07));
+  regionGlow.addColorStop(0.42, hexToRgba_(regionColor, 0));
 
-    ctx.restore();
+  ctx.fillStyle = regionGlow;
+  roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
+  ctx.fill();
 
-    const cardShine = ctx.createLinearGradient(
-      x,
-      y,
-      x,
-      y + cardHeight
-    );
+  // Top glass highlight
+  const topHighlight = ctx.createLinearGradient(x, y, x, y + 34);
+  topHighlight.addColorStop(0, "rgba(255,255,255,0.22)");
+  topHighlight.addColorStop(1, "rgba(255,255,255,0)");
 
-    cardShine.addColorStop(0, "rgba(255,255,255,0.075)");
-    cardShine.addColorStop(0.18, "rgba(255,255,255,0.025)");
+  ctx.fillStyle = topHighlight;
+  roundRect_(ctx, x + 1, y + 1, columnWidth - 2, 34, 15);
+  ctx.fill();
 
-    ctx.fillStyle = cardShine;
-    roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
-    ctx.fill();
+  // Neon outer glow
+  ctx.save();
+  ctx.strokeStyle = hexToRgba_(accent, 0.34);
+  ctx.lineWidth = 2;
+  ctx.shadowColor = accent;
+  ctx.shadowBlur = 16;
+  roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
+  ctx.stroke();
+  ctx.restore();
 
-    const regionGlow = ctx.createLinearGradient(
-      x,
-      y,
-      x + columnWidth,
-      y
-    );
-
-    regionGlow.addColorStop(
-        0,
-        hexToRgba_(regionColor,0.20)
-    );
-
-    regionGlow.addColorStop(
-        0.10,
-        hexToRgba_(regionColor,0.06)
-    );
-
-    regionGlow.addColorStop(
-        0.18,
-        hexToRgba_(regionColor,0)
-    );
-
-    ctx.fillStyle = regionGlow;
-    roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
-    ctx.fill();
-
-    ctx.strokeStyle = border;
-    ctx.lineWidth = 1.5;
-    roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
-    ctx.stroke(); 
+  // Thin glass border
+  ctx.strokeStyle = "rgba(255,255,255,0.28)";
+  ctx.lineWidth = 1;
+  roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
+  ctx.stroke();
 
     // 名前
     ctx.fillStyle = textMain;
