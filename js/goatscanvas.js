@@ -93,7 +93,7 @@ function shareGoatsImage_() {
 
   const columnWidth =
     useTwoColumns
-      ? 480
+      ? 500
       : listWidth;
 
   const listLeft =
@@ -140,7 +140,7 @@ function shareGoatsImage_() {
 
     ctx.fillStyle = textMuted;
     ctx.font = `700 22px ${fontBody}`;
-    ctx.fillText("★", x + 28, y + 48);
+    ctx.fillText("★", x + 22, y + 48);
 
     ctx.fillStyle = textMain;
 
@@ -151,7 +151,7 @@ function shareGoatsImage_() {
         : 32;
 
     ctx.font = `800 ${nameFontSize}px ${fontBody}`;
-    ctx.fillText(name, x + 72, y + 35, columnWidth - 100);
+    ctx.fillText(name, x + 64, y + 35, columnWidth - 100);
 
     const info = [
       regionLabel,
@@ -162,14 +162,14 @@ function shareGoatsImage_() {
     ctx.font = `600 18px ${fontBody}`;
     ctx.fillText(
       info,
-      x + 72,
+      x + 64,
       y + 60
     );
 
     if (p.team && p.team !== "No team") {
       ctx.fillText(
         p.team,
-        x + 72,
+        x + 64,
         y + 82,
         columnWidth - 100
       );
