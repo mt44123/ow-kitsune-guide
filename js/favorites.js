@@ -255,6 +255,8 @@ function shareGoatsImage_() {
     )
   );
 
+  const shareText = buildGoatsShareText_(players);
+
   const bodyStyle = getComputedStyle(document.body);
 
   const bgDark = bodyStyle.getPropertyValue("--bg-dark").trim() || "#111A2D";
@@ -277,7 +279,7 @@ function shareGoatsImage_() {
   const columns = useTwoColumns ? 2 : 1;
   const rows = Math.ceil(players.length / columns);
 
-  const cardHeight = 72;
+  const cardHeight = 82;
   const cardGap = 12;
   const headerHeight = 300;
   const footerHeight = 170;
@@ -345,7 +347,14 @@ function shareGoatsImage_() {
       listTop +
       row * (cardHeight + cardGap);
 
-    const regionColor = getCanvasRegionColor_(p.teamRegion || p.nationality);
+    const regionColor =
+      getCanvasRegionColor_(p.teamRegion || p.nationality);
+
+    const regionLabel =
+      getCanvasRegionLabel_(p.teamRegion || p.nationality);
+
+    const roleIcon =
+      getCanvasRoleIcon_(p.role);
 
     ctx.fillStyle = bgLight;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
@@ -357,31 +366,33 @@ function shareGoatsImage_() {
 
     ctx.fillStyle = accent;
     ctx.font = `700 28px ${fontBody}`;
-    ctx.fillText("★", x + 26, y + 45);
+    ctx.fillText("★", x + 26, y + 50);
 
     ctx.fillStyle = textMain;
 
     const name = p.name || "";
     const nameFontSize =
       useTwoColumns && name.length > 14
-        ? 25
-        : 31;
+        ? 24
+        : 30;
 
     ctx.font = `800 ${nameFontSize}px ${fontBody}`;
-    ctx.fillText(name, x + 72, y + 35, columnWidth - 92);
+    ctx.fillText(name, x + 72, y + 35, columnWidth - 100);
+
+    const meta = [
+      regionLabel,
+      roleIcon,
+      p.team && p.team !== "No team" ? p.team : ""
+    ].filter(Boolean).join("  •  ");
 
     ctx.fillStyle = textMuted;
     ctx.font = `600 18px ${fontBody}`;
-    if (p.team) {
-      ctx.fillStyle = textMuted;
-      ctx.font = `600 18px ${fontBody}`;
-      ctx.fillText(
-        p.team,
-        x + 72,
-        y + 59,
-        columnWidth - 92
-      );
-    }
+    ctx.fillText(
+      meta,
+      x + 72,
+      y + 64,
+      columnWidth - 100
+    );
   });
 
   const footerY = height - 120;
@@ -430,11 +441,13 @@ function shareGoatsImage_() {
     ) {
       navigator.share({
         title: "MY GOATS",
-        text: "MY GOATS on OW KITSUNE GUIDE 🦊",
+        text: shareText,
         files: [file]
       }).catch(() => {});
       return;
     }
+
+    navigator.clipboard?.writeText(shareText).catch(() => {});
 
     const link = document.createElement("a");
     link.download = "ow-kitsune-my-goats.png";
@@ -443,6 +456,44 @@ function shareGoatsImage_() {
 
     URL.revokeObjectURL(link.href);
   }, "image/png");
+}
+
+function buildGoatsShareText_(players) {
+  return [
+    "🦊 MY GOATS",
+    "",
+    `${players.length} Player${players.length === 1 ? "" : "s"}`,
+    "",
+    "Where Are the GOATs?",
+    "https://ow-kitsune-guide.pages.dev/",
+    "",
+    "#OWCS #Overwatch2 #OWKitsuneGuide"
+  ].join("\n");
+}
+
+function getCanvasRegionLabel_(region) {
+  const key = String(region || "").toLowerCase();
+
+  if (key.includes("kr")) return "🇰🇷 KR";
+  if (key.includes("jp")) return "🇯🇵 JP";
+  if (key.includes("cn")) return "🇨🇳 CN";
+  if (key.includes("na")) return "🇺🇸 NA";
+  if (key.includes("emea")) return "🇪🇺 EMEA";
+  if (key.includes("pac")) return "🌏 PAC";
+  if (key.includes("sa")) return "🌎 SA";
+
+  return "";
+}
+
+function getCanvasRoleIcon_(role) {
+  const key = String(role || "").toLowerCase();
+
+  if (key.includes("tank")) return "💪 TANK";
+  if (key.includes("dps")) return "🔫 DPS";
+  if (key.includes("sup")) return "💉 SUP";
+  if (key.includes("coach")) return "📋 COACH";
+
+  return "";
 }
 
 function getCanvasRegionColor_(region) {
