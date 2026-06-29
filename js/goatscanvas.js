@@ -300,7 +300,7 @@ function shareGoatsImage_() {
   ctx.shadowBlur = 10;
 
   ctx.fillStyle = textMain;
-  ctx.font = `500 ${nameFontSize + 1}px ${fontBody}`;
+  ctx.font = `700 ${nameFontSize + 2}px ${fontTitle}`;
 
   ctx.fillText(
     name,
