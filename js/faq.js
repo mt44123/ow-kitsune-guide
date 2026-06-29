@@ -199,6 +199,39 @@ function loadFaqView() {
         </ul>
       </div>
 
+            <div class="card faq-card">
+        <h3>
+          ◆ What is MUTED?<br>
+          MUTEDとは何ですか？
+        </h3>
+        <h4 class="faq-lang">🇺🇸 English</h4>
+
+        <p>
+          MUTED lets you hide players from LIVE, YouTube and Clips.
+        </p>
+
+        <ul>
+          <li>Muted players are hidden from stream, video and clip views</li>
+          <li>You can mute or unmute players from the card menu</li>
+          <li>Muted players can be managed from PLAYERS → ◆</li>
+          <li>Stored locally in your browser only</li>
+        </ul>
+
+        <hr>
+        <h4 class="faq-lang">🇯🇵 日本語</h4>
+
+        <p>
+          MUTEDでは、特定の選手をLIVE・YouTube・Clipsから非表示にできます。
+        </p>
+
+        <ul>
+          <li>ミュートした選手は配信・動画・クリップ一覧に表示されません</li>
+          <li>カード右上のメニューからMute / Unmuteできます</li>
+          <li>PLAYERS → ◆ からミュート一覧を管理できます</li>
+          <li>ブラウザ内にのみ保存されます</li>
+        </ul>
+      </div>
+
       <div class="card faq-card">
         <h3>
           🦊 Where does the data come from?<br>
