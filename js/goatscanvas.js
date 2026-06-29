@@ -180,14 +180,35 @@ function shareGoatsImage_() {
   roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
   ctx.fill();
 
-  // Top glass highlight
-  const topHighlight = ctx.createLinearGradient(x, y, x, y + 34);
-  topHighlight.addColorStop(0, "rgba(255,255,255,0.22)");
-  topHighlight.addColorStop(1, "rgba(255,255,255,0)");
+  // Liquid glass blobs
+  ctx.save();
+  roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
+  ctx.clip();
 
-  ctx.fillStyle = topHighlight;
-  roundRect_(ctx, x + 1, y + 1, columnWidth - 2, 34, 15);
-  ctx.fill();
+  const blob1 = ctx.createRadialGradient(
+    x + columnWidth * 0.22, y + 10, 0,
+    x + columnWidth * 0.22, y + 10, columnWidth * 0.45
+  );
+  blob1.addColorStop(0, "rgba(255,255,255,0.34)");
+  blob1.addColorStop(0.28, "rgba(255,255,255,0.16)");
+  blob1.addColorStop(0.62, "rgba(255,255,255,0.04)");
+  blob1.addColorStop(1, "rgba(255,255,255,0)");
+
+  ctx.fillStyle = blob1;
+  ctx.fillRect(x, y, columnWidth, cardHeight);
+
+  const blob2 = ctx.createRadialGradient(
+    x + columnWidth * 0.82, y + cardHeight * 0.78, 0,
+    x + columnWidth * 0.82, y + cardHeight * 0.78, columnWidth * 0.38
+  );
+  blob2.addColorStop(0, "rgba(255,255,255,0.12)");
+  blob2.addColorStop(0.45, "rgba(255,255,255,0.045)");
+  blob2.addColorStop(1, "rgba(255,255,255,0)");
+
+  ctx.fillStyle = blob2;
+  ctx.fillRect(x, y, columnWidth, cardHeight);
+
+  ctx.restore();
 
   // Neon outer glow
   ctx.save();
