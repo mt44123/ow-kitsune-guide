@@ -279,7 +279,7 @@ function shareGoatsImage_() {
   const columns = useTwoColumns ? 2 : 1;
   const rows = Math.ceil(players.length / columns);
 
-  const cardHeight = 82;
+  const cardHeight = 96;
   const cardGap = 12;
   const headerHeight = 300;
   const footerHeight = 170;
@@ -326,7 +326,7 @@ function shareGoatsImage_() {
 
   const columnWidth =
     useTwoColumns
-      ? 500
+      ? 480
       : listWidth;
 
   const listLeft =
@@ -380,26 +380,33 @@ function shareGoatsImage_() {
     const name = p.name || "";
     const nameFontSize =
       useTwoColumns && name.length > 14
-        ? 24
-        : 30;
+        ? 26
+        : 32;
 
     ctx.font = `800 ${nameFontSize}px ${fontBody}`;
     ctx.fillText(name, x + 72, y + 35, columnWidth - 100);
 
-    const meta = [
+    const info = [
       regionLabel,
-      roleIcon,
-      p.team && p.team !== "No team" ? p.team : ""
+      roleIcon
     ].filter(Boolean).join("  •  ");
 
     ctx.fillStyle = textMuted;
     ctx.font = `600 18px ${fontBody}`;
     ctx.fillText(
-      meta,
+      info,
       x + 72,
-      y + 64,
-      columnWidth - 100
+      y + 60
     );
+
+    if (p.team && p.team !== "No team") {
+      ctx.fillText(
+        p.team,
+        x + 72,
+        y + 82,
+        columnWidth - 100
+      );
+    }
   });
 
   const footerY = height - 120;
