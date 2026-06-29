@@ -204,19 +204,19 @@ body.theme-midnight{
 body.theme-limegreen{
 
   --accent:#CFFF08;
-  --accent-text:var(--bg-main);
-  --button-bg:#2A3319;
+  --accent-text:#12161C;
+  --button-bg:#27331A;
 
-  --bg-dark:#090B0F;
-  --bg-main:#12161C;
-  --bg-light:#1B212A;
+  --bg-dark:#0A0D08;
+  --bg-main:#141913;
+  --bg-light:#20281D;
 
-  --border:#313844;
-  --card-shadow:rgba(49,56,68,.28);
+  --border:#40502A;
+  --card-shadow:rgba(64,80,42,.28);
 
-  --text-main:#E2E4E8;
-  --text-sub:rgba(226,228,232,.72);
-  --text-muted:rgba(226,228,232,.45);
+  --text-main:#E8ECE4;
+  --text-sub:rgba(232,236,228,.72);
+  --text-muted:rgba(232,236,228,.45);
 
   --favorite-bg:rgba(207,255,8,.12);
   --favorite-glow-strong:rgba(207,255,8,.55);
@@ -228,44 +228,43 @@ body.theme-limegreen{
 body.theme-blackred{
 
   --accent:#E22020;
-  --accent-text:var(--bg-main);
-  --button-bg:#31191B;
+  --accent-text:#FFFFFF;
+  --button-bg:#341A1D;
 
-  --bg-dark:#090B0F;
-  --bg-main:#12161C;
-  --bg-light:#1B212A;
+  --bg-dark:#0C090A;
+  --bg-main:#181214;
+  --bg-light:#261D20;
 
-  --border:#313844;
-  --card-shadow:rgba(49,56,68,.28);
+  --border:#503136;
+  --card-shadow:rgba(80,49,54,.28);
 
-  
-  --text-main:#E2E4E8;
-  --text-sub:rgba(226,228,232,.72);
-  --text-muted:rgba(226,228,232,.45);
+  --text-main:#F0ECEC;
+  --text-sub:rgba(240,236,236,.72);
+  --text-muted:rgba(240,236,236,.45);
 
-  --favorite-bg:rgba(226,32,32,.10);
-  --favorite-glow-strong:rgba(226,32,32,.45);
-  --favorite-glow-mid:rgba(226,32,32,.30);
-  --favorite-glow-soft:rgba(226,32,32,.18);
+  --favorite-bg:rgba(226,32,32,.12);
+  --favorite-glow-strong:rgba(226,32,32,.55);
+  --favorite-glow-mid:rgba(226,32,32,.38);
+  --favorite-glow-soft:rgba(226,32,32,.22);
 
 }
 
 body.theme-blackgreen{
 
   --accent:#01BE6E;
-  --accent-text:var(--bg-main);
-  --button-bg:#173226;
+  --accent-text:#FFFFFF;
+  --button-bg:#173228;
 
-  --bg-dark:#090B0F;
-  --bg-main:#12161C;
-  --bg-light:#1B212A;
+  --bg-dark:#080C0A;
+  --bg-main:#111814;
+  --bg-light:#1C2721;
 
-  --border:#313844;
-  --card-shadow:rgba(49,56,68,.28);
+  --border:#2F5244;
+  --card-shadow:rgba(47,82,68,.28);
 
-  --text-main:#E2E4E8;
-  --text-sub:rgba(226,228,232,.72);
-  --text-muted:rgba(226,228,232,.45);
+  --text-main:#E8ECEA;
+  --text-sub:rgba(232,236,234,.72);
+  --text-muted:rgba(232,236,234,.45);
 
   --favorite-bg:rgba(1,190,110,.12);
   --favorite-glow-strong:rgba(1,190,110,.55);
