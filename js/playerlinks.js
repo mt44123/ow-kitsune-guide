@@ -93,10 +93,7 @@ app.innerHTML = `
               ★Import
             </button>
             <button class="goats-export-button" data-goats-export="share">
-              Share
-            </button>
-            <button class="goats-export-button" data-goats-export="image">
-              Export Image
+              ★Share
             </button>
           </div>
         `

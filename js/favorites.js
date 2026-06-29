@@ -181,77 +181,61 @@ function importGoatsBackupCode_() {
   );
 
   const mode = prompt(
-  "Import Backup\n\n" +
-  "1 = Replace current MY GOATS\n" +
-  "2 = Add to current list\n" +
-  "3 = Cancel\n\n" +
-  "バックアップをインポートします。\n\n" +
-  "1 = 今のMY GOATSを置き換える\n" +
-  "2 = 今のリストに追加する\n" +
-  "3 = キャンセル"
-);
-
-if (mode === null || mode.trim() === "3") {
-  return;
-}
-
-const choice = mode.trim();
-
-if (choice !== "1" && choice !== "2") {
-  alert("Import canceled.");
-  return;
-}
-
-const nextFavs =
-  choice === "1"
-    ? imported
-    : Array.from(
-        new Set([
-          ...getFavorites_(),
-          ...imported
-        ])
-      );
-
-  localStorage.setItem(
-    "favorites",
-    JSON.stringify(nextFavs)
+    "Import Backup\n\n" +
+    "1 = Replace current MY GOATS\n" +
+    "2 = Add to current list\n" +
+    "3 = Cancel\n\n" +
+    "バックアップをインポートします。\n\n" +
+    "1 = 今のMY GOATSを置き換える\n" +
+    "2 = 今のリストに追加する\n" +
+    "3 = キャンセル"
   );
 
-    updateFavoriteCounts_();
-
-    alert("MY GOATS imported!");
-
-    if (currentView === "favorites") {
-      renderFavorites(currentData);
-
-      if (document.querySelector(".player-table")) {
-        searchPlayerLinksTable();
-      }
-    }
-
-  } catch (error) {
-    console.error(error);
-    alert("Failed to import backup.");
-  }
-}
-
-function shareGoatsList_() {
-  const code = buildGoatsBackupCode_();
-
-  if (!navigator.share) {
-    copyGoatsBackupCode_();
+  if (mode === null || mode.trim() === "3") {
     return;
   }
 
-  navigator.share({
-    title: "Backup MY GOATS",
-    text:
-      "Import MY GOATS on OW KITSUNE GUIDE 🦊\n\n" +
-      code
-  }).catch(() => {});
-}
+  const choice = mode.trim();
 
-function exportGoatsImage_() {
+  if (choice !== "1" && choice !== "2") {
+    alert("Import canceled.");
+    return;
+  }
+
+  const nextFavs =
+    choice === "1"
+      ? imported
+      : Array.from(
+          new Set([
+            ...getFavorites_(),
+            ...imported
+          ])
+        );
+
+    localStorage.setItem(
+      "favorites",
+      JSON.stringify(nextFavs)
+    );
+
+      updateFavoriteCounts_();
+
+      alert("MY GOATS imported!");
+
+      if (currentView === "favorites") {
+        renderFavorites(currentData);
+
+        if (document.querySelector(".player-table")) {
+          searchPlayerLinksTable();
+        }
+      }
+
+    } catch (error) {
+      console.error(error);
+      alert("Failed to import backup.");
+    }
+  }
+
+function shareGoatsImage_() {
   const favs = getFavorites_();
 
   if (!favs.length) return;
@@ -303,10 +287,34 @@ function exportGoatsImage_() {
     height - 60
   );
 
-  const link = document.createElement("a");
-  link.download = "ow-kitsune-my-goats.png";
-  link.href = canvas.toDataURL("image/png");
-  link.click();
+  canvas.toBlob(blob => {
+    if (!blob) return;
+
+    const file = new File(
+      [blob],
+      "ow-kitsune-my-goats.png",
+      { type: "image/png" }
+    );
+
+    if (
+      navigator.canShare &&
+      navigator.canShare({ files: [file] })
+    ) {
+      navigator.share({
+        title: "MY GOATS",
+        text: "MY GOATS on OW KITSUNE GUIDE 🦊",
+        files: [file]
+      }).catch(() => {});
+      return;
+    }
+
+    const link = document.createElement("a");
+    link.download = "ow-kitsune-my-goats.png";
+    link.href = URL.createObjectURL(blob);
+    link.click();
+
+    URL.revokeObjectURL(link.href);
+  }, "image/png");
 }
 
 document.addEventListener("click", e => {
@@ -326,11 +334,7 @@ document.addEventListener("click", e => {
     }
 
     if (type === "share") {
-      shareGoatsList_();
-    }
-
-    if (type === "image") {
-      exportGoatsImage_();
+      shareGoatsImage_();
     }
 
     return;
