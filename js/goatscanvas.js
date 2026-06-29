@@ -222,12 +222,34 @@ function shareGoatsImage_() {
 
   // Neon outer glow
   ctx.save();
-  ctx.strokeStyle = hexToRgba_(accent, 0.24);
-  ctx.shadowBlur = 12;
+
+  ctx.shadowColor = regionColor;
+  ctx.shadowBlur = 18;
+  ctx.strokeStyle = hexToRgba_(regionColor, 0.38);
   ctx.lineWidth = 2;
-  ctx.shadowColor = accent;
+
   roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
   ctx.stroke();
+
+  ctx.restore();
+
+  // Inner neon rim
+  ctx.save();
+
+  ctx.strokeStyle = hexToRgba_(regionColor, 0.22);
+  ctx.lineWidth = 1;
+
+  roundRect_(
+    ctx,
+    x + 2,
+    y + 2,
+    columnWidth - 4,
+    cardHeight - 4,
+    14
+  );
+
+  ctx.stroke();
+
   ctx.restore();
 
   // Thin glass border
