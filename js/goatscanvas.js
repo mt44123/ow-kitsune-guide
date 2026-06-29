@@ -265,13 +265,22 @@ function shareGoatsImage_() {
       ? 26
       : 32;
 
+  ctx.fillStyle = "rgba(255,255,255,.35)";
+  ctx.font = `400 ${nameFontSize}px ${fontBody}`;
+  ctx.fillText(
+    name,
+    x + 32,
+    y + 40,
+    columnWidth - 56
+  );    
+
   ctx.save();
 
   ctx.shadowColor = accent;
   ctx.shadowBlur = 10;
 
   ctx.fillStyle = textMain;
-  ctx.font = `800 ${nameFontSize}px ${fontBody}`;
+  ctx.font = `600 ${nameFontSize}px ${fontBody}`;
 
   ctx.fillText(
     name,
