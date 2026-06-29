@@ -295,7 +295,18 @@ function shareGoatsImage_() {
   ctx.fillStyle = bgDark;
   ctx.fillRect(0, 0, width, height);
 
-  ctx.fillStyle = bgMain;
+  const bgGradient = ctx.createLinearGradient(
+    0,
+    0,
+    width,
+    height
+  );
+
+  bgGradient.addColorStop(0, bgDark);
+  bgGradient.addColorStop(0.6, bgMain);
+  bgGradient.addColorStop(1, bgDark);
+
+  ctx.fillStyle = bgGradient;
   ctx.fillRect(0, 0, width, height);
 
   ctx.fillStyle = bgLight;
