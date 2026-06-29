@@ -90,9 +90,15 @@ function shareGoatsImage_() {
 
   ctx.restore();
 
+  ctx.save();
+  ctx.shadowColor = "rgba(255,255,255,.35)";
+  ctx.shadowBlur = 4;
+
   ctx.fillStyle = textSub;
   ctx.font = `700 28px ${fontBody}`;
   ctx.fillText("OW KITSUNE GUIDE 🦊", width / 2, 178);
+
+  ctx.restore();
 
   ctx.save();
   ctx.shadowColor = accent;
@@ -174,17 +180,19 @@ function shareGoatsImage_() {
   ctx.fill();
 
   // Region tint from bottom-right
-  const regionGlow = ctx.createLinearGradient(
+  const regionGlow = ctx.createRadialGradient(
     x + columnWidth,
     y + cardHeight,
-    x,
-    y
+    0,
+    x + columnWidth,
+    y + cardHeight,
+    190
   );
 
-  regionGlow.addColorStop(0.00, hexToRgba_(regionColor, 0.20));
-  regionGlow.addColorStop(0.18, hexToRgba_(regionColor, 0.08));
-  regionGlow.addColorStop(0.42, hexToRgba_(regionColor, 0.02));
-  regionGlow.addColorStop(0.72, hexToRgba_(regionColor, 0));
+  regionGlow.addColorStop(0.00, hexToRgba_(regionColor, 0.30));
+  regionGlow.addColorStop(0.28, hexToRgba_(regionColor, 0.12));
+  regionGlow.addColorStop(0.58, hexToRgba_(regionColor, 0.035));
+  regionGlow.addColorStop(1.00, hexToRgba_(regionColor, 0));
 
   ctx.fillStyle = regionGlow;
   roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
@@ -258,6 +266,18 @@ function shareGoatsImage_() {
   roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
   ctx.stroke();
 
+  // Corner liquid highlights
+  ctx.save();
+  roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
+  ctx.clip();
+
+  drawCornerGlow_(ctx, x + 18, y + 14, 54, "rgba(255,255,255,.18)");
+  drawCornerGlow_(ctx, x + columnWidth - 18, y + 14, 54, "rgba(255,255,255,.14)");
+  drawCornerGlow_(ctx, x + 18, y + cardHeight - 14, 48, "rgba(255,255,255,.08)");
+  drawCornerGlow_(ctx, x + columnWidth - 18, y + cardHeight - 14, 48, "rgba(255,255,255,.10)");
+
+  ctx.restore();
+
   // 名前
   const name = p.name || "";
   const nameFontSize =
@@ -280,7 +300,7 @@ function shareGoatsImage_() {
   ctx.shadowBlur = 10;
 
   ctx.fillStyle = textMain;
-  ctx.font = `600 ${nameFontSize}px ${fontBody}`;
+  ctx.font = `500 ${nameFontSize + 1}px ${fontBody}`;
 
   ctx.fillText(
     name,
@@ -565,6 +585,25 @@ function drawGlow_(ctx, x, y, radius, color, alpha) {
 
   ctx.fillStyle = glow;
   ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+}
+
+function drawCornerGlow_(ctx, x, y, radius, color) {
+  const glow = ctx.createRadialGradient(
+    x, y, 0,
+    x, y, radius
+  );
+
+  glow.addColorStop(0, color);
+  glow.addColorStop(0.42, color.replace(/[\d.]+\)$/,"0.04)"));
+  glow.addColorStop(1, "rgba(255,255,255,0)");
+
+  ctx.fillStyle = glow;
+  ctx.fillRect(
+    x - radius,
+    y - radius,
+    radius * 2,
+    radius * 2
+  );
 }
 
 function hexToRgba_(color, alpha) {
