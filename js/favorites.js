@@ -295,25 +295,10 @@ function shareGoatsImage_() {
   ctx.fillStyle = bgMain;
   ctx.fillRect(0, 0, width, height);
 
-  // ===== Accent Glow =====
-  ctx.save();
-
-  ctx.globalAlpha = 0.08;
-  ctx.shadowBlur = 260;
-  ctx.shadowColor = accent;
-  ctx.fillStyle = "rgba(255,255,255,0.01)";
-
-  // 右上の発光
-  ctx.beginPath();
-  ctx.arc(width + 40, -40, 160, 0, Math.PI * 2);
-  ctx.fill();
-
-  // 左下の発光
-  ctx.beginPath();
-  ctx.arc(-60, height + 40, 180, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.restore();
+// ===== Accent Glow =====
+  drawGlow_(ctx, width - 80, 90, 360, accent, 0.28);
+  drawGlow_(ctx, 80, height - 80, 420, accent, 0.22);
+  drawGlow_(ctx, width * 0.5, height * 0.15, 520, accent, 0.10);
 
   ctx.fillStyle = bgLight;
   roundRect_(ctx, padding, 76, width - padding * 2, 170, 24);
@@ -373,7 +358,7 @@ function shareGoatsImage_() {
     ctx.fill();
 
     ctx.fillStyle = regionColor;
-    roundRect_(ctx, x, y, 7, cardHeight, 6);
+    roundRect_(ctx, x, y, 9, cardHeight, 6);
     ctx.fill();
 
     ctx.fillStyle = accent;
@@ -521,24 +506,59 @@ function getCanvasRegionColor_(nationality) {
   const bodyStyle = getComputedStyle(document.body);
   const cls = getNationalityRegionClass(nationality);
 
-  switch (cls) {
-    case "region-kr":
-      return bodyStyle.getPropertyValue("--region-kr").trim();
-    case "region-jp":
-      return bodyStyle.getPropertyValue("--region-jp").trim();
-    case "region-cn":
-      return bodyStyle.getPropertyValue("--region-cn").trim();
-    case "region-na":
-      return bodyStyle.getPropertyValue("--region-na").trim();
-    case "region-emea":
-      return bodyStyle.getPropertyValue("--region-emea").trim();
-    case "region-pac":
-      return bodyStyle.getPropertyValue("--region-pac").trim();
-    case "region-sa":
-      return bodyStyle.getPropertyValue("--region-sa").trim();
-    default:
-      return bodyStyle.getPropertyValue("--region-unknown").trim() || "#777777";
+  const colorMap = {
+    "region-kr": "--region-kr",
+    "region-jp": "--region-jp",
+    "region-cn": "--region-cn",
+    "region-na": "--region-na",
+    "region-emea": "--region-emea",
+    "region-pac": "--region-pac",
+    "region-sa": "--region-sa",
+    "region-unknown": "--region-unknown"
+  };
+
+  const varName = colorMap[cls] || "--region-unknown";
+
+  return (
+    bodyStyle.getPropertyValue(varName).trim() ||
+    "#777777"
+  );
+}
+
+function drawGlow_(ctx, x, y, radius, color, alpha) {
+  const glow = ctx.createRadialGradient(
+    x, y, 0,
+    x, y, radius
+  );
+
+  glow.addColorStop(0, hexToRgba_(color, alpha));
+  glow.addColorStop(0.45, hexToRgba_(color, alpha * 0.35));
+  glow.addColorStop(1, hexToRgba_(color, 0));
+
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+}
+
+function hexToRgba_(color, alpha) {
+  const ctx = document.createElement("canvas").getContext("2d");
+
+  ctx.fillStyle = color;
+  const normalized = ctx.fillStyle;
+
+  if (!normalized.startsWith("#")) {
+    return color.replace(
+      /rgba?\(([^)]+)\)/,
+      `rgba($1, ${alpha})`
+    );
   }
+
+  const hex = normalized.slice(1);
+
+  const r = parseInt(hex.slice(0, 2), 16);
+  const g = parseInt(hex.slice(2, 4), 16);
+  const b = parseInt(hex.slice(4, 6), 16);
+
+  return `rgba(${r},${g},${b},${alpha})`;
 }
 
 function roundRect_(ctx, x, y, width, height, radius) {
