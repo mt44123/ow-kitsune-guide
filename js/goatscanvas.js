@@ -152,9 +152,8 @@ function shareGoatsImage_() {
       y + cardHeight
     );
 
-    cardShine.addColorStop(0, "rgba(255,255,255,0.10)");
-    cardShine.addColorStop(0.22, "rgba(255,255,255,0.04)");
-    cardShine.addColorStop(1, "rgba(255,255,255,0)");
+    cardShine.addColorStop(0, "rgba(255,255,255,0.045)");
+    cardShine.addColorStop(0.22, "rgba(255,255,255,0.015)");
 
     ctx.fillStyle = cardShine;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
@@ -199,9 +198,6 @@ function shareGoatsImage_() {
         ? 26
         : 32;
 
-    ctx.shadowColor = "rgba(255,255,255,.45)";
-    ctx.shadowBlur = 6;
-
     ctx.font = `800 ${nameFontSize}px ${fontBody}`;
     ctx.fillText(
       name,
@@ -209,8 +205,6 @@ function shareGoatsImage_() {
       y + 40,
       columnWidth - 56
     );
-
-    ctx.shadowBlur = 0;
 
     const meta = [
       regionLabel,
