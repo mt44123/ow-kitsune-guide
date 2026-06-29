@@ -315,6 +315,8 @@ function renderClips(clips) {
       .join("");
 }
 
+
+
 function renderClipCard_(c) {
   const { mainTitle, subTitles } =
     buildMediaTitles_(
@@ -378,8 +380,19 @@ function renderClipCard_(c) {
           </div>
 
           <div class="youtube-date">
-            ▶️ ${Number(c.views || 0).toLocaleString()} views
-            🕓 ${timeAgo(c.date)}
+
+            <span class="youtube-stat-item">
+              ${youtubeViewsIcon_()}
+              <span>${Number(c.views || 0).toLocaleString()} views</span>
+            </span>
+
+            ・
+
+            <span class="youtube-stat-item">
+              ${youtubeTimeIcon_()}
+              <span>${timeAgo(c.date)}</span>
+            </span>
+
           </div>
 
         </div>
