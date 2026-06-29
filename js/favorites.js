@@ -296,12 +296,7 @@ function shareGoatsImage_() {
   ctx.fillRect(0, 0, width, height);
 
   ctx.fillStyle = bgMain;
-  roundRect_(ctx, 40, 40, width - 80, height - 80, 32);
-  ctx.fill();
-
-  ctx.fillStyle = accent;
-  roundRect_(ctx, 40, 40, 12, height - 80, 8);
-  ctx.fill();
+  ctx.fillRect(0, 0, width, height);
 
   ctx.fillStyle = bgLight;
   roundRect_(ctx, padding, 76, width - padding * 2, 170, 24);
