@@ -247,6 +247,14 @@ function shareGoatsImage_() {
     return player || { name };
   });
 
+  players.sort((a, b) =>
+    (a.name || "").localeCompare(
+      b.name || "",
+      "en",
+      { sensitivity: "base" }
+    )
+  );
+
   const bodyStyle = getComputedStyle(document.body);
 
   const bgDark = bodyStyle.getPropertyValue("--bg-dark").trim() || "#111A2D";
@@ -364,12 +372,16 @@ function shareGoatsImage_() {
 
     ctx.fillStyle = textMuted;
     ctx.font = `600 18px ${fontBody}`;
-    ctx.fillText(
-      p.team || "No team",
-      x + 72,
-      y + 59,
-      columnWidth - 92
-    );
+    if (p.team) {
+      ctx.fillStyle = textMuted;
+      ctx.font = `600 18px ${fontBody}`;
+      ctx.fillText(
+        p.team,
+        x + 72,
+        y + 59,
+        columnWidth - 92
+      );
+    }
   });
 
   const footerY = height - 120;
