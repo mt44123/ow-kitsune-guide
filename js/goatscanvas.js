@@ -307,7 +307,11 @@ function shareGoatsImage_() {
         { type: "image/png" }
       );
 
+      const isMobile =
+        /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
       if (
+        isMobile &&
         navigator.canShare &&
         navigator.canShare({ files: [file] })
       ) {
@@ -319,18 +323,7 @@ function shareGoatsImage_() {
         return;
       }
 
-      navigator.clipboard?.writeText(shareText).catch(() => {});
-
-      const url = URL.createObjectURL(blob);
-
-      const link = document.createElement("a");
-      link.download = "ow-kitsune-my-goats.png";
-      link.href = url;
-      link.click();
-
-      setTimeout(() => {
-        URL.revokeObjectURL(url);
-      }, 1000);
+      showGoatsShareModal_(blob, shareText);
 
     }, "image/png");
 
@@ -524,4 +517,94 @@ function roundRect_(ctx, x, y, width, height, radius) {
   ctx.lineTo(x, y + radius);
   ctx.quadraticCurveTo(x, y, x + radius, y);
   ctx.closePath();
+}
+
+function showGoatsShareModal_(blob, shareText) {
+  const oldModal =
+    document.querySelector(".goats-share-modal");
+
+  if (oldModal) {
+    oldModal.remove();
+  }
+
+  const url = URL.createObjectURL(blob);
+
+  const modal = document.createElement("div");
+  modal.className = "goats-share-modal";
+
+  modal.innerHTML = `
+    <div class="goats-share-modal-backdrop"></div>
+
+    <div class="goats-share-modal-card">
+      <button class="goats-share-modal-close" type="button">
+        ×
+      </button>
+
+      <h3>Share MY GOATS</h3>
+
+      <img
+        class="goats-share-preview"
+        src="${url}"
+        alt="MY GOATS share image"
+      >
+
+      <textarea
+        class="goats-share-text"
+        readonly
+      >${escapeHtml(shareText)}</textarea>
+
+      <div class="goats-share-actions">
+        <button type="button" data-goats-copy-text>
+          Copy Text
+        </button>
+
+        <a
+          href="${url}"
+          download="ow-kitsune-my-goats.png"
+        >
+          Download PNG
+        </a>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  const close = () => {
+    modal.remove();
+
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+    }, 1000);
+  };
+
+  modal
+    .querySelector(".goats-share-modal-backdrop")
+    .addEventListener("click", close);
+
+  modal
+    .querySelector(".goats-share-modal-close")
+    .addEventListener("click", close);
+
+  modal
+    .querySelector("[data-goats-copy-text]")
+    .addEventListener("click", () => {
+      navigator.clipboard
+        ?.writeText(shareText)
+        .then(() => {
+          alert("Share text copied!");
+        })
+        .catch(() => {
+          alert("Copy failed.");
+        });
+    });
+}
+
+function escapeHtml(text) {
+  return String(text || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
