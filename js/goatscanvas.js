@@ -1,5 +1,3 @@
-console.log("goatscanvas loaded");
-
 function shareGoatsImage_() {
   const favNames = getFavorites_();
 
@@ -140,7 +138,7 @@ function shareGoatsImage_() {
 
    ctx.fillStyle = textMuted;
     ctx.font = `700 20px ${fontBody}`;
-    ctx.fillText("★", x + 24, y + 56);
+    ctx.fillText("★", x + 24, y + 54);
 
     ctx.fillStyle = textMain;
 
@@ -151,31 +149,31 @@ function shareGoatsImage_() {
         : 32;
 
     ctx.font = `800 ${nameFontSize}px ${fontBody}`;
-    ctx.fillText(name, x + 64, y + 38, columnWidth - 88);
-
-    const info = [
-      regionLabel,
-      roleIcon
-    ].filter(Boolean).join("  •  ");
-
-    ctx.fillStyle = textMuted;
-    ctx.font = `600 17px ${fontBody}`;
     ctx.fillText(
-      info,
+      name,
       x + 64,
-      y + 64,
+      y + 40,
       columnWidth - 88
     );
 
-    if (p.team && p.team !== "No team") {
-      ctx.font = `600 16px ${fontBody}`;
-      ctx.fillText(
-        p.team,
-        x + 64,
-        y + 84,
-        columnWidth - 88
-      );
-    }
+    const meta = [
+      regionLabel,
+      roleIcon,
+      p.team && p.team !== "No team"
+        ? p.team
+        : ""
+    ]
+    .filter(Boolean)
+    .join("  •  ");
+
+    ctx.fillStyle = textMuted;
+    ctx.font = `600 18px ${fontBody}`;
+    ctx.fillText(
+      meta,
+      x + 64,
+      y + 72,
+      columnWidth - 88
+    );
   });
 
   const footerY = height - 120;
