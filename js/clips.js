@@ -87,7 +87,7 @@ function loadGoatClipsView() {
   viewNote.textContent = "";
   const now = Date.now();
 
-  pageTitle.textContent = "★";
+  pageTitle.textContent = "★MY GOATS";
   setRandomVoiceLine();
   viewNote.textContent =
     "Favorite players' clips from Twitch, CHZZK and SOOP.";
