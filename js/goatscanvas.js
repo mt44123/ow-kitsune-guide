@@ -173,13 +173,18 @@ function shareGoatsImage_() {
   roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
   ctx.fill();
 
-  // Region tint
-  const regionGlow = ctx.createLinearGradient(x, y, x + columnWidth, y);
+  // Region tint from bottom-right
+  const regionGlow = ctx.createLinearGradient(
+    x + columnWidth,
+    y + cardHeight,
+    x,
+    y
+  );
 
-  regionGlow.addColorStop(0.00, hexToRgba_(regionColor, 0.24));
-  regionGlow.addColorStop(0.08, hexToRgba_(regionColor, 0.10));
-  regionGlow.addColorStop(0.18, hexToRgba_(regionColor, 0.025));
-  regionGlow.addColorStop(0.34, hexToRgba_(regionColor, 0));
+  regionGlow.addColorStop(0.00, hexToRgba_(regionColor, 0.20));
+  regionGlow.addColorStop(0.18, hexToRgba_(regionColor, 0.08));
+  regionGlow.addColorStop(0.42, hexToRgba_(regionColor, 0.02));
+  regionGlow.addColorStop(0.72, hexToRgba_(regionColor, 0));
 
   ctx.fillStyle = regionGlow;
   roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
