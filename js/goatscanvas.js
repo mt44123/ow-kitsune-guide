@@ -284,16 +284,7 @@ function shareGoatsImage_() {
     useTwoColumns && name.length > 14
       ? 26
       : 32;
-
-  ctx.fillStyle = "rgba(255,255,255,.35)";
-  ctx.font = `400 ${nameFontSize + 2}px ${fontTitle}`;
-  ctx.fillText(
-    name,
-    x + 32,
-    y + 40,
-    columnWidth - 56
-  );    
-
+      
   ctx.save();
 
   ctx.shadowColor = accent;
