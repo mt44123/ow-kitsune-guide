@@ -150,10 +150,6 @@ function shareGoatsImage_() {
     ctx.shadowOffsetX = 0;
     ctx.shadowOffsetY = 0;
 
-    ctx.fillStyle = bgLight;
-    roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
-    ctx.fill();
-
     ctx.restore();
 
     ctx.fillStyle = bgLight;
