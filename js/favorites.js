@@ -304,6 +304,15 @@ function shareGoatsImage_() {
   roundRect_(ctx, padding, 76, width - padding * 2, 170, 24);
   ctx.fill();
 
+  ctx.save();
+  ctx.globalAlpha = 0.08;
+  ctx.fillStyle = accent;
+  ctx.font = `900 120px ${fontBody}`;
+  ctx.textAlign = "center";
+  ctx.fillText("★", width / 2 - 310, 185);
+  ctx.fillText("🦊", width / 2 + 320, 185);
+  ctx.restore();
+
   ctx.textAlign = "center";
 
   ctx.fillStyle = textMain;
@@ -353,17 +362,32 @@ function shareGoatsImage_() {
     const roleIcon =
       getCanvasRoleIcon_(p.role);
 
-    ctx.fillStyle = bgLight;
+    const cardGradient = ctx.createLinearGradient(
+      x,
+      y,
+      x,
+      y + cardHeight
+    );
+
+    cardGradient.addColorStop(0, "rgba(255,255,255,0.055)");
+    cardGradient.addColorStop(1, bgLight);
+
+    ctx.fillStyle = cardGradient;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
     ctx.fill();
+
+    ctx.strokeStyle = "rgba(255,255,255,0.045)";
+    ctx.lineWidth = 1;
+    roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
+    ctx.stroke();
 
     ctx.fillStyle = regionColor;
     roundRect_(ctx, x, y, 9, cardHeight, 6);
     ctx.fill();
 
-    ctx.fillStyle = accent;
-    ctx.font = `700 28px ${fontBody}`;
-    ctx.fillText("★", x + 26, y + 50);
+    ctx.fillStyle = textMuted;
+    ctx.font = `700 22px ${fontBody}`;
+    ctx.fillText("★", x + 28, y + 48);
 
     ctx.fillStyle = textMain;
 
