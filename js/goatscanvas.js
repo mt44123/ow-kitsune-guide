@@ -24,11 +24,11 @@ function shareGoatsImage_() {
   const bodyStyle = getComputedStyle(document.body);
 
   // Canvas fixed brand colors
-  const bgMain = "#121A2A";
-  const bgLight = "#1D273A";
-  const textMain = "#F4F6FB";
-  const textSub = "rgba(244,246,251,.78)";
-  const textMuted = "rgba(244,246,251,.52)";
+  const bgMain = "#18233A";
+  const bgLight = "#26334D";
+  const textMain = "#FFFFFF";
+  const textSub = "rgba(255,255,255,.82)";
+  const textMuted = "rgba(255,255,255,.62)";
 
   // Theme colors
   const accent =
@@ -147,8 +147,8 @@ function shareGoatsImage_() {
       y
     );
 
-    regionGlow.addColorStop(0, hexToRgba_(regionColor, 0.18));
-    regionGlow.addColorStop(0.22, hexToRgba_(regionColor, 0.06));
+    regionGlow.addColorStop(0, hexToRgba_(regionColor, 0.14));
+    regionGlow.addColorStop(0.24, hexToRgba_(regionColor, 0.045));
     regionGlow.addColorStop(1, hexToRgba_(regionColor, 0));
 
     ctx.fillStyle = regionGlow;
