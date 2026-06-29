@@ -495,11 +495,7 @@ if (orangeLine.complete) {
 
 function buildGoatsShareText_(players) {
   return [
-    "🦊 MY GOATS",
-    "",
-    "OW KITSUNE GUIDE",
-    "",
-    "Live streams, videos, clips and links from Overwatch pro players.",
+    "私のヤギ",
     "",
     "https://ow-kitsune-guide.pages.dev/",
     "",
