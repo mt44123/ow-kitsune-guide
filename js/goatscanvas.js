@@ -152,9 +152,15 @@ function shareGoatsImage_() {
 
   // Glass card base
   const glass = ctx.createLinearGradient(x, y, x, y + cardHeight);
-  glass.addColorStop(0, "rgba(255,255,255,0.16)");
-  glass.addColorStop(0.45, "rgba(255,255,255,0.075)");
-  glass.addColorStop(1, "rgba(255,255,255,0.045)");
+
+  glass.addColorStop(0.00, "rgba(255,255,255,0.20)");
+  glass.addColorStop(0.12, "rgba(255,255,255,0.10)");
+
+  glass.addColorStop(0.42, "rgba(255,255,255,0.015)");
+  glass.addColorStop(0.58, "rgba(255,255,255,0.015)");
+
+  glass.addColorStop(0.88, "rgba(255,255,255,0.08)");
+  glass.addColorStop(1.00, "rgba(255,255,255,0.16)");
 
   ctx.fillStyle = glass;
   roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
@@ -162,9 +168,9 @@ function shareGoatsImage_() {
 
   // Soft inner shadow
   const inner = ctx.createLinearGradient(x, y, x, y + cardHeight);
-  inner.addColorStop(0, "rgba(255,255,255,0.16)");
-  inner.addColorStop(0.12, "rgba(255,255,255,0.04)");
-  inner.addColorStop(1, "rgba(0,0,0,0.16)");
+  inner.addColorStop(0, "rgba(255,255,255,0.10)");
+  inner.addColorStop(0.12, "rgba(255,255,255,0.02)");
+  inner.addColorStop(1, "rgba(0,0,0,0.14)");
 
   ctx.fillStyle = inner;
   roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
@@ -172,9 +178,10 @@ function shareGoatsImage_() {
 
   // Region tint
   const regionGlow = ctx.createLinearGradient(x, y, x + columnWidth, y);
-  regionGlow.addColorStop(0, hexToRgba_(regionColor, 0.22));
-  regionGlow.addColorStop(0.18, hexToRgba_(regionColor, 0.07));
-  regionGlow.addColorStop(0.42, hexToRgba_(regionColor, 0));
+  regionGlow.addColorStop(0.00, hexToRgba_(regionColor,0.26));
+  regionGlow.addColorStop(0.08, hexToRgba_(regionColor,0.10));
+  regionGlow.addColorStop(0.18, hexToRgba_(regionColor,0.02));
+  regionGlow.addColorStop(0.32, hexToRgba_(regionColor,0));
 
   ctx.fillStyle = regionGlow;
   roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
@@ -209,6 +216,24 @@ function shareGoatsImage_() {
   ctx.fillRect(x, y, columnWidth, cardHeight);
 
   ctx.restore();
+
+  // Center depth
+  const centerShadow = ctx.createRadialGradient(
+    x + columnWidth / 2,
+    y + cardHeight / 2,
+    0,
+    x + columnWidth / 2,
+    y + cardHeight / 2,
+    cardHeight * 0.9
+  );
+
+  centerShadow.addColorStop(0, "rgba(0,0,0,.18)");
+  centerShadow.addColorStop(.45, "rgba(0,0,0,.10)");
+  centerShadow.addColorStop(1, "rgba(0,0,0,0)");
+
+  ctx.fillStyle = centerShadow;
+  roundRect_(ctx, x, y, columnWidth, cardHeight, 22);
+  ctx.fill();
 
   // Neon outer glow
   ctx.save();
