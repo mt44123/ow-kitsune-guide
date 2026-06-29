@@ -175,10 +175,11 @@ function shareGoatsImage_() {
 
   // Region tint
   const regionGlow = ctx.createLinearGradient(x, y, x + columnWidth, y);
-  inner.addColorStop(0, "rgba(255,255,255,0.06)");
-  inner.addColorStop(0.12, "rgba(255,255,255,0.01)");
-  inner.addColorStop(1, "rgba(0,0,0,0.18)");
-  regionGlow.addColorStop(0.32, hexToRgba_(regionColor,0));
+
+  regionGlow.addColorStop(0.00, hexToRgba_(regionColor, 0.24));
+  regionGlow.addColorStop(0.08, hexToRgba_(regionColor, 0.10));
+  regionGlow.addColorStop(0.18, hexToRgba_(regionColor, 0.025));
+  regionGlow.addColorStop(0.34, hexToRgba_(regionColor, 0));
 
   ctx.fillStyle = regionGlow;
   roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
