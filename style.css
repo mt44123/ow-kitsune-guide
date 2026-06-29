@@ -3109,3 +3109,13 @@ color:var(--text-sub);
   background:var(--button-bg);
   color:var(--accent);
 }
+
+@media (min-width:901px){
+
+  #app.muted-mode{
+    max-width:900px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+}
