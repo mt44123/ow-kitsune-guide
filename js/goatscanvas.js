@@ -83,13 +83,17 @@ function shareGoatsImage_() {
   ctx.font = `700 28px ${fontBody}`;
   ctx.fillText("OW KITSUNE GUIDE 🦊", width / 2, 178);
 
+  ctx.save();
+  ctx.shadowColor = accent;
+  ctx.shadowBlur = 16;
   ctx.fillStyle = accent;
-  ctx.font = `700 26px ${fontBody}`;
+  ctx.font = `800 28px ${fontBody}`;
   ctx.fillText(
     `${players.length} Player${players.length === 1 ? "" : "s"}`,
     width / 2,
     214
   );
+  ctx.restore();
 
   ctx.textAlign = "left";
 
@@ -152,8 +156,8 @@ function shareGoatsImage_() {
       y + cardHeight
     );
 
-    cardShine.addColorStop(0, "rgba(255,255,255,0.045)");
-    cardShine.addColorStop(0.22, "rgba(255,255,255,0.015)");
+    cardShine.addColorStop(0, "rgba(255,255,255,0.075)");
+    cardShine.addColorStop(0.18, "rgba(255,255,255,0.025)");
 
     ctx.fillStyle = cardShine;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
@@ -241,7 +245,7 @@ function shareGoatsImage_() {
     footerLineX,
     footerY - 24,
     footerLineWidth,
-    3
+    5
   );
 
   const months = [
