@@ -298,24 +298,20 @@ function shareGoatsImage_() {
 
   ctx.textAlign = "center";
 
-  ctx.fillStyle = accent;
-  ctx.font = `800 34px ${fontTitle}`;
-  ctx.fillText("★", width / 2, 118);
-
   ctx.fillStyle = textMain;
   ctx.font = `800 62px ${fontTitle}`;
-  ctx.fillText("MY GOATS", width / 2, 164);
+  ctx.fillText("MY GOATS", width / 2, 140);
 
   ctx.fillStyle = textSub;
   ctx.font = `700 28px ${fontBody}`;
-  ctx.fillText("OW KITSUNE GUIDE 🦊", width / 2, 202);
+  ctx.fillText("OW KITSUNE GUIDE 🦊", width / 2, 182);
 
   ctx.fillStyle = accent;
   ctx.font = `700 24px ${fontBody}`;
   ctx.fillText(
     `${favs.length} GOAT${favs.length === 1 ? "" : "s"}`,
     width / 2,
-    230
+    214
   );
 
   ctx.textAlign = "left";
