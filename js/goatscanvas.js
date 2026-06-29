@@ -214,24 +214,6 @@ function shareGoatsImage_() {
 
   ctx.restore();
 
-  // Center depth
-  const centerShadow = ctx.createRadialGradient(
-    x + columnWidth / 2,
-    y + cardHeight / 2,
-    0,
-    x + columnWidth / 2,
-    y + cardHeight / 2,
-    cardHeight * 0.9
-  );
-
-  centerShadow.addColorStop(0, "rgba(0,0,0,.28)");
-  centerShadow.addColorStop(.45, "rgba(0,0,0,.16)");
-  centerShadow.addColorStop(1, "rgba(0,0,0,0)");
-
-  ctx.fillStyle = centerShadow;
-  roundRect_(ctx, x, y, columnWidth, cardHeight, 22);
-  ctx.fill();
-
   // Neon outer glow
   ctx.save();
   ctx.strokeStyle = hexToRgba_(accent, 0.34);
