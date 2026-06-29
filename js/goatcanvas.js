@@ -1,3 +1,5 @@
+console.log("goats-canvas loaded");
+
 function shareGoatsImage_() {
   const favNames = getFavorites_();
 
