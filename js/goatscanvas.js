@@ -46,7 +46,7 @@ function shareGoatsImage_() {
 
   const cardHeight = 96;
   const cardGap = 12;
-  const headerHeight = 300;
+  const headerHeight = 270;
   const footerHeight = 170;
 
   const height =
@@ -61,9 +61,9 @@ function shareGoatsImage_() {
   ctx.fillRect(0, 0, width, height);
 
 // ===== Accent Glow =====
-  drawGlow_(ctx, width - 80, 90, 360, accent, 0.28);
-  drawGlow_(ctx, 80, height - 80, 420, accent, 0.22);
-  drawGlow_(ctx, width * 0.5, height * 0.15, 520, accent, 0.10);
+  drawGlow_(ctx, width - 80, 90, 360, accent, 0.18);
+  drawGlow_(ctx, 80, height - 80, 420, accent, 0.14);
+  drawGlow_(ctx, width * 0.5, height * 0.15, 520, accent, 0.06);
 
   ctx.textAlign = "center";
 
@@ -139,8 +139,8 @@ function shareGoatsImage_() {
       y
     );
 
-    regionGlow.addColorStop(0, hexToRgba_(regionColor, 0.26));
-    regionGlow.addColorStop(0.28, hexToRgba_(regionColor, 0.08));
+    regionGlow.addColorStop(0, hexToRgba_(regionColor, 0.18));
+    regionGlow.addColorStop(0.22, hexToRgba_(regionColor, 0.06));
     regionGlow.addColorStop(1, hexToRgba_(regionColor, 0));
 
     ctx.fillStyle = regionGlow;
