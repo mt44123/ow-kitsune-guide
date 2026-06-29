@@ -153,14 +153,11 @@ function shareGoatsImage_() {
   // Glass card base
   const glass = ctx.createLinearGradient(x, y, x, y + cardHeight);
 
-  glass.addColorStop(0.00, "rgba(255,255,255,0.12)");
-  glass.addColorStop(0.10, "rgba(255,255,255,0.055)");
-
-  glass.addColorStop(0.38, "rgba(255,255,255,0.006)");
-  glass.addColorStop(0.62, "rgba(255,255,255,0.004)");
-
-  glass.addColorStop(0.90, "rgba(255,255,255,0.035)");
-  glass.addColorStop(1.00, "rgba(255,255,255,0.075)");
+  glass.addColorStop(0.00, "rgba(255,255,255,0.075)");
+  glass.addColorStop(0.10, "rgba(255,255,255,0.035)");
+  glass.addColorStop(0.50, "rgba(255,255,255,0.010)");
+  glass.addColorStop(0.90, "rgba(255,255,255,0.025)");
+  glass.addColorStop(1.00, "rgba(255,255,255,0.060)");
 
   ctx.fillStyle = glass;
   roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
@@ -196,9 +193,9 @@ function shareGoatsImage_() {
     x + columnWidth * 0.22, y + 10, 0,
     x + columnWidth * 0.22, y + 10, columnWidth * 0.45
   );
-  blob1.addColorStop(0, "rgba(255,255,255,0.18)");
-  blob1.addColorStop(0.28, "rgba(255,255,255,0.075)");
-  blob1.addColorStop(0.62, "rgba(255,255,255,0.018)");
+  blob1.addColorStop(0, "rgba(255,255,255,0.075)");
+  blob1.addColorStop(0.28, "rgba(255,255,255,0.030)");
+  blob1.addColorStop(0.62, "rgba(255,255,255,0.006)");
   blob1.addColorStop(1, "rgba(255,255,255,0)");
 
   ctx.fillStyle = blob1;
@@ -208,8 +205,8 @@ function shareGoatsImage_() {
     x + columnWidth * 0.82, y + cardHeight * 0.78, 0,
     x + columnWidth * 0.82, y + cardHeight * 0.78, columnWidth * 0.38
   );
-  blob2.addColorStop(0, "rgba(255,255,255,0.12)");
-  blob2.addColorStop(0.45, "rgba(255,255,255,0.045)");
+  blob2.addColorStop(0, "rgba(255,255,255,0.040)");
+  blob2.addColorStop(0.45, "rgba(255,255,255,0.012)");
   blob2.addColorStop(1, "rgba(255,255,255,0)");
 
   ctx.fillStyle = blob2;
@@ -246,7 +243,7 @@ function shareGoatsImage_() {
   ctx.restore();
 
   // Thin glass border
-  ctx.strokeStyle = "rgba(255,255,255,0.28)";
+  ctx.strokeStyle = "rgba(255,255,255,0.36)";
   ctx.lineWidth = 1;
   roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
   ctx.stroke();
