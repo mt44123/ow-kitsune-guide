@@ -1195,7 +1195,7 @@ display:-webkit-box;
   height:16px;
   display:block;
   flex-shrink:0;
-  color:inherit;
+  color: var(--text-muted);
 }
 /* =========================================================
    8. YOUTUBE
