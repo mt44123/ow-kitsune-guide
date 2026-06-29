@@ -36,8 +36,8 @@ function loadFavoritesView() {
 
   viewNote.innerHTML = `
     ★ Saved on this browser only.<br>
-    Use <b>Backup MY GOATS</b> and <b>Import Backup</b> to move them to another device.<br>
-    このブラウザにのみ保存されます。<b>Backup MY GOATS</b> と <b>Import Backup</b> で別のデバイスへ引き継げます。
+    Use <b>★Backup</b> and <b>★Import</b> to move them to another device.<br>
+    このブラウザにのみ保存されます。<b>★Backup</b> と <b>★Import</b> で別のデバイスへ引き継げます。
   `;
 
   if (
@@ -101,7 +101,7 @@ function renderFavorites(players) {
     app.innerHTML = `
       <div class="goats-empty-actions">
         <button class="goats-export-button" data-goats-export="import">
-          Import Backup
+          ★Import
         </button>
       </div>
 
@@ -137,7 +137,10 @@ function copyGoatsBackupCode_() {
   navigator.clipboard.writeText(code)
     .then(() => {
       alert(
-        "Backup code copied!\nPaste it with Import Backup on another device."
+        "Backup code copied!\n" +
+        "Paste it with Import Backup on another device.\n\n" +
+        "バックアップコードをコピーしました。\n" +
+        "別のデバイスで OW KITSUNE GUIDE を開き、★Import から貼り付けてください。"
       );
     })
     .catch(() => {

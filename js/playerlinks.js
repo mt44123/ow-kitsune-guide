@@ -87,10 +87,10 @@ app.innerHTML = `
         ? `
           <div class="goats-export-box">
             <button class="goats-export-button" data-goats-export="backup">
-              Backup MY GOATS
+              ★Backup
             </button>
             <button class="goats-export-button" data-goats-export="import">
-              Import Backup
+              ★Import
             </button>
             <button class="goats-export-button" data-goats-export="share">
               Share
