@@ -153,14 +153,14 @@ function shareGoatsImage_() {
   // Glass card base
   const glass = ctx.createLinearGradient(x, y, x, y + cardHeight);
 
-  glass.addColorStop(0.00, "rgba(255,255,255,0.20)");
-  glass.addColorStop(0.12, "rgba(255,255,255,0.10)");
+  glass.addColorStop(0.00, "rgba(255,255,255,0.12)");
+  glass.addColorStop(0.10, "rgba(255,255,255,0.055)");
 
-  glass.addColorStop(0.42, "rgba(255,255,255,0.015)");
-  glass.addColorStop(0.58, "rgba(255,255,255,0.015)");
+  glass.addColorStop(0.38, "rgba(255,255,255,0.006)");
+  glass.addColorStop(0.62, "rgba(255,255,255,0.004)");
 
-  glass.addColorStop(0.88, "rgba(255,255,255,0.08)");
-  glass.addColorStop(1.00, "rgba(255,255,255,0.16)");
+  glass.addColorStop(0.90, "rgba(255,255,255,0.035)");
+  glass.addColorStop(1.00, "rgba(255,255,255,0.075)");
 
   ctx.fillStyle = glass;
   roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
@@ -178,9 +178,9 @@ function shareGoatsImage_() {
 
   // Region tint
   const regionGlow = ctx.createLinearGradient(x, y, x + columnWidth, y);
-  regionGlow.addColorStop(0.00, hexToRgba_(regionColor,0.26));
-  regionGlow.addColorStop(0.08, hexToRgba_(regionColor,0.10));
-  regionGlow.addColorStop(0.18, hexToRgba_(regionColor,0.02));
+  inner.addColorStop(0, "rgba(255,255,255,0.06)");
+  inner.addColorStop(0.12, "rgba(255,255,255,0.01)");
+  inner.addColorStop(1, "rgba(0,0,0,0.18)");
   regionGlow.addColorStop(0.32, hexToRgba_(regionColor,0));
 
   ctx.fillStyle = regionGlow;
@@ -196,9 +196,9 @@ function shareGoatsImage_() {
     x + columnWidth * 0.22, y + 10, 0,
     x + columnWidth * 0.22, y + 10, columnWidth * 0.45
   );
-  blob1.addColorStop(0, "rgba(255,255,255,0.34)");
-  blob1.addColorStop(0.28, "rgba(255,255,255,0.16)");
-  blob1.addColorStop(0.62, "rgba(255,255,255,0.04)");
+  blob1.addColorStop(0, "rgba(255,255,255,0.18)");
+  blob1.addColorStop(0.28, "rgba(255,255,255,0.075)");
+  blob1.addColorStop(0.62, "rgba(255,255,255,0.018)");
   blob1.addColorStop(1, "rgba(255,255,255,0)");
 
   ctx.fillStyle = blob1;
@@ -227,8 +227,8 @@ function shareGoatsImage_() {
     cardHeight * 0.9
   );
 
-  centerShadow.addColorStop(0, "rgba(0,0,0,.18)");
-  centerShadow.addColorStop(.45, "rgba(0,0,0,.10)");
+  centerShadow.addColorStop(0, "rgba(0,0,0,.28)");
+  centerShadow.addColorStop(.45, "rgba(0,0,0,.16)");
   centerShadow.addColorStop(1, "rgba(0,0,0,0)");
 
   ctx.fillStyle = centerShadow;
