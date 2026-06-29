@@ -286,7 +286,7 @@ function shareGoatsImage_() {
       : 32;
 
   ctx.fillStyle = "rgba(255,255,255,.35)";
-  ctx.font = `400 ${nameFontSize}px ${fontBody}`;
+  ctx.font = `400 ${nameFontSize + 2}px ${fontTitle}`;
   ctx.fillText(
     name,
     x + 32,
