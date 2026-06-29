@@ -23,13 +23,21 @@ function shareGoatsImage_() {
 
   const bodyStyle = getComputedStyle(document.body);
 
-  const bgDark = bodyStyle.getPropertyValue("--bg-dark").trim() || "#111A2D";
-  const bgMain = bodyStyle.getPropertyValue("--bg-main").trim() || "#111A2D";
-  const bgLight = bodyStyle.getPropertyValue("--bg-light").trim() || "#1D253A";
-  const accent = bodyStyle.getPropertyValue("--accent").trim() || "#B84724";
-  const textMain = bodyStyle.getPropertyValue("--text-main").trim() || "#FFFFFF";
-  const textSub = bodyStyle.getPropertyValue("--text-sub").trim() || "rgba(255,255,255,.7)";
-  const textMuted = bodyStyle.getPropertyValue("--text-muted").trim() || "rgba(255,255,255,.45)";
+  // Canvas fixed brand colors
+  const bgMain = "#121A2A";
+  const bgLight = "#1D273A";
+  const textMain = "#F4F6FB";
+  const textSub = "rgba(244,246,251,.78)";
+  const textMuted = "rgba(244,246,251,.52)";
+
+  // Theme colors
+  const accent =
+    bodyStyle.getPropertyValue("--accent").trim() ||
+    "#FE5002";
+
+  const border =
+    bodyStyle.getPropertyValue("--border").trim() ||
+    "rgba(255,255,255,.12)";
 
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -40,9 +48,10 @@ function shareGoatsImage_() {
   const fontBody = "Arial, sans-serif";
 
   const useTwoColumns = players.length > 12;
+
   const rows = Math.ceil(
     players.length / (useTwoColumns ? 2 : 1)
-    );
+  );
 
   const cardHeight = 96;
   const cardGap = 12;
@@ -60,27 +69,26 @@ function shareGoatsImage_() {
   ctx.fillStyle = bgMain;
   ctx.fillRect(0, 0, width, height);
 
-// ===== Accent Glow =====
-  drawGlow_(ctx, width - 80, 90, 360, accent, 0.18);
+  drawGlow_(ctx, width - 80, 90, 360, accent, 0.20);
   drawGlow_(ctx, 80, height - 80, 420, accent, 0.14);
-  drawGlow_(ctx, width * 0.5, height * 0.15, 520, accent, 0.06);
+  drawGlow_(ctx, width * 0.5, height * 0.15, 520, accent, 0.07);
 
   ctx.textAlign = "center";
 
   ctx.fillStyle = textMain;
   ctx.font = `800 62px ${fontTitle}`;
-  ctx.fillText("MY GOATS", width / 2, 145);
+  ctx.fillText("MY GOATS", width / 2, 135);
 
   ctx.fillStyle = textSub;
   ctx.font = `700 28px ${fontBody}`;
-  ctx.fillText("OW KITSUNE GUIDE 🦊", width / 2, 188);
+  ctx.fillText("OW KITSUNE GUIDE 🦊", width / 2, 178);
 
   ctx.fillStyle = accent;
   ctx.font = `700 26px ${fontBody}`;
   ctx.fillText(
     `${players.length} Player${players.length === 1 ? "" : "s"}`,
     width / 2,
-    224
+    214
   );
 
   ctx.textAlign = "left";
@@ -122,9 +130,9 @@ function shareGoatsImage_() {
 
     ctx.save();
 
-    ctx.shadowColor = "rgba(0,0,0,.28)";
-    ctx.shadowBlur = 12;
-    ctx.shadowOffsetY = 4;
+    ctx.shadowColor = "rgba(0,0,0,.32)";
+    ctx.shadowBlur = 14;
+    ctx.shadowOffsetY = 5;
 
     ctx.fillStyle = bgLight;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
@@ -146,6 +154,11 @@ function shareGoatsImage_() {
     ctx.fillStyle = regionGlow;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
     ctx.fill();
+
+    ctx.strokeStyle = border;
+    ctx.lineWidth = 1.5;
+    roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
+    ctx.stroke();
 
     ctx.fillStyle = textMain;
 
@@ -170,8 +183,8 @@ function shareGoatsImage_() {
         ? p.team
         : ""
     ]
-    .filter(Boolean)
-    .join("  •  ");
+      .filter(Boolean)
+      .join("  •  ");
 
     ctx.fillStyle = textMuted;
     ctx.font = `600 18px ${fontBody}`;
@@ -185,20 +198,21 @@ function shareGoatsImage_() {
 
   const footerY = height - 120;
 
-  const footerLineX = useTwoColumns ? listLeft : padding;
+  const footerLineX =
+    useTwoColumns ? listLeft : padding;
 
-const footerLineWidth =
+  const footerLineWidth =
     useTwoColumns
-        ? columnWidth * 2 + columnGap
-        : width - padding * 2;
+      ? columnWidth * 2 + columnGap
+      : width - padding * 2;
 
-    ctx.fillStyle = accent;
-    ctx.fillRect(
+  ctx.fillStyle = accent;
+  ctx.fillRect(
     footerLineX,
     footerY - 24,
     footerLineWidth,
     3
-    );
+  );
 
   const months = [
     "Jan","Feb","Mar","Apr","May","Jun",
@@ -249,12 +263,16 @@ const footerLineWidth =
 
     navigator.clipboard?.writeText(shareText).catch(() => {});
 
+    const url = URL.createObjectURL(blob);
+
     const link = document.createElement("a");
     link.download = "ow-kitsune-my-goats.png";
-    link.href = URL.createObjectURL(blob);
+    link.href = url;
     link.click();
 
-    URL.revokeObjectURL(link.href);
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+    }, 1000);
   }, "image/png");
 }
 
