@@ -82,7 +82,7 @@ function shareGoatsImage_() {
   ctx.save();
 
   ctx.shadowColor = accent;
-  ctx.shadowBlur = 24;
+  ctx.shadowBlur = 14;
 
   ctx.fillStyle = textMain;
   ctx.font = `800 62px ${fontTitle}`;
@@ -258,22 +258,29 @@ function shareGoatsImage_() {
   roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
   ctx.stroke();
 
-    // 名前
-    ctx.fillStyle = textMain;
+  // 名前
+  const name = p.name || "";
+  const nameFontSize =
+    useTwoColumns && name.length > 14
+      ? 26
+      : 32;
 
-    const name = p.name || "";
-    const nameFontSize =
-      useTwoColumns && name.length > 14
-        ? 26
-        : 32;
+  ctx.save();
 
-    ctx.font = `800 ${nameFontSize}px ${fontBody}`;
-    ctx.fillText(
-      name,
-      x + 32,
-      y + 40,
-      columnWidth - 56
-    );
+  ctx.shadowColor = accent;
+  ctx.shadowBlur = 10;
+
+  ctx.fillStyle = textMain;
+  ctx.font = `800 ${nameFontSize}px ${fontBody}`;
+
+  ctx.fillText(
+    name,
+    x + 32,
+    y + 40,
+    columnWidth - 56
+  );
+
+  ctx.restore();
 
     const meta = [
       regionLabel,
