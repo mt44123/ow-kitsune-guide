@@ -2133,10 +2133,7 @@ grid-column:1 / -1;
 }
 
 body.theme-light .team-card-logo{
-  filter:
-    invert(1)
-    brightness(.8)
-    contrast(1.2);
+  filter: invert(1);
 }
 
 /* =========================================================
