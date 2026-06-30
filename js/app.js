@@ -1028,6 +1028,92 @@ document
 
 updateNavState(currentView);
 
+let swipeStartX = 0;
+let swipeStartY = 0;
+let swipeEndX = 0;
+let swipeEndY = 0;
+
+const SWIPE_THRESHOLD = 70;
+
+function getSwipeViews_() {
+  if (isLiveView(currentView)) {
+    return VIEW_GROUPS.live;
+  }
+
+  if (isYoutubeView(currentView)) {
+    return VIEW_GROUPS.youtube;
+  }
+
+  if (isClipView(currentView)) {
+    return VIEW_GROUPS.clips;
+  }
+
+  return [];
+}
+
+function switchSwipeView_(direction) {
+  const views = getSwipeViews_();
+  if (!views.length) return;
+
+  const index = views.indexOf(currentView);
+  if (index < 0) return;
+
+  const nextIndex =
+    direction === "left"
+      ? index + 1
+      : index - 1;
+
+  if (nextIndex < 0 || nextIndex >= views.length) {
+    return;
+  }
+
+  currentView = views[nextIndex];
+
+  if (isLiveView(currentView)) {
+    currentLiveView = currentView;
+  }
+
+  if (isYoutubeView(currentView)) {
+    currentYoutubeView = currentView;
+  }
+
+  if (isClipView(currentView)) {
+    currentClipView = currentView;
+  }
+
+  history.replaceState({}, "", "?view=" + currentView);
+
+  updateNavState(currentView);
+  loadView(currentView);
+}
+
+app.addEventListener("touchstart", e => {
+  if (e.touches.length !== 1) return;
+
+  swipeStartX = e.touches[0].clientX;
+  swipeStartY = e.touches[0].clientY;
+}, { passive:true });
+
+app.addEventListener("touchend", e => {
+  const touch = e.changedTouches[0];
+  if (!touch) return;
+
+  swipeEndX = touch.clientX;
+  swipeEndY = touch.clientY;
+
+  const dx = swipeEndX - swipeStartX;
+  const dy = swipeEndY - swipeStartY;
+
+  if (Math.abs(dx) < SWIPE_THRESHOLD) return;
+  if (Math.abs(dx) < Math.abs(dy)) return;
+
+  if (dx < 0) {
+    switchSwipeView_("left");
+  } else {
+    switchSwipeView_("right");
+  }
+}, { passive:true });
+
 const searchToggle =
   document.getElementById("searchToggle");
 
