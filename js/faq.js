@@ -181,6 +181,8 @@ function loadFaqView() {
           <li>Favorite players are marked with ★</li>
           <li>Shows favorite LIVE streams, videos and clips</li>
           <li>Used for Live Notifications</li>
+          <li>★Backup / ★Import can move your list to another device</li>
+          <li>★Share creates a MY GOATS share image</li>
           <li>Stored locally in your browser only</li>
         </ul>
 
@@ -195,6 +197,8 @@ function loadFaqView() {
           <li>★でお気に入り登録</li>
           <li>お気に入り選手のLIVE・動画・クリップを表示</li>
           <li>ライブ通知でも利用</li>
+          <li>★Backup / ★Import で別のデバイスへ引き継げます</li>
+          <li>★Share でMY GOATS画像を作成できます</li>
           <li>ブラウザ内にのみ保存されます</li>
         </ul>
       </div>

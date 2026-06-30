@@ -35,8 +35,8 @@ function loadFavoritesView() {
   setRandomVoiceLine();
 
   viewNote.innerHTML = `
-    ★ Saved on this browser only. Use <b>★Backup</b> and <b>★Import</b> to move them to another device.<br>
-    このブラウザにのみ保存されます。<b>★Backup</b> と <b>★Import</b> で別のデバイスへ引き継げます。
+    See <b>⚙ FAQ</b> for more details.
+    詳しくは⚙の<b>FAQ</b>へ
   `;
 
   if (
