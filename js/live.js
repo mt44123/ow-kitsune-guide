@@ -200,69 +200,115 @@ function renderLive(players) {
     return;
   }
 
-  app.innerHTML = players.map(p => `
-    <a class="card-link" href="${p.url}" target="_blank" rel="noopener">
-      <div class="card live-card ${getLangClass(p)}">
-        <div class="player-name card-name-row">
+  app.innerHTML = players.map(p => {
+    const logoPath = getTeamLogoPath_(p.team);
 
-          <span>
-            <span
-              class="favorite-star ${isFavorite_(p.name) ? "active" : ""}"
-              data-favorite-name="${escapeHtml(p.name || "")}"
-            >
-              ${isFavorite_(p.name) ? "★" : "☆"}
+    return `
+      <a class="card-link" href="${p.url}" target="_blank" rel="noopener">
+        <div class="card live-card ${getLangClass(p)}">
+
+          <div class="player-name card-name-row">
+            <span>
+              <span
+                class="favorite-star ${isFavorite_(p.name) ? "active" : ""}"
+                data-favorite-name="${escapeHtml(p.name || "")}"
+              >
+                ${isFavorite_(p.name) ? "★" : "☆"}
+              </span>
+
+              ${escapeHtml(p.name || "")}
             </span>
 
-            ${escapeHtml(p.name || "")}
-          </span>
+            ${muteButton_(p.name)}
+          </div>
 
-          ${muteButton_(p.name)}
+          <div class="meta">
+            ${escapeHtml(p.team || "-")} │ ${escapeHtml(p.role || "-")} │ ${escapeHtml(p.nationality || "-")}
+          </div>
+
+          <div class="stats live-stats">
+            <span class="platform-icons">
+              ${renderPlatformIcons_(p.platform)}
+            </span>
+
+            <span class="live-stat-item">
+              ${liveTimeIcon_()}
+              <span>${formatLiveFor(p.startedAt)}</span>
+            </span>
+
+            <span class="live-stat-item">
+              ${liveViewersIcon_()}
+              <span>${Number(p.viewers || 0).toLocaleString()}</span>
+            </span>
+          </div>
+
+          <div class="title">${escapeHtml(p.title || "")}</div>
+
+          ${
+            logoPath
+              ? `<img
+                  class="card-team-watermark"
+                  src="${logoPath}"
+                  alt=""
+                  loading="lazy"
+                >`
+              : ""
+          }
 
         </div>
-
-        <div class="meta">
-          ${escapeHtml(p.team || "-")} │ ${escapeHtml(p.role || "-")} │ ${escapeHtml(p.nationality || "-")}
-        </div>
-
-        <div class="stats live-stats">
-          <span class="platform-icons">
-            ${renderPlatformIcons_(p.platform)}
-          </span>
-          <span class="live-stat-item">
-            ${liveTimeIcon_()}
-            <span>${formatLiveFor(p.startedAt)}</span>
-          </span>
-
-          <span class="live-stat-item">
-            ${liveViewersIcon_()}
-            <span>${Number(p.viewers || 0).toLocaleString()}</span>
-          </span>
-        </div>
-
-        <div class="title">${escapeHtml(p.title || "")}</div>
-
-        ${
-          p.team && p.team !== "No team"
-            ? `<img
-                class="card-team-watermark"
-                src="${getTeamLogoPath_(p.team)}"
-                alt=""
-                loading="lazy"
-              >`
-            : ""
-        }
-        
-      </div>
-    </a>
-  `).join("");
+      </a>
+    `;
+  }).join("");
 }
 
-function getTeamLogoPath_(team) {
-  if (!team) return "";
+function getTeamLogoPath_(team, useLightTheme = true) {
+  const name = String(team || "").trim();
 
-  const fileName = String(team)
-    .trim()
-    .replace(/\s+/g, "_");
+  if (!name || name === "No team") return "";
 
-  return `./TeamLogo/${encodeURIComponent(fileName)}.png`;
+  const file = encodeURIComponent(
+    name.replace(/\s+/g, "_")
+  );
+
+  const lightLogoTeams = [
+    "99DIVINE",
+    "Disguised",
+    "9z Team",
+    "Nyam Gaming",
+    "Four Angry Men",
+    "HUNENG Gaming",
+    "LuneX Gaming",
+    "MURASH GAMING",
+    "Najdorf Esports",
+    "O2 Blast",
+    "Please Not Hero Ban",
+    "Poker Face",
+    "REVATI",
+    "Team Liquid",
+    "Team Secret",
+    "ZANSIDE GAMING",
+    "ZETA DIVISION",
+  ];
+
+  const isLightTheme =
+    useLightTheme &&
+    (
+      document.body.classList.contains("light-theme") ||
+      document.body.classList.contains("theme-whitered") ||
+      document.body.classList.contains("theme-whiteblue") ||
+      document.body.classList.contains("theme-whitepink") ||
+      document.body.classList.contains("theme-cyanpink") ||
+      document.body.classList.contains("theme-yellowblue") ||
+      document.body.classList.contains("theme-dreampurple") ||
+      document.body.classList.contains("theme-whitegray")
+    );
+
+  if (
+    isLightTheme &&
+    lightLogoTeams.includes(name)
+  ) {
+    return `./TeamLogo/${file}_light.png`;
+  }
+
+  return `./TeamLogo/${file}.png`;
 }
