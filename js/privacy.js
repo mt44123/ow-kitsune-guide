@@ -89,23 +89,28 @@ function loadPrivacyView() {
       </div>
 
       <div class="card">
-        <h3>Analytics and Advertising</h3>
+        <h3>Cookies, Analytics and Advertising</h3>
 
         ${siteText_(
           `<p>
-            This website may use analytics tools or advertising services in the future
-            to understand usage and help support maintenance costs.
+            This website uses Google Analytics to understand website traffic and improve
+            the user experience.
+          </p>
+          <p>
+            Cookies or similar technologies may be used to analyze website traffic.
           </p>
           <p>
             If advertising services such as Google AdSense are introduced, cookies or
-            similar technologies may be used to display and measure ads.
+            similar technologies may also be used to display and measure ads.
           </p>`,
           `<p>
-            本サイトでは、利用状況の把握や維持費の補助を目的として、
-            将来的にアクセス解析ツールや広告サービスを利用する場合があります。
+            本サイトでは、利用状況の把握と利便性向上のために Google Analytics を使用しています。
           </p>
           <p>
-            Google AdSense などの広告サービスを導入した場合、広告の表示や測定のために
+            アクセス解析のために、Cookie または類似技術が使用される場合があります。
+          </p>
+          <p>
+            Google AdSense などの広告サービスを導入した場合、広告の表示や測定のためにも
             Cookie または類似技術が使用されることがあります。
           </p>`
         )}
