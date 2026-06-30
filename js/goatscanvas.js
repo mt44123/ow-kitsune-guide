@@ -59,7 +59,7 @@ async function shareGoatsImage_() {
   );
 
   const cardHeight = 104;
-  const cardGap = 12;
+  const cardGap = 16;
   const headerHeight = 270;
   const footerHeight = 170;
 
@@ -78,8 +78,8 @@ async function shareGoatsImage_() {
 
   ctx.save();
 
-  ctx.shadowColor = accent;
-  ctx.shadowBlur = 14;
+  ctx.shadowColor = hexToRgba_(accent, 0.75);
+  ctx.shadowBlur = 9;
 
   ctx.fillStyle = textMain;
   ctx.font = `800 62px ${fontTitle}`;
@@ -300,8 +300,8 @@ async function shareGoatsImage_() {
 
   ctx.save();
 
-  ctx.shadowColor = accent;
-  ctx.shadowBlur = 10;
+  ctx.shadowColor = hexToRgba_(accent, 0.65);
+  ctx.shadowBlur = 6;
 
   ctx.fillStyle = textMain;
   ctx.font = `700 ${nameFontSize + 2}px ${fontTitle}`;
