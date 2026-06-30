@@ -299,9 +299,29 @@ document
 
 document
   .getElementById("shareGoatsButton")
-  ?.addEventListener("click", () => {
+  ?.addEventListener("click", async () => {
+
     settingsMenu?.classList.add("settings-hidden");
-    shareGoatsImageHype_();
+
+    if (!playerLinksCache) {
+
+      const res = await fetch(
+        CONFIG.API_URL + "?view=playerlinks"
+      );
+
+      const data = await res.json();
+
+      playerLinksCache = data.playerLinks || [];
+    }
+
+    const backup = currentData;
+
+    currentData = playerLinksCache;
+
+    await shareGoatsImageHype_();
+
+    currentData = backup;
+
   });
 
 function getTeamLogoPath_(team, useLightTheme = true) {
