@@ -1,3 +1,6 @@
+const notifySelect = document.getElementById("notifySelect");
+const notifyIcon = document.getElementById("notifyIcon");
+
 let liveNotificationMode =
   localStorage.getItem("liveNotificationMode") || "off";
 
@@ -25,94 +28,64 @@ function notifyIcon_(type) {
   `;
 }
 
-function updateNotifyButton_() {
-  if (!notifyButton) return;
+function updateNotifySelect_() {
+  if (!notifySelect) return;
 
-  let iconType = "off";
-  let title = siteText_("Live Notifications", "ライブ通知");
-  let desc = siteText_(
-    "Experimental. See FAQ for details.",
-    "実験的な機能です。詳細はFAQをご確認ください。"
-  );
-  let value = "OFF";
+  notifySelect.value = liveNotificationMode;
 
-  if (!("Notification" in window)) {
-    iconType = "off";
-    title = siteText_("Notifications", "通知");
-    value = siteText_("Unsupported", "非対応");
-  } else if (Notification.permission === "denied") {
-    iconType = "off";
-    title = siteText_("Notifications", "通知");
-    value = siteText_("Blocked", "ブロック中");
-  } else if (liveNotificationMode === "goats") {
-    iconType = "goats";
-    value = "MY GOATS";
-  } else if (liveNotificationMode === "all") {
-    iconType = "all";
-    value = "ALL";
+  if (notifyIcon) {
+    notifyIcon.innerHTML = notifyIcon_(liveNotificationMode);
   }
 
-  notifyButton.innerHTML = `
-    <span class="settings-row-icon">
-      ${notifyIcon_(iconType)}
-    </span>
+  if (!("Notification" in window)) {
+    notifySelect.value = "off";
+    notifySelect.disabled = true;
+  }
 
-    <span class="settings-row-main">
-      <span class="settings-row-title">${title}</span>
-      <span class="settings-row-desc">${desc}</span>
-    </span>
-
-    <span class="settings-row-value">
-      ${value}
-    </span>
-  `;
+  if ("Notification" in window && Notification.permission === "denied") {
+    notifySelect.value = "off";
+    notifySelect.disabled = true;
+  }
 }
 
-updateNotifyButton_();
+updateNotifySelect_();
 
-notifyButton?.addEventListener(
-  "click",
+notifySelect?.addEventListener(
+  "change",
   async () => {
+    const nextMode = notifySelect.value;
 
     if (!("Notification" in window)) {
-      alert(
-        siteText_(
-          "Notifications are not supported.",
-          "このブラウザは通知に対応していません。"
-        )
-      );
+      alert(siteText_("Notifications are not supported.", "このブラウザは通知に対応していません。"));
+      notifySelect.value = "off";
       return;
     }
 
-    if (Notification.permission !== "granted") {
-      const result =
-        await Notification.requestPermission();
+    if (nextMode !== "off" && Notification.permission !== "granted") {
+      const result = await Notification.requestPermission();
 
       if (result !== "granted") {
-        updateNotifyButton_();
+        liveNotificationMode = "off";
+        notifySelect.value = "off";
+        localStorage.setItem("liveNotificationMode", "off");
+        updateNotifySelect_();
         return;
       }
     }
 
-    if (liveNotificationMode === "off") {
-      liveNotificationMode = "goats";
-    } else if (liveNotificationMode === "goats") {
-      liveNotificationMode = "all";
-    } else {
-      liveNotificationMode = "off";
-    }
-
-    if (liveNotificationMode !== "off" && liveCache?.players) {
-      saveLiveState_(liveCache.players);
-      liveStateInitialized = true;
-    }
+    liveNotificationMode = nextMode;
 
     localStorage.setItem(
       "liveNotificationMode",
       liveNotificationMode
     );
 
-    updateNotifyButton_();
+    if (liveNotificationMode !== "off" && liveCache?.players) {
+      saveLiveState_(liveCache.players);
+      liveStateInitialized = true;
+    }
+
+    updateNotifySelect_();
 
     if (liveNotificationMode !== "off") {
       new Notification(
