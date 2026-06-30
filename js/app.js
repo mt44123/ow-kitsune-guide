@@ -259,6 +259,42 @@ const settingsMenu =  document.getElementById("settingsMenu");
 
 const themeSelect = document.getElementById("themeSelect");
 
+const filtersToggle =
+  document.getElementById("filtersToggle");
+
+const filtersPanel =
+  document.getElementById("filtersPanel");
+
+let filtersExpanded =
+  localStorage.getItem("filtersExpanded") !== "false";
+
+function applyFiltersExpanded_() {
+  if (!filtersToggle || !filtersPanel) return;
+
+  filtersPanel.classList.toggle(
+    "filters-collapsed",
+    !filtersExpanded
+  );
+
+  filtersToggle.textContent =
+    filtersExpanded
+      ? "▼ Filters"
+      : "▶ Filters";
+}
+
+filtersToggle?.addEventListener("click", () => {
+  filtersExpanded = !filtersExpanded;
+
+  localStorage.setItem(
+    "filtersExpanded",
+    String(filtersExpanded)
+  );
+
+  applyFiltersExpanded_();
+});
+
+applyFiltersExpanded_();
+
 function applyTheme_(theme) {
 
   document.body.classList.remove(

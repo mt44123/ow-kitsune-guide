@@ -928,6 +928,46 @@ background:var(--accent);
 color:var(--accent-text);
 }
 
+.filters-toggle{
+
+  width:100%;
+  margin:8px 0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  gap:6px;
+
+  height:38px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:var(--bg-main);
+
+  color:var(--text-sub);
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.18s;
+}
+
+.filters-toggle:hover{
+  color:var(--accent);
+  border-color:var(--accent);
+}
+
+.filters-panel{
+  overflow:hidden;
+}
+
+.filters-panel.filters-collapsed{
+  display:none;
+}
+
 /* =========================================================
    5. SETTINGS
    ========================================================= */
