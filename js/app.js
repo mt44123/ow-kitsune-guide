@@ -821,21 +821,21 @@ async function loadVoiceLines() {
 }
 
 const VIEW_GROUPS = {
-  live: ["new", "viewers", "goats", "kr", "en", "cn", "jp", "intl"],
+  live: ["new", "goats", "viewers", "kr", "en", "cn", "jp", "intl"],
 
   clips: [
     "clips",
     "goatclips",
     "hotclips",
     "jpclips",
-    "soopclips",
-    "soophotclips",
     "chzzknewclips",
     "chzzkhotclips",
-    "chzzkbestclips"
+    "chzzkbestclips",
+    "soopclips",
+    "soophotclips"
   ],
 
-  youtube: ["youtube", "youtubehot", "youtubegoats", "youtubejp"],
+  youtube: ["youtube", "youtubegoats", "youtubehot", "youtubejp"],
 
   players: [
     "teams",
