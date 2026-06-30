@@ -321,60 +321,6 @@ document
 
   });
 
-function getTeamLogoPath_(team, useLightTheme = true) {
-
-  const name = String(team || "").trim();
-
-  if (!name || name === "No team") return "";
-
-  const file =
-    encodeURIComponent(
-      name.replace(/\s+/g, "_")
-    );
-
-  const lightLogoTeams = [
-    "99DIVINE",    
-    "Disguised",
-    "9z Team",    
-    "Nyam Gaming",
-    "Four Angry Men",
-    "HUNENG Gaming",
-    "LuneX Gaming",
-    "MURASH GAMING",
-    "Najdorf Esports",
-    "O2 Blast",
-    "Please Not Hero Ban",
-    "Poker Face",
-    "REVATI",
-    "Team Liquid",
-    "Team Secret",
-    "ZANSIDE GAMING",
-    "ZETA DIVISION",
-  ];
-
-  const isLightTheme =
-    useLightTheme &&
-    (
-      document.body.classList.contains("light-theme") ||
-      document.body.classList.contains("theme-whitered") ||
-      document.body.classList.contains("theme-whiteblue") ||
-      document.body.classList.contains("theme-whitepink") ||
-      document.body.classList.contains("theme-cyanpink") ||
-      document.body.classList.contains("theme-yellowblue") ||
-      document.body.classList.contains("theme-dreampurple") ||
-      document.body.classList.contains("theme-whitegray")
-    );
-
-  if (
-    isLightTheme &&
-    lightLogoTeams.includes(name)
-  ) {
-    return `./TeamLogo/${file}_light.png`;
-  }
-
-  return `./TeamLogo/${file}.png`;
-}
-
 async function preloadTeamLogos_(players, useLightTheme = true) {
 
   const promises = players.map(p => {
