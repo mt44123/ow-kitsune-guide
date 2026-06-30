@@ -1419,6 +1419,11 @@ min-width:0;
   color:var(--text-muted);
 }
 
+.youtube-card{
+  position:relative;
+  overflow:hidden;
+}
+
 /* =========================================================
    9. CLIPS
    ========================================================= */

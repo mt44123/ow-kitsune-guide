@@ -149,6 +149,8 @@ function renderYoutubeCard_(v) {
       v.titleEn || ""
     );
 
+    const logoPath = getTeamLogoPath_(v.team);
+
   return `
     <a
       class="card-link youtube-card-link"
@@ -216,8 +218,21 @@ function renderYoutubeCard_(v) {
             </span>
 
           </div>
-        </div>
+                </div>
+
+        ${
+          logoPath
+            ? `<img
+                class="card-team-watermark"
+                src="${logoPath}"
+                alt=""
+                loading="lazy"
+                onerror="this.remove()"
+              >`
+            : ""
+        }
+
       </div>
     </a>
-  `;
+     `;
 }
