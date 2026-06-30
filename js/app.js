@@ -304,8 +304,6 @@ filtersToggle?.addEventListener("click", () => {
   applyFiltersExpanded_();
 });
 
-applyFiltersExpanded_();
-
 function applyTheme_(theme) {
 
   document.body.classList.remove(
