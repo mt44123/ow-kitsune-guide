@@ -1032,14 +1032,36 @@ color:var(--accent-text);
 /* @SECTION: SETTINGS */
 
 .tools-link{
-  background:none;
-  border:none;
-  color:var(--accent);
-  cursor:pointer;
-  padding:0;
+  width:36px;
+  height:36px;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
+  background:var(--bg-main);
+  border:1px solid var(--border);
+  border-radius:50%;
+
+  color:var(--accent);
+  cursor:pointer;
+
+  padding:0;
+  margin-top:var(--space-md);
+
+  transition:var(--transition-fast);
+}
+
+.tools-link .settings-icon{
+  width:22px;
+  height:22px;
+}
+
+.settings-title-icon{
+  width:20px;
+  height:20px;
+  flex-shrink:0;
+  color:var(--accent);
 }
 
 .settings-menu{
