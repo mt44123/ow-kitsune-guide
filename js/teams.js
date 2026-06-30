@@ -107,17 +107,8 @@ function renderTeams(players) {
       class="team-card ${getTeamRegionClass(region.name)}"
       data-region="${escapeHtml(region.name)}"
     >
-      <div class="team-card-logo-wrap">
-        <img
-          class="team-card-logo"
-          src="${getTeamLogoPath_(team.name)}"
-          alt=""
-          onerror="this.style.display='none'"
-        >
-      </div>
-
       <div class="team-card-name">
-        ${escapeHtml(team.name)}
+        ${escapeHtml(region.name)}
       </div>
 
       <div class="team-card-meta">
@@ -127,20 +118,20 @@ function renderTeams(players) {
   `).join("");
 
   document.querySelectorAll(".team-card").forEach(button => {
-   button.addEventListener("click", () => {
-  const region = button.dataset.region;
+    button.addEventListener("click", () => {
+      const region = button.dataset.region;
 
-  if (region === "Official OWCS") {
-    renderTeamPlayers(
-      "Overwatch_Champions_Series",
-      players,
-      "Official OWCS"
-    );
-    return;
-  }
+      if (region === "Official OWCS") {
+        renderTeamPlayers(
+          "Overwatch_Champions_Series",
+          players,
+          "Official OWCS"
+        );
+        return;
+      }
 
-  renderRegionTeams(region, players);
-});
+      renderRegionTeams(region, players);
+    });
   });
 }
 
