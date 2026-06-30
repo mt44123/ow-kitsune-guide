@@ -55,7 +55,7 @@ async function shareGoatsImage_() {
   const fontTitle = "'Jura', sans-serif";
   const fontBody = "Arial, sans-serif";
 
-  const useTwoColumns = players.length > 12;
+  const useTwoColumns = players.length > 4;
 
   const rows = Math.ceil(
     players.length / (useTwoColumns ? 2 : 1)
@@ -122,17 +122,7 @@ async function shareGoatsImage_() {
   const columnGap = 34;
   const listWidth = width - padding * 2;
 
-  let columnWidth;
-
-    if (useTwoColumns) {
-      columnWidth = 500;
-    } else if (players.length <= 4) {
-      columnWidth = 700;
-    } else if (players.length <= 8) {
-      columnWidth = 820;
-    } else {
-      columnWidth = listWidth;
-    }
+  const columnWidth = 500;
 
     const listLeft =
       useTwoColumns
