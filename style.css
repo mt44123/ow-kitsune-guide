@@ -1232,6 +1232,15 @@ color:var(--accent-text);
 
 }
 
+.tools-link .settings-button-icon{
+  display:block;
+  width:22px !important;
+  height:22px !important;
+  max-width:22px !important;
+  max-height:22px !important;
+  flex:0 0 22px;
+}
+
 /* =========================================================
    6. COMMON CARD
    ========================================================= */
