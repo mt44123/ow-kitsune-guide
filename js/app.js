@@ -252,6 +252,7 @@ document.addEventListener("click", e => {
 const refreshDataButton =  document.getElementById("refreshDataButton");
 const toolsButton =  document.getElementById("toolsButton");
 const faqButton =  document.getElementById("faqButton");
+const contactButton =  document.getElementById("contactButton");
 
 const notifyButton =  document.getElementById("notifyButton");
 const settingsButton =  document.getElementById("settingsButton");
@@ -426,6 +427,17 @@ siteTextLanguageSelect?.addEventListener("change", () => {
 
   if (currentView === "faq") {
     loadFaqView();
+    return;
+  }
+
+  if (currentView === "about") {
+    loadAboutView();
+    return;
+  }
+
+  if (currentView === "privacy") {
+    loadPrivacyView();
+    return;
   }
 
 });
@@ -660,6 +672,19 @@ toolsButton?.addEventListener(
 faqButton?.addEventListener(
   "click",
   () => loadFaqView()
+);
+
+contactButton?.addEventListener(
+  "click",
+  () => {
+    settingsMenu?.classList.add("settings-hidden");
+
+    window.open(
+      "https://docs.google.com/forms/d/e/1FAIpQLSeDkW65qI07FFzP3oczawUR3AIp-9tOAfRmSEpavrLipZHS1w/viewform?usp=header",
+      "_blank",
+      "noopener"
+    );
+  }
 );
 
 const params = new URLSearchParams(window.location.search);
@@ -1433,7 +1458,17 @@ function loadView(view) {
   if (view === "muted") {
     loadMutedPlayersView();
     return;
-}
+    }
+
+  if (view === "about") {
+    loadAboutView();
+    return;
+  }
+
+  if (view === "privacy") {
+    loadPrivacyView();
+    return;
+  }
 
   loadLiveView("new");
   

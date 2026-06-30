@@ -9,7 +9,7 @@ function buildGoatsShareText_(players) {
 return [
   `私のヤギ、 ${names}`,
   "",
-  "https://ow-kitsune-guide.pages.dev/",
+  "https://owkitsune.com/",
   "#OWCS #Overwatch #OWKitsuneGuide"
 ].join("\n");
 }
@@ -264,7 +264,7 @@ function buildSiteShareText_() {
     "Live streams, videos, clips and links from Overwatch pro players.",
     "Track Twitch, CHZZK, SOOP, Bilibili, YouTube, birthdays and player links in one place.",
     "",
-    "https://ow-kitsune-guide.pages.dev/",
+    "https://owkitsune.com/",
     "",
     "#OWCS #Overwatch #OWKitsuneGuide"
   ].join("\n");
