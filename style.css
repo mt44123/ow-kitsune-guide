@@ -1035,7 +1035,7 @@ color:var(--accent-text);
   width:36px;
   height:36px;
 
-  display:flex;
+  display:inline-flex;
   align-items:center;
   justify-content:center;
 
@@ -1049,14 +1049,18 @@ color:var(--accent-text);
   padding:0;
   margin-top:var(--space-md);
 
-  transition:var(--transition-fast);
+  flex:0 0 36px;
 }
 
 .tools-link .settings-button-icon{
   display:block;
   width:22px;
   height:22px;
-  flex-shrink:0;
+  min-width:22px;
+  min-height:22px;
+  max-width:22px;
+  max-height:22px;
+  color:currentColor;
 }
 
 .settings-title-icon{
