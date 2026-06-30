@@ -213,25 +213,6 @@ async function shareGoatsImageHype_() {
     roundRect_(ctx, x + 2, y + 2, columnWidth - 4, cardHeight - 4, 12);
     ctx.stroke();
 
-    ctx.save();
-
-    ctx.fillStyle="#ffffff";
-
-    ctx.shadowColor=regionColor;
-    ctx.shadowBlur=22;
-
-    const s=6;
-
-    // 左上
-    ctx.fillRect(x-1,y-1,s,2);
-    ctx.fillRect(x-1,y-1,2,s);
-
-    // 右下
-    ctx.fillRect(x+columnWidth-s+1,y+cardHeight-1,s,2);
-    ctx.fillRect(x+columnWidth-1,y+cardHeight-s+1,2,s);
-
-    ctx.restore();
-
     // logo
     if (logo) {
       ctx.save();
