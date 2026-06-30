@@ -151,27 +151,6 @@ async function shareGoatsImageHype_() {
     roundRect_(ctx, x, y, columnWidth, cardHeight, 14);
     ctx.fill();
 
-    ctx.save();
-
-    ctx.globalAlpha=.06;
-
-    ctx.strokeStyle="#ffffff";
-    ctx.lineWidth=1;
-
-    for(let i=-cardHeight;i<columnWidth;i+=18){
-
-    ctx.beginPath();
-
-    ctx.moveTo(x+i,y);
-
-    ctx.lineTo(x+i+cardHeight,y+cardHeight);
-
-    ctx.stroke();
-
-    }
-
-    ctx.restore();
-
     // inner dark layer
     ctx.fillStyle="rgba(0,0,0,.38)";
     roundRect_(ctx, x + 2, y + 2, columnWidth - 4, cardHeight - 4, 12);
@@ -210,6 +189,22 @@ async function shareGoatsImageHype_() {
     ctx.fillStyle=centerShadow;
     roundRect_(ctx,x,y,columnWidth,cardHeight,14);
     ctx.fill();
+
+    ctx.save();
+
+    ctx.globalAlpha=.08;
+
+    ctx.strokeStyle="#ffffff";
+    ctx.lineWidth=1;
+
+    for(let i=-cardHeight;i<columnWidth;i+=18){
+      ctx.beginPath();
+      ctx.moveTo(x+i,y);
+      ctx.lineTo(x+i+cardHeight,y+cardHeight);
+      ctx.stroke();
+    }
+
+    ctx.restore();
 
     // sharp border
     ctx.strokeStyle = hexToRgba_(regionColor, 0.9);
