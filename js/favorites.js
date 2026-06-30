@@ -254,6 +254,10 @@ document.addEventListener("click", e => {
       shareGoatsImage_();
     }
 
+    if (type === "hype") {
+      shareGoatsImageHype_();
+    }
+
     return;
   }
 
