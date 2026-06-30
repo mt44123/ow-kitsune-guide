@@ -205,43 +205,6 @@ function showGoatsShareModal_(blob, shareText, options = {}) {
     .querySelector(".goats-share-modal-close")
     .addEventListener("click", close);
 
-  modal
-    .querySelector("[data-goats-share]")
-    .addEventListener("click", async () => {
-
-      const file = new File(
-        [blob],
-        fileName,
-        {
-          type: "image/png"
-        }
-      );
-
-      if (
-        navigator.canShare &&
-        navigator.canShare({ files: [file] })
-      ) {
-        try {
-
-          await navigator.share({
-            title: shareTitle,
-            text: shareText,
-            files: [file]
-          });
-
-          close();
-
-        } catch (e) {}
-      } else {
-
-        alert(
-          "Windows Share is not available in this browser."
-        );
-
-      }
-
-    });
-
     modal
       .querySelector("[data-goats-download-x]")
       .addEventListener("click", async () => {
