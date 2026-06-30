@@ -931,24 +931,23 @@ color:var(--accent-text);
 .filters-toggle{
 
   width:100%;
-  margin:8px 0;
+  margin:4px 0 8px;
 
   display:flex;
   align-items:center;
   justify-content:center;
-
   gap:6px;
 
-  height:38px;
+  height:30px;
 
-  border:1px solid var(--border);
-  border-radius:10px;
+  background:transparent;
 
-  background:var(--bg-main);
+  border:none;
 
-  color:var(--text-sub);
+  color:var(--text-muted);
 
-  font-weight:700;
+  font-size:13px;
+  font-weight:600;
 
   cursor:pointer;
 
@@ -956,8 +955,7 @@ color:var(--accent-text);
 }
 
 .filters-toggle:hover{
-  color:var(--accent);
-  border-color:var(--accent);
+  color:var(--text-main);
 }
 
 .filters-panel{
