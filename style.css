@@ -2781,11 +2781,10 @@ color:var(--text-main);
   align-items:center;
   justify-content:center;
 
-  min-width:72px;
-  height:36px;
-  min-height:unset;
+  min-width:64px;
+  height:32px;
 
-  padding:0 12px;
+  padding:0 10px;
 
   background:var(--button-bg);
   color:var(--text-main);
@@ -2793,7 +2792,7 @@ color:var(--text-main);
   border:none;
   border-radius:var(--radius-sm);
 
-  font-size:13px;
+  font-size:12px;
   font-weight:700;
   line-height:1;
 
