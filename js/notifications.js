@@ -28,41 +28,43 @@ function notifyIcon_(type) {
 function updateNotifyButton_() {
   if (!notifyButton) return;
 
+  let iconType = "off";
+  let title = siteText_("Live Notifications", "ライブ通知");
+  let desc = siteText_(
+    "Experimental. See FAQ for details.",
+    "実験的な機能です。詳細はFAQをご確認ください。"
+  );
+  let value = "OFF";
+
   if (!("Notification" in window)) {
-    notifyButton.innerHTML = `
-      <span>❌</span>
-      <span>${siteText_("Notifications: Unsupported", "通知: 非対応")}</span>
-    `;
-    return;
-  }
-
-  if (Notification.permission === "denied") {
-    notifyButton.innerHTML = `
-      <span>🚫</span>
-      <span>${siteText_("Notifications: Blocked", "通知: ブロック中")}</span>
-    `;
-    return;
-  }
-
-  if (liveNotificationMode === "goats") {
-    notifyButton.innerHTML = `
-      ${notifyIcon_("goats")}
-      <span>${siteText_("Live Notifications", "ライブ通知")}: MY GOATS</span>
-    `;
-    return;
-  }
-
-  if (liveNotificationMode === "all") {
-    notifyButton.innerHTML = `
-      ${notifyIcon_("all")}
-      <span>${siteText_("Live Notifications", "ライブ通知")}: ALL</span>
-    `;
-    return;
+    iconType = "off";
+    title = siteText_("Notifications", "通知");
+    value = siteText_("Unsupported", "非対応");
+  } else if (Notification.permission === "denied") {
+    iconType = "off";
+    title = siteText_("Notifications", "通知");
+    value = siteText_("Blocked", "ブロック中");
+  } else if (liveNotificationMode === "goats") {
+    iconType = "goats";
+    value = "MY GOATS";
+  } else if (liveNotificationMode === "all") {
+    iconType = "all";
+    value = "ALL";
   }
 
   notifyButton.innerHTML = `
-    ${notifyIcon_("off")}
-    <span>${siteText_("Live Notifications", "ライブ通知")}: OFF</span>
+    <span class="settings-row-icon">
+      ${notifyIcon_(iconType)}
+    </span>
+
+    <span class="settings-row-main">
+      <span class="settings-row-title">${title}</span>
+      <span class="settings-row-desc">${desc}</span>
+    </span>
+
+    <span class="settings-row-value">
+      ${value}
+    </span>
   `;
 }
 
