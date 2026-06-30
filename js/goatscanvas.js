@@ -55,7 +55,7 @@ async function shareGoatsImage_() {
   const fontTitle = "'Jura', sans-serif";
   const fontBody = "Arial, sans-serif";
 
-  const useTwoColumns = players.length > 4;
+  const useTwoColumns = players.length >= 4;
 
   const rows = Math.ceil(
     players.length / (useTwoColumns ? 2 : 1)
@@ -291,9 +291,18 @@ async function shareGoatsImage_() {
       const w = logo.width * scale;
       const h = logo.height * scale;
 
+      // ロゴ表示エリア（右側固定）
+      const logoAreaWidth = 90;
+      const logoAreaRight = x + columnWidth - 18;
+
+      // エリア内で中央配置
+      const logoX =
+        logoAreaRight - logoAreaWidth +
+        (logoAreaWidth - w) / 2;
+
       ctx.drawImage(
         logo,
-        x + columnWidth - 18 - w,
+        logoX,
         y + (cardHeight - h) / 2,
         w,
         h
