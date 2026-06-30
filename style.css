@@ -1197,6 +1197,30 @@ display:-webkit-box;
   flex-shrink:0;
   color: var(--text-muted);
 }
+
+.card{
+  position:relative;
+  overflow:hidden;
+}
+
+.card-team-watermark{
+  position:absolute;
+  right:18px;
+  bottom:14px;
+  width:92px;
+  max-height:72px;
+  object-fit:contain;
+  opacity:.16;
+  pointer-events:none;
+  z-index:0;
+}
+
+.card > *:not(.card-team-watermark){
+  position:relative;
+  z-index:1;
+}
+
+
 /* =========================================================
    8. YOUTUBE
    ========================================================= */
