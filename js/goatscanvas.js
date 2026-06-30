@@ -844,6 +844,8 @@ function getTeamLogoPath_(team, useLightTheme = true) {
   const lightLogoTeams = [
     "99DIVINE",    
     "Disguised",
+    "9z Team",    
+    "Nyam Gaming",
     "Four Angry Men",
     "HUNENG Gaming",
     "LuneX Gaming",
