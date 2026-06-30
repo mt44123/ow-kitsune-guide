@@ -143,16 +143,37 @@ async function shareGoatsImageHype_() {
 
     // card base
     const cardGradient = ctx.createLinearGradient(x, y, x + columnWidth, y + cardHeight);
-    cardGradient.addColorStop(0, "rgba(255,255,255,.08)");
-    cardGradient.addColorStop(0.42, "rgba(255,255,255,.025)");
-    cardGradient.addColorStop(1, hexToRgba_(regionColor, 0.16));
+    cardGradient.addColorStop(0, "rgba(255,255,255,.035)");
+    cardGradient.addColorStop(0.35, "rgba(255,255,255,.01)");
+    cardGradient.addColorStop(1, hexToRgba_(regionColor, 0.10));
 
     ctx.fillStyle = cardGradient;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 14);
     ctx.fill();
 
+    ctx.save();
+
+    ctx.globalAlpha=.06;
+
+    ctx.strokeStyle="#ffffff";
+    ctx.lineWidth=1;
+
+    for(let i=-cardHeight;i<columnWidth;i+=18){
+
+    ctx.beginPath();
+
+    ctx.moveTo(x+i,y);
+
+    ctx.lineTo(x+i+cardHeight,y+cardHeight);
+
+    ctx.stroke();
+
+    }
+
+    ctx.restore();
+
     // inner dark layer
-    ctx.fillStyle = "rgba(0,0,0,.18)";
+    ctx.fillStyle="rgba(0,0,0,.38)";
     roundRect_(ctx, x + 2, y + 2, columnWidth - 4, cardHeight - 4, 12);
     ctx.fill();
 
@@ -171,6 +192,23 @@ async function shareGoatsImageHype_() {
 
     ctx.fillStyle = regionLight;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 14);
+    ctx.fill();
+
+    const centerShadow = ctx.createRadialGradient(
+      x + columnWidth * 0.45,
+      y + cardHeight * 0.5,
+      20,
+      x + columnWidth * 0.45,
+      y + cardHeight * 0.5,
+      220
+    );
+
+    centerShadow.addColorStop(0,"rgba(0,0,0,.32)");
+    centerShadow.addColorStop(.65,"rgba(0,0,0,.12)");
+    centerShadow.addColorStop(1,"rgba(0,0,0,0)");
+
+    ctx.fillStyle=centerShadow;
+    roundRect_(ctx,x,y,columnWidth,cardHeight,14);
     ctx.fill();
 
     // sharp border
@@ -236,7 +274,7 @@ async function shareGoatsImageHype_() {
         (logoAreaWidth - w) / 2;
 
       ctx.shadowColor = regionColor;
-      ctx.shadowBlur = 14;
+      ctx.shadowBlur=5;
       ctx.globalAlpha = 0.95;
 
       ctx.drawImage(
