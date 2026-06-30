@@ -19,7 +19,6 @@ async function shareGoatsImageHype_() {
   const accent =
     bodyStyle.getPropertyValue("--accent").trim() || "#FE5002";
 
-  const bgMain = "#08111F";
   const bgPanel = "#111C31";
   const textMain = "#FFFFFF";
   const textSub = "rgba(255,255,255,.82)";
@@ -55,12 +54,21 @@ async function shareGoatsImageHype_() {
   canvas.width = width;
   canvas.height = height;
 
-  ctx.fillStyle = bgMain;
+  // Background
+  const bg = ctx.createLinearGradient(
+    0, 0,
+    0, height
+  );
+
+  bg.addColorStop(0, "#0D1016");
+  bg.addColorStop(1, "#090B10");
+
+  ctx.fillStyle = bg;
   ctx.fillRect(0, 0, width, height);
 
   // subtle background depth
-  drawGlow_(ctx, width / 2, 120, 380, accent, 0.10);
-  drawGlow_(ctx, 80, height - 80, 320, "#00C4C4", 0.06);
+  drawGlow_(ctx, width / 2, 120, 420, accent, 0.035);
+  drawGlow_(ctx, width / 2, height / 2, 700, "#FFFFFF", 0.015);
 
   // Header
   ctx.textAlign = "center";
