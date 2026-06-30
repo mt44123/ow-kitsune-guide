@@ -14,6 +14,28 @@ function getTitleLanguageMode_() {
   return localStorage.getItem("titleLanguageMode") || "original";
 }
 
+function getSiteTextLanguageMode_() {
+  return localStorage.getItem("siteTextLanguageMode") || "both";
+}
+
+function siteText_(enHtml, jpHtml) {
+  const mode = getSiteTextLanguageMode_();
+
+  if (mode === "en") {
+    return enHtml;
+  }
+
+  if (mode === "jp") {
+    return jpHtml;
+  }
+
+  return `
+    ${enHtml}
+    <hr>
+    ${jpHtml}
+  `;
+}
+
 function buildMediaTitles_(raw, jp, en, kr) {
   const mode = getTitleLanguageMode_();
 

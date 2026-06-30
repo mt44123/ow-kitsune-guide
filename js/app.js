@@ -261,6 +261,9 @@ const themeSelect = document.getElementById("themeSelect");
 const titleLanguageSelect =
   document.getElementById("titleLanguageSelect");
 
+const siteTextLanguageSelect =
+  document.getElementById("siteTextLanguageSelect");
+
 const filtersToggle =
   document.getElementById("filtersToggle");
 
@@ -373,6 +376,14 @@ if (titleLanguageSelect) {
   titleLanguageSelect.value = titleLanguageMode;
 }
 
+let siteTextLanguageMode =
+  localStorage.getItem("siteTextLanguageMode") || "both";
+
+if (siteTextLanguageSelect) {
+  siteTextLanguageSelect.value =
+    siteTextLanguageMode;
+}
+
 themeSelect?.addEventListener("change", () => {
   currentTheme = themeSelect.value;
 
@@ -396,6 +407,27 @@ titleLanguageSelect?.addEventListener("change", () => {
   } else if (isClipView(currentView)) {
     renderClips(filterClips(currentData));
   }
+});
+
+siteTextLanguageSelect?.addEventListener("change", () => {
+
+  siteTextLanguageMode =
+    siteTextLanguageSelect.value;
+
+  localStorage.setItem(
+    "siteTextLanguageMode",
+    siteTextLanguageMode
+  );
+
+  if (currentView === "toolstips") {
+    loadToolsView();
+    return;
+  }
+
+  if (currentView === "faq") {
+    loadFaqView();
+  }
+
 });
 
 let liveTitleMode =
