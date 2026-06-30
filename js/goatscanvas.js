@@ -345,12 +345,12 @@ async function shareGoatsImage_() {
       ? columnWidth * 2 + columnGap
       : width - padding * 2;
 
-  ctx.fillStyle = accent;
+  ctx.fillStyle = hexToRgba_(accent, 0.8);
   ctx.fillRect(
     footerLineX,
     footerY - 24,
     footerLineWidth,
-    5
+    2
   );
 
   const months = [
@@ -419,7 +419,7 @@ const qrX =
   width - padding - qrSize;
 
 const qrY =
-  footerY - 6;
+  footerY + 8;
 
 const drawQrAndShare = () => {
   ctx.drawImage(
