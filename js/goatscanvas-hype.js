@@ -84,7 +84,19 @@ async function shareGoatsImageHype_() {
 
   ctx.shadowColor = hexToRgba_(accent, 0.9);
   ctx.shadowBlur = 18;
-  ctx.fillStyle = accent;
+  const goatsGradient = ctx.createLinearGradient(
+    titleX,
+    0,
+    titleX + ctx.measureText(goatsText).width,
+    0
+  );
+
+  goatsGradient.addColorStop(0, "#FFD7A3");
+  goatsGradient.addColorStop(.35, "#FFB258");
+  goatsGradient.addColorStop(.75, accent);
+  goatsGradient.addColorStop(1, "#FF6A00");
+
+  ctx.fillStyle = goatsGradient;
   ctx.fillText(goatsText, titleX + ctx.measureText(goatsText).width / 2, 130);
 
   ctx.restore();
@@ -190,22 +202,6 @@ async function shareGoatsImageHype_() {
     roundRect_(ctx,x,y,columnWidth,cardHeight,14);
     ctx.fill();
 
-    ctx.save();
-
-    ctx.globalAlpha=.08;
-
-    ctx.strokeStyle="#ffffff";
-    ctx.lineWidth=1;
-
-    for(let i=-cardHeight;i<columnWidth;i+=18){
-      ctx.beginPath();
-      ctx.moveTo(x+i,y);
-      ctx.lineTo(x+i+cardHeight,y+cardHeight);
-      ctx.stroke();
-    }
-
-    ctx.restore();
-
     // sharp border
     ctx.strokeStyle = hexToRgba_(regionColor, 0.9);
     ctx.lineWidth = 1.4;
@@ -217,32 +213,22 @@ async function shareGoatsImageHype_() {
     roundRect_(ctx, x + 2, y + 2, columnWidth - 4, cardHeight - 4, 12);
     ctx.stroke();
 
-    // subtle corner highlights
     ctx.save();
 
-    ctx.strokeStyle = hexToRgba_(regionColor, 0.95);
-    ctx.lineWidth = 3;
-    ctx.lineCap = "round";
-    ctx.shadowColor = regionColor;
-    ctx.shadowBlur = 16;
+    ctx.fillStyle="#ffffff";
 
-    // top-left short glow
-    ctx.beginPath();
-    ctx.moveTo(x + 18, y);
-    ctx.lineTo(x + 64, y);
-    ctx.stroke();
+    ctx.shadowColor=regionColor;
+    ctx.shadowBlur=22;
 
-    // bottom-right short glow
-    ctx.beginPath();
-    ctx.moveTo(x + columnWidth - 64, y + cardHeight);
-    ctx.lineTo(x + columnWidth - 18, y + cardHeight);
-    ctx.stroke();
+    const s=6;
 
-    // right edge small glow
-    ctx.beginPath();
-    ctx.moveTo(x + columnWidth, y + cardHeight - 46);
-    ctx.lineTo(x + columnWidth, y + cardHeight - 18);
-    ctx.stroke();
+    // 左上
+    ctx.fillRect(x-1,y-1,s,2);
+    ctx.fillRect(x-1,y-1,2,s);
+
+    // 右下
+    ctx.fillRect(x+columnWidth-s+1,y+cardHeight-1,s,2);
+    ctx.fillRect(x+columnWidth-1,y+cardHeight-s+1,2,s);
 
     ctx.restore();
 
