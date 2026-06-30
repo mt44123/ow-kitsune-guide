@@ -1110,21 +1110,24 @@ color:var(--accent-text);
 }
 
 .settings-section{
-  margin-top:14px;
+  margin-top:18px;
+
+  padding-top:6px;
 }
 
 .settings-section:first-of-type{
   margin-top:0;
+  padding-top:0;
 }
 
 .settings-section-title{
   margin:0 0 8px;
 
-  color:var(--text-muted);
+  color:var(--text-sub);
 
-  font-size:11px;
+  font-size:12px;
   font-weight:700;
-  letter-spacing:.08em;
+  letter-spacing:.10em;
   text-transform:uppercase;
 }
 
@@ -1134,8 +1137,8 @@ color:var(--accent-text);
   gap:12px;
 
   width:100%;
+  min-height:44px;
 
-  min-height:42px;
   padding:8px 10px;
 
   background:transparent;
@@ -1151,6 +1154,10 @@ color:var(--accent-text);
 
 .settings-row:hover{
   background:var(--bg-main);
+}
+
+.settings-section .settings-row + .settings-row{
+  border-top:1px solid var(--border);
 }
 
 .settings-row-icon{
