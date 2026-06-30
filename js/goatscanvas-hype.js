@@ -29,7 +29,7 @@ async function shareGoatsImageHype_() {
   const ctx = canvas.getContext("2d");
 
   const qr = new Image();
-  qr.src = "./icons/qr.svg";
+  qr.src = "./icons/qr.png";
 
   const width = 1200;
   const padding = 56;
@@ -100,12 +100,6 @@ async function shareGoatsImageHype_() {
   ctx.save();
   ctx.strokeStyle = hexToRgba_(accent, 0.8);
   ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(width / 2 - 116, 210);
-  ctx.lineTo(width / 2 - 48, 210);
-  ctx.moveTo(width / 2 + 48, 210);
-  ctx.lineTo(width / 2 + 116, 210);
-  ctx.stroke();
 
   ctx.fillStyle = accent;
   ctx.font = `900 28px ${fontBody}`;
