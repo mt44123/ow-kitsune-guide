@@ -140,7 +140,7 @@ async function shareGoatsImage_() {
         : (width - columnWidth) / 2;
 
   players.forEach((p, index) => {
-    const logo = teamLogoCache[getTeamLogoPath_(p.team)];
+    const logo = teamLogoCache[getTeamLogoPath_(p.team, false)];
 
     const column = useTwoColumns ? index % 2 : 0;
     const row = useTwoColumns ? Math.floor(index / 2) : index;
