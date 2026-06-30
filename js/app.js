@@ -258,6 +258,8 @@ const settingsButton =  document.getElementById("settingsButton");
 const settingsMenu =  document.getElementById("settingsMenu");
 
 const themeSelect = document.getElementById("themeSelect");
+const titleLanguageSelect =
+  document.getElementById("titleLanguageSelect");
 
 const filtersToggle =
   document.getElementById("filtersToggle");
@@ -364,12 +366,36 @@ let currentTheme =
 
 applyTheme_(currentTheme);
 
+let titleLanguageMode =
+  localStorage.getItem("titleLanguageMode") || "original";
+
+if (titleLanguageSelect) {
+  titleLanguageSelect.value = titleLanguageMode;
+}
+
 themeSelect?.addEventListener("change", () => {
   currentTheme = themeSelect.value;
 
   localStorage.setItem("theme", currentTheme);
 
   applyTheme_(currentTheme);
+});
+
+titleLanguageSelect?.addEventListener("change", () => {
+  titleLanguageMode = titleLanguageSelect.value;
+
+  localStorage.setItem(
+    "titleLanguageMode",
+    titleLanguageMode
+  );
+
+  if (isLiveView(currentView)) {
+    renderLive(filterPlayers(currentData));
+  } else if (isYoutubeView(currentView)) {
+    renderYoutube(filterYoutube(currentData));
+  } else if (isClipView(currentView)) {
+    renderClips(filterClips(currentData));
+  }
 });
 
 let liveTitleMode =

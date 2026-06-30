@@ -260,6 +260,7 @@ function filterClips(clips) {
       c.rawTitle,
       c.titleJp,
       c.titleEn,
+      c.titleKr,
       c.date
     ].join(" ");
 
@@ -315,14 +316,13 @@ function renderClips(clips) {
       .join("");
 }
 
-
-
 function renderClipCard_(c) {
   const { mainTitle, subTitles } =
     buildMediaTitles_(
       c.rawTitle || c.title || "",
       c.titleJp || "",
-      c.titleEn || ""
+      c.titleEn || "",
+      c.titleKr || ""
     );
 
   const logoPath = getTeamLogoPath_(c.team);

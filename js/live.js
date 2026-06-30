@@ -169,7 +169,10 @@ function filterPlayers(players) {
       p.role,
       p.nationality,
       p.platform,
-      p.title
+      p.rawTitle,
+      p.titleJp,
+      p.titleEn,
+      p.titleKr
     ].join(" ");
 
     return matchesSearch_(haystack, query);
@@ -202,6 +205,13 @@ function renderLive(players) {
 
   app.innerHTML = players.map(p => {
     const logoPath = getTeamLogoPath_(p.team);
+    const { mainTitle, subTitles } =
+      buildMediaTitles_(
+        p.rawTitle || "",
+        p.titleJp || "",
+        p.titleEn || "",
+        p.titleKr || ""
+      );
 
     return `
       <a class="card-link" href="${p.url}" target="_blank" rel="noopener">
@@ -242,7 +252,15 @@ function renderLive(players) {
             </span>
           </div>
 
-          <div class="title">${escapeHtml(p.title || "")}</div>
+          <div class="title">
+            ${escapeHtml(mainTitle)}
+          </div>
+
+          ${subTitles.map(t => `
+            <div class="youtube-subtitle live-subtitle">
+              ${escapeHtml(t)}
+            </div>
+          `).join("")}
 
           ${
             logoPath

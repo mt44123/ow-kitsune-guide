@@ -77,6 +77,7 @@ function filterYoutube(videos) {
       v.rawTitle,
       v.titleJp,
       v.titleEn,
+      v.titleKr,
       v.date
     ].join(" ");
 
@@ -146,7 +147,8 @@ function renderYoutubeCard_(v) {
     buildMediaTitles_(
       v.rawTitle || "",
       v.titleJp || "",
-      v.titleEn || ""
+      v.titleEn || "",
+      v.titleKr || ""
     );
 
     const logoPath = getTeamLogoPath_(v.team);

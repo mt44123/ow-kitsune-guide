@@ -10,31 +10,44 @@ function sortByDateDesc_(items) {
   );
 }
 
-function buildMediaTitles_(raw, jp, en) {
-  let mainTitle = "";
-  const subTitles = [];
+function getTitleLanguageMode_() {
+  return localStorage.getItem("titleLanguageMode") || "original";
+}
 
-  if (jp) {
-    mainTitle = jp;
+function buildMediaTitles_(raw, jp, en, kr) {
+  const mode = getTitleLanguageMode_();
 
-    if (en) {
-      subTitles.push(en);
-    }
+  const clean = value => String(value || "").trim();
 
-    if (raw && raw !== jp && raw !== en) {
-      subTitles.push(raw);
-    }
+  raw = clean(raw);
+  jp = clean(jp);
+  en = clean(en);
+  kr = clean(kr);
 
-  } else {
-    mainTitle = raw || en || "";
+  const unique = items =>
+    items.filter((item, index) =>
+      item && items.indexOf(item) === index
+    );
 
-    if (raw && en && en !== raw) {
-      subTitles.push(en);
-    }
-  }
+  const byMode = {
+    original: [raw],
+
+    en: [en || raw],
+    "en-original": [en || raw, raw],
+
+    jp: [jp || raw],
+    "jp-original": [jp || raw, raw],
+    "jp-en-original": [jp || raw, en, raw],
+
+    kr: [kr || raw],
+    "kr-original": [kr || raw, raw],
+    "kr-en-original": [kr || raw, en, raw]
+  };
+
+  const titles = unique(byMode[mode] || byMode.original);
 
   return {
-    mainTitle,
-    subTitles
+    mainTitle: titles[0] || "",
+    subTitles: titles.slice(1)
   };
 }
