@@ -162,35 +162,23 @@ async function shareGoatsImageHype_() {
     ctx.restore();
 
     // card base
-    const cardGradient = ctx.createLinearGradient(x, y, x + columnWidth, y + cardHeight);
-    cardGradient.addColorStop(0, "rgba(255,255,255,.035)");
-    cardGradient.addColorStop(0.35, "rgba(255,255,255,.01)");
-    cardGradient.addColorStop(1, hexToRgba_(regionColor, 0.10));
+    const cardGradient = ctx.createLinearGradient(
+      x, y,
+      x + columnWidth, y + cardHeight
+    );
+
+    cardGradient.addColorStop(0, "rgba(255,255,255,.11)");
+    cardGradient.addColorStop(0.22, "rgba(255,255,255,.05)");
+    cardGradient.addColorStop(0.55, "rgba(255,255,255,.02)");
+    cardGradient.addColorStop(1, "rgba(255,255,255,.015)");
 
     ctx.fillStyle = cardGradient;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 14);
     ctx.fill();
 
     // inner dark layer
-    ctx.fillStyle="rgba(0,0,0,.38)";
+    ctx.fillStyle = "rgba(5,8,12,.12)";
     roundRect_(ctx, x + 2, y + 2, columnWidth - 4, cardHeight - 4, 12);
-    ctx.fill();
-
-    // region light wash
-    const regionLight = ctx.createRadialGradient(
-      x + columnWidth,
-      y + cardHeight / 2,
-      0,
-      x + columnWidth,
-      y + cardHeight / 2,
-      210
-    );
-    regionLight.addColorStop(0, hexToRgba_(regionColor, 0.46));
-    regionLight.addColorStop(0.45, hexToRgba_(regionColor, 0.12));
-    regionLight.addColorStop(1, hexToRgba_(regionColor, 0));
-
-    ctx.fillStyle = regionLight;
-    roundRect_(ctx, x, y, columnWidth, cardHeight, 14);
     ctx.fill();
 
     const centerShadow = ctx.createRadialGradient(
@@ -208,6 +196,59 @@ async function shareGoatsImageHype_() {
 
     ctx.fillStyle=centerShadow;
     roundRect_(ctx,x,y,columnWidth,cardHeight,14);
+    ctx.fill();
+
+    const glassOverlay = ctx.createLinearGradient(
+      x,
+      y,
+      x,
+      y + cardHeight
+    );
+
+    glassOverlay.addColorStop(0, "rgba(255,255,255,.08)");
+    glassOverlay.addColorStop(0.25, "rgba(255,255,255,.02)");
+    glassOverlay.addColorStop(0.75, "rgba(255,255,255,0)");
+    glassOverlay.addColorStop(1, "rgba(0,0,0,.08)");
+
+    ctx.fillStyle = glassOverlay;
+
+    roundRect_(
+      ctx,
+      x + 2,
+      y + 2,
+      columnWidth - 4,
+      cardHeight - 4,
+      12
+    );
+
+    ctx.fill();
+
+    // region light wash
+    const regionLight = ctx.createRadialGradient(
+      x + columnWidth,
+      y + cardHeight / 2,
+      0,
+      x + columnWidth,
+      y + cardHeight / 2,
+      210
+    );
+    regionLight.addColorStop(
+        0,
+        hexToRgba_(regionColor,0.20)
+    );
+
+    regionLight.addColorStop(
+        0.28,
+        hexToRgba_(regionColor,0.05)
+    );
+
+    regionLight.addColorStop(
+        1,
+        hexToRgba_(regionColor,0)
+    );
+
+    ctx.fillStyle = regionLight;
+    roundRect_(ctx, x, y, columnWidth, cardHeight, 14);
     ctx.fill();
 
     // sharp border
