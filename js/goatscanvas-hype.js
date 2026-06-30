@@ -42,8 +42,8 @@ async function shareGoatsImageHype_() {
   const columnWidth = 530;
   const columnGap = 36;
 
-  const cardHeight = 112;
-  const cardGap = 22;
+  const cardHeight = 128;
+  const cardGap = 24;
   const headerHeight = 290;
   const footerHeight = 170;
 
@@ -190,12 +190,67 @@ async function shareGoatsImageHype_() {
     roundRect_(ctx, x + 2, y + 2, columnWidth - 4, cardHeight - 4, 12);
     ctx.stroke();
 
+    // bright corner sparks
+    ctx.save();
+
+    ctx.strokeStyle = hexToRgba_(regionColor, 0.95);
+    ctx.lineWidth = 3;
+    ctx.lineCap = "round";
+    ctx.shadowColor = regionColor;
+    ctx.shadowBlur = 14;
+
+    // top-left
+    ctx.beginPath();
+    ctx.moveTo(x + 18, y);
+    ctx.lineTo(x + 58, y);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(x, y + 18);
+    ctx.lineTo(x, y + 48);
+    ctx.stroke();
+
+    // top-right
+    ctx.beginPath();
+    ctx.moveTo(x + columnWidth - 58, y);
+    ctx.lineTo(x + columnWidth - 18, y);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(x + columnWidth, y + 18);
+    ctx.lineTo(x + columnWidth, y + 48);
+    ctx.stroke();
+
+    // bottom-right
+    ctx.beginPath();
+    ctx.moveTo(x + columnWidth - 58, y + cardHeight);
+    ctx.lineTo(x + columnWidth - 18, y + cardHeight);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(x + columnWidth, y + cardHeight - 48);
+    ctx.lineTo(x + columnWidth, y + cardHeight - 18);
+    ctx.stroke();
+
+    // bottom-left
+    ctx.beginPath();
+    ctx.moveTo(x + 18, y + cardHeight);
+    ctx.lineTo(x + 58, y + cardHeight);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(x, y + cardHeight - 48);
+    ctx.lineTo(x, y + cardHeight - 18);
+    ctx.stroke();
+
+    ctx.restore();
+
     // logo
     if (logo) {
       ctx.save();
 
-      const maxWidth = 88;
-      const maxHeight = 74;
+      const maxWidth = 96;
+      const maxHeight = 84;
 
       const scale = Math.min(
         maxWidth / logo.width,
@@ -230,14 +285,14 @@ async function shareGoatsImageHype_() {
     // text
     const name = p.name || "";
     const nameFontSize =
-      useTwoColumns && name.length > 14 ? 28 : 34;
+      seTwoColumns && name.length > 14 ? 32 : 40;
 
     ctx.save();
     ctx.shadowColor = hexToRgba_(regionColor, 0.8);
     ctx.shadowBlur = 8;
     ctx.fillStyle = textMain;
     ctx.font = `900 ${nameFontSize}px ${fontTitle}`;
-    ctx.fillText(name, x + 34, y + 46, columnWidth - 150);
+    ctx.fillText(name, x + 34, y + 54, columnWidth - 150);
     ctx.restore();
 
     const meta = [
@@ -248,7 +303,7 @@ async function shareGoatsImageHype_() {
 
     ctx.fillStyle = textSub;
     ctx.font = `700 18px ${fontBody}`;
-    ctx.fillText(meta, x + 34, y + 78, columnWidth - 150);
+    ctx.fillText(meta, x + 34, y + 92, columnWidth - 150);
   });
 
   // Footer
