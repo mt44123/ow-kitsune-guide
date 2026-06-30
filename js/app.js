@@ -1023,19 +1023,32 @@ function updateNavState(view) {
   const showFilters =
     isLiveView(view) ||
     isYoutubeView(view) ||
-    isClipView(view);
+    isClipView(view) ||
+    isPlayerView(view);
 
   if (filtersToggle) {
     filtersToggle.style.display =
-      showFilters ? "" : "none";
+      isLiveView(view) ||
+      isYoutubeView(view) ||
+      isClipView(view)
+        ? ""
+        : "none";
   }
 
   if (filtersPanel) {
     filtersPanel.style.display =
       showFilters ? "" : "none";
+
+    if (isPlayerView(view)) {
+      filtersPanel.classList.remove("filters-collapsed");
+    }
   }
 
-  if (showFilters) {
+  if (
+    isLiveView(view) ||
+    isYoutubeView(view) ||
+    isClipView(view)
+  ) {
     applyFiltersExpanded_();
   }
 }
