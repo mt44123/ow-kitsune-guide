@@ -73,7 +73,7 @@ function renderLiquipediaNote_() {
       )}
 
       <details class="playerlinks-help">
-        <summary>${siteText_("More Info", "詳細")}</summary>
+        <summary>More Info</summary>
 
         ${siteText_(
           `<p>*DC links are Discord server home pages, not invite links.</p>`,
