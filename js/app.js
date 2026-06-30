@@ -1135,13 +1135,23 @@ function switchSwipeView_(direction) {
   if (isLiveView(currentView)) {
     renderLiveFromCache(currentView);
   } else if (isYoutubeView(currentView)) {
-    currentData = filterYoutubeView(youtubeCache || [], currentView);
+    if (!youtubeCache) {
+      loadView(currentView);
+      return;
+    }
+
+    currentData = filterYoutubeView(youtubeCache, currentView);
     renderYoutube(filterYoutube(currentData));
   } else if (isClipView(currentView)) {
     const source = getClipSource_(currentView);
     const cached = clipCache[source.cacheKey];
 
-    currentData = filterClipView(cached?.data || [], currentView);
+    if (!cached?.data) {
+      loadView(currentView);
+      return;
+    }
+
+    currentData = filterClipView(cached.data, currentView);
     renderClips(filterClips(currentData));
   } else {
     loadView(currentView);
