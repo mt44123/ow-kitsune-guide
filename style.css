@@ -2812,6 +2812,36 @@ color:var(--text-sub);
   text-decoration:underline;
 }
 
+#app.swipe-left{
+  animation: swipeSlideLeft .18s ease-out;
+}
+
+#app.swipe-right{
+  animation: swipeSlideRight .18s ease-out;
+}
+
+@keyframes swipeSlideLeft{
+  from{
+    transform:translateX(28px);
+    opacity:.45;
+  }
+  to{
+    transform:translateX(0);
+    opacity:1;
+  }
+}
+
+@keyframes swipeSlideRight{
+  from{
+    transform:translateX(-28px);
+    opacity:.45;
+  }
+  to{
+    transform:translateX(0);
+    opacity:1;
+  }
+}
+
 /* =========================================================
    16. RESPONSIVE
    ========================================================= */

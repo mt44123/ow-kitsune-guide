@@ -1083,7 +1083,38 @@ function switchSwipeView_(direction) {
 
   history.replaceState({}, "", "?view=" + currentView);
 
+  app.classList.remove("swipe-left", "swipe-right");
+
+  void app.offsetWidth;
+
+  app.classList.add(
+    direction === "left"
+      ? "swipe-left"
+      : "swipe-right"
+  );
+
   updateNavState(currentView);
+
+  if (isLiveView(currentView)) {
+    renderLiveFromCache(currentView);
+    return;
+  }
+
+  if (isYoutubeView(currentView)) {
+    currentData = filterYoutubeView(youtubeCache || [], currentView);
+    renderYoutube(filterYoutube(currentData));
+    return;
+  }
+
+  if (isClipView(currentView)) {
+    const source = getClipSource_(currentView);
+    const cached = clipCache[source.cacheKey];
+
+    currentData = filterClipView(cached?.data || [], currentView);
+    renderClips(filterClips(currentData));
+    return;
+  }
+
   loadView(currentView);
 }
 
