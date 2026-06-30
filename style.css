@@ -2118,18 +2118,25 @@ grid-column:1 / -1;
   display:flex;
   align-items:center;
   justify-content:center;
-  height:72px;
+  height:84px;
   margin-bottom:10px;
 }
 
 .team-card-logo{
-  max-width:92px;
-  max-height:64px;
+  max-width:120px;
+  max-height:76px;
   width:auto;
   height:auto;
   object-fit:contain;
   opacity:.9;
   pointer-events:none;
+}
+
+body.theme-light .team-card-logo{
+  filter:
+    invert(1)
+    brightness(.8)
+    contrast(1.2);
 }
 
 /* =========================================================
