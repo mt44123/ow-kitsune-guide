@@ -1,13 +1,17 @@
 const teamLogoCache = {};
 
 function buildGoatsShareText_(players) {
-  return [
-    "私のヤギ",
-    "",
-    "https://ow-kitsune-guide.pages.dev/",
-    "",
-    "#OWCS #Overwatch #OWKitsuneGuide"
-  ].join("\n");
+
+  const names = players
+    .map(p => p.name)
+    .join(" / ");
+
+return [
+  `私のヤギ、 ${names}`,
+  "",
+  "https://ow-kitsune-guide.pages.dev/",
+  "#OWCS #Overwatch #OWKitsuneGuide"
+].join("\n");
 }
 
 function getCanvasRegionLabel_(nationality) {
@@ -173,6 +177,11 @@ function showGoatsShareModal_(blob, shareText, options = {}) {
         class="goats-share-text"
         readonly
       >${escapeHtml(shareText)}</textarea>
+
+      <p class="goats-share-help">
+        PC: Downloaded PNG will be saved. Drag it into the X post window to attach it.<br>
+        PC：PNGが保存されます。開いたXの投稿画面に画像をドラッグして添付してください。
+      </p>
 
       <div class="goats-share-actions">
 

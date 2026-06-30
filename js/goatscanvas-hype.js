@@ -341,7 +341,7 @@ async function shareGoatsImageHype_() {
 
       const file = new File(
         [blob],
-        "ow-kitsune-my-goats-hype.png",
+        "owkg-my-goats.png",
         { type: "image/png" }
       );
 
@@ -364,7 +364,7 @@ async function shareGoatsImageHype_() {
       showGoatsShareModal_(blob, shareText, {
         title: "Share Your GOATs - HYPE",
         shareTitle: "MY GOATS",
-        fileName: "ow-kitsune-my-goats-hype.png"
+        fileName: "owkg-my-goats.png"
       });
 
     }, "image/png");
