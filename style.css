@@ -931,27 +931,44 @@ color:var(--accent-text);
 .filters-toggle{
 
   width:100%;
-  margin:4px 0 8px;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
+  padding:6px 0;
 
-  height:30px;
-
-  background:transparent;
-
+  background:none;
   border:none;
 
   color:var(--text-muted);
 
-  font-size:13px;
-  font-weight:600;
+  font-size:12px;
+  font-weight:700;
+
+  letter-spacing:.08em;
 
   cursor:pointer;
 
-  transition:.18s;
+  position:relative;
+}
+
+.filters-toggle::before,
+.filters-toggle::after{
+  content:"";
+
+  position:absolute;
+  top:50%;
+
+  width:28%;
+
+  height:1px;
+
+  background:var(--border);
+}
+
+.filters-toggle::before{
+  left:0;
+}
+
+.filters-toggle::after{
+  right:0;
 }
 
 .filters-toggle:hover{
