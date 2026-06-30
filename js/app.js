@@ -999,6 +999,7 @@ document
   .querySelectorAll(".sub-nav button")
   .forEach(button => {
     button.addEventListener("click", () => {
+         hideSwipeHint_();
 
       if (button.dataset.roleFilter) {
         currentRoleFilter = button.dataset.roleFilter;
@@ -1040,6 +1041,15 @@ document
 
 updateNavState(currentView);
 
+let swipeHintEl = null;
+
+function hideSwipeHint_() {
+  swipeHintEl?.remove();
+  swipeHintEl = null;
+
+  localStorage.setItem("swipeHintShown", "true");
+}
+
 function showSwipeHintOnce_() {
   if (localStorage.getItem("swipeHintShown") === "true") {
     return;
@@ -1053,17 +1063,11 @@ function showSwipeHintOnce_() {
     return;
   }
 
-  localStorage.setItem("swipeHintShown", "true");
+  swipeHintEl = document.createElement("div");
+  swipeHintEl.className = "swipe-hint";
+  swipeHintEl.textContent = "← Swipe to change filters →";
 
-  const hint = document.createElement("div");
-  hint.className = "swipe-hint";
-  hint.textContent = "← Swipe filters →";
-
-  document.body.appendChild(hint);
-
-  setTimeout(() => {
-    hint.remove();
-  }, 2400);
+  document.body.appendChild(swipeHintEl);
 }
 
 showSwipeHintOnce_();
@@ -1094,6 +1098,9 @@ function getSwipeViews_() {
 }
 
 function switchSwipeView_(direction) {
+
+  hideSwipeHint_();
+
   const views = getSwipeViews_();
   if (!views.length) return;
 

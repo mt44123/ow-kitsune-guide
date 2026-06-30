@@ -986,7 +986,7 @@ color:var(--accent-text);
 .swipe-hint{
   position:fixed;
   left:50%;
-  bottom:22px;
+  bottom:90px;
   transform:translateX(-50%);
 
   padding:8px 12px;
@@ -1000,17 +1000,20 @@ color:var(--accent-text);
   font-weight:700;
 
   z-index:5000;
-  opacity:0;
   pointer-events:none;
 
-  animation:swipeHintFade 2.2s ease forwards;
+  animation:swipeHintIn .18s ease-out;
 }
 
-@keyframes swipeHintFade{
-  0%{ opacity:0; transform:translateX(-50%) translateY(8px); }
-  18%{ opacity:1; transform:translateX(-50%) translateY(0); }
-  75%{ opacity:1; }
-  100%{ opacity:0; }
+@keyframes swipeHintIn{
+  from{
+    opacity:0;
+    transform:translateX(-50%) translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
 }
 
 /* =========================================================
