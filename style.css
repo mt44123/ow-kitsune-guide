@@ -2132,9 +2132,6 @@ grid-column:1 / -1;
   pointer-events:none;
 }
 
-body.light-theme .team-card-logo{
-  filter: invert(1);
-}
 
 /* =========================================================
    12. BIRTHDAYS

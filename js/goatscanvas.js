@@ -140,7 +140,7 @@ async function shareGoatsImage_() {
         : (width - columnWidth) / 2;
 
   players.forEach((p, index) => {
-    const logo = teamLogoCache[p.team];
+    const logo = teamLogoCache[getTeamLogoPath_(p.team)];
 
     const column = useTwoColumns ? index % 2 : 0;
     const row = useTwoColumns ? Math.floor(index / 2) : index;
@@ -831,13 +831,52 @@ document
   });
 
 function getTeamLogoPath_(team) {
+
   const name = String(team || "").trim();
 
   if (!name || name === "No team") return "";
 
-  return "./TeamLogo/" + encodeURIComponent(
-    name.replace(/\s+/g, "_")
-  ) + ".png";
+  const file =
+    encodeURIComponent(
+      name.replace(/\s+/g, "_")
+    );
+
+  const lightLogoTeams = [
+    "99DIVINE",    
+    "Disguised",
+    "Four Angry Men",
+    "HUNENG Gaming",
+    "LuneX Gaming",
+    "MURASH GAMING",
+    "Najdorf Esports",
+    "O2 Blast",
+    "Please Not Hero Ban",
+    "Poker Face",
+    "REVATI",
+    "Team Liquid",
+    "Team Secret",
+    "ZANSIDE GAMING",
+    "ZETA DIVISION",
+  ];
+
+  const isLightTheme =
+    document.body.classList.contains("light-theme") ||
+    document.body.classList.contains("theme-whitered") ||
+    document.body.classList.contains("theme-whiteblue") ||
+    document.body.classList.contains("theme-whitepink") ||
+    document.body.classList.contains("theme-cyanpink") ||
+    document.body.classList.contains("theme-yellowblue") ||
+    document.body.classList.contains("theme-dreampurple") ||
+    document.body.classList.contains("theme-whitegray");
+
+  if (
+    isLightTheme &&
+    lightLogoTeams.includes(name)
+  ) {
+    return `./TeamLogo/${file}_light.png`;
+  }
+
+  return `./TeamLogo/${file}.png`;
 }
 
 async function preloadTeamLogos_(players) {
@@ -846,11 +885,13 @@ async function preloadTeamLogos_(players) {
 
     const team = String(p.team || "");
 
-    if (
-      !team ||
-      team === "No team" ||
-      teamLogoCache[team]
-    ) {
+    if (!team || team === "No team") {
+      return Promise.resolve();
+    }
+
+    const logoPath = getTeamLogoPath_(team);
+
+    if (!logoPath || teamLogoCache[logoPath]) {
       return Promise.resolve();
     }
 
@@ -859,13 +900,13 @@ async function preloadTeamLogos_(players) {
       const img = new Image();
 
       img.onload = () => {
-        teamLogoCache[team] = img;
+        teamLogoCache[logoPath] = img;
         resolve();
       };
 
       img.onerror = () => resolve();
 
-      img.src = getTeamLogoPath_(team);
+      img.src = logoPath;
 
     });
 
