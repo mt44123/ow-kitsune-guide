@@ -31,7 +31,7 @@ function updateNotifyButton_() {
   if (!("Notification" in window)) {
     notifyButton.innerHTML = `
       <span>❌</span>
-      <span>Notifications: Unsupported</span>
+      <span>${siteText_("Notifications: Unsupported", "通知: 非対応")}</span>
     `;
     return;
   }
@@ -39,7 +39,7 @@ function updateNotifyButton_() {
   if (Notification.permission === "denied") {
     notifyButton.innerHTML = `
       <span>🚫</span>
-      <span>Notifications: Blocked</span>
+      <span>${siteText_("Notifications: Blocked", "通知: ブロック中")}</span>
     `;
     return;
   }
@@ -47,7 +47,7 @@ function updateNotifyButton_() {
   if (liveNotificationMode === "goats") {
     notifyButton.innerHTML = `
       ${notifyIcon_("goats")}
-      <span>Live Notifications: MY GOATS</span>
+      <span>${siteText_("Live Notifications", "ライブ通知")}: MY GOATS</span>
     `;
     return;
   }
@@ -55,14 +55,14 @@ function updateNotifyButton_() {
   if (liveNotificationMode === "all") {
     notifyButton.innerHTML = `
       ${notifyIcon_("all")}
-      <span>Live Notifications: ALL</span>
+      <span>${siteText_("Live Notifications", "ライブ通知")}: ALL</span>
     `;
     return;
   }
 
   notifyButton.innerHTML = `
     ${notifyIcon_("off")}
-    <span>Live Notifications: OFF</span>
+    <span>${siteText_("Live Notifications", "ライブ通知")}: OFF</span>
   `;
 }
 
@@ -73,7 +73,12 @@ notifyButton?.addEventListener(
   async () => {
 
     if (!("Notification" in window)) {
-      alert("Notifications are not supported.");
+      alert(
+        siteText_(
+          "Notifications are not supported.",
+          "このブラウザは通知に対応していません。"
+        )
+      );
       return;
     }
 
@@ -113,8 +118,8 @@ notifyButton?.addEventListener(
         {
           body:
             liveNotificationMode === "goats"
-              ? "Live notifications: MY GOATS"
-              : "Live notifications: ALL",
+              ? siteText_("Live notifications: MY GOATS", "ライブ通知: MY GOATS")
+              : siteText_("Live notifications: ALL", "ライブ通知: ALL"),
           icon: "./icons/icon-192.png"
         }
       );
@@ -175,11 +180,23 @@ function checkLiveNotifications_(players){
 
     if (!wasLive && isLive){
 
+      const { mainTitle, subTitles } =
+        buildMediaTitles_(
+          p.rawTitle || "",
+          p.titleJp || "",
+          p.titleEn || "",
+          p.titleKr || ""
+        );
+
       new Notification(
         `🔴 ${p.name} is LIVE`,
         {
-          body:
-            `${p.platform || ""}\n${p.title || p.titleJp || p.titleEn || ""}`,
+         body:
+            [
+              p.platform || "",
+              mainTitle,
+              ...subTitles
+            ].filter(Boolean).join("\n"),
           icon: "./icons/icon-192.png"
         }
       );
