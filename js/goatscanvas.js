@@ -1,4 +1,6 @@
-function shareGoatsImage_() {
+const teamLogoCache = {};
+
+async function shareGoatsImage_() {
   const favNames = getFavorites_();
 
   if (!favNames.length) return;
@@ -18,6 +20,8 @@ function shareGoatsImage_() {
       { sensitivity: "base" }
     )
   );
+
+  await preloadTeamLogos_(players);
 
   const shareText = buildGoatsShareText_(players);
 
@@ -136,6 +140,8 @@ function shareGoatsImage_() {
         : (width - columnWidth) / 2;
 
   players.forEach((p, index) => {
+    const logo = teamLogoCache[p.team];
+
     const column = useTwoColumns ? index % 2 : 0;
     const row = useTwoColumns ? Math.floor(index / 2) : index;
 
@@ -277,6 +283,23 @@ function shareGoatsImage_() {
   drawCornerGlow_(ctx, x + columnWidth - 18, y + cardHeight - 14, 48, "rgba(255,255,255,.10)");
 
   ctx.restore();
+
+      if (logo) {
+
+      ctx.save();
+
+      ctx.globalAlpha = 0.82;
+
+      ctx.drawImage(
+        logo,
+        x + columnWidth - 56,
+        y + 14,
+        40,
+        40
+      );
+
+      ctx.restore();
+    }
 
   // 名前
   const name = p.name || "";
@@ -796,3 +819,47 @@ document
     settingsMenu?.classList.add("settings-hidden");
     shareGoatsImage_();
   });
+
+function getTeamLogoPath_(team) {
+  const name = String(team || "").trim();
+
+  if (!name || name === "No team") return "";
+
+  return "./TeamLogo/" + encodeURIComponent(
+    name.replace(/\s+/g, "_")
+  ) + ".png";
+}
+
+async function preloadTeamLogos_(players) {
+
+  const promises = players.map(p => {
+
+    const team = String(p.team || "");
+
+    if (
+      !team ||
+      team === "No team" ||
+      teamLogoCache[team]
+    ) {
+      return Promise.resolve();
+    }
+
+    return new Promise(resolve => {
+
+      const img = new Image();
+
+      img.onload = () => {
+        teamLogoCache[team] = img;
+        resolve();
+      };
+
+      img.onerror = () => resolve();
+
+      img.src = getTeamLogoPath_(team);
+
+    });
+
+  });
+
+  await Promise.all(promises);
+}
