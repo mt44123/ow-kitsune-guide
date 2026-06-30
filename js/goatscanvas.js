@@ -301,7 +301,7 @@ document
   .getElementById("shareGoatsButton")
   ?.addEventListener("click", () => {
     settingsMenu?.classList.add("settings-hidden");
-    shareGoatsImage_();
+    shareGoatsImageHype_();
   });
 
 function getTeamLogoPath_(team, useLightTheme = true) {
