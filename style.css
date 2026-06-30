@@ -1238,10 +1238,25 @@ display:none;
 }
 
 .short-live-title .title{
-display:-webkit-box;
+  display:-webkit-box;
   -webkit-box-orient:vertical;
   -webkit-line-clamp:1;
   overflow:hidden;
+
+  margin-bottom:2px;
+}
+
+.short-live-title .live-subtitle{
+  display:block;
+
+  margin-top:2px;
+
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+
+  -webkit-line-clamp:unset;
+  -webkit-box-orient:unset;
 }
 
 .live-card,
