@@ -95,9 +95,6 @@ app.innerHTML = `
             <button class="goats-export-button" data-goats-export="share">
               ★Share
             </button>
-              <button class="goats-export-button" data-goats-export="hype">
-              ★Hype
-            </button>
           </div>
         `
         : ""

@@ -251,10 +251,6 @@ document.addEventListener("click", e => {
     }
 
     if (type === "share") {
-      shareGoatsImage_();
-    }
-
-    if (type === "hype") {
       shareGoatsImageHype_();
     }
 
