@@ -2114,6 +2114,19 @@ grid-column:1 / -1;
 .team-card.team-emea{ border-left-color:var(--region-other); }
 .team-card.team-sa{ border-left-color:var(--region-sa); }
 
+.team-card-logo-wrap{
+  display:flex;
+  justify-content:center;
+  margin-bottom:10px;
+}
+
+.team-card-logo{
+  width:46px;
+  height:46px;
+  object-fit:contain;
+  filter:drop-shadow(0 0 10px rgba(255,255,255,.18));
+}
+
 /* =========================================================
    12. BIRTHDAYS
    ========================================================= */
