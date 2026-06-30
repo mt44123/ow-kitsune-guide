@@ -233,18 +233,18 @@ async function shareGoatsImageHype_() {
       210
     );
     regionLight.addColorStop(
-        0,
-        hexToRgba_(regionColor,0.20)
+      0,
+      hexToRgba_(regionColor, 0.46)
     );
 
     regionLight.addColorStop(
-        0.28,
-        hexToRgba_(regionColor,0.05)
+      0.45,
+      hexToRgba_(regionColor, 0.12)
     );
 
     regionLight.addColorStop(
-        1,
-        hexToRgba_(regionColor,0)
+      1,
+      hexToRgba_(regionColor, 0)
     );
 
     ctx.fillStyle = regionLight;
