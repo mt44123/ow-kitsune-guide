@@ -285,7 +285,7 @@ async function shareGoatsImageHype_() {
     // text
     const name = p.name || "";
     const nameFontSize =
-      seTwoColumns && name.length > 14 ? 32 : 40;
+      useTwoColumns && name.length > 14 ? 32 : 40;
 
     ctx.save();
     ctx.shadowColor = hexToRgba_(regionColor, 0.8);
