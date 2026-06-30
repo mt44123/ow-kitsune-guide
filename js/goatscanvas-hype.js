@@ -190,61 +190,6 @@ async function shareGoatsImageHype_() {
     roundRect_(ctx, x + 2, y + 2, columnWidth - 4, cardHeight - 4, 12);
     ctx.stroke();
 
-    // bright corner sparks
-    ctx.save();
-
-    ctx.strokeStyle = hexToRgba_(regionColor, 0.95);
-    ctx.lineWidth = 3;
-    ctx.lineCap = "round";
-    ctx.shadowColor = regionColor;
-    ctx.shadowBlur = 14;
-
-    // top-left
-    ctx.beginPath();
-    ctx.moveTo(x + 18, y);
-    ctx.lineTo(x + 58, y);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(x, y + 18);
-    ctx.lineTo(x, y + 48);
-    ctx.stroke();
-
-    // top-right
-    ctx.beginPath();
-    ctx.moveTo(x + columnWidth - 58, y);
-    ctx.lineTo(x + columnWidth - 18, y);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(x + columnWidth, y + 18);
-    ctx.lineTo(x + columnWidth, y + 48);
-    ctx.stroke();
-
-    // bottom-right
-    ctx.beginPath();
-    ctx.moveTo(x + columnWidth - 58, y + cardHeight);
-    ctx.lineTo(x + columnWidth - 18, y + cardHeight);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(x + columnWidth, y + cardHeight - 48);
-    ctx.lineTo(x + columnWidth, y + cardHeight - 18);
-    ctx.stroke();
-
-    // bottom-left
-    ctx.beginPath();
-    ctx.moveTo(x + 18, y + cardHeight);
-    ctx.lineTo(x + 58, y + cardHeight);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(x, y + cardHeight - 48);
-    ctx.lineTo(x, y + cardHeight - 18);
-    ctx.stroke();
-
-    ctx.restore();
-
     // logo
     if (logo) {
       ctx.save();
