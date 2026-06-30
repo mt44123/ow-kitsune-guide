@@ -650,12 +650,15 @@ font-size:24px;
 }
 
 .footer{
-margin-top:40px;
+  margin-top:40px;
   padding-top:20px;
   border-top:1px solid var(--border);
+
   color:var(--text-muted);
   font-size:12px;
   line-height:1.6;
+
+  text-align:center;
 }
 
 .footer p{
@@ -701,8 +704,9 @@ margin:0;
 }
 
 .footer a{
-color:var(--accent);
+  color:var(--accent);
   text-decoration:none;
+  margin:0 4px;
 }
 
 .footer a:hover{
