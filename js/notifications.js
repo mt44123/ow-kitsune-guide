@@ -55,6 +55,18 @@ notifySelect?.addEventListener(
   async () => {
     const nextMode = notifySelect.value;
 
+    if (nextMode === "off") {
+      liveNotificationMode = "off";
+
+      localStorage.setItem(
+        "liveNotificationMode",
+        liveNotificationMode
+      );
+
+      updateNotifySelect_();
+      return;
+    }
+
     if (!("Notification" in window)) {
       alert(siteText_("Notifications are not supported.", "このブラウザは通知に対応していません。"));
       notifySelect.value = "off";
