@@ -115,7 +115,7 @@ async function shareGoatsImage_() {
   const columnGap = 34;
   const listWidth = width - padding * 2;
 
-  const columnWidth = 500;
+  const columnWidth = 530;
 
     const listLeft =
       useTwoColumns
