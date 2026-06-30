@@ -47,9 +47,6 @@ async function shareGoatsImage_() {
   const qr = new Image();
   qr.src = "./icons/qr.svg";
 
-  const orangeLine = new Image();
-  orangeLine.src = "./icons/orangeline.png";
-
   const width = 1200;
   const padding = 80;
   const fontTitle = "'Jura', sans-serif";
@@ -76,10 +73,6 @@ async function shareGoatsImage_() {
 
   ctx.fillStyle = bgMain;
   ctx.fillRect(0, 0, width, height);
-
-  drawGlow_(ctx, width - 80, 90, 360, accent, 0.20);
-  drawGlow_(ctx, 80, height - 80, 420, accent, 0.14);
-  drawGlow_(ctx, width * 0.5, height * 0.15, 520, accent, 0.07);
 
   ctx.textAlign = "center";
 
@@ -489,40 +482,11 @@ const drawQrAndShare = () => {
   finishShare();
 };
 
-const drawHeaderLine = () => {
-
-  ctx.drawImage(
-    orangeLine,
-    width / 2 - 300,
-    232,
-    600,
-    34
-  );
-
-  if (qr.complete) {
-    drawQrAndShare();
-  } else {
-    qr.onload = drawQrAndShare;
-    qr.onerror = finishShare;
-  }
-};
-
-if (orangeLine.complete) {
-  drawHeaderLine();
+if (qr.complete) {
+  drawQrAndShare();
 } else {
-  orangeLine.onload = drawHeaderLine;
-
-  orangeLine.onerror = () => {
-    console.warn("Orange line could not be loaded.");
-
-    if (qr.complete) {
-      drawQrAndShare();
-    } else {
-      qr.onload = drawQrAndShare;
-      qr.onerror = finishShare;
-    }
-  };
-}
+  qr.onload = drawQrAndShare;
+  qr.onerror = finishShare;
 }
 
 function buildGoatsShareText_(players) {
