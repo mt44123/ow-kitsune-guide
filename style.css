@@ -1238,6 +1238,32 @@ color:var(--accent-text);
 
 }
 
+.settings-icon{
+  display:block;
+  width:18px !important;
+  height:18px !important;
+  max-width:18px !important;
+  max-height:18px !important;
+  flex-shrink:0;
+}
+
+.settings-title-icon{
+  display:block;
+  width:20px !important;
+  height:20px !important;
+  max-width:20px !important;
+  max-height:20px !important;
+  flex-shrink:0;
+}
+
+.settings-button-icon{
+  display:block;
+  width:22px !important;
+  height:22px !important;
+  max-width:22px !important;
+  max-height:22px !important;
+}
+
 /* =========================================================
    6. COMMON CARD
    ========================================================= */
