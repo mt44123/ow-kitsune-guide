@@ -240,7 +240,29 @@ function renderLive(players) {
         </div>
 
         <div class="title">${escapeHtml(p.title || "")}</div>
+
+        ${
+          p.team && p.team !== "No team"
+            ? `<img
+                class="card-team-watermark"
+                src="${getTeamLogoPath_(p.team)}"
+                alt=""
+                loading="lazy"
+              >`
+            : ""
+        }
+        
       </div>
     </a>
   `).join("");
+}
+
+function getTeamLogoPath_(team) {
+  if (!team) return "";
+
+  const fileName = String(team)
+    .trim()
+    .replace(/\s+/g, "_");
+
+  return `./TeamLogo/${encodeURIComponent(fileName)}.png`;
 }
