@@ -425,7 +425,7 @@ async function shareGoatsImage_() {
 
   };
 
-  const qrSize = 84;
+const qrSize = 64;
 
 const qrX =
   width - padding - qrSize;
@@ -434,30 +434,18 @@ const qrY =
   footerY - 6;
 
 const drawQrAndShare = () => {
-  ctx.fillStyle = bgLight;
+
+  ctx.fillStyle = "rgba(255,255,255,.92)";
 
   roundRect_(
     ctx,
-    qrX - 10,
-    qrY - 10,
-    qrSize + 20,
-    qrSize + 40,
-    14
+    qrX - 8,
+    qrY - 8,
+    qrSize + 16,
+    qrSize + 16,
+    10
   );
   ctx.fill();
-
-  ctx.strokeStyle = border;
-  ctx.lineWidth = 1;
-
-  roundRect_(
-    ctx,
-    qrX - 10,
-    qrY - 10,
-    qrSize + 20,
-    qrSize + 40,
-    14
-  );
-  ctx.stroke();
 
   ctx.drawImage(
     qr,
@@ -466,18 +454,6 @@ const drawQrAndShare = () => {
     qrSize,
     qrSize
   );
-
-  ctx.textAlign = "center";
-  ctx.fillStyle = textMuted;
-  ctx.font = `600 15px ${fontBody}`;
-
-  ctx.fillText(
-    "Scan Me",
-    qrX + qrSize / 2,
-    qrY + qrSize + 20
-  );
-
-  ctx.textAlign = "left";
 
   finishShare();
 };
@@ -488,6 +464,7 @@ if (qr.complete) {
   qr.onload = drawQrAndShare;
   qr.onerror = finishShare;
 }
+
 }
 
 function buildGoatsShareText_(players) {
