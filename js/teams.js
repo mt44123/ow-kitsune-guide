@@ -66,29 +66,33 @@ function loadTeamsView() {
 function renderLiquipediaNote_() {
   return `
     <div class="discord-note">
-       <p>
-      *Click player or team names to open Liquipedia.<br>
-      プレイヤー・チーム名をクリックしてLiquipediaを開きます。
-      </p>
-      
+
+      ${siteText_(
+        `<p>*Click player or team names to open Liquipedia.</p>`,
+        `<p>※プレイヤー・チーム名をクリックするとLiquipediaを開きます。</p>`
+      )}
+
       <details class="playerlinks-help">
-        <summary>More Info / 詳細</summary>
-  
-        <p>
-        *DC links are Discord server home pages, not invite links.<br>
-        DCはDiscordサーバーのトップページです（招待リンクではありません）
-        </p>
-  
-        <p>
-        *If the Discord app is installed on your mobile device, the link may only open the app and not navigate to the server.<br>
-        Discordアプリがインストールされている場合、アプリが開くだけでサーバーへ移動しないことがあります。
-        </p>
-        
-        <p>Some player and team information is sourced from Liquipedia.<br>
-        Special thanks to the Liquipedia contributors who help keep esports history alive.<br>
-        一部のプレイヤー情報・チーム情報はLiquipediaを参考にしています。<br>
-        eスポーツの歴史を支えているLiquipedia編集者の皆様に感謝します。</p>
-        </details>
+        <summary>${siteText_("More Info", "詳細")}</summary>
+
+        ${siteText_(
+          `<p>*DC links are Discord server home pages, not invite links.</p>`,
+          `<p>※DCはDiscordサーバーのトップページです（招待リンクではありません）。</p>`
+        )}
+
+        ${siteText_(
+          `<p>*If the Discord app is installed on your mobile device, the link may only open the app and not navigate to the server.</p>`,
+          `<p>※Discordアプリがインストールされている場合、アプリが開くだけでサーバーへ移動しないことがあります。</p>`
+        )}
+
+        ${siteText_(
+          `<p>Some player and team information is sourced from Liquipedia.<br>
+          Special thanks to the Liquipedia contributors who help keep esports history alive.</p>`,
+          `<p>一部のプレイヤー情報・チーム情報はLiquipediaを参考にしています。<br>
+          eスポーツの歴史を支えているLiquipedia編集者の皆様に感謝します。</p>`
+        )}
+
+      </details>
     </div>
   `;
 }
