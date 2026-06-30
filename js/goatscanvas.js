@@ -488,6 +488,7 @@ if (qr.complete) {
   qr.onload = drawQrAndShare;
   qr.onerror = finishShare;
 }
+}
 
 function buildGoatsShareText_(players) {
   return [
