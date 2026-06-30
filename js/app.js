@@ -1069,19 +1069,29 @@ function switchSwipeView_(direction) {
 
   currentView = views[nextIndex];
 
-  if (isLiveView(currentView)) {
-    currentLiveView = currentView;
-  }
-
-  if (isYoutubeView(currentView)) {
-    currentYoutubeView = currentView;
-  }
-
-  if (isClipView(currentView)) {
-    currentClipView = currentView;
-  }
+  if (isLiveView(currentView)) currentLiveView = currentView;
+  if (isYoutubeView(currentView)) currentYoutubeView = currentView;
+  if (isClipView(currentView)) currentClipView = currentView;
 
   history.replaceState({}, "", "?view=" + currentView);
+
+  updateNavState(currentView);
+
+  if (isLiveView(currentView)) {
+    renderLiveFromCache(currentView);
+  } else if (isYoutubeView(currentView)) {
+    currentData = filterYoutubeView(youtubeCache || [], currentView);
+    renderYoutube(filterYoutube(currentData));
+  } else if (isClipView(currentView)) {
+    const source = getClipSource_(currentView);
+    const cached = clipCache[source.cacheKey];
+
+    currentData = filterClipView(cached?.data || [], currentView);
+    renderClips(filterClips(currentData));
+  } else {
+    loadView(currentView);
+    return;
+  }
 
   app.classList.remove("swipe-left", "swipe-right");
 
@@ -1092,30 +1102,6 @@ function switchSwipeView_(direction) {
       ? "swipe-left"
       : "swipe-right"
   );
-
-  updateNavState(currentView);
-
-  if (isLiveView(currentView)) {
-    renderLiveFromCache(currentView);
-    return;
-  }
-
-  if (isYoutubeView(currentView)) {
-    currentData = filterYoutubeView(youtubeCache || [], currentView);
-    renderYoutube(filterYoutube(currentData));
-    return;
-  }
-
-  if (isClipView(currentView)) {
-    const source = getClipSource_(currentView);
-    const cached = clipCache[source.cacheKey];
-
-    currentData = filterClipView(cached?.data || [], currentView);
-    renderClips(filterClips(currentData));
-    return;
-  }
-
-  loadView(currentView);
 }
 
 app.addEventListener("touchstart", e => {
