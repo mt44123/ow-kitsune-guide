@@ -1201,7 +1201,8 @@ color:var(--accent-text);
 .settings-row-select{
   margin-left:auto;
 
-  min-width:122px;
+  width:140px;
+  min-width:140px;
 
   padding:6px 8px;
 
