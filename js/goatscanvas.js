@@ -434,19 +434,6 @@ const qrY =
   footerY - 6;
 
 const drawQrAndShare = () => {
-
-  ctx.fillStyle = "rgba(255,255,255,.92)";
-
-  roundRect_(
-    ctx,
-    qrX - 8,
-    qrY - 8,
-    qrSize + 16,
-    qrSize + 16,
-    10
-  );
-  ctx.fill();
-
   ctx.drawImage(
     qr,
     qrX,
