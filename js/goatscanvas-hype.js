@@ -99,10 +99,10 @@ async function shareGoatsImageHype_() {
     0
   );
 
-  goatsGradient.addColorStop(0, "#FFD7A3");
-  goatsGradient.addColorStop(.35, "#FFB258");
-  goatsGradient.addColorStop(.75, accent);
-  goatsGradient.addColorStop(1, "#FF6A00");
+  goatsGradient.addColorStop(0, "#FFFFFF");
+  goatsGradient.addColorStop(.25, "#F4F4F4");
+  goatsGradient.addColorStop(.65, accent);
+  goatsGradient.addColorStop(1, accent);
 
   ctx.fillStyle = goatsGradient;
   ctx.fillText(goatsText, titleX + ctx.measureText(goatsText).width / 2, 130);
@@ -255,11 +255,6 @@ async function shareGoatsImageHype_() {
     ctx.strokeStyle = hexToRgba_(regionColor, 0.9);
     ctx.lineWidth = 1.4;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 14);
-    ctx.stroke();
-
-    ctx.strokeStyle = "rgba(255,255,255,.34)";
-    ctx.lineWidth = 1;
-    roundRect_(ctx, x + 2, y + 2, columnWidth - 4, cardHeight - 4, 12);
     ctx.stroke();
 
     // logo
