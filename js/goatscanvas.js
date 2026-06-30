@@ -255,18 +255,6 @@ async function shareGoatsImage_() {
   roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
   ctx.stroke();
 
-  // Corner liquid highlights
-  ctx.save();
-  roundRect_(ctx, x, y, columnWidth, cardHeight, 16);
-  ctx.clip();
-
-  drawCornerGlow_(ctx, x + 18, y + 14, 54, "rgba(255,255,255,.18)");
-  drawCornerGlow_(ctx, x + columnWidth - 18, y + 14, 54, "rgba(255,255,255,.14)");
-  drawCornerGlow_(ctx, x + 18, y + cardHeight - 14, 48, "rgba(255,255,255,.08)");
-  drawCornerGlow_(ctx, x + columnWidth - 18, y + cardHeight - 14, 48, "rgba(255,255,255,.10)");
-
-  ctx.restore();
-
       if (logo) {
 
       ctx.save();
