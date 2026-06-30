@@ -1127,7 +1127,6 @@ app.addEventListener("touchstart", e => {
 
   if (
     e.target.closest("button") ||
-    e.target.closest("a") ||
     e.target.closest("input") ||
     e.target.closest("textarea") ||
     e.target.closest("select")
