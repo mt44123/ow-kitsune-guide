@@ -268,6 +268,17 @@ const filtersPanel =
 let filtersExpanded =
   localStorage.getItem("filtersExpanded") !== "false";
 
+function getCurrentFilterLabel_() {
+  const viewLabel = titles[currentView] || currentView.toUpperCase();
+
+  const roleLabel =
+    currentRoleFilter && currentRoleFilter !== "all"
+      ? ` / ${currentRoleFilter}`
+      : "";
+
+  return `${viewLabel}${roleLabel}`;
+}
+
 function applyFiltersExpanded_() {
   if (!filtersToggle || !filtersPanel) return;
 
@@ -279,7 +290,7 @@ function applyFiltersExpanded_() {
   filtersToggle.textContent =
     filtersExpanded
       ? "▼ Filters"
-      : "▶ Filters";
+      : `▶ Filters (${getCurrentFilterLabel_()})`;
 }
 
 filtersToggle?.addEventListener("click", () => {
@@ -952,6 +963,9 @@ function updateNavState(view) {
     isYoutubeView(view) ||
     isPlayerView(view)
   );
+
+  applyFiltersExpanded_();
+
 }
 
 document
@@ -1077,6 +1091,12 @@ function switchSwipeView_(direction) {
 
   updateNavState(currentView);
 
+  pageTitle.textContent =
+    titles[currentView] || currentView.toUpperCase();
+
+  updateViewActionButton_(currentView);
+  updatePageTitleLink_(currentView);
+
   if (isLiveView(currentView)) {
     renderLiveFromCache(currentView);
   } else if (isYoutubeView(currentView)) {
@@ -1107,6 +1127,18 @@ function switchSwipeView_(direction) {
 app.addEventListener("touchstart", e => {
   if (e.touches.length !== 1) return;
 
+  if (
+    e.target.closest("button") ||
+    e.target.closest("a") ||
+    e.target.closest("input") ||
+    e.target.closest("textarea") ||
+    e.target.closest("select")
+  ) {
+    swipeStartX = 0;
+    swipeStartY = 0;
+    return;
+  }
+
   swipeStartX = e.touches[0].clientX;
   swipeStartY = e.touches[0].clientY;
 }, { passive:true });
@@ -1114,6 +1146,8 @@ app.addEventListener("touchstart", e => {
 app.addEventListener("touchend", e => {
   const touch = e.changedTouches[0];
   if (!touch) return;
+
+  if (!swipeStartX && !swipeStartY) return;
 
   swipeEndX = touch.clientX;
   swipeEndY = touch.clientY;
