@@ -134,18 +134,18 @@ async function shareGoatsImageHype_() {
     // outer glow
     ctx.save();
     ctx.shadowColor = regionColor;
-    ctx.shadowBlur = 24;
-    ctx.strokeStyle = hexToRgba_(regionColor, 0.72);
-    ctx.lineWidth = 2.5;
+    ctx.shadowBlur = 28;
+    ctx.strokeStyle = hexToRgba_(regionColor, 0.62);
+    ctx.lineWidth = 1.8;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 14);
     ctx.stroke();
     ctx.restore();
 
     // card base
     const cardGradient = ctx.createLinearGradient(x, y, x + columnWidth, y + cardHeight);
-    cardGradient.addColorStop(0, "rgba(255,255,255,.12)");
-    cardGradient.addColorStop(0.45, "rgba(255,255,255,.045)");
-    cardGradient.addColorStop(1, hexToRgba_(regionColor, 0.22));
+    cardGradient.addColorStop(0, "rgba(255,255,255,.08)");
+    cardGradient.addColorStop(0.42, "rgba(255,255,255,.025)");
+    cardGradient.addColorStop(1, hexToRgba_(regionColor, 0.16));
 
     ctx.fillStyle = cardGradient;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 14);
@@ -165,8 +165,8 @@ async function shareGoatsImageHype_() {
       y + cardHeight / 2,
       210
     );
-    regionLight.addColorStop(0, hexToRgba_(regionColor, 0.34));
-    regionLight.addColorStop(0.55, hexToRgba_(regionColor, 0.08));
+    regionLight.addColorStop(0, hexToRgba_(regionColor, 0.46));
+    regionLight.addColorStop(0.45, hexToRgba_(regionColor, 0.12));
     regionLight.addColorStop(1, hexToRgba_(regionColor, 0));
 
     ctx.fillStyle = regionLight;
@@ -183,6 +183,35 @@ async function shareGoatsImageHype_() {
     ctx.lineWidth = 1;
     roundRect_(ctx, x + 2, y + 2, columnWidth - 4, cardHeight - 4, 12);
     ctx.stroke();
+
+    // subtle corner highlights
+    ctx.save();
+
+    ctx.strokeStyle = hexToRgba_(regionColor, 0.95);
+    ctx.lineWidth = 3;
+    ctx.lineCap = "round";
+    ctx.shadowColor = regionColor;
+    ctx.shadowBlur = 16;
+
+    // top-left short glow
+    ctx.beginPath();
+    ctx.moveTo(x + 18, y);
+    ctx.lineTo(x + 64, y);
+    ctx.stroke();
+
+    // bottom-right short glow
+    ctx.beginPath();
+    ctx.moveTo(x + columnWidth - 64, y + cardHeight);
+    ctx.lineTo(x + columnWidth - 18, y + cardHeight);
+    ctx.stroke();
+
+    // right edge small glow
+    ctx.beginPath();
+    ctx.moveTo(x + columnWidth, y + cardHeight - 46);
+    ctx.lineTo(x + columnWidth, y + cardHeight - 18);
+    ctx.stroke();
+
+    ctx.restore();
 
     // logo
     if (logo) {
