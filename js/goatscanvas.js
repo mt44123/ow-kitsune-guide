@@ -882,7 +882,7 @@ function getTeamLogoPath_(team, useLightTheme = true) {
   return `./TeamLogo/${file}.png`;
 }
 
-async function preloadTeamLogos_(players, useLightTheme = true)
+async function preloadTeamLogos_(players, useLightTheme = true) {
 
   const promises = players.map(p => {
 
