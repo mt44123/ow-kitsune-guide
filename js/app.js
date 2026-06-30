@@ -1051,6 +1051,10 @@ function hideSwipeHint_() {
 }
 
 function showSwipeHintOnce_() {
+  if (!window.matchMedia("(max-width: 900px)").matches) {
+    return;
+  }
+
   if (localStorage.getItem("swipeHintShown") === "true") {
     return;
   }
