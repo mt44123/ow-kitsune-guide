@@ -216,7 +216,6 @@ function renderYoutubeCard_(v) {
             </span>
 
           </div>
-
         </div>
       </div>
     </a>
