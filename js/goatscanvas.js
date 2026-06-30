@@ -21,7 +21,7 @@ async function shareGoatsImage_() {
     )
   );
 
-  await preloadTeamLogos_(players);
+  await preloadTeamLogos_(players, false);
 
   const shareText = buildGoatsShareText_(players);
 
@@ -830,7 +830,7 @@ document
     shareGoatsImage_();
   });
 
-function getTeamLogoPath_(team) {
+function getTeamLogoPath_(team, useLightTheme = true) {
 
   const name = String(team || "").trim();
 
@@ -860,14 +860,17 @@ function getTeamLogoPath_(team) {
   ];
 
   const isLightTheme =
-    document.body.classList.contains("light-theme") ||
-    document.body.classList.contains("theme-whitered") ||
-    document.body.classList.contains("theme-whiteblue") ||
-    document.body.classList.contains("theme-whitepink") ||
-    document.body.classList.contains("theme-cyanpink") ||
-    document.body.classList.contains("theme-yellowblue") ||
-    document.body.classList.contains("theme-dreampurple") ||
-    document.body.classList.contains("theme-whitegray");
+    useLightTheme &&
+    (
+      document.body.classList.contains("light-theme") ||
+      document.body.classList.contains("theme-whitered") ||
+      document.body.classList.contains("theme-whiteblue") ||
+      document.body.classList.contains("theme-whitepink") ||
+      document.body.classList.contains("theme-cyanpink") ||
+      document.body.classList.contains("theme-yellowblue") ||
+      document.body.classList.contains("theme-dreampurple") ||
+      document.body.classList.contains("theme-whitegray")
+    );
 
   if (
     isLightTheme &&
@@ -879,7 +882,7 @@ function getTeamLogoPath_(team) {
   return `./TeamLogo/${file}.png`;
 }
 
-async function preloadTeamLogos_(players) {
+async function preloadTeamLogos_(players, useLightTheme = true)
 
   const promises = players.map(p => {
 
@@ -889,7 +892,7 @@ async function preloadTeamLogos_(players) {
       return Promise.resolve();
     }
 
-    const logoPath = getTeamLogoPath_(team);
+    const logoPath =  getTeamLogoPath_(team, useLightTheme);
 
     if (!logoPath || teamLogoCache[logoPath]) {
       return Promise.resolve();
