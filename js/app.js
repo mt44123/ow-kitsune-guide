@@ -962,9 +962,24 @@ function updateNavState(view) {
     isPlayerView(view)
   );
 
-  applyFiltersExpanded_();
+  const showFilters =
+    isLiveView(view) ||
+    isYoutubeView(view) ||
+    isClipView(view);
 
-}
+  if (filtersToggle) {
+    filtersToggle.style.display =
+      showFilters ? "" : "none";
+  }
+
+  if (filtersPanel) {
+    filtersPanel.style.display =
+      showFilters ? "" : "none";
+  }
+
+  if (showFilters) {
+    applyFiltersExpanded_();
+  }
 
 document
   .querySelectorAll(".main-nav button")
