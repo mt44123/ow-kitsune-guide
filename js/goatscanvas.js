@@ -45,7 +45,7 @@ async function shareGoatsImage_() {
   const ctx = canvas.getContext("2d");
 
   const qr = new Image();
-  qr.src = "./icons/qr.svg";
+  qr.src = "./icons/qr.png";
 
   const width = 1200;
   const padding = 80;
