@@ -183,6 +183,20 @@ function showGoatsShareModal_(blob, shareText, options = {}) {
           Share Social
         </button>
 
+        <button
+          type="button"
+          data-goats-copy
+        >
+          Copy Text
+        </button>
+
+        <button
+          type="button"
+          data-goats-open-x
+        >
+          Open X
+        </button>
+
         <a
           href="${url}"
           download="${escapeHtml(fileName)}"
@@ -248,6 +262,32 @@ function showGoatsShareModal_(blob, shareText, options = {}) {
       }
 
     });
+
+    modal
+      .querySelector("[data-goats-copy]")
+      .addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(shareText);
+          alert("Share text copied!");
+        } catch (e) {
+          alert("Copy failed.");
+        }
+      });
+
+    modal
+      .querySelector("[data-goats-open-x]")
+      .addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(shareText);
+        } catch (e) {}
+
+        const tweetUrl =
+          "https://twitter.com/intent/tweet?text=" +
+          encodeURIComponent(shareText);
+
+        window.open(tweetUrl, "_blank", "noopener,noreferrer");
+        close();
+      });
 }
 
 function escapeHtml(text) {
