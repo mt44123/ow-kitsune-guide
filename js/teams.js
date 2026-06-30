@@ -17,6 +17,7 @@ function loadTeamsView() {
 
     currentData = playerLinksCache;
     renderTeams(currentData);
+    applyCurrentSearch_();
     return;
   }
 

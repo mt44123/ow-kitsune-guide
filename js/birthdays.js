@@ -24,6 +24,7 @@ function loadBirthdaysView() {
 
     currentData = birthdaysCache;
     renderBirthdayCalendar(currentData);
+    applyCurrentSearch_();
     return;
   }
 

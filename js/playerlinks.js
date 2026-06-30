@@ -16,6 +16,7 @@ function loadPlayerLinksView() {
 
     currentData = playerLinksCache;
     renderPlayerLinks(currentData);
+    applyCurrentSearch_();
     return;
   }
 

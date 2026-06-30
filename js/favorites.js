@@ -50,6 +50,7 @@ function loadFavoritesView() {
 
     currentData = playerLinksCache;
     renderFavorites(currentData);
+    applyCurrentSearch_();
     return;
   }
 

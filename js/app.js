@@ -39,9 +39,26 @@ function matchesSearch_(haystack, query) {
 
   const text = String(haystack || "").toLowerCase();
 
+  const words = text
+    .split(/[\s/_-]+/)
+    .filter(Boolean);
+
+  const isJapaneseLike = value =>
+    /[ぁ-んァ-ン一-龥]/.test(value);
+
+  const matchToken = keyword => {
+    if (isJapaneseLike(keyword)) {
+      return text.includes(keyword);
+    }
+
+    return words.some(word =>
+      word.startsWith(keyword)
+    );
+  };
+
   return (
-    include.every(word => text.includes(word)) &&
-    exclude.every(word => !text.includes(word))
+    include.every(matchToken) &&
+    exclude.every(keyword => !matchToken(keyword))
   );
 }
 
@@ -411,8 +428,6 @@ function updatePageTitleLink_(view = currentView) {
     ? () => {
         currentView = "favorites";
         currentPlayerView = "favorites";
-
-        searchBox.value = "";
 
         history.replaceState({}, "", "?view=favorites");
 
@@ -925,8 +940,6 @@ document
         currentView = button.dataset.view;
       }
 
-      searchBox.value = "";
-
       history.replaceState({}, "", "?view=" + currentView);
 
       updateNavState(currentView);
@@ -970,8 +983,6 @@ document
         currentPlayerView = currentView;
       }
             
-      searchBox.value = "";
-
       history.replaceState({}, "", "?view=" + currentView);
 
       updateNavState(currentView);
@@ -1025,6 +1036,32 @@ searchBox?.addEventListener("input", () => {
   }, 300);
 });
 
+function applyCurrentSearch_() {
+  if (!searchBox.value.trim()) return;
+
+  if (currentView === "birthdays") {
+    jumpBirthdaySearch_();
+
+  } else if (isYoutubeView(currentView)) {
+    renderYoutube(filterYoutube(currentData));
+
+  } else if (isClipView(currentView)) {
+    renderClips(filterClips(currentData));
+
+  } else if (
+    currentView === "playerlinks" ||
+    currentView === "favorites"
+  ) {
+    searchPlayerLinksTable();
+
+  } else if (currentView === "muted") {
+    renderMutedPlayersView();
+
+  } else {
+    renderLive(filterPlayers(currentData));
+  }
+}
+
 function loadView(view) {
 
   updatePageTitleLink_(view);
@@ -1076,6 +1113,7 @@ function loadView(view) {
 }
 
   loadLiveView("new");
+  
 }
 
 function loadMutedPlayersView() {
