@@ -980,6 +980,7 @@ function updateNavState(view) {
   if (showFilters) {
     applyFiltersExpanded_();
   }
+}
 
 document
   .querySelectorAll(".main-nav button")
