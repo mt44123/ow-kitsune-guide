@@ -288,6 +288,15 @@ function renderRegionTeams(regionName, players) {
         class="team-card ${getTeamRegionClass(team.region, team.name)}"
         data-team="${escapeHtml(team.name)}"
       >
+        <div class="team-card-logo-wrap">
+          <img
+            class="team-card-logo"
+            src="${getTeamLogoPath_(team.name)}"
+            alt=""
+            onerror="this.style.display='none'"
+          >
+        </div>
+
         <div class="team-card-name">
           ${escapeHtml(team.name)}
         </div>
