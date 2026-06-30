@@ -167,18 +167,24 @@ async function shareGoatsImageHype_() {
       x + columnWidth, y + cardHeight
     );
 
-    cardGradient.addColorStop(0, "rgba(255,255,255,.11)");
-    cardGradient.addColorStop(0.22, "rgba(255,255,255,.05)");
-    cardGradient.addColorStop(0.55, "rgba(255,255,255,.02)");
-    cardGradient.addColorStop(1, "rgba(255,255,255,.015)");
+    cardGradient.addColorStop(0, "rgba(255,255,255,.035)");
+    cardGradient.addColorStop(0.35, "rgba(255,255,255,.012)");
+    cardGradient.addColorStop(1, "rgba(255,255,255,.006)");
 
     ctx.fillStyle = cardGradient;
     roundRect_(ctx, x, y, columnWidth, cardHeight, 14);
     ctx.fill();
 
-    // inner dark layer
-    ctx.fillStyle = "rgba(5,8,12,.12)";
-    roundRect_(ctx, x + 2, y + 2, columnWidth - 4, cardHeight - 4, 12);
+    // inner dark smoke
+    ctx.fillStyle = "rgba(0,0,0,.24)";
+    roundRect_(
+      ctx,
+      x + 2,
+      y + 2,
+      columnWidth - 4,
+      cardHeight - 4,
+      12
+    );
     ctx.fill();
 
     const centerShadow = ctx.createRadialGradient(
@@ -190,37 +196,12 @@ async function shareGoatsImageHype_() {
       220
     );
 
-    centerShadow.addColorStop(0,"rgba(0,0,0,.32)");
-    centerShadow.addColorStop(.65,"rgba(0,0,0,.12)");
-    centerShadow.addColorStop(1,"rgba(0,0,0,0)");
+    centerShadow.addColorStop(0, "rgba(0,0,0,.22)");
+    centerShadow.addColorStop(0.65, "rgba(0,0,0,.10)");
+    centerShadow.addColorStop(1, "rgba(0,0,0,0)");
 
-    ctx.fillStyle=centerShadow;
-    roundRect_(ctx,x,y,columnWidth,cardHeight,14);
-    ctx.fill();
-
-    const glassOverlay = ctx.createLinearGradient(
-      x,
-      y,
-      x,
-      y + cardHeight
-    );
-
-    glassOverlay.addColorStop(0, "rgba(255,255,255,.08)");
-    glassOverlay.addColorStop(0.25, "rgba(255,255,255,.02)");
-    glassOverlay.addColorStop(0.75, "rgba(255,255,255,0)");
-    glassOverlay.addColorStop(1, "rgba(0,0,0,.08)");
-
-    ctx.fillStyle = glassOverlay;
-
-    roundRect_(
-      ctx,
-      x + 2,
-      y + 2,
-      columnWidth - 4,
-      cardHeight - 4,
-      12
-    );
-
+    ctx.fillStyle = centerShadow;
+    roundRect_(ctx, x, y, columnWidth, cardHeight, 14);
     ctx.fill();
 
     // region light wash
