@@ -206,21 +206,21 @@ async function shareGoatsImageHype_() {
 
     // region light wash
     const regionLight = ctx.createRadialGradient(
-      x + columnWidth * 0.82,
+      x + columnWidth * 0.92,
       y + cardHeight / 2,
       0,
-      x + columnWidth * 0.82,
+      x + columnWidth * 0.92,
       y + cardHeight / 2,
-      300
+      240
     );
     regionLight.addColorStop(
       0,
-      hexToRgba_(regionColor, 0.50)
+      hexToRgba_(regionColor, 0.42)
     );
 
     regionLight.addColorStop(
-      0.60,
-      hexToRgba_(regionColor, 0.16)
+      0.35,
+      hexToRgba_(regionColor, 0.12)
     );
 
     regionLight.addColorStop(
