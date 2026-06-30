@@ -290,14 +290,24 @@ async function shareGoatsImage_() {
 
       ctx.globalAlpha = 0.82;
 
-      ctx.drawImage(
-        logo,
-        x + columnWidth - 56,
-        y + 14,
-        40,
-        40
+      const maxWidth = 72;
+      const maxHeight = 64;
+
+      const scale = Math.min(
+        maxWidth / logo.width,
+        maxHeight / logo.height
       );
 
+      const w = logo.width * scale;
+      const h = logo.height * scale;
+
+      ctx.drawImage(
+        logo,
+        x + columnWidth - 18 - w,
+        y + (cardHeight - h) / 2,
+        w,
+        h
+      );
       ctx.restore();
     }
 

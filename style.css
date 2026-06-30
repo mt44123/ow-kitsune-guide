@@ -2115,15 +2115,25 @@ grid-column:1 / -1;
 .team-card.team-sa{ border-left-color:var(--region-sa); }
 
 .team-card-logo-wrap{
+  width:56px;
+  height:56px;
+
   display:flex;
+  align-items:center;
   justify-content:center;
-  margin-bottom:10px;
+
+  margin:0 auto 10px;
 }
 
 .team-card-logo{
-  width:46px;
-  height:46px;
+  max-width:100%;
+  max-height:100%;
+
+  width:auto;
+  height:auto;
+
   object-fit:contain;
+
   filter:drop-shadow(0 0 10px rgba(255,255,255,.18));
 }
 
