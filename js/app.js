@@ -1040,10 +1040,40 @@ document
 
 updateNavState(currentView);
 
+function showSwipeHintOnce_() {
+  if (localStorage.getItem("swipeHintShown") === "true") {
+    return;
+  }
+
+  if (
+    !isLiveView(currentView) &&
+    !isYoutubeView(currentView) &&
+    !isClipView(currentView)
+  ) {
+    return;
+  }
+
+  localStorage.setItem("swipeHintShown", "true");
+
+  const hint = document.createElement("div");
+  hint.className = "swipe-hint";
+  hint.textContent = "← Swipe filters →";
+
+  document.body.appendChild(hint);
+
+  setTimeout(() => {
+    hint.remove();
+  }, 2400);
+}
+
+showSwipeHintOnce_();
+
 let swipeStartX = 0;
 let swipeStartY = 0;
 let swipeEndX = 0;
 let swipeEndY = 0;
+
+let swipeTracking = false;
 
 const SWIPE_THRESHOLD = 70;
 
@@ -1072,12 +1102,8 @@ function switchSwipeView_(direction) {
 
   const nextIndex =
     direction === "left"
-      ? index + 1
-      : index - 1;
-
-  if (nextIndex < 0 || nextIndex >= views.length) {
-    return;
-  }
+      ? (index + 1) % views.length
+      : (index - 1 + views.length) % views.length;
 
   currentView = views[nextIndex];
 
@@ -1136,11 +1162,30 @@ app.addEventListener("touchstart", e => {
     return;
   }
 
+  swipeTracking = true;
+  app.style.transition = "none";
+
   swipeStartX = e.touches[0].clientX;
   swipeStartY = e.touches[0].clientY;
 }, { passive:true });
 
+app.addEventListener("touchmove", e => {
+  if (!swipeTracking) return;
+  if (e.touches.length !== 1) return;
+
+  const dx = e.touches[0].clientX - swipeStartX;
+  const dy = e.touches[0].clientY - swipeStartY;
+
+  if (Math.abs(dx) < Math.abs(dy)) return;
+
+  app.style.transform = `translateX(${dx * 0.18}px)`;
+}, { passive:true });
+
 app.addEventListener("touchend", e => {
+  swipeTracking = false;
+  app.style.transition = "";
+  app.style.transform = "";
+
   const touch = e.changedTouches[0];
   if (!touch) return;
 
