@@ -178,31 +178,10 @@ function showGoatsShareModal_(blob, shareText, options = {}) {
 
         <button
           type="button"
-          data-goats-share
+          data-goats-download-x
         >
-          Share Social
+          Download PNG & Open X
         </button>
-
-        <button
-          type="button"
-          data-goats-copy
-        >
-          Copy Text
-        </button>
-
-        <button
-          type="button"
-          data-goats-open-x
-        >
-          Open X
-        </button>
-
-        <a
-          href="${url}"
-          download="${escapeHtml(fileName)}"
-        >
-          Download PNG
-        </a>
 
       </div>
     </div>
@@ -264,30 +243,36 @@ function showGoatsShareModal_(blob, shareText, options = {}) {
     });
 
     modal
-      .querySelector("[data-goats-copy]")
+      .querySelector("[data-goats-download-x]")
       .addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(shareText);
-          alert("Share text copied!");
-        } catch (e) {
-          alert("Copy failed.");
-        }
-      });
 
-    modal
-      .querySelector("[data-goats-open-x]")
-      .addEventListener("click", async () => {
+        // テキストをコピー
         try {
           await navigator.clipboard.writeText(shareText);
         } catch (e) {}
 
-        const tweetUrl =
-          "https://twitter.com/intent/tweet?text=" +
-          encodeURIComponent(shareText);
+        // PNGダウンロード
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = fileName;
+        a.click();
 
-        window.open(tweetUrl, "_blank", "noopener,noreferrer");
-        close();
+        // 少し待ってXを開く
+        setTimeout(() => {
+          window.open(
+            "https://twitter.com/intent/tweet?text=" +
+            encodeURIComponent(shareText),
+            "_blank",
+            "noopener,noreferrer"
+          );
+
+          close();
+
+        }, 250);
+
       });
+
+
 }
 
 function escapeHtml(text) {
