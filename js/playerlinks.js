@@ -626,7 +626,7 @@ function setPlayerSeo_(player) {
     `${name} - ${team} Overwatch Player Profile | OW KITSUNE GUIDE`;
 
   const description =
-    `${name} is an Overwatch player for ${team}. View Twitch, YouTube, clips, Discord, nationality, role, birthday, age and latest activity.`;
+    `${name} is a ${player.role || "Overwatch"} player from ${player.nationality || "unknown region"} currently playing for ${team}. View Twitch, YouTube, latest streams, clips, Discord and complete Overwatch player profile.`;
 
   document.title = title;
 
@@ -635,6 +635,60 @@ function setPlayerSeo_(player) {
   setCanonical_(
     `${location.origin}/player/${slug}`
   );
+
+  setPlayerJsonLd_(player);
+  setPlayerOgp_(player, title, description);
+}
+
+function setPlayerJsonLd_(player) {
+  const name = player.name || "";
+  const slug = playerToSlug_(name);
+
+  const sameAs = [
+    player.twitchUrl,
+    player.chzzkUrl,
+    player.soopUrl,
+    player.biliUrl,
+    player.youtubeUrl,
+    player.xUrl
+  ].filter(Boolean);
+
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": name,
+    "alternateName": player.playerAlias
+      ? player.playerAlias.split("|").map(v => v.trim()).filter(Boolean)
+      : undefined,
+    "nationality": player.nationality || undefined,
+    "birthDate": player.born || undefined,
+    "url": `${location.origin}/player/${slug}`,
+    "sameAs": sameAs.length ? sameAs : undefined,
+    "memberOf": player.team
+      ? {
+          "@type": "SportsTeam",
+          "name": player.team
+        }
+      : undefined
+  };
+
+  Object.keys(data).forEach(key => {
+    if (data[key] === undefined) {
+      delete data[key];
+    }
+  });
+
+  let script =
+    document.querySelector('script[data-player-jsonld="true"]');
+
+  if (!script) {
+    script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.dataset.playerJsonld = "true";
+    document.head.appendChild(script);
+  }
+
+  script.textContent = JSON.stringify(data);
 }
 
 function setMeta_(name, content) {

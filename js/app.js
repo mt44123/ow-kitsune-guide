@@ -2134,3 +2134,23 @@ function resetSeo_() {
     canonical.href = "https://owkitsune.com/";
   }
 }
+
+function setOg_(property, content) {
+  let meta =
+    document.querySelector(`meta[property="${property}"]`) ||
+    document.querySelector(`meta[name="${property}"]`);
+
+  if (!meta) {
+    meta = document.createElement("meta");
+
+    if (property.startsWith("twitter:")) {
+      meta.setAttribute("name", property);
+    } else {
+      meta.setAttribute("property", property);
+    }
+
+    document.head.appendChild(meta);
+  }
+
+  meta.setAttribute("content", content);
+}
