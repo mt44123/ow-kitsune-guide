@@ -460,11 +460,19 @@ function renderPlayerDetail(name, players) {
           : ""
       }
 
-      <p>
-        ${escapeHtml(player.team || "-")} /
-        ${escapeHtml(player.role || "-")} /
-        ${escapeHtml(player.nationality || "-")}
-      </p>
+      <div class="player-detail-meta">
+        <div>${escapeHtml(player.team || "-")}</div>
+        <div>${escapeHtml(player.nationality || "-")}</div>
+        <div>${escapeHtml(player.role || "-")}</div>
+      </div>
+
+      ${
+        player.born
+          ? `<div class="player-detail-birthday">
+              Age ${getCurrentAgeFromBorn(player.born)} / Birthday ${player.born}
+            </div>`
+          : ""
+      }
 
       <div class="team-player-links">
         ${linkTag(player.twitchUrl, "TW", player.twitchActive ? "tw" : "tw-inactive")}

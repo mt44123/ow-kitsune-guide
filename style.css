@@ -3679,3 +3679,26 @@ body.player-detail-view #app{
   max-width:900px;
   margin:0 auto;
 }
+
+.player-detail-meta{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:14px 0;
+  color:var(--text-main);
+  font-size:15px;
+}
+
+.player-detail-meta div{
+  padding:6px 10px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+}
+
+.player-detail-birthday{
+  margin:8px 0 18px;
+  color:var(--text-muted);
+  font-size:13px;
+}
