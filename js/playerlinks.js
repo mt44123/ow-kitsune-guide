@@ -157,31 +157,35 @@ app.innerHTML = `
             </td>
 
             <td class="name-cell ${getNationalityRegionClass(p.nationality)}">
+              <div class="player-name-wrap">
 
-              <span
-                class="favorite-star ${isFavorite_(p.name) ? "active" : ""}"
-                data-favorite-name="${escapeHtml(p.name || "")}"
-              >
-                ${isFavorite_(p.name) ? "★" : "☆"}
-              </span>
-            
-              ${
-                hasPlayerProfile_(p)
-                  ? `
-                    <a
-                      class="player-name-link"
-                      href="#"
-                      data-player="${escapeHtml(p.name)}"
-                      onclick="return false;"
-                    >
-                      ${escapeHtml(p.name || "")}
-                    </a>
-                  `
-                  : `
-                    <span>${escapeHtml(p.name || "")}</span>
-                  `
-              }
-            
+                <span
+                  class="favorite-star ${isFavorite_(p.name) ? "active" : ""}"
+                  data-favorite-name="${escapeHtml(p.name || "")}"
+                >
+                  ${isFavorite_(p.name) ? "★" : "☆"}
+                </span>
+
+                ${
+                  hasPlayerProfile_(p)
+                    ? `
+                      <a
+                        class="player-name-link"
+                        href="#"
+                        data-player="${escapeHtml(p.name)}"
+                        onclick="return false;"
+                      >
+                        ${escapeHtml(p.name || "")}
+                      </a>
+                    `
+                    : `
+                      <span class="player-name-text">
+                        ${escapeHtml(p.name || "")}
+                      </span>
+                    `
+                }
+
+              </div>
             </td>
 
            <td>${shortNationality(p.nationality || "")}</td>
