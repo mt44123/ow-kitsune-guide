@@ -471,6 +471,9 @@ function renderPlayerDetail(name, players) {
   }
 
   pageTitle.textContent = player.name;
+
+  setPlayerSeo_(player);
+
   app.className = "";
   document.body.classList.add("player-detail-view");
 
@@ -612,4 +615,50 @@ function renderPlayerDetail(name, players) {
       </p>
     </div>
   `;
+}
+
+function setPlayerSeo_(player) {
+  const name = player.name || "";
+  const team = player.team || "Overwatch";
+  const slug = playerToSlug_(name);
+
+  const title =
+    `${name} - ${team} Overwatch Player Profile | OW KITSUNE GUIDE`;
+
+  const description =
+    `${name} is an Overwatch player for ${team}. View Twitch, YouTube, clips, Discord, nationality, role, birthday, age and latest activity.`;
+
+  document.title = title;
+
+  setMeta_("description", description);
+
+  setCanonical_(
+    `${location.origin}/player/${slug}`
+  );
+}
+
+function setMeta_(name, content) {
+  let meta =
+    document.querySelector(`meta[name="${name}"]`);
+
+  if (!meta) {
+    meta = document.createElement("meta");
+    meta.setAttribute("name", name);
+    document.head.appendChild(meta);
+  }
+
+  meta.setAttribute("content", content);
+}
+
+function setCanonical_(url) {
+  let link =
+    document.querySelector(`link[rel="canonical"]`);
+
+  if (!link) {
+    link = document.createElement("link");
+    link.setAttribute("rel", "canonical");
+    document.head.appendChild(link);
+  }
+
+  link.setAttribute("href", url);
 }
