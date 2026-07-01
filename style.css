@@ -3887,45 +3887,21 @@ body.player-detail-view #app{
 
 }
 
-.player-table .name-cell{
-  text-align:center;
+.player-detail-title-row{
+  justify-content:center;
 }
 
-.player-name-wrap{
+.player-detail-name-wrap{
   display:inline-flex;
   align-items:center;
   justify-content:center;
   gap:6px;
-  max-width:100%;
 }
 
-.player-name-wrap .favorite-star{
-  flex:0 0 auto;
-}
-
-.player-name-wrap .player-name-link,
-.player-name-wrap .player-name-text{
-  min-width:0;
-  text-align:center;
-}
-
-.player-table .name-cell{
-  text-align:center;
-}
-
-.player-name-wrap{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-  max-width:100%;
-}
-
-.player-name-wrap .favorite-star{
+.player-detail-name-wrap .favorite-star{
   margin-right:0;
 }
 
-.player-name-wrap .player-name-link,
-.player-name-wrap .player-name-text{
+.player-detail-name{
   text-align:center;
 }
