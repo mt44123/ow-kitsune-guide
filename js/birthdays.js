@@ -463,7 +463,9 @@ function jumpBirthdaySearch_() {
   const hit = currentData.find(p => {
     const haystack = [
       p.name,
+      p.playerAlias,
       p.team,
+      p.teamAlias,
       p.role,
       p.nationality
     ].join(" ");

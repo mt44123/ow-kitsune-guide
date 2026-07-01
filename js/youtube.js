@@ -74,7 +74,9 @@ function filterYoutube(videos) {
 
     const haystack = [
       v.name,
+      v.playerAlias,
       v.team,
+      v.teamAlias,
       v.role,
       v.nationality,
       v.rawTitle,

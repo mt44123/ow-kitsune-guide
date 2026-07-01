@@ -168,7 +168,9 @@ function filterPlayers(players) {
 
     const haystack = [
       p.name,
+      p.playerAlias,
       p.team,
+      p.teamAlias,
       p.role,
       p.nationality,
       p.platform,

@@ -257,7 +257,9 @@ function filterClips(clips) {
 
     const haystack = [
       c.name,
+      c.playerAlias,
       c.team,
+      c.teamAlias,
       c.role,
       c.nationality,
       c.rawTitle,

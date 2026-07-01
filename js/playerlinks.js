@@ -131,6 +131,8 @@ app.innerHTML = `
             data-team-region="${(p.teamRegion || "").toLowerCase()}"
             data-team="${(p.team || "").toLowerCase()}"
             data-name="${(p.name || "").toLowerCase()}"
+            data-team-alias="${(p.teamAlias || "").toLowerCase()}"
+            data-player-alias="${(p.playerAlias || "").toLowerCase()}"
             data-nationality="${(p.nationality || "").toLowerCase()}"
             data-role="${(p.role || "").toLowerCase()}"
             data-age="${
@@ -371,7 +373,9 @@ function searchPlayerLinksTable() {
     const haystack = [
       row.dataset.teamRegion,
       row.dataset.team,
+      row.dataset.teamAlias,
       row.dataset.name,
+      row.dataset.playerAlias,
       row.dataset.nationality,
       row.dataset.role
     ].join(" ");
