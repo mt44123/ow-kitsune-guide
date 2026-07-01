@@ -253,6 +253,7 @@ const refreshDataButton =  document.getElementById("refreshDataButton");
 const toolsButton =  document.getElementById("toolsButton");
 const faqButton =  document.getElementById("faqButton");
 const contactButton =  document.getElementById("contactButton");
+const updateLogButton =  document.getElementById("updateLogButton");
 
 const notifyButton =  document.getElementById("notifyButton");
 const settingsButton =  document.getElementById("settingsButton");
@@ -674,6 +675,11 @@ faqButton?.addEventListener(
   () => loadFaqView()
 );
 
+updateLogButton?.addEventListener(
+  "click",
+  () => loadUpdateLogView()
+);
+
 contactButton?.addEventListener(
   "click",
   () => {
@@ -926,7 +932,8 @@ const VIEW_GROUPS = {
     "playerlinks",
     "birthdays",
     "favorites",
-    "muted"
+    "muted",
+    "updatelog"
   ]
 };
 
@@ -1485,7 +1492,12 @@ function loadView(view) {
   }
 
   if (view === "privacy") {
-    loadPrivacyView();
+  loadPrivacyView();
+  return;
+  }
+
+  if (view === "updatelog") {
+    loadUpdateLogView();
     return;
   }
 
