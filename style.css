@@ -1156,10 +1156,6 @@ color:var(--accent-text);
   background:var(--bg-main);
 }
 
-.settings-section .settings-row + .settings-row{
-  border-top:1px solid var(--border);
-}
-
 .settings-row-icon{
   width:22px;
   display:flex;
