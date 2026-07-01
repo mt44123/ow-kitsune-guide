@@ -1317,6 +1317,11 @@ function switchSwipeView_(direction) {
 }
 
 app.addEventListener("touchstart", e => {
+  if (
+    e.target.closest(".player-table-wrap")
+  ) {
+    return;
+  }
   if (e.touches.length !== 1) return;
 
   if (
@@ -1338,6 +1343,11 @@ app.addEventListener("touchstart", e => {
 }, { passive:true });
 
 app.addEventListener("touchmove", e => {
+  if (
+    e.target.closest(".player-table-wrap")
+  ) {
+    return;
+  }
   if (!swipeTracking) return;
   if (e.touches.length !== 1) return;
 
@@ -1350,6 +1360,11 @@ app.addEventListener("touchmove", e => {
 }, { passive:true });
 
 app.addEventListener("touchend", e => {
+  if (
+    e.target.closest(".player-table-wrap")
+  ) {
+    return;
+  }
   swipeTracking = false;
   app.style.transition = "";
   app.style.transform = "";
