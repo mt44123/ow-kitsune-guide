@@ -1399,26 +1399,25 @@ border-left-color:var(--region-jp);
 display:none;
 }
 
-.short-live-title .title{
-  display:-webkit-box;
-  -webkit-box-orient:vertical;
-  -webkit-line-clamp:1;
-  overflow:hidden;
-
-  margin-bottom:2px;
-}
-
-.short-live-title .live-subtitle{
+.short-live-title .live-card .title,
+.short-live-title .live-card .live-subtitle{
   display:block;
+  width:100%;
   max-width:100%;
-  margin-top:2px;
 
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 
-  -webkit-line-clamp:unset;
-  -webkit-box-orient:unset;
+  word-break:normal;
+  overflow-wrap:normal;
+
+  line-height:1.35;
+  max-height:1.35em;
+}
+
+.short-live-title .live-card .title{
+  margin-bottom:2px;
 }
 
 .live-card,
@@ -3330,14 +3329,6 @@ color:var(--text-sub);
   .birthday-month{
     font-size:24px;
   }
-}
-
-@media (max-width:900px){
-
-  .live-card .title{
-    -webkit-line-clamp:2;
-  }
-
 }
 
 @media (max-width:900px){
