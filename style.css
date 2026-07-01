@@ -3702,3 +3702,38 @@ body.player-detail-view #app{
   color:var(--text-muted);
   font-size:13px;
 }
+
+.player-detail-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.player-detail-team-logo{
+  position:absolute;
+  right:-30px;
+  bottom:-30px;
+  width:180px;
+  max-height:180px;
+  object-fit:contain;
+  opacity:.08;
+  pointer-events:none;
+}
+
+.player-detail-section{
+  margin:26px 0;
+  text-align:left;
+}
+
+.player-detail-section h3{
+  margin-bottom:12px;
+}
+
+.player-detail-activity{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.player-detail-empty{
+  color:var(--text-muted);
+}

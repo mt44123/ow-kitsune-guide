@@ -452,6 +452,17 @@ function renderPlayerDetail(name, players) {
 
   app.innerHTML = `
     <div class="card player-detail-card">
+    ${
+      getTeamLogoPath_(player.team)
+        ? `<img
+            class="player-detail-team-logo"
+            src="${getTeamLogoPath_(player.team)}"
+            alt=""
+            loading="lazy"
+            onerror="this.remove()"
+          >`
+        : ""
+    }
       <h2>${escapeHtml(player.name)}</h2>
 
       ${
@@ -473,6 +484,34 @@ function renderPlayerDetail(name, players) {
             </div>`
           : ""
       }
+
+      <div class="player-detail-section">
+        <h3>Latest Activity</h3>
+
+        <div class="player-detail-activity">
+
+          ${
+            player.lastStreamUrl
+              ? `
+              <a
+                class="last-stream-link"
+                href="${player.lastStreamUrl}"
+                target="_blank"
+                rel="noopener"
+              >
+                ${renderPlatformIcons_(player.lastStreamPlatform)}
+                <span>Last Stream · ${cleanLastStreamAge_(player.lastStreamAge)}</span>
+              </a>
+              `
+              : `
+              <span class="player-detail-empty">
+                No recent stream
+              </span>
+              `
+          }
+
+        </div>
+      </div>
 
       <div class="team-player-links">
         ${linkTag(player.twitchUrl, "TW", player.twitchActive ? "tw" : "tw-inactive")}
