@@ -622,6 +622,8 @@ function renderPlayerDetail(name, players) {
         ${linkTag(player.discordUrl, "DC", "dc")}
       </div>
 
+      ${renderLiquipediaNote_()}
+
       <div class="player-detail-section">
         <h3>Latest Activity</h3>
 

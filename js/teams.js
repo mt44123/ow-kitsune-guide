@@ -98,10 +98,8 @@ function renderLiquipediaNote_() {
         )}
 
         ${siteText_(
-          `<p>Some player and team information is sourced from Liquipedia.<br>
-          Special thanks to the Liquipedia contributors who help keep esports history alive.</p>`,
-          `<p>一部のプレイヤー情報・チーム情報はLiquipediaを参考にしています。<br>
-          eスポーツの歴史を支えているLiquipedia編集者の皆様に感謝します。</p>`
+          `<p>Some player and team information is sourced from Liquipedia.</p>`,
+          `<p>一部のプレイヤー情報・チーム情報はLiquipediaを参考にしています。</p>`
         )}
 
       </details>
