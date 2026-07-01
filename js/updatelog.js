@@ -44,9 +44,11 @@ function renderUpdateLog_(logs) {
     return;
   }
 
+  const sortedLogs = [...logs].reverse();
+
   app.innerHTML = `
     <div class="tools-page">
-      ${logs.map(log => `
+      ${sortedLogs.map(log => `
         <div class="card">
           <h3>Version ${escapeHtml(log.version)}</h3>
           <p>${escapeHtml(log.date)}</p>
