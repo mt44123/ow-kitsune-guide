@@ -727,6 +727,7 @@ const clipCache = {
   twitch: { data: null, time: 0 },
   twitchhot: { data: null, time: 0 },
   soop: { data: null, time: 0 },
+  soophot: { data: null, time: 0 },
   chzzknew: { data: null, time: 0 },
   chzzkbest: { data: null, time: 0 }
 };

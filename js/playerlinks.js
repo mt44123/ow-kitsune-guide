@@ -410,25 +410,54 @@ function loadPlayerDetailView() {
 
   startFakeProgress();
 
-  fetch(CONFIG.API_URL + "?view=playerlinks")
-    .then(res => res.json())
-    .then(data => {
-      finishFakeProgress();
+  Promise.all([
+  fetch(CONFIG.API_URL + "?view=playerlinks").then(r => r.json()),
+  fetch(CONFIG.API_URL + "?view=youtube").then(r => r.json()),
+  fetch(CONFIG.API_URL + "?view=clips").then(r => r.json()),
+  fetch(CONFIG.API_URL + "?view=hotclips").then(r => r.json()),
+  fetch(CONFIG.API_URL + "?view=soopclips").then(r => r.json()),
+  fetch(CONFIG.API_URL + "?view=soophotclips").then(r => r.json()),
+  fetch(CONFIG.API_URL + "?view=chzzknewclips").then(r => r.json()),
+  fetch(CONFIG.API_URL + "?view=chzzkbestclips").then(r => r.json())
+])
+  .then(([
+    linksData,
+    youtubeData,
+    clipsData,
+    hotClipsData,
+    soopClipsData,
+    soopHotClipsData,
+    chzzkNewClipsData,
+    chzzkBestClipsData
+  ]) => {
+    finishFakeProgress();
 
-      playerLinksLastUpdated = data.lastUpdated || "";
-      updated.textContent = playerLinksLastUpdated;
+    playerLinksLastUpdated = linksData.lastUpdated || "";
+    updated.textContent = playerLinksLastUpdated;
 
-      playerLinksCache = data.playerLinks || [];
-      playerLinksCacheTime = Date.now();
+    playerLinksCache = linksData.playerLinks || [];
+    playerLinksCacheTime = Date.now();
 
-      currentData = playerLinksCache;
-      renderPlayerDetail(name, currentData);
-    })
-    .catch(error => {
-      stopFakeProgress();
-      console.error(error);
-      app.innerHTML = `<p class="error">Failed to load player.</p>`;
-    });
+    youtubeCache = youtubeData.videos || [];
+    youtubeCacheTime = Date.now();
+
+    setClipCache_("twitch", clipsData.clips || []);
+    setClipCache_("twitchhot", hotClipsData.clips || []);
+
+    setClipCache_("soop", soopClipsData.clips || []);
+    setClipCache_("soophot", soopHotClipsData.clips || []);
+
+    setClipCache_("chzzknew", chzzkNewClipsData.clips || []);
+    setClipCache_("chzzkbest", chzzkBestClipsData.clips || []);
+
+    currentData = playerLinksCache;
+    renderPlayerDetail(name, currentData);
+  })
+  .catch(error => {
+    stopFakeProgress();
+    console.error(error);
+    app.innerHTML = `<p class="error">Failed to load player.</p>`;
+  });
 }
 
 function renderPlayerDetail(name, players) {
@@ -449,6 +478,26 @@ function renderPlayerDetail(name, players) {
     player.playerAlias
       ? player.playerAlias.replaceAll("|", " / ")
       : "";
+
+  const latestVideo =
+    youtubeCache?.find(v => v.name === player.name);
+
+  const latestClip = [
+    ...(clipCache.twitch.data || []),
+    ...(clipCache.twitchhot.data || []),
+
+    ...(clipCache.soop.data || []),
+    ...(clipCache.soophot.data || []),
+
+    ...(clipCache.chzzknew.data || []),
+    ...(clipCache.chzzkbest.data || [])
+  ]
+    .filter(c => c.name === player.name)
+    .sort((a, b) => {
+      const aTime = new Date(a.date || 0).getTime();
+      const bTime = new Date(b.date || 0).getTime();
+      return bTime - aTime;
+    })[0];
 
   app.innerHTML = `
     <div class="card player-detail-card">
@@ -508,6 +557,38 @@ function renderPlayerDetail(name, players) {
                 No recent stream
               </span>
               `
+          }
+
+          ${
+            latestVideo
+              ? `
+              <a
+                class="last-stream-link"
+                href="${latestVideo.url}"
+                target="_blank"
+                rel="noopener"
+              >
+                <img class="platform-icon" src="/icons/youtube.png" alt="YouTube">
+                <span>Latest YouTube · ${timeAgo(latestVideo.date)}</span>
+              </a>
+              `
+              : ""
+          }
+
+          ${
+            latestClip
+              ? `
+              <a
+                class="last-stream-link"
+                href="${latestClip.url}"
+                target="_blank"
+                rel="noopener"
+              >
+                <span>✂</span>
+                <span>Latest Clip · ${timeAgo(latestClip.date)}</span>
+              </a>
+              `
+              : ""
           }
 
         </div>
