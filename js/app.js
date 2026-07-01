@@ -620,7 +620,7 @@ viewActionButton?.addEventListener("click", () => {
 
     applyLiveTitleMode_();
     updateViewActionButton_();
-    renderLive(currentData);
+    renderLive(filterPlayers(currentData));
     return;
   }
 

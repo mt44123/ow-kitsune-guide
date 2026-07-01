@@ -1410,7 +1410,7 @@ display:none;
 
 .short-live-title .live-subtitle{
   display:block;
-
+  max-width:100%;
   margin-top:2px;
 
   white-space:nowrap;
