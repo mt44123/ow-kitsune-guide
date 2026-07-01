@@ -253,7 +253,6 @@ const refreshDataButton =  document.getElementById("refreshDataButton");
 const toolsButton =  document.getElementById("toolsButton");
 const faqButton =  document.getElementById("faqButton");
 const contactButton =  document.getElementById("contactButton");
-const updateLogButton =  document.getElementById("updateLogButton");
 
 const notifyButton =  document.getElementById("notifyButton");
 const settingsButton =  document.getElementById("settingsButton");
@@ -673,11 +672,6 @@ toolsButton?.addEventListener(
 faqButton?.addEventListener(
   "click",
   () => loadFaqView()
-);
-
-updateLogButton?.addEventListener(
-  "click",
-  () => loadUpdateLogView()
 );
 
 contactButton?.addEventListener(

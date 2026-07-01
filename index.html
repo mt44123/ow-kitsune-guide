@@ -2,7 +2,7 @@
 <html>
 <head>
   <script>
-  const APP_VERSION = "1.0.1";
+  const APP_VERSION = "1.0.2";
 
   function loadScript(src) {
     document.write(
@@ -11,7 +11,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="./style.css?v=1.0.1">  
+  <link rel="stylesheet" href="./style.css?v=1.0.2">  
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -367,31 +367,6 @@
       <span class="settings-chevron">›</span>
     </button>
 
-    <button
-      id="updateLogButton"
-      class="settings-item settings-row"
-    >
-      <span class="settings-row-icon">
-        <svg
-          class="settings-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 -960 960 960"
-          aria-hidden="true"
-        >
-          <path
-            fill="currentColor"
-            d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm40-200 120-120-56-56-64 64v-168h-80v200Z"
-            />
-        </svg>
-      </span>
-
-      <span class="settings-row-main">
-        <span class="settings-row-title">Update Log</span>
-      </span>
-
-      <span class="settings-chevron">›</span>
-    </button>
-
   </div>
 
   <div class="settings-section">
@@ -642,6 +617,7 @@
 
   <p>
     <a href="#" onclick="loadAboutView(); return false;">About</a> |
+    <a href="#" onclick="loadUpdateLogView(); return false;">Update Log</a> |
     <a href="#" onclick="loadPrivacyView(); return false;">Privacy Policy</a> |
     <a
       href="https://docs.google.com/forms/d/e/1FAIpQLSeDkW65qI07FFzP3oczawUR3AIp-9tOAfRmSEpavrLipZHS1w/viewform"
