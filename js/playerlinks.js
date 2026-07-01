@@ -166,9 +166,7 @@ app.innerHTML = `
             
               <a
                 class="player-name-link"
-                href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
-                target="_blank"
-                rel="noopener"
+                href="/player/${playerToSlug_(p.name)}"
               >
                 ${p.name || ""}
               </a>
@@ -385,4 +383,104 @@ function searchPlayerLinksTable() {
         ? ""
         : "none";
   });
+}
+
+function loadPlayerDetailView() {
+  resetSeo_();
+
+  const slug = location.pathname
+    .replace(/^\/player\//, "")
+    .replace(/\/$/, "");
+
+  const name = decodeURIComponent(slug);
+
+  if (!name) {
+    app.innerHTML = `<p class="empty">Player not found.</p>`;
+    return;
+  }
+
+  if (
+    playerLinksCache &&
+    Date.now() - playerLinksCacheTime < PLAYER_LINKS_CLIENT_CACHE_MS
+  ) {
+    currentData = playerLinksCache;
+    renderPlayerDetail(name, currentData);
+    return;
+  }
+
+  startFakeProgress();
+
+  fetch(CONFIG.API_URL + "?view=playerlinks")
+    .then(res => res.json())
+    .then(data => {
+      finishFakeProgress();
+
+      playerLinksLastUpdated = data.lastUpdated || "";
+      updated.textContent = playerLinksLastUpdated;
+
+      playerLinksCache = data.playerLinks || [];
+      playerLinksCacheTime = Date.now();
+
+      currentData = playerLinksCache;
+      renderPlayerDetail(name, currentData);
+    })
+    .catch(error => {
+      stopFakeProgress();
+      console.error(error);
+      app.innerHTML = `<p class="error">Failed to load player.</p>`;
+    });
+}
+
+function renderPlayerDetail(name, players) {
+  const player = players.find(p =>
+    playerToSlug_(p.name) === name
+  );
+
+  if (!player) {
+    app.innerHTML = `<p class="empty">Player not found.</p>`;
+    return;
+  }
+
+  pageTitle.textContent = player.name;
+  app.className = "player-detail-mode";
+
+  const aliasText =
+    player.playerAlias
+      ? player.playerAlias.replaceAll("|", " / ")
+      : "";
+
+  app.innerHTML = `
+    <div class="card player-detail-card">
+      <h2>${escapeHtml(player.name)}</h2>
+
+      ${
+        aliasText
+          ? `<p class="player-detail-alias">${escapeHtml(aliasText)}</p>`
+          : ""
+      }
+
+      <p>
+        ${escapeHtml(player.team || "-")} /
+        ${escapeHtml(player.role || "-")} /
+        ${escapeHtml(player.nationality || "-")}
+      </p>
+
+      <div class="team-player-links">
+        ${linkTag(player.twitchUrl, "TW", player.twitchActive ? "tw" : "tw-inactive")}
+        ${linkTag(player.chzzkUrl, "CHZ", "chz")}
+        ${linkTag(player.soopUrl, "SOOP", "soop")}
+        ${linkTag(player.biliUrl, "BILI", "bili")}
+        ${linkTag(player.youtubeUrl, "YT", "yt")}
+        ${linkTag(player.xUrl, "X", "x")}
+        ${linkTag(player.discordUrl, "DC", "dc")}
+      </div>
+
+      <p class="seo-note">
+        ${escapeHtml(player.name)}
+        ${aliasText ? `(${escapeHtml(aliasText)})` : ""}
+        Overwatch player links: Twitch, YouTube, Discord, clips and stream information.
+        ${escapeHtml(player.name)} の配信、YouTube、Discord、クリップ、選手情報を確認できます。
+      </p>
+    </div>
+  `;
 }

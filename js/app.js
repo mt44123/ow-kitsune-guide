@@ -689,7 +689,12 @@ contactButton?.addEventListener(
 
 const params = new URLSearchParams(window.location.search);
 
-let currentView = params.get("view") || "new";
+const path = location.pathname;
+
+let currentView =
+  path.startsWith("/player/")
+    ? "player"
+    : params.get("view") || "new";
 
 let currentRoleFilter =
   localStorage.getItem("roleFilter") || "all";
@@ -923,6 +928,7 @@ const VIEW_GROUPS = {
   players: [
     "teams",
     "team",
+    "player",
     "playerlinks",
     "birthdays",
     "favorites",
@@ -1158,7 +1164,12 @@ updateNavState(currentView);
 window.addEventListener("popstate", () => {
   const params = new URLSearchParams(window.location.search);
 
-  currentView = params.get("view") || "new";
+  const path = location.pathname;
+
+  currentView =
+    path.startsWith("/player/")
+      ? "player"
+      : params.get("view") || "new";
 
   if (currentView === "team") {
     currentPlayerView = "teams";
@@ -1457,6 +1468,11 @@ function loadView(view) {
 
   if (view === "team") {
     loadTeamsView(true);
+    return;
+  }
+
+  if (view === "player") {
+    loadPlayerDetailView();
     return;
   }
 
@@ -2062,6 +2078,14 @@ async function init() {
 
 function teamToSlug_(team) {
   return String(team || "")
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function playerToSlug_(name) {
+  return String(name || "")
     .toLowerCase()
     .replace(/&/g, "and")
     .replace(/[^a-z0-9]+/g, "-")
