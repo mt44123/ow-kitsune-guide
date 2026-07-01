@@ -2154,3 +2154,15 @@ function setOg_(property, content) {
 
   meta.setAttribute("content", content);
 }
+
+function hasPlayerProfile_(player) {
+  const region = String(player.teamRegion || "")
+    .replace(/^●\s*/, "")
+    .trim();
+
+  return ![
+    "Team Official",
+    "Official OWCS",
+    "HERO"
+  ].includes(region);
+}

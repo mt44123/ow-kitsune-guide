@@ -164,12 +164,20 @@ app.innerHTML = `
                 ${isFavorite_(p.name) ? "★" : "☆"}
               </span>
             
-              <a
-                class="player-name-link"
-                href="/player/${playerToSlug_(p.name)}"
-              >
-                ${p.name || ""}
-              </a>
+              ${
+                hasPlayerProfile_(p)
+                  ? `
+                    <a
+                      class="player-name-link"
+                      href="/player/${playerToSlug_(p.name)}"
+                    >
+                      ${escapeHtml(p.name || "")}
+                    </a>
+                  `
+                  : `
+                    <span>${escapeHtml(p.name || "")}</span>
+                  `
+              }
             
             </td>
 
@@ -715,4 +723,17 @@ function setCanonical_(url) {
   }
 
   link.setAttribute("href", url);
+}
+
+function setPlayerOgp_(player, title, description) {
+  const slug = playerToSlug_(player.name || "");
+
+  setOg_("og:title", title);
+  setOg_("og:description", description);
+  setOg_("og:url", `${location.origin}/player/${slug}`);
+  setOg_("og:type", "profile");
+
+  setOg_("twitter:card", "summary_large_image");
+  setOg_("twitter:title", title);
+  setOg_("twitter:description", description);
 }

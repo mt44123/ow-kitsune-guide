@@ -474,9 +474,7 @@ const members = players
         
           <a
             class="player-name-link"
-            href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
-            target="_blank"
-            rel="noopener"
+            href="/player/${playerToSlug_(p.name)}"
           >
             ${escapeHtml(p.name || "-")}
           </a>
