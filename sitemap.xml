@@ -1,20 +1,359 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+"<?xml version=""1.0"" encoding=""UTF-8""?>
+<urlset xmlns=""http://www.sitemaps.org/schemas/sitemap/0.9"">
 
   <url>
     <loc>https://owkitsune.com/</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=teams</loc>
+    <lastmod>2026-07-01</lastmod>
   </url>
 
   <url>
     <loc>https://owkitsune.com/?view=playerlinks</loc>
+    <lastmod>2026-07-01</lastmod>
   </url>
 
   <url>
     <loc>https://owkitsune.com/?view=birthdays</loc>
+    <lastmod>2026-07-01</lastmod>
   </url>
 
   <url>
     <loc>https://owkitsune.com/?view=youtube</loc>
+    <lastmod>2026-07-01</lastmod>
   </url>
 
-</urlset>
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=1234</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=99divine</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=9z-team</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=al-qadsiah</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=all-gamers</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=arise-project</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=avidity</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=blue-bees</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=category-casters</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=cheeseburger</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=crazy-raccoon</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=dallas-fuel</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=darkmode-na</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=dhillducks</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=disguised</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=dreamlight-x-harmony</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=elmt</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=enter-force-36</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=ex-oblivione</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=extinction</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=fury</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=four-angry-men</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=geekay-esports</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=goud-guys</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=huneng-gaming</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=interesting-pivot</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=jd-gaming</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=laika</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=last-word</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=lazuli</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=lostnever-gaming</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=lunex-gaming</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=meng-gong-3</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=murash-gaming</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=ntmr</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=najdorf-esports</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=nyam-gaming</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=o2-blast</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=overwatch-champions-series</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=please-not-hero-ban</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=poker-face</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=revati</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=shengshi-esports</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=solus-victorem</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=spacestation-gaming</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=srpeakcheck</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=superbad</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=t1</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=team-falcons</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=team-liquid</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=team-peps</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=team-rats</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=team-secret</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=team-vision</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=telacy</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=the-kafe</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=trap12</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=twisted-minds</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=uwinks</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=varrel</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=vanir-quick</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=virtus-pro</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=weibo-gaming</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=young-and-beautiful</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=zanside-gaming</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://owkitsune.com/?view=team&amp;team=zeta-division</loc>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+
+</urlset>"
