@@ -1495,6 +1495,8 @@ function loadView(view) {
 
 function loadMutedPlayersView() {
 
+  resetSeo_();
+
   stopFakeProgress();
 
   pageTitle.textContent = "◆MUTED";
@@ -2084,4 +2086,19 @@ function openTeamFromUrl_() {
     team.region,
     false
   );
+}
+
+function resetSeo_() {
+  document.title = "OW KITSUNE GUIDE";
+  
+  const meta = document.getElementById("metaDescription");
+  if (meta) {
+    meta.content =
+      "Track Overwatch pro player live streams, YouTube videos, clips and player links.";
+  }
+
+  const canonical = document.getElementById("canonicalUrl");
+  if (canonical) {
+    canonical.href = "https://owkitsune.com/";
+  }
 }

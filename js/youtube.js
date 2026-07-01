@@ -1,4 +1,7 @@
 function loadYoutubeView(view) {
+
+  resetSeo_();
+  
   viewNote.textContent = "";
   document.body.classList.add("youtube-view");
   document.body.classList.remove("clip-view");

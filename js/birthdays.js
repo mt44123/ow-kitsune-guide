@@ -1,6 +1,9 @@
 let birthdayCalendarDate = new Date();
 
 function loadBirthdaysView() {
+
+  resetSeo_();
+
   const now = Date.now();
 
   updated.textContent =

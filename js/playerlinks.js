@@ -1,4 +1,7 @@
 function loadPlayerLinksView() {
+
+  resetSeo_();
+
   viewNote.textContent = "";
   const now = Date.now();
 

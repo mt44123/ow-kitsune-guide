@@ -1,4 +1,7 @@
 function loadLiveView(view) {
+
+  resetSeo_();
+  
   viewNote.textContent = "";
   const now = Date.now();
 

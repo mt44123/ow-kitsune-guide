@@ -28,9 +28,11 @@ function toggleFavorite_(name) {
 }
 
 function loadFavoritesView() {
+
   updateFavoriteCounts_();
   const now = Date.now();
 
+  resetSeo_();
   pageTitle.textContent = "★MY GOATS";
   setRandomVoiceLine();
 

@@ -1,6 +1,8 @@
 function loadTeamsView(openFromUrl = false) {
   const now = Date.now();
 
+  resetSeo_();
+
   pageTitle.textContent = "TEAMS";
   setRandomVoiceLine();
 
@@ -346,6 +348,26 @@ function renderTeamPlayers(teamName, players, regionName = null, updateUrl = tru
       "",
       `?view=team&team=${encodeURIComponent(teamToSlug_(teamName))}`
     );
+  }
+
+  document.title =
+  `${teamName} Players | OW KITSUNE GUIDE`;
+
+  pageTitle.textContent = teamName;
+
+  const meta = document.getElementById("metaDescription");
+
+  if (meta) {
+    meta.content =
+      `${teamName} roster, live streams, YouTube videos, clips and player links.`;
+  }
+
+  const canonical =
+    document.getElementById("canonicalUrl");
+
+  if (canonical) {
+    canonical.href =
+      `${location.origin}/?view=team&team=${encodeURIComponent(teamToSlug_(teamName))}`;
   }
 
   app.className = "team-detail-mode";
