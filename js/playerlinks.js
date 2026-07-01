@@ -514,7 +514,32 @@ function renderPlayerDetail(name, players) {
           >`
         : ""
     }
-      <h2>${escapeHtml(player.name)}</h2>
+      <div class="player-detail-title-row">
+
+        <div class="player-detail-name-wrap">
+
+          <span
+            class="favorite-star ${isFavorite_(player.name) ? "active" : ""}"
+            data-favorite-name="${escapeHtml(player.name)}"
+          >
+            ${isFavorite_(player.name) ? "★" : "☆"}
+          </span>
+
+          <h2 class="player-detail-name">
+            ${escapeHtml(player.name)}
+          </h2>
+
+        </div>
+
+        <button
+          class="player-menu-button"
+          data-player-menu="${escapeHtml(player.name)}"
+          aria-label="Player menu"
+        >
+          ⋮
+        </button>
+
+      </div>
 
       ${
         aliasText

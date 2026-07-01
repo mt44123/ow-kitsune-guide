@@ -3827,3 +3827,54 @@ body.player-detail-view #app{
   max-width:1000px;
   margin:0 auto;
 }
+
+.player-detail-title-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+
+  margin-bottom:8px;
+}
+
+.player-detail-name-wrap{
+  display:flex;
+  align-items:center;
+  min-width:0;
+}
+
+.player-detail-name{
+  margin:0;
+
+  font-size:28px;
+  line-height:1.2;
+
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.player-menu-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  width:36px;
+  height:36px;
+
+  border:none;
+  border-radius:999px;
+
+  background:transparent;
+  color:var(--text-muted);
+
+  font-size:24px;
+  line-height:1;
+
+  cursor:pointer;
+}
+
+.player-menu-button:hover{
+  background:var(--bg-light);
+  color:var(--accent);
+}
