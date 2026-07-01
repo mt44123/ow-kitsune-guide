@@ -691,10 +691,15 @@ const params = new URLSearchParams(window.location.search);
 
 const path = location.pathname;
 
-let currentView =
-  path.startsWith("/player/")
-    ? "player"
-    : params.get("view") || "new";
+let currentView;
+
+if (path.startsWith("/player/")) {
+  currentView = "player";
+} else if (path.startsWith("/team/")) {
+  currentView = "team";
+} else {
+  currentView = params.get("view") || "new";
+}
 
 let currentRoleFilter =
   localStorage.getItem("roleFilter") || "all";
@@ -1167,10 +1172,13 @@ window.addEventListener("popstate", () => {
 
   const path = location.pathname;
 
-  currentView =
-    path.startsWith("/player/")
-      ? "player"
-      : params.get("view") || "new";
+  if (path.startsWith("/player/")) {
+    currentView = "player";
+  } else if (path.startsWith("/team/")) {
+    currentView = "team";
+  } else {
+    currentView = params.get("view") || "new";
+  }
 
   if (currentView === "team") {
     currentPlayerView = "teams";
@@ -2095,8 +2103,9 @@ function playerToSlug_(name) {
 }
 
 function openTeamFromUrl_() {
-  const params = new URLSearchParams(window.location.search);
-  const slug = params.get("team");
+  const slug = location.pathname
+    .replace(/^\/team\//, "")
+    .replace(/\/$/, "");
 
   if (!slug) {
     renderTeams(currentData);

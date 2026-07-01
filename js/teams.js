@@ -346,7 +346,7 @@ function renderTeamPlayers(teamName, players, regionName = null, updateUrl = tru
     history.pushState(
       {},
       "",
-      `?view=team&team=${encodeURIComponent(teamToSlug_(teamName))}`
+      `/team/${teamToSlug_(teamName)}`
     );
   }
 
@@ -367,7 +367,7 @@ function renderTeamPlayers(teamName, players, regionName = null, updateUrl = tru
 
   if (canonical) {
     canonical.href =
-      `${location.origin}/?view=team&team=${encodeURIComponent(teamToSlug_(teamName))}`;
+      `${location.origin}/team/${teamToSlug_(teamName)}`;
   }
 
   app.className = "team-detail-mode";
