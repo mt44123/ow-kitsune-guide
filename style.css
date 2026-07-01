@@ -2859,43 +2859,43 @@ content:"★ ";
 }
 
 .birthday-next{
-  margin-top:12px;
-  padding-top:10px;
+  margin-top:14px;
+  padding-top:12px;
+
   border-top:1px solid var(--border);
 
-  color:var(--text-muted);
-  font-size:12px;
   text-align:center;
 }
 
 .birthday-next-title{
-  margin-bottom:4px;
+  margin-bottom:6px;
 
-  color:var(--text-muted);
   font-size:11px;
   font-weight:700;
-  letter-spacing:.08em;
+  letter-spacing:.12em;
   text-transform:uppercase;
+
+  color:var(--text-muted);
 }
 
 .birthday-next-item{
-  line-height:1.5;
+  color:var(--text-sub);
+  font-size:13px;
+  line-height:1.6;
+}
+
+.birthday-next-item + .birthday-next-item{
+  margin-top:2px;
 }
 
 .birthday-next-item a{
-  color:var(--text-sub);
-  text-decoration:none;
+  color:inherit;
   font-weight:700;
+  text-decoration:none;
 }
 
 .birthday-next-item a:hover{
   color:var(--accent);
-  text-decoration:underline;
-}
-
-.birthday-next-item span{
-  margin-left:4px;
-  color:var(--text-muted);
 }
 
 /* =========================================================
