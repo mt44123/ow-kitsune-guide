@@ -609,13 +609,46 @@ function renderPlayerDetail(name, players) {
             latestClip
               ? `
               <a
-                class="last-stream-link"
+                class="player-activity-card"
                 href="${latestClip.url}"
                 target="_blank"
                 rel="noopener"
               >
-                <span>✂</span>
-                <span>Latest Clip · ${timeAgo(latestClip.date)}</span>
+                <img
+                  class="player-activity-thumb"
+                  src="${latestClip.thumbnail}"
+                  alt="${escapeHtml(
+                    latestClip.rawTitle ||
+                    latestClip.titleJp ||
+                    latestClip.titleEn ||
+                    latestClip.titleKr ||
+                    ""
+                  )}"
+                  loading="lazy"
+                >
+
+                <div class="player-activity-info">
+
+                  <div class="player-activity-label">
+                    ${latestClip.platform ? renderPlatformIcons_(latestClip.platform) : "✂"}
+                    Latest Clip
+                  </div>
+
+                  <div class="player-activity-title">
+                    ${escapeHtml(
+                      latestClip.rawTitle ||
+                      latestClip.titleJp ||
+                      latestClip.titleEn ||
+                      latestClip.titleKr ||
+                      ""
+                    )}
+                  </div>
+
+                  <div class="player-activity-time">
+                    ${timeAgo(latestClip.date)}
+                  </div>
+
+                </div>
               </a>
               `
               : ""
