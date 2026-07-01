@@ -311,8 +311,10 @@ function filterClipView(clips, view) {
   }
 
   if (view === "chzzkhotclips" || view === "soophotclips") {
-  return sortByViews_(result);
-}
+    return sortByViews_(
+      filterRecentClips_(result, 30)
+    );
+  }
 
   return sortByDateDesc_(result);
 }
