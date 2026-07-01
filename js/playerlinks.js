@@ -409,15 +409,6 @@ function loadPlayerDetailView() {
     return;
   }
 
-  if (
-    playerLinksCache &&
-    Date.now() - playerLinksCacheTime < PLAYER_LINKS_CLIENT_CACHE_MS
-  ) {
-    currentData = playerLinksCache;
-    renderPlayerDetail(name, currentData);
-    return;
-  }
-
   startFakeProgress();
 
   Promise.all([
