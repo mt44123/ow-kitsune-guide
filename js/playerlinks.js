@@ -536,6 +536,16 @@ function renderPlayerDetail(name, players) {
           : ""
       }
 
+      <div class="team-player-links">
+        ${linkTag(player.twitchUrl, "TW", player.twitchActive ? "tw" : "tw-inactive")}
+        ${linkTag(player.chzzkUrl, "CHZ", "chz")}
+        ${linkTag(player.soopUrl, "SOOP", "soop")}
+        ${linkTag(player.biliUrl, "BILI", "bili")}
+        ${linkTag(player.youtubeUrl, "YT", "yt")}
+        ${linkTag(player.xUrl, "X", "x")}
+        ${linkTag(player.discordUrl, "DC", "dc")}
+      </div>
+
       <div class="player-detail-section">
         <h3>Latest Activity</h3>
 
@@ -648,16 +658,6 @@ function renderPlayerDetail(name, players) {
           }
 
         </div>
-      </div>
-
-      <div class="team-player-links">
-        ${linkTag(player.twitchUrl, "TW", player.twitchActive ? "tw" : "tw-inactive")}
-        ${linkTag(player.chzzkUrl, "CHZ", "chz")}
-        ${linkTag(player.soopUrl, "SOOP", "soop")}
-        ${linkTag(player.biliUrl, "BILI", "bili")}
-        ${linkTag(player.youtubeUrl, "YT", "yt")}
-        ${linkTag(player.xUrl, "X", "x")}
-        ${linkTag(player.discordUrl, "DC", "dc")}
       </div>
 
       <p class="seo-note">
