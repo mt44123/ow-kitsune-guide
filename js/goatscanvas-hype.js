@@ -331,7 +331,7 @@ async function shareGoatsImageHype_() {
   ctx.font = `500 22px ${fontBody}`;
   ctx.fillText(`Generated ${dateText}`, width / 2, footerY + 42);
 
-  ctx.fillText("ow-kitsune-guide.pages.dev", width / 2, footerY + 72);
+  ctx.fillText("https://owkitsune.com", width / 2, footerY + 72);
 
   ctx.textAlign = "left";
 
