@@ -3642,3 +3642,35 @@ color:var(--text-sub);
   text-decoration:underline;
   text-underline-offset:6px;
 }
+
+.player-detail-mode{
+  max-width:900px;
+  margin:0 auto;
+}
+
+.player-detail-card{
+  padding:24px;
+  text-align:center;
+}
+
+.player-detail-card h2{
+  margin:0 0 8px;
+}
+
+.player-detail-alias{
+  color:var(--text-muted);
+  font-size:14px;
+}
+
+.player-detail-card .team-player-links{
+  justify-content:center;
+  margin:20px 0;
+}
+
+.seo-note{
+  margin-top:24px;
+  color:var(--text-muted);
+  font-size:12px;
+  line-height:1.6;
+  text-align:left;
+}
