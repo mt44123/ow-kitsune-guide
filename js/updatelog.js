@@ -53,9 +53,18 @@ function renderUpdateLog_(logs) {
           <h3>Version ${escapeHtml(log.version)}</h3>
           <p>${escapeHtml(log.date)}</p>
 
-          ${renderUpdateLogSection_("NEW 新機能", log.new)}
-          ${renderUpdateLogSection_("IMPROVED 改善", log.improved)}
-          ${renderUpdateLogSection_("FIXED 修正", log.fixed)}
+          ${renderUpdateLogSection_(
+            siteText_("NEW", "新機能"),
+            log.new
+          )}
+          ${renderUpdateLogSection_(
+            siteText_("IMPROVED", "改善"),
+            log.improved
+          )}
+          ${renderUpdateLogSection_(
+            siteText_("FIXED", "修正"),
+            log.fixed
+)}
         </div>
       `).join("")}
     </div>
@@ -70,12 +79,10 @@ function renderUpdateLogSection_(title, items) {
     <ul>
       ${items.map(item => `
         <li>
-          ${escapeHtml(item.en || "")}
-          ${
-            item.jp
-              ? `<br><span class="update-log-jp">${escapeHtml(item.jp)}</span>`
-              : ""
-          }
+          ${siteText_(
+            escapeHtml(item.en || ""),
+            escapeHtml(item.jp || "")
+          )}
         </li>
       `).join("")}
     </ul>
