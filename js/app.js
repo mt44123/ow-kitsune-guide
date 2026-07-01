@@ -1628,35 +1628,35 @@ function linkDot(url, type) {
   const icons = {
     tw: {
       name: "Twitch",
-      src: "./icons/twitch.png"
+      src: "/icons/twitch.png"
     },
     "tw-inactive": {
       name: "Twitch",
-      src: "./icons/twitch.png"
+      src: "/icons/twitch.png"
     },
     chz: {
       name: "CHZZK",
-      src: "./icons/chzzk.png"
+      src: "/icons/chzzk.png"
     },
     soop: {
       name: "SOOP",
-      src: "./icons/soop.png"
+      src: "/icons/soop.png"
     },
     bili: {
       name: "Bilibili",
-      src: "./icons/bilibili.png"
+      src: "/icons/bilibili.png"
     },
     yt: {
       name: "YouTube",
-      src: "./icons/youtube.png"
+      src: "/icons/youtube.png"
     },
     dc: {
       name: "Discord",
-      src: "./icons/discord.png"
+      src: "/icons/discord.png"
     },
     x: {
       name: "X",
-      src: "./icons/x.png"
+      src: "/icons/x.png"
     },
   };
 
@@ -1689,14 +1689,14 @@ function linkTag(url, label, cls) {
 
   const type = cls || "";
   const icons = {
-    tw: { name: "Twitch", src: "./icons/twitch.png" },
-    "tw-inactive": { name: "Twitch", src: "./icons/twitch.png" },
-    chz: { name: "CHZZK", src: "./icons/chzzk.png" },
-    soop: { name: "SOOP", src: "./icons/soop.png" },
-    bili: { name: "Bilibili", src: "./icons/bilibili.png" },
-    yt: { name: "YouTube", src: "./icons/youtube.png" },
-    dc: { name: "Discord", src: "./icons/discord.png" },
-    x: {  name: "X",  src: "./icons/x.png"},
+    tw: { name: "Twitch", src: "/icons/twitch.png" },
+    "tw-inactive": { name: "Twitch", src: "/icons/twitch.png" },
+    chz: { name: "CHZZK", src: "/icons/chzzk.png" },
+    soop: { name: "SOOP", src: "/icons/soop.png" },
+    bili: { name: "Bilibili", src: "/icons/bilibili.png" },
+    yt: { name: "YouTube", src: "/icons/youtube.png" },
+    dc: { name: "Discord", src: "/icons/discord.png" },
+    x: {  name: "X",  src: "/icons/x.png"},
   };
 
   const icon = icons[type];
@@ -1939,28 +1939,28 @@ function getPlatformIcons_(platform) {
   if (text.includes("TWITCH") || text.includes("🟣")) {
     icons.push({
       name: "Twitch",
-      src: "./icons/twitch.png"
+      src: "/icons/twitch.png"
     });
   }
 
   if (text.includes("CHZZK") || text.includes("🟢")) {
     icons.push({
       name: "CHZZK",
-      src: "./icons/chzzk.png"
+      src: "/icons/chzzk.png"
     });
   }
 
   if (text.includes("SOOP") || text.includes("🔵")) {
     icons.push({
       name: "SOOP",
-      src: "./icons/soop.png"
+      src: "/icons/soop.png"
     });
   }
 
   if (text.includes("BILIBILI") || text.includes("🟡")) {
     icons.push({
       name: "Bilibili",
-      src: "./icons/bilibili.png"
+      src: "/icons/bilibili.png"
     });
   }
 
@@ -2062,10 +2062,10 @@ function getTeamLogoPath_(team, useLightTheme = true) {
     isLightTheme &&
     lightLogoTeams.includes(name)
   ) {
-    return `./TeamLogo/${file}_light.png`;
+    return `/TeamLogo/${file}_light.png`;
   }
 
-  return `./TeamLogo/${file}.png`;
+  return `/TeamLogo/${file}.png`;
 }
 
 async function init() {

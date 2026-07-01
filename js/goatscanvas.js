@@ -271,7 +271,7 @@ function buildSiteShareText_() {
 }
 
 function shareSite_() {
-  fetch("./og-image.png")
+  fetch("/og-image.png")
     .then(res => res.blob())
     .then(blob => {
       showGoatsShareModal_(

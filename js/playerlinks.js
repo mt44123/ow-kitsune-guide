@@ -442,7 +442,8 @@ function renderPlayerDetail(name, players) {
   }
 
   pageTitle.textContent = player.name;
-  app.className = "player-detail-mode";
+  app.className = "";
+  document.body.classList.add("player-detail-view");
 
   const aliasText =
     player.playerAlias

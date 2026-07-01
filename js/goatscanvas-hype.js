@@ -28,7 +28,7 @@ async function shareGoatsImageHype_() {
   const ctx = canvas.getContext("2d");
 
   const qr = new Image();
-  qr.src = "./icons/qr.png";
+  qr.src = "/icons/qr.png";
 
   const width = 1200;
   const padding = 56;

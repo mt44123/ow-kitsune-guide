@@ -107,7 +107,7 @@ notifySelect?.addEventListener(
             liveNotificationMode === "goats"
               ? siteText_("Live notifications: MY GOATS", "ライブ通知: MY GOATS")
               : siteText_("Live notifications: ALL", "ライブ通知: ALL"),
-          icon: "./icons/icon-192.png"
+          icon: "/icons/icon-192.png"
         }
       );
     }
@@ -184,7 +184,7 @@ function checkLiveNotifications_(players){
               mainTitle,
               ...subTitles
             ].filter(Boolean).join("\n"),
-          icon: "./icons/icon-192.png"
+          icon: "/icons/icon-192.png"
         }
       );
     }
