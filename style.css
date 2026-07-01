@@ -3818,3 +3818,12 @@ body.player-detail-view #app{
   }
 
 }
+
+.player-detail-view #app{
+  display:block;
+}
+
+.player-detail-card{
+  max-width:1000px;
+  margin:0 auto;
+}
