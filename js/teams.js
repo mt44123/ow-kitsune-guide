@@ -1,4 +1,4 @@
-function loadTeamsView() {
+function loadTeamsView(openFromUrl = false) {
   const now = Date.now();
 
   pageTitle.textContent = "TEAMS";
@@ -16,7 +16,13 @@ function loadTeamsView() {
     updated.textContent = playerLinksLastUpdated;
 
     currentData = playerLinksCache;
-    renderTeams(currentData);
+
+    if (openFromUrl) {
+      openTeamFromUrl_();
+    } else {
+      renderTeams(currentData);
+    }
+
     applyCurrentSearch_();
     return;
   }
@@ -49,7 +55,11 @@ function loadTeamsView() {
 
       currentData = playerLinksCache;
 
-      renderTeams(currentData);
+      if (openFromUrl) {
+        openTeamFromUrl_();
+      } else {
+        renderTeams(currentData);
+      }
     })
     .catch(error => {
       if (currentRequest !== requestId) return;
@@ -325,10 +335,18 @@ function renderRegionTeams(regionName, players) {
   });
 }
 
-function renderTeamPlayers(teamName, players, regionName = null) {
+function renderTeamPlayers(teamName, players, regionName = null, updateUrl = true) {
 
   currentTeamName = teamName;
   currentRegionName = regionName;
+
+  if (updateUrl) {
+    history.pushState(
+      {},
+      "",
+      `?view=team&team=${encodeURIComponent(teamToSlug_(teamName))}`
+    );
+  }
 
   app.className = "team-detail-mode";
   

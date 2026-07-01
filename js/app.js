@@ -922,6 +922,7 @@ const VIEW_GROUPS = {
 
   players: [
     "teams",
+    "team",
     "playerlinks",
     "birthdays",
     "favorites",
@@ -1437,6 +1438,11 @@ function loadView(view) {
 
   if (view === "teams") {
     loadTeamsView();
+    return;
+  }
+
+  if (view === "team") {
+    loadTeamsView(true);
     return;
   }
 
@@ -2033,3 +2039,36 @@ async function init() {
   setRandomVoiceLine();
 }
 
+function teamToSlug_(team) {
+  return String(team || "")
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function openTeamFromUrl_() {
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("team");
+
+  if (!slug) {
+    renderTeams(currentData);
+    return;
+  }
+
+  const team = buildTeams_(currentData).find(t =>
+    teamToSlug_(t.name) === slug
+  );
+
+  if (!team) {
+    app.innerHTML = `<p class="empty">Team not found.</p>`;
+    return;
+  }
+
+  renderTeamPlayers(
+    team.name,
+    currentData,
+    team.region,
+    false
+  );
+}
