@@ -3829,18 +3829,40 @@ body.player-detail-view #app{
 }
 
 .player-detail-title-row{
+  position:relative;
+
   display:flex;
+  justify-content:center;
   align-items:center;
-  justify-content:space-between;
-  gap:12px;
 
   margin-bottom:8px;
 }
 
 .player-detail-name-wrap{
-  display:flex;
+  display:inline-flex;
   align-items:center;
+  justify-content:center;
+  gap:6px;
+
   min-width:0;
+}
+
+.player-detail-name{
+  margin:0;
+
+  font-size:28px;
+  line-height:1.2;
+
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+
+  text-align:center;
+}
+
+.player-menu-button{
+  position:absolute;
+  right:0;
 }
 
 .player-detail-name{
@@ -3885,17 +3907,6 @@ body.player-detail-view #app{
     font-size:24px;
   }
 
-}
-
-.player-detail-title-row{
-  justify-content:center;
-}
-
-.player-detail-name-wrap{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
 }
 
 .player-detail-name-wrap .favorite-star{
