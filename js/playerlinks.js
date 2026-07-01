@@ -169,7 +169,9 @@ app.innerHTML = `
                   ? `
                     <a
                       class="player-name-link"
-                      href="/player/${playerToSlug_(p.name)}"
+                      href="#"
+                      data-player="${escapeHtml(p.name)}"
+                      onclick="return false;"
                     >
                       ${escapeHtml(p.name || "")}
                     </a>

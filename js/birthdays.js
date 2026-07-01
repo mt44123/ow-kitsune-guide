@@ -185,10 +185,10 @@ function buildBirthdayTodaySection_(
 
                 <strong>
                   <a
-                    class="birthday-player-link"
-                    href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
-                    target="_blank"
-                    rel="noopener"
+                    class="birthday-player-link player-name-link"
+                    href="#"
+                    data-player="${escapeHtml(p.name)}"
+                    onclick="return false;"
                   >
                     🎂 ${escapeHtml(p.name)}
                   </a>
@@ -280,10 +280,10 @@ function buildBirthdayCells_(
 
             <strong>
               🎂 <a
-                class="birthday-player-link"
-                href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
-                target="_blank"
-                rel="noopener"
+                class="birthday-player-link player-name-link"
+                href="#"
+                data-player="${escapeHtml(p.name)}"
+                onclick="return false;"
               >
                 ${escapeHtml(p.name)}
               </a>
@@ -345,12 +345,12 @@ function buildBirthdayList_(
 
         <div>
           <strong>
-            🎂 <a
-              class="birthday-player-link"
-              href="https://liquipedia.net/overwatch/${encodeURIComponent(p.name || "")}"
-              target="_blank"
-              rel="noopener"
-            >
+            🎂<a
+                class="birthday-player-link player-name-link"
+                href="#"
+                data-player="${escapeHtml(p.name)}"
+                onclick="return false;"
+              >
               ${escapeHtml(p.name)}
             </a>
           </strong>

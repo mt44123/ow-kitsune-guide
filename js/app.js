@@ -2201,3 +2201,84 @@ function setCanonical_(url) {
 
   link.setAttribute("href", url);
 }
+
+let playerLinkMenu = null;
+
+function closePlayerLinkMenu_() {
+  playerLinkMenu?.remove();
+  playerLinkMenu = null;
+}
+
+function openPlayerLinkMenu_(button, playerName) {
+  closePlayerLinkMenu_();
+
+  const name = String(playerName || "");
+  if (!name) return;
+
+  playerLinkMenu = document.createElement("div");
+  playerLinkMenu.className = "player-context-menu";
+
+  playerLinkMenu.innerHTML = `
+    <button data-action="liquipedia">
+      📖 Liquipedia
+    </button>
+
+    <button data-action="activity">
+      🦊 Latest Activity
+    </button>
+  `;
+
+  document.body.appendChild(playerLinkMenu);
+
+  const rect = button.getBoundingClientRect();
+
+  playerLinkMenu.style.left =
+    `${rect.left + window.scrollX}px`;
+
+  playerLinkMenu.style.top =
+    `${rect.bottom + window.scrollY + 6}px`;
+
+  playerLinkMenu.addEventListener("click", e => {
+    const item = e.target.closest("button");
+    if (!item) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (item.dataset.action === "liquipedia") {
+      window.open(
+        `https://liquipedia.net/overwatch/${encodeURIComponent(name)}`,
+        "_blank",
+        "noopener"
+      );
+    }
+
+    if (item.dataset.action === "activity") {
+
+      history.pushState(
+        {},
+        "",
+        `/player/${playerToSlug_(name)}`
+      );
+
+      currentView = "player";
+      updateNavState(currentView);
+      loadPlayerDetailView();
+    }
+
+    closePlayerLinkMenu_();
+  });
+}
+
+document.addEventListener("click", e => {
+  const link = e.target.closest("[data-player]");
+  if (!link) {
+    closePlayerLinkMenu_();
+    return;
+  }
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  openPlayerLinkMenu_(link, link.dataset.player);
+});
