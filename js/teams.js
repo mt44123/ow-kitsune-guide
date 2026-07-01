@@ -350,25 +350,7 @@ function renderTeamPlayers(teamName, players, regionName = null, updateUrl = tru
     );
   }
 
-  document.title =
-  `${teamName} Players | OW KITSUNE GUIDE`;
-
-  pageTitle.textContent = teamName;
-
-  const meta = document.getElementById("metaDescription");
-
-  if (meta) {
-    meta.content =
-      `${teamName} roster, live streams, YouTube videos, clips and player links.`;
-  }
-
-  const canonical =
-    document.getElementById("canonicalUrl");
-
-  if (canonical) {
-    canonical.href =
-      `${location.origin}/team/${teamToSlug_(teamName)}`;
-  }
+setTeamSeo_(teamName);
 
   app.className = "team-detail-mode";
   
@@ -537,3 +519,56 @@ const members = players
     });
 }
 
+function setTeamSeo_(teamName) {
+  const slug = teamToSlug_(teamName);
+
+  const title =
+    `${teamName} Players | OW KITSUNE GUIDE`;
+
+  const description =
+    `${teamName} Overwatch roster, live streams, YouTube videos, clips, player links and latest activity.`;
+
+  document.title = title;
+
+  pageTitle.textContent = teamName;
+
+  setMeta_("description", description);
+
+  setCanonical_(
+    `${location.origin}/team/${slug}`
+  );
+
+  setOg_("og:title", title);
+  setOg_("og:description", description);
+  setOg_("og:url", `${location.origin}/team/${slug}`);
+  setOg_("og:type", "website");
+
+  setOg_("twitter:card", "summary_large_image");
+  setOg_("twitter:title", title);
+  setOg_("twitter:description", description);
+
+  setTeamJsonLd_(teamName);
+}
+
+function setTeamJsonLd_(teamName) {
+  const slug = teamToSlug_(teamName);
+
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "SportsTeam",
+    "name": teamName,
+    "url": `${location.origin}/team/${slug}`
+  };
+
+  let script =
+    document.querySelector('script[data-team-jsonld="true"]');
+
+  if (!script) {
+    script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.dataset.teamJsonld = "true";
+    document.head.appendChild(script);
+  }
+
+  script.textContent = JSON.stringify(data);
+}

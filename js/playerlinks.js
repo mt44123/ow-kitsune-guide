@@ -478,8 +478,6 @@ function renderPlayerDetail(name, players) {
     return;
   }
 
-  pageTitle.textContent = player.name;
-
   setPlayerSeo_(player);
 
   app.className = "";
@@ -574,13 +572,34 @@ function renderPlayerDetail(name, players) {
             latestVideo
               ? `
               <a
-                class="last-stream-link"
+                class="player-activity-card"
                 href="${latestVideo.url}"
                 target="_blank"
                 rel="noopener"
               >
-                <img class="platform-icon" src="/icons/youtube.png" alt="YouTube">
-                <span>Latest YouTube · ${timeAgo(latestVideo.date)}</span>
+                <img
+                  class="player-activity-thumb"
+                  src="${latestVideo.thumbnail}"
+                  alt="${escapeHtml(latestVideo.rawTitle || latestVideo.titleJp || latestVideo.titleEn || latestVideo.titleKr || "")}"
+                  loading="lazy"
+                >
+
+                <div class="player-activity-info">
+
+                  <div class="player-activity-label">
+                    <img class="platform-icon" src="/icons/youtube.png" alt="">
+                    Latest YouTube
+                  </div>
+
+                  <div class="player-activity-title">
+                    ${escapeHtml(latestVideo.rawTitle || latestVideo.titleJp || latestVideo.titleEn || latestVideo.titleKr || "")}
+                  </div>
+
+                  <div class="player-activity-time">
+                    ${timeAgo(latestVideo.date)}
+                  </div>
+
+                </div>
               </a>
               `
               : ""
@@ -637,6 +656,8 @@ function setPlayerSeo_(player) {
     `${name} is a ${player.role || "Overwatch"} player from ${player.nationality || "unknown region"} currently playing for ${team}. View Twitch, YouTube, latest streams, clips, Discord and complete Overwatch player profile.`;
 
   document.title = title;
+
+  pageTitle.textContent = player.name;
 
   setMeta_("description", description);
 
