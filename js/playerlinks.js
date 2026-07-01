@@ -699,32 +699,6 @@ function setPlayerJsonLd_(player) {
   script.textContent = JSON.stringify(data);
 }
 
-function setMeta_(name, content) {
-  let meta =
-    document.querySelector(`meta[name="${name}"]`);
-
-  if (!meta) {
-    meta = document.createElement("meta");
-    meta.setAttribute("name", name);
-    document.head.appendChild(meta);
-  }
-
-  meta.setAttribute("content", content);
-}
-
-function setCanonical_(url) {
-  let link =
-    document.querySelector(`link[rel="canonical"]`);
-
-  if (!link) {
-    link = document.createElement("link");
-    link.setAttribute("rel", "canonical");
-    document.head.appendChild(link);
-  }
-
-  link.setAttribute("href", url);
-}
-
 function setPlayerOgp_(player, title, description) {
   const slug = playerToSlug_(player.name || "");
 
