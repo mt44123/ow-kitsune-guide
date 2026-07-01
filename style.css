@@ -1429,6 +1429,24 @@ display:none;
   overflow:hidden;
 }
 
+/* レイアウト崩れ防止 */
+.live-card,
+.live-card *{
+  min-width:0;
+}
+
+.card-link,
+.live-card{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+}
+
+.live-card .title{
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+
 .live-card .title{
   overflow-wrap:anywhere;
   word-break:break-word;
