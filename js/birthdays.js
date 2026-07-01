@@ -82,6 +82,9 @@ function renderBirthdayCalendar(players) {
       d === today.getDate()
     );
   });
+
+  const nextBirthdays =
+  getNextBirthdays_(players, today);
   
   const firstDay = new Date(year, month, 1);
   const startDay = firstDay.getDay();
@@ -122,7 +125,8 @@ function renderBirthdayCalendar(players) {
     buildBirthdayTodaySection_(
       todayBirthdays,
       today,
-      year
+      year,
+      nextBirthdays
     );
 
   app.innerHTML = `
@@ -165,10 +169,49 @@ function renderBirthdayCalendar(players) {
   };
 }
 
+function getNextBirthdays_(players, today) {
+  const todayMonth = today.getMonth() + 1;
+  const todayDay = today.getDate();
+
+  const list = players
+    .filter(p => p.born)
+    .map(p => {
+      const [, month, day] =
+        p.born.split("-").map(Number);
+
+      let nextDate =
+        new Date(today.getFullYear(), month - 1, day);
+
+      if (
+        month < todayMonth ||
+        (month === todayMonth && day <= todayDay)
+      ) {
+        nextDate =
+          new Date(today.getFullYear() + 1, month - 1, day);
+      }
+
+      return {
+        ...p,
+        nextDate,
+        month,
+        day
+      };
+    })
+    .sort((a, b) => a.nextDate - b.nextDate);
+
+  const firstDate = list[0]?.nextDate;
+  if (!firstDate) return [];
+
+  return list.filter(p =>
+    p.nextDate.getTime() === firstDate.getTime()
+  );
+}
+
 function buildBirthdayTodaySection_(
   todayBirthdays,
   today,
-  year
+  year,
+  nextBirthdays = []
 ) {
   return `
     <div class="birthday-today">
@@ -224,6 +267,37 @@ function buildBirthdayTodaySection_(
                 </div>
               </div>
             `
+      }
+
+      ${
+        nextBirthdays.length
+          ? `
+            <div class="birthday-next">
+              <div class="birthday-next-title">
+                Next Birthday
+              </div>
+
+              ${nextBirthdays.map(p => `
+                <div class="birthday-next-item">
+                  ${p.month}/${p.day}
+                  ·
+                  <a
+                    class="birthday-player-link player-name-link"
+                    href="#"
+                    data-player="${escapeHtml(p.name)}"
+                    onclick="return false;"
+                  >
+                    ${escapeHtml(p.name)}
+                  </a>
+                  <span>
+                    ${escapeHtml(p.team || "-")} /
+                    ${escapeHtml(p.role || "-")}
+                  </span>
+                </div>
+              `).join("")}
+            </div>
+          `
+          : ""
       }
 
     </div>

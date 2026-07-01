@@ -2858,6 +2858,46 @@ content:"★ ";
   color:var(--accent);
 }
 
+.birthday-next{
+  margin-top:12px;
+  padding-top:10px;
+  border-top:1px solid var(--border);
+
+  color:var(--text-muted);
+  font-size:12px;
+  text-align:center;
+}
+
+.birthday-next-title{
+  margin-bottom:4px;
+
+  color:var(--text-muted);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.birthday-next-item{
+  line-height:1.5;
+}
+
+.birthday-next-item a{
+  color:var(--text-sub);
+  text-decoration:none;
+  font-weight:700;
+}
+
+.birthday-next-item a:hover{
+  color:var(--accent);
+  text-decoration:underline;
+}
+
+.birthday-next-item span{
+  margin-left:4px;
+  color:var(--text-muted);
+}
+
 /* =========================================================
    13. TOOLS
    ========================================================= */
