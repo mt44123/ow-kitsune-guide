@@ -412,16 +412,62 @@ function loadPlayerDetailView() {
 
   startFakeProgress();
 
+  const linksPromise =
+    playerLinksCache
+      ? Promise.resolve({
+          playerLinks: playerLinksCache,
+          lastUpdated: playerLinksLastUpdated
+        })
+      : fetch(CONFIG.API_URL + "?view=playerlinks").then(r => r.json());
+
+  const youtubePromise =
+    youtubeCache
+      ? Promise.resolve({
+          videos: youtubeCache
+        })
+      : fetch(CONFIG.API_URL + "?view=youtube").then(r => r.json());
+
+  const twitchPromise =
+    clipCache.twitch.data
+      ? Promise.resolve({ clips: clipCache.twitch.data })
+      : fetch(CONFIG.API_URL + "?view=clips").then(r => r.json());
+
+  const twitchHotPromise =
+    clipCache.twitchhot.data
+      ? Promise.resolve({ clips: clipCache.twitchhot.data })
+      : fetch(CONFIG.API_URL + "?view=hotclips").then(r => r.json());
+
+  const soopPromise =
+    clipCache.soop.data
+      ? Promise.resolve({ clips: clipCache.soop.data })
+      : fetch(CONFIG.API_URL + "?view=soopclips").then(r => r.json());
+
+  const soopHotPromise =
+    clipCache.soophot.data
+      ? Promise.resolve({ clips: clipCache.soophot.data })
+      : fetch(CONFIG.API_URL + "?view=soophotclips").then(r => r.json());
+
+  const chzzkNewPromise =
+    clipCache.chzzknew.data
+      ? Promise.resolve({ clips: clipCache.chzzknew.data })
+      : fetch(CONFIG.API_URL + "?view=chzzknewclips").then(r => r.json());
+
+  const chzzkBestPromise =
+    clipCache.chzzkbest.data
+      ? Promise.resolve({ clips: clipCache.chzzkbest.data })
+      : fetch(CONFIG.API_URL + "?view=chzzkbestclips").then(r => r.json());
+
   Promise.all([
-  fetch(CONFIG.API_URL + "?view=playerlinks").then(r => r.json()),
-  fetch(CONFIG.API_URL + "?view=youtube").then(r => r.json()),
-  fetch(CONFIG.API_URL + "?view=clips").then(r => r.json()),
-  fetch(CONFIG.API_URL + "?view=hotclips").then(r => r.json()),
-  fetch(CONFIG.API_URL + "?view=soopclips").then(r => r.json()),
-  fetch(CONFIG.API_URL + "?view=soophotclips").then(r => r.json()),
-  fetch(CONFIG.API_URL + "?view=chzzknewclips").then(r => r.json()),
-  fetch(CONFIG.API_URL + "?view=chzzkbestclips").then(r => r.json())
-])
+    linksPromise,
+    youtubePromise,
+    twitchPromise,
+    twitchHotPromise,
+    soopPromise,
+    soopHotPromise,
+    chzzkNewPromise,
+    chzzkBestPromise
+  ])
+  
   .then(([
     linksData,
     youtubeData,
@@ -446,11 +492,11 @@ function loadPlayerDetailView() {
     setClipCache_("twitch", clipsData.clips || []);
     setClipCache_("twitchhot", hotClipsData.clips || []);
 
-    setClipCache_("soop", soopClipsData.clips || []);
-    setClipCache_("soophot", soopHotClipsData.clips || []);
+    setClipCache_("soop", soopClipsData.clips || soopClipsData.soopclips || []);
+    setClipCache_("soophot", soopHotClipsData.clips || soopHotClipsData.soopclips || []);
 
-    setClipCache_("chzzknew", chzzkNewClipsData.clips || []);
-    setClipCache_("chzzkbest", chzzkBestClipsData.clips || []);
+    setClipCache_("chzzknew", chzzkNewClipsData.clips || chzzkNewClipsData.chzzknewclips || []);
+    setClipCache_("chzzkbest", chzzkBestClipsData.clips || chzzkBestClipsData.chzzkbestclips || []);
 
     currentData = playerLinksCache;
     renderPlayerDetail(name, currentData);
