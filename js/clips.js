@@ -243,9 +243,17 @@ function getClipSource_(view) {
 }
 
 function getClipsFromApiData_(data, type) {
-  if (type === "soop") return data.soopclips || [];
-  if (type === "chzzknew") return data.chzzknewclips || [];
-  if (type === "chzzkbest") return data.chzzkbestclips || [];
+  if (type === "soop") {
+    return data.soopclips || data.clips || [];
+  }
+
+  if (type === "chzzknew") {
+    return data.chzzknewclips || data.clips || [];
+  }
+
+  if (type === "chzzkbest") {
+    return data.chzzkbestclips || data.clips || [];
+  }
 
   return data.clips || [];
 }
