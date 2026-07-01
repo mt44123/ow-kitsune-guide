@@ -1,6 +1,7 @@
 let birthdayCalendarDate = new Date();
 
 function loadBirthdaysView() {
+  history.replaceState({}, "", "?view=birthdays");
 
   resetSeo_();
 

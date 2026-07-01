@@ -1,4 +1,5 @@
 function loadYoutubeView(view) {
+  history.replaceState({}, "", "?view=" + view);
 
   resetSeo_();
   

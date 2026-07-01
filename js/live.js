@@ -1,4 +1,5 @@
 function loadLiveView(view) {
+  history.replaceState({}, "", "?view=" + view);
 
   resetSeo_();
   
