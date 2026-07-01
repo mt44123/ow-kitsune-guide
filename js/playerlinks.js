@@ -80,7 +80,7 @@ function renderPlayerLinks(players, options = {}) {
   });
 
 app.innerHTML = `
-  ${renderLiquipediaNote_()}
+  ${renderLiquipediaNote_(true)}
 
     <div class="player-table-top">
     <div class="scroll-note">
@@ -622,7 +622,7 @@ function renderPlayerDetail(name, players) {
         ${linkTag(player.discordUrl, "DC", "dc")}
       </div>
 
-      ${renderLiquipediaNote_()}
+      ${renderLiquipediaNote_(false)}
 
       <div class="player-detail-section">
         <h3>Latest Activity</h3>

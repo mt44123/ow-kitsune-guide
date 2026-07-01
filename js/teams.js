@@ -75,14 +75,18 @@ function loadTeamsView(openFromUrl = false) {
     });
 }
 
-function renderLiquipediaNote_() {
+function renderLiquipediaNote_(showClickNote = true) {
   return `
     <div class="discord-note">
 
-      ${siteText_(
-        `<p>*Click player or team names to open Liquipedia.</p>`,
-        `<p>※プレイヤー・チーム名をクリックするとLiquipediaを開きます。</p>`
-      )}
+      ${
+        showClickNote
+          ? siteText_(
+              `<p>*Click player or team names to open Liquipedia.</p>`,
+              `<p>※プレイヤー・チーム名をクリックするとLiquipediaを開きます。</p>`
+            )
+          : ""
+      }
 
       <details class="playerlinks-help">
         <summary>More Info</summary>
@@ -388,7 +392,7 @@ const members = players
   });
 
   app.innerHTML = `
-    ${renderLiquipediaNote_()}
+    ${renderLiquipediaNote_(true)}
 
     <button class="team-back-button" id="teamBackButton">
       ← Back to Teams
