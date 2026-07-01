@@ -2024,7 +2024,7 @@ function getTeamLogoPath_(team, useLightTheme = true) {
     "REVATI",
     "Team Liquid",
     "Team Secret",
-    "ZANSIDE GAMING",
+    "RØDE ZANSIDE GAMING",
     "ZETA DIVISION",
   ];
 
