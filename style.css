@@ -3674,3 +3674,8 @@ color:var(--text-sub);
   line-height:1.6;
   text-align:left;
 }
+
+body.player-detail-view #app{
+  max-width:900px;
+  margin:0 auto;
+}

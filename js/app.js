@@ -1438,6 +1438,7 @@ function applyCurrentSearch_() {
 
 function loadView(view) {
 
+  document.body.classList.remove("player-detail-view");
   updatePageTitleLink_(view);
 
   if (isPlayerView(view)) {
