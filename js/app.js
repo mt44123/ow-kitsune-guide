@@ -1154,6 +1154,19 @@ document
 
 updateNavState(currentView);
 
+window.addEventListener("popstate", () => {
+  const params = new URLSearchParams(window.location.search);
+
+  currentView = params.get("view") || "new";
+
+  if (currentView === "team") {
+    currentPlayerView = "teams";
+  }
+
+  updateNavState(currentView);
+  loadView(currentView);
+});
+
 let swipeHintEl = null;
 
 function hideSwipeHint_() {
