@@ -187,19 +187,35 @@ function buildGoatClips_() {
 }
 
 function getClipSource_(view) {
-  if (view === "soopclips" || view === "soophotclips") {
+  if (view === "soopclips") {
     return {
       type: "soop",
-      apiView: view === "soophotclips" ? "soophotclips" : "soopclips",
+      apiView: "soopclips",
       cacheKey: "soop"
     };
   }
 
-  if (view === "chzzknewclips" || view === "chzzkhotclips") {
+  if (view === "soophotclips") {
+    return {
+      type: "soop",
+      apiView: "soophotclips",
+      cacheKey: "soophot"
+    };
+  }
+
+  if (view === "chzzknewclips") {
     return {
       type: "chzzknew",
       apiView: "chzzknewclips",
       cacheKey: "chzzknew"
+    };
+  }
+
+  if (view === "chzzkhotclips") {
+    return {
+      type: "chzzknew",
+      apiView: "chzzknewclips",
+      cacheKey: "chzzkhot"
     };
   }
 

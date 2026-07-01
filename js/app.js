@@ -729,12 +729,13 @@ let playerLinksCacheTime = 0;
 const PLAYER_LINKS_CLIENT_CACHE_MS =  6 * 60 * 60 * 1000;
 
 const clipCache = {
-  twitch: { data: null, time: 0 },
-  twitchhot: { data: null, time: 0 },
-  soop: { data: null, time: 0 },
-  soophot: { data: null, time: 0 },
-  chzzknew: { data: null, time: 0 },
-  chzzkbest: { data: null, time: 0 }
+  twitch:{ data:null, time:0 },
+  twitchhot:{ data:null, time:0 },
+  soop:{ data:null, time:0 },
+  soophot:{ data:null, time:0 },
+  chzzknew:{ data:null, time:0 },
+  chzzkhot:{ data:null, time:0 },
+  chzzkbest:{ data:null, time:0 }
 };
 
 const CLIPS_CLIENT_CACHE_MS = 6 * 60 * 60 * 1000;
