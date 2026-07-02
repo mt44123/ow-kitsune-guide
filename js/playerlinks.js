@@ -61,6 +61,16 @@ function loadPlayerLinksView() {
 }
 
 function renderPlayerLinks(players, options = {}) {
+
+  if (playerLinksLayout === "grid") {
+    renderPlayerLinksGrid_(players, options);
+    return;
+  }
+
+  renderPlayerLinksTable_(players, options);
+}
+
+function renderPlayerLinksTable_(players, options = {}) {
   const showGoatsExport = options.showGoatsExport === true;
   app.className = "table-mode";
 
@@ -225,6 +235,155 @@ app.innerHTML = `
   setupPlayerLinksSort();
 }
 
+function renderPlayerLinksGrid_(players, options = {}) {
+  const showGoatsExport = options.showGoatsExport === true;
+
+  app.className = "grid-mode player-links-grid-mode";
+
+  if (!players.length) {
+    app.innerHTML = `<p class="empty">No player links found.</p>`;
+    return;
+  }
+
+  players = [...players].sort((a, b) => {
+    const aValue = String(a.teamRegion || "");
+    const bValue = String(b.teamRegion || "");
+
+    if (aValue === "" && bValue !== "") return 1;
+    if (aValue !== "" && bValue === "") return -1;
+    if (aValue === "" && bValue === "") return 0;
+
+    return aValue.localeCompare(bValue);
+  });
+
+  app.innerHTML = `
+    ${renderLiquipediaNote_(true)}
+
+    ${
+      showGoatsExport
+        ? `
+          <div class="goats-export-box">
+            <button class="goats-export-button" data-goats-export="backup">
+              ★Backup
+            </button>
+            <button class="goats-export-button" data-goats-export="import">
+              ★Import
+            </button>
+            <button class="goats-export-button" data-goats-export="share">
+              ★Share
+            </button>
+          </div>
+        `
+        : ""
+    }
+
+    <div class="player-links-grid">
+      ${players.map(p => `
+        <div
+          class="card player-link-card"
+          data-team-region="${(p.teamRegion || "").toLowerCase()}"
+          data-team="${(p.team || "").toLowerCase()}"
+          data-name="${(p.name || "").toLowerCase()}"
+          data-team-alias="${(p.teamAlias || "").toLowerCase()}"
+          data-player-alias="${(p.playerAlias || "").toLowerCase()}"
+          data-nationality="${(p.nationality || "").toLowerCase()}"
+          data-role="${(p.role || "").toLowerCase()}"
+        >
+          ${
+            getTeamLogoPath_(p.team)
+              ? `<img
+                  class="player-link-team-logo"
+                  src="${getTeamLogoPath_(p.team)}"
+                  alt=""
+                  loading="lazy"
+                  onerror="this.remove()"
+                >`
+              : ""
+          }
+
+          <div class="player-link-name-row">
+            <span
+              class="favorite-star ${isFavorite_(p.name) ? "active" : ""}"
+              data-favorite-name="${escapeHtml(p.name || "")}"
+            >
+              ${isFavorite_(p.name) ? "★" : "☆"}
+            </span>
+
+            ${
+              hasPlayerProfile_(p)
+                ? `
+                  <a
+                    class="player-name-link"
+                    href="#"
+                    data-player="${escapeHtml(p.name)}"
+                    onclick="return false;"
+                  >
+                    ${escapeHtml(p.name || "")}
+                  </a>
+                `
+                : `
+                  <span class="player-name-text">
+                    ${escapeHtml(p.name || "")}
+                  </span>
+                `
+            }
+          </div>
+
+          <div class="player-link-meta">
+            <button
+              type="button"
+              class="player-detail-meta-pill"
+              data-player-detail-filter="team"
+              data-value="${escapeHtml(p.team || "")}"
+            >
+              ${escapeHtml(p.team || "-")}
+            </button>
+
+            <button
+              type="button"
+              class="player-detail-meta-pill"
+              data-player-detail-filter="role"
+              data-value="${escapeHtml(p.role || "")}"
+            >
+              ${escapeHtml(p.role || "-")}
+            </button>
+
+            <button
+              type="button"
+              class="player-detail-meta-pill"
+              data-player-detail-filter="nationality"
+              data-value="${escapeHtml(p.nationality || "")}"
+            >
+              ${escapeHtml(shortNationality(p.nationality || "-"))}
+            </button>
+          </div>
+
+          <div class="player-link-last-stream">
+            ${
+              p.lastStreamUrl
+                ? `<a class="last-stream-link" href="${p.lastStreamUrl}" target="_blank" rel="noopener">
+                    ${renderPlatformIcons_(p.lastStreamPlatform)}
+                    <span>${cleanLastStreamAge_(p.lastStreamAge)}</span>
+                  </a>`
+                : `<span>-</span>`
+            }
+          </div>
+
+          <div class="team-player-links">
+            ${linkTag(p.twitchUrl, "TW", p.twitchActive ? "tw" : "tw-inactive")}
+            ${linkTag(p.chzzkUrl, "CHZ", "chz")}
+            ${linkTag(p.soopUrl, "SOOP", "soop")}
+            ${linkTag(p.biliUrl, "BILI", "bili")}
+            ${linkTag(p.youtubeUrl, "YT", "yt")}
+            ${linkTag(p.xUrl, "X", "x")}
+            ${linkTag(p.discordUrl, "DC", "dc")}
+          </div>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
 function cleanLastStreamAge_(value) {
   return String(value || "-")
     .replace(/^[🟣🟢🔵🟡]\s*/, "")
@@ -381,7 +540,9 @@ function compareText_(aValue, bValue, dir) {
 
 function searchPlayerLinksTable() {
   const query = searchBox.value;
-  const rows = document.querySelectorAll(".player-table tbody tr");
+  const rows = document.querySelectorAll(
+    ".player-table tbody tr, .player-link-card"
+  );
 
   rows.forEach(row => {
     const haystack = [

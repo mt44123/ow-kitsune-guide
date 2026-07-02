@@ -488,6 +488,9 @@ function applyClipLayout_() {
 
 applyClipLayout_();
 
+let playerLinksLayout =
+  localStorage.getItem("playerLinksLayout") || "table";
+
 function updateViewActionButton_(view = currentView) {
   if (!viewActionButton) return;
 
@@ -520,6 +523,17 @@ function updateViewActionButton_(view = currentView) {
 
     viewActionButton.textContent =
       clipLayout === "grid"
+        ? "▦ Grid"
+        : "☰ List";
+
+    return;
+  }
+
+  if (view === "playerlinks" || view === "favorites") {
+    viewActionButton.hidden = false;
+
+    viewActionButton.textContent =
+      playerLinksLayout === "table"
         ? "▦ Grid"
         : "☰ List";
 
@@ -651,6 +665,29 @@ viewActionButton?.addEventListener("click", () => {
     applyClipLayout_();
     updateViewActionButton_();
     renderClips(currentData);
+  }
+
+  if (currentView === "playerlinks" || currentView === "favorites") {
+    playerLinksLayout =
+      playerLinksLayout === "table"
+        ? "grid"
+        : "table";
+
+    localStorage.setItem(
+      "playerLinksLayout",
+      playerLinksLayout
+    );
+
+    updateViewActionButton_();
+
+    if (currentView === "favorites") {
+      renderFavorites(currentData);
+    } else {
+      renderPlayerLinks(currentData);
+    }
+
+    applyCurrentSearch_();
+    return;
   }
 });
 
