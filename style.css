@@ -4022,3 +4022,21 @@ body.player-detail-view #app{
   text-align:left;
   opacity:.6;
 }
+
+.footer-voice{
+  margin-bottom:18px;
+  text-align:center;
+}
+
+.footer-voice #voiceLine{
+  color:var(--text-sub);
+  font-style:italic;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.footer-voice #voiceActor{
+  margin-top:4px;
+  color:var(--text-muted);
+  font-size:11px;
+}
