@@ -48,6 +48,7 @@ function loadBirthdaysView() {
 
       currentData = birthdaysCache;
       renderBirthdayCalendar(currentData);
+      applyCurrentSearch_();
     })
     .catch(err => {
       if (currentRequest !== requestId) return;

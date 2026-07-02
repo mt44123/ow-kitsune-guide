@@ -78,6 +78,7 @@ function loadFavoritesView() {
 
       currentData = playerLinksCache;
       renderFavorites(currentData);
+      applyCurrentSearch_();
     })
     .catch(error => {
       if (currentRequest !== requestId) return;

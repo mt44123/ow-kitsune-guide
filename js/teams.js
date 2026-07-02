@@ -62,6 +62,8 @@ function loadTeamsView(openFromUrl = false) {
       } else {
         renderTeams(currentData);
       }
+      
+      applyCurrentSearch_();
     })
     .catch(error => {
       if (currentRequest !== requestId) return;

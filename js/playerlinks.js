@@ -46,6 +46,7 @@ function loadPlayerLinksView() {
 
       currentData = playerLinksCache;
       renderPlayerLinks(currentData);
+      applyCurrentSearch_();
     })
     .catch(error => {
       if (currentRequest !== requestId) return;
@@ -503,7 +504,7 @@ function loadPlayerDetailView() {
     setClipCache_("chzzkbest", chzzkBestClipsData.clips || chzzkBestClipsData.chzzkbestclips || []);
 
     currentData = playerLinksCache;
-    renderPlayerDetail(name, currentData);
+    renderPlayerDetail(name, currentData);    
   })
   .catch(error => {
     stopFakeProgress();
@@ -595,12 +596,6 @@ function renderPlayerDetail(name, players) {
         </button>
 
       </div>
-
-      ${
-        aliasText
-          ? `<p class="player-detail-alias">${escapeHtml(aliasText)}</p>`
-          : ""
-      }
 
       <div class="player-detail-meta">
         <div>${escapeHtml(player.team || "-")}</div>
