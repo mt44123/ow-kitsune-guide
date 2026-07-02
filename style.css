@@ -2173,6 +2173,14 @@ color:var(--platform-twitch-inactive);
   gap:16px;
 }
 
+#app.player-links-grid-mode{
+  display:block;
+}
+
+.player-links-grid{
+  margin-top:12px;
+}
+
 /* =========================================================
    11. TEAMS
    ========================================================= */
