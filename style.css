@@ -2117,6 +2117,27 @@ color:var(--platform-twitch-inactive);
   overflow:hidden;
 }
 
+.player-link-card .card-team-watermark{
+  position:absolute;
+  right:18px;
+  bottom:14px;
+  top:auto;
+
+  width:92px;
+  max-height:72px;
+
+  object-fit:contain;
+  opacity:.16;
+
+  pointer-events:none;
+  z-index:0;
+}
+
+.player-link-card > *:not(.card-team-watermark){
+  position:relative;
+  z-index:2;
+}
+
 .player-link-name-row{
   display:flex;
   align-items:center;
