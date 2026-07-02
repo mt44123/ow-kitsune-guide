@@ -513,8 +513,12 @@ function loadPlayerDetailView() {
 }
 
 function renderPlayerDetail(name, players) {
+
+  const decodedName = decodeURIComponent(name);
+
   const player = players.find(p =>
-    playerToSlug_(p.name) === name
+    playerToSlug_(p.name) === name ||
+    p.name === decodedName
   );
 
   if (!player) {
@@ -766,7 +770,7 @@ function setPlayerSeo_(player) {
   setMeta_("description", description);
 
   setCanonical_(
-    `${location.origin}/player/${slug}`
+    `${location.origin}/player/${encodeURIComponent(slug)}`
   );
 
   setPlayerJsonLd_(player);
@@ -795,7 +799,7 @@ function setPlayerJsonLd_(player) {
       : undefined,
     "nationality": player.nationality || undefined,
     "birthDate": player.born || undefined,
-    "url": `${location.origin}/player/${slug}`,
+    "url": `${location.origin}/player/${encodeURIComponent(slug)}`,
     "sameAs": sameAs.length ? sameAs : undefined,
     "memberOf": player.team
       ? {
@@ -829,7 +833,7 @@ function setPlayerOgp_(player, title, description) {
 
   setOg_("og:title", title);
   setOg_("og:description", description);
-  setOg_("og:url", `${location.origin}/player/${slug}`);
+  setOg_("og:url", `${location.origin}/player/${encodeURIComponent(slug)}`);
   setOg_("og:type", "profile");
 
   setOg_("twitter:card", "summary_large_image");

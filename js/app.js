@@ -2247,11 +2247,21 @@ function teamToSlug_(team) {
 }
 
 function playerToSlug_(name) {
-  return String(name || "")
+  const original = String(name || "").trim();
+
+  const slug = original
     .toLowerCase()
     .replace(/&/g, "and")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
+
+  // 英字なら今まで通り
+  if (slug) {
+    return slug;
+  }
+
+  // 日本語・韓国語・中国語などはそのまま
+  return original;
 }
 
 function openTeamFromUrl_() {
