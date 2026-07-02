@@ -370,25 +370,32 @@ function renderPlayerLinksGrid_(players, options = {}) {
             }
           </div>
 
-          <div class="player-link-last-stream">
-            ${
-              p.lastStreamUrl
-                ? `<a class="last-stream-link" href="${p.lastStreamUrl}" target="_blank" rel="noopener">
-                    ${renderPlatformIcons_(p.lastStreamPlatform)}
-                    <span>${cleanLastStreamAge_(p.lastStreamAge)}</span>
-                  </a>`
-                : `<span>-</span>`
-            }
-          </div>
+          <div class="player-link-bottom-row">
 
-          <div class="team-player-links">
-            ${linkTag(p.twitchUrl, "TW", p.twitchActive ? "tw" : "tw-inactive")}
-            ${linkTag(p.chzzkUrl, "CHZ", "chz")}
-            ${linkTag(p.soopUrl, "SOOP", "soop")}
-            ${linkTag(p.biliUrl, "BILI", "bili")}
-            ${linkTag(p.youtubeUrl, "YT", "yt")}
-            ${linkTag(p.xUrl, "X", "x")}
-            ${linkTag(p.discordUrl, "DC", "dc")}
+            <div class="player-link-last-stream">
+              ${
+                p.lastStreamUrl
+                  ? `<a class="last-stream-link"
+                      href="${p.lastStreamUrl}"
+                      target="_blank"
+                      rel="noopener">
+                      ${renderPlatformIcons_(p.lastStreamPlatform)}
+                      <span>${cleanLastStreamAge_(p.lastStreamAge)}</span>
+                    </a>`
+                  : `<span>-</span>`
+              }
+            </div>
+
+            <div class="team-player-links">
+              ${linkTag(p.twitchUrl,"TW",p.twitchActive?"tw":"tw-inactive")}
+              ${linkTag(p.chzzkUrl,"CHZ","chz")}
+              ${linkTag(p.soopUrl,"SOOP","soop")}
+              ${linkTag(p.biliUrl,"BILI","bili")}
+              ${linkTag(p.youtubeUrl,"YT","yt")}
+              ${linkTag(p.xUrl,"X","x")}
+              ${linkTag(p.discordUrl,"DC","dc")}
+            </div>
+
           </div>
         </div>
       `).join("")}

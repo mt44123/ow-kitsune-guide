@@ -2145,6 +2145,30 @@ color:var(--platform-twitch-inactive);
   font-size:13px;
 }
 
+.player-link-bottom-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.player-link-last-stream{
+  margin:0;
+  flex-shrink:0;
+}
+
+.player-link-bottom-row .team-player-links{
+  display:flex;
+  flex-wrap:wrap;
+
+  margin-left:auto;
+
+  justify-content:flex-end;
+  align-items:center;
+
+  gap:6px;
+}
+
 .player-link-name-row{
   display:flex;
   align-items:center;
@@ -2160,10 +2184,6 @@ color:var(--platform-twitch-inactive);
 
   color:var(--text-sub);
   font-size:13px;
-}
-
-.player-link-last-stream{
-  margin-bottom:10px;
 }
 
 .player-link-meta .player-detail-meta-pill{
