@@ -362,6 +362,7 @@ function renderClipCard_(c) {
       href="${c.url}"
       target="_blank"
       rel="noopener"
+      data-track-open="clip"
     >
       <div class="youtube-card ${getNationalityRegionClass(c.nationality)}">
 

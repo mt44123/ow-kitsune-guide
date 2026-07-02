@@ -225,7 +225,7 @@ function renderLive(players) {
       href="${p.url}"
       target="_blank"
       rel="noopener"
-      onclick="trackOpen('live')"
+      data-track-open="live"
     >      
         <div class="card live-card ${getLangClass(p)}">
 

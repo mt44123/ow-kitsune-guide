@@ -2049,6 +2049,13 @@ function trackOpen(type) {
   }).catch(() => {});
 }
 
+document.addEventListener("click", e => {
+  const link = e.target.closest("[data-track-open]");
+  if (!link) return;
+
+  trackOpen(link.dataset.trackOpen);
+});
+
 function getTeamLogoPath_(team, useLightTheme = true) {
 
   const name = String(team || "").trim();

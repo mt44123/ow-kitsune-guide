@@ -165,6 +165,7 @@ function renderYoutubeCard_(v) {
       href="${v.url}"
       target="_blank"
       rel="noopener"
+      data-track-open="youtube"
     >
       <div class="youtube-card ${getNationalityRegionClass(v.nationality)}">
 
