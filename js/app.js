@@ -2543,6 +2543,16 @@ function openTeamLinkMenu_(button, teamName) {
 }
 
 document.addEventListener("click", e => {
+  const button = e.target.closest("[data-team-menu]");
+  if (!button) return;
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  openTeamLinkMenu_(button, button.dataset.teamMenu);
+});
+
+document.addEventListener("click", e => {
   const link = e.target.closest("[data-player]");
   if (!link) {
     closePlayerLinkMenu_();
@@ -2591,14 +2601,4 @@ document.addEventListener("click", e => {
 
   updateNavState(currentView);
   loadPlayerLinksView();
-});
-
-document.addEventListener("click", e => {
-  const button = e.target.closest("[data-team-menu]");
-  if (!button) return;
-
-  e.preventDefault();
-  e.stopPropagation();
-
-  openTeamLinkMenu_(button, button.dataset.teamMenu);
 });
