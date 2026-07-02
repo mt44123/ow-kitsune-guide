@@ -598,9 +598,32 @@ function renderPlayerDetail(name, players) {
       </div>
 
       <div class="player-detail-meta">
-        <div>${escapeHtml(player.team || "-")}</div>
-        <div>${escapeHtml(player.nationality || "-")}</div>
-        <div>${escapeHtml(player.role || "-")}</div>
+        <button
+          type="button"
+          class="player-detail-meta-pill"
+          data-player-detail-filter="team"
+          data-value="${escapeHtml(player.team || "")}"
+        >
+          ${escapeHtml(player.team || "-")}
+        </button>
+
+        <button
+          type="button"
+          class="player-detail-meta-pill"
+          data-player-detail-filter="nationality"
+          data-value="${escapeHtml(player.nationality || "")}"
+        >
+          ${escapeHtml(player.nationality || "-")}
+        </button>
+
+        <button
+          type="button"
+          class="player-detail-meta-pill"
+          data-player-detail-filter="role"
+          data-value="${escapeHtml(player.role || "")}"
+        >
+          ${escapeHtml(player.role || "-")}
+        </button>
       </div>
 
       ${

@@ -4040,3 +4040,37 @@ body.player-detail-view #app{
   color:var(--text-muted);
   font-size:11px;
 }
+
+.player-detail-meta{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.player-detail-meta-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  min-height:32px;
+  padding:6px 14px;
+
+  border:1px solid var(--border);
+  border-radius:999px;
+  background:transparent;
+  color:var(--text-main);
+
+  font:inherit;
+  font-size:13px;
+  line-height:1;
+  vertical-align:middle;
+
+  cursor:pointer;
+}
+
+.player-detail-meta-pill:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}

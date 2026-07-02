@@ -2444,3 +2444,41 @@ document.addEventListener("click", e => {
 
   openPlayerLinkMenu_(link, link.dataset.player);
 });
+
+document.addEventListener("click", e => {
+  const button = e.target.closest("[data-player-detail-filter]");
+  if (!button) return;
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  const type = button.dataset.playerDetailFilter;
+  const value = button.dataset.value || "";
+
+  if (!value) return;
+
+  if (type === "team") {
+    history.pushState(
+      {},
+      "",
+      `/team/${teamToSlug_(value)}`
+    );
+
+    currentView = "team";
+    currentPlayerView = "teams";
+
+    updateNavState(currentView);
+    loadTeamsView(true);
+    return;
+  }
+
+  currentView = "playerlinks";
+  currentPlayerView = "playerlinks";
+
+  history.pushState({}, "", "?view=playerlinks");
+
+  searchBox.value = value;
+
+  updateNavState(currentView);
+  loadPlayerLinksView();
+});
