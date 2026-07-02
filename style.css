@@ -2115,30 +2115,20 @@ color:var(--platform-twitch-inactive);
 .player-link-card{
   position:relative;
   overflow:hidden;
-
-  min-height:225px;
-
-  display:flex;
-  flex-direction:column;
 }
 
 .player-link-team-logo{
   position:absolute;
-
-  right:14px;
+  right:18px;
   bottom:14px;
 
-  width:96px;
-  height:96px;
+  width:92px;
+  max-height:72px;
 
   object-fit:contain;
-  object-position:right bottom;
-
   opacity:.16;
 
   pointer-events:none;
-  user-select:none;
-
   z-index:0;
 }
 
@@ -2459,8 +2449,6 @@ grid-column:1 / -1;
   align-items:center;
   gap:6px;
   flex-wrap:wrap;
-
-  margin-top:auto;
 }
 
 .team-link-icon{
