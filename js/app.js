@@ -2057,9 +2057,22 @@ document.addEventListener("click", e => {
   trackOpen(link.dataset.trackOpen);
 });
 
+let todayStatsCache = null;
+let todayStatsCacheTime = 0;
+
+const TODAY_STATS_CACHE_MS = 60 * 1000;
+
 async function loadTodayStats_() {
   const el = document.getElementById("todayStats");
   if (!el) return;
+
+  if (
+    todayStatsCache &&
+    Date.now() - todayStatsCacheTime < TODAY_STATS_CACHE_MS
+  ) {
+    renderTodayStats_(todayStatsCache);
+    return;
+  }
 
   try {
     const res = await fetch("/api/stats", {
@@ -2068,28 +2081,40 @@ async function loadTodayStats_() {
 
     const stats = await res.json();
 
-    if (isLiveView(currentView)) {
-        el.textContent =
-          `🦊 Guided ${Number(stats.live || 0).toLocaleString()} fans to LIVE today.`;
-        return;
-      }
+    todayStatsCache = stats;
+    todayStatsCacheTime = Date.now();
 
-      if (isYoutubeView(currentView)) {
-        el.textContent =
-          `🦊 Guided ${Number(stats.youtube || 0).toLocaleString()} fans to YouTube today.`;
-        return;
-      }
+    renderTodayStats_(stats);
 
-      if (isClipView(currentView)) {
-        el.textContent =
-          `🦊 Guided ${Number(stats.clip || 0).toLocaleString()} fans to Clips today.`;
-        return;
-      }
-
-    el.textContent = "";
   } catch (e) {
     el.textContent = "";
   }
+}
+
+function renderTodayStats_(stats) {
+
+  const el = document.getElementById("todayStats");
+  if (!el) return;
+
+  if (isLiveView(currentView)) {
+    el.textContent =
+      `🦊 Guided ${Number(stats.live || 0).toLocaleString()} fans to LIVE today.`;
+    return;
+  }
+
+  if (isYoutubeView(currentView)) {
+    el.textContent =
+      `🦊 Guided ${Number(stats.youtube || 0).toLocaleString()} fans to YouTube today.`;
+    return;
+  }
+
+  if (isClipView(currentView)) {
+    el.textContent =
+      `🦊 Guided ${Number(stats.clip || 0).toLocaleString()} fans to Clips today.`;
+    return;
+  }
+
+  el.textContent = "";
 }
 
 function getTeamLogoPath_(team, useLightTheme = true) {
