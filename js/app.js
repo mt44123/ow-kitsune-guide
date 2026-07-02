@@ -2125,8 +2125,14 @@ function renderTodayStats_(stats) {
 }
 
 async function loadSiteGuided_() {
-  const el = document.getElementById("siteGuided");
-  if (!el) return;
+
+  if (
+    siteGuidedCache &&
+    Date.now() - siteGuidedCacheTime < SITE_GUIDED_CACHE_MS
+  ) {
+    renderSiteGuided_(siteGuidedCache);
+    return;
+  }
 
   try {
     const res = await fetch("/api/stats", {
@@ -2134,25 +2140,38 @@ async function loadSiteGuided_() {
     });
 
     const stats = await res.json();
-    const total = Number(stats.total || 0).toLocaleString();
 
-    if (siteTextLanguageMode === "jp") {
-      el.textContent = `あなたは${total}人目の訪問者です。`;
-      return;
-    }
+    siteGuidedCache = stats;
+    siteGuidedCacheTime = Date.now();
 
-    if (siteTextLanguageMode === "both") {
-      el.innerHTML = `
-        Kitsune has guided ${total} fans.あなたは${total}人目の訪問者です。
-      `;
-      return;
-    }
-
-    el.textContent = `Kitsune has guided ${total} fans.`;
+    renderSiteGuided_(stats);
 
   } catch (e) {
-    el.textContent = "";
+    const el = document.getElementById("siteGuided");
+    if (el) el.textContent = "";
   }
+}
+
+function renderSiteGuided_(stats) {
+
+  const el = document.getElementById("siteGuided");
+  if (!el) return;
+
+  const total = Number(stats.total || 0).toLocaleString();
+
+  if (siteTextLanguageMode === "jp") {
+    el.textContent = `あなたは${total}人目の訪問者です。`;
+    return;
+  }
+
+  if (siteTextLanguageMode === "both") {
+    el.innerHTML = `
+      Kitsune has guided ${total} fans.　あなたは${total}人目の訪問者です。
+    `;
+    return;
+  }
+
+  el.textContent = `Kitsune has guided ${total} fans.`;
 }
 
 function getTeamLogoPath_(team, useLightTheme = true) {
