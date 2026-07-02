@@ -402,7 +402,7 @@ titleLanguageSelect?.addEventListener("change", () => {
   );
 
   if (isLiveView(currentView)) {
-    renderLive(filterPlayers(currentData));
+    renderLiveFromCache(currentView);
   } else if (isYoutubeView(currentView)) {
     renderYoutube(filterYoutube(currentData));
   } else if (isClipView(currentView)) {
