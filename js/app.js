@@ -2255,12 +2255,12 @@ function playerToSlug_(name) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-  // 英字なら今まで通り
-  if (slug) {
+  // 英字だけで構成されている名前だけスラッグ化
+  if (/^[A-Za-z0-9&\s._-]+$/.test(original)) {
     return slug;
   }
 
-  // 日本語・韓国語・中国語などはそのまま
+  // 日本語・韓国語・中国語などが含まれる場合は元の名前
   return original;
 }
 
@@ -2420,7 +2420,7 @@ function openPlayerLinkMenu_(button, playerName) {
       history.pushState(
         {},
         "",
-        `/player/${playerToSlug_(name)}`
+        `/player/${encodeURIComponent(playerToSlug_(name))}`
       );
 
       currentView = "player";
