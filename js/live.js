@@ -207,13 +207,22 @@ function renderLive(players) {
 
   app.innerHTML = players.map(p => {
     const logoPath = getTeamLogoPath_(p.team);
+    const isLive =
+      String(p.status || "").includes("LIVE") ||
+      String(p.status || "").includes("🔥");
+
     const { mainTitle, subTitles } =
-      buildMediaTitles_(
-        p.rawTitle || "",
-        p.titleJp || "",
-        p.titleEn || "",
-        p.titleKr || ""
-      );
+      isLive
+        ? buildMediaTitles_(
+            p.rawTitle || "",
+            p.titleJp || "",
+            p.titleEn || "",
+            p.titleKr || ""
+          )
+        : {
+            mainTitle: "",
+            subTitles: []
+          };
 
     return `
     <a
@@ -260,9 +269,11 @@ function renderLive(players) {
             </span>
           </div>
 
-          <div class="title">
-            ${escapeHtml(mainTitle)}
-          </div>
+          ${
+              mainTitle
+                ? `<div class="title">${escapeHtml(mainTitle)}</div>`
+                : ""
+            }
 
           ${subTitles.map(t => `
             <div class="youtube-subtitle live-subtitle">
