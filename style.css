@@ -4017,5 +4017,5 @@ body.player-detail-view #app{
   margin-top:4px;
   color:var(--text-muted);
   font-size:13px;
-  text-align:center;
+  text-align:left;
 }
