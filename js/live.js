@@ -220,7 +220,13 @@ function renderLive(players) {
       );
 
     return `
-      <a class="card-link" href="${p.url}" target="_blank" rel="noopener">
+    <a
+      class="card-link"
+      href="${p.url}"
+      target="_blank"
+      rel="noopener"
+      onclick="trackOpen('live')"
+    >      
         <div class="card live-card ${getLangClass(p)}">
 
           <div class="player-name card-name-row">

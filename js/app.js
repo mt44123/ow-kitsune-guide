@@ -2039,6 +2039,16 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
+function trackOpen(type) {
+  fetch("/api/track-open", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ type })
+  }).catch(() => {});
+}
+
 function getTeamLogoPath_(team, useLightTheme = true) {
 
   const name = String(team || "").trim();
