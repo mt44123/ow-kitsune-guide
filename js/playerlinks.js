@@ -739,9 +739,13 @@ function renderPlayerDetail(name, players) {
 
       <p class="seo-note">
         ${escapeHtml(player.name)}
-        ${aliasText ? `(${escapeHtml(aliasText)})` : ""}
+        ${aliasText ? ` (${escapeHtml(aliasText)})` : ""}
+        plays for ${escapeHtml(player.team || "an Overwatch team")}.
         Overwatch player profile with Twitch, CHZZK, SOOP, Bilibili, YouTube, X, Discord, live streams, clips and player information.
-        ${escapeHtml(player.name)} のTwitch、CHZZK、SOOP、Bilibili、YouTube、X、Discord、配信、クリップ、選手情報をまとめて確認できます。
+
+        ${escapeHtml(player.name)}
+        ${escapeHtml(player.team ? ` は ${player.team} のOverwatchプレイヤーです。` : " はOverwatchプレイヤーです。")}
+        Twitch、CHZZK、SOOP、Bilibili、YouTube、X、Discord、配信、クリップ、選手情報をまとめて確認できます。
       </p>
     </div>
   `;
