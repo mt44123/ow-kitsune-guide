@@ -19,9 +19,6 @@ function loadYoutubeView(view) {
     requestId++;
     stopFakeProgress();
 
-    updated.textContent =
-    "Updates every 30 min";
-
     currentData = filterYoutubeView(youtubeCache, view);
     renderYoutube(filterYoutube(currentData));
     return;
@@ -38,9 +35,6 @@ function loadYoutubeView(view) {
         stopFakeProgress();
         return;
       }
-
-      updated.textContent =
-      "Updates every 30 min";
 
       finishFakeProgress();
 

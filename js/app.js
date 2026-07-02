@@ -2063,7 +2063,7 @@ let todayStatsCacheTime = 0;
 const TODAY_STATS_CACHE_MS = 60 * 1000;
 
 async function loadTodayStats_() {
-  const el = document.getElementById("todayStats");
+  const el = document.getElementById("updated");
   if (!el) return;
 
   if (
@@ -2093,24 +2093,24 @@ async function loadTodayStats_() {
 
 function renderTodayStats_(stats) {
 
-  const el = document.getElementById("todayStats");
+  const el = document.getElementById("updated");
   if (!el) return;
 
   if (isLiveView(currentView)) {
     el.textContent =
-      `🦊 Guided ${Number(stats.live || 0).toLocaleString()} fans to LIVE today.`;
+      `Updates every 5 min • 🦊 Guided ${Number(stats.live || 0).toLocaleString()} fans to LIVE today.`;
     return;
   }
 
   if (isYoutubeView(currentView)) {
     el.textContent =
-      `🦊 Guided ${Number(stats.youtube || 0).toLocaleString()} fans to YouTube today.`;
+      `Updates every 30 min • 🦊 Guided ${Number(stats.youtube || 0).toLocaleString()} fans to YouTube today.`;
     return;
   }
 
   if (isClipView(currentView)) {
     el.textContent =
-      `🦊 Guided ${Number(stats.clip || 0).toLocaleString()} fans to Clips today.`;
+      `Updates every day • 🦊 Guided ${Number(stats.clip || 0).toLocaleString()} fans to Clips today.`;
     return;
   }
 

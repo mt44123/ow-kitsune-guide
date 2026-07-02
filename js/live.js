@@ -17,10 +17,7 @@ function loadLiveView(view) {
   ) {
     requestId++;
     stopFakeProgress();
-  
-    updated.textContent =
-      "Updates every 5 min";
-  
+    
     renderLiveFromCache(view);
     return;
   }
@@ -41,9 +38,6 @@ function loadLiveView(view) {
 
       liveCache = data;
       liveCacheTime = Date.now();
-
-      updated.textContent =
-      "Updates every 5 min";
 
       if (data.counts) {
         updateAllButtonCounts(data.counts);

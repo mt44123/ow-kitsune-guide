@@ -42,9 +42,6 @@ function loadClipsView(view) {
     requestId++;
     stopFakeProgress();
 
-    updated.textContent =
-    "Updates daily";
-
     currentData = filterClipView(cached.data, view);
     renderClips(filterClips(currentData));
     return;
@@ -64,9 +61,6 @@ function loadClipsView(view) {
 
       clipLastUpdated[source.cacheKey] =
         data.lastUpdated || "";
-
-      updated.textContent =
-        "Updates daily";
 
       finishFakeProgress();
 
@@ -111,8 +105,6 @@ function loadGoatClipsView() {
     requestId++;
     stopFakeProgress();
 
-    updated.textContent = "Updates daily";
-
     currentData = buildGoatClips_();
     renderClips(currentData);
     return;
@@ -147,8 +139,6 @@ function loadGoatClipsView() {
       setClipCache_("soop", soop.soopclips || []);
       setClipCache_("chzzknew", chzzkNew.chzzknewclips || []);
       setClipCache_("chzzkbest", chzzkBest.chzzkbestclips || []);
-
-      updated.textContent = "Updates daily";
 
       currentData = buildGoatClips_();
       renderClips(currentData);
