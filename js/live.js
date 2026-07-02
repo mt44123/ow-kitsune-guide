@@ -95,6 +95,15 @@ function getClientFilteredLivePlayers(players, view) {
     });
 }
 
+function isPlayerLive_(p) {
+  const status = String(p.status || "").toUpperCase();
+
+  return (
+    status.includes("LIVE") ||
+    status.includes("🔥")
+  );
+}
+
 function matchLiveViewClient(p, view) {
   const platform = String(p.platform || "");
   const language = String(p.language || "").toUpperCase();
@@ -135,7 +144,7 @@ function matchLiveViewClient(p, view) {
       );
 
     default:
-      return true;
+      return isPlayerLive_(p);
   }
 }
 
@@ -207,13 +216,7 @@ function renderLive(players) {
 
   app.innerHTML = players.map(p => {
     const logoPath = getTeamLogoPath_(p.team);
-    const isLive =
-      p.url &&
-      Number(p.viewers || 0) > 0 &&
-      (
-        String(p.status || "").includes("LIVE") ||
-        String(p.status || "").includes("🔥")
-      );
+    const isLive = isPlayerLive_(p);
 
     const { mainTitle, subTitles } =
       isLive
