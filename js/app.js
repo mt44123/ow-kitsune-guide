@@ -2553,6 +2553,10 @@ document.addEventListener("click", e => {
 });
 
 document.addEventListener("click", e => {
+  if (e.target.closest("[data-team-menu]")) {
+    return;
+  }
+
   const link = e.target.closest("[data-player]");
   if (!link) {
     closePlayerLinkMenu_();
