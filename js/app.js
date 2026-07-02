@@ -2479,6 +2479,69 @@ function openPlayerLinkMenu_(button, playerName) {
   });
 }
 
+function openTeamLinkMenu_(button, teamName) {
+  closePlayerLinkMenu_();
+
+  const team = String(teamName || "");
+  if (!team) return;
+
+  playerLinkMenu = document.createElement("div");
+  playerLinkMenu.className = "player-context-menu";
+
+  playerLinkMenu.innerHTML = `
+    <button data-action="team-detail">
+      🦊 Team Detail
+    </button>
+
+    <button data-action="liquipedia">
+      📖 Liquipedia
+    </button>
+  `;
+
+  document.body.appendChild(playerLinkMenu);
+
+  const rect = button.getBoundingClientRect();
+
+  playerLinkMenu.style.left =
+    `${rect.left + window.scrollX}px`;
+
+  playerLinkMenu.style.top =
+    `${rect.bottom + window.scrollY + 6}px`;
+
+  playerLinkMenu.addEventListener("click", e => {
+    const item = e.target.closest("button");
+    if (!item) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (item.dataset.action === "team-detail") {
+
+      history.pushState(
+        {},
+        "",
+        `/team/${teamToSlug_(team)}`
+      );
+
+      currentView = "team";
+      currentPlayerView = "teams";
+
+      updateNavState(currentView);
+      loadTeamsView(true);
+    }
+
+    if (item.dataset.action === "liquipedia") {
+      window.open(
+        `https://liquipedia.net/overwatch/${encodeURIComponent(team)}`,
+        "_blank",
+        "noopener"
+      );
+    }
+
+    closePlayerLinkMenu_();
+  });
+}
+
 document.addEventListener("click", e => {
   const link = e.target.closest("[data-player]");
   if (!link) {
@@ -2528,4 +2591,14 @@ document.addEventListener("click", e => {
 
   updateNavState(currentView);
   loadPlayerLinksView();
+});
+
+document.addEventListener("click", e => {
+  const button = e.target.closest("[data-team-menu]");
+  if (!button) return;
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  openTeamLinkMenu_(button, button.dataset.teamMenu);
 });

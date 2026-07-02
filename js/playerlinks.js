@@ -333,8 +333,8 @@ function renderPlayerLinksGrid_(players, options = {}) {
             <button
               type="button"
               class="player-detail-meta-pill"
-              data-player-detail-filter="team"
-              data-value="${escapeHtml(p.team || "")}"
+              data-team-menu="${escapeHtml(p.team || "")}"
+              data-team-liquipedia="${escapeHtml(p.team || "")}"
             >
               ${escapeHtml(p.team || "-")}
             </button>
