@@ -2117,26 +2117,6 @@ color:var(--platform-twitch-inactive);
   overflow:hidden;
 }
 
-.player-link-team-logo{
-  position:absolute;
-  right:18px;
-  bottom:14px;
-
-  width:92px;
-  max-height:72px;
-
-  object-fit:contain;
-  opacity:.16;
-
-  pointer-events:none;
-  z-index:0;
-}
-
-.player-link-card > *:not(.player-link-team-logo){
-  position:relative;
-  z-index:1;
-}
-
 .player-link-name-row{
   display:flex;
   align-items:center;

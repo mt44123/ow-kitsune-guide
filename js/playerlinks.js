@@ -292,7 +292,7 @@ function renderPlayerLinksGrid_(players, options = {}) {
           ${
             getTeamLogoPath_(p.team)
               ? `<img
-                  class="player-link-team-logo"
+                  class="card-team-watermark"
                   src="${getTeamLogoPath_(p.team)}"
                   alt=""
                   loading="lazy"
