@@ -2056,6 +2056,28 @@ document.addEventListener("click", e => {
   trackOpen(link.dataset.trackOpen);
 });
 
+async function loadTodayStats_() {
+  const el = document.getElementById("todayStats");
+  if (!el) return;
+
+  try {
+    const res = await fetch("/api/stats", {
+      cache: "no-store"
+    });
+
+    const stats = await res.json();
+
+    el.innerHTML = `
+      🦊 Today:
+      🟢 LIVE ${Number(stats.live || 0).toLocaleString()}
+      / ▶ YouTube ${Number(stats.youtube || 0).toLocaleString()}
+      / 🎬 Clips ${Number(stats.clip || 0).toLocaleString()}
+    `;
+  } catch (e) {
+    el.textContent = "";
+  }
+}
+
 function getTeamLogoPath_(team, useLightTheme = true) {
 
   const name = String(team || "").trim();
@@ -2114,6 +2136,7 @@ async function init() {
   speechSynthesis.getVoices();
 
   loadView(currentView);
+  loadTodayStats_();
 
   await loadVoiceLines();
   setRandomVoiceLine();
