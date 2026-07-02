@@ -1460,10 +1460,20 @@ function applyCurrentSearch_() {
   ) {
     searchPlayerLinksTable();
 
+  } else if (currentView === "teams") {
+    renderTeams(currentData);
+
+  } else if (currentView === "team") {
+    renderTeamPlayers(
+      currentTeamName,
+      currentData,
+      currentRegionName
+    );
+
   } else if (currentView === "muted") {
     renderMutedPlayersView();
 
-  } else {
+  } else if (isLiveView(currentView)) {
     renderLive(filterPlayers(currentData));
   }
 }
