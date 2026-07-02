@@ -21,6 +21,7 @@ function loadYoutubeView(view) {
 
     currentData = filterYoutubeView(youtubeCache, view);
     renderYoutube(filterYoutube(currentData));
+    applyCurrentSearch_();
     return;
   }
 
@@ -43,6 +44,7 @@ function loadYoutubeView(view) {
 
       currentData = filterYoutubeView(youtubeCache, view);
       renderYoutube(filterYoutube(currentData));
+      applyCurrentSearch_();
     })
     .catch(error => {
       if (currentRequest !== requestId) return;

@@ -65,6 +65,8 @@ function renderLiveFromCache(view) {
   currentData = getClientFilteredLivePlayers(players, view);
   renderLive(filterPlayers(currentData));
   updateFavoriteCounts_();
+
+  applyCurrentSearch_();
 }
 
 function getClientFilteredLivePlayers(players, view) {

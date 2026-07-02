@@ -44,6 +44,7 @@ function loadClipsView(view) {
 
     currentData = filterClipView(cached.data, view);
     renderClips(filterClips(currentData));
+    applyCurrentSearch_();
     return;
   }
 
@@ -70,6 +71,7 @@ function loadClipsView(view) {
 
       currentData = filterClipView(clips, view);
       renderClips(filterClips(currentData));
+      applyCurrentSearch_();
     })
     .catch(error => {
       if (currentRequest !== requestId) return;
@@ -107,6 +109,7 @@ function loadGoatClipsView() {
 
     currentData = buildGoatClips_();
     renderClips(currentData);
+    applyCurrentSearch_();
     return;
   }
 
@@ -142,6 +145,7 @@ function loadGoatClipsView() {
 
       currentData = buildGoatClips_();
       renderClips(currentData);
+      applyCurrentSearch_();
     })
     .catch(error => {
       if (currentRequest !== requestId) return;
