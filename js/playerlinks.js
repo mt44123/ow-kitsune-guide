@@ -358,6 +358,18 @@ function renderPlayerLinksGrid_(players, options = {}) {
             </button>
           </div>
 
+          <div class="player-link-birthday">
+            ${
+              p.born
+                ? `${
+                    String(p.role || "").toLowerCase() === "hero"
+                      ? `Age ${p.age || ""} · ${formatHeroBirthday_(p.born)}`
+                      : `Age ${getCurrentAgeFromBorn(p.born)} · ${p.born}`
+                  }`
+                : ""
+            }
+          </div>
+
           <div class="player-link-last-stream">
             ${
               p.lastStreamUrl

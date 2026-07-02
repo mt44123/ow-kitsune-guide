@@ -2138,6 +2138,13 @@ color:var(--platform-twitch-inactive);
   z-index:2;
 }
 
+.player-link-birthday{
+  margin-bottom:8px;
+
+  color:var(--text-sub);
+  font-size:13px;
+}
+
 .player-link-name-row{
   display:flex;
   align-items:center;
