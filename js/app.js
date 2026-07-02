@@ -420,6 +420,8 @@ siteTextLanguageSelect?.addEventListener("change", () => {
     siteTextLanguageMode
   );
 
+  loadSiteGuided_();
+
   if (currentView === "toolstips") {
     loadToolsView();
     return;
@@ -745,6 +747,11 @@ let youtubeCacheTime = 0;
 const YOUTUBE_CLIENT_CACHE_MS =  30 * 60 * 1000;
 let youtubeLastUpdated = "";
 const clipLastUpdated = {};
+
+let siteGuidedCache = null;
+let siteGuidedCacheTime = 0;
+
+const SITE_GUIDED_CACHE_MS = 60 * 1000;
 
 let currentTeamName = "";
 let currentRegionName = null;
@@ -2117,6 +2124,37 @@ function renderTodayStats_(stats) {
   el.textContent = "";
 }
 
+async function loadSiteGuided_() {
+  const el = document.getElementById("siteGuided");
+  if (!el) return;
+
+  try {
+    const res = await fetch("/api/stats", {
+      cache: "no-store"
+    });
+
+    const stats = await res.json();
+    const total = Number(stats.total || 0).toLocaleString();
+
+    if (siteTextLanguageMode === "jp") {
+      el.textContent = `あなたは${total}人目の訪問者です。`;
+      return;
+    }
+
+    if (siteTextLanguageMode === "both") {
+      el.innerHTML = `
+        Kitsune has guided ${total} fans.あなたは${total}人目の訪問者です。
+      `;
+      return;
+    }
+
+    el.textContent = `Kitsune has guided ${total} fans.`;
+
+  } catch (e) {
+    el.textContent = "";
+  }
+}
+
 function getTeamLogoPath_(team, useLightTheme = true) {
 
   const name = String(team || "").trim();
@@ -2175,6 +2213,7 @@ async function init() {
   speechSynthesis.getVoices();
 
   loadView(currentView);
+  loadSiteGuided_();
 
   await loadVoiceLines();
   setRandomVoiceLine();

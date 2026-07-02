@@ -7,6 +7,7 @@ export async function onRequestGet(context) {
     timeZone: "Asia/Tokyo"
   }).format(now);
 
+  // 今日の件数
   const { results } = await env.DB.prepare(`
     SELECT type, count
     FROM daily_opens
@@ -18,12 +19,21 @@ export async function onRequestGet(context) {
   const stats = {
     live: 0,
     youtube: 0,
-    clip: 0
+    clip: 0,
+    total: 0
   };
 
   for (const row of results) {
     stats[row.type] = row.count;
   }
+
+  // サイト開設以来の累計
+  const totalResult = await env.DB.prepare(`
+    SELECT SUM(count) AS total
+    FROM daily_opens
+  `).first();
+
+  stats.total = Number(totalResult?.total || 0);
 
   return new Response(JSON.stringify(stats), {
     headers: {
