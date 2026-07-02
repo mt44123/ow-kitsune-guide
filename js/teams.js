@@ -1,4 +1,6 @@
 function loadTeamsView(openFromUrl = false) {
+  document.body.classList.remove("player-detail-view");
+
   const now = Date.now();
 
   resetSeo_();
@@ -114,6 +116,8 @@ function renderLiquipediaNote_(showClickNote = true) {
 }
 
 function renderTeams(players) {
+  document.body.classList.remove("player-detail-view");
+
   app.className = "teams-mode";
 
   const regions = buildTeamRegions_(players);
@@ -290,6 +294,8 @@ function buildTeamRegions_(players) {
 }
 
 function renderRegionTeams(regionName, players) {
+  document.body.classList.remove("player-detail-view");
+
   app.className = "teams-mode";
 
   const teams = buildTeams_(players)
