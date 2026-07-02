@@ -740,8 +740,8 @@ function renderPlayerDetail(name, players) {
       <p class="seo-note">
         ${escapeHtml(player.name)}
         ${aliasText ? `(${escapeHtml(aliasText)})` : ""}
-        Overwatch player links: Twitch, YouTube, Discord, clips and stream information.
-        ${escapeHtml(player.name)} の配信、YouTube、Discord、クリップ、選手情報を確認できます。
+        Overwatch player profile with Twitch, CHZZK, SOOP, Bilibili, YouTube, X, Discord, live streams, clips and player information.
+        ${escapeHtml(player.name)} のTwitch、CHZZK、SOOP、Bilibili、YouTube、X、Discord、配信、クリップ、選手情報をまとめて確認できます。
       </p>
     </div>
   `;
