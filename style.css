@@ -4074,3 +4074,8 @@ body.player-detail-view #app{
   border-color:var(--accent);
   color:var(--accent);
 }
+
+body.hide-live-title .live-card .title,
+body.hide-live-title .live-card .live-subtitle{
+  display:none !important;
+}
