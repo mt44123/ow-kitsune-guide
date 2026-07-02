@@ -4012,3 +4012,10 @@ body.player-detail-view #app{
 .player-detail-name{
   text-align:center;
 }
+
+.today-stats{
+  margin-top:4px;
+  color:var(--text-muted);
+  font-size:13px;
+  text-align:center;
+}

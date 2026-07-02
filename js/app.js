@@ -1465,6 +1465,7 @@ function loadView(view) {
 
   document.body.classList.remove("player-detail-view");
   updatePageTitleLink_(view);
+  loadTodayStats_();
 
   if (isPlayerView(view)) {
     currentPlayerView = view;
@@ -2067,12 +2068,25 @@ async function loadTodayStats_() {
 
     const stats = await res.json();
 
-    el.innerHTML = `
-      🦊 Today:
-      🟢 LIVE ${Number(stats.live || 0).toLocaleString()}
-      / ▶ YouTube ${Number(stats.youtube || 0).toLocaleString()}
-      / 🎬 Clips ${Number(stats.clip || 0).toLocaleString()}
-    `;
+    if (isLiveView(currentView)) {
+        el.textContent =
+          `🦊 Guided ${Number(stats.live || 0).toLocaleString()} fans to LIVE today.`;
+        return;
+      }
+
+      if (isYoutubeView(currentView)) {
+        el.textContent =
+          `🦊 Guided ${Number(stats.youtube || 0).toLocaleString()} fans to YouTube today.`;
+        return;
+      }
+
+      if (isClipView(currentView)) {
+        el.textContent =
+          `🦊 Guided ${Number(stats.clip || 0).toLocaleString()} fans to Clips today.`;
+        return;
+      }
+
+    el.textContent = "";
   } catch (e) {
     el.textContent = "";
   }
@@ -2136,7 +2150,6 @@ async function init() {
   speechSynthesis.getVoices();
 
   loadView(currentView);
-  loadTodayStats_();
 
   await loadVoiceLines();
   setRandomVoiceLine();
