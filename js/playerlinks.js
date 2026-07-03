@@ -157,14 +157,13 @@ app.innerHTML = `
             <td>${p.teamRegion || ""}</td>
 
             <td class="team-cell ${getTeamRegionClass(p.teamRegion, p.team)}">
-              <a
+              <button
+                type="button"
                 class="team-link"
-                href="https://liquipedia.net/overwatch/${encodeURIComponent(p.team || "")}"
-                target="_blank"
-                rel="noopener"
+                data-team-menu="${escapeHtml(p.team || "")}"
               >
-                ${p.team || ""}
-              </a>
+                ${escapeHtml(p.team || "-")}
+              </button>
             </td>
 
             <td class="name-cell ${getNationalityRegionClass(p.nationality)}">

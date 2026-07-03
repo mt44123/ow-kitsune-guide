@@ -2586,6 +2586,16 @@ grid-column:1 / -1;
   pointer-events:none;
 }
 
+.team-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 
 /* =========================================================
    12. BIRTHDAYS
