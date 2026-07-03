@@ -2489,12 +2489,12 @@ function openTeamLinkMenu_(button, teamName) {
   playerLinkMenu.className = "player-context-menu";
 
   playerLinkMenu.innerHTML = `
-    <button data-action="team-detail">
-      🦊 Team Detail
-    </button>
-
     <button data-action="liquipedia">
       📖 Liquipedia
+    </button>
+
+    <button data-action="team-detail">
+      🦊 Team Detail
     </button>
   `;
 

@@ -399,6 +399,11 @@ const members = players
     );
   });
 
+  const teamAlias =
+  official?.teamAlias ||
+  members[0]?.teamAlias ||
+  "";
+
   app.innerHTML = `
     ${renderLiquipediaNote_(true)}
 
@@ -517,6 +522,19 @@ const members = players
   }).join("")}
 
 </div>
+
+      <p class="seo-note">
+        ${escapeHtml(teamName)}
+        ${teamAlias ? ` (${escapeHtml(teamAlias)})` : ""}
+        is an Overwatch team.
+        Team roster with Twitch, CHZZK, SOOP, Bilibili, YouTube, X, Discord, live streams and player information.
+
+        ${escapeHtml(teamName)}
+        ${teamAlias ? `（${escapeHtml(teamAlias)}）` : ""}
+        はOverwatchチームです。
+        所属選手、Twitch、CHZZK、SOOP、Bilibili、YouTube、X、Discord、配信、選手情報をまとめて確認できます。
+      </p>
+
     </div>
   `;
 
