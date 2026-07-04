@@ -595,8 +595,8 @@ function updateViewActionButton_(view = currentView) {
 
     viewActionButton.textContent =
       playerLinksLayout === "table"
-        ? "▦ Grid"
-        : "☰ List";
+        ? "▦ Cards"
+        : "☰ Table";
 
     return;
   }
@@ -712,7 +712,7 @@ viewActionButton?.addEventListener("click", () => {
 
     applyYoutubeLayout_();
     updateViewActionButton_();
-    renderYoutube(currentData);
+    renderYoutube(filterYoutube(currentData));
     return;
   }
 
@@ -726,7 +726,7 @@ viewActionButton?.addEventListener("click", () => {
 
     applyClipLayout_();
     updateViewActionButton_();
-    renderClips(currentData);
+    renderClips(filterClips(currentData));
     return;
   }
 
@@ -768,41 +768,17 @@ refreshDataButton?.addEventListener("click", () => {
 
 toolsButton?.addEventListener(
   "click",
-  () => {
-    settingsMenu?.classList.add("settings-hidden");
-
-    currentView = "toolstips";
-    history.replaceState({}, "", "?view=toolstips");
-
-    updateNavState(currentView);
-    loadView(currentView);
-  }
+  () => openStaticView_("toolstips")
 );
 
 usefulLinksButton?.addEventListener(
   "click",
-  () => {
-    settingsMenu?.classList.add("settings-hidden");
-
-    currentView = "usefullinks";
-    history.replaceState({}, "", "?view=usefullinks");
-
-    updateNavState(currentView);
-    loadView(currentView);
-  }
+  () => openStaticView_("usefullinks")
 );
 
 faqButton?.addEventListener(
   "click",
-  () => {
-    settingsMenu?.classList.add("settings-hidden");
-
-    currentView = "faq";
-    history.replaceState({}, "", "?view=faq");
-
-    updateNavState(currentView);
-    loadView(currentView);
-  }
+  () => openStaticView_("faq")
 );
 
 contactButton?.addEventListener(
@@ -818,19 +794,24 @@ contactButton?.addEventListener(
   }
 );
 
-const params = new URLSearchParams(window.location.search);
+function getViewFromLocation_() {
+  const params =
+    new URLSearchParams(window.location.search);
 
-const path = location.pathname;
+  const path = location.pathname;
 
-let currentView;
+  if (path.startsWith("/player/")) {
+    return "player";
+  }
 
-if (path.startsWith("/player/")) {
-  currentView = "player";
-} else if (path.startsWith("/team/")) {
-  currentView = "team";
-} else {
-  currentView = params.get("view") || "new";
+  if (path.startsWith("/team/")) {
+    return "team";
+  }
+
+  return params.get("view") || "new";
 }
+
+let currentView = getViewFromLocation_();
 
 let currentRoleFilter =
   localStorage.getItem("roleFilter") || "all";
@@ -1093,6 +1074,40 @@ const VIEW_GROUPS = {
   ]
 };
 
+const STATIC_VIEW_LOADERS = {
+  about: () => loadAboutView(),
+  privacy: () => loadPrivacyView(),
+  usefullinks: () => loadUsefulLinksView(),
+  faq: () => loadFaqView(),
+  toolstips: () => loadToolsView(),
+  updatelog: () => loadUpdateLogView()
+};
+
+function isStaticView_(view) {
+  return Boolean(STATIC_VIEW_LOADERS[view]);
+}
+
+function loadStaticView_(view) {
+  const loader = STATIC_VIEW_LOADERS[view];
+
+  if (!loader) {
+    return false;
+  }
+
+  loader();
+  return true;
+}
+
+function openStaticView_(view) {
+  settingsMenu?.classList.add("settings-hidden");
+
+  currentView = view;
+  history.replaceState({}, "", "?view=" + view);
+
+  updateNavState(currentView);
+  loadView(currentView);
+}
+
 let currentLiveView =
   isLiveView(currentView)
     ? currentView
@@ -1129,28 +1144,25 @@ function isPlayerView(view) {
   return VIEW_GROUPS.players.includes(view);
 }
 
-const STATIC_VIEW_LOADERS = {
-  about: () => loadAboutView(),
-  privacy: () => loadPrivacyView(),
-  usefullinks: () => loadUsefulLinksView(),
-  faq: () => loadFaqView(),
-  toolstips: () => loadToolsView(),
-  updatelog: () => loadUpdateLogView()
-};
-
-function isStaticView_(view) {
-  return Boolean(STATIC_VIEW_LOADERS[view]);
+function hasSubNav_(view) {
+  return (
+    isLiveView(view) ||
+    isClipView(view) ||
+    isYoutubeView(view) ||
+    (isPlayerView(view) && !isStaticView_(view))
+  );
 }
 
-function loadStaticView_(view) {
-  const loader = STATIC_VIEW_LOADERS[view];
+function hasFilterPanel_(view) {
+  return hasSubNav_(view);
+}
 
-  if (!loader) {
-    return false;
-  }
-
-  loader();
-  return true;
+function hasCollapsibleFilters_(view) {
+  return (
+    isLiveView(view) ||
+    isYoutubeView(view) ||
+    isClipView(view)
+  );
 }
 
 function updateNavState(view) {
@@ -1230,23 +1242,14 @@ function updateNavState(view) {
 
   document.body.classList.toggle(
     "has-sub-nav",
-    isLiveView(view) ||
-    isClipView(view) ||
-    isYoutubeView(view) ||
-    (isPlayerView(view) && !isStaticView_(view))
+    hasSubNav_(view)
   );
 
-  const showFilters =
-    isLiveView(view) ||
-    isYoutubeView(view) ||
-    isClipView(view) ||
-    (isPlayerView(view) && !isStaticView_(view));
+  const showFilters = hasFilterPanel_(view);
 
   if (filtersToggle) {
     filtersToggle.style.display =
-      isLiveView(view) ||
-      isYoutubeView(view) ||
-      isClipView(view)
+      hasCollapsibleFilters_(view)
         ? ""
         : "none";
   }
@@ -1260,11 +1263,7 @@ function updateNavState(view) {
     }
   }
 
-  if (
-    isLiveView(view) ||
-    isYoutubeView(view) ||
-    isClipView(view)
-  ) {
+  if (hasCollapsibleFilters_(view)) {
     applyFiltersExpanded_();
   }
 }
@@ -1331,7 +1330,10 @@ document
         currentYoutubeView = currentView;
       }
 
-      if (isPlayerView(currentView)) {
+      if (
+        isPlayerView(currentView) &&
+        !isStaticView_(currentView)
+      ) {
         currentPlayerView = currentView;
       }
             
@@ -1345,17 +1347,7 @@ document
 updateNavState(currentView);
 
 window.addEventListener("popstate", () => {
-  const params = new URLSearchParams(window.location.search);
-
-  const path = location.pathname;
-
-  if (path.startsWith("/player/")) {
-    currentView = "player";
-  } else if (path.startsWith("/team/")) {
-    currentView = "team";
-  } else {
-    currentView = params.get("view") || "new";
-  }
+  currentView = getViewFromLocation_();
 
   if (
     currentView === "team" ||
@@ -1674,6 +1666,10 @@ function loadView(view) {
 
   updateViewActionButton_(view);
 
+  if (loadStaticView_(view)) {
+    return;
+  }
+
   if (isLiveView(view)) {
     loadLiveView(view);
     return;
@@ -1724,11 +1720,14 @@ function loadView(view) {
     return;
   }
 
-  if (loadStaticView_(view)) {
-    return;
-  }
+  currentView = "new";
+  currentLiveView = "new";
 
-  loadLiveView("new");
+  history.replaceState({}, "", "?view=new");
+
+  updateNavState(currentView);
+  updateViewActionButton_(currentView);
+  loadLiveView(currentView);
   
 }
 
