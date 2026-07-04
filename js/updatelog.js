@@ -90,7 +90,7 @@ function renderUpdateLogSection_(title, items) {
 }
 
 function updateLogText_(en, jp) {
-  switch (siteTextLanguage) {
+  switch (siteTextLanguageMode) {
     case "en":
       return en;
 
