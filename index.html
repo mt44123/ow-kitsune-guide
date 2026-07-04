@@ -2,7 +2,7 @@
 <html>
 <head>
   <script>
-  const APP_VERSION = "1.1.73";
+  const APP_VERSION = "1.1.74";
 
   function loadScript(src) {
     document.write(
@@ -11,7 +11,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="/style.css?v=1.1.73">
+  <link rel="stylesheet" href="/style.css?v=1.1.74">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -347,6 +347,31 @@
     </button>
 
     <button
+      id="usefulLinksButton"
+      class="settings-item settings-row"
+    >
+      <span class="settings-row-icon">
+        <svg
+          class="settings-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 -960 960 960"
+          aria-hidden="true"
+        >
+          <path
+            fill="currentColor"
+            d="M320-240h320v-80H320v80Zm0-160h480v-80H320v80Zm0-160h480v-80H320v80ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Z"
+          />
+        </svg>
+      </span>
+
+      <span class="settings-row-main">
+        <span class="settings-row-title">Useful Links</span>
+      </span>
+
+      <span class="settings-chevron">›</span>
+    </button>
+
+    <button
       id="faqButton"
       class="settings-item settings-row"
     >
@@ -664,6 +689,7 @@ loadScript("/js/goatscanvas-hype.js");
 loadScript("/js/birthdays.js");
 
 loadScript("/js/tools.js");
+loadScript("/js/usefullinks.js");
 loadScript("/js/faq.js");
 loadScript("/js/about.js");
 loadScript("/js/privacy.js");

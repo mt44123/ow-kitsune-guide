@@ -161,6 +161,46 @@ function loadFaqView() {
         )}
       </div>
 
+            <div class="card faq-card">
+        <h3>
+          🛠️ Why does the site look broken or not update?<br>
+          サイトの表示がおかしい・更新されないのはなぜですか？
+        </h3>
+
+        ${siteText_(
+          `
+            <p>
+              If the site does not load correctly or seems outdated, try the following.
+            </p>
+            <ul>
+              <li>Refresh the page</li>
+              <li>On PC, try Ctrl + F5 if possible</li>
+              <li>Clear your browser cache</li>
+              <li>Close and reopen the browser</li>
+              <li>If you are using the Home Screen app on mobile, remove it and add it again if the issue persists</li>
+            </ul>
+            <p>
+              Mobile browsers do not usually have a Ctrl + F5 equivalent. If refreshing does not help, clearing the browser cache usually resolves the issue.
+            </p>
+          `,
+          `
+            <p>
+              サイトが正しく表示されない、または最新の内容に更新されない場合は、以下をお試しください。
+            </p>
+            <ul>
+              <li>ページを再読み込みする</li>
+              <li>PCでは可能であれば Ctrl + F5 を試す</li>
+              <li>ブラウザのキャッシュを削除する</li>
+              <li>ブラウザを閉じて開き直す</li>
+              <li>スマートフォンでホーム画面に追加したアプリを使っている場合、改善しないときは一度削除して再追加する</li>
+            </ul>
+            <p>
+              スマートフォンには通常、Ctrl + F5 と同じ操作はありません。再読み込みで改善しない場合は、ブラウザのキャッシュ削除をお試しください。
+            </p>
+          `
+        )}
+      </div>
+
       <div class="card faq-card">
         <h3>
           ⭐ What is MY GOATS?<br>

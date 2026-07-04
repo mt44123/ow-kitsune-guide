@@ -249,10 +249,20 @@ document.addEventListener("click", e => {
   loadView(currentView);
 });
 
-const refreshDataButton =  document.getElementById("refreshDataButton");
-const toolsButton =  document.getElementById("toolsButton");
-const faqButton =  document.getElementById("faqButton");
-const contactButton =  document.getElementById("contactButton");
+const refreshDataButton =
+  document.getElementById("refreshDataButton");
+
+const toolsButton =
+  document.getElementById("toolsButton");
+
+const usefulLinksButton =
+  document.getElementById("usefulLinksButton");
+
+const faqButton =
+  document.getElementById("faqButton");
+
+const contactButton =
+  document.getElementById("contactButton");
 
 const notifyButton =  document.getElementById("notifyButton");
 const settingsButton =  document.getElementById("settingsButton");
@@ -706,6 +716,14 @@ refreshDataButton?.addEventListener("click", () => {
 toolsButton?.addEventListener(
   "click",
   () => loadToolsView()
+);
+
+usefulLinksButton?.addEventListener(
+  "click",
+  () => {
+    settingsMenu?.classList.add("settings-hidden");
+    loadUsefulLinksView();
+  }
 );
 
 faqButton?.addEventListener(
@@ -1589,6 +1607,11 @@ function loadView(view) {
 
   if (view === "updatelog") {
     loadUpdateLogView();
+    return;
+  }
+
+  if (view === "usefullinks") {
+    loadUsefulLinksView();
     return;
   }
 
