@@ -149,11 +149,23 @@ function openPlayerMenu_(button, player) {
 
   const rect = button.getBoundingClientRect();
 
+  const menuWidth = 180;
+
+  const left = Math.min(
+    rect.right + window.scrollX - menuWidth,
+    window.scrollX + window.innerWidth - menuWidth - 12
+  );
+
   playerContextMenu.style.left =
-    `${rect.right + window.scrollX - 180}px`;
+    `${Math.max(12, left)}px`;
+
+  const top = Math.min(
+    rect.bottom + window.scrollY + 6,
+    window.scrollY + window.innerHeight - 120
+  );
 
   playerContextMenu.style.top =
-     `${rect.bottom + window.scrollY + 6}px`;
+    `${Math.max(window.scrollY + 12, top)}px`;
 
     playerContextMenu.addEventListener("click", e => {
     const menuButton = e.target.closest("button");
@@ -193,12 +205,30 @@ function openPlayerMenu_(button, player) {
     }
 
 document.addEventListener("click", e => {
+  const clickedPlayerMenuButton =
+    e.target.closest("[data-player-menu]");
+
+  const clickedPlayerLink =
+    e.target.closest("[data-player]");
+
+  const clickedTeamMenuButton =
+    e.target.closest("[data-team-menu]");
+
   if (
     playerContextMenu &&
     !playerContextMenu.contains(e.target) &&
-    !e.target.closest("[data-player-menu]")
+    !clickedPlayerMenuButton
   ) {
     closePlayerMenu_();
+  }
+
+  if (
+    playerLinkMenu &&
+    !playerLinkMenu.contains(e.target) &&
+    !clickedPlayerLink &&
+    !clickedTeamMenuButton
+  ) {
+    closePlayerLinkMenu_();
   }
 });
 
@@ -2556,11 +2586,23 @@ function openPlayerLinkMenu_(button, playerName) {
 
   const rect = button.getBoundingClientRect();
 
+  const menuWidth = 180;
+
+  const left = Math.min(
+    rect.left + window.scrollX,
+    window.scrollX + window.innerWidth - menuWidth - 12
+  );
+
   playerLinkMenu.style.left =
-    `${rect.left + window.scrollX}px`;
+    `${Math.max(12, left)}px`;
+
+  const top = Math.min(
+    rect.bottom + window.scrollY + 6,
+    window.scrollY + window.innerHeight - 120
+  );
 
   playerLinkMenu.style.top =
-    `${rect.bottom + window.scrollY + 6}px`;
+    `${Math.max(window.scrollY + 12, top)}px`;
 
   playerLinkMenu.addEventListener("click", e => {
     const item = e.target.closest("button");
@@ -2618,11 +2660,23 @@ function openTeamLinkMenu_(button, teamName) {
 
   const rect = button.getBoundingClientRect();
 
+  const menuWidth = 180;
+
+  const left = Math.min(
+    rect.left + window.scrollX,
+    window.scrollX + window.innerWidth - menuWidth - 12
+  );
+
   playerLinkMenu.style.left =
-    `${rect.left + window.scrollX}px`;
+    `${Math.max(12, left)}px`;
+
+  const top = Math.min(
+    rect.bottom + window.scrollY + 6,
+    window.scrollY + window.innerHeight - 120
+  );
 
   playerLinkMenu.style.top =
-    `${rect.bottom + window.scrollY + 6}px`;
+    `${Math.max(window.scrollY + 12, top)}px`;
 
   playerLinkMenu.addEventListener("click", e => {
     const item = e.target.closest("button");
