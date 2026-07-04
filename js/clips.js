@@ -342,13 +342,14 @@ function renderClips(clips) {
 function renderClipCard_(c) {
   const { mainTitle, subTitles } =
     buildMediaTitles_(
-      c.rawTitle || c.title || "",
+      c.rawTitle || "",
       c.titleJp || "",
       c.titleEn || "",
       c.titleKr || ""
     );
 
   const logoPath = getTeamLogoPath_(c.team);
+  const isFav = isFavorite_(c.name);
 
   return `
     <a
@@ -386,10 +387,10 @@ function renderClipCard_(c) {
           <div class="youtube-player card-name-row">
             <span>
               <span
-                class="favorite-star ${isFavorite_(c.name) ? "active" : ""}"
+                class="favorite-star ${isFav ? "active" : ""}"
                 data-favorite-name="${escapeHtml(c.name || "")}"
               >
-                ${isFavorite_(c.name) ? "★" : "☆"}
+                ${isFav ? "★" : "☆"}
               </span>
               ${escapeHtml(c.name || "-")}
             </span>
