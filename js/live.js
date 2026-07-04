@@ -217,6 +217,7 @@ function renderLive(players) {
   app.innerHTML = players.map(p => {
     const logoPath = getTeamLogoPath_(p.team);
     const isLive = isPlayerLive_(p);
+    const isFav = isFavorite_(p.name);
 
     const { mainTitle, subTitles } =
       isLive
@@ -244,10 +245,10 @@ function renderLive(players) {
           <div class="player-name card-name-row">
             <span>
               <span
-                class="favorite-star ${isFavorite_(p.name) ? "active" : ""}"
+                class="favorite-star ${isFav ? "active" : ""}"
                 data-favorite-name="${escapeHtml(p.name || "")}"
               >
-                ${isFavorite_(p.name) ? "★" : "☆"}
+                ${isFav ? "★" : "☆"}
               </span>
 
               ${escapeHtml(p.name || "")}
