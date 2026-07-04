@@ -1651,18 +1651,11 @@ function loadView(view) {
 
   if (
     isPlayerView(view) &&
-    ![
-      "about",
-      "privacy",
-      "usefullinks",
-      "faq",
-      "toolstips",
-      "updatelog"
-    ].includes(view)
+    !isStaticView_(view)
   ) {
     currentPlayerView = view;
   }
-
+  
   updateViewActionButton_(view);
 
   if (isLiveView(view)) {
