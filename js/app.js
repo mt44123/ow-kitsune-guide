@@ -124,7 +124,6 @@ function muteButton_(name) {
 let playerContextMenu = null;
 
 function openPlayerMenu_(button, player) {
-
   closePlayerMenu_();
   closePlayerLinkMenu_();
 
@@ -149,25 +148,13 @@ function openPlayerMenu_(button, player) {
 
   const rect = button.getBoundingClientRect();
 
-  const menuWidth = 180;
-
-  const left = Math.min(
-    rect.right + window.scrollX - menuWidth,
-    window.scrollX + window.innerWidth - menuWidth - 12
+  positionContextMenu_(
+    playerContextMenu,
+    rect,
+    "right"
   );
 
-  playerContextMenu.style.left =
-    `${Math.max(12, left)}px`;
-
-  const top = Math.min(
-    rect.bottom + window.scrollY + 6,
-    window.scrollY + window.innerHeight - 120
-  );
-
-  playerContextMenu.style.top =
-    `${Math.max(window.scrollY + 12, top)}px`;
-
-    playerContextMenu.addEventListener("click", e => {
+  playerContextMenu.addEventListener("click", e => {
     const menuButton = e.target.closest("button");
     if (!menuButton) return;
 
@@ -201,8 +188,8 @@ function openPlayerMenu_(button, player) {
     }
 
     closePlayerMenu_();
-      });
-    }
+  });
+}
 
 document.addEventListener("click", e => {
   const clickedPlayerMenuButton =
@@ -238,6 +225,32 @@ document.addEventListener("keydown", e => {
     closePlayerLinkMenu_();
   }
 });
+
+function positionContextMenu_(menu, rect, align = "left") {
+  const menuWidth = 180;
+  const menuHeight = 120;
+
+  const baseLeft =
+    align === "right"
+      ? rect.right + window.scrollX - menuWidth
+      : rect.left + window.scrollX;
+
+  const left = Math.min(
+    baseLeft,
+    window.scrollX + window.innerWidth - menuWidth - 12
+  );
+
+  const top = Math.min(
+    rect.bottom + window.scrollY + 6,
+    window.scrollY + window.innerHeight - menuHeight
+  );
+
+  menu.style.left =
+    `${Math.max(12, left)}px`;
+
+  menu.style.top =
+    `${Math.max(window.scrollY + 12, top)}px`;
+}
 
 function closePlayerMenu_() {
   playerContextMenu?.remove();
@@ -1125,6 +1138,17 @@ function isPlayerView(view) {
   return VIEW_GROUPS.players.includes(view);
 }
 
+function isStaticView_(view) {
+  return [
+    "about",
+    "privacy",
+    "usefullinks",
+    "faq",
+    "toolstips",
+    "updatelog"
+  ].includes(view);
+}
+
 function updateNavState(view) {
   const liveButton = document.querySelector('[data-section="live"]');
   const clipsButton = document.querySelector('[data-section="clips"]');
@@ -1181,7 +1205,10 @@ function updateNavState(view) {
 
   } else if (isPlayerView(view)) {
     playersButton?.classList.add("active");
-    if (playerSubNav) playerSubNav.style.display = "flex";
+
+    if (playerSubNav && !isStaticView_(view)) {
+      playerSubNav.style.display = "flex";
+    }
 
     document
       .querySelector(`#playerSubNav button[data-view="${view}"]`)
@@ -1202,14 +1229,14 @@ function updateNavState(view) {
     isLiveView(view) ||
     isClipView(view) ||
     isYoutubeView(view) ||
-    isPlayerView(view)
+    (isPlayerView(view) && !isStaticView_(view))
   );
 
   const showFilters =
     isLiveView(view) ||
     isYoutubeView(view) ||
     isClipView(view) ||
-    isPlayerView(view);
+    (isPlayerView(view) && !isStaticView_(view));
 
   if (filtersToggle) {
     filtersToggle.style.display =
@@ -1224,7 +1251,7 @@ function updateNavState(view) {
     filtersPanel.style.display =
       showFilters ? "" : "none";
 
-    if (isPlayerView(view)) {
+    if (isPlayerView(view) && !isStaticView_(view)) {
       filtersPanel.classList.remove("filters-collapsed");
     }
   }
@@ -2586,23 +2613,11 @@ function openPlayerLinkMenu_(button, playerName) {
 
   const rect = button.getBoundingClientRect();
 
-  const menuWidth = 180;
-
-  const left = Math.min(
-    rect.left + window.scrollX,
-    window.scrollX + window.innerWidth - menuWidth - 12
+  positionContextMenu_(
+    playerLinkMenu,
+    rect,
+    "left"
   );
-
-  playerLinkMenu.style.left =
-    `${Math.max(12, left)}px`;
-
-  const top = Math.min(
-    rect.bottom + window.scrollY + 6,
-    window.scrollY + window.innerHeight - 120
-  );
-
-  playerLinkMenu.style.top =
-    `${Math.max(window.scrollY + 12, top)}px`;
 
   playerLinkMenu.addEventListener("click", e => {
     const item = e.target.closest("button");
@@ -2660,23 +2675,11 @@ function openTeamLinkMenu_(button, teamName) {
 
   const rect = button.getBoundingClientRect();
 
-  const menuWidth = 180;
-
-  const left = Math.min(
-    rect.left + window.scrollX,
-    window.scrollX + window.innerWidth - menuWidth - 12
+  positionContextMenu_(
+    playerLinkMenu,
+    rect,
+    "left"
   );
-
-  playerLinkMenu.style.left =
-    `${Math.max(12, left)}px`;
-
-  const top = Math.min(
-    rect.bottom + window.scrollY + 6,
-    window.scrollY + window.innerHeight - 120
-  );
-
-  playerLinkMenu.style.top =
-    `${Math.max(window.scrollY + 12, top)}px`;
 
   playerLinkMenu.addEventListener("click", e => {
     const item = e.target.closest("button");
