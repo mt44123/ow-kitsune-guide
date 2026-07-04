@@ -13,6 +13,8 @@ function loadPrivacyView() {
   currentView = "privacy";
   history.replaceState({}, "", "?view=privacy");
 
+  resetSeo_();
+
   requestId++;
 
   updateNavState(currentView);

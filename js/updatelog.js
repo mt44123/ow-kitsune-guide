@@ -2,6 +2,8 @@ function loadUpdateLogView() {
   currentView = "updatelog";
   history.replaceState({}, "", "?view=updatelog");
 
+  resetSeo_();
+
   const currentRequest = ++requestId;
 
   updateNavState(currentView);

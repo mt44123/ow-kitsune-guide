@@ -2,6 +2,8 @@ function loadUsefulLinksView() {
   currentView = "usefullinks";
   history.replaceState({}, "", "?view=usefullinks");
 
+  resetSeo_();
+
   requestId++;
 
   updateNavState(currentView);

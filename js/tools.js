@@ -2,6 +2,8 @@ function loadToolsView() {
   currentView = "toolstips";
   history.replaceState({}, "", "?view=toolstips");
 
+  resetSeo_();
+
   requestId++;
 
   updateNavState(currentView);
