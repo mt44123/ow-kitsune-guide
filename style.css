@@ -3067,6 +3067,15 @@ border:none;
 margin-top:var(--space-sm);
 }
 
+.tools-page .card h3{
+  margin-bottom:0;
+}
+
+.tools-page .card:has(> h3:only-child){
+  padding:14px 18px;
+  background:var(--bg-light);
+}
+
 /* =========================================================
    14. FAQ
    ========================================================= */

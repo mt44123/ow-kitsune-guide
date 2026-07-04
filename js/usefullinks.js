@@ -144,7 +144,6 @@ function loadUsefulLinksView() {
           )}
         </div>
       </div>
-      </div>
 
       <div class="card">
         <h3>🎮 Replay Codes</h3>
