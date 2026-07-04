@@ -360,49 +360,51 @@ function renderTeamPlayers(teamName, players, regionName = null, updateUrl = tru
     );
   }
 
-setTeamSeo_(teamName);
+  setTeamSeo_(teamName);
 
   app.className = "team-detail-mode";
   
- const official = players.find(
-  p =>
-    p.teamRegion === "● Team Official" &&
-    p.team === teamName
-);
-
-const members = players
-  .filter(
+  const official = players.find(
     p =>
-      p.team === teamName &&
-      isTeamListMember_(p)
-  )
-  .sort((a, b) => {
+      p.teamRegion === "● Team Official" &&
+      p.team === teamName
+  );
 
-    const roleOrder = {
-      TANK: 1,
-      DPS: 2,
-      SUP: 3,
-      COACH: 4
-    };
+  const members = players
+    .filter(
+      p =>
+        p.team === teamName &&
+        isTeamListMember_(p)
+    )
+    .sort((a, b) => {
 
-    const roleA =
-      String(a.role || "")
-        .replace(/[^\p{L}\p{N}]/gu, "");
+      const roleOrder = {
+        TANK: 1,
+        DPS: 2,
+        SUP: 3,
+        COACH: 4
+      };
 
-    const roleB =
-      String(b.role || "")
-        .replace(/[^\p{L}\p{N}]/gu, "");
+      const roleA =
+        String(a.role || "")
+          .replace(/[^\p{L}\p{N}]/gu, "");
 
-    return (
-      (roleOrder[roleA] || 99) -
-      (roleOrder[roleB] || 99)
-    );
-  });
+      const roleB =
+        String(b.role || "")
+          .replace(/[^\p{L}\p{N}]/gu, "");
+
+      return (
+        (roleOrder[roleA] || 99) -
+        (roleOrder[roleB] || 99)
+      );
+    });
+
+  const favSet = new Set(getFavorites_());
 
   const teamAlias =
-  official?.teamAlias ||
-  members[0]?.teamAlias ||
-  "";
+    official?.teamAlias ||
+    members[0]?.teamAlias ||
+    "";
 
   app.innerHTML = `
     ${renderLiquipediaNote_(true)}
@@ -422,6 +424,7 @@ const members = players
           ${escapeHtml(teamName)}
         </a>
       </div>
+
       <div class="team-official-links">
         ${
           official
@@ -444,84 +447,85 @@ const members = players
 
       <div class="team-player-table">
 
-  <div class="team-player-header desktop-only">
-    <div>Name</div>
-    <div>Nat</div>
-    <div>Age (Born)</div>
-    <div>Role</div>
-    <div>Last Stream</div>
-    <div>Links</div>
-  </div>
-
-  ${members.map(p => {
-    const age = p.born ? getCurrentAgeFromBorn(p.born) : "-";
-    const born = p.born ? ` (${p.born})` : "";
-
-    return `
-      <div class="team-player-card-row">
-
-        <div class="team-player-name">
-
-          <span
-            class="favorite-star ${isFavorite_(p.name) ? "active" : ""}"
-            data-favorite-name="${escapeHtml(p.name || "")}"
-          >
-            ${isFavorite_(p.name) ? "★" : "☆"}
-          </span>
-        
-          <a
-            class="player-name-link"
-            href="#"
-            data-player="${escapeHtml(p.name)}"
-            onclick="return false;"
-          >
-            ${escapeHtml(p.name || "-")}
-          </a>
-                
+        <div class="team-player-header desktop-only">
+          <div>Name</div>
+          <div>Nat</div>
+          <div>Age (Born)</div>
+          <div>Role</div>
+          <div>Last Stream</div>
+          <div>Links</div>
         </div>
 
-        <div class="team-player-nat">
-          ${escapeHtml(shortNationality(p.nationality || "-"))}
-        </div>
-        
-        <div class="team-player-age">
-          ${age}${born}
-        </div>
-        
-        <div class="team-player-role">
-          ${escapeHtml(p.role || "-")}
-        </div>
+        ${members.map(p => {
+          const age = p.born ? getCurrentAgeFromBorn(p.born) : "-";
+          const born = p.born ? ` (${p.born})` : "";
+          const isFav = favSet.has(p.name);
 
-        <div class="team-player-last">
-          ${
-            p.lastStreamUrl
-              ? `<a class="last-stream-link" href="${p.lastStreamUrl}" target="_blank" rel="noopener">
-                  ${renderPlatformIcons_(p.lastStreamPlatform)}
-                  <span>${cleanLastStreamAge_(p.lastStreamAge)}</span>
-                </a>`
-              : "-"
-          }
-        </div>
+          return `
+            <div class="team-player-card-row">
 
-        <div class="team-player-links">
-        ${linkTag(
-          p.twitchUrl,
-          "TW",
-          p.twitchActive ? "tw" : "tw-inactive"
-        )}
-        ${linkTag(p.chzzkUrl, "CHZ", "chz")}
-        ${linkTag(p.soopUrl, "SOOP", "soop")}
-        ${linkTag(p.biliUrl, "BILI", "bili")}
-        ${linkTag(p.youtubeUrl, "YT", "yt")}
-        ${linkTag(p.xUrl, "X", "x")}
-        ${linkTag(p.discordUrl, "DC", "dc")}
-        </div>
+              <div class="team-player-name">
+
+                <span
+                  class="favorite-star ${isFav ? "active" : ""}"
+                  data-favorite-name="${escapeHtml(p.name || "")}"
+                >
+                  ${isFav ? "★" : "☆"}
+                </span>
+              
+                <a
+                  class="player-name-link"
+                  href="#"
+                  data-player="${escapeHtml(p.name)}"
+                  onclick="return false;"
+                >
+                  ${escapeHtml(p.name || "-")}
+                </a>
+                      
+              </div>
+
+              <div class="team-player-nat">
+                ${escapeHtml(shortNationality(p.nationality || "-"))}
+              </div>
+              
+              <div class="team-player-age">
+                ${age}${born}
+              </div>
+              
+              <div class="team-player-role">
+                ${escapeHtml(p.role || "-")}
+              </div>
+
+              <div class="team-player-last">
+                ${
+                  p.lastStreamUrl
+                    ? `<a class="last-stream-link" href="${p.lastStreamUrl}" target="_blank" rel="noopener">
+                        ${renderPlatformIcons_(p.lastStreamPlatform)}
+                        <span>${cleanLastStreamAge_(p.lastStreamAge)}</span>
+                      </a>`
+                    : "-"
+                }
+              </div>
+
+              <div class="team-player-links">
+                ${linkTag(
+                  p.twitchUrl,
+                  "TW",
+                  p.twitchActive ? "tw" : "tw-inactive"
+                )}
+                ${linkTag(p.chzzkUrl, "CHZ", "chz")}
+                ${linkTag(p.soopUrl, "SOOP", "soop")}
+                ${linkTag(p.biliUrl, "BILI", "bili")}
+                ${linkTag(p.youtubeUrl, "YT", "yt")}
+                ${linkTag(p.xUrl, "X", "x")}
+                ${linkTag(p.discordUrl, "DC", "dc")}
+              </div>
+
+            </div>
+          `;
+        }).join("")}
 
       </div>
-    `;
-  }).join("")}
-
-</div>
 
       <p class="seo-note">
         ${escapeHtml(teamName)}
