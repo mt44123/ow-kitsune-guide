@@ -498,33 +498,8 @@ siteTextLanguageSelect?.addEventListener("change", () => {
 
   loadSiteGuided_();
 
-  if (currentView === "toolstips") {
-    loadToolsView();
-    return;
-  }
-
-  if (currentView === "faq") {
-    loadFaqView();
-    return;
-  }
-
-  if (currentView === "about") {
-    loadAboutView();
-    return;
-  }
-
-  if (currentView === "privacy") {
-    loadPrivacyView();
-    return;
-  }
-
-  if (currentView === "usefullinks") {
-    loadUsefulLinksView();
-    return;
-  }
-
-  if (currentView === "updatelog") {
-    loadUpdateLogView();
+  if (isStaticView_(currentView)) {
+    loadView(currentView);
     return;
   }
 
@@ -752,6 +727,7 @@ viewActionButton?.addEventListener("click", () => {
     applyClipLayout_();
     updateViewActionButton_();
     renderClips(currentData);
+    return;
   }
 
   if (currentView === "playerlinks" || currentView === "favorites") {
@@ -794,7 +770,12 @@ toolsButton?.addEventListener(
   "click",
   () => {
     settingsMenu?.classList.add("settings-hidden");
-    loadToolsView();
+
+    currentView = "toolstips";
+    history.replaceState({}, "", "?view=toolstips");
+
+    updateNavState(currentView);
+    loadView(currentView);
   }
 );
 
@@ -802,7 +783,12 @@ usefulLinksButton?.addEventListener(
   "click",
   () => {
     settingsMenu?.classList.add("settings-hidden");
-    loadUsefulLinksView();
+
+    currentView = "usefullinks";
+    history.replaceState({}, "", "?view=usefullinks");
+
+    updateNavState(currentView);
+    loadView(currentView);
   }
 );
 
@@ -810,7 +796,12 @@ faqButton?.addEventListener(
   "click",
   () => {
     settingsMenu?.classList.add("settings-hidden");
-    loadFaqView();
+
+    currentView = "faq";
+    history.replaceState({}, "", "?view=faq");
+
+    updateNavState(currentView);
+    loadView(currentView);
   }
 );
 
@@ -1118,7 +1109,7 @@ let currentYoutubeView =
     : "youtube";
 
 let currentPlayerView =
-  isPlayerView(currentView)
+  isPlayerView(currentView) && !isStaticView_(currentView)
     ? currentView
     : "teams";
 
@@ -1138,15 +1129,28 @@ function isPlayerView(view) {
   return VIEW_GROUPS.players.includes(view);
 }
 
+const STATIC_VIEW_LOADERS = {
+  about: () => loadAboutView(),
+  privacy: () => loadPrivacyView(),
+  usefullinks: () => loadUsefulLinksView(),
+  faq: () => loadFaqView(),
+  toolstips: () => loadToolsView(),
+  updatelog: () => loadUpdateLogView()
+};
+
 function isStaticView_(view) {
-  return [
-    "about",
-    "privacy",
-    "usefullinks",
-    "faq",
-    "toolstips",
-    "updatelog"
-  ].includes(view);
+  return Boolean(STATIC_VIEW_LOADERS[view]);
+}
+
+function loadStaticView_(view) {
+  const loader = STATIC_VIEW_LOADERS[view];
+
+  if (!loader) {
+    return false;
+  }
+
+  loader();
+  return true;
 }
 
 function updateNavState(view) {
@@ -1353,7 +1357,10 @@ window.addEventListener("popstate", () => {
     currentView = params.get("view") || "new";
   }
 
-  if (currentView === "team") {
+  if (
+    currentView === "team" ||
+    isStaticView_(currentView)
+  ) {
     currentPlayerView = "teams";
   }
 
@@ -1582,28 +1589,37 @@ searchBox?.addEventListener("input", () => {
   clearTimeout(searchTimer);
 
   searchTimer = setTimeout(() => {
-   if (currentView === "birthdays") {
-    jumpBirthdaySearch_();
+    if (currentView === "birthdays") {
+      jumpBirthdaySearch_();
 
-  } else if (isYoutubeView(currentView)) {
-    renderYoutube(filterYoutube(currentData));
-  
-  } else if (isClipView(currentView)) {
-    renderClips(filterClips(currentData));
-  
-  } else if (currentView === "playerlinks") {
-    searchPlayerLinksTable();
+    } else if (isYoutubeView(currentView)) {
+      renderYoutube(filterYoutube(currentData));
 
-  } else if (currentView === "favorites") {
-    searchPlayerLinksTable();
+    } else if (isClipView(currentView)) {
+      renderClips(filterClips(currentData));
 
-  } else if (currentView === "muted") {
-    renderMutedPlayersView();
-  
-  } else {
-    renderLive(filterPlayers(currentData));
-  }
+    } else if (currentView === "playerlinks") {
+      searchPlayerLinksTable();
 
+    } else if (currentView === "favorites") {
+      searchPlayerLinksTable();
+
+    } else if (currentView === "teams") {
+      renderTeams(currentData);
+
+    } else if (currentView === "team") {
+      renderTeamPlayers(
+        currentTeamName,
+        currentData,
+        currentRegionName
+      );
+
+    } else if (currentView === "muted") {
+      renderMutedPlayersView();
+
+    } else if (isLiveView(currentView)) {
+      renderLive(filterPlayers(currentData));
+    }
   }, 300);
 });
 
@@ -1655,7 +1671,7 @@ function loadView(view) {
   ) {
     currentPlayerView = view;
   }
-  
+
   updateViewActionButton_(view);
 
   if (isLiveView(view)) {
@@ -1708,33 +1724,7 @@ function loadView(view) {
     return;
   }
 
-  if (view === "about") {
-    loadAboutView();
-    return;
-  }
-
-  if (view === "privacy") {
-    loadPrivacyView();
-    return;
-  }
-
-  if (view === "updatelog") {
-    loadUpdateLogView();
-    return;
-  }
-
-  if (view === "usefullinks") {
-    loadUsefulLinksView();
-    return;
-  }
-
-  if (view === "faq") {
-    loadFaqView();
-    return;
-  }
-
-  if (view === "toolstips") {
-    loadToolsView();
+  if (loadStaticView_(view)) {
     return;
   }
 
