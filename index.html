@@ -2,7 +2,7 @@
 <html>
 <head>
   <script>
-  const APP_VERSION = "1.1.78";
+  const APP_VERSION = "1.1.8";
 
   function loadScript(src) {
     document.write(
@@ -11,7 +11,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="/style.css?v=1.1.78">
+  <link rel="stylesheet" href="/style.css?v=1.1.8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -705,6 +705,16 @@ loadScript("/js/clips.js");
 loadScript("/js/notifications.js");
 loadScript("/js/live.js");
 loadScript("/js/init.js");
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations().then(registrations => {
+    registrations.forEach(registration => {
+      registration.unregister();
+    });
+  });
+}
 </script>
   
 </body>
