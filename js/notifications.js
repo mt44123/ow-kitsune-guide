@@ -149,11 +149,13 @@ function checkLiveNotifications_(players){
     return;
   }
 
+  const favSet = new Set(getFavorites_());
+
   for (const p of players){
 
     if (
       liveNotificationMode === "goats" &&
-      !isFavorite_(p.name)
+      !favSet.has(p.name)
     ) {
       continue;
     }
