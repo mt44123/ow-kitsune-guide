@@ -72,6 +72,8 @@ function renderPlayerLinks(players, options = {}) {
 
 function renderPlayerLinksTable_(players, options = {}) {
   const showGoatsExport = options.showGoatsExport === true;
+  const favSet = new Set(getFavorites_());
+
   app.className = "table-mode";
 
   if (!players.length) {
@@ -138,7 +140,10 @@ app.innerHTML = `
         </tr>
       </thead>
       <tbody>
-        ${players.map(p => `
+        ${players.map(p => {
+          const isFav = favSet.has(p.name);
+
+          return `
           <tr
             data-team-region="${(p.teamRegion || "").toLowerCase()}"
             data-team="${(p.team || "").toLowerCase()}"
@@ -170,10 +175,10 @@ app.innerHTML = `
               <div class="player-name-wrap">
 
                 <span
-                  class="favorite-star ${isFavorite_(p.name) ? "active" : ""}"
+                  class="favorite-star ${isFav ? "active" : ""}"
                   data-favorite-name="${escapeHtml(p.name || "")}"
                 >
-                  ${isFavorite_(p.name) ? "★" : "☆"}
+                  ${isFav ? "★" : "☆"}
                 </span>
 
                 ${
@@ -225,7 +230,8 @@ app.innerHTML = `
             <td>${linkDot(p.xUrl, "x")}</td>
             <td>${linkDot(p.discordUrl, "dc")}</td>
           </tr>
-        `).join("")}
+        `;
+        }).join("")}
       </tbody>
     </table>
   </div>
@@ -236,6 +242,7 @@ app.innerHTML = `
 
 function renderPlayerLinksGrid_(players, options = {}) {
   const showGoatsExport = options.showGoatsExport === true;
+  const favSet = new Set(getFavorites_());
 
   app.className = "grid-mode player-links-grid-mode";
 
@@ -277,7 +284,11 @@ function renderPlayerLinksGrid_(players, options = {}) {
     }
 
     <div class="player-links-grid">
-      ${players.map(p => `
+      ${players.map(p => {
+        const isFav = favSet.has(p.name);
+        const logoPath = getTeamLogoPath_(p.team);
+
+        return `
         <div
           class="card player-link-card"
           data-team-region="${(p.teamRegion || "").toLowerCase()}"
@@ -289,10 +300,10 @@ function renderPlayerLinksGrid_(players, options = {}) {
           data-role="${(p.role || "").toLowerCase()}"
         >
           ${
-            getTeamLogoPath_(p.team)
+            logoPath
               ? `<img
                   class="card-team-watermark"
-                  src="${getTeamLogoPath_(p.team)}"
+                  src="${logoPath}"
                   alt=""
                   loading="lazy"
                   onerror="this.remove()"
@@ -302,10 +313,10 @@ function renderPlayerLinksGrid_(players, options = {}) {
 
           <div class="player-link-name-row">
             <span
-              class="favorite-star ${isFavorite_(p.name) ? "active" : ""}"
+              class="favorite-star ${isFav ? "active" : ""}"
               data-favorite-name="${escapeHtml(p.name || "")}"
             >
-              ${isFavorite_(p.name) ? "★" : "☆"}
+              ${isFav ? "★" : "☆"}
             </span>
 
             ${
@@ -397,7 +408,8 @@ function renderPlayerLinksGrid_(players, options = {}) {
 
           </div>
         </div>
-      `).join("")}
+      `;
+    }).join("")}
     </div>
   `;
 }
