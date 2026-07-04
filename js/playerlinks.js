@@ -728,6 +728,9 @@ function renderPlayerDetail(name, players) {
       ? player.playerAlias.replaceAll("|", " / ")
       : "";
 
+  const isFav = isFavorite_(player.name);
+  const logoPath = getTeamLogoPath_(player.team);
+
   const latestVideo =
     youtubeCache?.find(v => v.name === player.name);
 
@@ -751,10 +754,10 @@ function renderPlayerDetail(name, players) {
   app.innerHTML = `
     <div class="card player-detail-card">
     ${
-      getTeamLogoPath_(player.team)
+      logoPath
         ? `<img
             class="player-detail-team-logo"
-            src="${getTeamLogoPath_(player.team)}"
+            src="${logoPath}"
             alt=""
             loading="lazy"
             onerror="this.remove()"
@@ -766,10 +769,10 @@ function renderPlayerDetail(name, players) {
         <div class="player-detail-name-wrap">
 
           <span
-            class="favorite-star ${isFavorite_(player.name) ? "active" : ""}"
+            class="favorite-star ${isFav ? "active" : ""}"
             data-favorite-name="${escapeHtml(player.name)}"
           >
-            ${isFavorite_(player.name) ? "★" : "☆"}
+            ${isFav ? "★" : "☆"}
           </span>
 
           <h2 class="player-detail-name">
