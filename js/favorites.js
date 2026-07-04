@@ -1,7 +1,14 @@
 function getFavorites_() {
-  return JSON.parse(
-    localStorage.getItem("favorites") || "[]"
-  );
+  try {
+    const favs = JSON.parse(
+      localStorage.getItem("favorites") || "[]"
+    );
+
+    return Array.isArray(favs) ? favs : [];
+
+  } catch (e) {
+    return [];
+  }
 }
 
 function isFavorite_(name) {
@@ -93,10 +100,10 @@ function loadFavoritesView() {
 }
 
 function renderFavorites(players) {
-  const favs = getFavorites_();
+  const favSet = new Set(getFavorites_());
 
   const favoritePlayers = players.filter(p =>
-    favs.includes(p.name)
+    favSet.has(p.name)
   );
 
   if (!favoritePlayers.length) {
