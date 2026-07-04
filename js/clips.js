@@ -157,7 +157,7 @@ function loadGoatClipsView() {
 }
 
 function buildGoatClips_() {
-  const favs = getFavorites_();
+  const favSet = new Set(getFavorites_());
 
   const allClips = [
     ...(clipCache.twitch.data || []),
@@ -170,7 +170,7 @@ function buildGoatClips_() {
   const seen = new Set();
 
   return allClips
-    .filter(c => favs.includes(c.name))
+    .filter(c => favSet.has(c.name))
     .filter(c => {
       const key = c.url || `${c.name}-${c.rawTitle || c.title}-${c.date}`;
       if (seen.has(key)) return false;
