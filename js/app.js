@@ -66,9 +66,12 @@ const MUTED_PLAYERS_KEY = "mutedPlayers";
 
 function getMutedPlayers_() {
   try {
-    return JSON.parse(
+    const muted = JSON.parse(
       localStorage.getItem(MUTED_PLAYERS_KEY) || "[]"
     );
+
+    return Array.isArray(muted) ? muted : [];
+
   } catch (e) {
     return [];
   }
@@ -1613,6 +1616,16 @@ function loadView(view) {
 
   if (view === "usefullinks") {
     loadUsefulLinksView();
+    return;
+  }
+
+  if (view === "faq") {
+    loadFaqView();
+    return;
+  }
+
+  if (view === "toolstips") {
+    loadToolsView();
     return;
   }
 
