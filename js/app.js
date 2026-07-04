@@ -580,13 +580,14 @@ function updatePageTitleLink_(view = currentView) {
 
 function updateFavoriteCounts_() {
   const favs = getFavorites_();
+  const favSet = new Set(favs);
 
   const favoriteCount = favs.length;
 
   const livePlayers = liveCache?.players || [];
 
   const liveCount = livePlayers.filter(
-    p => favs.includes(p.name)
+    p => favSet.has(p.name)
   ).length;
 
   document
