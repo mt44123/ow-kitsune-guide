@@ -57,11 +57,11 @@ function loadYoutubeView(view) {
 
 function filterYoutube(videos) {
   const query = searchBox.value;
-  const muted = getMutedPlayers_();
+  const mutedSet = new Set(getMutedPlayers_());
 
   return videos.filter(v => {
 
-    if (muted.includes(v.name)) {
+    if (mutedSet.has(v.name)) {
       return false;
     }
 

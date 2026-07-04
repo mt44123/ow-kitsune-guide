@@ -261,11 +261,11 @@ function setClipCache_(cacheKey, clips) {
 
 function filterClips(clips) {
   const query = searchBox.value;
-  const muted = getMutedPlayers_();
+  const mutedSet = new Set(getMutedPlayers_());
 
   return clips.filter(c => {
 
-    if (muted.includes(c.name)) {
+    if (mutedSet.has(c.name)) {
       return false;
     }
 

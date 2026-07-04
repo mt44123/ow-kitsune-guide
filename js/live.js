@@ -160,11 +160,11 @@ function getLiveMinutesClient(startedAt) {
 
 function filterPlayers(players) {
   const query = searchBox.value;
-  const muted = getMutedPlayers_();
+  const mutedSet = new Set(getMutedPlayers_());
 
   return players.filter(p => {
 
-    if (muted.includes(p.name)) {
+    if (mutedSet.has(p.name)) {
       return false;
     }
 
