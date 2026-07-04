@@ -126,6 +126,7 @@ let playerContextMenu = null;
 function openPlayerMenu_(button, player) {
 
   closePlayerMenu_();
+  closePlayerLinkMenu_();
 
   playerContextMenu = document.createElement("div");
   playerContextMenu.className = "player-context-menu";
@@ -204,6 +205,7 @@ document.addEventListener("click", e => {
 document.addEventListener("keydown", e => {
   if (e.key === "Escape") {
     closePlayerMenu_();
+    closePlayerLinkMenu_();
   }
 });
 
@@ -416,10 +418,28 @@ titleLanguageSelect?.addEventListener("change", () => {
 
   if (isLiveView(currentView)) {
     renderLiveFromCache(currentView);
-  } else if (isYoutubeView(currentView)) {
+    return;
+  }
+
+  if (isYoutubeView(currentView)) {
     renderYoutube(filterYoutube(currentData));
-  } else if (isClipView(currentView)) {
+    return;
+  }
+
+  if (isClipView(currentView)) {
     renderClips(filterClips(currentData));
+    return;
+  }
+
+  if (currentView === "playerlinks") {
+    renderPlayerLinks(currentData);
+    applyCurrentSearch_();
+    return;
+  }
+
+  if (currentView === "favorites") {
+    renderFavorites(currentData);
+    applyCurrentSearch_();
   }
 });
 
@@ -452,6 +472,16 @@ siteTextLanguageSelect?.addEventListener("change", () => {
 
   if (currentView === "privacy") {
     loadPrivacyView();
+    return;
+  }
+
+  if (currentView === "usefullinks") {
+    loadUsefulLinksView();
+    return;
+  }
+
+  if (currentView === "updatelog") {
+    loadUpdateLogView();
     return;
   }
 
@@ -874,6 +904,14 @@ function clearClientCache_() {
   birthdaysCache = null;
   birthdaysCacheTime = 0;
 
+  todayStatsCache = null;
+  todayStatsCacheTime = 0;
+
+  siteGuidedCache = null;
+  siteGuidedCacheTime = 0;
+
+  statsFetchPromise = null;
+
   Object.values(clipCache).forEach(cache => {
     cache.data = null;
     cache.time = 0;
@@ -1012,6 +1050,11 @@ const VIEW_GROUPS = {
     "birthdays",
     "favorites",
     "muted",
+    "about",
+    "privacy",
+    "usefullinks",
+    "faq",
+    "toolstips",
     "updatelog"
   ]
 };
@@ -1491,14 +1534,14 @@ searchBox?.addEventListener("input", () => {
   } else if (isClipView(currentView)) {
     renderClips(filterClips(currentData));
   
-  } else if (
-  currentView === "playerlinks" ||
-  currentView === "favorites"
-) {
-  searchPlayerLinksTable();
+  } else if (currentView === "playerlinks") {
+    searchPlayerLinksTable();
 
-} else if (currentView === "muted") {
-  renderMutedPlayersView();
+  } else if (currentView === "favorites") {
+    searchPlayerLinksTable();
+
+  } else if (currentView === "muted") {
+    renderMutedPlayersView();
   
   } else {
     renderLive(filterPlayers(currentData));
@@ -1519,10 +1562,10 @@ function applyCurrentSearch_() {
   } else if (isClipView(currentView)) {
     renderClips(filterClips(currentData));
 
-  } else if (
-    currentView === "playerlinks" ||
-    currentView === "favorites"
-  ) {
+  } else if (currentView === "playerlinks") {
+    searchPlayerLinksTable();
+
+  } else if (currentView === "favorites") {
     searchPlayerLinksTable();
 
   } else if (currentView === "teams") {
@@ -1549,7 +1592,17 @@ function loadView(view) {
   updatePageTitleLink_(view);
   loadTodayStats_();
 
-  if (isPlayerView(view)) {
+  if (
+    isPlayerView(view) &&
+    ![
+      "about",
+      "privacy",
+      "usefullinks",
+      "faq",
+      "toolstips",
+      "updatelog"
+    ].includes(view)
+  ) {
     currentPlayerView = view;
   }
 
@@ -1603,7 +1656,7 @@ function loadView(view) {
   if (view === "muted") {
     loadMutedPlayersView();
     return;
-    }
+  }
 
   if (view === "about") {
     loadAboutView();
@@ -1611,8 +1664,8 @@ function loadView(view) {
   }
 
   if (view === "privacy") {
-  loadPrivacyView();
-  return;
+    loadPrivacyView();
+    return;
   }
 
   if (view === "updatelog") {
@@ -2481,6 +2534,7 @@ function closePlayerLinkMenu_() {
 
 function openPlayerLinkMenu_(button, playerName) {
   closePlayerLinkMenu_();
+  closePlayerMenu_();
 
   const name = String(playerName || "");
   if (!name) return;
@@ -2542,6 +2596,7 @@ function openPlayerLinkMenu_(button, playerName) {
 
 function openTeamLinkMenu_(button, teamName) {
   closePlayerLinkMenu_();
+  closePlayerMenu_();
 
   const team = String(teamName || "");
   if (!team) return;
