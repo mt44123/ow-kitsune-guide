@@ -719,7 +719,10 @@ refreshDataButton?.addEventListener("click", () => {
 
 toolsButton?.addEventListener(
   "click",
-  () => loadToolsView()
+  () => {
+    settingsMenu?.classList.add("settings-hidden");
+    loadToolsView();
+  }
 );
 
 usefulLinksButton?.addEventListener(
@@ -732,7 +735,10 @@ usefulLinksButton?.addEventListener(
 
 faqButton?.addEventListener(
   "click",
-  () => loadFaqView()
+  () => {
+    settingsMenu?.classList.add("settings-hidden");
+    loadFaqView();
+  }
 );
 
 contactButton?.addEventListener(
@@ -1634,14 +1640,27 @@ function loadView(view) {
 }
 
 function loadMutedPlayersView() {
+  currentView = "muted";
+  currentPlayerView = "muted";
+  history.replaceState({}, "", "?view=muted");
 
   resetSeo_();
 
+  requestId++;
+
+  updateNavState(currentView);
   stopFakeProgress();
 
+  document.body.classList.remove(
+    "youtube-view",
+    "clip-view",
+    "player-detail-view"
+  );
+
   pageTitle.textContent = "◆MUTED";
-  updated.textContent = "";
   setRandomVoiceLine();
+
+  updated.textContent = "";
 
   currentData = getMutedPlayers_();
 
