@@ -2139,27 +2139,48 @@ let todayStatsCacheTime = 0;
 
 const TODAY_STATS_CACHE_MS = 60 * 1000;
 
+let statsFetchPromise = null;
+
+async function getStats_() {
+  const now = Date.now();
+
+  if (
+    todayStatsCache &&
+    now - todayStatsCacheTime < TODAY_STATS_CACHE_MS
+  ) {
+    return todayStatsCache;
+  }
+
+  if (statsFetchPromise) {
+    return statsFetchPromise;
+  }
+
+  statsFetchPromise = fetch("/api/stats", {
+    cache: "no-store"
+  })
+    .then(res => res.json())
+    .then(stats => {
+      todayStatsCache = stats;
+      todayStatsCacheTime = Date.now();
+
+      siteGuidedCache = stats;
+      siteGuidedCacheTime = Date.now();
+
+      return stats;
+    })
+    .finally(() => {
+      statsFetchPromise = null;
+    });
+
+  return statsFetchPromise;
+}
+
 async function loadTodayStats_() {
   const el = document.getElementById("updated");
   if (!el) return;
 
-  if (
-    todayStatsCache &&
-    Date.now() - todayStatsCacheTime < TODAY_STATS_CACHE_MS
-  ) {
-    renderTodayStats_(todayStatsCache);
-    return;
-  }
-
   try {
-    const res = await fetch("/api/stats", {
-      cache: "no-store"
-    });
-
-    const stats = await res.json();
-
-    todayStatsCache = stats;
-    todayStatsCacheTime = Date.now();
+    const stats = await getStats_();
 
     renderTodayStats_(stats);
 
@@ -2195,24 +2216,8 @@ function renderTodayStats_(stats) {
 }
 
 async function loadSiteGuided_() {
-
-  if (
-    siteGuidedCache &&
-    Date.now() - siteGuidedCacheTime < SITE_GUIDED_CACHE_MS
-  ) {
-    renderSiteGuided_(siteGuidedCache);
-    return;
-  }
-
   try {
-    const res = await fetch("/api/stats", {
-      cache: "no-store"
-    });
-
-    const stats = await res.json();
-
-    siteGuidedCache = stats;
-    siteGuidedCacheTime = Date.now();
+    const stats = await getStats_();
 
     renderSiteGuided_(stats);
 
