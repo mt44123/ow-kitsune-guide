@@ -153,7 +153,8 @@ function renderYoutubeCard_(v) {
       v.titleKr || ""
     );
 
-    const logoPath = getTeamLogoPath_(v.team);
+  const logoPath = getTeamLogoPath_(v.team);
+  const isFav = isFavorite_(v.name);
 
   return `
     <a
@@ -191,10 +192,10 @@ function renderYoutubeCard_(v) {
           <div class="youtube-player card-name-row">
             <span>
               <span
-                class="favorite-star ${isFavorite_(v.name) ? "active" : ""}"
+                class="favorite-star ${isFav ? "active" : ""}"
                 data-favorite-name="${escapeHtml(v.name || "")}"
               >
-                ${isFavorite_(v.name) ? "★" : "☆"}
+                ${isFav ? "★" : "☆"}
               </span>
               ${escapeHtml(v.name || "-")}
             </span>
