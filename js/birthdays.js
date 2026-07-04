@@ -67,6 +67,7 @@ function loadBirthdaysView() {
 function renderBirthdayCalendar(players) {
   const year = birthdayCalendarDate.getFullYear();
   const month = birthdayCalendarDate.getMonth();
+  const favSet = new Set(getFavorites_());
 
   const today = new Date();
   const todayY = today.getFullYear();
@@ -113,13 +114,15 @@ function renderBirthdayCalendar(players) {
     startDay,
     lastDate,
     prevLastDate,
-    birthdaysByDay
+    birthdaysByDay,
+    favSet
   );
 
   const listItems = buildBirthdayList_(
     players,
     month,
-    year
+    year,
+    favSet
   );
 
   const todaySection =
@@ -127,7 +130,8 @@ function renderBirthdayCalendar(players) {
       todayBirthdays,
       today,
       year,
-      nextBirthdays
+      nextBirthdays,
+      favSet
     );
 
   app.innerHTML = `
@@ -212,7 +216,8 @@ function buildBirthdayTodaySection_(
   todayBirthdays,
   today,
   year,
-  nextBirthdays = []
+  nextBirthdays = [],
+  favSet = new Set()
 ) {
   return `
     <div class="birthday-today">
@@ -226,7 +231,7 @@ function buildBirthdayTodaySection_(
       ${
         todayBirthdays.length
           ? todayBirthdays.map(p => `
-              <div class="birthday-event ${getNationalityRegionClass(p.nationality)} ${isFavorite_(p.name) ? "favorite-birthday" : ""}">
+              <div class="birthday-event ${getNationalityRegionClass(p.nationality)} ${favSet.has(p.name) ? "favorite-birthday" : ""}">
 
                 <strong>
                   <a
@@ -314,7 +319,8 @@ function buildBirthdayCells_(
   startDay,
   lastDate,
   prevLastDate,
-  birthdaysByDay
+  birthdaysByDay,
+  favSet = new Set()
 ) {
   let cells = "";
 
@@ -352,8 +358,7 @@ function buildBirthdayCells_(
         </div>
 
         ${events.map(p => `
-          <div class="birthday-event ${getNationalityRegionClass(p.nationality)} ${isFavorite_(p.name) ? "favorite-birthday" : ""}">
-
+          <div class="birthday-event ${getNationalityRegionClass(p.nationality)} ${favSet.has(p.name) ? "favorite-birthday" : ""}">
             <strong>
               🎂 <a
                 class="birthday-player-link player-name-link"
@@ -396,7 +401,8 @@ function buildBirthdayCells_(
 function buildBirthdayList_(
   players,
   month,
-  year
+  year,
+  favSet = new Set()
 ) {
   return players
     .filter(p => p.born)
@@ -413,8 +419,7 @@ function buildBirthdayList_(
     .filter(p => p.month === month + 1)
     .sort((a, b) => a.day - b.day)
     .map(p => `
-      <div class="birthday-list-item ${getNationalityRegionClass(p.nationality)} ${isFavorite_(p.name) ? "favorite-birthday" : ""}">
-
+      <div class="birthday-list-item ${getNationalityRegionClass(p.nationality)} ${favSet.has(p.name) ? "favorite-birthday" : ""}">
         <div class="birthday-list-date">
           ${month + 1}/${p.day}
         </div>
