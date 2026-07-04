@@ -79,7 +79,7 @@ function renderUpdateLogSection_(title, items) {
     <ul>
       ${items.map(item => `
         <li>
-          ${siteText_(
+          ${updateLogText_(
             escapeHtml(item.en || ""),
             escapeHtml(item.jp || "")
           )}
@@ -87,4 +87,23 @@ function renderUpdateLogSection_(title, items) {
       `).join("")}
     </ul>
   `;
+}
+
+function updateLogText_(en, jp) {
+  switch (siteTextLanguage) {
+    case "en":
+      return en;
+
+    case "jp":
+      return jp;
+
+    case "both":
+      return `
+        <div>${en}</div>
+        <div>${jp}</div>
+      `;
+
+    default:
+      return en;
+  }
 }
