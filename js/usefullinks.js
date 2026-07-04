@@ -62,86 +62,46 @@ function loadUsefulLinksView() {
         </div>
       </div>
 
-            <div class="card">
+      <div class="card">
         <div class="tool-item">
           <div>
-            <strong>🏆 OWCS Official Links</strong>
+            <strong>📺 OWCS Official Links</strong>
           </div>
 
-          ${siteText_(
-            `
-              <p><strong>Twitch</strong></p>
-              <p><a href="https://www.twitch.tv/ow_esports" target="_blank" rel="noopener">Overwatch Esports (OWCS EMEA/NA)</a></p>
-              <p><a href="https://www.twitch.tv/ow_esports_jp" target="_blank" rel="noopener">Overwatch Esports Japan (OWCS JP/KR)</a></p>
-              <p><a href="https://www.twitch.tv/ow_esports_th" target="_blank" rel="noopener">Overwatch Esports Thai (OWCS Pacific)</a></p>
+          <p><strong>Twitch</strong></p>
+          <p><a href="https://www.twitch.tv/ow_esports" target="_blank" rel="noopener">Overwatch Esports (OWCS EMEA/NA)</a></p>
+          <p><a href="https://www.twitch.tv/ow_esports_jp" target="_blank" rel="noopener">Overwatch Esports Japan (OWCS JP/KR)</a></p>
+          <p><a href="https://www.twitch.tv/ow_esports_th" target="_blank" rel="noopener">Overwatch Esports Thai (OWCS Pacific)</a></p>
 
-              <p><strong>YouTube</strong></p>
-              <p><a href="https://www.youtube.com/c/ow_esports" target="_blank" rel="noopener">Overwatch Esports (OWCS EMEA/NA)</a></p>
-              <p><a href="https://youtube.com/@ow_esports_jp" target="_blank" rel="noopener">Overwatch Esports Japan (OWCS JP/KR)</a></p>
-              <p><a href="https://youtube.com/@roofesports" target="_blank" rel="noopener">Overwatch Esports Thai (OWCS Pacific)</a></p>
+          <p><strong>YouTube</strong></p>
+          <p><a href="https://www.youtube.com/c/ow_esports" target="_blank" rel="noopener">Overwatch Esports (OWCS EMEA/NA)</a></p>
+          <p><a href="https://youtube.com/@ow_esports_jp" target="_blank" rel="noopener">Overwatch Esports Japan (OWCS JP/KR)</a></p>
+          <p><a href="https://youtube.com/@roofesports" target="_blank" rel="noopener">Overwatch Esports Thai (OWCS Pacific)</a></p>
 
-              <p><strong>SOOP</strong></p>
-              <p><a href="https://play.sooplive.com/owesports/295314607" target="_blank" rel="noopener">Overwatch Esports Korea (OWCS KR)</a></p>
-              <p><a href="https://play.sooplive.com/owesportsen/null" target="_blank" rel="noopener">Overwatch Esports (OWCS EMEA/NA)</a></p>
-              <p><a href="https://play.sooplive.com/owesportsjp/295314613" target="_blank" rel="noopener">Overwatch Esports Japan (OWCS JP/KR)</a></p>
-              <p><a href="https://play.sooplive.com/owesportsth" target="_blank" rel="noopener">Overwatch Esports Thai (OWCS Pacific)</a></p>
+          <p><strong>SOOP</strong></p>
+          <p><a href="https://play.sooplive.com/owesports/295314607" target="_blank" rel="noopener">Overwatch Esports Korea (OWCS KR)</a></p>
+          <p><a href="https://play.sooplive.com/owesportsen/null" target="_blank" rel="noopener">Overwatch Esports (OWCS EMEA/NA)</a></p>
+          <p><a href="https://play.sooplive.com/owesportsjp/295314613" target="_blank" rel="noopener">Overwatch Esports Japan (OWCS JP/KR)</a></p>
+          <p><a href="https://play.sooplive.com/owesportsth" target="_blank" rel="noopener">Overwatch Esports Thai (OWCS Pacific)</a></p>
 
-              <p><strong>Bilibili</strong></p>
-              <p><a href="https://live.bilibili.com/23612045" target="_blank" rel="noopener">Overwatch Esports China</a></p>
+          <p><strong>Bilibili</strong></p>
+          <p><a href="https://live.bilibili.com/23612045" target="_blank" rel="noopener">Overwatch Esports China</a></p>
 
-              <p><strong>X</strong></p>
-              <p><a href="https://twitter.com/OW_Esports" target="_blank" rel="noopener">Overwatch Esports</a></p>
-              <p><a href="https://twitter.com/OW_Esports_asia" target="_blank" rel="noopener">Overwatch Esports Asia</a></p>
-              <p><a href="https://twitter.com/wdgjapan" target="_blank" rel="noopener">Overwatch Esports Japan</a></p>
+          <p><strong>X</strong></p>
+          <p><a href="https://twitter.com/OW_Esports" target="_blank" rel="noopener">Overwatch Esports</a></p>
+          <p><a href="https://twitter.com/OW_Esports_asia" target="_blank" rel="noopener">Overwatch Esports Asia</a></p>
+          <p><a href="https://twitter.com/wdgjapan" target="_blank" rel="noopener">Overwatch Esports Japan</a></p>
 
-              <p><strong>Instagram</strong></p>
-              <p><a href="https://www.instagram.com/ow_esports" target="_blank" rel="noopener">Overwatch Esports</a></p>
-              <p><a href="https://www.instagram.com/ow_esports_kr" target="_blank" rel="noopener">Overwatch Esports Asia</a></p>
+          <p><strong>Instagram</strong></p>
+          <p><a href="https://www.instagram.com/ow_esports" target="_blank" rel="noopener">Overwatch Esports</a></p>
+          <p><a href="https://www.instagram.com/ow_esports_kr" target="_blank" rel="noopener">Overwatch Esports Asia</a></p>
 
-              <p><strong>Discord</strong></p>
-              <p><a href="https://discord.gg/overwatchesports" target="_blank" rel="noopener">Overwatch Esports</a></p>
-              <p><a href="https://discord.gg/wdgtournament" target="_blank" rel="noopener">Overwatch Esports Asia</a></p>
+          <p><strong>Discord</strong></p>
+          <p><a href="https://discord.gg/overwatchesports" target="_blank" rel="noopener">Overwatch Esports</a></p>
+          <p><a href="https://discord.gg/wdgtournament" target="_blank" rel="noopener">Overwatch Esports Asia</a></p>
 
-              <p><strong>TikTok</strong></p>
-              <p><a href="https://www.tiktok.com/@overwatchesports?lang=en" target="_blank" rel="noopener">Overwatch Esports</a></p>
-            `,
-            `
-              <p><strong>Twitch</strong></p>
-              <p><a href="https://www.twitch.tv/ow_esports" target="_blank" rel="noopener">Overwatch Esports（OWCS EMEA/NA）</a></p>
-              <p><a href="https://www.twitch.tv/ow_esports_jp" target="_blank" rel="noopener">Overwatch Esports Japan（OWCS JP/KR）</a></p>
-              <p><a href="https://www.twitch.tv/ow_esports_th" target="_blank" rel="noopener">Overwatch Esports Thai（OWCS Pacific）</a></p>
-
-              <p><strong>YouTube</strong></p>
-              <p><a href="https://www.youtube.com/c/ow_esports" target="_blank" rel="noopener">Overwatch Esports（OWCS EMEA/NA）</a></p>
-              <p><a href="https://youtube.com/@ow_esports_jp" target="_blank" rel="noopener">Overwatch Esports Japan（OWCS JP/KR）</a></p>
-              <p><a href="https://youtube.com/@roofesports" target="_blank" rel="noopener">Overwatch Esports Thai（OWCS Pacific）</a></p>
-
-              <p><strong>SOOP</strong></p>
-              <p><a href="https://play.sooplive.com/owesports/295314607" target="_blank" rel="noopener">Overwatch Esports Korea（OWCS KR）</a></p>
-              <p><a href="https://play.sooplive.com/owesportsen/null" target="_blank" rel="noopener">Overwatch Esports（OWCS EMEA/NA）</a></p>
-              <p><a href="https://play.sooplive.com/owesportsjp/295314613" target="_blank" rel="noopener">Overwatch Esports Japan（OWCS JP/KR）</a></p>
-              <p><a href="https://play.sooplive.com/owesportsth" target="_blank" rel="noopener">Overwatch Esports Thai（OWCS Pacific）</a></p>
-
-              <p><strong>Bilibili</strong></p>
-              <p><a href="https://live.bilibili.com/23612045" target="_blank" rel="noopener">Overwatch Esports China</a></p>
-
-              <p><strong>X</strong></p>
-              <p><a href="https://twitter.com/OW_Esports" target="_blank" rel="noopener">Overwatch Esports</a></p>
-              <p><a href="https://twitter.com/OW_Esports_asia" target="_blank" rel="noopener">Overwatch Esports Asia</a></p>
-              <p><a href="https://twitter.com/wdgjapan" target="_blank" rel="noopener">Overwatch Esports Japan</a></p>
-
-              <p><strong>Instagram</strong></p>
-              <p><a href="https://www.instagram.com/ow_esports" target="_blank" rel="noopener">Overwatch Esports</a></p>
-              <p><a href="https://www.instagram.com/ow_esports_kr" target="_blank" rel="noopener">Overwatch Esports Asia</a></p>
-
-              <p><strong>Discord</strong></p>
-              <p><a href="https://discord.gg/overwatchesports" target="_blank" rel="noopener">Overwatch Esports</a></p>
-              <p><a href="https://discord.gg/wdgtournament" target="_blank" rel="noopener">Overwatch Esports Asia</a></p>
-
-              <p><strong>TikTok</strong></p>
-              <p><a href="https://www.tiktok.com/@overwatchesports?lang=en" target="_blank" rel="noopener">Overwatch Esports</a></p>
-            `
-          )}
+          <p><strong>TikTok</strong></p>
+          <p><a href="https://www.tiktok.com/@overwatchesports?lang=en" target="_blank" rel="noopener">Overwatch Esports</a></p>
         </div>
       </div>
 
