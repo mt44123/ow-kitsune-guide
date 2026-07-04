@@ -1,6 +1,23 @@
 function loadFaqView() {
+  currentView = "faq";
+  history.replaceState({}, "", "?view=faq");
+
+  resetSeo_();
+
+  requestId++;
+
+  updateNavState(currentView);
+  stopFakeProgress();
+
+  document.body.classList.remove(
+    "youtube-view",
+    "clip-view",
+    "player-detail-view"
+  );
 
   pageTitle.textContent = "FAQ";
+  setRandomVoiceLine();
+
   updated.textContent = "";
   viewNote.textContent = "";
 
