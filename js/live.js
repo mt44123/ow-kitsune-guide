@@ -70,8 +70,13 @@ function renderLiveFromCache(view) {
 }
 
 function getClientFilteredLivePlayers(players, view) {
+  const favSet =
+    view === "goats"
+      ? new Set(getFavorites_())
+      : null;
+
   return players
-    .filter(p => matchLiveViewClient(p, view))
+    .filter(p => matchLiveViewClient(p, view, favSet))
     .filter(p =>
       currentRoleFilter === "all" ||
       String(p.role || "").includes(currentRoleFilter)
@@ -104,14 +109,14 @@ function isPlayerLive_(p) {
   );
 }
 
-function matchLiveViewClient(p, view) {
+function matchLiveViewClient(p, view, favSet = null) {
   const platform = String(p.platform || "");
   const language = String(p.language || "").toUpperCase();
 
   switch (view) {
     case "goats":
-      return getFavorites_().includes(p.name);
-      
+      return favSet?.has(p.name) || false;
+
     case "kr":
       return (
         platform.includes("CHZZK") ||

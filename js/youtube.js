@@ -91,8 +91,10 @@ function filterYoutubeView(videos, view) {
   let result = [...videos];
 
   if (view === "youtubegoats") {
+    const favSet = new Set(getFavorites_());
+
     result = result.filter(v =>
-      getFavorites_().includes(v.name)
+      favSet.has(v.name)
     );
   }
 
