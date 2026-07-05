@@ -1102,6 +1102,8 @@ function openStaticView_(view) {
   settingsMenu?.classList.add("settings-hidden");
 
   currentView = view;
+  currentPlayerView = "teams";
+
   history.replaceState({}, "", "?view=" + view);
 
   updateNavState(currentView);

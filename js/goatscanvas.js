@@ -271,6 +271,8 @@ function buildSiteShareText_() {
 }
 
 function shareSite_() {
+  settingsMenu?.classList.add("settings-hidden");
+
   fetch("/og-image.png")
     .then(res => res.blob())
     .then(blob => {
@@ -308,16 +310,20 @@ document
 
       const data = await res.json();
 
+      playerLinksLastUpdated = data.lastUpdated || "";
       playerLinksCache = data.playerLinks || [];
+      playerLinksCacheTime = Date.now();
     }
 
     const backup = currentData;
 
-    currentData = playerLinksCache;
+    try {
+      currentData = playerLinksCache;
+      await shareGoatsImageHype_();
 
-    await shareGoatsImageHype_();
-
-    currentData = backup;
+    } finally {
+      currentData = backup;
+    }
 
   });
 

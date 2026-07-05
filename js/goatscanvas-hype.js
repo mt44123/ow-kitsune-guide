@@ -2,9 +2,12 @@ async function shareGoatsImageHype_() {
   const favNames = getFavorites_();
   if (!favNames.length) return;
 
+  const playerMap = new Map(
+    (currentData || []).map(p => [p.name, p])
+  );
+
   const players = favNames.map(name => {
-    const player = (currentData || []).find(p => p.name === name);
-    return player || { name };
+    return playerMap.get(name) || { name };
   });
 
   players.sort((a, b) =>
@@ -19,13 +22,17 @@ async function shareGoatsImageHype_() {
   const accent =
     bodyStyle.getPropertyValue("--accent").trim() || "#FE5002";
 
-  const bgPanel = "#111C31";
   const textMain = "#FFFFFF";
   const textSub = "rgba(255,255,255,.82)";
   const textMuted = "rgba(255,255,255,.62)";
 
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
+
+  if (!ctx) {
+    alert("Failed to create share image.");
+    return;
+  }
 
   const qr = new Image();
   qr.src = "/icons/qr.png";

@@ -28,6 +28,15 @@ function notifyIcon_(type) {
   `;
 }
 
+function sitePlainText_(enText, jpText) {
+  const mode = getSiteTextLanguageMode_();
+
+  if (mode === "en") return enText;
+  if (mode === "jp") return jpText;
+
+  return `${enText}\n${jpText}`;
+}
+
 function updateNotifySelect_() {
   if (!notifySelect) return;
 
@@ -68,7 +77,12 @@ notifySelect?.addEventListener(
     }
 
     if (!("Notification" in window)) {
-      alert(siteText_("Notifications are not supported.", "このブラウザは通知に対応していません。"));
+      alert(
+        sitePlainText_(
+          "Notifications are not supported.",
+          "このブラウザは通知に対応していません。"
+        )
+      );
       notifySelect.value = "off";
       return;
     }
@@ -105,8 +119,8 @@ notifySelect?.addEventListener(
         {
           body:
             liveNotificationMode === "goats"
-              ? siteText_("Live notifications: MY GOATS", "ライブ通知: MY GOATS")
-              : siteText_("Live notifications: ALL", "ライブ通知: ALL"),
+              ? sitePlainText_("Live notifications: MY GOATS", "ライブ通知: MY GOATS")
+              : sitePlainText_("Live notifications: ALL", "ライブ通知: ALL"),
           icon: "/icons/icon-192.png"
         }
       );
@@ -119,7 +133,9 @@ let previousLiveState = {};
 try{
   previousLiveState =
     JSON.parse(localStorage.getItem("liveState") || "{}");
-}catch{
+}
+
+catch{
   previousLiveState = {};
 }
 
@@ -130,8 +146,8 @@ function checkLiveNotifications_(players){
   if (!Array.isArray(players)) return;
 
   if (liveNotificationMode === "off") {
-  return;
-}
+    return;
+  }
 
   if (!liveStateInitialized) {
     saveLiveState_(players);
@@ -160,9 +176,7 @@ function checkLiveNotifications_(players){
       continue;
     }
 
-    const isLive =
-      p.status === "LIVE" ||
-      p.status === "🔥 LIVE";
+    const isLive = isPlayerLive_(p);
 
     const wasLive =
       previousLiveState[p.name] || false;
@@ -200,10 +214,7 @@ function saveLiveState_(players){
   previousLiveState = {};
 
   for(const p of players){
-
-    previousLiveState[p.name] =
-      p.status === "LIVE" ||
-      p.status === "🔥 LIVE";
+    previousLiveState[p.name] = isPlayerLive_(p);
   }
 
   localStorage.setItem(

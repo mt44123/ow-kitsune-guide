@@ -1,11 +1,11 @@
 function sortByViews_(items) {
-  return items.sort(
+  return [...items].sort(
     (a, b) => Number(b.views || 0) - Number(a.views || 0)
   );
 }
 
 function sortByDateDesc_(items) {
-  return items.sort(
+  return [...items].sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
 }

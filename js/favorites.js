@@ -186,46 +186,46 @@ function importGoatsBackupCode_() {
       return;
     }
 
-   const imported = favs.filter(name =>
-    typeof name === "string"
-  );
-
-  const mode = prompt(
-    "Import Backup\n\n" +
-    "1 = Replace current MY GOATS\n" +
-    "2 = Add to current list\n" +
-    "3 = Cancel\n\n" +
-    "バックアップをインポートします。\n\n" +
-    "1 = 今のMY GOATSを置き換える\n" +
-    "2 = 今のリストに追加する\n" +
-    "3 = キャンセル"
-  );
-
-  if (mode === null || mode.trim() === "3") {
-    return;
-  }
-
-  const choice = mode.trim();
-
-  if (choice !== "1" && choice !== "2") {
-    alert("Import canceled.");
-    return;
-  }
-
-  const nextFavs =
-    choice === "1"
-      ? imported
-      : Array.from(
-          new Set([
-            ...getFavorites_(),
-            ...imported
-          ])
-        );
-
-    localStorage.setItem(
-      "favorites",
-      JSON.stringify(nextFavs)
+    const imported = favs.filter(name =>
+      typeof name === "string"
     );
+
+    const mode = prompt(
+      "Import Backup\n\n" +
+      "1 = Replace current MY GOATS\n" +
+      "2 = Add to current list\n" +
+      "3 = Cancel\n\n" +
+      "バックアップをインポートします。\n\n" +
+      "1 = 今のMY GOATSを置き換える\n" +
+      "2 = 今のリストに追加する\n" +
+      "3 = キャンセル"
+    );
+
+    if (mode === null || mode.trim() === "3") {
+      return;
+    }
+
+    const choice = mode.trim();
+
+    if (choice !== "1" && choice !== "2") {
+      alert("Import canceled.");
+      return;
+    }
+
+    const nextFavs =
+      choice === "1"
+        ? imported
+        : Array.from(
+            new Set([
+              ...getFavorites_(),
+              ...imported
+            ])
+          );
+
+      localStorage.setItem(
+        "favorites",
+        JSON.stringify(nextFavs)
+      );
 
       updateFavoriteCounts_();
 
@@ -233,10 +233,7 @@ function importGoatsBackupCode_() {
 
       if (currentView === "favorites") {
         renderFavorites(currentData);
-
-        if (document.querySelector(".player-table")) {
-          searchPlayerLinksTable();
-        }
+        searchPlayerLinksTable();
       }
 
     } catch (error) {
@@ -292,19 +289,19 @@ document.addEventListener("click", e => {
 
   if (currentView === "favorites") {
     renderFavorites(currentData);
-
-    if (document.querySelector(".player-table")) {
-      searchPlayerLinksTable();
-    }
-
+    searchPlayerLinksTable();
     return;
   }
 
-  if (currentView === "teams" && currentTeamName) {
+  if (
+    (currentView === "teams" || currentView === "team") &&
+    currentTeamName
+  ) {
     renderTeamPlayers(
       currentTeamName,
       currentData,
-      currentRegionName
+      currentRegionName,
+      false
     );
     return;
   }
