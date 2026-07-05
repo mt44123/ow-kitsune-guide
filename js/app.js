@@ -123,6 +123,51 @@ function muteButton_(name) {
 
 let playerContextMenu = null;
 
+function getPlayerMenuLabels_(name) {
+  return {
+    liquipedia:
+      siteTextLanguageMode === "jp"
+        ? "📖 Liquipediaを開く"
+        : "📖 Liquipedia",
+
+    activity:
+      siteTextLanguageMode === "jp"
+        ? "🦊 最新の配信・動画"
+        : "🦊 Latest Activity",
+
+    mute:
+      siteTextLanguageMode === "jp"
+        ? (
+            isMutedPlayer_(name)
+              ? "ミュート解除"
+              : "ミュート"
+          )
+        : (
+            isMutedPlayer_(name)
+              ? "Unmute Player"
+              : "Mute Player"
+          )
+  };
+}
+
+function renderPlayerMenuItems_(name) {
+  const labels = getPlayerMenuLabels_(name);
+
+  return `
+    <button data-action="liquipedia">
+      ${labels.liquipedia}
+    </button>
+
+    <button data-action="activity">
+      ${labels.activity}
+    </button>
+
+    <button data-action="mute">
+      ${labels.mute}
+    </button>
+  `;
+}
+
 function openPlayerMenu_(button, player) {
   closePlayerMenu_();
   closePlayerLinkMenu_();
@@ -130,19 +175,8 @@ function openPlayerMenu_(button, player) {
   playerContextMenu = document.createElement("div");
   playerContextMenu.className = "player-context-menu";
 
-  playerContextMenu.innerHTML = `
-    <button data-action="liquipedia">
-      Open Liquipedia
-    </button>
-
-    <button data-action="mute">
-      ${
-        isMutedPlayer_(player.name)
-          ? "Unmute Player"
-          : "Mute Player"
-      }
-    </button>
-  `;
+  playerContextMenu.innerHTML =
+    renderPlayerMenuItems_(player.name);
 
   document.body.appendChild(playerContextMenu);
 
@@ -169,6 +203,23 @@ function openPlayerMenu_(button, player) {
         `https://liquipedia.net/overwatch/${encodeURIComponent(player.name)}`;
 
       window.open(url, "_blank", "noopener");
+    }
+
+    if (action === "activity") {
+      history.pushState(
+        {},
+        "",
+        `/player/${encodeURIComponent(playerToSlug_(player.name))}`
+      );
+
+      currentView = "player";
+      currentPlayerView = "player";
+
+      updateNavState(currentView);
+      loadPlayerDetailView();
+
+      closePlayerMenu_();
+      return;
     }
 
     if (action === "mute") {
@@ -443,6 +494,63 @@ if (siteTextLanguageSelect) {
     siteTextLanguageMode;
 }
 
+function settingsText_(en, jp) {
+  return siteTextLanguageMode === "jp"
+    ? jp
+    : en;
+}
+
+updateSettingsMenuText_();
+
+function setSettingsText_(selector, text) {
+  const el = document.querySelector(selector);
+  if (!el) return;
+
+  el.textContent = text;
+}
+
+function updateSettingsMenuText_() {
+  setSettingsText_(
+    'label[for="themeSelect"]',
+    settingsText_("Theme", "テーマ")
+  );
+
+  setSettingsText_(
+    'label[for="siteTextLanguageSelect"]',
+    settingsText_("Site Text", "サイト表示")
+  );
+
+  setSettingsText_(
+    'label[for="titleLanguageSelect"]',
+    settingsText_("Title Language", "タイトル言語")
+  );
+
+  if (refreshDataButton) {
+    refreshDataButton.textContent =
+      settingsText_("Refresh Data", "データ更新");
+  }
+
+  if (toolsButton) {
+    toolsButton.textContent =
+      settingsText_("Translation Tools", "翻訳ツール");
+  }
+
+  if (usefulLinksButton) {
+    usefulLinksButton.textContent =
+      settingsText_("Useful Links", "関連リンク");
+  }
+
+  if (faqButton) {
+    faqButton.textContent =
+      settingsText_("FAQ", "よくある質問");
+  }
+
+  if (contactButton) {
+    contactButton.textContent =
+      settingsText_("Contact", "お問い合わせ");
+  }
+}
+
 themeSelect?.addEventListener("change", () => {
   currentTheme = themeSelect.value;
 
@@ -496,6 +604,7 @@ siteTextLanguageSelect?.addEventListener("change", () => {
     siteTextLanguageMode
   );
 
+  updateSettingsMenuText_();
   loadSiteGuided_();
 
   if (isStaticView_(currentView)) {
@@ -2596,15 +2705,8 @@ function openPlayerLinkMenu_(button, playerName) {
   playerLinkMenu = document.createElement("div");
   playerLinkMenu.className = "player-context-menu";
 
-  playerLinkMenu.innerHTML = `
-    <button data-action="liquipedia">
-      📖 Liquipedia
-    </button>
-
-    <button data-action="activity">
-      🦊 Latest Activity
-    </button>
-  `;
+  playerLinkMenu.innerHTML =
+    renderPlayerMenuItems_(name);
 
   document.body.appendChild(playerLinkMenu);
 
@@ -2644,6 +2746,13 @@ function openPlayerLinkMenu_(button, playerName) {
       loadPlayerDetailView();
     }
 
+    if (item.dataset.action === "mute") {
+      toggleMutedPlayer_(name);
+
+      closePlayerLinkMenu_();
+      return;
+    }
+
     closePlayerLinkMenu_();
   });
 }
@@ -2658,13 +2767,23 @@ function openTeamLinkMenu_(button, teamName) {
   playerLinkMenu = document.createElement("div");
   playerLinkMenu.className = "player-context-menu";
 
+  const liquipediaLabel =
+    siteTextLanguageMode === "jp"
+      ? "📖 Liquipediaを開く"
+      : "📖 Liquipedia";
+
+  const teamDetailLabel =
+    siteTextLanguageMode === "jp"
+      ? "🦊 チーム詳細"
+      : "🦊 Team Detail";
+
   playerLinkMenu.innerHTML = `
     <button data-action="liquipedia">
-      📖 Liquipedia
+      ${liquipediaLabel}
     </button>
 
     <button data-action="team-detail">
-      🦊 Team Detail
+      ${teamDetailLabel}
     </button>
   `;
 

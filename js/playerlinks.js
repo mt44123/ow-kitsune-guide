@@ -653,7 +653,7 @@ function loadPlayerDetailView() {
       ? Promise.resolve({ clips: clipCache.chzzkbest.data })
       : fetch(CONFIG.API_URL + "?view=chzzkbestclips").then(r => r.json());
 
-  Promise.all([
+  Promise.allSettled([
     linksPromise,
     youtubePromise,
     twitchPromise,
@@ -664,16 +664,43 @@ function loadPlayerDetailView() {
     chzzkBestPromise
   ])
   
-  .then(([
-    linksData,
-    youtubeData,
-    clipsData,
-    hotClipsData,
-    soopClipsData,
-    soopHotClipsData,
-    chzzkNewClipsData,
-    chzzkBestClipsData
-  ]) => {
+  .then(results => {
+    const getResult = (index, fallback = {}) =>
+      results[index]?.status === "fulfilled"
+        ? results[index].value
+        : fallback;
+
+    const linksData = getResult(0, {
+      playerLinks: playerLinksCache || [],
+      lastUpdated: playerLinksLastUpdated || ""
+    });
+
+    const youtubeData = getResult(1, {
+      videos: youtubeCache || []
+    });
+
+    const clipsData = getResult(2, { clips: [] });
+    const hotClipsData = getResult(3, { clips: [] });
+
+    const soopClipsData = getResult(4, {
+      clips: [],
+      soopclips: []
+    });
+
+    const soopHotClipsData = getResult(5, {
+      clips: [],
+      soopclips: []
+    });
+
+    const chzzkNewClipsData = getResult(6, {
+      clips: [],
+      chzzknewclips: []
+    });
+
+    const chzzkBestClipsData = getResult(7, {
+      clips: [],
+      chzzkbestclips: []
+    });
     finishFakeProgress();
 
     playerLinksLastUpdated = linksData.lastUpdated || "";
@@ -734,22 +761,35 @@ function renderPlayerDetail(name, players) {
   const latestVideo =
     youtubeCache?.find(v => v.name === player.name);
 
-  const latestClip = [
-    ...(clipCache.twitch.data || []),
-    ...(clipCache.twitchhot.data || []),
+  const latestClips = [
+    ...(clipCache.twitch.data || [])
+      .map(c => ({ ...c, platform: c.platform || "🟣TWITCH" })),
 
-    ...(clipCache.soop.data || []),
-    ...(clipCache.soophot.data || []),
+    ...(clipCache.twitchhot.data || [])
+      .map(c => ({ ...c, platform: c.platform || "🟣TWITCH" })),
 
-    ...(clipCache.chzzknew.data || []),
+    ...(clipCache.soop.data || [])
+      .map(c => ({ ...c, platform: c.platform || "🔵SOOP" })),
+
+    ...(clipCache.soophot.data || [])
+      .map(c => ({ ...c, platform: c.platform || "🔵SOOP" })),
+
+    ...(clipCache.chzzknew.data || [])
+      .map(c => ({ ...c, platform: c.platform || "🟢CHZZK" })),
+
     ...(clipCache.chzzkbest.data || [])
+      .map(c => ({ ...c, platform: c.platform || "🟢CHZZK" }))
   ]
-    .filter(c => c.name === player.name)
+    .filter(c => c.name === player.name && c.url)
     .sort((a, b) => {
       const aTime = new Date(a.date || 0).getTime();
       const bTime = new Date(b.date || 0).getTime();
       return bTime - aTime;
-    })[0];
+    })
+    .filter((clip, index, clips) =>
+      clips.findIndex(c => c.url === clip.url) === index
+    )
+    .slice(0, 3);
 
   app.innerHTML = `
     <div class="card player-detail-card">
@@ -903,51 +943,51 @@ function renderPlayerDetail(name, players) {
           }
 
           ${
-            latestClip
-              ? `
-              <a
-                class="player-activity-card"
-                href="${latestClip.url}"
-                target="_blank"
-                rel="noopener"
-              >
-                <img
-                  class="player-activity-thumb"
-                  src="${latestClip.thumbnail}"
-                  alt="${escapeHtml(
-                    latestClip.rawTitle ||
-                    latestClip.titleJp ||
-                    latestClip.titleEn ||
-                    latestClip.titleKr ||
-                    ""
-                  )}"
-                  loading="lazy"
+            latestClips.length
+              ? latestClips.map(latestClip => `
+                <a
+                  class="player-activity-card"
+                  href="${latestClip.url}"
+                  target="_blank"
+                  rel="noopener"
                 >
-
-                <div class="player-activity-info">
-
-                  <div class="player-activity-label">
-                    ${latestClip.platform ? renderPlatformIcons_(latestClip.platform) : "✂"}
-                    Latest Clip
-                  </div>
-
-                  <div class="player-activity-title">
-                    ${escapeHtml(
+                  <img
+                    class="player-activity-thumb"
+                    src="${latestClip.thumbnail}"
+                    alt="${escapeHtml(
                       latestClip.rawTitle ||
                       latestClip.titleJp ||
                       latestClip.titleEn ||
                       latestClip.titleKr ||
                       ""
-                    )}
-                  </div>
+                    )}"
+                    loading="lazy"
+                  >
 
-                  <div class="player-activity-time">
-                    ${timeAgo(latestClip.date)}
-                  </div>
+                  <div class="player-activity-info">
 
-                </div>
-              </a>
-              `
+                    <div class="player-activity-label">
+                      ${latestClip.platform ? renderPlatformIcons_(latestClip.platform) : "✂"}
+                      Latest Clip
+                    </div>
+
+                    <div class="player-activity-title">
+                      ${escapeHtml(
+                        latestClip.rawTitle ||
+                        latestClip.titleJp ||
+                        latestClip.titleEn ||
+                        latestClip.titleKr ||
+                        ""
+                      )}
+                    </div>
+
+                    <div class="player-activity-time">
+                      ${timeAgo(latestClip.date)}
+                    </div>
+
+                  </div>
+                </a>
+              `).join("")
               : ""
           }
 
