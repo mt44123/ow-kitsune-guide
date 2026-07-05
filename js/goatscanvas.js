@@ -10,7 +10,7 @@ return [
   `私のヤギ、 ${names}`,
   "",
   "https://owkitsune.com/",
-  "#OWCS #Overwatch #OWKitsuneGuide"
+  "#OW #OWCS #Overwatch #オーバーウォッチ"
 ].join("\n");
 }
 
