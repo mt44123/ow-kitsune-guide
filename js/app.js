@@ -2504,6 +2504,12 @@ function resetSeo_() {
   if (canonical) {
     canonical.href = "https://owkitsune.com/";
   }
+
+  document
+    .querySelectorAll(
+      'script[data-player-jsonld="true"], script[data-team-jsonld="true"]'
+    )
+    .forEach(script => script.remove());
 }
 
 function setOg_(property, content) {
