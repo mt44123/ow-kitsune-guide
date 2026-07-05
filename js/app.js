@@ -538,6 +538,21 @@ function updateSettingsMenuText_() {
     settingsText_("Title Language", "タイトル言語")
   );
 
+  setSettingsText_(
+    "#themeSettingTitle",
+    settingsText_("Theme", "テーマ")
+  );
+
+  setSettingsText_(
+    "#siteTextSettingTitle",
+    settingsText_("Site Text", "サイト表示")
+  );
+
+  setSettingsText_(
+    "#titleLanguageSettingTitle",
+    settingsText_("Title Language", "タイトル言語")
+  );
+
   setSettingsRowTitle_(
     refreshDataButton,
     settingsText_("Refresh Data", "データ更新")
