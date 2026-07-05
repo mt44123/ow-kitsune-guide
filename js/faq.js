@@ -163,6 +163,7 @@ function loadFaqView() {
               <li>LIVE: every 5 min</li>
               <li>YOUTUBE: every 30 min</li>
               <li>CLIPS: daily</li>
+              <li>BIRTHDAYS: manual update</li>
               <li>PLAYER LINKS: manual update</li>
             </ul>
           `,
@@ -172,6 +173,7 @@ function loadFaqView() {
               <li>LIVE：5分ごと</li>
               <li>YOUTUBE：30分ごと</li>
               <li>CLIPS：1日ごと</li>
+              <li>BIRTHDAYS：手動更新</li>
               <li>PLAYER LINKS：手動更新</li>
             </ul>
           `
