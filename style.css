@@ -761,34 +761,42 @@ position:relative;
 @media (max-width:600px){
 
   .header-row{
+    display:flex;
     align-items:flex-start;
+    justify-content:space-between;
     gap:8px;
+    width:100%;
   }
 
   .title-top{
+    width:auto;
     min-width:0;
-    flex:1;
+    flex:1 1 auto;
   }
 
   .title-top h1{
     min-width:0;
-    font-size:clamp(30px, 9vw, 42px);
-    line-height:.95;
-    letter-spacing:-1px;
-    overflow-wrap:anywhere;
+    font-size:clamp(24px, 7.8vw, 34px);
+    line-height:1;
+    letter-spacing:1px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
   }
 
   .header-actions{
     flex:0 0 auto;
-    margin-left:4px;
+    margin-left:0;
   }
 
   .tools-link{
-    margin-top:2px;
+    width:34px;
+    height:34px;
+    flex:0 0 34px;
+    margin-top:4px;
   }
 
 }
-
 /* =========================================================
    4. NAVIGATION / SEARCH
    ========================================================= */
