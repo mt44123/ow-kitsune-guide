@@ -1657,7 +1657,6 @@ function loadView(view) {
 
   document.body.classList.remove("player-detail-view");
   updatePageTitleLink_(view);
-  loadTodayStats_();
 
   if (
     isPlayerView(view) &&
@@ -1670,6 +1669,14 @@ function loadView(view) {
 
   if (loadStaticView_(view)) {
     return;
+  }
+
+  if (
+    isLiveView(view) ||
+    isYoutubeView(view) ||
+    isClipView(view)
+  ) {
+    loadTodayStats_();
   }
 
   if (isLiveView(view)) {
