@@ -509,6 +509,19 @@ function setSettingsText_(selector, text) {
   el.textContent = text;
 }
 
+function setSettingsRowTitle_(button, text) {
+  const title = button?.querySelector(".settings-row-title");
+
+  if (title) {
+    title.textContent = text;
+    return;
+  }
+
+  if (button) {
+    button.textContent = text;
+  }
+}
+
 function updateSettingsMenuText_() {
   setSettingsText_(
     'label[for="themeSelect"]',
@@ -525,30 +538,30 @@ function updateSettingsMenuText_() {
     settingsText_("Title Language", "タイトル言語")
   );
 
-  if (refreshDataButton) {
-    refreshDataButton.textContent =
-      settingsText_("Refresh Data", "データ更新");
-  }
+  setSettingsRowTitle_(
+    refreshDataButton,
+    settingsText_("Refresh Data", "データ更新")
+  );
 
-  if (toolsButton) {
-    toolsButton.textContent =
-      settingsText_("Translation Tools", "翻訳ツール");
-  }
+  setSettingsRowTitle_(
+    toolsButton,
+    settingsText_("Translation Tools", "翻訳ツール")
+  );
 
-  if (usefulLinksButton) {
-    usefulLinksButton.textContent =
-      settingsText_("Useful Links", "関連リンク");
-  }
+  setSettingsRowTitle_(
+    usefulLinksButton,
+    settingsText_("Useful Links", "関連リンク")
+  );
 
-  if (faqButton) {
-    faqButton.textContent =
-      settingsText_("FAQ", "よくある質問");
-  }
+  setSettingsRowTitle_(
+    faqButton,
+    settingsText_("FAQ", "よくある質問")
+  );
 
-  if (contactButton) {
-    contactButton.textContent =
-      settingsText_("Contact", "お問い合わせ");
-  }
+  setSettingsRowTitle_(
+    contactButton,
+    settingsText_("Contact", "お問い合わせ")
+  );
 }
 
 themeSelect?.addEventListener("change", () => {
