@@ -31,14 +31,33 @@ function notifyIcon_(type) {
 function sitePlainText_(enText, jpText) {
   const mode = getSiteTextLanguageMode_();
 
-  if (mode === "en") return enText;
-  if (mode === "jp") return jpText;
+  return mode === "jp"
+    ? jpText
+    : enText;
+}
 
-  return `${enText}\n${jpText}`;
+function updateNotifySelectText_() {
+  if (!notifySelect) return;
+
+  const labels = {
+    off: sitePlainText_("Off", "オフ"),
+    goats: sitePlainText_("MY GOATS", "MY GOATS"),
+    all: sitePlainText_("All Players", "全プレイヤー")
+  };
+
+  [...notifySelect.options].forEach(option => {
+    const label = labels[option.value];
+
+    if (label) {
+      option.textContent = label;
+    }
+  });
 }
 
 function updateNotifySelect_() {
   if (!notifySelect) return;
+
+  updateNotifySelectText_();
 
   notifySelect.value = liveNotificationMode;
 

@@ -758,6 +758,37 @@ position:absolute;
 position:relative;
 }
 
+@media (max-width:600px){
+
+  .header-row{
+    align-items:flex-start;
+    gap:8px;
+  }
+
+  .title-top{
+    min-width:0;
+    flex:1;
+  }
+
+  .title-top h1{
+    min-width:0;
+    font-size:clamp(30px, 9vw, 42px);
+    line-height:.95;
+    letter-spacing:-1px;
+    overflow-wrap:anywhere;
+  }
+
+  .header-actions{
+    flex:0 0 auto;
+    margin-left:4px;
+  }
+
+  .tools-link{
+    margin-top:2px;
+  }
+
+}
+
 /* =========================================================
    4. NAVIGATION / SEARCH
    ========================================================= */

@@ -605,6 +605,11 @@ siteTextLanguageSelect?.addEventListener("change", () => {
   );
 
   updateSettingsMenuText_();
+
+  if (typeof updateNotifySelect_ === "function") {
+    updateNotifySelect_();
+  }
+
   loadSiteGuided_();
 
   if (isStaticView_(currentView)) {
