@@ -1,17 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script>
-  const APP_VERSION = "1.2.1.9";
 
-  function loadScript(src) {
-    document.write(
-      `<script src="${src}?v=${APP_VERSION}"><\/script>`
-    );
-  }
-  </script>
-
-  <link rel="stylesheet" href="/style.css?v=1.2.1.9">
+  <link rel="stylesheet" href="/style.css?v=1.2.2.0">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -685,34 +676,26 @@
 
 </footer>
 
-<script>
-loadScript("/js/config.js");
-loadScript("/js/app.js");
-
-loadScript("/js/favorites.js");
-loadScript("/js/goatscanvas.js");
-loadScript("/js/goatscanvas-hype.js");
-
-loadScript("/js/birthdays.js");
-
-loadScript("/js/tools.js");
-loadScript("/js/usefullinks.js");
-loadScript("/js/faq.js");
-loadScript("/js/about.js");
-loadScript("/js/privacy.js");
-loadScript("/js/updatelog.js");
-
-loadScript("/js/teams.js");
-loadScript("/js/playerlinks.js");
-
-loadScript("/js/media.js");
-loadScript("/js/youtube.js");
-loadScript("/js/clips.js");
-
-loadScript("/js/notifications.js");
-loadScript("/js/live.js");
-loadScript("/js/init.js");
-</script>
+<script src="/js/config.js?v=1.2.2.0" defer></script>
+<script src="/js/app.js?v=1.2.2.0" defer></script>
+<script src="/js/favorites.js?v=1.2.2.0" defer></script>
+<script src="/js/goatscanvas.js?v=1.2.2.0" defer></script>
+<script src="/js/goatscanvas-hype.js?v=1.2.2.0" defer></script>
+<script src="/js/birthdays.js?v=1.2.2.0" defer></script>
+<script src="/js/tools.js?v=1.2.2.0" defer></script>
+<script src="/js/usefullinks.js?v=1.2.2.0" defer></script>
+<script src="/js/faq.js?v=1.2.2.0" defer></script>
+<script src="/js/about.js?v=1.2.2.0" defer></script>
+<script src="/js/privacy.js?v=1.2.2.0" defer></script>
+<script src="/js/updatelog.js?v=1.2.2.0" defer></script>
+<script src="/js/teams.js?v=1.2.2.0" defer></script>
+<script src="/js/playerlinks.js?v=1.2.2.0" defer></script>
+<script src="/js/media.js?v=1.2.2.0" defer></script>
+<script src="/js/youtube.js?v=1.2.2.0" defer></script>
+<script src="/js/clips.js?v=1.2.2.0" defer></script>
+<script src="/js/notifications.js?v=1.2.2.0" defer></script>
+<script src="/js/live.js?v=1.2.2.0" defer></script>
+<script src="/js/init.js?v=1.2.2.0" defer></script>
 
 <script>
 if ("serviceWorker" in navigator && !sessionStorage.getItem("swCleared")) {
