@@ -2336,6 +2336,13 @@ function getPlatformIcons_(platform) {
     });
   }
 
+  if (text.includes("YOUTUBE") || text.includes("🔴")) {
+    icons.push({
+      name: "YouTube",
+      src: "/icons/youtube.png"
+    });
+  }
+
   if (text.includes("BILIBILI") || text.includes("🟡")) {
     icons.push({
       name: "Bilibili",
