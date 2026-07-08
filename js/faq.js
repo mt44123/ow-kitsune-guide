@@ -83,7 +83,7 @@ function loadFaqView() {
 
           <p>
             <a
-              href="YOUR_GOOGLE_FORM_URL"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSeDkW65qI07FFzP3oczawUR3AIp-9tOAfRmSEpavrLipZHS1w/viewform"
               target="_blank"
               rel="noopener"
             >
