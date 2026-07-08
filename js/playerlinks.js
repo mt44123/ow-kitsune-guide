@@ -905,19 +905,52 @@ function renderPlayerDetail(name, players) {
               `
           }
 
-          ${
-            latestVideo
+        ${
+          latestVideo
+            ? `
+            <a
+              class="player-activity-card"
+              href="${latestVideo.url}"
+              target="_blank"
+              rel="noopener"
+            >
+              <img
+                class="player-activity-thumb"
+                src="${latestVideo.thumbnail}"
+                alt="${escapeHtml(latestVideo.rawTitle || latestVideo.titleJp || latestVideo.titleEn || latestVideo.titleKr || "")}"
+                loading="lazy"
+              >
+
+              <div class="player-activity-info">
+
+                <div class="player-activity-label">
+                  <img class="platform-icon" src="/icons/youtube.png" alt="">
+                  Latest YouTube
+                </div>
+
+                <div class="player-activity-title">
+                  ${escapeHtml(latestVideo.rawTitle || latestVideo.titleJp || latestVideo.titleEn || latestVideo.titleKr || "")}
+                </div>
+
+                <div class="player-activity-time">
+                  ${timeAgo(latestVideo.date)}
+                </div>
+
+              </div>
+            </a>
+            `
+            : player.youtubeLatestUrl
               ? `
               <a
                 class="player-activity-card"
-                href="${latestVideo.url}"
+                href="${player.youtubeLatestUrl}"
                 target="_blank"
                 rel="noopener"
               >
                 <img
                   class="player-activity-thumb"
-                  src="${latestVideo.thumbnail}"
-                  alt="${escapeHtml(latestVideo.rawTitle || latestVideo.titleJp || latestVideo.titleEn || latestVideo.titleKr || "")}"
+                  src="${player.youtubeLatestThumbnail || ""}"
+                  alt="${escapeHtml(player.youtubeLatestTitle || "")}"
                   loading="lazy"
                 >
 
@@ -929,18 +962,18 @@ function renderPlayerDetail(name, players) {
                   </div>
 
                   <div class="player-activity-title">
-                    ${escapeHtml(latestVideo.rawTitle || latestVideo.titleJp || latestVideo.titleEn || latestVideo.titleKr || "")}
+                    ${escapeHtml(player.youtubeLatestTitle || "")}
                   </div>
 
                   <div class="player-activity-time">
-                    ${timeAgo(latestVideo.date)}
+                    ${timeAgo(player.youtubeLatestDate)}
                   </div>
 
                 </div>
               </a>
               `
               : ""
-          }
+        }         
 
           ${
             latestClips.length
