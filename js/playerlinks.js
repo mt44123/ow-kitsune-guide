@@ -715,11 +715,11 @@ function loadPlayerDetailView() {
     setClipCache_("twitch", clipsData.clips || []);
     setClipCache_("twitchhot", hotClipsData.clips || []);
 
-    setClipCache_("soop", soopClipsData.clips || soopClipsData.soopclips || []);
-    setClipCache_("soophot", soopHotClipsData.clips || soopHotClipsData.soopclips || []);
+    setClipCacheIfNotEmpty_("soop", soopClipsData.soopclips || soopClipsData.clips);
+    setClipCacheIfNotEmpty_("soophot", soopHotClipsData.soopclips || soopHotClipsData.clips);
 
-    setClipCache_("chzzknew", chzzkNewClipsData.clips || chzzkNewClipsData.chzzknewclips || []);
-    setClipCache_("chzzkbest", chzzkBestClipsData.clips || chzzkBestClipsData.chzzkbestclips || []);
+    setClipCacheIfNotEmpty_("chzzknew", chzzkNewClipsData.chzzknewclips || chzzkNewClipsData.clips);
+    setClipCacheIfNotEmpty_("chzzkbest", chzzkBestClipsData.chzzkbestclips || chzzkBestClipsData.clips);
 
     currentData = playerLinksCache;
     renderPlayerDetail(name, currentData);    

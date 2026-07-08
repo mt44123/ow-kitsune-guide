@@ -2935,3 +2935,9 @@ document.addEventListener("click", e => {
   updateNavState(currentView);
   loadPlayerLinksView();
 });
+
+function setClipCacheIfNotEmpty_(key, data) {
+  if (Array.isArray(data) && data.length > 0) {
+    setClipCache_(key, data);
+  }
+}
