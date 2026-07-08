@@ -26,6 +26,74 @@ function loadFaqView() {
   app.innerHTML = `
     <div class="tools-page">
 
+    <div class="card faq-card">
+      <h3>
+        ➕ Can't find a player?<br>
+        掲載されていない選手がいますか？
+      </h3>
+
+      ${siteText_(
+        `
+          <p>
+            If a player is missing, feel free to submit a Player Request.
+          </p>
+
+          <p>
+            Players are generally added if they meet one of the following criteria:
+          </p>
+
+          <ul>
+            <li>Previously listed on Liquipedia (including player pages, tournament pages or team rosters)</li>
+            <li>Champion-ranked players who regularly stream or upload videos</li>
+          </ul>
+
+          <p>
+            We review every request, but not all players may be added.
+          </p>
+
+          <p>
+            <a
+              href="YOUR_GOOGLE_FORM_URL"
+              target="_blank"
+              rel="noopener"
+            >
+              Player Request Form
+            </a>
+          </p>
+        `,
+        `
+          <p>
+            掲載されていない選手がいる場合は、
+            Player Requestフォームからお気軽にご連絡ください。
+          </p>
+
+          <p>
+            主な掲載対象は以下のいずれかです。
+          </p>
+
+          <ul>
+            <li>Liquipedia掲載経験者（個人ページ・大会ページ・ロスター掲載を含む）</li>
+            <li>継続的に配信・動画投稿を行っているChampion到達者</li>
+          </ul>
+
+          <p>
+            すべてのご要望を確認していますが、
+            基準などにより掲載できない場合があります。
+          </p>
+
+          <p>
+            <a
+              href="YOUR_GOOGLE_FORM_URL"
+              target="_blank"
+              rel="noopener"
+            >
+              Player Requestフォーム
+            </a>
+          </p>
+        `
+      )}
+    </div>
+
       <div class="card faq-card">
         <h3>
           🔔 How do Live Notifications work?<br>
