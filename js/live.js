@@ -115,13 +115,15 @@ function updateLiveSpecialCounts_(players) {
     /\bfaceit\b/i.test(getLiveTitle_(p))
   ).length;
 
-  document
-    .querySelector('#liveSubNav [data-view="owcs"]')
-    ?.textContent = `OWCS (${owcs})`;
+  const owcsButton = document.querySelector('#liveSubNav [data-view="owcs"]');
+  if (owcsButton) {
+    owcsButton.textContent = `OWCS (${owcs})`;
+  }
 
-  document
-    .querySelector('#liveSubNav [data-view="faceit"]')
-    ?.textContent = `FACEIT (${faceit})`;
+  const faceitButton = document.querySelector('#liveSubNav [data-view="faceit"]');
+  if (faceitButton) {
+    faceitButton.textContent = `FACEIT (${faceit})`;
+  }
 }
 
 function isPlayerLive_(p) {
