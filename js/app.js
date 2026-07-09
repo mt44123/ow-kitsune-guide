@@ -1196,7 +1196,7 @@ const VIEW_GROUPS = {
  "intl",
  "owcs",
  "faceit"
-]
+],
 
   clips: [
     "clips",
