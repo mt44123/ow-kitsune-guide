@@ -1084,6 +1084,8 @@ const titles = {
   cn: "CN",
   jp: "JP",
   intl: "INTL",
+  owcs: "OWCS",
+  faceit: "FACEIT",
   
   youtube: "NEW",
   youtubegoats: "★MY GOATS",

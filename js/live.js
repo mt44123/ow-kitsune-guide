@@ -88,7 +88,9 @@ function getClientFilteredLivePlayers(players, view) {
         view === "jp" ||
         view === "en" ||
         view === "cn" ||
-        view === "intl"
+        view === "intl" ||
+        view === "owcs" ||
+        view === "faceit"
       ) {
         return Number(b.viewers || 0) - Number(a.viewers || 0);
       }
@@ -107,6 +109,17 @@ function isPlayerLive_(p) {
     status.includes("LIVE") ||
     status.includes("🔥")
   );
+}
+
+function getLiveTitle_(p) {
+  return [
+    p.rawTitle,
+    p.titleJp,
+    p.titleEn,
+    p.titleKr
+  ]
+    .join(" ")
+    .toLowerCase();
 }
 
 function matchLiveViewClient(p, view, favSet = null) {
@@ -146,6 +159,18 @@ function matchLiveViewClient(p, view, favSet = null) {
         language !== "JA" &&
         language !== "EN" &&
         !language.startsWith("ZH")
+      );
+
+    case "owcs":
+      return (
+        isPlayerLive_(p) &&
+        /(owcs|owcc)/i.test(getLiveTitle_(p))
+      );
+
+    case "faceit":
+      return (
+        isPlayerLive_(p) &&
+        /\bfaceit\b/i.test(getLiveTitle_(p))
       );
 
     default:
