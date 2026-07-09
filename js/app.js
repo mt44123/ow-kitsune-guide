@@ -1185,7 +1185,18 @@ async function loadVoiceLines() {
 }
 
 const VIEW_GROUPS = {
-  live: ["new", "goats", "viewers", "kr", "en", "cn", "jp", "intl"],
+  live: [
+ "new",
+ "goats",
+ "viewers",
+ "kr",
+ "en",
+ "cn",
+ "jp",
+ "intl",
+ "owcs",
+ "faceit"
+]
 
   clips: [
     "clips",
@@ -2375,14 +2386,17 @@ function renderPlatformIcons_(platform) {
 }
 
 function updateAllButtonCounts(counts) {
-
   document
     .querySelectorAll("#liveSubNav button[data-view]")
     .forEach(button => {
 
       const view = button.dataset.view;
-      const label = titles[view] || view.toUpperCase();
 
+      if (view === "owcs" || view === "faceit") {
+        return;   // ←ここだけ追加
+      }
+
+      const label = titles[view] || view.toUpperCase();
       const count = counts?.[view] ?? "";
 
       button.textContent =
@@ -2390,7 +2404,6 @@ function updateAllButtonCounts(counts) {
           ? label
           : `${label} (${count})`;
     });
-
 }
 
 function escapeHtml(value) {
