@@ -62,6 +62,8 @@ function renderLiveFromCache(view) {
 
   checkLiveNotifications_(players);
 
+  updateLiveSpecialCounts_(players);
+
   currentData = getClientFilteredLivePlayers(players, view);
   renderLive(filterPlayers(currentData));
   updateFavoriteCounts_();
@@ -100,6 +102,26 @@ function getClientFilteredLivePlayers(players, view) {
         getLiveMinutesClient(b.startedAt)
       );
     });
+}
+
+function updateLiveSpecialCounts_(players) {
+  const owcs = players.filter(p =>
+    isPlayerLive_(p) &&
+    /(owcs|owcc)/i.test(getLiveTitle_(p))
+  ).length;
+
+  const faceit = players.filter(p =>
+    isPlayerLive_(p) &&
+    /\bfaceit\b/i.test(getLiveTitle_(p))
+  ).length;
+
+  document
+    .querySelector('#liveSubNav [data-view="owcs"]')
+    ?.textContent = `OWCS (${owcs})`;
+
+  document
+    .querySelector('#liveSubNav [data-view="faceit"]')
+    ?.textContent = `FACEIT (${faceit})`;
 }
 
 function isPlayerLive_(p) {
