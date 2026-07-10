@@ -206,10 +206,12 @@ function getClipSource_(view) {
   }
 
   if (view === "chzzkhotclips") {
+    // CHZZK HOT re-sorts the same "new clips" data client-side,
+    // so it reuses the chzzknew cache instead of fetching it again.
     return {
       type: "chzzknew",
       apiView: "chzzknewclips",
-      cacheKey: "chzzkhot"
+      cacheKey: "chzzknew"
     };
   }
 

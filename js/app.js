@@ -360,10 +360,6 @@ const usefulLinksButton =
 const faqButton =
   document.getElementById("faqButton");
 
-const contactButton =
-  document.getElementById("contactButton");
-
-const notifyButton =  document.getElementById("notifyButton");
 const settingsButton =  document.getElementById("settingsButton");
 const settingsMenu =  document.getElementById("settingsMenu");
 
@@ -571,11 +567,6 @@ function updateSettingsMenuText_() {
   setSettingsRowTitle_(
     faqButton,
     settingsText_("FAQ", "よくある質問")
-  );
-
-  setSettingsRowTitle_(
-    contactButton,
-    settingsText_("Contact", "お問い合わせ")
   );
 }
 
@@ -923,19 +914,6 @@ faqButton?.addEventListener(
   () => openStaticView_("faq")
 );
 
-contactButton?.addEventListener(
-  "click",
-  () => {
-    settingsMenu?.classList.add("settings-hidden");
-
-    window.open(
-      "https://docs.google.com/forms/d/e/1FAIpQLSeDkW65qI07FFzP3oczawUR3AIp-9tOAfRmSEpavrLipZHS1w/viewform?usp=header",
-      "_blank",
-      "noopener"
-    );
-  }
-);
-
 function getViewFromLocation_() {
   const params =
     new URLSearchParams(window.location.search);
@@ -987,8 +965,8 @@ const clipCache = {
   twitchhot:{ data:null, time:0 },
   soop:{ data:null, time:0 },
   soophot:{ data:null, time:0 },
+  // CHZZK HOT reuses the "chzzknew" slot (same source data, sorted client-side).
   chzzknew:{ data:null, time:0 },
-  chzzkhot:{ data:null, time:0 },
   chzzkbest:{ data:null, time:0 }
 };
 
@@ -999,11 +977,6 @@ let youtubeCacheTime = 0;
 const YOUTUBE_CLIENT_CACHE_MS =  30 * 60 * 1000;
 let youtubeLastUpdated = "";
 const clipLastUpdated = {};
-
-let siteGuidedCache = null;
-let siteGuidedCacheTime = 0;
-
-const SITE_GUIDED_CACHE_MS = 60 * 1000;
 
 let currentTeamName = "";
 let currentRegionName = null;
@@ -1063,9 +1036,6 @@ function clearClientCache_() {
 
   todayStatsCache = null;
   todayStatsCacheTime = 0;
-
-  siteGuidedCache = null;
-  siteGuidedCacheTime = 0;
 
   statsFetchPromise = null;
 
@@ -2460,9 +2430,6 @@ async function getStats_() {
     .then(stats => {
       todayStatsCache = stats;
       todayStatsCacheTime = Date.now();
-
-      siteGuidedCache = stats;
-      siteGuidedCacheTime = Date.now();
 
       return stats;
     })

@@ -1,14 +1,3 @@
-const privacyButton =
-  document.getElementById("privacyButton");
-
-privacyButton?.addEventListener(
-  "click",
-  () => {
-    settingsMenu.classList.add("settings-hidden");
-    loadPrivacyView();
-  }
-);
-
 function loadPrivacyView() {
   currentView = "privacy";
   history.replaceState({}, "", "?view=privacy");

@@ -1,14 +1,3 @@
-const aboutButton =
-  document.getElementById("aboutButton");
-
-aboutButton?.addEventListener(
-  "click",
-  () => {
-    settingsMenu.classList.add("settings-hidden");
-    loadAboutView();
-  }
-);
-
 function loadAboutView() {
   currentView = "about";
   history.replaceState({}, "", "?view=about");
