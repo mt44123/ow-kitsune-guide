@@ -167,7 +167,11 @@ app.innerHTML = `
                 ? (p.age || "")
                 : (p.born ? getCurrentAgeFromBorn(p.born) : "")
             }"
-            data-born="${p.born || ""}"
+            data-born="${
+              String(p.role || "").toLowerCase() === "hero"
+                ? getSyntheticHeroBorn_(p.born, p.age)
+                : (p.born || "")
+            }"
             data-laststream="${p.lastStreamAge || '9999d'}"
           >
             <td>${p.teamRegion || ""}</td>
@@ -438,6 +442,27 @@ function formatHeroBirthday_(born) {
     String(born).split("-");
 
   return `${month}-${day}`;
+}
+
+function getSyntheticHeroBorn_(born, age) {
+  if (!born || age === "" || age == null) return "";
+
+  const [, month, day] =
+    String(born).split("-").map(Number);
+
+  if (!month || !day) return "";
+
+  const today = new Date();
+
+  const birthdayThisYear =
+    new Date(today.getFullYear(), month - 1, day);
+
+  const birthYear =
+    today < birthdayThisYear
+      ? today.getFullYear() - Number(age) - 1
+      : today.getFullYear() - Number(age);
+
+  return `${birthYear}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 }
 
 function setupPlayerLinksSort() {
