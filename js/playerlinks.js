@@ -18,7 +18,7 @@ function loadPlayerLinksView() {
 
     updated.textContent = playerLinksLastUpdated;
 
-    currentData = playerLinksCache;
+    currentData = getRoleFilteredPlayerLinks_(playerLinksCache);
     renderPlayerLinks(currentData);
     applyCurrentSearch_();
     return;
@@ -44,7 +44,7 @@ function loadPlayerLinksView() {
       playerLinksCache = data.playerLinks || [];
       playerLinksCacheTime = Date.now();
 
-      currentData = playerLinksCache;
+      currentData = getRoleFilteredPlayerLinks_(playerLinksCache);
       renderPlayerLinks(currentData);
       applyCurrentSearch_();
     })
@@ -58,6 +58,16 @@ function loadPlayerLinksView() {
 
       console.error(error);
     });
+}
+
+function getRoleFilteredPlayerLinks_(players) {
+  if (currentRoleFilter === "all") return players;
+
+  return players.filter(p =>
+    String(p.role || "")
+      .toLowerCase()
+      .includes(currentRoleFilter.toLowerCase())
+  );
 }
 
 function renderPlayerLinks(players, options = {}) {

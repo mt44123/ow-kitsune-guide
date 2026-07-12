@@ -1304,6 +1304,7 @@ function updateNavState(view) {
   const youtubeSubNav = document.getElementById("youtubeSubNav");
   const youtubeRoleSubNav = document.getElementById("youtubeRoleSubNav");
   const playerSubNav = document.getElementById("playerSubNav");
+  const playerRoleSubNav = document.getElementById("playerRoleSubNav");
 
   document
     .querySelectorAll('.main-nav button:not(#searchToggle)')
@@ -1319,6 +1320,7 @@ function updateNavState(view) {
   if (youtubeSubNav) youtubeSubNav.style.display = "none";
   if (youtubeRoleSubNav) youtubeRoleSubNav.style.display = "none";
   if (playerSubNav) playerSubNav.style.display = "none";
+  if (playerRoleSubNav) playerRoleSubNav.style.display = "none";
 
   if (isLiveView(view)) {
     liveButton?.classList.add("active");
@@ -1351,6 +1353,10 @@ function updateNavState(view) {
 
     if (playerSubNav && !isStaticView_(view)) {
       playerSubNav.style.display = "flex";
+    }
+
+    if (playerRoleSubNav && view === "playerlinks") {
+      playerRoleSubNav.style.display = "flex";
     }
 
     document
