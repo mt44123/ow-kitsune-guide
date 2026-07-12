@@ -167,6 +167,7 @@ app.innerHTML = `
                 ? (p.age || "")
                 : (p.born ? getCurrentAgeFromBorn(p.born) : "")
             }"
+            data-born="${p.born || ""}"
             data-laststream="${p.lastStreamAge || '9999d'}"
           >
             <td>${p.teamRegion || ""}</td>
@@ -498,7 +499,9 @@ function setupPlayerLinksSort() {
             return compareAge_(
               aValue,
               bValue,
-              nextDir
+              nextDir,
+              a.dataset.born,
+              b.dataset.born
             );
           }
 
@@ -525,7 +528,7 @@ function setupPlayerLinksSort() {
     });
 }
 
-function compareAge_(aValue, bValue, dir) {
+function compareAge_(aValue, bValue, dir, aBorn, bBorn) {
   const aEmpty = aValue === "";
   const bEmpty = bValue === "";
 
@@ -533,12 +536,33 @@ function compareAge_(aValue, bValue, dir) {
   if (!aEmpty && bEmpty) return -1;
   if (aEmpty && bEmpty) return 0;
 
-  const result =
+  const ageDiff =
     Number(aValue) - Number(bValue);
+
+  const result =
+    ageDiff !== 0
+      ? ageDiff
+      : compareBornDates_(aBorn, bBorn);
 
   return dir === "asc"
     ? result
     : -result;
+}
+
+function compareBornDates_(aBorn, bBorn) {
+  const aTime = aBorn ? new Date(aBorn).getTime() : NaN;
+  const bTime = bBorn ? new Date(bBorn).getTime() : NaN;
+
+  const aValid = Number.isFinite(aTime);
+  const bValid = Number.isFinite(bTime);
+
+  if (!aValid && bValid) return 1;
+  if (aValid && !bValid) return -1;
+  if (!aValid && !bValid) return 0;
+
+  // Same age, but born later (younger) sorts like a smaller age value,
+  // matching the ageDiff sign convention above.
+  return bTime - aTime;
 }
 
 function compareLastStream_(aValue, bValue, dir) {
