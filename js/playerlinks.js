@@ -146,6 +146,7 @@ app.innerHTML = `
           <th>BILI</th>
           <th>YT</th>
           <th>X</th>
+          <th>IG</th>
           <th>DC*</th>
         </tr>
       </thead>
@@ -245,6 +246,7 @@ app.innerHTML = `
             <td>${linkDot(p.biliUrl, "bili")}</td>
             <td>${linkDot(p.youtubeUrl, "yt")}</td>
             <td>${linkDot(p.xUrl, "x")}</td>
+            <td>${linkDot(p.instagramUrl, "ig")}</td>
             <td>${linkDot(p.discordUrl, "dc")}</td>
           </tr>
         `;
@@ -422,6 +424,7 @@ function renderPlayerLinksGrid_(players, options = {}) {
               ${linkTag(p.biliUrl,"BILI","bili")}
               ${linkTag(p.youtubeUrl,"YT","yt")}
               ${linkTag(p.xUrl,"X","x")}
+              ${linkTag(p.instagramUrl,"IG","ig")}
               ${linkTag(p.discordUrl,"DC","dc")}
             </div>
 
@@ -942,6 +945,7 @@ function renderPlayerDetail(name, players) {
         ${linkTag(player.biliUrl, "BILI", "bili")}
         ${linkTag(player.youtubeUrl, "YT", "yt")}
         ${linkTag(player.xUrl, "X", "x")}
+        ${linkTag(player.instagramUrl, "IG", "ig")}
         ${linkTag(player.discordUrl, "DC", "dc")}
       </div>
 
@@ -1098,11 +1102,11 @@ function renderPlayerDetail(name, players) {
         ${escapeHtml(player.name)}
         ${aliasText ? ` (${escapeHtml(aliasText)})` : ""}
         plays for ${escapeHtml(player.team || "an Overwatch team")}.
-        Overwatch player profile with Twitch, CHZZK, SOOP, Bilibili, YouTube, X, Discord, live streams, clips and player information.
+        Overwatch player profile with Twitch, CHZZK, SOOP, Bilibili, YouTube, X, Instagram, Discord, live streams, clips and player information.
 
         ${escapeHtml(player.name)}
         ${escapeHtml(player.team ? ` は ${player.team} のOverwatchプレイヤーです。` : " はOverwatchプレイヤーです。")}
-        Twitch、CHZZK、SOOP、Bilibili、YouTube、X、Discord、配信、クリップ、選手情報をまとめて確認できます。
+        Twitch、CHZZK、SOOP、Bilibili、YouTube、X、Instagram、Discord、配信、クリップ、選手情報をまとめて確認できます。
       </p>
     </div>
   `;
@@ -1143,7 +1147,8 @@ function setPlayerJsonLd_(player) {
     player.soopUrl,
     player.biliUrl,
     player.youtubeUrl,
-    player.xUrl
+    player.xUrl,
+    player.instagramUrl
   ].filter(Boolean);
 
   const data = {

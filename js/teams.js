@@ -435,6 +435,7 @@ function renderTeamPlayers(teamName, players, regionName = null, updateUrl = tru
                 ${linkTag(official.soopUrl, "", "soop")}
                 ${linkTag(official.biliUrl, "", "bili")}
                 ${linkTag(official.xUrl, "", "x")}
+                ${linkTag(official.instagramUrl, "", "ig")}
                 ${linkTag(official.discordUrl, "", "dc")}
               `
             : ""
@@ -525,6 +526,7 @@ function renderTeamPlayers(teamName, players, regionName = null, updateUrl = tru
                 ${linkTag(p.biliUrl, "BILI", "bili")}
                 ${linkTag(p.youtubeUrl, "YT", "yt")}
                 ${linkTag(p.xUrl, "X", "x")}
+                ${linkTag(p.instagramUrl, "IG", "ig")}
                 ${linkTag(p.discordUrl, "DC", "dc")}
               </div>
 
@@ -538,12 +540,12 @@ function renderTeamPlayers(teamName, players, regionName = null, updateUrl = tru
         ${escapeHtml(teamName)}
         ${teamAlias ? ` (${escapeHtml(teamAlias)})` : ""}
         is an Overwatch team.
-        Team roster with Twitch, CHZZK, SOOP, Bilibili, YouTube, X, Discord, live streams and player information.
+        Team roster with Twitch, CHZZK, SOOP, Bilibili, YouTube, X, Instagram, Discord, live streams and player information.
 
         ${escapeHtml(teamName)}
         ${teamAlias ? `（${escapeHtml(teamAlias)}）` : ""}
         はOverwatchチームです。
-        所属選手、Twitch、CHZZK、SOOP、Bilibili、YouTube、X、Discord、配信、選手情報をまとめて確認できます。
+        所属選手、Twitch、CHZZK、SOOP、Bilibili、YouTube、X、Instagram、Discord、配信、選手情報をまとめて確認できます。
       </p>
 
     </div>

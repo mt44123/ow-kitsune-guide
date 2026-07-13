@@ -2026,6 +2026,10 @@ function linkDot(url, type) {
       name: "X",
       src: "/icons/x.png"
     },
+    ig: {
+      name: "Instagram",
+      src: "/icons/Instagram.png"
+    },
   };
 
   const icon = icons[type];
@@ -2065,6 +2069,7 @@ function linkTag(url, label, cls) {
     yt: { name: "YouTube", src: "/icons/youtube.png" },
     dc: { name: "Discord", src: "/icons/discord.png" },
     x: {  name: "X",  src: "/icons/x.png"},
+    ig: { name: "Instagram", src: "/icons/Instagram.png" },
   };
 
   const icon = icons[type];
