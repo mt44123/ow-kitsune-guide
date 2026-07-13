@@ -267,7 +267,7 @@ function loadFaqView() {
               <li>If you are using the Home Screen app on mobile, remove it and add it again if the issue persists</li>
             </ul>
             <p>
-              Mobile browsers do not usually have a Ctrl + F5 equivalent. If refreshing does not help, clearing the browser cache usually resolves the issue.
+              Mobile browsers do not usually have a Ctrl + F5 or Ctrl + Shift + R equivalent. If refreshing does not help, clearing the browser cache usually resolves the issue.
             </p>
           `,
           `
@@ -276,7 +276,7 @@ function loadFaqView() {
             </p>
             <ul>
               <li>ページを再読み込みする</li>
-              <li>PCでは可能であれば Ctrl + F5 を試す</li>
+              <li>PCでは可能であれば Ctrl + F5 または Ctrl + Shift + R を試す</li>
               <li>ブラウザのキャッシュを削除する</li>
               <li>ブラウザを閉じて開き直す</li>
               <li>スマートフォンでホーム画面に追加したアプリを使っている場合、改善しないときは一度削除して再追加する</li>
