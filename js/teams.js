@@ -457,8 +457,15 @@ function renderTeamPlayers(teamName, players, regionName = null, updateUrl = tru
         </div>
 
         ${members.map(p => {
-          const age = p.born ? getCurrentAgeFromBorn(p.born) : "-";
-          const born = p.born ? ` (${p.born})` : "";
+          const age =
+            p.born
+              ? (isUnknownBirthYear_(p.born) ? "-" : getCurrentAgeFromBorn(p.born))
+              : "-";
+
+          const born =
+            p.born
+              ? ` (${isUnknownBirthYear_(p.born) ? formatHeroBirthday_(p.born) : p.born})`
+              : "";
           const isFav = favSet.has(p.name);
 
           return `

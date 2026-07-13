@@ -224,7 +224,9 @@ app.innerHTML = `
               ${
                 String(p.role || "").toLowerCase() === "hero"
                 ? `${p.age || ""}${p.born ? ` (${formatHeroBirthday_(p.born)})` : ""}`
-                  : `${p.born ? getCurrentAgeFromBorn(p.born) : ""}${p.born ? ` (${p.born})` : ""}`
+                  : isUnknownBirthYear_(p.born)
+                    ? `-${p.born ? ` (${formatHeroBirthday_(p.born)})` : ""}`
+                    : `${p.born ? getCurrentAgeFromBorn(p.born) : ""}${p.born ? ` (${p.born})` : ""}`
               }
             </td>
             <td>
@@ -389,7 +391,9 @@ function renderPlayerLinksGrid_(players, options = {}) {
                 ? `${
                     String(p.role || "").toLowerCase() === "hero"
                       ? `Age ${p.age || ""} · ${formatHeroBirthday_(p.born)}`
-                      : `Age ${getCurrentAgeFromBorn(p.born)} · ${p.born}`
+                      : isUnknownBirthYear_(p.born)
+                        ? `Age - · ${formatHeroBirthday_(p.born)}`
+                        : `Age ${getCurrentAgeFromBorn(p.born)} · ${p.born}`
                   }`
                 : ""
             }
@@ -922,7 +926,11 @@ function renderPlayerDetail(name, players) {
       ${
         player.born
           ? `<div class="player-detail-birthday">
-              Age ${getCurrentAgeFromBorn(player.born)} / Birthday ${player.born}
+              ${
+                isUnknownBirthYear_(player.born)
+                  ? `Age - / Birthday ${formatHeroBirthday_(player.born)}`
+                  : `Age ${getCurrentAgeFromBorn(player.born)} / Birthday ${player.born}`
+              }
             </div>`
           : ""
       }

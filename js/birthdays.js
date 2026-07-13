@@ -479,8 +479,16 @@ function googleBirthdayUrl(p, year) {
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}`;
 }
 
+function isUnknownBirthYear_(born) {
+  if (!born) return false;
+
+  const birthYear = Number(String(born).split("-")[0]);
+
+  return birthYear === 1900;
+}
+
 function getCurrentAgeFromBorn(born) {
-  if (!born) return "";
+  if (!born || isUnknownBirthYear_(born)) return "";
 
   const [birthYear, birthMonth, birthDay] =
     String(born).split("-").map(Number);
@@ -528,6 +536,10 @@ function getBirthdayAgeText_(p, year = null) {
 
   if (String(p.role || "").toLowerCase() === "hero") {
     return p.age ? `Age ${p.age}` : "";
+  }
+
+  if (isUnknownBirthYear_(p.born)) {
+    return "-";
   }
 
   if (year) {
