@@ -1,6 +1,10 @@
 // =========================================================
 // ARCHIVE (past LIVE broadcasts, ordered by when they ended)
 // =========================================================
+// Grid uses the exact same look as LIVE cards (.live-card), and List uses
+// the exact same look as Players > ALL (.player-table). Links always go to
+// the player's channel (not a specific VOD), same as the "Last Stream" link
+// on Players > ALL.
 
 let archiveCache = null;
 let archiveCacheTime = 0;
@@ -11,8 +15,7 @@ function loadArchiveView(view) {
 
   resetSeo_();
 
-  viewNote.textContent =
-    "Most recent ended broadcast per player, newest first.";
+  viewNote.textContent = "";
 
   document.body.classList.add("archive-view");
   document.body.classList.remove("youtube-view", "clip-view", "mediagoats-view");
@@ -29,9 +32,7 @@ function loadArchiveView(view) {
     requestId++;
     stopFakeProgress();
 
-    currentData = filterArchiveView_(archiveCache);
-    renderArchive(filterArchive(currentData));
-    applyCurrentSearch_();
+    renderArchiveFromCache(view);
     return;
   }
 
@@ -52,9 +53,7 @@ function loadArchiveView(view) {
       archiveCache = data.archive || [];
       archiveCacheTime = Date.now();
 
-      currentData = filterArchiveView_(archiveCache);
-      renderArchive(filterArchive(currentData));
-      applyCurrentSearch_();
+      renderArchiveFromCache(view);
     })
     .catch(error => {
       if (currentRequest !== requestId) return;
@@ -65,13 +64,86 @@ function loadArchiveView(view) {
     });
 }
 
-function filterArchiveView_(items) {
-  const result = items.filter(a =>
-    currentRoleFilter === "all" ||
-    String(a.role || "").includes(currentRoleFilter)
-  );
+function renderArchiveFromCache(view) {
+  currentData = filterArchiveView_(archiveCache || [], view);
+  renderArchive(filterArchive(currentData));
+  applyCurrentSearch_();
+}
 
-  return sortByDateDesc_(result.map(a => ({ ...a, date: a.endedAt })));
+function matchArchiveViewClient_(a, view) {
+  const platform = String(a.platform || "");
+  const language = String(a.language || "").toUpperCase();
+
+  switch (view) {
+    case "archivekr":
+      return (
+        platform.includes("CHZZK") ||
+        platform.includes("SOOP") ||
+        language === "KO"
+      );
+
+    case "archivejp":
+      return language === "JA";
+
+    case "archiveen":
+      return language === "EN";
+
+    case "archivecn":
+      return (
+        platform.includes("BILIBILI") ||
+        language.startsWith("ZH")
+      );
+
+    case "archiveintl":
+      return (
+        !platform.includes("CHZZK") &&
+        !platform.includes("SOOP") &&
+        !platform.includes("BILIBILI") &&
+        language &&
+        language !== "KO" &&
+        language !== "JA" &&
+        language !== "EN" &&
+        !language.startsWith("ZH")
+      );
+
+    case "archiveowcs":
+      return /(owcs|owcc)/i.test(getArchiveTitleText_(a));
+
+    case "archivefaceit":
+      return /\bfaceit\b/i.test(getArchiveTitleText_(a));
+
+    default:
+      return true;
+  }
+}
+
+function archiveEndedAgo_(endedAt) {
+  const ago = timeAgo(endedAt);
+  return ago === "NOW" ? "just now" : `${ago} ago`;
+}
+
+function getArchiveTitleText_(a) {
+  return [
+    a.rawTitle,
+    a.titleJp,
+    a.titleEn,
+    a.titleKr
+  ]
+    .join(" ")
+    .toLowerCase();
+}
+
+function filterArchiveView_(items, view = currentView) {
+  const result = items
+    .filter(a => matchArchiveViewClient_(a, view))
+    .filter(a =>
+      currentRoleFilter === "all" ||
+      String(a.role || "").includes(currentRoleFilter)
+    );
+
+  return sortByDateDesc_(
+    result.map(a => ({ ...a, date: a.endedAt }))
+  );
 }
 
 function filterArchive(items) {
@@ -107,7 +179,16 @@ function filterArchive(items) {
 }
 
 function renderArchive(items) {
-  app.className = "clip-mode";
+  if (archiveLayout === "list") {
+    renderArchiveList_(items);
+    return;
+  }
+
+  renderArchiveGrid_(items);
+}
+
+function renderArchiveGrid_(items) {
+  app.className = "";
 
   if (!items.length) {
     app.innerHTML = `<p class="empty">No archived broadcasts found yet.</p>`;
@@ -121,6 +202,9 @@ function renderArchive(items) {
 }
 
 function renderArchiveCard_(a) {
+  const logoPath = getTeamLogoPath_(a.team);
+  const isFav = isFavorite_(a.name);
+
   const { mainTitle, subTitles } =
     buildMediaTitles_(
       a.rawTitle || "",
@@ -129,77 +213,61 @@ function renderArchiveCard_(a) {
       a.titleKr || ""
     );
 
-  const logoPath = getTeamLogoPath_(a.team);
-  const isFav = isFavorite_(a.name);
-
   return `
     <a
-      class="card-link youtube-card-link"
+      class="card-link"
       href="${a.url}"
       target="_blank"
       rel="noopener"
       data-track-open="archive"
     >
-      <div class="youtube-card ${getNationalityRegionClass(a.nationality)}">
+      <div class="card live-card ${getLangClass(a)}">
+
+        <div class="player-name card-name-row">
+          <span>
+            <span
+              class="favorite-star ${isFav ? "active" : ""}"
+              data-favorite-name="${escapeHtml(a.name || "")}"
+            >
+              ${isFav ? "★" : "☆"}
+            </span>
+
+            ${escapeHtml(a.name || "")}
+          </span>
+
+          ${muteButton_(a.name)}
+        </div>
+
+        <div class="meta">
+          ${escapeHtml(a.team || "-")} │ ${escapeHtml(a.role || "-")} │ ${escapeHtml(a.nationality || "-")}
+        </div>
+
+        <div class="stats live-stats">
+          <span class="platform-icons">
+            ${renderPlatformIcons_(a.platform)}
+          </span>
+
+          <span class="live-stat-item">
+            ${liveTimeIcon_()}
+            <span>${archiveEndedAgo_(a.endedAt)}</span>
+          </span>
+        </div>
 
         ${
-          a.thumbnail
-            ? `<img
-                 class="youtube-thumb"
-                 src="${a.thumbnail}"
-                 loading="lazy"
-                 alt=""
-               >`
+          mainTitle
+            ? `
+              <div class="title">
+                ${escapeHtml(mainTitle)}
+              </div>
+
+              ${subTitles.map(t => `
+                <div class="youtube-subtitle live-subtitle">
+                  ${escapeHtml(t)}
+                </div>
+              `).join("")}
+            `
             : ""
         }
-
-        <div class="youtube-info">
-
-          <div class="youtube-title">
-            ${escapeHtml(mainTitle) || "(No title)"}
-          </div>
-
-          ${subTitles.map(t => `
-            <div class="youtube-subtitle">
-              ${escapeHtml(t)}
-            </div>
-          `).join("")}
-
-          <div class="youtube-player card-name-row">
-            <span>
-              <span
-                class="favorite-star ${isFav ? "active" : ""}"
-                data-favorite-name="${escapeHtml(a.name || "")}"
-              >
-                ${isFav ? "★" : "☆"}
-              </span>
-              ${escapeHtml(a.name || "-")}
-            </span>
-
-            ${muteButton_(a.name)}
-          </div>
-
-          <div class="youtube-meta">
-            ${escapeHtml(a.team || "-")}
-            │
-            ${escapeHtml(a.role || "-")}
-            │
-            ${escapeHtml(a.nationality || "-")}
-          </div>
-
-          <div class="youtube-date">
-
-            <span class="youtube-stat-item">
-              ${renderPlatformIcons_(a.platform)}
-            </span>
-
-            <span class="youtube-stat-item">
-              ${youtubeTimeIcon_()}
-              <span>ended ${timeAgo(a.endedAt)} ago</span>
-            </span>
-
-          </div>
-        </div>
 
         ${
           logoPath
@@ -218,6 +286,105 @@ function renderArchiveCard_(a) {
   `;
 }
 
+function renderArchiveList_(items) {
+  app.className = "table-mode archive-list-mode";
+
+  if (!items.length) {
+    app.innerHTML = `<p class="empty">No archived broadcasts found yet.</p>`;
+    return;
+  }
+
+  app.innerHTML = `
+    <div class="player-table-top">
+      <div class="scroll-note">←📱Mobile:Swipe→</div>
+    </div>
+
+    <div class="player-table-wrap">
+      <table class="player-table archive-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Team</th>
+            <th>Role</th>
+            <th>Nationality</th>
+            <th>Ended</th>
+            <th class="archive-title-col">Title</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          ${items.map(renderArchiveListRow_).join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function renderArchiveListRow_(a) {
+  const isFav = isFavorite_(a.name);
+
+  const { mainTitle, subTitles } =
+    buildMediaTitles_(
+      a.rawTitle || "",
+      a.titleJp || "",
+      a.titleEn || "",
+      a.titleKr || ""
+    );
+
+  return `
+    <tr>
+      <td>
+        <a
+          class="last-stream-link"
+          href="${a.url}"
+          target="_blank"
+          rel="noopener"
+          data-track-open="archive"
+        >
+          ${renderPlatformIcons_(a.platform)}
+        </a>
+      </td>
+
+      <td class="name-cell ${getNationalityRegionClass(a.nationality)}">
+        <span
+          class="favorite-star ${isFav ? "active" : ""}"
+          data-favorite-name="${escapeHtml(a.name || "")}"
+        >
+          ${isFav ? "★" : "☆"}
+        </span>
+        ${escapeHtml(a.name || "-")}
+      </td>
+
+      <td>${escapeHtml(a.team || "-")}</td>
+      <td>${escapeHtml(a.role || "-")}</td>
+      <td>${escapeHtml(shortNationality(a.nationality || "-"))}</td>
+      <td>${archiveEndedAgo_(a.endedAt)}</td>
+
+      <td class="archive-title-col">
+        <a
+          class="archive-title-link"
+          href="${a.url}"
+          target="_blank"
+          rel="noopener"
+          data-track-open="archive"
+        >
+          <div class="archive-title-line">
+            ${escapeHtml(mainTitle) || "(No title)"}
+          </div>
+
+          ${subTitles.map(t => `
+            <div class="archive-title-line archive-title-sub">
+              ${escapeHtml(t)}
+            </div>
+          `).join("")}
+        </a>
+      </td>
+    </tr>
+  `;
+}
+
 function rerenderCurrentArchiveView_() {
+  currentData = filterArchiveView_(archiveCache || [], currentView);
   renderArchive(filterArchive(currentData));
 }

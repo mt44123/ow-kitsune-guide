@@ -2,7 +2,7 @@
 <html>
 <head>
 
-  <link rel="stylesheet" href="/style.css?v=1.2.3.6">
+  <link rel="stylesheet" href="/style.css?v=1.2.3.7">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -175,6 +175,25 @@
         <option value="off">OFF</option>
         <option value="goats">MY GOATS</option>
         <option value="all">ALL</option>
+      </select>
+    </label>
+
+    <label class="settings-item settings-row">
+      <span class="settings-row-icon">
+        <svg class="settings-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
+          <path fill="currentColor" d="m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/>
+        </svg>
+      </span>
+
+      <span class="settings-row-main">
+        <span id="streamTitleSettingTitle" class="settings-row-title">Stream Title</span>
+        <span class="settings-row-desc">Applies to LIVE and ARCHIVE cards.</span>
+      </span>
+
+      <select id="streamTitleSelect" class="settings-row-select">
+        <option value="full">FULL</option>
+        <option value="short">SHORT</option>
+        <option value="off">OFF</option>
       </select>
     </label>
 
@@ -462,16 +481,13 @@
   </button>
 
   <button class="media-nav" data-section="archive">
-    <svg class="media-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
+    <svg class="media-icon archive-nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
       <path fill="currentColor" d="m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/>
     </svg>
     <span class="media-label">ARCHIVE</span>
   </button>
 
   <button class="media-nav" data-section="media">
-    <svg class="media-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
-      <path fill="currentColor" d="M320-200v-560l440 280-440 280Z"/>
-    </svg>
     <span class="media-label">CLIP&amp;
 YOUTUBE</span>
   </button>
@@ -591,6 +607,17 @@ YOUTUBE</span>
   <button data-role-filter="SUP">SUP</button>
 </div>
 
+<div class="nav sub-nav" id="archiveSubNav">
+  <button class="active" data-view="archive">ALL</button>
+  <button data-view="archivekr">KR</button>
+  <button data-view="archiveen">EN</button>
+  <button data-view="archivecn">CN</button>
+  <button data-view="archivejp">JP</button>
+  <button data-view="archiveintl">INTL</button>
+  <button data-view="archiveowcs">OWCS</button>
+  <button data-view="archivefaceit">FACEIT</button>
+</div>
+
 <div class="nav sub-nav role-sub-nav" id="archiveRoleSubNav">
   <button class="active" data-role-filter="all">ALL</button>
   <button data-role-filter="TANK">TANK</button>
@@ -691,28 +718,28 @@ YOUTUBE</span>
 
 </footer>
 
-<script src="/js/config.js?v=1.2.3.6" defer></script>
-<script src="/js/app.js?v=1.2.3.6" defer></script>
-<script src="/js/favorites.js?v=1.2.3.6" defer></script>
-<script src="/js/goatscanvas.js?v=1.2.3.6" defer></script>
-<script src="/js/goatscanvas-hype.js?v=1.2.3.6" defer></script>
-<script src="/js/birthdays.js?v=1.2.3.6" defer></script>
-<script src="/js/tools.js?v=1.2.3.6" defer></script>
-<script src="/js/usefullinks.js?v=1.2.3.6" defer></script>
-<script src="/js/faq.js?v=1.2.3.6" defer></script>
-<script src="/js/about.js?v=1.2.3.6" defer></script>
-<script src="/js/privacy.js?v=1.2.3.6" defer></script>
-<script src="/js/updatelog.js?v=1.2.3.6" defer></script>
-<script src="/js/teams.js?v=1.2.3.6" defer></script>
-<script src="/js/playerlinks.js?v=1.2.3.6" defer></script>
-<script src="/js/media.js?v=1.2.3.6" defer></script>
-<script src="/js/youtube.js?v=1.2.3.6" defer></script>
-<script src="/js/clips.js?v=1.2.3.6" defer></script>
-<script src="/js/mediahub.js?v=1.2.3.6" defer></script>
-<script src="/js/archive.js?v=1.2.3.6" defer></script>
-<script src="/js/notifications.js?v=1.2.3.6" defer></script>
-<script src="/js/live.js?v=1.2.3.6" defer></script>
-<script src="/js/init.js?v=1.2.3.6" defer></script>
+<script src="/js/config.js?v=1.2.3.7" defer></script>
+<script src="/js/app.js?v=1.2.3.7" defer></script>
+<script src="/js/favorites.js?v=1.2.3.7" defer></script>
+<script src="/js/goatscanvas.js?v=1.2.3.7" defer></script>
+<script src="/js/goatscanvas-hype.js?v=1.2.3.7" defer></script>
+<script src="/js/birthdays.js?v=1.2.3.7" defer></script>
+<script src="/js/tools.js?v=1.2.3.7" defer></script>
+<script src="/js/usefullinks.js?v=1.2.3.7" defer></script>
+<script src="/js/faq.js?v=1.2.3.7" defer></script>
+<script src="/js/about.js?v=1.2.3.7" defer></script>
+<script src="/js/privacy.js?v=1.2.3.7" defer></script>
+<script src="/js/updatelog.js?v=1.2.3.7" defer></script>
+<script src="/js/teams.js?v=1.2.3.7" defer></script>
+<script src="/js/playerlinks.js?v=1.2.3.7" defer></script>
+<script src="/js/media.js?v=1.2.3.7" defer></script>
+<script src="/js/youtube.js?v=1.2.3.7" defer></script>
+<script src="/js/clips.js?v=1.2.3.7" defer></script>
+<script src="/js/mediahub.js?v=1.2.3.7" defer></script>
+<script src="/js/archive.js?v=1.2.3.7" defer></script>
+<script src="/js/notifications.js?v=1.2.3.7" defer></script>
+<script src="/js/live.js?v=1.2.3.7" defer></script>
+<script src="/js/init.js?v=1.2.3.7" defer></script>
 
 <script>
 if (

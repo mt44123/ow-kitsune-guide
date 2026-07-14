@@ -370,6 +370,9 @@ const titleLanguageSelect =
 const siteTextLanguageSelect =
   document.getElementById("siteTextLanguageSelect");
 
+const streamTitleSelect =
+  document.getElementById("streamTitleSelect");
+
 const filtersToggle =
   document.getElementById("filtersToggle");
 
@@ -549,6 +552,11 @@ function updateSettingsMenuText_() {
     settingsText_("Title Language", "タイトル言語")
   );
 
+  setSettingsText_(
+    "#streamTitleSettingTitle",
+    settingsText_("Stream Title", "配信タイトル表示")
+  );
+
   setSettingsRowTitle_(
     refreshDataButton,
     settingsText_("Refresh Data", "データ更新")
@@ -654,9 +662,28 @@ function applyLiveTitleMode_() {
   if (liveTitleMode === "off") {
     document.body.classList.add("hide-live-title");
   }
+
+  if (streamTitleSelect) {
+    streamTitleSelect.value = liveTitleMode;
+  }
 }
 
 applyLiveTitleMode_();
+
+streamTitleSelect?.addEventListener("change", () => {
+  liveTitleMode = streamTitleSelect.value;
+
+  localStorage.setItem("liveTitleMode", liveTitleMode);
+
+  applyLiveTitleMode_();
+  updateViewActionButton_();
+
+  if (isLiveView(currentView)) {
+    renderLive(filterPlayers(currentData));
+  } else if (isArchiveView(currentView)) {
+    rerenderCurrentArchiveView_();
+  }
+});
 
 let mediaLayout =
   localStorage.getItem("mediaLayout") ||
@@ -1093,6 +1120,13 @@ const titles = {
   chzzkbestclips: "CHZZK BEST",
 
   archive: "ARCHIVE",
+  archivekr: "KR",
+  archiveen: "EN",
+  archivecn: "CN",
+  archivejp: "JP",
+  archiveintl: "INTL",
+  archiveowcs: "OWCS",
+  archivefaceit: "FACEIT",
 
   teams: "TEAMS",
   playerlinks: "ALL",
@@ -1217,7 +1251,16 @@ const VIEW_GROUPS = {
     "soophotclips"
   ],
 
-  archive: ["archive"],
+  archive: [
+    "archive",
+    "archivekr",
+    "archiveen",
+    "archivecn",
+    "archivejp",
+    "archiveintl",
+    "archiveowcs",
+    "archivefaceit"
+  ],
 
   players: [
     "teams",
@@ -1347,6 +1390,7 @@ function updateNavState(view) {
   const liveRoleSubNav = document.getElementById("liveRoleSubNav");
   const mediaSubNav = document.getElementById("mediaSubNav");
   const mediaRoleSubNav = document.getElementById("mediaRoleSubNav");
+  const archiveSubNav = document.getElementById("archiveSubNav");
   const archiveRoleSubNav = document.getElementById("archiveRoleSubNav");
   const playerSubNav = document.getElementById("playerSubNav");
   const playerRoleSubNav = document.getElementById("playerRoleSubNav");
@@ -1363,6 +1407,7 @@ function updateNavState(view) {
   if (liveRoleSubNav) liveRoleSubNav.style.display = "none";
   if (mediaSubNav) mediaSubNav.style.display = "none";
   if (mediaRoleSubNav) mediaRoleSubNav.style.display = "none";
+  if (archiveSubNav) archiveSubNav.style.display = "none";
   if (archiveRoleSubNav) archiveRoleSubNav.style.display = "none";
   if (playerSubNav) playerSubNav.style.display = "none";
   if (playerRoleSubNav) playerRoleSubNav.style.display = "none";
@@ -1378,7 +1423,12 @@ function updateNavState(view) {
 
   } else if (isArchiveView(view)) {
     archiveButton?.classList.add("active");
+    if (archiveSubNav) archiveSubNav.style.display = "flex";
     if (archiveRoleSubNav) archiveRoleSubNav.style.display = "flex";
+
+    document
+      .querySelector(`#archiveSubNav button[data-view="${view}"]`)
+      ?.classList.add("active");
 
   } else if (isMediaView(view)) {
     mediaButton?.classList.add("active");
