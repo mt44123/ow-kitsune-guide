@@ -303,8 +303,8 @@ function renderArchiveList_(items) {
       <table class="player-table archive-table">
         <thead>
           <tr>
-            <th class="archive-title-col">Title</th>
             <th>Name</th>
+            <th class="archive-title-col">Title</th>
             <th>Team</th>
             <th>Role</th>
             <th>Nationality</th>
@@ -333,6 +333,24 @@ function renderArchiveListRow_(a) {
 
   return `
     <tr>
+      <td class="name-cell ${getNationalityRegionClass(a.nationality)}">
+        <span
+          class="favorite-star ${isFav ? "active" : ""}"
+          data-favorite-name="${escapeHtml(a.name || "")}"
+        >
+          ${isFav ? "★" : "☆"}
+        </span>
+
+        <a
+          class="player-name-link"
+          href="#"
+          data-player="${escapeHtml(a.name || "")}"
+          onclick="return false;"
+        >
+          ${escapeHtml(a.name || "-")}
+        </a>
+      </td>
+
       <td class="archive-title-col">
         <a
           class="last-stream-link archive-title-link"
@@ -354,24 +372,6 @@ function renderArchiveListRow_(a) {
               </span>
             `).join("")}
           </span>
-        </a>
-      </td>
-
-      <td class="name-cell ${getNationalityRegionClass(a.nationality)}">
-        <span
-          class="favorite-star ${isFav ? "active" : ""}"
-          data-favorite-name="${escapeHtml(a.name || "")}"
-        >
-          ${isFav ? "★" : "☆"}
-        </span>
-
-        <a
-          class="player-name-link"
-          href="#"
-          data-player="${escapeHtml(a.name || "")}"
-          onclick="return false;"
-        >
-          ${escapeHtml(a.name || "-")}
         </a>
       </td>
 

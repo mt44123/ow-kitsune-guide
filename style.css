@@ -2078,35 +2078,45 @@ z-index:3;
 background:var(--bg-light);
 }
 
-/* ARCHIVE/LIVE tables put Name in column 2 (Title comes first), so the
-   sticky "keep visible while scrolling" treatment moves from col 3 to col 2. */
+/* ARCHIVE/LIVE tables: Name is column 1, so sticky treatment stays on col 1
+   (Players ALL uses col 3 for Name — unset that sticky on Team col 3 here). */
 #app.table-mode .archive-table th:nth-child(3),
 #app.table-mode .archive-table td:nth-child(3),
 #app.table-mode .live-table th:nth-child(3),
 #app.table-mode .live-table td:nth-child(3){
   position:static;
   z-index:auto;
-  background:none;
 }
 
-#app.table-mode .archive-table th:nth-child(2),
-#app.table-mode .archive-table td:nth-child(2),
-#app.table-mode .live-table th:nth-child(2),
-#app.table-mode .live-table td:nth-child(2){
+#app.table-mode .archive-table td:nth-child(3),
+#app.table-mode .live-table td:nth-child(3){
+  background:transparent;
+  font-weight:normal;
+}
+
+#app.table-mode .archive-table th:nth-child(3),
+#app.table-mode .live-table th:nth-child(3){
+  background:var(--bg-main);
+}
+
+#app.table-mode .archive-table th:nth-child(1),
+#app.table-mode .archive-table td:nth-child(1),
+#app.table-mode .live-table th:nth-child(1),
+#app.table-mode .live-table td:nth-child(1){
   position:sticky;
   left:0;
   z-index:2;
   background:var(--bg-dark);
 }
 
-#app.table-mode .archive-table th:nth-child(2),
-#app.table-mode .live-table th:nth-child(2){
+#app.table-mode .archive-table th:nth-child(1),
+#app.table-mode .live-table th:nth-child(1){
   z-index:3;
   background:var(--bg-main);
 }
 
-#app.table-mode .archive-table tr:hover td:nth-child(2),
-#app.table-mode .live-table tr:hover td:nth-child(2){
+#app.table-mode .archive-table tr:hover td:nth-child(1),
+#app.table-mode .live-table tr:hover td:nth-child(1){
   background:var(--bg-light);
 }
 
@@ -2117,18 +2127,22 @@ color:var(--text-muted);
   text-align:center;
 }
 
-/* ARCHIVE / LIVE list (Players ALL table look, with a Title column) */
-.archive-table th:nth-child(2),
-.archive-table td:nth-child(2),
-.live-table th:nth-child(2),
-.live-table td:nth-child(2){
+/* ARCHIVE / LIVE list (Players ALL table look, with a Title column)
+   Order: Name | Title | Team | Role | Nationality | Started/Ended | Viewers */
+.archive-table th:nth-child(1),
+.archive-table td:nth-child(1),
+.live-table th:nth-child(1),
+.live-table td:nth-child(1){
   min-width:140px;
   font-weight:bold;
 }
 
 .archive-table th:nth-child(3),
+.live-table th:nth-child(3){
+  min-width:110px;
+}
+
 .archive-table td:nth-child(3),
-.live-table th:nth-child(3),
 .live-table td:nth-child(3){
   min-width:110px;
   font-weight:normal;

@@ -391,8 +391,8 @@ function renderLiveList_(players) {
       <table class="player-table live-table">
         <thead>
           <tr>
-            <th class="archive-title-col">Title</th>
             <th>Name</th>
+            <th class="archive-title-col">Title</th>
             <th>Team</th>
             <th>Role</th>
             <th>Nationality</th>
@@ -428,6 +428,24 @@ function renderLiveListRow_(p) {
 
   return `
     <tr>
+      <td class="name-cell ${getNationalityRegionClass(p.nationality)}">
+        <span
+          class="favorite-star ${isFav ? "active" : ""}"
+          data-favorite-name="${escapeHtml(p.name || "")}"
+        >
+          ${isFav ? "★" : "☆"}
+        </span>
+
+        <a
+          class="player-name-link"
+          href="#"
+          data-player="${escapeHtml(p.name || "")}"
+          onclick="return false;"
+        >
+          ${escapeHtml(p.name || "-")}
+        </a>
+      </td>
+
       <td class="archive-title-col">
         <a
           class="last-stream-link archive-title-link"
@@ -449,24 +467,6 @@ function renderLiveListRow_(p) {
               </span>
             `).join("")}
           </span>
-        </a>
-      </td>
-
-      <td class="name-cell ${getNationalityRegionClass(p.nationality)}">
-        <span
-          class="favorite-star ${isFav ? "active" : ""}"
-          data-favorite-name="${escapeHtml(p.name || "")}"
-        >
-          ${isFav ? "★" : "☆"}
-        </span>
-
-        <a
-          class="player-name-link"
-          href="#"
-          data-player="${escapeHtml(p.name || "")}"
-          onclick="return false;"
-        >
-          ${escapeHtml(p.name || "-")}
         </a>
       </td>
 
