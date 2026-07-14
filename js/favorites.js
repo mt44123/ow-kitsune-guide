@@ -311,13 +311,8 @@ document.addEventListener("click", e => {
     return;
   }
 
-  if (currentView === "youtubegoats") {
-    renderYoutube(filterYoutube(currentData));
-    return;
-  }
-
-  if (currentView === "goatclips") {
-    renderClips(filterClips(currentData));
+  if (currentView === "mediagoats") {
+    renderMediaGoats_(filterMediaGoats_(currentData));
     return;
   }
 });

@@ -11,7 +11,9 @@ function loadUpdateLogView() {
 
   document.body.classList.remove(
     "youtube-view",
-    "clip-view"
+    "clip-view",
+    "mediagoats-view",
+    "archive-view"
   );
 
   pageTitle.textContent = "UPDATE LOG";

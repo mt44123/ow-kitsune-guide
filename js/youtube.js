@@ -5,7 +5,7 @@ function loadYoutubeView(view) {
   
   viewNote.textContent = "";
   document.body.classList.add("youtube-view");
-  document.body.classList.remove("clip-view");
+  document.body.classList.remove("clip-view", "mediagoats-view", "archive-view");
 
   const now = Date.now();
 
@@ -89,14 +89,6 @@ function filterYoutube(videos) {
 
 function filterYoutubeView(videos, view) {
   let result = [...videos];
-
-  if (view === "youtubegoats") {
-    const favSet = new Set(getFavorites_());
-
-    result = result.filter(v =>
-      favSet.has(v.name)
-    );
-  }
 
   if (view === "youtubejp") {
     result = result.filter(v =>

@@ -229,10 +229,10 @@ function openPlayerMenu_(button, player) {
 
       if (isLiveView(currentView)) {
         renderLive(filterPlayers(currentData));
-      } else if (isYoutubeView(currentView)) {
-        renderYoutube(filterYoutube(currentData));
-      } else if (isClipView(currentView)) {
-        renderClips(filterClips(currentData));
+      } else if (isMediaView(currentView)) {
+        rerenderCurrentMediaView_();
+      } else if (isArchiveView(currentView)) {
+        rerenderCurrentArchiveView_();
       }
 
       return;
@@ -591,13 +591,13 @@ titleLanguageSelect?.addEventListener("change", () => {
     return;
   }
 
-  if (isYoutubeView(currentView)) {
-    renderYoutube(filterYoutube(currentData));
+  if (isMediaView(currentView)) {
+    rerenderCurrentMediaView_();
     return;
   }
 
-  if (isClipView(currentView)) {
-    renderClips(filterClips(currentData));
+  if (isArchiveView(currentView)) {
+    rerenderCurrentArchiveView_();
     return;
   }
 
@@ -658,8 +658,13 @@ function applyLiveTitleMode_() {
 
 applyLiveTitleMode_();
 
-let youtubeLayout =
-  localStorage.getItem("youtubeLayout") || "grid";
+let mediaLayout =
+  localStorage.getItem("mediaLayout") ||
+  localStorage.getItem("youtubeLayout") ||
+  "grid";
+
+let youtubeLayout = mediaLayout;
+let clipLayout = mediaLayout;
 
 function applyYoutubeLayout_() {
   document.body.classList.toggle(
@@ -668,11 +673,6 @@ function applyYoutubeLayout_() {
   );
 }
 
-applyYoutubeLayout_();
-
-let clipLayout =
-  localStorage.getItem("clipLayout") || "grid";
-
 function applyClipLayout_() {
   document.body.classList.toggle(
     "clip-list-layout",
@@ -680,7 +680,27 @@ function applyClipLayout_() {
   );
 }
 
-applyClipLayout_();
+function applyMediaLayout_() {
+  youtubeLayout = mediaLayout;
+  clipLayout = mediaLayout;
+
+  applyYoutubeLayout_();
+  applyClipLayout_();
+}
+
+applyMediaLayout_();
+
+let archiveLayout =
+  localStorage.getItem("archiveLayout") || "grid";
+
+function applyArchiveLayout_() {
+  document.body.classList.toggle(
+    "archive-list-layout",
+    archiveLayout === "list"
+  );
+}
+
+applyArchiveLayout_();
 
 let playerLinksLayout =
   localStorage.getItem("playerLinksLayout") || "table";
@@ -701,22 +721,22 @@ function updateViewActionButton_(view = currentView) {
     return;
   }
 
-  if (isYoutubeView(view)) {
+  if (isMediaView(view)) {
     viewActionButton.hidden = false;
 
     viewActionButton.textContent =
-      youtubeLayout === "grid"
+      mediaLayout === "grid"
         ? "▦ Grid"
         : "☰ List";
 
     return;
   }
 
-  if (isClipView(view)) {
+  if (isArchiveView(view)) {
     viewActionButton.hidden = false;
 
     viewActionButton.textContent =
-      clipLayout === "grid"
+      archiveLayout === "grid"
         ? "▦ Grid"
         : "☰ List";
 
@@ -741,8 +761,7 @@ function updateViewActionButton_(view = currentView) {
 function updatePageTitleLink_(view = currentView) {
   const isGoatsMediaView =
     view === "goats" ||
-    view === "youtubegoats" ||
-    view === "goatclips";
+    view === "mediagoats";
 
   pageTitle.classList.toggle(
     "page-title-link",
@@ -776,7 +795,7 @@ function updateFavoriteCounts_() {
 
   document
     .querySelectorAll(
-      '[data-view="goats"], [data-view="youtubegoats"], [data-view="goatclips"], [data-view="favorites"]'
+      '[data-view="goats"], [data-view="favorites"]'
     )
     .forEach(btn => {
       switch (btn.dataset.view) {
@@ -787,9 +806,6 @@ function updateFavoriteCounts_() {
         case "favorites":
           btn.textContent = `★ (${favoriteCount})`;
           break;
-
-        default:
-          btn.textContent = "★";
       }
     });
 }
@@ -835,31 +851,31 @@ viewActionButton?.addEventListener("click", () => {
     return;
   }
 
-  if (isYoutubeView(currentView)) {
-    youtubeLayout =
-      youtubeLayout === "grid"
+  if (isMediaView(currentView)) {
+    mediaLayout =
+      mediaLayout === "grid"
         ? "list"
         : "grid";
 
-    localStorage.setItem("youtubeLayout", youtubeLayout);
+    localStorage.setItem("mediaLayout", mediaLayout);
 
-    applyYoutubeLayout_();
+    applyMediaLayout_();
     updateViewActionButton_();
-    renderYoutube(filterYoutube(currentData));
+    rerenderCurrentMediaView_();
     return;
   }
 
-  if (isClipView(currentView)) {
-    clipLayout =
-      clipLayout === "grid"
+  if (isArchiveView(currentView)) {
+    archiveLayout =
+      archiveLayout === "grid"
         ? "list"
         : "grid";
 
-    localStorage.setItem("clipLayout", clipLayout);
+    localStorage.setItem("archiveLayout", archiveLayout);
 
-    applyClipLayout_();
+    applyArchiveLayout_();
     updateViewActionButton_();
-    renderClips(filterClips(currentData));
+    rerenderCurrentArchiveView_();
     return;
   }
 
@@ -1034,6 +1050,9 @@ function clearClientCache_() {
   birthdaysCache = null;
   birthdaysCacheTime = 0;
 
+  archiveCache = null;
+  archiveCacheTime = 0;
+
   todayStatsCache = null;
   todayStatsCacheTime = 0;
 
@@ -1057,21 +1076,23 @@ const titles = {
   owcs: "OWCS",
   faceit: "FACEIT",
   
-  youtube: "NEW",
-  youtubegoats: "★MY GOATS",
-  youtubehot: "HOT",
-  youtubejp: "JP",
+  mediagoats: "★MY GOATS",
 
-  clips: "NEW",
-  goatclips: "★MY GOATS",
-  hotclips: "HOT",
-  jpclips: "JP",
+  youtube: "YOUTUBE NEW",
+  youtubehot: "YOUTUBE HOT",
+  youtubejp: "YOUTUBE JP",
+
+  clips: "TWITCH NEW",
+  hotclips: "TWITCH HOT",
+  jpclips: "TWITCH JP",
   soopclips: "SOOP NEW",
   soophotclips: "SOOP HOT",
   
   chzzknewclips: "CHZZK NEW",
   chzzkhotclips: "CHZZK HOT",
   chzzkbestclips: "CHZZK BEST",
+
+  archive: "ARCHIVE",
 
   teams: "TEAMS",
   playerlinks: "ALL",
@@ -1170,7 +1191,6 @@ const VIEW_GROUPS = {
 
   clips: [
     "clips",
-    "goatclips",
     "hotclips",
     "jpclips",
     "chzzknewclips",
@@ -1180,7 +1200,24 @@ const VIEW_GROUPS = {
     "soophotclips"
   ],
 
-  youtube: ["youtube", "youtubegoats", "youtubehot", "youtubejp"],
+  youtube: ["youtube", "youtubehot", "youtubejp"],
+
+  media: [
+    "mediagoats",
+    "youtube",
+    "youtubehot",
+    "youtubejp",
+    "clips",
+    "hotclips",
+    "jpclips",
+    "chzzknewclips",
+    "chzzkhotclips",
+    "chzzkbestclips",
+    "soopclips",
+    "soophotclips"
+  ],
+
+  archive: ["archive"],
 
   players: [
     "teams",
@@ -1240,15 +1277,15 @@ let currentLiveView =
     ? currentView
     : "new";
 
-let currentClipView =
-  isClipView(currentView)
-    ? currentView
-    : "clips";
-
-let currentYoutubeView =
-  isYoutubeView(currentView)
+let currentMediaView =
+  isMediaView(currentView)
     ? currentView
     : "youtube";
+
+let currentArchiveView =
+  isArchiveView(currentView)
+    ? currentView
+    : "archive";
 
 let currentPlayerView =
   isPlayerView(currentView) && !isStaticView_(currentView)
@@ -1267,6 +1304,14 @@ function isYoutubeView(view) {
   return VIEW_GROUPS.youtube.includes(view);
 }
 
+function isMediaView(view) {
+  return VIEW_GROUPS.media.includes(view);
+}
+
+function isArchiveView(view) {
+  return VIEW_GROUPS.archive.includes(view);
+}
+
 function isPlayerView(view) {
   return VIEW_GROUPS.players.includes(view);
 }
@@ -1274,8 +1319,8 @@ function isPlayerView(view) {
 function hasSubNav_(view) {
   return (
     isLiveView(view) ||
-    isClipView(view) ||
-    isYoutubeView(view) ||
+    isMediaView(view) ||
+    isArchiveView(view) ||
     (isPlayerView(view) && !isStaticView_(view))
   );
 }
@@ -1287,22 +1332,22 @@ function hasFilterPanel_(view) {
 function hasCollapsibleFilters_(view) {
   return (
     isLiveView(view) ||
-    isYoutubeView(view) ||
-    isClipView(view)
+    isMediaView(view) ||
+    isArchiveView(view)
   );
 }
 
 function updateNavState(view) {
   const liveButton = document.querySelector('[data-section="live"]');
-  const clipsButton = document.querySelector('[data-section="clips"]');
-  const youtubeButton = document.querySelector('[data-section="youtube"]');
+  const archiveButton = document.querySelector('[data-section="archive"]');
+  const mediaButton = document.querySelector('[data-section="media"]');
   const playersButton = document.querySelector('[data-section="players"]');
 
   const liveSubNav = document.getElementById("liveSubNav");
   const liveRoleSubNav = document.getElementById("liveRoleSubNav");
-  const clipsSubNav = document.getElementById("clipsSubNav");
-  const youtubeSubNav = document.getElementById("youtubeSubNav");
-  const youtubeRoleSubNav = document.getElementById("youtubeRoleSubNav");
+  const mediaSubNav = document.getElementById("mediaSubNav");
+  const mediaRoleSubNav = document.getElementById("mediaRoleSubNav");
+  const archiveRoleSubNav = document.getElementById("archiveRoleSubNav");
   const playerSubNav = document.getElementById("playerSubNav");
   const playerRoleSubNav = document.getElementById("playerRoleSubNav");
 
@@ -1316,9 +1361,9 @@ function updateNavState(view) {
 
   if (liveSubNav) liveSubNav.style.display = "none";
   if (liveRoleSubNav) liveRoleSubNav.style.display = "none";
-  if (clipsSubNav) clipsSubNav.style.display = "none";
-  if (youtubeSubNav) youtubeSubNav.style.display = "none";
-  if (youtubeRoleSubNav) youtubeRoleSubNav.style.display = "none";
+  if (mediaSubNav) mediaSubNav.style.display = "none";
+  if (mediaRoleSubNav) mediaRoleSubNav.style.display = "none";
+  if (archiveRoleSubNav) archiveRoleSubNav.style.display = "none";
   if (playerSubNav) playerSubNav.style.display = "none";
   if (playerRoleSubNav) playerRoleSubNav.style.display = "none";
 
@@ -1331,21 +1376,17 @@ function updateNavState(view) {
       .querySelector(`#liveSubNav button[data-view="${view}"]`)
       ?.classList.add("active");
 
-  } else if (isClipView(view)) {
-    clipsButton?.classList.add("active");
-    if (clipsSubNav) clipsSubNav.style.display = "flex";
+  } else if (isArchiveView(view)) {
+    archiveButton?.classList.add("active");
+    if (archiveRoleSubNav) archiveRoleSubNav.style.display = "flex";
+
+  } else if (isMediaView(view)) {
+    mediaButton?.classList.add("active");
+    if (mediaSubNav) mediaSubNav.style.display = "flex";
+    if (mediaRoleSubNav) mediaRoleSubNav.style.display = "flex";
 
     document
-      .querySelector(`#clipsSubNav button[data-view="${view}"]`)
-      ?.classList.add("active");
-
-  } else if (isYoutubeView(view)) {
-    youtubeButton?.classList.add("active");
-    if (youtubeSubNav) youtubeSubNav.style.display = "flex";
-    if (youtubeRoleSubNav) youtubeRoleSubNav.style.display = "flex";
-
-    document
-      .querySelector(`#youtubeSubNav button[data-view="${view}"]`)
+      .querySelector(`#mediaSubNav button[data-view="${view}"]`)
       ?.classList.add("active");
 
   } else if (isPlayerView(view)) {
@@ -1409,12 +1450,12 @@ document
       
       if (button.dataset.section === "live") {
         currentView = currentLiveView;
-      
-      } else if (button.dataset.section === "clips") {
-        currentView = currentClipView;
-      
-      } else if (button.dataset.section === "youtube") {
-        currentView = currentYoutubeView;
+
+      } else if (button.dataset.section === "archive") {
+        currentView = currentArchiveView;
+
+      } else if (button.dataset.section === "media") {
+        currentView = currentMediaView;
 
       } else if (button.dataset.section === "players") {
         currentView = currentPlayerView;
@@ -1455,12 +1496,12 @@ document
         currentLiveView = currentView;
       }
 
-      if (isClipView(currentView)) {
-        currentClipView = currentView;
+      if (isMediaView(currentView)) {
+        currentMediaView = currentView;
       }
 
-      if (isYoutubeView(currentView)) {
-        currentYoutubeView = currentView;
+      if (isArchiveView(currentView)) {
+        currentArchiveView = currentView;
       }
 
       if (
@@ -1513,8 +1554,8 @@ function showSwipeHintOnce_() {
 
   if (
     !isLiveView(currentView) &&
-    !isYoutubeView(currentView) &&
-    !isClipView(currentView)
+    !isMediaView(currentView) &&
+    !isArchiveView(currentView)
   ) {
     return;
   }
@@ -1542,12 +1583,12 @@ function getSwipeViews_() {
     return VIEW_GROUPS.live;
   }
 
-  if (isYoutubeView(currentView)) {
-    return VIEW_GROUPS.youtube;
+  if (isMediaView(currentView)) {
+    return VIEW_GROUPS.media;
   }
 
-  if (isClipView(currentView)) {
-    return VIEW_GROUPS.clips;
+  if (isArchiveView(currentView)) {
+    return VIEW_GROUPS.archive;
   }
 
   return [];
@@ -1571,8 +1612,8 @@ function switchSwipeView_(direction) {
   currentView = views[nextIndex];
 
   if (isLiveView(currentView)) currentLiveView = currentView;
-  if (isYoutubeView(currentView)) currentYoutubeView = currentView;
-  if (isClipView(currentView)) currentClipView = currentView;
+  if (isMediaView(currentView)) currentMediaView = currentView;
+  if (isArchiveView(currentView)) currentArchiveView = currentView;
 
   history.replaceState({}, "", "?view=" + currentView);
 
@@ -1606,6 +1647,8 @@ function switchSwipeView_(direction) {
     currentData = filterClipView(cached.data, currentView);
     renderClips(filterClips(currentData));
   } else {
+    // "mediagoats", archive views, etc. always go through the normal
+    // loader since they have their own dedicated fetch/cache logic.
     loadView(currentView);
     return;
   }
@@ -1717,11 +1760,11 @@ searchBox?.addEventListener("input", () => {
     if (currentView === "birthdays") {
       jumpBirthdaySearch_();
 
-    } else if (isYoutubeView(currentView)) {
-      renderYoutube(filterYoutube(currentData));
+    } else if (isMediaView(currentView)) {
+      rerenderCurrentMediaView_();
 
-    } else if (isClipView(currentView)) {
-      renderClips(filterClips(currentData));
+    } else if (isArchiveView(currentView)) {
+      rerenderCurrentArchiveView_();
 
     } else if (currentView === "playerlinks") {
       searchPlayerLinksTable();
@@ -1754,11 +1797,11 @@ function applyCurrentSearch_() {
   if (currentView === "birthdays") {
     jumpBirthdaySearch_();
 
-  } else if (isYoutubeView(currentView)) {
-    renderYoutube(filterYoutube(currentData));
+  } else if (isMediaView(currentView)) {
+    rerenderCurrentMediaView_();
 
-  } else if (isClipView(currentView)) {
-    renderClips(filterClips(currentData));
+  } else if (isArchiveView(currentView)) {
+    rerenderCurrentArchiveView_();
 
   } else if (currentView === "playerlinks") {
     searchPlayerLinksTable();
@@ -1804,14 +1847,18 @@ function loadView(view) {
 
   if (
     isLiveView(view) ||
-    isYoutubeView(view) ||
-    isClipView(view)
+    isMediaView(view)
   ) {
     loadTodayStats_();
   }
 
   if (isLiveView(view)) {
     loadLiveView(view);
+    return;
+  }
+
+  if (view === "mediagoats") {
+    loadMediaGoatsView();
     return;
   }
 
@@ -1822,6 +1869,11 @@ function loadView(view) {
 
   if (isClipView(view)) {
     loadClipsView(view);
+    return;
+  }
+
+  if (isArchiveView(view)) {
+    loadArchiveView(view);
     return;
   }
 
@@ -1886,6 +1938,8 @@ function loadMutedPlayersView() {
   document.body.classList.remove(
     "youtube-view",
     "clip-view",
+    "mediagoats-view",
+    "archive-view",
     "player-detail-view"
   );
 
@@ -2485,6 +2539,12 @@ function renderTodayStats_(stats) {
   if (isClipView(currentView)) {
     el.textContent =
       `Updates every day • 🦊 Guided ${Number(stats.clip || 0).toLocaleString()} fans to Clips today.`;
+    return;
+  }
+
+  if (currentView === "mediagoats") {
+    el.textContent =
+      "YouTube updates every 30 min, Clips update every day.";
     return;
   }
 

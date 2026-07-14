@@ -461,18 +461,19 @@
     <span class="media-label">LIVE</span>
   </button>
 
-  <button class="media-nav" data-section="youtube">
+  <button class="media-nav" data-section="archive">
+    <svg class="media-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
+      <path fill="currentColor" d="m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/>
+    </svg>
+    <span class="media-label">ARCHIVE</span>
+  </button>
+
+  <button class="media-nav" data-section="media">
     <svg class="media-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
       <path fill="currentColor" d="M320-200v-560l440 280-440 280Z"/>
     </svg>
-    <span class="media-label">YOUTUBE</span>
-  </button>
-
-  <button class="media-nav" data-section="clips">
-    <svg class="media-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
-      <path fill="currentColor" d="m160-800 80 160h120l-80-160h80l80 160h120l-80-160h80l80 160h120l-80-160h120q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800Z"/>
-    </svg>
-    <span class="media-label">CLIPS</span>
+    <span class="media-label">CLIP&amp;
+YOUTUBE</span>
   </button>
 
   <button class="media-nav" data-section="players">
@@ -518,18 +519,34 @@
   <button data-role-filter="SUP">SUP</button>
 </div>
 
-<div class="nav sub-nav" id="clipsSubNav">
+<div class="nav sub-nav" id="mediaSubNav">
+  <button class="clip-tab-goats clip-icon-tab" data-view="mediagoats">
+    <img class="platform-icon" src="/icons/youtube.png" alt="YouTube">
+    <img class="platform-icon" src="/icons/twitch.png" alt="Twitch">
+    <img class="platform-icon" src="/icons/chzzk.png" alt="CHZZK">
+    <img class="platform-icon" src="/icons/soop.png" alt="SOOP">
+    <span>★</span>
+  </button>
+
+  <button class="youtube-tab" data-view="youtube">
+    <img class="platform-icon" src="/icons/youtube.png" alt="YouTube">
+    <span>NEW</span>
+  </button>
+
+  <button class="youtube-tab" data-view="youtubehot">
+    <img class="platform-icon" src="/icons/youtube.png" alt="YouTube">
+    <span>HOT</span>
+  </button>
+
+  <button class="youtube-tab" data-view="youtubejp">
+    <img class="platform-icon" src="/icons/youtube.png" alt="YouTube">
+    <span>JP</span>
+  </button>
+
   <button class="clip-tab-all clip-icon-tab" data-view="clips">
     <img class="platform-icon" src="/icons/twitch.png" alt="Twitch">
     <span>NEW</span>
   </button>
-
-  <button class="clip-tab-goats clip-icon-tab" data-view="goatclips">
-  <img class="platform-icon" src="/icons/twitch.png" alt="Twitch">
-  <img class="platform-icon" src="/icons/chzzk.png" alt="CHZZK">
-  <img class="platform-icon" src="/icons/soop.png" alt="SOOP">
-  <span>★</span>
-</button>
 
   <button class="clip-tab-all clip-icon-tab" data-view="hotclips">
     <img class="platform-icon" src="/icons/twitch.png" alt="Twitch">
@@ -567,29 +584,14 @@
   </button>
 </div>
 
-<div class="nav sub-nav" id="youtubeSubNav">
-  <button class="youtube-tab" data-view="youtube">
-    <img class="platform-icon" src="/icons/youtube.png" alt="YouTube">
-    <span>NEW</span>
-  </button>
-
-  <button class="youtube-tab-goats" data-view="youtubegoats">
-    <img class="platform-icon" src="/icons/youtube.png" alt="YouTube">
-    <span>★</span>
-  </button>
-
-  <button class="youtube-tab" data-view="youtubehot">
-    <img class="platform-icon" src="/icons/youtube.png" alt="YouTube">
-    <span>HOT</span>
-  </button>
-
-  <button class="youtube-tab" data-view="youtubejp">
-    <img class="platform-icon" src="/icons/youtube.png" alt="YouTube">
-    <span>JP</span>
-  </button>
+<div class="nav sub-nav role-sub-nav" id="mediaRoleSubNav">
+  <button class="active" data-role-filter="all">ALL</button>
+  <button data-role-filter="TANK">TANK</button>
+  <button data-role-filter="DPS">DPS</button>
+  <button data-role-filter="SUP">SUP</button>
 </div>
 
-<div class="nav sub-nav role-sub-nav" id="youtubeRoleSubNav">
+<div class="nav sub-nav role-sub-nav" id="archiveRoleSubNav">
   <button class="active" data-role-filter="all">ALL</button>
   <button data-role-filter="TANK">TANK</button>
   <button data-role-filter="DPS">DPS</button>
@@ -706,6 +708,8 @@
 <script src="/js/media.js?v=1.2.3.6" defer></script>
 <script src="/js/youtube.js?v=1.2.3.6" defer></script>
 <script src="/js/clips.js?v=1.2.3.6" defer></script>
+<script src="/js/mediahub.js?v=1.2.3.6" defer></script>
+<script src="/js/archive.js?v=1.2.3.6" defer></script>
 <script src="/js/notifications.js?v=1.2.3.6" defer></script>
 <script src="/js/live.js?v=1.2.3.6" defer></script>
 <script src="/js/init.js?v=1.2.3.6" defer></script>

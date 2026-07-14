@@ -4,7 +4,7 @@ function loadClipsView(view) {
 
   viewNote.textContent = "";
   document.body.classList.add("clip-view");
-  document.body.classList.remove("youtube-view");
+  document.body.classList.remove("youtube-view", "mediagoats-view", "archive-view");
   
   const now = Date.now();
 
@@ -27,11 +27,6 @@ function loadClipsView(view) {
     viewNote.textContent = "";
   }
 
-  if (view === "goatclips") {
-    loadGoatClipsView();
-    return;
-  }
-  
   const source = getClipSource_(view);
   const cached = clipCache[source.cacheKey];
 
@@ -80,104 +75,6 @@ function loadClipsView(view) {
       app.innerHTML = `<p class="error">Failed to load data.</p>`;
       console.error(error);
     });
-}
-
-function loadGoatClipsView() {
-  viewNote.textContent = "";
-  const now = Date.now();
-
-  pageTitle.textContent = "★MY GOATS";
-  setRandomVoiceLine();
-  viewNote.textContent =
-    "Favorite players' clips from Twitch, CHZZK and SOOP.";
-
-  const allReady =
-    clipCache.twitch.data &&
-    clipCache.twitchhot.data &&
-    clipCache.soop.data &&
-    clipCache.chzzknew.data &&
-    clipCache.chzzkbest.data &&
-    now - clipCache.twitch.time < CLIPS_CLIENT_CACHE_MS &&
-    now - clipCache.twitchhot.time < CLIPS_CLIENT_CACHE_MS &&
-    now - clipCache.soop.time < CLIPS_CLIENT_CACHE_MS &&
-    now - clipCache.chzzknew.time < CLIPS_CLIENT_CACHE_MS &&
-    now - clipCache.chzzkbest.time < CLIPS_CLIENT_CACHE_MS;
-
-  if (allReady) {
-    requestId++;
-    stopFakeProgress();
-
-    currentData = buildGoatClips_();
-    renderClips(currentData);
-    applyCurrentSearch_();
-    return;
-  }
-
-  const currentRequest = ++requestId;
-
-  startFakeProgress();
-
-  Promise.all([
-    fetch(CONFIG.API_URL + "?view=clips").then(r => r.json()),
-    fetch(CONFIG.API_URL + "?view=hotclips").then(r => r.json()),
-    fetch(CONFIG.API_URL + "?view=soopclips").then(r => r.json()),
-    fetch(CONFIG.API_URL + "?view=chzzknewclips").then(r => r.json()),
-    fetch(CONFIG.API_URL + "?view=chzzkbestclips").then(r => r.json())
-  ])
-    .then(([twitchNew, twitchHot, soop, chzzkNew, chzzkBest]) => {
-    
-      if (currentRequest !== requestId) {
-        stopFakeProgress();
-        return;
-      }
-    
-      if (currentView !== "goatclips") {
-        return;
-      }
-    
-      finishFakeProgress();
-
-      setClipCache_("twitch", twitchNew.clips || []);
-      setClipCache_("twitchhot", twitchHot.clips || []);
-      setClipCache_("soop", soop.soopclips || []);
-      setClipCache_("chzzknew", chzzkNew.chzzknewclips || []);
-      setClipCache_("chzzkbest", chzzkBest.chzzkbestclips || []);
-
-      currentData = buildGoatClips_();
-      renderClips(currentData);
-      applyCurrentSearch_();
-    })
-    .catch(error => {
-      if (currentRequest !== requestId) return;
-
-      stopFakeProgress();
-      app.innerHTML = `<p class="error">Failed to load clips.</p>`;
-      console.error(error);
-    });
-}
-
-function buildGoatClips_() {
-  const favSet = new Set(getFavorites_());
-
-  const allClips = [
-    ...(clipCache.twitch.data || []),
-    ...(clipCache.twitchhot.data || []),
-    ...(clipCache.soop.data || []),
-    ...(clipCache.chzzknew.data || []),
-    ...(clipCache.chzzkbest.data || [])
-  ];
-
-  const seen = new Set();
-
-  return allClips
-    .filter(c => favSet.has(c.name))
-    .filter(c => {
-      const key = c.url || `${c.name}-${c.rawTitle || c.title}-${c.date}`;
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    })
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
 function getClipSource_(view) {
@@ -294,7 +191,12 @@ function filterClips(clips) {
 }
 
 function filterClipView(clips, view) {
-  const result = [...clips];
+  let result = [...clips];
+
+  result = result.filter(c =>
+    currentRoleFilter === "all" ||
+    String(c.role || "").includes(currentRoleFilter)
+  );
 
   if (view === "jpclips") {
     return result.filter(c =>

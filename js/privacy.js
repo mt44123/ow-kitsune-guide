@@ -9,7 +9,7 @@ function loadPrivacyView() {
   updateNavState(currentView);
   stopFakeProgress();
 
-  document.body.classList.remove("youtube-view", "clip-view");
+  document.body.classList.remove("youtube-view", "clip-view", "mediagoats-view", "archive-view");
 
   pageTitle.textContent = "PRIVACY";
   setRandomVoiceLine();

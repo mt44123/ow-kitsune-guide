@@ -12,6 +12,8 @@ function loadFaqView() {
   document.body.classList.remove(
     "youtube-view",
     "clip-view",
+    "mediagoats-view",
+    "archive-view",
     "player-detail-view"
   );
 

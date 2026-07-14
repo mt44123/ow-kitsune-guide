@@ -1755,11 +1755,11 @@ min-width:0;
   line-height:1;
 }
 
-#youtubeSubNav button{
+#mediaSubNav button{
   opacity:.65;
 }
 
-#youtubeSubNav button.active{
+#mediaSubNav button.active{
   opacity:1;
   transform:translateY(-1px);
 }
@@ -1795,23 +1795,18 @@ min-width:0;
   max-width:100%;
 }
 
-#clipsSubNav button{
-opacity:.65;
-}
-
-#clipsSubNav button.active{
-opacity:1;
-  transform:translateY(-1px);
-}
-
-body.clip-list-layout.clip-view .youtube-card{
+body.clip-list-layout.clip-view .youtube-card,
+body.clip-list-layout.mediagoats-view .youtube-card,
+body.archive-list-layout.archive-view .youtube-card{
   display:grid;
   grid-template-columns:160px minmax(0,1fr);
   gap:var(--space-xl);
   align-items:start;
 }
 
-body.clip-list-layout.clip-view .youtube-thumb{
+body.clip-list-layout.clip-view .youtube-thumb,
+body.clip-list-layout.mediagoats-view .youtube-thumb,
+body.archive-list-layout.archive-view .youtube-thumb{
   width:160px;
   aspect-ratio:16 / 9;
   height:auto;
@@ -1820,31 +1815,43 @@ body.clip-list-layout.clip-view .youtube-thumb{
   border-radius:10px 0 0 10px;
 }
 
-body.clip-list-layout.clip-view .youtube-info{
+body.clip-list-layout.clip-view .youtube-info,
+body.clip-list-layout.mediagoats-view .youtube-info,
+body.archive-list-layout.archive-view .youtube-info{
   min-width:0;
   padding:10px 10px 10px 0;
 }
 
-body.clip-list-layout.clip-view .youtube-title{
+body.clip-list-layout.clip-view .youtube-title,
+body.clip-list-layout.mediagoats-view .youtube-title,
+body.archive-list-layout.archive-view .youtube-title{
   -webkit-line-clamp:2;
 }
 
-body.clip-list-layout.clip-view .youtube-subtitle{
+body.clip-list-layout.clip-view .youtube-subtitle,
+body.clip-list-layout.mediagoats-view .youtube-subtitle,
+body.archive-list-layout.archive-view .youtube-subtitle{
   -webkit-line-clamp:1;
 }
 
 @media (max-width:768px){
 
-  body.clip-list-layout.clip-view .youtube-card{
+  body.clip-list-layout.clip-view .youtube-card,
+  body.clip-list-layout.mediagoats-view .youtube-card,
+  body.archive-list-layout.archive-view .youtube-card{
     grid-template-columns:120px minmax(0,1fr);
     gap:var(--space-lg);
   }
 
-  body.clip-list-layout.clip-view .youtube-thumb{
+  body.clip-list-layout.clip-view .youtube-thumb,
+  body.clip-list-layout.mediagoats-view .youtube-thumb,
+  body.archive-list-layout.archive-view .youtube-thumb{
     width:120px;
   }
 
-  body.clip-list-layout.clip-view .youtube-info{
+  body.clip-list-layout.clip-view .youtube-info,
+  body.clip-list-layout.mediagoats-view .youtube-info,
+  body.archive-list-layout.archive-view .youtube-info{
     padding:8px 8px 8px 0;
   }
 
@@ -3519,7 +3526,9 @@ color:var(--text-sub);
 
 @media (min-width:1600px){
 
-  body.clip-view #app.clip-mode{
+  body.clip-view #app.clip-mode,
+  body.mediagoats-view #app.clip-mode,
+  body.archive-view #app.clip-mode{
     grid-template-columns:repeat(5,minmax(0,1fr));
   }
 
@@ -3527,7 +3536,9 @@ color:var(--text-sub);
 
 @media (min-width:1300px) and (max-width:1599px){
 
-  body.clip-view #app.clip-mode{
+  body.clip-view #app.clip-mode,
+  body.mediagoats-view #app.clip-mode,
+  body.archive-view #app.clip-mode{
     grid-template-columns:repeat(4,minmax(0,1fr));
   }
 
@@ -3535,7 +3546,9 @@ color:var(--text-sub);
 
 @media (min-width:900px) and (max-width:1299px){
 
-  body.clip-view #app.clip-mode{
+  body.clip-view #app.clip-mode,
+  body.mediagoats-view #app.clip-mode,
+  body.archive-view #app.clip-mode{
     grid-template-columns:repeat(3,minmax(0,1fr));
   }
 
@@ -3544,7 +3557,9 @@ color:var(--text-sub);
 /* CLIPS Grid */
 @media (max-width:899px){
 
-  body.clip-view #app.clip-mode{
+  body.clip-view #app.clip-mode,
+  body.mediagoats-view #app.clip-mode,
+  body.archive-view #app.clip-mode{
     grid-template-columns:repeat(2,minmax(0,1fr));
   }
 
@@ -3553,7 +3568,9 @@ color:var(--text-sub);
 /* CLIPS List */
 @media (max-width:899px){
 
-  body.clip-list-layout.clip-view #app.clip-mode{
+  body.clip-list-layout.clip-view #app.clip-mode,
+  body.clip-list-layout.mediagoats-view #app.clip-mode,
+  body.archive-list-layout.archive-view #app.clip-mode{
     grid-template-columns:1fr;
   }
 
