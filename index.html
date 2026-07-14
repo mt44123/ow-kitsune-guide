@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="/style.css?v=1.2.3.9">
+  <link rel="stylesheet" href="/style.css?v=1.2.4.0">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -167,33 +167,14 @@
       </span>
 
       <span class="settings-row-main">
-        <span class="settings-row-title">Live Notifications</span>
-        <span class="settings-row-desc">Experimental. See FAQ for details.</span>
+        <span id="notifySettingTitle" class="settings-row-title">Live Notifications</span>
+        <span id="notifySettingDesc" class="settings-row-desc">Experimental. See FAQ for details.</span>
       </span>
 
       <select id="notifySelect" class="settings-row-select">
         <option value="off">OFF</option>
         <option value="goats">MY GOATS</option>
         <option value="all">ALL</option>
-      </select>
-    </label>
-
-    <label class="settings-item settings-row">
-      <span class="settings-row-icon">
-        <svg class="settings-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
-          <path fill="currentColor" d="m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/>
-        </svg>
-      </span>
-
-      <span class="settings-row-main">
-        <span id="streamTitleSettingTitle" class="settings-row-title">Stream Title</span>
-        <span class="settings-row-desc">Applies to LIVE and ARCHIVE cards.</span>
-      </span>
-
-      <select id="streamTitleSelect" class="settings-row-select">
-        <option value="full">FULL</option>
-        <option value="short">SHORT</option>
-        <option value="off">OFF</option>
       </select>
     </label>
 
@@ -307,8 +288,26 @@
         <option value="kr-original">Korean + Original</option>
         <option value="kr-en-original">Korean + English + Original</option>
       </select>
+    </label>
 
-      </label>
+    <label class="settings-item settings-row">
+      <span class="settings-row-icon">
+        <svg class="settings-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
+          <path fill="currentColor" d="m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/>
+        </svg>
+      </span>
+
+      <span class="settings-row-main">
+        <span id="streamTitleSettingTitle" class="settings-row-title">Stream Title</span>
+        <span id="streamTitleSettingDesc" class="settings-row-desc">Applies to LIVE and ARCHIVE cards.</span>
+      </span>
+
+      <select id="streamTitleSelect" class="settings-row-select">
+        <option value="full">FULL</option>
+        <option value="short">SHORT</option>
+        <option value="off">OFF</option>
+      </select>
+    </label>
 
     <button
       id="refreshDataButton"
@@ -718,28 +717,28 @@ YOUTUBE</span>
 
 </footer>
 
-<script src="/js/config.js?v=1.2.3.9" defer></script>
-<script src="/js/app.js?v=1.2.3.9" defer></script>
-<script src="/js/favorites.js?v=1.2.3.9" defer></script>
-<script src="/js/goatscanvas.js?v=1.2.3.9" defer></script>
-<script src="/js/goatscanvas-hype.js?v=1.2.3.9" defer></script>
-<script src="/js/birthdays.js?v=1.2.3.9" defer></script>
-<script src="/js/tools.js?v=1.2.3.9" defer></script>
-<script src="/js/usefullinks.js?v=1.2.3.9" defer></script>
-<script src="/js/faq.js?v=1.2.3.9" defer></script>
-<script src="/js/about.js?v=1.2.3.9" defer></script>
-<script src="/js/privacy.js?v=1.2.3.9" defer></script>
-<script src="/js/updatelog.js?v=1.2.3.9" defer></script>
-<script src="/js/teams.js?v=1.2.3.9" defer></script>
-<script src="/js/playerlinks.js?v=1.2.3.9" defer></script>
-<script src="/js/media.js?v=1.2.3.9" defer></script>
-<script src="/js/youtube.js?v=1.2.3.9" defer></script>
-<script src="/js/clips.js?v=1.2.3.9" defer></script>
-<script src="/js/mediahub.js?v=1.2.3.9" defer></script>
-<script src="/js/archive.js?v=1.2.3.9" defer></script>
-<script src="/js/notifications.js?v=1.2.3.9" defer></script>
-<script src="/js/live.js?v=1.2.3.9" defer></script>
-<script src="/js/init.js?v=1.2.3.9" defer></script>
+<script src="/js/config.js?v=1.2.4.0" defer></script>
+<script src="/js/app.js?v=1.2.4.0" defer></script>
+<script src="/js/favorites.js?v=1.2.4.0" defer></script>
+<script src="/js/goatscanvas.js?v=1.2.4.0" defer></script>
+<script src="/js/goatscanvas-hype.js?v=1.2.4.0" defer></script>
+<script src="/js/birthdays.js?v=1.2.4.0" defer></script>
+<script src="/js/tools.js?v=1.2.4.0" defer></script>
+<script src="/js/usefullinks.js?v=1.2.4.0" defer></script>
+<script src="/js/faq.js?v=1.2.4.0" defer></script>
+<script src="/js/about.js?v=1.2.4.0" defer></script>
+<script src="/js/privacy.js?v=1.2.4.0" defer></script>
+<script src="/js/updatelog.js?v=1.2.4.0" defer></script>
+<script src="/js/teams.js?v=1.2.4.0" defer></script>
+<script src="/js/playerlinks.js?v=1.2.4.0" defer></script>
+<script src="/js/media.js?v=1.2.4.0" defer></script>
+<script src="/js/youtube.js?v=1.2.4.0" defer></script>
+<script src="/js/clips.js?v=1.2.4.0" defer></script>
+<script src="/js/mediahub.js?v=1.2.4.0" defer></script>
+<script src="/js/archive.js?v=1.2.4.0" defer></script>
+<script src="/js/notifications.js?v=1.2.4.0" defer></script>
+<script src="/js/live.js?v=1.2.4.0" defer></script>
+<script src="/js/init.js?v=1.2.4.0" defer></script>
 
 <script>
 if (

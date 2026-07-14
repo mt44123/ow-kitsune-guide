@@ -538,6 +538,19 @@ function updateSettingsMenuText_() {
   );
 
   setSettingsText_(
+    "#notifySettingTitle",
+    settingsText_("Live Notifications", "LIVE通知")
+  );
+
+  setSettingsText_(
+    "#notifySettingDesc",
+    settingsText_(
+      "Experimental. See FAQ for details.",
+      "実験的機能です。詳細はFAQを参照してください。"
+    )
+  );
+
+  setSettingsText_(
     "#themeSettingTitle",
     settingsText_("Theme", "テーマ")
   );
@@ -555,6 +568,14 @@ function updateSettingsMenuText_() {
   setSettingsText_(
     "#streamTitleSettingTitle",
     settingsText_("Stream Title", "配信タイトル表示")
+  );
+
+  setSettingsText_(
+    "#streamTitleSettingDesc",
+    settingsText_(
+      "Applies to LIVE and ARCHIVE cards.",
+      "LIVEとARCHIVEカードに適用されます。"
+    )
   );
 
   setSettingsRowTitle_(
