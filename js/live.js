@@ -372,6 +372,19 @@ function renderLiveGrid_(players) {
       </a>
     `;
   }).join("");
+
+  // #region agent log
+  (() => {
+    const star = document.querySelector(".favorite-star");
+    const mute = document.querySelector(".mute-button");
+    const goats = document.querySelector('#liveSubNav [data-view="goats"]');
+    const muted = document.querySelector('#playerSubNav [data-view="muted"]');
+    const starText = star ? star.textContent : "";
+    const goatsText = goats ? goats.textContent : "";
+    const mutedText = muted ? muted.textContent : "";
+    fetch('http://127.0.0.1:7282/ingest/90a5ab17-9968-48a2-ac64-79247fc4a8cf',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'de8da2'},body:JSON.stringify({sessionId:'de8da2',runId:'post-restore',hypothesisId:'B',location:'live.js:renderLiveGrid_',message:'glyph codes after live render',data:{charset:document.characterSet,starText,starCp:starText?[...starText].map(c=>c.codePointAt(0).toString(16)):null,goatsText,goatsCp:goatsText?[...goatsText].map(c=>c.codePointAt(0).toString(16)):null,mutedText,mutedCp:mutedText?[...mutedText].map(c=>c.codePointAt(0).toString(16)):null,muteIsSvg:!!(mute&&mute.querySelector('svg')),hasCharsetMeta:!!document.querySelector('meta[charset]')},timestamp:Date.now()})}).catch(()=>{});
+  })();
+  // #endregion
 }
 
 function renderLiveList_(players) {
