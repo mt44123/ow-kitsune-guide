@@ -148,6 +148,9 @@ function loadToolsView() {
               <p>
                 It was the first OCR tool I found through a web search, and I have been using it ever since. While there may be other alternatives, it has worked well for my needs.
               </p>
+              <p>
+                By the way, Windows' built-in Snipping Tool also has a Text extractor OCR feature, and the experience is nearly the same.
+              </p>
             `,
             `
               <p>
@@ -155,6 +158,9 @@ function loadToolsView() {
               </p>
               <p>
                 検索で最初に見つけたOCRソフトだったため、ずっと使用しています。他にも選択肢はあると思いますが、私の用途では特に問題なく利用できています。
+              </p>
+              <p>
+                ちなみに、WINDOWS標準ソフトのSnipping ToolにもText extractorというOCR機能があり、使用感はほぼ同じです。
               </p>
             `
           )}
