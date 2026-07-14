@@ -303,13 +303,12 @@ function renderArchiveList_(items) {
       <table class="player-table archive-table">
         <thead>
           <tr>
-            <th></th>
+            <th class="archive-title-col">Title</th>
             <th>Name</th>
             <th>Team</th>
             <th>Role</th>
             <th>Nationality</th>
             <th>Ended</th>
-            <th class="archive-title-col">Title</th>
           </tr>
         </thead>
 
@@ -334,15 +333,27 @@ function renderArchiveListRow_(a) {
 
   return `
     <tr>
-      <td>
+      <td class="archive-title-col">
         <a
-          class="last-stream-link"
+          class="last-stream-link archive-title-link"
           href="${a.url}"
           target="_blank"
           rel="noopener"
           data-track-open="archive"
         >
           ${renderPlatformIcons_(a.platform)}
+
+          <span class="archive-title-text">
+            <span class="archive-title-line">
+              ${escapeHtml(mainTitle) || "(No title)"}
+            </span>
+
+            ${subTitles.map(t => `
+              <span class="archive-title-line archive-title-sub">
+                ${escapeHtml(t)}
+              </span>
+            `).join("")}
+          </span>
         </a>
       </td>
 
@@ -353,33 +364,30 @@ function renderArchiveListRow_(a) {
         >
           ${isFav ? "★" : "☆"}
         </span>
-        ${escapeHtml(a.name || "-")}
+
+        <a
+          class="player-name-link"
+          href="#"
+          data-player="${escapeHtml(a.name || "")}"
+          onclick="return false;"
+        >
+          ${escapeHtml(a.name || "-")}
+        </a>
       </td>
 
-      <td>${escapeHtml(a.team || "-")}</td>
+      <td>
+        <button
+          type="button"
+          class="team-link"
+          data-team-menu="${escapeHtml(a.team || "")}"
+        >
+          ${escapeHtml(a.team || "-")}
+        </button>
+      </td>
+
       <td>${escapeHtml(a.role || "-")}</td>
       <td>${escapeHtml(shortNationality(a.nationality || "-"))}</td>
       <td>${archiveEndedAgo_(a.endedAt)}</td>
-
-      <td class="archive-title-col">
-        <a
-          class="archive-title-link"
-          href="${a.url}"
-          target="_blank"
-          rel="noopener"
-          data-track-open="archive"
-        >
-          <div class="archive-title-line">
-            ${escapeHtml(mainTitle) || "(No title)"}
-          </div>
-
-          ${subTitles.map(t => `
-            <div class="archive-title-line archive-title-sub">
-              ${escapeHtml(t)}
-            </div>
-          `).join("")}
-        </a>
-      </td>
     </tr>
   `;
 }

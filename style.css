@@ -2075,6 +2075,38 @@ z-index:3;
 background:var(--bg-light);
 }
 
+/* ARCHIVE/LIVE tables put Name in column 2 (Title comes first), so the
+   sticky "keep visible while scrolling" treatment moves from col 3 to col 2. */
+#app.table-mode .archive-table th:nth-child(3),
+#app.table-mode .archive-table td:nth-child(3),
+#app.table-mode .live-table th:nth-child(3),
+#app.table-mode .live-table td:nth-child(3){
+  position:static;
+  z-index:auto;
+  background:none;
+}
+
+#app.table-mode .archive-table th:nth-child(2),
+#app.table-mode .archive-table td:nth-child(2),
+#app.table-mode .live-table th:nth-child(2),
+#app.table-mode .live-table td:nth-child(2){
+  position:sticky;
+  left:0;
+  z-index:2;
+  background:var(--bg-dark);
+}
+
+#app.table-mode .archive-table th:nth-child(2),
+#app.table-mode .live-table th:nth-child(2){
+  z-index:3;
+  background:var(--bg-main);
+}
+
+#app.table-mode .archive-table tr:hover td:nth-child(2),
+#app.table-mode .live-table tr:hover td:nth-child(2){
+  background:var(--bg-light);
+}
+
 .scroll-note{
 color:var(--text-muted);
   font-size:12px;
@@ -2082,55 +2114,79 @@ color:var(--text-muted);
   text-align:center;
 }
 
-/* ARCHIVE list (Players ALL table look, but title column instead of link dots) */
-.archive-table th:nth-child(1),
-.archive-table td:nth-child(1){
-  min-width:44px;
-  text-align:center;
-}
-
+/* ARCHIVE / LIVE list (Players ALL table look, with a Title column) */
 .archive-table th:nth-child(2),
-.archive-table td:nth-child(2){
+.archive-table td:nth-child(2),
+.live-table th:nth-child(2),
+.live-table td:nth-child(2){
   min-width:140px;
   font-weight:bold;
 }
 
 .archive-table th:nth-child(3),
-.archive-table td:nth-child(3){
+.archive-table td:nth-child(3),
+.live-table th:nth-child(3),
+.live-table td:nth-child(3){
   min-width:110px;
   font-weight:normal;
 }
 
 .archive-table th:nth-child(4),
-.archive-table td:nth-child(4){
+.archive-table td:nth-child(4),
+.live-table th:nth-child(4),
+.live-table td:nth-child(4){
   min-width:56px;
 }
 
 .archive-table th:nth-child(5),
-.archive-table td:nth-child(5){
+.archive-table td:nth-child(5),
+.live-table th:nth-child(5),
+.live-table td:nth-child(5){
   min-width:90px;
 }
 
 .archive-table th:nth-child(6),
-.archive-table td:nth-child(6){
+.archive-table td:nth-child(6),
+.live-table th:nth-child(6),
+.live-table td:nth-child(6){
   min-width:70px;
   text-align:center;
 }
 
+.live-table th:nth-child(7),
+.live-table td:nth-child(7){
+  min-width:80px;
+  text-align:center;
+}
+
 .archive-table th.archive-title-col,
-.archive-table td.archive-title-col{
+.archive-table td.archive-title-col,
+.live-table th.archive-title-col,
+.live-table td.archive-title-col{
   text-align:left;
   min-width:280px;
 }
 
 .archive-title-link{
-  display:block;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
   color:inherit;
   text-decoration:none;
 }
 
 .archive-title-link:hover{
   color:var(--accent);
+}
+
+.archive-title-link .platform-icons{
+  flex-shrink:0;
+}
+
+.archive-title-text{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
 }
 
 .archive-title-line{
@@ -2143,7 +2199,7 @@ color:var(--text-muted);
   font-size:11px;
 }
 
-body.hide-live-title .archive-table .archive-title-col{
+body.hide-live-title .archive-title-col .archive-title-text{
   display:none;
 }
 

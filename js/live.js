@@ -261,6 +261,15 @@ function liveViewersIcon_() {
 }
 
 function renderLive(players) {
+  if (liveLayout === "list") {
+    renderLiveList_(players);
+    return;
+  }
+
+  renderLiveGrid_(players);
+}
+
+function renderLiveGrid_(players) {
   app.className = "";
 
   if (!players.length) {
@@ -363,4 +372,118 @@ function renderLive(players) {
       </a>
     `;
   }).join("");
+}
+
+function renderLiveList_(players) {
+  app.className = "table-mode live-list-mode";
+
+  if (!players.length) {
+    app.innerHTML = `<p class="empty">No players found.</p>`;
+    return;
+  }
+
+  app.innerHTML = `
+    <div class="player-table-top">
+      <div class="scroll-note">←📱Mobile:Swipe→</div>
+    </div>
+
+    <div class="player-table-wrap">
+      <table class="player-table live-table">
+        <thead>
+          <tr>
+            <th class="archive-title-col">Title</th>
+            <th>Name</th>
+            <th>Team</th>
+            <th>Role</th>
+            <th>Nationality</th>
+            <th>Started</th>
+            <th>Viewers</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          ${players.map(renderLiveListRow_).join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function renderLiveListRow_(p) {
+  const isLive = isPlayerLive_(p);
+  const isFav = isFavorite_(p.name);
+
+  const { mainTitle, subTitles } =
+    isLive
+      ? buildMediaTitles_(
+          p.rawTitle || "",
+          p.titleJp || "",
+          p.titleEn || "",
+          p.titleKr || ""
+        )
+      : {
+          mainTitle: "",
+          subTitles: []
+        };
+
+  return `
+    <tr>
+      <td class="archive-title-col">
+        <a
+          class="last-stream-link archive-title-link"
+          href="${p.url}"
+          target="_blank"
+          rel="noopener"
+          data-track-open="live"
+        >
+          ${renderPlatformIcons_(p.platform)}
+
+          <span class="archive-title-text">
+            <span class="archive-title-line">
+              ${escapeHtml(mainTitle) || "(No title)"}
+            </span>
+
+            ${subTitles.map(t => `
+              <span class="archive-title-line archive-title-sub">
+                ${escapeHtml(t)}
+              </span>
+            `).join("")}
+          </span>
+        </a>
+      </td>
+
+      <td class="name-cell ${getNationalityRegionClass(p.nationality)}">
+        <span
+          class="favorite-star ${isFav ? "active" : ""}"
+          data-favorite-name="${escapeHtml(p.name || "")}"
+        >
+          ${isFav ? "★" : "☆"}
+        </span>
+
+        <a
+          class="player-name-link"
+          href="#"
+          data-player="${escapeHtml(p.name || "")}"
+          onclick="return false;"
+        >
+          ${escapeHtml(p.name || "-")}
+        </a>
+      </td>
+
+      <td>
+        <button
+          type="button"
+          class="team-link"
+          data-team-menu="${escapeHtml(p.team || "")}"
+        >
+          ${escapeHtml(p.team || "-")}
+        </button>
+      </td>
+
+      <td>${escapeHtml(p.role || "-")}</td>
+      <td>${escapeHtml(shortNationality(p.nationality || "-"))}</td>
+      <td>${formatLiveFor(p.startedAt)}</td>
+      <td>${Number(p.viewers || 0).toLocaleString()}</td>
+    </tr>
+  `;
 }

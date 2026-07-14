@@ -685,6 +685,18 @@ streamTitleSelect?.addEventListener("change", () => {
   }
 });
 
+let liveLayout =
+  localStorage.getItem("liveLayout") || "grid";
+
+function applyLiveLayout_() {
+  document.body.classList.toggle(
+    "live-list-layout",
+    liveLayout === "list"
+  );
+}
+
+applyLiveLayout_();
+
 let mediaLayout =
   localStorage.getItem("mediaLayout") ||
   localStorage.getItem("youtubeLayout") ||
@@ -739,11 +751,9 @@ function updateViewActionButton_(view = currentView) {
     viewActionButton.hidden = false;
 
     viewActionButton.textContent =
-      liveTitleMode === "full"
-        ? "📝 Full"
-        : liveTitleMode === "short"
-          ? "📝 Short"
-          : "📝 Off";
+      liveLayout === "grid"
+        ? "▦ Grid"
+        : "☰ List";
 
     return;
   }
@@ -863,16 +873,14 @@ document.addEventListener(
 
 viewActionButton?.addEventListener("click", () => {
   if (isLiveView(currentView)) {
-    liveTitleMode =
-      liveTitleMode === "full"
-        ? "short"
-        : liveTitleMode === "short"
-          ? "off"
-          : "full";
+    liveLayout =
+      liveLayout === "grid"
+        ? "list"
+        : "grid";
 
-    localStorage.setItem("liveTitleMode", liveTitleMode);
+    localStorage.setItem("liveLayout", liveLayout);
 
-    applyLiveTitleMode_();
+    applyLiveLayout_();
     updateViewActionButton_();
     renderLive(filterPlayers(currentData));
     return;
