@@ -321,10 +321,6 @@ async function shareGoatsImageHype_() {
 
   ctx.textAlign = "center";
 
-  ctx.fillStyle = textSub;
-  ctx.font = `800 28px ${fontBody}`;
-  ctx.fillText("Where Are the GOATs?", width / 2, footerY + 10);
-
   const months = [
     "Jan","Feb","Mar","Apr","May","Jun",
     "Jul","Aug","Sep","Oct","Nov","Dec"
@@ -336,7 +332,10 @@ async function shareGoatsImageHype_() {
 
   ctx.fillStyle = textMuted;
   ctx.font = `500 22px ${fontBody}`;
-  ctx.fillText(`Generated ${dateText}`, width / 2, footerY + 42);
+
+  ctx.fillText(`Generated ${dateText}`, width / 2, footerY + 10);
+
+  ctx.fillText("Where are the GOATs now? Check the link below", width / 2, footerY + 42);
 
   ctx.fillText("https://owkitsune.com", width / 2, footerY + 72);
 
