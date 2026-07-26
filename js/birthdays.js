@@ -30,6 +30,11 @@ function getVisitorTimezoneInfo_() {
     iana = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
   } catch (e) {}
 
+  // Etc/GMT±n uses inverted signs and is confusing next to UTC labels.
+  if (/^Etc\/GMT/i.test(iana)) {
+    iana = "";
+  }
+
   return {
     offsetHours,
     utcLabel: formatUtcOffsetLabel_(offsetHours),
@@ -43,42 +48,6 @@ function getVisitorTimezoneText_() {
   return info.iana
     ? `${info.utcLabel} (${info.iana})`
     : info.utcLabel;
-}
-
-function getTeamRegionTimezoneInfo_(teamRegion) {
-  const r = String(teamRegion || "")
-    .replace(/^●\s*/, "")
-    .replace(/^★\s*/, "")
-    .trim()
-    .toUpperCase();
-
-  if (!r || r.includes("OFFICIAL") || r.includes("OWWC") || r === "HERO") {
-    return null;
-  }
-
-  if (r === "KR" || r.endsWith(" KR") || r.startsWith("KR ")) {
-    return { code: "KR", min: 9, max: 9 };
-  }
-  if (r === "JP" || r.endsWith(" JP") || r.startsWith("JP ")) {
-    return { code: "JP", min: 9, max: 9 };
-  }
-  if (r === "CN" || r.endsWith(" CN") || r.startsWith("CN ")) {
-    return { code: "CN", min: 8, max: 8 };
-  }
-  if (r === "NA" || r.endsWith(" NA") || r.startsWith("NA ")) {
-    return { code: "NA", min: -8, max: -4 };
-  }
-  if (r === "EMEA" || r.includes("EMEA")) {
-    return { code: "EMEA", min: 0, max: 4 };
-  }
-  if (r === "PAC" || r.endsWith(" PAC") || r.startsWith("PAC ")) {
-    return { code: "PAC", min: 8, max: 13 };
-  }
-  if (r === "SA" || r.endsWith(" SA") || r.startsWith("SA ")) {
-    return { code: "SA", min: -5, max: -3 };
-  }
-
-  return null;
 }
 
 function getNationalityTimezoneInfo_(nationality) {
@@ -167,19 +136,14 @@ function getNationalityTimezoneInfo_(nationality) {
 }
 
 function getPlayerTimezoneDisplay_(p) {
-  const teamInfo = getTeamRegionTimezoneInfo_(p.teamRegion);
   const natInfo = getNationalityTimezoneInfo_(p.nationality);
   const natName = shortNationality(p.nationality || "") || "-";
 
-  const teamLine = teamInfo
-    ? `Team ${teamInfo.code}: ${formatUtcRangeLabel_(teamInfo.min, teamInfo.max)}`
-    : "Team: -";
-
   const natLine = natInfo
-    ? `Nat ${natName}: ${formatUtcRangeLabel_(natInfo.min, natInfo.max)}`
-    : `Nat ${natName}: -`;
+    ? `Nationality ${natName}: ${formatUtcRangeLabel_(natInfo.min, natInfo.max)}`
+    : `Nationality ${natName}: -`;
 
-  return { teamLine, natLine };
+  return { natLine };
 }
 
 function getTodayBirthdays_(players, today = new Date()) {
@@ -469,10 +433,6 @@ function buildBirthdayTodaySection_(
 
                 <span>
                   ${getBirthdayAgeText_(p)}
-                </span>
-
-                <span class="birthday-tz-line">
-                  ${escapeHtml(tz.teamLine)}
                 </span>
 
                 <span class="birthday-tz-line">

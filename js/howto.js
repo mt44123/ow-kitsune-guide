@@ -316,7 +316,7 @@ function loadHowtoView() {
             <ul>
               <li><b>TEAMS</b> — browse by team</li>
               <li><b>ALL</b> — all player links</li>
-              <li><b>🎂HBD</b> — birthdays (★Share for today's birthday image; shows your TZ and each player's team/nationality TZ range)</li>
+              <li><b>🎂HBD</b> — birthdays (★Share for today's birthday image; shows your TZ and each player's nationality TZ range)</li>
               <li><b>★</b> — MY GOATS list</li>
               <li><b>◆</b> — MUTED list</li>
               <li>Open a player for stream and social links</li>
@@ -326,7 +326,7 @@ function loadHowtoView() {
             <ul>
               <li><b>TEAMS</b> — チームから選手へ</li>
               <li><b>ALL</b> — 全選手リンク</li>
-              <li><b>🎂HBD</b> — 誕生日（★Share で今日の誕生日画像。自分のTZと選手のチーム/国籍TZ範囲を表示）</li>
+              <li><b>🎂HBD</b> — 誕生日（★Share で今日の誕生日画像。自分のTZと選手の国籍TZ範囲を表示）</li>
               <li><b>★</b> — MY GOATS 一覧</li>
               <li><b>◆</b> — MUTED 一覧</li>
               <li>選手を開くと配信・SNSなどのリンク集</li>

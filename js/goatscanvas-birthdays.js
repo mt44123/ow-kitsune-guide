@@ -81,7 +81,7 @@ async function shareBirthdaysImage_() {
   const columnWidth = 530;
   const columnGap = 36;
 
-  const cardHeight = 168;
+  const cardHeight = 148;
   const cardGap = 24;
   const headerHeight = 320;
   const footerHeight = 190;
@@ -273,8 +273,7 @@ async function shareBirthdaysImage_() {
 
     ctx.fillStyle = textMuted;
     ctx.font = `600 15px ${fontBody}`;
-    ctx.fillText(tz.teamLine, x + 28, y + 112, columnWidth - 140);
-    ctx.fillText(tz.natLine, x + 28, y + 138, columnWidth - 140);
+    ctx.fillText(tz.natLine, x + 28, y + 118, columnWidth - 140);
   });
 
   const footerY = height - 130;
