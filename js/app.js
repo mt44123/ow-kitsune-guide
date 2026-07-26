@@ -595,7 +595,7 @@ function updateSettingsMenuText_() {
 
   setSettingsRowTitle_(
     faqButton,
-    settingsText_("FAQ", "よくある質問")
+    settingsText_("FAQ", "FAQ")
   );
 }
 

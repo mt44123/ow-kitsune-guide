@@ -98,6 +98,26 @@ function loadFaqView() {
 
       <div class="card faq-card">
         <h3>
+          💬 Why don't you include Discord invite links?<br>
+          Discordの招待URLが掲載されていないのはなぜですか？
+        </h3>
+
+        ${siteText_(
+          `
+            <p>
+              To help prevent spam, harassment, and other unwanted activity that could cause inconvenience to players or their communities. Discord invite links can often be found in the links section of a player's streaming page, on Liquipedia, or on X (formerly Twitter).
+            </p>
+          `,
+          `
+            <p>
+              スパムや荒らしなどによって、選手やコミュニティに迷惑がかかることを防ぐためです。Discordの招待URLは、選手の配信ページのリンク欄やLiquipedia、X（旧Twitter）などに掲載されている場合があります。
+            </p>
+          `
+        )}
+      </div>
+
+      <div class="card faq-card">
+        <h3>
           🔔 How do Live Notifications work?<br>
           ライブ通知はどのように動作しますか？
         </h3>
