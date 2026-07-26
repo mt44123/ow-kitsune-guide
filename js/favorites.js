@@ -43,10 +43,10 @@ function loadFavoritesView() {
   pageTitle.textContent = "★MY GOATS";
   setRandomVoiceLine();
 
-  viewNote.innerHTML = `
-    See <b>⚙ FAQ</b> for more details.
-    詳しくは⚙の<b>FAQ</b>へ
-  `;
+  viewNote.innerHTML = siteNote_(
+    `See <b>⚙ FAQ</b> for more details.`,
+    `詳しくは ⚙ の <b>FAQ</b> へ`
+  );
 
   if (
     playerLinksCache &&

@@ -627,10 +627,13 @@ if (siteTextLanguageSelect) {
     siteTextLanguageMode;
 }
 
+function siteNote_(enHtml, jpHtml) {
+  // View notes: JP only in Japanese mode. EN (+ both) stays English to keep notes short.
+  return siteTextLanguageMode === "jp" ? jpHtml : enHtml;
+}
+
 function settingsText_(en, jp) {
-  return siteTextLanguageMode === "jp"
-    ? jp
-    : en;
+  return siteNote_(en, jp);
 }
 
 updateSettingsMenuText_();
@@ -802,6 +805,21 @@ siteTextLanguageSelect?.addEventListener("change", () => {
   if (isStaticView_(currentView)) {
     loadView(currentView);
     return;
+  }
+
+  if (
+    [
+      "birthdays",
+      "favorites",
+      "muted",
+      "mediagoats",
+      "hotclips",
+      "soophotclips",
+      "chzzkhotclips",
+      "chzzkbestclips"
+    ].includes(currentView)
+  ) {
+    loadView(currentView);
   }
 
 });
@@ -2195,9 +2213,10 @@ function renderMutedPlayersView() {
 
   app.className = "table-mode muted-mode";
 
-  viewNote.innerHTML = `
-    ◆ Players hidden from LIVE, YouTube and Clips.
-  `;
+  viewNote.innerHTML = siteNote_(
+    `◆ Players hidden from LIVE, YouTube and Clips.`,
+    `◆ LIVE / YouTube / Clips から非表示にしたプレイヤーです。`
+  );
 
   const exportBox = `
     <div class="goats-export-box">

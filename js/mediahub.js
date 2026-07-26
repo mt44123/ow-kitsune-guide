@@ -12,8 +12,10 @@ function loadMediaGoatsView() {
 
   resetSeo_();
 
-  viewNote.textContent =
-    "Favorite players' YouTube videos, Twitch/CHZZK/SOOP clips in one feed.";
+  viewNote.textContent = siteNote_(
+    "Favorite players' YouTube videos, Twitch/CHZZK/SOOP clips in one feed.",
+    "お気に入り選手の YouTube・Twitch/CHZZK/SOOP クリップをまとめて表示します。"
+  );
 
   document.body.classList.add("mediagoats-view");
   document.body.classList.remove("youtube-view", "clip-view", "archive-view");

@@ -16,12 +16,16 @@ function loadClipsView(view) {
     view === "soophotclips" ||
     view === "chzzkhotclips"
   ) {
-    viewNote.textContent =
-      "HOT = Most viewed clips from the last 30 days";
+    viewNote.textContent = siteNote_(
+      "HOT = Most viewed clips from the last 30 days",
+      "HOT = 直近30日で再生の多いクリップ"
+    );
 
   } else if (view === "chzzkbestclips") {
-    viewNote.textContent =
-      "BEST = Popular clips";
+    viewNote.textContent = siteNote_(
+      "BEST = Popular clips",
+      "BEST = 人気クリップ"
+    );
 
   } else {
     viewNote.textContent = "";
