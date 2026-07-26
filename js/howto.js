@@ -73,7 +73,7 @@ function loadHowtoView() {
         )}
         <button
           type="button"
-          class="howto-action-button"
+          class="howto-action-button howto-action-button-show"
           id="showHowtoNavButton"
         >
           Show HOW TO USE button
@@ -81,31 +81,31 @@ function loadHowtoView() {
       </div>
     `
     : `
-      <div class="card faq-card howto-hide-card">
+      <div class="card faq-card howto-hide-card howto-hide-card-emphasize">
         <h3>
-          📌 This button is optional<br>
-          このボタンは任意です
+          ✕ You can hide this button<br>
+          ✕ このボタンは消せます
         </h3>
         ${siteText_(
           `
             <p>
-              Hide the HOW TO USE nav button anytime if it gets in the way.
+              If the HOW TO USE nav button gets in the way, hide it anytime.
               After hiding, you can still open this page from ⚙ Settings → How to use.
             </p>
           `,
           `
             <p>
-              邪魔なら HOW TO USE ナビボタンを非表示にできます。
+              HOW TO USE ナビボタンが邪魔なら、いつでも非表示にできます。
               消したあとも ⚙ Settings → How to use から読めます。
             </p>
           `
         )}
         <button
           type="button"
-          class="howto-action-button"
+          class="howto-action-button howto-action-button-hide"
           id="hideHowtoNavButton"
         >
-          Hide this button
+          ✕ Hide this button
         </button>
       </div>
     `;
@@ -122,18 +122,52 @@ function loadHowtoView() {
         </h3>
         ${siteText_(
           `
-            <ul>
-              <li>Browse pro player <b>LIVE</b>, <b>ARCHIVE</b>, and <b>CLIP &amp; YouTube</b></li>
-              <li>Use <b>PLAYERS</b> for teams, links, birthdays, favorites, and mute</li>
-              <li>Data comes from public sources (see FAQ for details)</li>
-            </ul>
+            <p>
+              An unofficial fan site for checking which Overwatch pro players are
+              live right now — Twitch, CHZZK, SOOP, Bilibili, and more in one place.
+              You can also browse clips &amp; YouTube and player link collections.
+            </p>
           `,
           `
-            <ul>
-              <li>プロ選手の <b>LIVE</b> / <b>ARCHIVE</b> / <b>CLIP &amp; YouTube</b> を一覧</li>
-              <li><b>PLAYERS</b> でチーム・リンク・誕生日・お気に入り・ミュート</li>
-              <li>データは公開情報ベース（詳細は FAQ）</li>
-            </ul>
+            <p>
+              Overwatch のプロプレイヤーで「今」誰が配信しているかを、
+              Twitch / CHZZK / SOOP / Bilibili などからまとめてチェックできる
+              非公式ファンサイトです。CLIP &amp; YouTube・プレイヤーのリンク集なども
+              一覧で確認できます。
+            </p>
+          `
+        )}
+      </div>
+
+      <div class="card faq-card">
+        <h3>
+          ⚙ Settings<br>
+          設定
+        </h3>
+        ${siteText_(
+          `
+            <p>
+              In ⚙ Settings, you can change how the site looks — themes, languages,
+              and more — and find useful URLs and tools.
+            </p>
+            <p>
+              <b>Site Text</b> switches the site’s explanatory text between English
+              and Japanese. If you prefer another language, choose EN or JP first,
+              then use your browser’s translate feature. The creator is Japanese,
+              so when wording differs, the Japanese text is the intended meaning.
+            </p>
+          `,
+          `
+            <p>
+              ⚙ では、テーマや言語など、サイトの表示変更や、
+              便利なURLやツールの紹介を確認できます。
+            </p>
+            <p>
+              <b>Site Text</b> では、サイト内の説明文を英語または日本語に
+              切り替えられます。その他の言語の方は、英語か日本語に切り替えたうえで
+              ブラウザの翻訳機能を使うと読みやすいです。
+              製作者が日本人のため、意味の正は日本語側です。
+            </p>
           `
         )}
       </div>
@@ -146,20 +180,20 @@ function loadHowtoView() {
         ${siteText_(
           `
             <ul>
-              <li><b>LIVE</b> — players currently streaming</li>
-              <li><b>ARCHIVE</b> — recent ended streams</li>
+              <li><b>LIVE</b> — players who are live right now</li>
+              <li><b>ARCHIVE</b> — streams that ended recently</li>
               <li><b>CLIP&amp;YOUTUBE</b> — clips and YouTube videos</li>
-              <li><b>PLAYERS</b> — player database, ★ MY GOATS, ◆ MUTED</li>
+              <li><b>PLAYERS</b> — links for listed players, plus manage ★ MY GOATS and ◆ MUTED</li>
               <li><b>SEARCH</b> — open the search box</li>
               <li><b>HOW TO USE</b> — this page (optional; hide anytime)</li>
             </ul>
           `,
           `
             <ul>
-              <li><b>LIVE</b> — 配信中の選手</li>
-              <li><b>ARCHIVE</b> — 終了した配信など</li>
+              <li><b>LIVE</b> — 現在配信中のプレイヤー</li>
+              <li><b>ARCHIVE</b> — 直近に終了した配信</li>
               <li><b>CLIP&amp;YOUTUBE</b> — クリップと YouTube</li>
-              <li><b>PLAYERS</b> — 選手DB・★ MY GOATS・◆ MUTED</li>
+              <li><b>PLAYERS</b> — 掲載プレイヤーのリンク一覧、★ MY GOATS・◆ MUTED の管理</li>
               <li><b>SEARCH</b> — 検索ボックスを開く</li>
               <li><b>HOW TO USE</b> — このページ（任意・非表示可）</li>
             </ul>
@@ -346,39 +380,6 @@ function loadHowtoView() {
             <p>
               詳細は
               <a href="?view=faq" onclick="openStaticView_('faq'); return false;">FAQ — MUTEDとは？</a>
-            </p>
-          `
-        )}
-      </div>
-
-      <div class="card faq-card">
-        <h3>
-          ⚙ Settings<br>
-          設定
-        </h3>
-        ${siteText_(
-          `
-            <ul>
-              <li><b>Theme</b> / <b>Site Text</b> / <b>Title Language</b> / <b>Stream Title</b></li>
-              <li><b>Live Notifications</b> — experimental; works only while this site is open</li>
-              <li>Translation Tools / Useful Links / How to use / FAQ</li>
-              <li>Refresh Data, Share Site, Share Your GOATS</li>
-            </ul>
-            <p>
-              Notification troubleshooting:
-              <a href="?view=faq" onclick="openStaticView_('faq'); return false;">FAQ</a>
-            </p>
-          `,
-          `
-            <ul>
-              <li><b>Theme</b> / <b>Site Text</b> / <b>Title Language</b> / <b>Stream Title</b></li>
-              <li><b>Live Notifications</b> — 実験的。サイトを開いている間のみ動作</li>
-              <li>Translation Tools / Useful Links / How to use / FAQ</li>
-              <li>Refresh Data、Share Site、Share Your GOATS</li>
-            </ul>
-            <p>
-              通知のトラブルは
-              <a href="?view=faq" onclick="openStaticView_('faq'); return false;">FAQ</a>
             </p>
           `
         )}
