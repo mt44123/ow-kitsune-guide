@@ -57,126 +57,37 @@ function drawBirthdaySunburst_(ctx, width, height) {
   ctx.restore();
 }
 
-function drawBirthdayDecor_(ctx, width, height) {
-  const drawNeonPath = (color, lineWidth, drawFn) => {
-    ctx.save();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = lineWidth;
-    ctx.lineJoin = "round";
-    ctx.lineCap = "round";
-    ctx.shadowColor = color;
-    ctx.shadowBlur = 16;
-    drawFn();
-    ctx.stroke();
-    ctx.restore();
-  };
-
-  // paw (top-left)
-  drawNeonPath("rgba(255,120,220,0.95)", 4, () => {
-    ctx.beginPath();
-    ctx.ellipse(90, 210, 28, 22, -0.3, 0, Math.PI * 2);
-    ctx.moveTo(62, 175);
-    ctx.ellipse(62, 175, 10, 13, -0.4, 0, Math.PI * 2);
-    ctx.moveTo(82, 162);
-    ctx.ellipse(82, 162, 10, 13, -0.1, 0, Math.PI * 2);
-    ctx.moveTo(105, 165);
-    ctx.ellipse(105, 165, 10, 13, 0.2, 0, Math.PI * 2);
-    ctx.moveTo(122, 182);
-    ctx.ellipse(122, 182, 10, 13, 0.5, 0, Math.PI * 2);
-  });
-
-  // heart (mid-left)
-  drawNeonPath("rgba(255,90,160,0.9)", 4, () => {
-    const hx = 70;
-    const hy = height * 0.55;
-    ctx.beginPath();
-    ctx.moveTo(hx, hy + 18);
-    ctx.bezierCurveTo(hx - 28, hy - 8, hx - 22, hy - 36, hx, hy - 18);
-    ctx.bezierCurveTo(hx + 22, hy - 36, hx + 28, hy - 8, hx, hy + 18);
-  });
-
-  // paw (mid-right)
-  drawNeonPath("rgba(120,220,255,0.9)", 4, () => {
-    const px = width - 95;
-    const py = height * 0.48;
-    ctx.beginPath();
-    ctx.ellipse(px, py, 26, 20, 0.25, 0, Math.PI * 2);
-    ctx.moveTo(px - 22, py - 30);
-    ctx.ellipse(px - 22, py - 30, 9, 12, -0.2, 0, Math.PI * 2);
-    ctx.moveTo(px - 4, py - 38);
-    ctx.ellipse(px - 4, py - 38, 9, 12, 0, 0, Math.PI * 2);
-    ctx.moveTo(px + 16, py - 34);
-    ctx.ellipse(px + 16, py - 34, 9, 12, 0.25, 0, Math.PI * 2);
-    ctx.moveTo(px + 28, py - 18);
-    ctx.ellipse(px + 28, py - 18, 9, 12, 0.45, 0, Math.PI * 2);
-  });
-
-  // heart (top-right-ish)
-  drawNeonPath("rgba(255,170,90,0.85)", 3.5, () => {
-    const hx = width - 80;
-    const hy = 250;
-    ctx.beginPath();
-    ctx.moveTo(hx, hy + 14);
-    ctx.bezierCurveTo(hx - 22, hy - 6, hx - 18, hy - 28, hx, hy - 14);
-    ctx.bezierCurveTo(hx + 18, hy - 28, hx + 22, hy - 6, hx, hy + 14);
-  });
-
-  // sparkles
-  const sparkles = [
-    [160, 90, "rgba(255,240,150,0.9)"],
-    [220, 150, "rgba(255,160,220,0.85)"],
-    [width - 180, 100, "rgba(160,240,255,0.9)"],
-    [width - 140, 180, "rgba(255,210,120,0.85)"],
-    [140, height * 0.42, "rgba(255,180,255,0.75)"],
-    [width - 160, height * 0.62, "rgba(140,230,255,0.8)"]
-  ];
-
-  sparkles.forEach(([x, y, color]) => {
-    ctx.save();
-    ctx.strokeStyle = color;
-    ctx.fillStyle = color;
-    ctx.shadowColor = color;
-    ctx.shadowBlur = 12;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(x, y - 8);
-    ctx.lineTo(x, y + 8);
-    ctx.moveTo(x - 8, y);
-    ctx.lineTo(x + 8, y);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(x, y, 2.2, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-  });
+function drawBirthdayEmoji_(ctx, emoji, x, y, size, glowColor) {
+  ctx.save();
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.font = `${size}px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif`;
+  if (glowColor) {
+    ctx.shadowColor = glowColor;
+    ctx.shadowBlur = Math.max(10, size * 0.35);
+  }
+  ctx.fillText(emoji, x, y);
+  ctx.restore();
 }
 
-function drawBirthdayPartyHat_(ctx, x, y, color) {
-  ctx.save();
-  ctx.translate(x, y);
-  ctx.shadowColor = color;
-  ctx.shadowBlur = 18;
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 3.5;
-  ctx.lineJoin = "round";
+function drawBirthdayDecor_(ctx, width, height) {
+  const items = [
+    ["🐾", 95, 200, 56, "rgba(255,140,230,0.95)"],
+    ["💖", 78, height * 0.55, 48, "rgba(255,100,170,0.95)"],
+    ["🐾", width - 95, height * 0.48, 52, "rgba(120,230,255,0.95)"],
+    ["💛", width - 85, 240, 42, "rgba(255,200,100,0.9)"],
+    ["✨", 170, 95, 34, "rgba(255,240,160,0.95)"],
+    ["✨", width - 175, 105, 34, "rgba(180,245,255,0.95)"],
+    ["⭐", 230, 155, 28, "rgba(255,220,120,0.9)"],
+    ["⭐", width - 150, 175, 28, "rgba(255,180,220,0.9)"],
+    ["🎉", 130, height * 0.38, 36, "rgba(255,180,100,0.85)"],
+    ["🎈", width - 150, height * 0.62, 36, "rgba(140,220,255,0.85)"],
+    ["🦊", 100, height * 0.72, 34, "rgba(255,160,100,0.8)"]
+  ];
 
-  ctx.beginPath();
-  ctx.moveTo(0, -46);
-  ctx.lineTo(34, 28);
-  ctx.lineTo(-34, 28);
-  ctx.closePath();
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.arc(0, -50, 7, 0, Math.PI * 2);
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(-30, 28);
-  ctx.quadraticCurveTo(0, 40, 30, 28);
-  ctx.stroke();
-
-  ctx.restore();
+  items.forEach(([emoji, x, y, size, glow]) => {
+    drawBirthdayEmoji_(ctx, emoji, x, y, size, glow);
+  });
 }
 
 function getBirthdayCardNeonColor_(index, regionColor) {
@@ -235,7 +146,7 @@ async function shareBirthdaysImage_() {
   const columnWidth = useTwoColumns ? 520 : 760;
   const columnGap = 36;
 
-  const cardHeight = 156;
+  const cardHeight = 168;
   const cardGap = 28;
   const headerHeight = 300;
   const footerHeight = 180;
@@ -352,7 +263,7 @@ async function shareBirthdaysImage_() {
     const regionLabel = getCanvasRegionLabel_(p.nationality);
     const roleIcon = getCanvasRoleIcon_(p.role);
     const logo = teamLogoCache[getTeamLogoPath_(p.team, false)];
-    const tz = getPlayerTimezoneDisplay_(p, { forceEnglish: true });
+    const tz = getPlayerTimezoneDisplay_(p);
     const ageText = getBirthdayAgeText_(p);
 
     // Card glass base
@@ -397,29 +308,62 @@ async function shareBirthdaysImage_() {
     roundRect_(ctx, x, y, columnWidth, cardHeight, 22);
     ctx.fill();
 
+    const logoArea = 132;
+    const textMaxWidth = columnWidth - logoArea - 48;
+
     if (logo) {
       ctx.save();
-      const maxWidth = 92;
-      const maxHeight = 80;
+      const maxWidth = 118;
+      const maxHeight = 108;
       const scale = Math.min(
         maxWidth / logo.width,
         maxHeight / logo.height
       );
       const w = logo.width * scale;
       const h = logo.height * scale;
-      const logoX = x + columnWidth - 28 - w;
-      const logoY = y + (cardHeight - h) / 2;
+      const logoCenterX = x + columnWidth - 24 - logoArea / 2;
+      const logoCenterY = y + cardHeight / 2;
+      const logoX = logoCenterX - w / 2;
+      const logoY = logoCenterY - h / 2;
 
+      // Bright plate behind logo
       ctx.shadowColor = neon;
-      ctx.shadowBlur = 12;
-      ctx.globalAlpha = 0.98;
+      ctx.shadowBlur = 22;
+      ctx.fillStyle = "rgba(255,255,255,0.92)";
+      roundRect_(
+        ctx,
+        logoCenterX - logoArea / 2,
+        logoCenterY - logoArea / 2,
+        logoArea,
+        logoArea,
+        22
+      );
+      ctx.fill();
+
+      ctx.strokeStyle = neon;
+      ctx.lineWidth = 2.5;
+      roundRect_(
+        ctx,
+        logoCenterX - logoArea / 2,
+        logoCenterY - logoArea / 2,
+        logoArea,
+        logoArea,
+        22
+      );
+      ctx.stroke();
+
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = "rgba(0,0,0,0.25)";
+      ctx.globalAlpha = 1;
       ctx.drawImage(logo, logoX, logoY, w, h);
       ctx.restore();
     } else {
-      drawBirthdayPartyHat_(
+      drawBirthdayEmoji_(
         ctx,
-        x + columnWidth - 70,
-        y + cardHeight / 2 - 4,
+        "🥳",
+        x + columnWidth - 24 - logoArea / 2,
+        y + cardHeight / 2,
+        64,
         neon
       );
     }
@@ -427,14 +371,14 @@ async function shareBirthdaysImage_() {
     const name = p.name || "";
     const displayName = `🎂${name}🎂`;
     const nameFontSize =
-      useTwoColumns && name.length > 12 ? 30 : 38;
+      useTwoColumns && name.length > 12 ? 28 : 36;
 
     ctx.save();
     ctx.shadowColor = neon;
     ctx.shadowBlur = 14;
     ctx.fillStyle = "#FFFFFF";
     ctx.font = `900 ${nameFontSize}px ${fontTitle}`;
-    ctx.fillText(displayName, x + 32, y + 52, columnWidth - 150);
+    ctx.fillText(displayName, x + 32, y + 52, textMaxWidth);
     ctx.restore();
 
     const meta = [
@@ -447,11 +391,11 @@ async function shareBirthdaysImage_() {
 
     ctx.fillStyle = "rgba(255,255,255,0.9)";
     ctx.font = `700 17px ${fontBody}`;
-    ctx.fillText(meta, x + 32, y + 88, columnWidth - 150);
+    ctx.fillText(meta, x + 32, y + 90, textMaxWidth);
 
     ctx.fillStyle = "rgba(255,255,255,0.75)";
     ctx.font = `600 15px ${fontBody}`;
-    ctx.fillText(tz.natLine, x + 32, y + 120, columnWidth - 150);
+    ctx.fillText(tz.natLine, x + 32, y + 124, textMaxWidth);
   });
 
   const footerY = height - 120;
@@ -474,19 +418,14 @@ async function shareBirthdaysImage_() {
   ctx.fillStyle = lineGrad;
   ctx.fillRect(footerLineX, footerY - 34, footerLineWidth, 3);
 
-  // Center heart on divider
-  ctx.save();
-  ctx.fillStyle = "#FF7ADB";
-  ctx.shadowColor = "#FF7ADB";
-  ctx.shadowBlur = 12;
-  const hx = width / 2;
-  const hy = footerY - 34;
-  ctx.beginPath();
-  ctx.moveTo(hx, hy + 8);
-  ctx.bezierCurveTo(hx - 10, hy - 2, hx - 8, hy - 12, hx, hy - 5);
-  ctx.bezierCurveTo(hx + 8, hy - 12, hx + 10, hy - 2, hx, hy + 8);
-  ctx.fill();
-  ctx.restore();
+  drawBirthdayEmoji_(
+    ctx,
+    "💖",
+    width / 2,
+    footerY - 34,
+    28,
+    "rgba(255,120,200,0.95)"
+  );
 
   ctx.textAlign = "center";
   ctx.fillStyle = "rgba(255,255,255,0.88)";

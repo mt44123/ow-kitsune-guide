@@ -138,13 +138,10 @@ function getNationalityTimezoneInfo_(nationality) {
 function getPlayerTimezoneDisplay_(p, options = {}) {
   const natInfo = getNationalityTimezoneInfo_(p.nationality);
   const natName = shortNationality(p.nationality || "") || "-";
-  const natLabel = options.forceEnglish
-    ? "Nationality"
-    : siteNote_("Nationality", "国籍");
 
   const natLine = natInfo
-    ? `${natLabel} ${natName}: ${formatUtcRangeLabel_(natInfo.min, natInfo.max)}`
-    : `${natLabel} ${natName}: -`;
+    ? `Nationality ${natName}: ${formatUtcRangeLabel_(natInfo.min, natInfo.max)}`
+    : `Nationality ${natName}: -`;
 
   return { natLine };
 }
