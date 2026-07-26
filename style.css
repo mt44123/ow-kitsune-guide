@@ -3124,9 +3124,43 @@ background:var(--bg-main);
 }
 
 .birthday-today h3{
-margin:0 0 4px;
+margin:0;
   color:var(--accent);
   text-align:center;
+}
+
+.birthday-today-header{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:8px;
+}
+
+.birthday-share-button{
+  flex:0 0 auto;
+}
+
+.birthday-visitor-tz{
+  text-align:center;
+  color:var(--text-sub);
+  font-size:13px;
+  margin-bottom:12px;
+}
+
+.birthday-tz-line{
+  color:var(--text-muted) !important;
+  font-size:12px !important;
+  white-space:normal !important;
+}
+
+.birthday-tz-note{
+  display:inline-block;
+  margin-top:4px;
+  color:var(--text-muted);
+  font-size:12px;
+  line-height:1.4;
 }
 
 .birthday-today-item{

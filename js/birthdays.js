@@ -1,5 +1,200 @@
 let birthdayCalendarDate = new Date();
 
+function formatUtcOffsetLabel_(hours) {
+  if (!Number.isFinite(hours)) return "";
+
+  const sign = hours >= 0 ? "+" : "-";
+  const abs = Math.abs(hours);
+  const h = Math.floor(abs);
+  const m = Math.round((abs - h) * 60);
+
+  if (m) {
+    return `UTC${sign}${h}:${String(m).padStart(2, "0")}`;
+  }
+
+  return `UTC${sign}${h}`;
+}
+
+function formatUtcRangeLabel_(min, max) {
+  if (!Number.isFinite(min) || !Number.isFinite(max)) return "";
+  if (min === max) return formatUtcOffsetLabel_(min);
+  return `${formatUtcOffsetLabel_(min)}〜${formatUtcOffsetLabel_(max)}`;
+}
+
+function getVisitorTimezoneInfo_() {
+  const offsetMinutes = -new Date().getTimezoneOffset();
+  const offsetHours = offsetMinutes / 60;
+  let iana = "";
+
+  try {
+    iana = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+  } catch (e) {}
+
+  return {
+    offsetHours,
+    utcLabel: formatUtcOffsetLabel_(offsetHours),
+    iana
+  };
+}
+
+function getVisitorTimezoneText_() {
+  const info = getVisitorTimezoneInfo_();
+  if (!info.utcLabel) return "";
+  return info.iana
+    ? `${info.utcLabel} (${info.iana})`
+    : info.utcLabel;
+}
+
+function getTeamRegionTimezoneInfo_(teamRegion) {
+  const r = String(teamRegion || "")
+    .replace(/^●\s*/, "")
+    .replace(/^★\s*/, "")
+    .trim()
+    .toUpperCase();
+
+  if (!r || r.includes("OFFICIAL") || r.includes("OWWC") || r === "HERO") {
+    return null;
+  }
+
+  if (r === "KR" || r.endsWith(" KR") || r.startsWith("KR ")) {
+    return { code: "KR", min: 9, max: 9 };
+  }
+  if (r === "JP" || r.endsWith(" JP") || r.startsWith("JP ")) {
+    return { code: "JP", min: 9, max: 9 };
+  }
+  if (r === "CN" || r.endsWith(" CN") || r.startsWith("CN ")) {
+    return { code: "CN", min: 8, max: 8 };
+  }
+  if (r === "NA" || r.endsWith(" NA") || r.startsWith("NA ")) {
+    return { code: "NA", min: -8, max: -4 };
+  }
+  if (r === "EMEA" || r.includes("EMEA")) {
+    return { code: "EMEA", min: 0, max: 4 };
+  }
+  if (r === "PAC" || r.endsWith(" PAC") || r.startsWith("PAC ")) {
+    return { code: "PAC", min: 8, max: 13 };
+  }
+  if (r === "SA" || r.endsWith(" SA") || r.startsWith("SA ")) {
+    return { code: "SA", min: -5, max: -3 };
+  }
+
+  return null;
+}
+
+function getNationalityTimezoneInfo_(nationality) {
+  const nat = String(nationality || "")
+    .split(",")[0]
+    .trim()
+    .toLowerCase();
+
+  if (!nat) return null;
+
+  const exact = {
+    japan: [9, 9],
+    jp: [9, 9],
+    "south korea": [9, 9],
+    korea: [9, 9],
+    kr: [9, 9],
+    china: [8, 8],
+    cn: [8, 8],
+    taiwan: [8, 8],
+    "hong kong": [8, 8],
+    singapore: [8, 8],
+    "united states": [-10, -4],
+    usa: [-10, -4],
+    us: [-10, -4],
+    en: [-10, -4],
+    canada: [-8, -3.5],
+    mexico: [-8, -5],
+    brazil: [-5, -2],
+    argentina: [-3, -3],
+    chile: [-4, -3],
+    colombia: [-5, -5],
+    peru: [-5, -5],
+    australia: [8, 11],
+    "new zealand": [12, 13],
+    "united kingdom": [0, 1],
+    uk: [0, 1],
+    england: [0, 1],
+    france: [1, 2],
+    germany: [1, 2],
+    sweden: [1, 2],
+    finland: [2, 3],
+    denmark: [1, 2],
+    norway: [1, 2],
+    netherlands: [1, 2],
+    spain: [1, 2],
+    italy: [1, 2],
+    poland: [1, 2],
+    turkey: [3, 3],
+    russia: [2, 12],
+    india: [5.5, 5.5],
+    thailand: [7, 7],
+    vietnam: [7, 7],
+    philippines: [8, 8],
+    indonesia: [7, 9],
+    "saudi arabia": [3, 3],
+    uae: [4, 4],
+    "united arab emirates": [4, 4],
+    egypt: [2, 3],
+    "south africa": [2, 2]
+  };
+
+  if (exact[nat]) {
+    return { min: exact[nat][0], max: exact[nat][1] };
+  }
+
+  const matched = Object.keys(exact).find(key => nat.includes(key));
+  if (matched) {
+    return { min: exact[matched][0], max: exact[matched][1] };
+  }
+
+  const region = getNationalityRegionClass(nationality);
+  const regionRanges = {
+    "region-jp": [9, 9],
+    "region-kr": [9, 9],
+    "region-cn": [8, 8],
+    "region-na": [-10, -4],
+    "region-emea": [0, 4],
+    "region-pac": [8, 13],
+    "region-sa": [-5, -3]
+  };
+
+  const range = regionRanges[region];
+  if (!range) return null;
+
+  return { min: range[0], max: range[1] };
+}
+
+function getPlayerTimezoneDisplay_(p) {
+  const teamInfo = getTeamRegionTimezoneInfo_(p.teamRegion);
+  const natInfo = getNationalityTimezoneInfo_(p.nationality);
+  const natName = shortNationality(p.nationality || "") || "-";
+
+  const teamLine = teamInfo
+    ? `Team ${teamInfo.code}: ${formatUtcRangeLabel_(teamInfo.min, teamInfo.max)}`
+    : "Team: -";
+
+  const natLine = natInfo
+    ? `Nat ${natName}: ${formatUtcRangeLabel_(natInfo.min, natInfo.max)}`
+    : `Nat ${natName}: -`;
+
+  return { teamLine, natLine };
+}
+
+function getTodayBirthdays_(players, today = new Date()) {
+  return (players || []).filter(p => {
+    if (!p.born) return false;
+
+    const [, m, d] = p.born.split("-").map(Number);
+
+    return (
+      m === today.getMonth() + 1 &&
+      d === today.getDate()
+    );
+  });
+}
+
 function loadBirthdaysView() {
   history.replaceState({}, "", "?view=birthdays");
 
@@ -9,9 +204,13 @@ function loadBirthdaysView() {
 
   updated.textContent =
   playerLinksLastUpdated;
-  
+
+  const visitorTz = getVisitorTimezoneText_();
+
   viewNote.innerHTML = `
-  🌐 Dates are shown based on your device's local date.
+  🌐 Dates are shown based on your device's local date.<br>
+  Your TZ: ${escapeHtml(visitorTz || "-")}<br>
+  <span class="birthday-tz-note">Around 18:00 JST, most OW regions share the same date (Hawaii usually still previous day).</span>
   `;
 
   pageTitle.textContent = "BIRTHDAYS";
@@ -74,16 +273,7 @@ function renderBirthdayCalendar(players) {
   const todayM = today.getMonth();
   const todayD = today.getDate();
 
-  const todayBirthdays = players.filter(p => {
-    if (!p.born) return false;
-  
-    const [, m, d] = p.born.split("-").map(Number);
-  
-    return (
-      m === today.getMonth() + 1 &&
-      d === today.getDate()
-    );
-  });
+  const todayBirthdays = getTodayBirthdays_(players, today);
 
   const nextBirthdays =
   getNextBirthdays_(players, today);
@@ -219,18 +409,43 @@ function buildBirthdayTodaySection_(
   nextBirthdays = [],
   favSet = new Set()
 ) {
+  const visitorTz = getVisitorTimezoneText_();
+
   return `
     <div class="birthday-today">
 
-      <h3>
-        🎂 Today's Birthdays
-        (${today.getMonth() + 1}/${today.getDate()})
-        🎂
-      </h3>
+      <div class="birthday-today-header">
+        <h3>
+          🎂 Today's Birthdays
+          (${today.getMonth() + 1}/${today.getDate()})
+          🎂
+        </h3>
+
+        ${
+          todayBirthdays.length
+            ? `
+              <button
+                type="button"
+                class="goats-export-button birthday-share-button"
+                data-birthday-share
+              >
+                ★Share
+              </button>
+            `
+            : ""
+        }
+      </div>
+
+      <div class="birthday-visitor-tz">
+        Your TZ: ${escapeHtml(visitorTz || "-")}
+      </div>
 
       ${
         todayBirthdays.length
-          ? todayBirthdays.map(p => `
+          ? todayBirthdays.map(p => {
+              const tz = getPlayerTimezoneDisplay_(p);
+
+              return `
               <div class="birthday-event ${getNationalityRegionClass(p.nationality)} ${favSet.has(p.name) ? "favorite-birthday" : ""}">
 
                 <strong>
@@ -253,6 +468,14 @@ function buildBirthdayTodaySection_(
                   ${getBirthdayAgeText_(p)}
                 </span>
 
+                <span class="birthday-tz-line">
+                  ${escapeHtml(tz.teamLine)}
+                </span>
+
+                <span class="birthday-tz-line">
+                  ${escapeHtml(tz.natLine)}
+                </span>
+
                 <a
                   class="birthday-calendar-link"
                   href="${googleBirthdayUrl(p, year)}"
@@ -263,7 +486,8 @@ function buildBirthdayTodaySection_(
                 </a>
 
               </div>
-            `).join("")
+            `;
+            }).join("")
           : `
               <div class="birthday-today-empty">
                 <div> No birthdays today.</div>
@@ -577,3 +801,15 @@ function jumpBirthdaySearch_() {
 
   renderBirthdayCalendar(currentData);
 }
+
+document.addEventListener("click", e => {
+  const shareBtn = e.target.closest("[data-birthday-share]");
+  if (!shareBtn) return;
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  if (typeof shareBirthdaysImage_ === "function") {
+    shareBirthdaysImage_();
+  }
+});
