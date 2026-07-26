@@ -169,7 +169,7 @@ function renderTeams(players) {
   });
 }
 
-const OWWC_TEAM_OFFICIAL_LABEL_ = "OWWC Team official";
+const OWWC_TEAM_OFFICIAL_LABEL_ = "OWWC Team Official";
 
 function stripTeamRegionPrefix_(region) {
   return String(region || "")
