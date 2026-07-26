@@ -1,16 +1,22 @@
 function buildBirthdaysShareText_(players) {
-  const names = players.map(p => p.name).join(" / ");
-  const visitorTz = getVisitorTimezoneText_();
+  const visitor = getVisitorTimezoneInfo_();
   const today = new Date();
   const dateLabel = `${today.getMonth() + 1}/${today.getDate()}`;
 
+  const nameLines = players
+    .map(p => `🎂 ${p.name}`)
+    .join("\n");
+
   const lines = [
     `🎂 Today's Birthdays (${dateLabel})`,
-    names
+    nameLines
   ];
 
-  if (visitorTz) {
-    lines.push(`Your TZ: ${visitorTz}`);
+  if (visitor.utcLabel) {
+    const tzValue = visitor.iana
+      ? `${visitor.utcLabel}, ${visitor.iana}`
+      : visitor.utcLabel;
+    lines.push(`My time zone: (${tzValue})`);
   }
 
   lines.push(
@@ -38,7 +44,12 @@ async function shareBirthdaysImage_() {
   await preloadTeamLogos_(players, false);
 
   const shareText = buildBirthdaysShareText_(players);
-  const visitorTz = getVisitorTimezoneText_();
+  const visitor = getVisitorTimezoneInfo_();
+  const visitorTzLabel = visitor.utcLabel
+    ? (visitor.iana
+        ? `${visitor.utcLabel}, ${visitor.iana}`
+        : visitor.utcLabel)
+    : "";
   const bodyStyle = getComputedStyle(document.body);
 
   const accent =
@@ -129,7 +140,9 @@ async function shareBirthdaysImage_() {
   ctx.fillStyle = textMuted;
   ctx.font = `600 20px ${fontBody}`;
   ctx.fillText(
-    `Your TZ: ${visitorTz || "-"}`,
+    visitorTzLabel
+      ? `My time zone: (${visitorTzLabel})`
+      : "My time zone: (-)",
     width / 2,
     248
   );

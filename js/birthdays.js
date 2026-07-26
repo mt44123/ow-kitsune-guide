@@ -185,6 +185,7 @@ function getPlayerTimezoneDisplay_(p) {
 function getTodayBirthdays_(players, today = new Date()) {
   return (players || []).filter(p => {
     if (!p.born) return false;
+    if (isMutedPlayer_(p.name)) return false;
 
     const [, m, d] = p.born.split("-").map(Number);
 
@@ -264,6 +265,8 @@ function loadBirthdaysView() {
 }
 
 function renderBirthdayCalendar(players) {
+  players = (players || []).filter(p => !isMutedPlayer_(p.name));
+
   const year = birthdayCalendarDate.getFullYear();
   const month = birthdayCalendarDate.getMonth();
   const favSet = new Set(getFavorites_());
