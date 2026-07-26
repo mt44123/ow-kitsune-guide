@@ -1,6 +1,5 @@
-function buildBirthdaysShareText_(players) {
-  const today = new Date();
-  const dateLabel = `${today.getMonth() + 1}/${today.getDate()}`;
+function buildBirthdaysShareText_(players, date = new Date()) {
+  const dateLabel = `${date.getMonth() + 1}/${date.getDate()}`;
 
   const nameLines = players
     .map(p => `🎂${p.name}🎂`)
@@ -91,12 +90,33 @@ function getBirthdayCardNeonColor_(nationality) {
   return getCanvasRegionColor_(nationality) || "#FFFFFF";
 }
 
-async function shareBirthdaysImage_() {
-  const today = new Date();
-  const players = getTodayBirthdays_(currentData || [], today);
+async function shareBirthdaysImageForDate_(year, month, day) {
+  const date = new Date(year, month - 1, day);
+
+  if (
+    !Number.isFinite(year) ||
+    !Number.isFinite(month) ||
+    !Number.isFinite(day) ||
+    isNaN(date.getTime()) ||
+    date.getFullYear() !== year ||
+    date.getMonth() !== month - 1 ||
+    date.getDate() !== day
+  ) {
+    alert("Invalid date. Use: shareBirthdaysImageForDate_(2026, 7, 30)");
+    return;
+  }
+
+  return shareBirthdaysImage_(date);
+}
+
+async function shareBirthdaysImage_(date = new Date()) {
+  const targetDate = date instanceof Date ? date : new Date();
+  const players = getTodayBirthdays_(currentData || [], targetDate);
 
   if (!players.length) {
-    alert("No birthdays today.");
+    const label =
+      `${targetDate.getMonth() + 1}/${targetDate.getDate()}`;
+    alert(`No birthdays on ${label}.`);
     return;
   }
 
@@ -107,7 +127,7 @@ async function shareBirthdaysImage_() {
   // Bright birthday image uses a white logo plate, so force light-theme logos.
   await preloadTeamLogos_(players, true, true);
 
-  const shareText = buildBirthdaysShareText_(players);
+  const shareText = buildBirthdaysShareText_(players, targetDate);
 
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -124,6 +144,7 @@ async function shareBirthdaysImage_() {
   const padding = 56;
   const fontTitle = "'Jura', sans-serif";
   const fontBody = "Arial, sans-serif";
+  const fontHeavy = '"Arial Black", "Arial Bold", Arial, sans-serif';
 
   const useTwoColumns = players.length >= 4;
   const rows = Math.ceil(players.length / (useTwoColumns ? 2 : 1));
@@ -168,50 +189,47 @@ async function shareBirthdaysImage_() {
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
   ];
   const dateText =
-    `${months[today.getMonth()]} ${today.getDate()}, ${today.getFullYear()}`;
+    `${months[targetDate.getMonth()]} ${targetDate.getDate()}, ${targetDate.getFullYear()}`;
 
   ctx.textAlign = "center";
 
   const title = "HAPPY BIRTHDAY!";
   const titleY = 118;
-  const titleFont = `900 74px ${fontTitle}`;
 
-  // Fake-bold passes for extra weight (canvas can't go beyond 900 easily)
+  // Soft glow behind (separate pass, no blur on final glyphs)
   ctx.save();
-  ctx.font = titleFont;
+  ctx.font = `900 68px ${fontHeavy}`;
+  ctx.shadowColor = "rgba(255, 240, 150, 0.95)";
+  ctx.shadowBlur = 24;
+  ctx.fillStyle = "rgba(255, 255, 255, 0.35)";
+  ctx.fillText(title, width / 2, titleY);
+  ctx.restore();
+
+  // Crisp outline + solid fill for readability
+  ctx.save();
+  ctx.font = `900 68px ${fontHeavy}`;
   ctx.lineJoin = "round";
   ctx.miterLimit = 2;
-  ctx.shadowColor = "#FFFFFF";
-  ctx.shadowBlur = 40;
-  ctx.strokeStyle = "rgba(90, 20, 140, 0.55)";
-  ctx.lineWidth = 10;
+  ctx.lineWidth = 8;
+  ctx.strokeStyle = "#4A148C";
   ctx.strokeText(title, width / 2, titleY);
 
   const titleGrad = ctx.createLinearGradient(
-    width / 2 - 320,
-    0,
-    width / 2 + 320,
-    0
+    width / 2 - 300,
+    titleY - 40,
+    width / 2 + 300,
+    titleY + 20
   );
   titleGrad.addColorStop(0, "#FFFFFF");
-  titleGrad.addColorStop(0.35, "#FFF7A8");
-  titleGrad.addColorStop(0.7, "#FFE566");
-  titleGrad.addColorStop(1, "#FFFBDE");
+  titleGrad.addColorStop(0.45, "#FFF6C8");
+  titleGrad.addColorStop(1, "#FFE566");
   ctx.fillStyle = titleGrad;
-
-  const boldOffsets = [
-    [-1.5, 0], [1.5, 0], [0, -1.5], [0, 1.5],
-    [-1, -1], [1, -1], [-1, 1], [1, 1],
-    [0, 0]
-  ];
-  boldOffsets.forEach(([dx, dy]) => {
-    ctx.fillText(title, width / 2 + dx, titleY + dy);
-  });
+  ctx.fillText(title, width / 2, titleY);
   ctx.restore();
 
   ctx.save();
-  ctx.shadowColor = "#FFFFFF";
-  ctx.shadowBlur = 18;
+  ctx.shadowColor = "rgba(0,0,0,0.25)";
+  ctx.shadowBlur = 8;
   ctx.fillStyle = "#FFFFFF";
   ctx.font = `900 30px ${fontBody}`;
   ctx.fillText(dateText, width / 2, 178);
