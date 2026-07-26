@@ -205,7 +205,9 @@ function loadToolsView() {
       <div class="card">
         <div class="tool-item">
           <div>
-            <strong>💻📱 Discord (Browser Version)</strong>
+            <a href="https://discord.com/discovery/servers">
+              💻📱 Discord (Browser Version)
+            </a>
           </div>
 
           ${siteText_(
@@ -213,10 +215,16 @@ function loadToolsView() {
               <p>
                 If you use Discord in a web browser, you can translate messages using your browser's built-in translation feature. This can be useful when reading Discord servers run by overseas players.
               </p>
+              <p>
+                The link above goes to Discord Discovery, a shared public URL for everyone. If you are not logged in, you should be redirected to the login page first.
+              </p>
             `,
             `
               <p>
                 Discordをブラウザ版で利用すると、ブラウザの翻訳機能でメッセージを翻訳できます。海外プレイヤーのDiscordサーバーを読む際に便利です。
+              </p>
+              <p>
+                上記リンクは、全員共通のDiscordディスカバリー（サーバー検索）のURLです。未ログインの場合は、先にログイン画面へ移動するはずです。
               </p>
             `
           )}
