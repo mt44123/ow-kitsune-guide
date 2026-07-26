@@ -65,11 +65,11 @@ function drawBirthdayDecor_(ctx, width, height) {
     ["🐾", 95, 200, 56, "rgba(255,140,230,0.95)"],
     ["💖", 78, height * 0.55, 48, "rgba(255,100,170,0.95)"],
     ["🐾", width - 95, height * 0.48, 52, "rgba(120,230,255,0.95)"],
-    ["💛", width - 85, 240, 42, "rgba(255,200,100,0.9)"],
+    ["💜", width - 85, 240, 44, "rgba(200,140,255,0.95)"],
     ["✨", 170, 95, 34, "rgba(255,240,160,0.95)"],
     ["✨", width - 175, 105, 34, "rgba(180,245,255,0.95)"],
     ["⭐", 230, 155, 28, "rgba(255,220,120,0.9)"],
-    ["⭐", width - 150, 175, 28, "rgba(255,180,220,0.9)"],
+    ["💙", width - 150, 175, 30, "rgba(120,200,255,0.95)"],
     ["🎉", 130, height * 0.38, 36, "rgba(255,180,100,0.85)"],
     ["🎈", width - 150, height * 0.62, 36, "rgba(140,220,255,0.85)"],
     ["🦊", 100, height * 0.72, 34, "rgba(255,160,100,0.8)"]
@@ -172,15 +172,25 @@ async function shareBirthdaysImage_() {
 
   ctx.textAlign = "center";
 
-  // Title
+  const title = "HAPPY BIRTHDAY!";
+  const titleY = 118;
+  const titleFont = `900 74px ${fontTitle}`;
+
+  // Fake-bold passes for extra weight (canvas can't go beyond 900 easily)
   ctx.save();
-  ctx.font = `900 72px ${fontTitle}`;
+  ctx.font = titleFont;
+  ctx.lineJoin = "round";
+  ctx.miterLimit = 2;
   ctx.shadowColor = "#FFFFFF";
-  ctx.shadowBlur = 36;
+  ctx.shadowBlur = 40;
+  ctx.strokeStyle = "rgba(90, 20, 140, 0.55)";
+  ctx.lineWidth = 10;
+  ctx.strokeText(title, width / 2, titleY);
+
   const titleGrad = ctx.createLinearGradient(
-    width / 2 - 300,
+    width / 2 - 320,
     0,
-    width / 2 + 300,
+    width / 2 + 320,
     0
   );
   titleGrad.addColorStop(0, "#FFFFFF");
@@ -188,15 +198,15 @@ async function shareBirthdaysImage_() {
   titleGrad.addColorStop(0.7, "#FFE566");
   titleGrad.addColorStop(1, "#FFFBDE");
   ctx.fillStyle = titleGrad;
-  ctx.fillText("HAPPY BIRTHDAY!", width / 2, 118);
-  ctx.restore();
 
-  // Extra punch outline for readability on bright bg
-  ctx.save();
-  ctx.font = `900 72px ${fontTitle}`;
-  ctx.lineWidth = 3;
-  ctx.strokeStyle = "rgba(120, 40, 160, 0.45)";
-  ctx.strokeText("HAPPY BIRTHDAY!", width / 2, 118);
+  const boldOffsets = [
+    [-1.5, 0], [1.5, 0], [0, -1.5], [0, 1.5],
+    [-1, -1], [1, -1], [-1, 1], [1, 1],
+    [0, 0]
+  ];
+  boldOffsets.forEach(([dx, dy]) => {
+    ctx.fillText(title, width / 2 + dx, titleY + dy);
+  });
   ctx.restore();
 
   ctx.save();
@@ -204,11 +214,7 @@ async function shareBirthdaysImage_() {
   ctx.shadowBlur = 18;
   ctx.fillStyle = "#FFFFFF";
   ctx.font = `900 30px ${fontBody}`;
-  ctx.fillText(
-    `${dateText}  ·  ${players.length} PLAYER${players.length === 1 ? "" : "S"}`,
-    width / 2,
-    178
-  );
+  ctx.fillText(dateText, width / 2, 178);
   ctx.restore();
 
   const listTop = headerHeight;
