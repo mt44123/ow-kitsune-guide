@@ -2495,6 +2495,7 @@ function getTeamRegionClass(region, team) {
       return "team-official-account";
 
     case "OFFICIAL OWCS":
+    case "OWWC TEAM OFFICIAL":
       return "team-official";
 
     case "KR":
@@ -2924,6 +2925,16 @@ function openTeamFromUrl_() {
     return;
   }
 
+  if (slug === teamToSlug_(OWWC_TEAM_OFFICIAL_LABEL_)) {
+    renderTeamPlayers(
+      OWWC_TEAM_OFFICIAL_LABEL_,
+      currentData,
+      OWWC_TEAM_OFFICIAL_LABEL_,
+      false
+    );
+    return;
+  }
+
   const team = buildTeams_(currentData).find(t =>
     teamToSlug_(t.name) === slug
   );
@@ -2986,6 +2997,10 @@ function hasPlayerProfile_(player) {
   const region = String(player.teamRegion || "")
     .replace(/^●\s*/, "")
     .trim();
+
+  if (region.toLowerCase() === "owwc team official") {
+    return false;
+  }
 
   return ![
     "Team Official",
