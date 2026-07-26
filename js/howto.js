@@ -1,0 +1,430 @@
+const HIDE_HOWTO_NAV_KEY = "hideHowtoNav";
+
+function isHowtoNavHidden_() {
+  return localStorage.getItem(HIDE_HOWTO_NAV_KEY) === "1";
+}
+
+function applyHowtoNavVisibility_() {
+  const row = document.getElementById("howtoNavRow");
+  if (!row) return;
+
+  row.hidden = isHowtoNavHidden_();
+}
+
+function setHowtoNavHidden_(hidden) {
+  if (hidden) {
+    localStorage.setItem(HIDE_HOWTO_NAV_KEY, "1");
+  } else {
+    localStorage.removeItem(HIDE_HOWTO_NAV_KEY);
+  }
+
+  applyHowtoNavVisibility_();
+}
+
+function loadHowtoView() {
+  currentView = "howto";
+  history.replaceState({}, "", "?view=howto");
+
+  resetSeo_();
+
+  requestId++;
+
+  updateNavState(currentView);
+  stopFakeProgress();
+
+  document.body.classList.remove(
+    "youtube-view",
+    "clip-view",
+    "mediagoats-view",
+    "archive-view",
+    "player-detail-view"
+  );
+
+  pageTitle.textContent = "HOW TO USE";
+  setRandomVoiceLine();
+
+  updated.textContent = "";
+  viewNote.textContent = "";
+
+  app.className = "tools-mode faq-mode";
+
+  const hidden = isHowtoNavHidden_();
+
+  const hideBanner = hidden
+    ? `
+      <div class="card faq-card howto-hide-card">
+        <h3>
+          📌 Nav button is hidden<br>
+          ナビボタンは非表示です
+        </h3>
+        ${siteText_(
+          `
+            <p>
+              The HOW TO USE button is hidden from the top nav.
+              You can still open this page anytime from ⚙ Settings.
+            </p>
+          `,
+          `
+            <p>
+              上部ナビの HOW TO USE ボタンは非表示です。
+              このページはいつでも ⚙ Settings から開けます。
+            </p>
+          `
+        )}
+        <button
+          type="button"
+          class="howto-action-button"
+          id="showHowtoNavButton"
+        >
+          Show HOW TO USE button
+        </button>
+      </div>
+    `
+    : `
+      <div class="card faq-card howto-hide-card">
+        <h3>
+          📌 This button is optional<br>
+          このボタンは任意です
+        </h3>
+        ${siteText_(
+          `
+            <p>
+              Hide the HOW TO USE nav button anytime if it gets in the way.
+              After hiding, you can still open this page from ⚙ Settings → How to use.
+            </p>
+          `,
+          `
+            <p>
+              邪魔なら HOW TO USE ナビボタンを非表示にできます。
+              消したあとも ⚙ Settings → How to use から読めます。
+            </p>
+          `
+        )}
+        <button
+          type="button"
+          class="howto-action-button"
+          id="hideHowtoNavButton"
+        >
+          Hide this button
+        </button>
+      </div>
+    `;
+
+  app.innerHTML = `
+    <div class="tools-page">
+
+      ${hideBanner}
+
+      <div class="card faq-card">
+        <h3>
+          🦊 What you can do here<br>
+          このサイトでできること
+        </h3>
+        ${siteText_(
+          `
+            <ul>
+              <li>Browse pro player <b>LIVE</b>, <b>ARCHIVE</b>, and <b>CLIP &amp; YouTube</b></li>
+              <li>Use <b>PLAYERS</b> for teams, links, birthdays, favorites, and mute</li>
+              <li>Data comes from public sources (see FAQ for details)</li>
+            </ul>
+          `,
+          `
+            <ul>
+              <li>プロ選手の <b>LIVE</b> / <b>ARCHIVE</b> / <b>CLIP &amp; YouTube</b> を一覧</li>
+              <li><b>PLAYERS</b> でチーム・リンク・誕生日・お気に入り・ミュート</li>
+              <li>データは公開情報ベース（詳細は FAQ）</li>
+            </ul>
+          `
+        )}
+      </div>
+
+      <div class="card faq-card">
+        <h3>
+          🧭 Top navigation<br>
+          上のナビ
+        </h3>
+        ${siteText_(
+          `
+            <ul>
+              <li><b>LIVE</b> — players currently streaming</li>
+              <li><b>ARCHIVE</b> — recent ended streams</li>
+              <li><b>CLIP&amp;YOUTUBE</b> — clips and YouTube videos</li>
+              <li><b>PLAYERS</b> — player database, ★ MY GOATS, ◆ MUTED</li>
+              <li><b>SEARCH</b> — open the search box</li>
+              <li><b>HOW TO USE</b> — this page (optional; hide anytime)</li>
+            </ul>
+          `,
+          `
+            <ul>
+              <li><b>LIVE</b> — 配信中の選手</li>
+              <li><b>ARCHIVE</b> — 終了した配信など</li>
+              <li><b>CLIP&amp;YOUTUBE</b> — クリップと YouTube</li>
+              <li><b>PLAYERS</b> — 選手DB・★ MY GOATS・◆ MUTED</li>
+              <li><b>SEARCH</b> — 検索ボックスを開く</li>
+              <li><b>HOW TO USE</b> — このページ（任意・非表示可）</li>
+            </ul>
+          `
+        )}
+      </div>
+
+      <div class="card faq-card">
+        <h3>
+          ▶ Filters<br>
+          フィルター
+        </h3>
+        ${siteText_(
+          `
+            <ul>
+              <li>Tap <b>▶ Filters</b> to show or hide NEW / ★ / HOT / region / role filters</li>
+              <li>On mobile, swipe the list left or right to change filters</li>
+              <li>Role filters (TANK / DPS / SUP) are saved on your device</li>
+            </ul>
+          `,
+          `
+            <ul>
+              <li><b>▶ Filters</b> で NEW / ★ / HOT / 地域 / ロールなどを開閉</li>
+              <li>スマホでは一覧を左右スワイプしてもフィルター切替可</li>
+              <li>ロール（TANK / DPS / SUP）は端末に保存されます</li>
+            </ul>
+          `
+        )}
+      </div>
+
+      <div class="card faq-card">
+        <h3>
+          🔍 Search<br>
+          検索
+        </h3>
+        ${siteText_(
+          `
+            <ul>
+              <li>Open <b>SEARCH</b>, then filter by player, team, nationality, title, and more</li>
+              <li>Use spaces for multiple words (AND)</li>
+              <li>Prefix a word with <b>-</b> to exclude it (example: <code>owcs -faceit</code>)</li>
+            </ul>
+          `,
+          `
+            <ul>
+              <li><b>SEARCH</b> で選手名・チーム・国籍・タイトルなどで絞り込み</li>
+              <li>スペース区切りで複数語（AND）</li>
+              <li><b>-</b> を付けた語は除外（例: <code>owcs -faceit</code>）</li>
+            </ul>
+          `
+        )}
+      </div>
+
+      <div class="card faq-card">
+        <h3>
+          🔴 LIVE / ARCHIVE
+        </h3>
+        ${siteText_(
+          `
+            <ul>
+              <li><b>NEW</b> — newest first</li>
+              <li><b>★</b> — MY GOATS streams only</li>
+              <li><b>HOT</b> — sorted by viewers</li>
+              <li><b>KR / EN / CN / JP / INTL / OWCS / FACEIT</b> — region or circuit filters</li>
+              <li>Tap a card to open the stream. Use the card menu for ★ / Mute and more</li>
+            </ul>
+          `,
+          `
+            <ul>
+              <li><b>NEW</b> — 新しい順</li>
+              <li><b>★</b> — MY GOATS の配信だけ</li>
+              <li><b>HOT</b> — 視聴者順</li>
+              <li><b>KR / EN / CN / JP / INTL / OWCS / FACEIT</b> — 地域・大会系</li>
+              <li>カードをタップで配信元へ。メニューから ★ / Mute など</li>
+            </ul>
+          `
+        )}
+      </div>
+
+      <div class="card faq-card">
+        <h3>
+          🎬 CLIP &amp; YouTube
+        </h3>
+        ${siteText_(
+          `
+            <ul>
+              <li>Switch tabs by platform (YouTube / Twitch / CHZZK / SOOP)</li>
+              <li><b>★</b> shows media from your favorite players</li>
+              <li>Use NEW / HOT / region / BEST tabs to change the sort</li>
+            </ul>
+          `,
+          `
+            <ul>
+              <li>プラットフォーム別タブ（YouTube / Twitch / CHZZK / SOOP）</li>
+              <li><b>★</b> タブでお気に入り選手のメディア</li>
+              <li>NEW / HOT / 地域 / BEST などで切替</li>
+            </ul>
+          `
+        )}
+      </div>
+
+      <div class="card faq-card">
+        <h3>
+          ⭐ PLAYERS
+        </h3>
+        ${siteText_(
+          `
+            <ul>
+              <li><b>TEAMS</b> — browse by team</li>
+              <li><b>ALL</b> — all player links</li>
+              <li><b>🎂HBD</b> — birthdays</li>
+              <li><b>★</b> — MY GOATS list</li>
+              <li><b>◆</b> — MUTED list</li>
+              <li>Open a player for stream and social links</li>
+            </ul>
+          `,
+          `
+            <ul>
+              <li><b>TEAMS</b> — チームから選手へ</li>
+              <li><b>ALL</b> — 全選手リンク</li>
+              <li><b>🎂HBD</b> — 誕生日</li>
+              <li><b>★</b> — MY GOATS 一覧</li>
+              <li><b>◆</b> — MUTED 一覧</li>
+              <li>選手を開くと配信・SNSなどのリンク集</li>
+            </ul>
+          `
+        )}
+      </div>
+
+      <div class="card faq-card">
+        <h3>
+          ★ MY GOATS
+        </h3>
+        ${siteText_(
+          `
+            <ul>
+              <li>Tap ☆ / ★ to save favorites (stored in this browser only)</li>
+              <li>Used by LIVE / media ★ tabs and Live Notifications → MY GOATS</li>
+              <li><b>★Backup / ★Import</b> move your list to another device</li>
+              <li><b>★Share</b> creates a share image</li>
+            </ul>
+            <p>
+              More details:
+              <a href="?view=faq" onclick="openStaticView_('faq'); return false;">FAQ — What is MY GOATS?</a>
+            </p>
+          `,
+          `
+            <ul>
+              <li>☆ / ★ でお気に入り（このブラウザ内のみ）</li>
+              <li>LIVE・メディアの ★ タブ、通知の MY GOATS でも使用</li>
+              <li><b>★Backup / ★Import</b> で別端末へ</li>
+              <li><b>★Share</b> で画像共有</li>
+            </ul>
+            <p>
+              詳細は
+              <a href="?view=faq" onclick="openStaticView_('faq'); return false;">FAQ — MY GOATSとは？</a>
+            </p>
+          `
+        )}
+      </div>
+
+      <div class="card faq-card">
+        <h3>
+          ◆ MUTED
+        </h3>
+        ${siteText_(
+          `
+            <ul>
+              <li>Hide players you do not want to see from LIVE / YouTube / Clips</li>
+              <li>Mute from a card menu, or manage the list in PLAYERS → ◆</li>
+              <li><b>◆Backup / ◆Import</b> available</li>
+            </ul>
+            <p>
+              More details:
+              <a href="?view=faq" onclick="openStaticView_('faq'); return false;">FAQ — What is MUTED?</a>
+            </p>
+          `,
+          `
+            <ul>
+              <li>見たくない選手を LIVE / YouTube / Clips から隠す</li>
+              <li>カードメニュー、または PLAYERS → ◆ で管理</li>
+              <li><b>◆Backup / ◆Import</b> あり</li>
+            </ul>
+            <p>
+              詳細は
+              <a href="?view=faq" onclick="openStaticView_('faq'); return false;">FAQ — MUTEDとは？</a>
+            </p>
+          `
+        )}
+      </div>
+
+      <div class="card faq-card">
+        <h3>
+          ⚙ Settings<br>
+          設定
+        </h3>
+        ${siteText_(
+          `
+            <ul>
+              <li><b>Theme</b> / <b>Site Text</b> / <b>Title Language</b> / <b>Stream Title</b></li>
+              <li><b>Live Notifications</b> — experimental; works only while this site is open</li>
+              <li>Translation Tools / Useful Links / How to use / FAQ</li>
+              <li>Refresh Data, Share Site, Share Your GOATS</li>
+            </ul>
+            <p>
+              Notification troubleshooting:
+              <a href="?view=faq" onclick="openStaticView_('faq'); return false;">FAQ</a>
+            </p>
+          `,
+          `
+            <ul>
+              <li><b>Theme</b> / <b>Site Text</b> / <b>Title Language</b> / <b>Stream Title</b></li>
+              <li><b>Live Notifications</b> — 実験的。サイトを開いている間のみ動作</li>
+              <li>Translation Tools / Useful Links / How to use / FAQ</li>
+              <li>Refresh Data、Share Site、Share Your GOATS</li>
+            </ul>
+            <p>
+              通知のトラブルは
+              <a href="?view=faq" onclick="openStaticView_('faq'); return false;">FAQ</a>
+            </p>
+          `
+        )}
+      </div>
+
+      <div class="card faq-card">
+        <h3>
+          💬 Need more help?<br>
+          困ったとき
+        </h3>
+        ${siteText_(
+          `
+            <ul>
+              <li>Missing players, notifications, display issues →
+                <a href="?view=faq" onclick="openStaticView_('faq'); return false;">FAQ</a>
+              </li>
+              <li>Requests / bugs → Contact form in the footer</li>
+            </ul>
+          `,
+          `
+            <ul>
+              <li>選手がいない・通知が出ない・表示がおかしい →
+                <a href="?view=faq" onclick="openStaticView_('faq'); return false;">FAQ</a>
+              </li>
+              <li>要望・不具合 → フッターの Contact フォーム</li>
+            </ul>
+          `
+        )}
+      </div>
+
+    </div>
+  `;
+
+  document
+    .getElementById("hideHowtoNavButton")
+    ?.addEventListener("click", () => {
+      setHowtoNavHidden_(true);
+      loadHowtoView();
+    });
+
+  document
+    .getElementById("showHowtoNavButton")
+    ?.addEventListener("click", () => {
+      setHowtoNavHidden_(false);
+      loadHowtoView();
+    });
+}
+
+applyHowtoNavVisibility_();

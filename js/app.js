@@ -485,8 +485,14 @@ const toolsButton =
 const usefulLinksButton =
   document.getElementById("usefulLinksButton");
 
+const howtoButton =
+  document.getElementById("howtoButton");
+
 const faqButton =
   document.getElementById("faqButton");
+
+const howtoNavButton =
+  document.getElementById("howtoNavButton");
 
 const settingsButton =  document.getElementById("settingsButton");
 const settingsMenu =  document.getElementById("settingsMenu");
@@ -719,6 +725,11 @@ function updateSettingsMenuText_() {
   setSettingsRowTitle_(
     usefulLinksButton,
     settingsText_("Useful Links", "関連リンク")
+  );
+
+  setSettingsRowTitle_(
+    howtoButton,
+    settingsText_("How to use", "使い方")
   );
 
   setSettingsRowTitle_(
@@ -1109,9 +1120,19 @@ usefulLinksButton?.addEventListener(
   () => openStaticView_("usefullinks")
 );
 
+howtoButton?.addEventListener(
+  "click",
+  () => openStaticView_("howto")
+);
+
 faqButton?.addEventListener(
   "click",
   () => openStaticView_("faq")
+);
+
+howtoNavButton?.addEventListener(
+  "click",
+  () => openStaticView_("howto")
 );
 
 function getViewFromLocation_() {
@@ -1441,6 +1462,7 @@ const STATIC_VIEW_LOADERS = {
   privacy: () => loadPrivacyView(),
   usefullinks: () => loadUsefulLinksView(),
   faq: () => loadFaqView(),
+  howto: () => loadHowtoView(),
   toolstips: () => loadToolsView(),
   updatelog: () => loadUpdateLogView()
 };
@@ -1556,6 +1578,8 @@ function updateNavState(view) {
     .querySelectorAll('.main-nav button:not(#searchToggle)')
     .forEach(b => b.classList.remove("active"));
 
+  howtoNavButton?.classList.remove("active");
+
   document
     .querySelectorAll(".sub-nav button")
     .forEach(b => b.classList.remove("active"));
@@ -1569,7 +1593,10 @@ function updateNavState(view) {
   if (playerSubNav) playerSubNav.style.display = "none";
   if (playerRoleSubNav) playerRoleSubNav.style.display = "none";
 
-  if (isLiveView(view)) {
+  if (view === "howto") {
+    howtoNavButton?.classList.add("active");
+
+  } else if (isLiveView(view)) {
     liveButton?.classList.add("active");
     if (liveSubNav) liveSubNav.style.display = "flex";
     if (liveRoleSubNav) liveRoleSubNav.style.display = "flex";

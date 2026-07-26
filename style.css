@@ -17,6 +17,7 @@
    @SECTION: BIRTHDAYS
    @SECTION: TOOLS
    @SECTION: FAQ
+   @SECTION: HOWTO
    @SECTION: UTILITIES
    @SECTION: RESPONSIVE
    @SECTION: MUTE
@@ -924,6 +925,29 @@ display:flex;
 
 .main-nav button{
 flex:0 0 auto;
+}
+
+.main-nav-howto{
+  display:flex;
+  gap:var(--space-md);
+  margin:0 0 8px;
+  overflow-x:auto;
+  flex-wrap:nowrap;
+}
+
+.main-nav-howto[hidden]{
+  display:none;
+}
+
+.nav button.howto-nav-button{
+  width:auto;
+  min-width:120px;
+  padding:var(--space-xs) 14px;
+  flex:0 0 auto;
+}
+
+.howto-nav-button .media-label{
+  white-space:nowrap;
 }
 
 .sub-nav{
@@ -3343,6 +3367,41 @@ color:var(--accent);
 
 body.light-theme .faq-card a{
 color:var(--text-main);
+}
+
+/* =========================================================
+   14b. HOW TO USE
+   ========================================================= */
+/* @SECTION: HOWTO */
+.howto-hide-card{
+  border:1px solid var(--accent);
+}
+
+.howto-action-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:12px;
+  padding:10px 16px;
+  border:none;
+  border-radius:var(--radius-md);
+  background:var(--accent);
+  color:var(--accent-text);
+  font-size:.92rem;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.howto-action-button:hover{
+  filter:brightness(1.05);
+}
+
+.faq-card code{
+  padding:1px 6px;
+  border-radius:var(--radius-sm);
+  background:var(--bg-light);
+  border:1px solid var(--border);
+  font-size:.85em;
 }
 
 /* =========================================================
