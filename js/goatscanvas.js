@@ -327,7 +327,7 @@ document
 
   });
 
-async function preloadTeamLogos_(players, useLightTheme = true) {
+async function preloadTeamLogos_(players, useLightTheme = true, forceLightLogo = false) {
 
   const promises = players.map(p => {
 
@@ -337,7 +337,7 @@ async function preloadTeamLogos_(players, useLightTheme = true) {
       return Promise.resolve();
     }
 
-    const logoPath =  getTeamLogoPath_(team, useLightTheme);
+    const logoPath = getTeamLogoPath_(team, useLightTheme, forceLightLogo);
 
     if (!logoPath || teamLogoCache[logoPath]) {
       return Promise.resolve();

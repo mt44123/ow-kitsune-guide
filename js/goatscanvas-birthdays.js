@@ -114,7 +114,8 @@ async function shareBirthdaysImage_() {
     (a.name || "").localeCompare(b.name || "", "en", { sensitivity: "base" })
   );
 
-  await preloadTeamLogos_(players, false);
+  // Bright birthday image uses a white logo plate, so force light-theme logos.
+  await preloadTeamLogos_(players, true, true);
 
   const shareText = buildBirthdaysShareText_(players);
   const visitor = getVisitorTimezoneInfo_();
@@ -262,7 +263,7 @@ async function shareBirthdaysImage_() {
     const neon = getBirthdayCardNeonColor_(index, regionColor);
     const regionLabel = getCanvasRegionLabel_(p.nationality);
     const roleIcon = getCanvasRoleIcon_(p.role);
-    const logo = teamLogoCache[getTeamLogoPath_(p.team, false)];
+    const logo = teamLogoCache[getTeamLogoPath_(p.team, true, true)];
     const tz = getPlayerTimezoneDisplay_(p);
     const ageText = getBirthdayAgeText_(p);
 
@@ -428,20 +429,16 @@ async function shareBirthdaysImage_() {
   );
 
   ctx.textAlign = "center";
-  ctx.fillStyle = "rgba(255,255,255,0.88)";
-  ctx.font = `600 22px ${fontBody}`;
-  ctx.fillText(`Generated ${dateText}`, width / 2, footerY + 8);
-
   ctx.fillStyle = "rgba(255,255,255,0.9)";
   ctx.font = `700 22px ${fontBody}`;
-  ctx.fillText("Celebrate with the GOATs — link below", width / 2, footerY + 42);
+  ctx.fillText("Celebrate with the GOATs — link below", width / 2, footerY + 18);
 
   ctx.save();
   ctx.shadowColor = "#7CFFF7";
   ctx.shadowBlur = 10;
   ctx.fillStyle = "#B8FFFF";
   ctx.font = `800 22px ${fontBody}`;
-  ctx.fillText("https://owkitsune.com/?view=birthdays", width / 2, footerY + 76);
+  ctx.fillText("https://owkitsune.com/?view=birthdays", width / 2, footerY + 54);
   ctx.restore();
 
   const finishShare = () => {
@@ -483,12 +480,7 @@ async function shareBirthdaysImage_() {
   const qrY = footerY + 18;
 
   const drawQrAndShare = () => {
-    ctx.save();
-    ctx.fillStyle = "rgba(255,255,255,0.92)";
-    roundRect_(ctx, qrX - 6, qrY - 6, qrSize + 12, qrSize + 12, 8);
-    ctx.fill();
     ctx.drawImage(qr, qrX, qrY, qrSize, qrSize);
-    ctx.restore();
     finishShare();
   };
 

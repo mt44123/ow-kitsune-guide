@@ -2871,7 +2871,7 @@ function renderSiteGuided_(stats) {
   el.textContent = `Kitsune has guided ${total} fans.`;
 }
 
-function getTeamLogoPath_(team, useLightTheme = true) {
+function getTeamLogoPath_(team, useLightTheme = true, forceLightLogo = false) {
 
   const name = String(team || "").trim();
 
@@ -2903,16 +2903,19 @@ function getTeamLogoPath_(team, useLightTheme = true) {
   ];
 
   const isLightTheme =
-    useLightTheme &&
+    forceLightLogo ||
     (
-      document.body.classList.contains("light-theme") ||
-      document.body.classList.contains("theme-whitered") ||
-      document.body.classList.contains("theme-whiteblue") ||
-      document.body.classList.contains("theme-whitepink") ||
-      document.body.classList.contains("theme-cyanpink") ||
-      document.body.classList.contains("theme-yellowblue") ||
-      document.body.classList.contains("theme-dreampurple") ||
-      document.body.classList.contains("theme-whitegray")
+      useLightTheme &&
+      (
+        document.body.classList.contains("light-theme") ||
+        document.body.classList.contains("theme-whitered") ||
+        document.body.classList.contains("theme-whiteblue") ||
+        document.body.classList.contains("theme-whitepink") ||
+        document.body.classList.contains("theme-cyanpink") ||
+        document.body.classList.contains("theme-yellowblue") ||
+        document.body.classList.contains("theme-dreampurple") ||
+        document.body.classList.contains("theme-whitegray")
+      )
     );
 
   if (
