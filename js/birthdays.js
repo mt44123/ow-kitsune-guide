@@ -135,10 +135,12 @@ function getNationalityTimezoneInfo_(nationality) {
   return { min: range[0], max: range[1] };
 }
 
-function getPlayerTimezoneDisplay_(p) {
+function getPlayerTimezoneDisplay_(p, options = {}) {
   const natInfo = getNationalityTimezoneInfo_(p.nationality);
   const natName = shortNationality(p.nationality || "") || "-";
-  const natLabel = siteNote_("Nationality", "国籍");
+  const natLabel = options.forceEnglish
+    ? "Nationality"
+    : siteNote_("Nationality", "国籍");
 
   const natLine = natInfo
     ? `${natLabel} ${natName}: ${formatUtcRangeLabel_(natInfo.min, natInfo.max)}`
@@ -175,14 +177,12 @@ function loadBirthdaysView() {
 
   viewNote.innerHTML = siteNote_(
     `
-      🌐 Dates are shown based on your device's local date.<br>
-      Your TZ: ${escapeHtml(visitorTz || "-")}<br>
-      <span class="birthday-tz-note">Around 18:00 JST, most OW regions share the same date (Hawaii usually still previous day).</span>
+      🌐 Dates are shown based on your device's local date. Your TZ: ${escapeHtml(visitorTz || "-")}<br>
+      <span class="birthday-tz-note">Around 18:00 JST, most OW regions share the same date (except Hawaii).</span>
     `,
     `
-      🌐 日付はお使いの端末のローカル日付で表示されます。<br>
-      タイムゾーン: ${escapeHtml(visitorTz || "-")}<br>
-      <span class="birthday-tz-note">JST 18:00頃は、OW主要地域のほとんどで同じ日付になります（ハワイは前日のことが多い）。</span>
+      🌐 日付はお使いの端末のローカル日付で表示されます。タイムゾーン: ${escapeHtml(visitorTz || "-")}<br>
+      <span class="birthday-tz-note">JST 18:00頃は、OW主要地域のほとんどで同じ日付になります（ハワイ等を除く）</span>
     `
   );
 

@@ -1,14 +1,12 @@
 function buildBirthdaysShareText_(players) {
   const visitor = getVisitorTimezoneInfo_();
-  const today = new Date();
-  const dateLabel = `${today.getMonth() + 1}/${today.getDate()}`;
 
   const nameLines = players
     .map(p => `🎂 ${p.name}`)
     .join("\n");
 
   const lines = [
-    `🎂 Today's Birthdays (${dateLabel})`,
+    "Happy Birthday! 🎉 Hope you have an amazing day!",
     nameLines
   ];
 
@@ -16,7 +14,7 @@ function buildBirthdaysShareText_(players) {
     const tzValue = visitor.iana
       ? `${visitor.utcLabel}, ${visitor.iana}`
       : visitor.utcLabel;
-    lines.push(`My time zone: (${tzValue})`);
+    lines.push(`(My time zone: ${tzValue})`);
   }
 
   lines.push(
@@ -141,8 +139,8 @@ async function shareBirthdaysImage_() {
   ctx.font = `600 20px ${fontBody}`;
   ctx.fillText(
     visitorTzLabel
-      ? `My time zone: (${visitorTzLabel})`
-      : "My time zone: (-)",
+      ? `(My time zone: ${visitorTzLabel})`
+      : "(My time zone: -)",
     width / 2,
     248
   );
@@ -174,7 +172,7 @@ async function shareBirthdaysImage_() {
     const regionLabel = getCanvasRegionLabel_(p.nationality);
     const roleIcon = getCanvasRoleIcon_(p.role);
     const logo = teamLogoCache[getTeamLogoPath_(p.team, false)];
-    const tz = getPlayerTimezoneDisplay_(p);
+    const tz = getPlayerTimezoneDisplay_(p, { forceEnglish: true });
     const ageText = getBirthdayAgeText_(p);
 
     ctx.save();
