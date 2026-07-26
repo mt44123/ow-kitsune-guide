@@ -361,6 +361,7 @@ function loadFaqView() {
               <li>Muted players are hidden from stream, video and clip views</li>
               <li>You can mute or unmute players from the card menu</li>
               <li>Muted players can be managed from PLAYERS → ◆</li>
+              <li>◆Backup / ◆Import can move your list to another device</li>
               <li>Stored locally in your browser only</li>
             </ul>
           `,
@@ -372,6 +373,7 @@ function loadFaqView() {
               <li>ミュートした選手は配信・動画・クリップ一覧に表示されません</li>
               <li>カード右上のメニューからMute / Unmuteできます</li>
               <li>PLAYERS → ◆ からミュート一覧を管理できます</li>
+              <li>◆Backup / ◆Import で別のデバイスへ引き継げます</li>
               <li>ブラウザ内にのみ保存されます</li>
             </ul>
           `

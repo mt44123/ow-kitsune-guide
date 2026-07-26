@@ -3875,6 +3875,11 @@ color:var(--text-sub);
   color:var(--accent);
 }
 
+.muted-mode .goats-export-box{
+  max-width:900px;
+  margin:0 auto 12px;
+}
+
 @media (min-width:901px){
 
   .muted-mode .player-table-wrap{

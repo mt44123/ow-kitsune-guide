@@ -97,6 +97,116 @@ function toggleMutedPlayer_(name) {
   );
 }
 
+function buildMutedBackupCode_() {
+  const muted = getMutedPlayers_();
+
+  const encoded = btoa(
+    unescape(
+      encodeURIComponent(JSON.stringify(muted))
+    )
+  );
+
+  return `OWKG-MUTED:${encoded}`;
+}
+
+function copyMutedBackupCode_() {
+  const code = buildMutedBackupCode_();
+
+  navigator.clipboard.writeText(code)
+    .then(() => {
+      alert(
+        "Backup code copied!\n" +
+        "Paste it with ◆Import on another device.\n\n" +
+        "バックアップコードをコピーしました。\n" +
+        "別のデバイスで OW KITSUNE GUIDE を開き、◆Import から貼り付けてください。"
+      );
+    })
+    .catch(() => {
+      alert("Copy failed.");
+    });
+}
+
+function importMutedBackupCode_() {
+  const code = prompt(
+    "Paste your OW KITSUNE GUIDE MUTED backup code:"
+  );
+
+  if (!code) return;
+
+  try {
+    const cleaned = code.trim();
+
+    if (!cleaned.startsWith("OWKG-MUTED:")) {
+      alert("Invalid backup code.");
+      return;
+    }
+
+    const encoded = cleaned.replace("OWKG-MUTED:", "");
+
+    const muted = JSON.parse(
+      decodeURIComponent(
+        escape(atob(encoded))
+      )
+    );
+
+    if (!Array.isArray(muted)) {
+      alert("Invalid backup code.");
+      return;
+    }
+
+    const imported = muted.filter(name =>
+      typeof name === "string"
+    );
+
+    const mode = prompt(
+      "Import Backup\n\n" +
+      "1 = Replace current MUTED\n" +
+      "2 = Add to current list\n" +
+      "3 = Cancel\n\n" +
+      "バックアップをインポートします。\n\n" +
+      "1 = 今のMUTEDを置き換える\n" +
+      "2 = 今のリストに追加する\n" +
+      "3 = キャンセル"
+    );
+
+    if (mode === null || mode.trim() === "3") {
+      return;
+    }
+
+    const choice = mode.trim();
+
+    if (choice !== "1" && choice !== "2") {
+      alert("Import canceled.");
+      return;
+    }
+
+    const nextMuted =
+      choice === "1"
+        ? imported
+        : Array.from(
+            new Set([
+              ...getMutedPlayers_(),
+              ...imported
+            ])
+          );
+
+    localStorage.setItem(
+      MUTED_PLAYERS_KEY,
+      JSON.stringify(nextMuted)
+    );
+
+    alert("MUTED imported!");
+
+    if (currentView === "muted") {
+      renderMutedPlayersView();
+    }
+
+  } catch (error) {
+    console.error(error);
+    alert("Failed to import backup.");
+  }
+}
+
 function muteButton_(name) {
   return `
     <button
@@ -322,6 +432,24 @@ document.addEventListener("click", e => {
 });
 
 document.addEventListener("click", e => {
+  const mutedExport = e.target.closest("[data-muted-export]");
+  if (mutedExport) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const type = mutedExport.dataset.mutedExport;
+
+    if (type === "backup") {
+      copyMutedBackupCode_();
+    }
+
+    if (type === "import") {
+      importMutedBackupCode_();
+    }
+
+    return;
+  }
+
   const button = e.target.closest("[data-unmute-player]");
   if (!button) return;
 
@@ -2033,7 +2161,8 @@ function loadMutedPlayersView() {
 }
 
 function renderMutedPlayersView() {
-  const muted = getMutedPlayers_().filter(name =>
+  const allMuted = getMutedPlayers_();
+  const muted = allMuted.filter(name =>
     matchesSearch_(name, searchBox.value)
   );
 
@@ -2043,14 +2172,45 @@ function renderMutedPlayersView() {
     ◆ Players hidden from LIVE, YouTube and Clips.
   `;
 
+  const exportBox = `
+    <div class="goats-export-box">
+      ${
+        allMuted.length
+          ? `
+            <button class="goats-export-button" data-muted-export="backup">
+              ◆Backup
+            </button>
+          `
+          : ""
+      }
+      <button class="goats-export-button" data-muted-export="import">
+        ◆Import
+      </button>
+    </div>
+  `;
+
   if (!muted.length) {
     app.innerHTML = `
+      ${
+        allMuted.length
+          ? exportBox
+          : `
+            <div class="goats-empty-actions">
+              <button class="goats-export-button" data-muted-export="import">
+                ◆Import
+              </button>
+            </div>
+          `
+      }
+
       <p class="empty">No muted players.</p>
     `;
     return;
   }
 
   app.innerHTML = `
+    ${exportBox}
+
     <div class="player-table-wrap">
       <table class="player-table">
         <thead>
