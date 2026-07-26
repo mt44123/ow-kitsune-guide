@@ -122,19 +122,27 @@ function loadHowtoView() {
         </h3>
         ${siteText_(
           `
-            <p>
-              An unofficial fan site for checking which Overwatch pro players are
-              live right now — Twitch, CHZZK, SOOP, Bilibili, and more in one place.
-              You can also browse clips &amp; YouTube and player link collections.
-            </p>
+            <ul>
+              <li>
+                An unofficial fan site for checking which Overwatch pro players are
+                live right now — Twitch, CHZZK, SOOP, Bilibili, and more in one place
+              </li>
+              <li>
+                You can also browse clips &amp; YouTube and player link collections
+              </li>
+            </ul>
           `,
           `
-            <p>
-              Overwatch のプロプレイヤーで「今」誰が配信しているかを、
-              Twitch / CHZZK / SOOP / Bilibili などからまとめてチェックできる
-              非公式ファンサイトです。CLIP &amp; YouTube・プレイヤーのリンク集なども
-              一覧で確認できます。
-            </p>
+            <ul>
+              <li>
+                Overwatch のプロプレイヤーで「今」誰が配信しているかを、
+                Twitch / CHZZK / SOOP / Bilibili などからまとめてチェックできる
+                非公式ファンサイトです
+              </li>
+              <li>
+                CLIP &amp; YouTube・プレイヤーのリンク集なども一覧で確認できます
+              </li>
+            </ul>
           `
         )}
       </div>
@@ -146,28 +154,32 @@ function loadHowtoView() {
         </h3>
         ${siteText_(
           `
-            <p>
-              In ⚙ Settings, you can change how the site looks — themes, languages,
-              and more — and find useful URLs and tools.
-            </p>
-            <p>
-              <b>Site Text</b> switches the site’s explanatory text between English
-              and Japanese. If you prefer another language, choose EN or JP first,
-              then use your browser’s translate feature. The creator is Japanese,
-              so when wording differs, the Japanese text is the intended meaning.
-            </p>
+            <ul>
+              <li>
+                In ⚙ Settings, you can change how the site looks — themes, languages,
+                and more — and find useful URLs and tools
+              </li>
+              <li>
+                <b>Site Text</b> switches the site’s explanatory text between English
+                and Japanese. If you prefer another language, choose EN or JP first,
+                then use your browser’s translate feature. The creator is Japanese,
+                so when wording differs, the Japanese text is the intended meaning
+              </li>
+            </ul>
           `,
           `
-            <p>
-              ⚙ では、テーマや言語など、サイトの表示変更や、
-              便利なURLやツールの紹介を確認できます。
-            </p>
-            <p>
-              <b>Site Text</b> では、サイト内の説明文を英語または日本語に
-              切り替えられます。その他の言語の方は、英語か日本語に切り替えたうえで
-              ブラウザの翻訳機能を使うと読みやすいです。
-              製作者が日本人のため、意味の正は日本語側です。
-            </p>
+            <ul>
+              <li>
+                ⚙ では、テーマや言語など、サイトの表示変更や、
+                便利なURLやツールの紹介を確認できます
+              </li>
+              <li>
+                <b>Site Text</b> では、サイト内の説明文を英語または日本語に
+                切り替えられます。その他の言語の方は、英語か日本語に切り替えたうえで
+                ブラウザの翻訳機能を使うと読みやすいです。
+                製作者が日本人のため、意味の正は日本語側です
+              </li>
+            </ul>
           `
         )}
       </div>
