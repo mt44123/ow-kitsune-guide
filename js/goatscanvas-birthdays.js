@@ -2,7 +2,7 @@ function buildBirthdaysShareText_(players) {
   const visitor = getVisitorTimezoneInfo_();
 
   const nameLines = players
-    .map(p => `🎂 ${p.name}`)
+    .map(p => `🎂${p.name}🎂`)
     .join("\n");
 
   const lines = [
@@ -81,7 +81,7 @@ async function shareBirthdaysImage_() {
 
   const cardHeight = 148;
   const cardGap = 24;
-  const headerHeight = 320;
+  const headerHeight = 280;
   const footerHeight = 190;
 
   const height =
@@ -105,11 +105,11 @@ async function shareBirthdaysImage_() {
   ctx.textAlign = "center";
 
   ctx.save();
-  ctx.font = `900 58px ${fontTitle}`;
+  ctx.font = `900 56px ${fontTitle}`;
   ctx.shadowColor = hexToRgba_(accent, 0.9);
   ctx.shadowBlur = 18;
   ctx.fillStyle = textMain;
-  ctx.fillText("TODAY'S BIRTHDAYS", width / 2, 118);
+  ctx.fillText("HAPPY BIRTHDAY", width / 2, 112);
   ctx.restore();
 
   const months = [
@@ -123,16 +123,16 @@ async function shareBirthdaysImage_() {
   ctx.shadowColor = "rgba(255,255,255,.35)";
   ctx.shadowBlur = 5;
   ctx.fillStyle = textSub;
-  ctx.font = `800 27px ${fontBody}`;
-  ctx.fillText("OW KITSUNE GUIDE 🦊", width / 2, 164);
+  ctx.font = `800 26px ${fontBody}`;
+  ctx.fillText("OW KITSUNE GUIDE 🦊", width / 2, 158);
   ctx.restore();
 
   ctx.fillStyle = accent;
-  ctx.font = `900 26px ${fontBody}`;
+  ctx.font = `900 24px ${fontBody}`;
   ctx.fillText(
     `${dateText}  ·  ${players.length} PLAYER${players.length === 1 ? "" : "S"}`,
     width / 2,
-    210
+    202
   );
 
   ctx.fillStyle = textMuted;
@@ -142,15 +142,7 @@ async function shareBirthdaysImage_() {
       ? `(My time zone: ${visitorTzLabel})`
       : "(My time zone: -)",
     width / 2,
-    248
-  );
-
-  ctx.fillStyle = "rgba(255,255,255,.45)";
-  ctx.font = `500 16px ${fontBody}`;
-  ctx.fillText(
-    "Around 18:00 JST, most OW regions share this date (Hawaii often previous day)",
-    width / 2,
-    278
+    240
   );
 
   const listTop = headerHeight;
@@ -246,19 +238,19 @@ async function shareBirthdaysImage_() {
     }
 
     const name = p.name || "";
+    const displayName = `🎂${name}🎂`;
     const nameFontSize =
-      useTwoColumns && name.length > 14 ? 30 : 36;
+      useTwoColumns && name.length > 12 ? 28 : 34;
 
     ctx.save();
     ctx.shadowColor = hexToRgba_(regionColor, 0.8);
     ctx.shadowBlur = 8;
     ctx.fillStyle = textMain;
     ctx.font = `900 ${nameFontSize}px ${fontTitle}`;
-    ctx.fillText(name, x + 28, y + 48, columnWidth - 140);
+    ctx.fillText(displayName, x + 28, y + 48, columnWidth - 140);
     ctx.restore();
 
     const meta = [
-      "🎂",
       regionLabel,
       roleIcon,
       p.team && p.team !== "No team" ? p.team : "",
@@ -310,7 +302,7 @@ async function shareBirthdaysImage_() {
         navigator.canShare({ files: [file] })
       ) {
         navigator.share({
-          title: "Today's Birthdays",
+          title: "Happy Birthday",
           text: shareText,
           files: [file]
         }).catch(() => {});
@@ -318,8 +310,8 @@ async function shareBirthdaysImage_() {
       }
 
       showGoatsShareModal_(blob, shareText, {
-        title: "Share Today's Birthdays",
-        shareTitle: "TODAY'S BIRTHDAYS",
+        title: "Share Happy Birthday",
+        shareTitle: "HAPPY BIRTHDAY",
         fileName: "owkg-todays-birthdays.png"
       });
     }, "image/png");
