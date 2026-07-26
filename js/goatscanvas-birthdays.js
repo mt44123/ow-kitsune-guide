@@ -1,29 +1,19 @@
 function buildBirthdaysShareText_(players) {
-  const visitor = getVisitorTimezoneInfo_();
+  const today = new Date();
+  const dateLabel = `${today.getMonth() + 1}/${today.getDate()}`;
 
   const nameLines = players
     .map(p => `🎂${p.name}🎂`)
     .join("\n");
 
-  const lines = [
+  return [
+    dateLabel,
     "Happy Birthday! 🎉 Hope you have an amazing day!",
-    nameLines
-  ];
-
-  if (visitor.utcLabel) {
-    const tzValue = visitor.iana
-      ? `${visitor.utcLabel}, ${visitor.iana}`
-      : visitor.utcLabel;
-    lines.push(`(My time zone: ${tzValue})`);
-  }
-
-  lines.push(
+    nameLines,
     "",
     "https://owkitsune.com/?view=birthdays",
     "#OW #OWCS #Overwatch #HappyBirthday #オーバーウォッチ"
-  );
-
-  return lines.join("\n");
+  ].join("\n");
 }
 
 function drawBirthdaySunburst_(ctx, width, height) {
@@ -90,15 +80,15 @@ function drawBirthdayDecor_(ctx, width, height) {
   });
 }
 
-function getBirthdayCardNeonColor_(index, regionColor) {
-  const palette = [
-    "#5CFFF7",
-    "#FFD56A",
-    "#FF7AD9",
-    "#7CFFB2",
-    "#FF9B6A"
-  ];
-  return palette[index % palette.length] || regionColor || "#5CFFF7";
+function getBirthdayCardNeonColor_(nationality) {
+  const cls = getNationalityRegionClass(nationality);
+
+  // Bright share image: keep JP as white regardless of site theme text color.
+  if (cls === "region-jp") {
+    return "#FFFFFF";
+  }
+
+  return getCanvasRegionColor_(nationality) || "#FFFFFF";
 }
 
 async function shareBirthdaysImage_() {
@@ -118,12 +108,6 @@ async function shareBirthdaysImage_() {
   await preloadTeamLogos_(players, true, true);
 
   const shareText = buildBirthdaysShareText_(players);
-  const visitor = getVisitorTimezoneInfo_();
-  const visitorTzLabel = visitor.utcLabel
-    ? (visitor.iana
-        ? `${visitor.utcLabel}, ${visitor.iana}`
-        : visitor.utcLabel)
-    : "";
 
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -149,8 +133,8 @@ async function shareBirthdaysImage_() {
 
   const cardHeight = 168;
   const cardGap = 28;
-  const headerHeight = 300;
-  const footerHeight = 180;
+  const headerHeight = 240;
+  const footerHeight = 160;
 
   const height =
     headerHeight +
@@ -226,24 +210,6 @@ async function shareBirthdaysImage_() {
   );
   ctx.restore();
 
-  ctx.fillStyle = "rgba(255,255,255,0.88)";
-  ctx.font = `600 20px ${fontBody}`;
-  ctx.fillText(
-    visitorTzLabel
-      ? `(My time zone: ${visitorTzLabel})`
-      : "(My time zone: -)",
-    width / 2,
-    236
-  );
-
-  ctx.fillStyle = "rgba(255,255,255,0.72)";
-  ctx.font = `500 16px ${fontBody}`;
-  ctx.fillText(
-    "Around 18:00 JST, most OW regions share this date (Hawaii often previous day)",
-    width / 2,
-    266
-  );
-
   const listTop = headerHeight;
   const listLeft =
     useTwoColumns
@@ -259,8 +225,8 @@ async function shareBirthdaysImage_() {
     const x = listLeft + column * (columnWidth + columnGap);
     const y = listTop + row * (cardHeight + cardGap);
 
-    const regionColor = getCanvasRegionColor_(p.nationality);
-    const neon = getBirthdayCardNeonColor_(index, regionColor);
+    const neon = getBirthdayCardNeonColor_(p.nationality);
+    const regionColor = neon;
     const regionLabel = getCanvasRegionLabel_(p.nationality);
     const roleIcon = getCanvasRoleIcon_(p.role);
     const logo = teamLogoCache[getTeamLogoPath_(p.team, true, true)];
