@@ -133,8 +133,8 @@ async function shareBirthdaysImage_() {
 
   const cardHeight = 168;
   const cardGap = 28;
-  const headerHeight = 240;
-  const footerHeight = 160;
+  const headerHeight = 220;
+  const footerHeight = 180;
 
   const height =
     headerHeight +
@@ -174,39 +174,40 @@ async function shareBirthdaysImage_() {
 
   // Title
   ctx.save();
-  ctx.font = `900 64px ${fontTitle}`;
-  ctx.shadowColor = "#FFE566";
-  ctx.shadowBlur = 28;
+  ctx.font = `900 72px ${fontTitle}`;
+  ctx.shadowColor = "#FFFFFF";
+  ctx.shadowBlur = 36;
   const titleGrad = ctx.createLinearGradient(
-    width / 2 - 280,
+    width / 2 - 300,
     0,
-    width / 2 + 280,
+    width / 2 + 300,
     0
   );
-  titleGrad.addColorStop(0, "#FFF8C8");
-  titleGrad.addColorStop(0.5, "#FFE566");
-  titleGrad.addColorStop(1, "#FFC94A");
+  titleGrad.addColorStop(0, "#FFFFFF");
+  titleGrad.addColorStop(0.35, "#FFF7A8");
+  titleGrad.addColorStop(0.7, "#FFE566");
+  titleGrad.addColorStop(1, "#FFFBDE");
   ctx.fillStyle = titleGrad;
-  ctx.fillText("TODAY'S BIRTHDAYS", width / 2, 108);
+  ctx.fillText("HAPPY BIRTHDAY!", width / 2, 118);
+  ctx.restore();
+
+  // Extra punch outline for readability on bright bg
+  ctx.save();
+  ctx.font = `900 72px ${fontTitle}`;
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = "rgba(120, 40, 160, 0.45)";
+  ctx.strokeText("HAPPY BIRTHDAY!", width / 2, 118);
   ctx.restore();
 
   ctx.save();
-  ctx.shadowColor = "rgba(255,255,255,0.65)";
-  ctx.shadowBlur = 10;
+  ctx.shadowColor = "#FFFFFF";
+  ctx.shadowBlur = 18;
   ctx.fillStyle = "#FFFFFF";
-  ctx.font = `800 28px ${fontBody}`;
-  ctx.fillText("OW KITSUNE GUIDE 🦊", width / 2, 156);
-  ctx.restore();
-
-  ctx.save();
-  ctx.shadowColor = "#FF9B4A";
-  ctx.shadowBlur = 14;
-  ctx.fillStyle = "#FFE0A8";
-  ctx.font = `900 26px ${fontBody}`;
+  ctx.font = `900 30px ${fontBody}`;
   ctx.fillText(
     `${dateText}  ·  ${players.length} PLAYER${players.length === 1 ? "" : "S"}`,
     width / 2,
-    200
+    178
   );
   ctx.restore();
 
@@ -395,16 +396,29 @@ async function shareBirthdaysImage_() {
   );
 
   ctx.textAlign = "center";
-  ctx.fillStyle = "rgba(255,255,255,0.9)";
-  ctx.font = `700 22px ${fontBody}`;
-  ctx.fillText("Celebrate with the GOATs — link below", width / 2, footerY + 18);
+
+  ctx.save();
+  ctx.shadowColor = "#FFFFFF";
+  ctx.shadowBlur = 14;
+  ctx.fillStyle = "#FFFFFF";
+  ctx.font = `900 26px ${fontBody}`;
+  ctx.fillText("OW KITSUNE GUIDE 🦊", width / 2, footerY + 12);
+  ctx.restore();
+
+  ctx.save();
+  ctx.shadowColor = "rgba(255,255,255,0.8)";
+  ctx.shadowBlur = 10;
+  ctx.fillStyle = "#FFFFFF";
+  ctx.font = `800 22px ${fontBody}`;
+  ctx.fillText("Celebrate with the GOATs — link below", width / 2, footerY + 48);
+  ctx.restore();
 
   ctx.save();
   ctx.shadowColor = "#7CFFF7";
-  ctx.shadowBlur = 10;
-  ctx.fillStyle = "#B8FFFF";
-  ctx.font = `800 22px ${fontBody}`;
-  ctx.fillText("https://owkitsune.com/?view=birthdays", width / 2, footerY + 54);
+  ctx.shadowBlur = 14;
+  ctx.fillStyle = "#E8FFFF";
+  ctx.font = `900 24px ${fontBody}`;
+  ctx.fillText("https://owkitsune.com/?view=birthdays", width / 2, footerY + 84);
   ctx.restore();
 
   const finishShare = () => {
@@ -435,7 +449,7 @@ async function shareBirthdaysImage_() {
 
       showGoatsShareModal_(blob, shareText, {
         title: "Share Happy Birthday",
-        shareTitle: "TODAY'S BIRTHDAYS",
+        shareTitle: "HAPPY BIRTHDAY!",
         fileName: "owkg-todays-birthdays.png"
       });
     }, "image/png");
@@ -443,7 +457,7 @@ async function shareBirthdaysImage_() {
 
   const qrSize = 58;
   const qrX = width - padding - qrSize;
-  const qrY = footerY + 18;
+  const qrY = footerY + 28;
 
   const drawQrAndShare = () => {
     ctx.drawImage(qr, qrX, qrY, qrSize, qrSize);
