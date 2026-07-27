@@ -176,12 +176,12 @@ function loadBirthdaysView() {
     `
       🌐 Dates are shown based on your device's local date. Your TZ: ${escapeHtml(visitorTz || "-")}<br>
       <span class="birthday-tz-note">Around 18:00 JST, most OW regions share the same date (except Hawaii).</span><br>
-      <span class="birthday-tz-note">To share only specific players, temporarily mute the others. Unmute them later from ◆ MUTED.</span>
+      <span class="birthday-tz-note">To share only specific players, temporarily mute the others, then refresh. Unmute them later from ◆ MUTED.</span>
     `,
     `
       🌐 日付はお使いの端末のローカル日付で表示されます。あなたのタイムゾーン: ${escapeHtml(visitorTz || "-")}<br>
       <span class="birthday-tz-note">JST 18:00頃は、OW主要地域のほとんどで同じ日付になります（ハワイ等を除く）</span><br>
-      <span class="birthday-tz-note">特定のプレイヤーのみシェアしたい場合は、一時的に他の人をミュートしてください。ミュートを外したい場合は ◆ ではずしてください。</span>
+      <span class="birthday-tz-note">特定のプレイヤーのみシェアしたい場合は、一時的に他の人をミュートして、更新してください。ミュートを外したい場合は ◆ ではずしてください。</span>
     `
   );
 

@@ -180,7 +180,9 @@ function showGoatsShareModal_(blob, shareText, options = {}) {
 
       <p class="goats-share-help">
         PC: Downloaded PNG will be saved. Drag it into the X post window to attach it.<br>
-        PC：PNGが保存されます。開いたXの投稿画面に画像をドラッグして添付してください。
+        PC：PNGが保存されます。開いたXの投稿画面に画像をドラッグして添付してください。<br>
+        Mobile: Long-press the preview image to save the full-quality PNG, then attach it in X.<br>
+        スマホ：プレビュー画像を長押ししてフル画質PNGを保存し、Xに添付してください。
       </p>
 
       <div class="goats-share-actions">

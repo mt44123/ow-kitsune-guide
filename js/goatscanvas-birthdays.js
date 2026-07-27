@@ -142,9 +142,10 @@ async function shareBirthdaysImage_(date = new Date()) {
 
   const width = 1200;
   const padding = 56;
+  const exportScale = 2;
   const fontTitle = "'Jura', sans-serif";
   const fontBody = "Arial, sans-serif";
-  const fontHeavy = '"Arial Black", "Arial Bold", Arial, sans-serif';
+  const fontHeavy = '"Arial Black", "Hiragino Sans", "Helvetica Neue", Arial, sans-serif';
 
   const useTwoColumns = players.length >= 4;
   const rows = Math.ceil(players.length / (useTwoColumns ? 2 : 1));
@@ -162,8 +163,9 @@ async function shareBirthdaysImage_(date = new Date()) {
     rows * (cardHeight + cardGap) +
     footerHeight;
 
-  canvas.width = width;
-  canvas.height = height;
+  canvas.width = width * exportScale;
+  canvas.height = height * exportScale;
+  ctx.setTransform(exportScale, 0, 0, exportScale, 0, 0);
 
   // Bright festive background
   const bg = ctx.createLinearGradient(0, 0, width, height);
@@ -449,28 +451,8 @@ async function shareBirthdaysImage_(date = new Date()) {
     canvas.toBlob(blob => {
       if (!blob) return;
 
-      const file = new File(
-        [blob],
-        "owkg-todays-birthdays.png",
-        { type: "image/png" }
-      );
-
-      const isMobile =
-        /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-      if (
-        isMobile &&
-        navigator.canShare &&
-        navigator.canShare({ files: [file] })
-      ) {
-        navigator.share({
-          title: "Happy Birthday",
-          text: shareText,
-          files: [file]
-        }).catch(() => {});
-        return;
-      }
-
+      // Always use the modal (full PNG). Mobile Web Share often recompresses
+      // the image and makes it look much worse than the PC download path.
       showGoatsShareModal_(blob, shareText, {
         title: "Share Happy Birthday",
         shareTitle: "HAPPY BIRTHDAY!",
