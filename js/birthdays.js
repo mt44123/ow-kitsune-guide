@@ -396,8 +396,6 @@ function buildBirthdayTodaySection_(
   nextBirthdays = [],
   favSet = new Set()
 ) {
-  const visitorTz = getVisitorTimezoneText_();
-
   return `
     <div class="birthday-today">
 
@@ -421,10 +419,6 @@ function buildBirthdayTodaySection_(
             `
             : ""
         }
-      </div>
-
-      <div class="birthday-visitor-tz">
-        ${siteNote_("Your TZ", "あなたのタイムゾーン")}: ${escapeHtml(visitorTz || "-")}
       </div>
 
       ${
