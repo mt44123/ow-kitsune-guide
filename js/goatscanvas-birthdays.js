@@ -50,11 +50,24 @@ function drawBirthdayEmoji_(ctx, emoji, x, y, size, glowColor) {
   ctx.save();
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.font = `${size}px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif`;
+
+  // shadowBlur breaks color emoji on many browsers (silhouette / blank).
+  ctx.shadowColor = "transparent";
+  ctx.shadowBlur = 0;
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 0;
+
   if (glowColor) {
-    ctx.shadowColor = glowColor;
-    ctx.shadowBlur = Math.max(10, size * 0.35);
+    ctx.globalAlpha = 0.22;
+    ctx.fillStyle = glowColor;
+    ctx.beginPath();
+    ctx.arc(x, y, size * 0.58, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
   }
+
+  ctx.font = `${size}px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif`;
+  ctx.fillStyle = "#000000";
   ctx.fillText(emoji, x, y);
   ctx.restore();
 }
@@ -142,7 +155,6 @@ async function shareBirthdaysImage_(date = new Date()) {
 
   const width = 1200;
   const padding = 56;
-  const exportScale = 2;
   const fontTitle = "'Jura', sans-serif";
   const fontBody = "Arial, sans-serif";
   const fontHeavy = '"Arial Black", "Hiragino Sans", "Helvetica Neue", Arial, sans-serif';
@@ -163,9 +175,8 @@ async function shareBirthdaysImage_(date = new Date()) {
     rows * (cardHeight + cardGap) +
     footerHeight;
 
-  canvas.width = width * exportScale;
-  canvas.height = height * exportScale;
-  ctx.setTransform(exportScale, 0, 0, exportScale, 0, 0);
+  canvas.width = width;
+  canvas.height = height;
 
   // Bright festive background
   const bg = ctx.createLinearGradient(0, 0, width, height);
@@ -363,29 +374,62 @@ async function shareBirthdaysImage_(date = new Date()) {
     }
 
     const name = p.name || "";
-    const displayName = `🎂${name}🎂`;
     const nameFontSize =
       useTwoColumns && name.length > 12 ? 28 : 36;
+    const nameX = x + 32;
+    const nameY = y + 52;
 
+    // Draw cake emojis without shadow (shadow breaks color emoji).
     ctx.save();
+    ctx.textAlign = "left";
+    ctx.textBaseline = "alphabetic";
+    ctx.shadowBlur = 0;
+    ctx.shadowColor = "transparent";
+    ctx.font = `${nameFontSize}px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif`;
+    ctx.fillStyle = "#000000";
+    const cake = "🎂";
+    const cakeW = ctx.measureText(cake).width;
+    ctx.fillText(cake, nameX, nameY);
+
     ctx.shadowColor = neon;
     ctx.shadowBlur = 14;
     ctx.fillStyle = "#FFFFFF";
     ctx.font = `900 ${nameFontSize}px ${fontTitle}`;
-    ctx.fillText(displayName, x + 32, y + 52, textMaxWidth);
+    const nameW = ctx.measureText(name).width;
+    const nameMax = Math.max(40, textMaxWidth - cakeW * 2 - 8);
+    ctx.fillText(name, nameX + cakeW + 4, nameY, nameMax);
+
+    ctx.shadowBlur = 0;
+    ctx.shadowColor = "transparent";
+    ctx.font = `${nameFontSize}px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif`;
+    ctx.fillStyle = "#000000";
+    const drawnNameW = Math.min(nameW, nameMax);
+    ctx.fillText(cake, nameX + cakeW + 4 + drawnNameW + 4, nameY);
     ctx.restore();
 
-    const meta = [
-      "🎂",
+    const metaParts = [
       regionLabel,
       roleIcon,
       p.team && p.team !== "No team" ? p.team : "",
       ageText
-    ].filter(Boolean).join("  •  ");
+    ].filter(Boolean);
 
+    ctx.save();
+    ctx.textAlign = "left";
+    ctx.shadowBlur = 0;
+    ctx.font = `17px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif`;
+    ctx.fillStyle = "#000000";
+    ctx.fillText("🎂", x + 32, y + 90);
+    const metaCakeW = ctx.measureText("🎂").width;
     ctx.fillStyle = "rgba(255,255,255,0.9)";
     ctx.font = `700 17px ${fontBody}`;
-    ctx.fillText(meta, x + 32, y + 90, textMaxWidth);
+    ctx.fillText(
+      (metaParts.length ? "  •  " : "") + metaParts.join("  •  "),
+      x + 32 + metaCakeW,
+      y + 90,
+      textMaxWidth - metaCakeW
+    );
+    ctx.restore();
 
     ctx.fillStyle = "rgba(255,255,255,0.75)";
     ctx.font = `600 15px ${fontBody}`;
@@ -451,8 +495,34 @@ async function shareBirthdaysImage_(date = new Date()) {
     canvas.toBlob(blob => {
       if (!blob) return;
 
-      // Always use the modal (full PNG). Mobile Web Share often recompresses
-      // the image and makes it look much worse than the PC download path.
+      const file = new File(
+        [blob],
+        "owkg-todays-birthdays.png",
+        { type: "image/png" }
+      );
+
+      const isMobile =
+        /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+      if (
+        isMobile &&
+        navigator.canShare &&
+        navigator.canShare({ files: [file] })
+      ) {
+        navigator.share({
+          title: "Happy Birthday",
+          text: shareText,
+          files: [file]
+        }).catch(() => {
+          showGoatsShareModal_(blob, shareText, {
+            title: "Share Happy Birthday",
+            shareTitle: "HAPPY BIRTHDAY!",
+            fileName: "owkg-todays-birthdays.png"
+          });
+        });
+        return;
+      }
+
       showGoatsShareModal_(blob, shareText, {
         title: "Share Happy Birthday",
         shareTitle: "HAPPY BIRTHDAY!",
