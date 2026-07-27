@@ -125,6 +125,8 @@ async function shareBirthdaysImageForDate_(year, month, day) {
 async function shareBirthdaysImage_(date = new Date()) {
   const targetDate = date instanceof Date ? date : new Date();
   const players = getTodayBirthdays_(currentData || [], targetDate);
+  const fileName =
+    `owkg-birthday-${targetDate.getMonth() + 1}-${targetDate.getDate()}.png`;
 
   if (!players.length) {
     const label =
@@ -497,7 +499,7 @@ async function shareBirthdaysImage_(date = new Date()) {
 
       const file = new File(
         [blob],
-        "owkg-todays-birthdays.png",
+        fileName,
         { type: "image/png" }
       );
 
@@ -517,7 +519,7 @@ async function shareBirthdaysImage_(date = new Date()) {
           showGoatsShareModal_(blob, shareText, {
             title: "Share Happy Birthday",
             shareTitle: "HAPPY BIRTHDAY!",
-            fileName: "owkg-todays-birthdays.png"
+            fileName
           });
         });
         return;
@@ -526,7 +528,7 @@ async function shareBirthdaysImage_(date = new Date()) {
       showGoatsShareModal_(blob, shareText, {
         title: "Share Happy Birthday",
         shareTitle: "HAPPY BIRTHDAY!",
-        fileName: "owkg-todays-birthdays.png"
+        fileName
       });
     }, "image/png");
   };
