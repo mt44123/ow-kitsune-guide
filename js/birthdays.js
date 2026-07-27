@@ -172,18 +172,31 @@ function loadBirthdaysView() {
 
   const visitorTz = getVisitorTimezoneText_();
 
-  viewNote.innerHTML = siteNote_(
-    `
-      🌐 Dates are shown based on your device's local date. Your TZ: ${escapeHtml(visitorTz || "-")}<br>
-      <span class="birthday-tz-note">Around 18:00 JST, most OW regions share the same date (except Hawaii).</span><br>
-      <span class="birthday-tz-note">To share only specific players, temporarily mute the others, then refresh. Unmute them later from ◆ MUTED.</span>
-    `,
-    `
-      🌐 日付はお使いの端末のローカル日付で表示されます。あなたのタイムゾーン: ${escapeHtml(visitorTz || "-")}<br>
-      <span class="birthday-tz-note">JST 18:00頃は、OW主要地域のほとんどで同じ日付になります（ハワイ等を除く）</span><br>
-      <span class="birthday-tz-note">特定のプレイヤーのみシェアしたい場合は、一時的に他の人をミュートして、更新してください。ミュートを外したい場合は ◆ ではずしてください。</span>
-    `
-  );
+  viewNote.innerHTML = `
+    <div class="discord-note">
+      ${siteNote_(
+        `<p>*Dates use your device's local date. Your TZ: ${escapeHtml(visitorTz || "-")}</p>`,
+        `<p>※日付はお使いの端末のローカル日付で表示されます。あなたのタイムゾーン: ${escapeHtml(visitorTz || "-")}</p>`
+      )}
+
+      <details class="playerlinks-help">
+        <summary>More Info</summary>
+
+        ${siteNote_(
+          `
+            <p>*Around 18:00 JST, most OW regions share the same date (except Hawaii).</p>
+            <p>*To share only specific players, temporarily mute the others, then refresh. Unmute them later from ◆ MUTED.</p>
+            <p>*Click a day number on the calendar to share that date.</p>
+          `,
+          `
+            <p>※JST 18:00頃は、OW主要地域のほとんどで同じ日付になります（ハワイ等を除く）。</p>
+            <p>※特定のプレイヤーのみシェアしたい場合は、一時的に他の人をミュートして、更新してください。ミュートを外したい場合は ◆ ではずしてください。</p>
+            <p>※カレンダーの日付数字をクリックすると、その日をシェアできます。</p>
+          `
+        )}
+      </details>
+    </div>
+  `;
 
   pageTitle.textContent = "BIRTHDAYS";
   setRandomVoiceLine();
@@ -547,7 +560,18 @@ function buildBirthdayCells_(
 
     cells += `
       <div class="birthday-day ${isOtherMonth ? "other-month" : ""} ${isToday ? "today" : ""}">
-        <div class="birthday-day-number">
+        <div
+          class="birthday-day-number${
+            !isOtherMonth && events.length
+              ? " birthday-day-share"
+              : ""
+          }"
+          ${
+            !isOtherMonth && events.length
+              ? `data-birthday-share-date="${year}-${month + 1}-${displayDay}" title="Share this day"`
+              : ""
+          }
+        >
           ${displayDay}
         </div>
 
@@ -773,6 +797,28 @@ function jumpBirthdaySearch_() {
 }
 
 document.addEventListener("click", e => {
+  const dayShare = e.target.closest("[data-birthday-share-date]");
+  if (dayShare) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const parts = String(dayShare.dataset.birthdayShareDate || "")
+      .split("-")
+      .map(Number);
+    const [year, month, day] = parts;
+
+    if (
+      typeof shareBirthdaysImageForDate_ === "function" &&
+      year &&
+      month &&
+      day
+    ) {
+      shareBirthdaysImageForDate_(year, month, day);
+    }
+
+    return;
+  }
+
   const shareBtn = e.target.closest("[data-birthday-share]");
   if (!shareBtn) return;
 

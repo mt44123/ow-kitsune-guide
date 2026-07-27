@@ -2960,6 +2960,20 @@ text-align:center;
   margin-bottom:var(--space-xs);
 }
 
+.birthday-day-number.birthday-day-share{
+  cursor:pointer;
+  user-select:none;
+  display:inline-block;
+  min-width:1.4em;
+  border-radius:4px;
+  padding:0 2px;
+}
+
+.birthday-day-number.birthday-day-share:hover{
+  color:var(--accent);
+  text-decoration:underline;
+}
+
 .birthday-event strong{
 font-size:15px;
   display:block;
