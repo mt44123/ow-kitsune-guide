@@ -2950,7 +2950,8 @@ background:var(--bg-light);
 }
 
 .birthday-day-number{
-text-align:center;
+  display:block;
+  text-align:center;
 
   color:var(--text-muted);
 
@@ -2963,8 +2964,6 @@ text-align:center;
 .birthday-day-number.birthday-day-share{
   cursor:pointer;
   user-select:none;
-  display:inline-block;
-  min-width:1.4em;
   border-radius:4px;
   padding:0 2px;
 }
