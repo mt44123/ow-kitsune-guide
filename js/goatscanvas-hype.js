@@ -116,12 +116,28 @@ async function shareGoatsImageHype_() {
 
   ctx.restore();
 
+  const guideLabel = "OW KITSUNE GUIDE ";
   ctx.save();
+  ctx.textAlign = "left";
+  ctx.textBaseline = "alphabetic";
+  ctx.font = `800 27px ${fontBody}`;
+  const guideWidth = ctx.measureText(guideLabel).width;
+  ctx.font = `27px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif`;
+  const foxWidth = ctx.measureText("🦊").width;
+  const guideStartX = width / 2 - (guideWidth + foxWidth) / 2;
+
   ctx.shadowColor = "rgba(255,255,255,.35)";
   ctx.shadowBlur = 5;
   ctx.fillStyle = textSub;
   ctx.font = `800 27px ${fontBody}`;
-  ctx.fillText("OW KITSUNE GUIDE 🦊", width / 2, 174);
+  ctx.fillText(guideLabel, guideStartX, 174);
+
+  // Emoji without shadowBlur (shadow can break color emoji).
+  ctx.shadowBlur = 0;
+  ctx.shadowColor = "transparent";
+  ctx.fillStyle = "#000000";
+  ctx.font = `27px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif`;
+  ctx.fillText("🦊", guideStartX + guideWidth, 174);
   ctx.restore();
 
   ctx.save();
@@ -300,11 +316,15 @@ async function shareGoatsImageHype_() {
       regionLabel,
       roleIcon,
       p.team && p.team !== "No team" ? p.team : ""
-    ].filter(Boolean).join("  •  ");
+    ].filter(Boolean);
 
+    ctx.save();
+    ctx.shadowBlur = 0;
+    ctx.shadowColor = "transparent";
     ctx.fillStyle = textSub;
     ctx.font = `700 18px ${fontBody}`;
-    ctx.fillText(meta, x + 34, y + 92, columnWidth - 150);
+    ctx.fillText(meta.join("  •  "), x + 34, y + 92, columnWidth - 150);
+    ctx.restore();
   });
 
   // Footer
