@@ -1,6 +1,6 @@
 function loadUsefulLinksView() {
   currentView = "usefullinks";
-  history.replaceState({}, "", "?view=usefullinks");
+  setViewUrl_("usefullinks");
 
   resetSeo_();
 

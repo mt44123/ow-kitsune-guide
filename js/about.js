@@ -1,6 +1,6 @@
 function loadAboutView() {
   currentView = "about";
-  history.replaceState({}, "", "?view=about");
+  setViewUrl_("about");
 
   requestId++;
 

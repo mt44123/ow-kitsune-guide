@@ -8,7 +8,7 @@
 
 function loadMediaGoatsView() {
   currentView = "mediagoats";
-  history.replaceState({}, "", "?view=mediagoats");
+  setViewUrl_("mediagoats");
 
   resetSeo_();
 

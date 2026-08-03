@@ -23,7 +23,7 @@ function setHowtoNavHidden_(hidden) {
 
 function loadHowtoView() {
   currentView = "howto";
-  history.replaceState({}, "", "?view=howto");
+  setViewUrl_("howto");
 
   resetSeo_();
 
@@ -349,7 +349,7 @@ function loadHowtoView() {
             </ul>
             <p>
               More details:
-              <a href="?view=faq" onclick="openStaticView_('faq'); return false;">FAQ — What is MY GOATS?</a>
+              <a href="/faq" onclick="openStaticView_('faq'); return false;">FAQ — What is MY GOATS?</a>
             </p>
           `,
           `
@@ -361,7 +361,7 @@ function loadHowtoView() {
             </ul>
             <p>
               詳細は
-              <a href="?view=faq" onclick="openStaticView_('faq'); return false;">FAQ — MY GOATSとは？</a>
+              <a href="/faq" onclick="openStaticView_('faq'); return false;">FAQ — MY GOATSとは？</a>
             </p>
           `
         )}
@@ -380,7 +380,7 @@ function loadHowtoView() {
             </ul>
             <p>
               More details:
-              <a href="?view=faq" onclick="openStaticView_('faq'); return false;">FAQ — What is MUTED?</a>
+              <a href="/faq" onclick="openStaticView_('faq'); return false;">FAQ — What is MUTED?</a>
             </p>
           `,
           `
@@ -391,7 +391,7 @@ function loadHowtoView() {
             </ul>
             <p>
               詳細は
-              <a href="?view=faq" onclick="openStaticView_('faq'); return false;">FAQ — MUTEDとは？</a>
+              <a href="/faq" onclick="openStaticView_('faq'); return false;">FAQ — MUTEDとは？</a>
             </p>
           `
         )}
@@ -406,7 +406,7 @@ function loadHowtoView() {
           `
             <ul>
               <li>Missing players, notifications, display issues →
-                <a href="?view=faq" onclick="openStaticView_('faq'); return false;">FAQ</a>
+                <a href="/faq" onclick="openStaticView_('faq'); return false;">FAQ</a>
               </li>
               <li>Requests / bugs → Contact form in the footer</li>
             </ul>
@@ -414,7 +414,7 @@ function loadHowtoView() {
           `
             <ul>
               <li>選手がいない・通知が出ない・表示がおかしい →
-                <a href="?view=faq" onclick="openStaticView_('faq'); return false;">FAQ</a>
+                <a href="/faq" onclick="openStaticView_('faq'); return false;">FAQ</a>
               </li>
               <li>要望・不具合 → フッターの Contact フォーム</li>
             </ul>

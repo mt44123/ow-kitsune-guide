@@ -1,7 +1,7 @@
 let liveBackgroundRefreshPromise_ = null;
 
 function loadLiveView(view) {
-  history.replaceState({}, "", "?view=" + view);
+  setViewUrl_(view);
 
   resetSeo_();
   

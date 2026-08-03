@@ -1,5 +1,5 @@
 function loadPlayerLinksView() {
-  history.replaceState({}, "", "?view=playerlinks");
+  setViewUrl_("playerlinks");
 
   resetSeo_();
 

@@ -161,7 +161,7 @@ function getTodayBirthdays_(players, today = new Date()) {
 }
 
 function loadBirthdaysView() {
-  history.replaceState({}, "", "?view=birthdays");
+  setViewUrl_("birthdays");
 
   resetSeo_();
 

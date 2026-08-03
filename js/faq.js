@@ -1,6 +1,6 @@
 function loadFaqView() {
   currentView = "faq";
-  history.replaceState({}, "", "?view=faq");
+  setViewUrl_("faq");
 
   resetSeo_();
 

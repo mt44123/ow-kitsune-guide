@@ -1,6 +1,6 @@
 function loadToolsView() {
   currentView = "toolstips";
-  history.replaceState({}, "", "?view=toolstips");
+  setViewUrl_("toolstips");
 
   resetSeo_();
 

@@ -10,7 +10,7 @@ function buildBirthdaysShareText_(players, date = new Date()) {
     "Happy Birthday! 🎉 Hope you have an amazing day!",
     nameLines,
     "",
-    "https://owkitsune.com/?view=birthdays",
+    "https://owkitsune.com/birthdays",
     "#OW #OWCS #Overwatch #HappyBirthday #オーバーウォッチ"
   ].join("\n");
 }
@@ -490,7 +490,7 @@ async function shareBirthdaysImage_(date = new Date()) {
   ctx.shadowBlur = 14;
   ctx.fillStyle = "#E8FFFF";
   ctx.font = `900 24px ${fontBody}`;
-  ctx.fillText("https://owkitsune.com/?view=birthdays", width / 2, footerY + 84);
+  ctx.fillText("https://owkitsune.com/birthdays", width / 2, footerY + 84);
   ctx.restore();
 
   const finishShare = () => {

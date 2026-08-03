@@ -988,7 +988,7 @@ function updatePageTitleLink_(view = currentView) {
         currentView = "favorites";
         currentPlayerView = "favorites";
 
-        history.replaceState({}, "", "?view=favorites");
+        setViewUrl_("favorites");
 
         updateNavState(currentView);
         loadView(currentView);
@@ -1153,23 +1153,58 @@ howtoNavButton?.addEventListener(
   () => openStaticView_("howto")
 );
 
+function viewToPath_(view) {
+  if (!view || view === "new") return "/";
+  return "/" + encodeURIComponent(view);
+}
+
+function setViewUrl_(view, push = false) {
+  const url = viewToPath_(view);
+
+  if (push) {
+    history.pushState({}, "", url);
+  } else {
+    history.replaceState({}, "", url);
+  }
+}
+
+function migrateLegacyViewUrl_() {
+  const params = new URLSearchParams(location.search);
+  const legacyView = params.get("view");
+  if (!legacyView) return;
+
+  const path = location.pathname || "/";
+
+  // Detail pages: drop a misleading ?view= left by old relative updates.
+  if (path.startsWith("/player/") || path.startsWith("/team/")) {
+    history.replaceState({}, "", path);
+    return;
+  }
+
+  history.replaceState({}, "", viewToPath_(legacyView));
+}
+
 function getViewFromLocation_() {
-  const params =
-    new URLSearchParams(window.location.search);
+  const path =
+    (location.pathname || "/").replace(/\/+$/, "") || "/";
 
-  const path = location.pathname;
-
-  if (path.startsWith("/player/")) {
+  if (path.startsWith("/player/") || path === "/player") {
     return "player";
   }
 
-  if (path.startsWith("/team/")) {
+  if (path.startsWith("/team/") || path === "/team") {
     return "team";
   }
 
-  return params.get("view") || "new";
+  if (path === "/" || path === "/index.html") {
+    return "new";
+  }
+
+  const view = decodeURIComponent(path.slice(1).split("/")[0] || "");
+  return view || "new";
 }
 
+migrateLegacyViewUrl_();
 let currentView = getViewFromLocation_();
 
 let currentRoleFilter =
@@ -1591,7 +1626,7 @@ function openStaticView_(view) {
   currentView = view;
   currentPlayerView = "teams";
 
-  history.replaceState({}, "", "?view=" + view);
+  setViewUrl_(view);
 
   updateNavState(currentView);
   loadView(currentView);
@@ -1801,7 +1836,7 @@ document
         currentView = button.dataset.view;
       }
 
-      history.replaceState({}, "", "?view=" + currentView);
+      setViewUrl_(currentView);
 
       updateNavState(currentView);
       loadView(currentView);
@@ -1848,7 +1883,7 @@ document
         currentPlayerView = currentView;
       }
             
-      history.replaceState({}, "", "?view=" + currentView);
+      setViewUrl_(currentView);
 
       updateNavState(currentView);
       loadView(currentView);
@@ -1952,7 +1987,7 @@ function switchSwipeView_(direction) {
   if (isMediaView(currentView)) currentMediaView = currentView;
   if (isArchiveView(currentView)) currentArchiveView = currentView;
 
-  history.replaceState({}, "", "?view=" + currentView);
+  setViewUrl_(currentView);
 
   updateNavState(currentView);
 
@@ -2252,7 +2287,7 @@ function loadView(view) {
   currentView = "new";
   currentLiveView = "new";
 
-  history.replaceState({}, "", "?view=new");
+  setViewUrl_("new");
 
   updateNavState(currentView);
   updateViewActionButton_(currentView);
@@ -2263,7 +2298,7 @@ function loadView(view) {
 function loadMutedPlayersView() {
   currentView = "muted";
   currentPlayerView = "muted";
-  history.replaceState({}, "", "?view=muted");
+  setViewUrl_("muted");
 
   resetSeo_();
 
@@ -3627,7 +3662,7 @@ document.addEventListener("click", e => {
   currentView = "playerlinks";
   currentPlayerView = "playerlinks";
 
-  history.pushState({}, "", "?view=playerlinks");
+  setViewUrl_("playerlinks", true);
 
   searchBox.value = value;
 

@@ -1,6 +1,6 @@
 function loadUpdateLogView() {
   currentView = "updatelog";
-  history.replaceState({}, "", "?view=updatelog");
+  setViewUrl_("updatelog");
 
   resetSeo_();
 

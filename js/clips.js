@@ -1,4 +1,5 @@
 function loadClipsView(view) {
+  setViewUrl_(view);
 
   resetSeo_();
 

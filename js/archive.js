@@ -11,7 +11,7 @@ let archiveCacheTime = 0;
 const ARCHIVE_CLIENT_CACHE_MS = 5 * 60 * 1000;
 
 function loadArchiveView(view) {
-  history.replaceState({}, "", "?view=" + view);
+  setViewUrl_(view);
 
   resetSeo_();
 

@@ -1,6 +1,6 @@
 function loadPrivacyView() {
   currentView = "privacy";
-  history.replaceState({}, "", "?view=privacy");
+  setViewUrl_("privacy");
 
   resetSeo_();
 
