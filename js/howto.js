@@ -5,10 +5,21 @@ function isHowtoNavHidden_() {
 }
 
 function applyHowtoNavVisibility_() {
+  const howtoButton = document.getElementById("howtoNavButton");
   const row = document.getElementById("howtoNavRow");
-  if (!row) return;
+  if (!howtoButton) return;
 
-  row.hidden = isHowtoNavHidden_();
+  const hidden = isHowtoNavHidden_();
+  howtoButton.hidden = hidden;
+
+  // Keep the row visible when WATCH OWCS (or other guide buttons) remain.
+  if (row) {
+    const hasVisibleGuideButton = Array.from(
+      row.querySelectorAll(".howto-nav-button")
+    ).some(button => !button.hidden);
+
+    row.hidden = !hasVisibleGuideButton;
+  }
 }
 
 function setHowtoNavHidden_(hidden) {
@@ -198,6 +209,7 @@ function loadHowtoView() {
               <li><b>PLAYERS</b> — links for listed players, plus manage ★ MY GOATS and ◆ MUTED</li>
               <li><b>SEARCH</b> — open the search box</li>
               <li><b>HOW TO USE</b> — this page (optional; hide anytime)</li>
+              <li><b>WATCH OWCS</b> — beginner guide to watching OWCS</li>
             </ul>
           `,
           `
@@ -208,6 +220,7 @@ function loadHowtoView() {
               <li><b>PLAYERS</b> — 掲載プレイヤーのリンク一覧、★ MY GOATS・◆ MUTED の管理</li>
               <li><b>SEARCH</b> — 検索ボックスを開く</li>
               <li><b>HOW TO USE</b> — このページ（任意・非表示可）</li>
+              <li><b>WATCH OWCS</b> — OWCS 観戦の初心者ガイド</li>
             </ul>
           `
         )}

@@ -950,6 +950,10 @@ flex:0 0 auto;
   white-space:nowrap;
 }
 
+.howto-nav-button[hidden]{
+  display:none;
+}
+
 .sub-nav{
 display:flex;
   gap:var(--space-sm);
@@ -3674,6 +3678,35 @@ color:var(--text-main);
 
 .howto-action-button:hover{
   filter:brightness(1.08);
+}
+
+.howto-glossary-wrap{
+  overflow-x:auto;
+  margin:0 0 12px;
+}
+
+.howto-glossary{
+  width:100%;
+  border-collapse:collapse;
+  font-size:0.95em;
+}
+
+.howto-glossary th,
+.howto-glossary td{
+  text-align:left;
+  vertical-align:top;
+  padding:8px 10px;
+  border-bottom:1px solid color-mix(in srgb, currentColor 18%, transparent);
+}
+
+.howto-glossary th{
+  font-weight:700;
+  opacity:0.85;
+}
+
+.howto-glossary td:first-child{
+  white-space:nowrap;
+  width:30%;
 }
 
 .faq-card code{

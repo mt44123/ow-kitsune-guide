@@ -494,6 +494,9 @@ const faqButton =
 const howtoNavButton =
   document.getElementById("howtoNavButton");
 
+const watchOwcsNavButton =
+  document.getElementById("watchOwcsNavButton");
+
 const settingsButton =  document.getElementById("settingsButton");
 const settingsMenu =  document.getElementById("settingsMenu");
 
@@ -1161,6 +1164,11 @@ howtoNavButton?.addEventListener(
   () => openStaticView_("howto")
 );
 
+watchOwcsNavButton?.addEventListener(
+  "click",
+  () => openStaticView_("watchowcs")
+);
+
 function viewToPath_(view) {
   const id = normalizeViewId_(view);
   if (!id) return "/";
@@ -1661,6 +1669,7 @@ const STATIC_VIEW_LOADERS = {
   usefullinks: () => loadUsefulLinksView(),
   faq: () => loadFaqView(),
   howto: () => loadHowtoView(),
+  watchowcs: () => loadWatchOwcsView(),
   toolstips: () => loadToolsView(),
   updatelog: () => loadUpdateLogView()
 };
@@ -1777,6 +1786,7 @@ function updateNavState(view) {
     .forEach(b => b.classList.remove("active"));
 
   howtoNavButton?.classList.remove("active");
+  watchOwcsNavButton?.classList.remove("active");
 
   document
     .querySelectorAll(".sub-nav button")
@@ -1793,6 +1803,9 @@ function updateNavState(view) {
 
   if (view === "howto") {
     howtoNavButton?.classList.add("active");
+
+  } else if (view === "watchowcs") {
+    watchOwcsNavButton?.classList.add("active");
 
   } else if (isLiveView(view)) {
     liveButton?.classList.add("active");
