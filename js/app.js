@@ -1245,7 +1245,7 @@ function startFakeProgress() {
 
     app.innerHTML =
       `<p class="loading">🦊 My ultimate is charging... ${progressSteps[progressIndex]}%</p>`;
-  }, 700);
+  }, 1100);
 }
 
 function finishFakeProgress() {
