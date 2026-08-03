@@ -28,8 +28,7 @@ function loadPlayerLinksView() {
 
   startFakeProgress();
 
-  fetch(CONFIG.API_URL + "?view=playerlinks")
-    .then(res => res.json())
+  fetchConfigApi_("playerlinks")
     .then(data => {
       if (currentRequest !== requestId) {
         stopFakeProgress();
@@ -52,6 +51,14 @@ function loadPlayerLinksView() {
       if (currentRequest !== requestId) return;
 
       stopFakeProgress();
+
+      if (playerLinksCache) {
+        updated.textContent = playerLinksLastUpdated;
+        currentData = getRoleFilteredPlayerLinks_(playerLinksCache);
+        renderPlayerLinks(currentData);
+        applyCurrentSearch_();
+        return;
+      }
 
       app.innerHTML =
         `<p class="error">Failed to load data.</p>`;
@@ -880,44 +887,44 @@ function loadPlayerDetailView() {
           playerLinks: playerLinksCache,
           lastUpdated: playerLinksLastUpdated
         })
-      : fetch(CONFIG.API_URL + "?view=playerlinks").then(r => r.json());
+      : fetchConfigApi_("playerlinks");
 
   const youtubePromise =
     youtubeCache
       ? Promise.resolve({
           videos: youtubeCache
         })
-      : fetch(CONFIG.API_URL + "?view=youtube").then(r => r.json());
+      : fetchConfigApi_("youtube");
 
   const twitchPromise =
     clipCache.twitch.data
       ? Promise.resolve({ clips: clipCache.twitch.data })
-      : fetch(CONFIG.API_URL + "?view=clips").then(r => r.json());
+      : fetchConfigApi_("clips");
 
   const twitchHotPromise =
     clipCache.twitchhot.data
       ? Promise.resolve({ clips: clipCache.twitchhot.data })
-      : fetch(CONFIG.API_URL + "?view=hotclips").then(r => r.json());
+      : fetchConfigApi_("hotclips");
 
   const soopPromise =
     clipCache.soop.data
       ? Promise.resolve({ clips: clipCache.soop.data })
-      : fetch(CONFIG.API_URL + "?view=soopclips").then(r => r.json());
+      : fetchConfigApi_("soopclips");
 
   const soopHotPromise =
     clipCache.soophot.data
       ? Promise.resolve({ clips: clipCache.soophot.data })
-      : fetch(CONFIG.API_URL + "?view=soophotclips").then(r => r.json());
+      : fetchConfigApi_("soophotclips");
 
   const chzzkNewPromise =
     clipCache.chzzknew.data
       ? Promise.resolve({ clips: clipCache.chzzknew.data })
-      : fetch(CONFIG.API_URL + "?view=chzzknewclips").then(r => r.json());
+      : fetchConfigApi_("chzzknewclips");
 
   const chzzkBestPromise =
     clipCache.chzzkbest.data
       ? Promise.resolve({ clips: clipCache.chzzkbest.data })
-      : fetch(CONFIG.API_URL + "?view=chzzkbestclips").then(r => r.json());
+      : fetchConfigApi_("chzzkbestclips");
 
   Promise.allSettled([
     linksPromise,

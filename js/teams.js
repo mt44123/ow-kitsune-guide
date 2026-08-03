@@ -35,8 +35,7 @@ function loadTeamsView(openFromUrl = false) {
 
   startFakeProgress();
 
-  fetch(CONFIG.API_URL + "?view=playerlinks")
-    .then(res => res.json())
+  fetchConfigApi_("playerlinks")
     .then(data => {
       if (currentRequest !== requestId) {
         stopFakeProgress();
@@ -71,6 +70,20 @@ function loadTeamsView(openFromUrl = false) {
       if (currentRequest !== requestId) return;
 
       stopFakeProgress();
+
+      if (playerLinksCache) {
+        updated.textContent = playerLinksLastUpdated;
+        currentData = playerLinksCache;
+
+        if (openFromUrl) {
+          openTeamFromUrl_();
+        } else {
+          renderTeams(currentData);
+        }
+
+        applyCurrentSearch_();
+        return;
+      }
 
       app.innerHTML =
         `<p class="error">Failed to load data.</p>`;

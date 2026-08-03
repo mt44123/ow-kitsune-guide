@@ -220,8 +220,7 @@ function loadBirthdaysView() {
 
   startFakeProgress();
 
-  fetch(CONFIG.API_URL + "?view=birthdays")
-    .then(r => r.json())
+  fetchConfigApi_("birthdays")
     .then(data => {
       if (currentRequest !== requestId) return;
 
@@ -239,6 +238,13 @@ function loadBirthdaysView() {
 
       stopFakeProgress();
       console.error(err);
+
+      if (birthdaysCache) {
+        currentData = birthdaysCache;
+        renderBirthdayCalendar(currentData);
+        applyCurrentSearch_();
+        return;
+      }
 
       app.innerHTML = `
         <p class="error">

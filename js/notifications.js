@@ -249,8 +249,7 @@ setInterval(() => {
 function refreshLiveNotificationsOnly_() {
   if (liveNotificationMode === "off") return;
 
-  fetch(CONFIG.API_URL + "?view=new")
-    .then(res => res.json())
+  fetchConfigApi_("new")
     .then(data => {
       const players = data.players || [];
 

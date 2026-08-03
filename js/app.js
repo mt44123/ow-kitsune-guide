@@ -1226,6 +1226,93 @@ const BIRTHDAYS_CLIENT_CACHE_MS = 6 * 60 * 60 * 1000;
 
 let playerLinksLastUpdated = "";
 
+// Apps Script often returns HTML 404s under load; retry + dedupe reduce
+// "Failed to load data" without hammering the same endpoint twice.
+const gasFetchInflightByView_ = Object.create(null);
+let gasFetchActive_ = 0;
+const gasFetchWaiters_ = [];
+const GAS_FETCH_MAX_CONCURRENT = 2;
+const GAS_FETCH_RETRIES = 3;
+const GAS_FETCH_RETRY_BASE_MS = 1200;
+
+function acquireGasSlot_() {
+  if (gasFetchActive_ < GAS_FETCH_MAX_CONCURRENT) {
+    gasFetchActive_++;
+    return Promise.resolve();
+  }
+
+  return new Promise(resolve => {
+    gasFetchWaiters_.push(resolve);
+  }).then(() => {
+    gasFetchActive_++;
+  });
+}
+
+function releaseGasSlot_() {
+  gasFetchActive_ = Math.max(0, gasFetchActive_ - 1);
+  const next = gasFetchWaiters_.shift();
+  if (next) next();
+}
+
+function fetchConfigApi_(view, options = {}) {
+  const key = String(view || "");
+  const retries = options.retries ?? GAS_FETCH_RETRIES;
+  const baseDelayMs = options.baseDelayMs ?? GAS_FETCH_RETRY_BASE_MS;
+
+  if (gasFetchInflightByView_[key]) {
+    return gasFetchInflightByView_[key];
+  }
+
+  const promise = (async () => {
+    await acquireGasSlot_();
+
+    try {
+      let lastError;
+
+      for (let attempt = 1; attempt <= retries; attempt++) {
+        try {
+          const res = await fetch(
+            CONFIG.API_URL + "?view=" + encodeURIComponent(key)
+          );
+          const text = await res.text();
+          let data;
+
+          try {
+            data = JSON.parse(text);
+          } catch (e) {
+            throw new Error(
+              `Apps Script returned non-JSON (HTTP ${res.status})`
+            );
+          }
+
+          if (!res.ok) {
+            throw new Error(`Apps Script HTTP ${res.status}`);
+          }
+
+          return data;
+        } catch (e) {
+          lastError = e;
+
+          if (attempt < retries) {
+            await new Promise(resolve =>
+              setTimeout(resolve, baseDelayMs * attempt)
+            );
+          }
+        }
+      }
+
+      throw lastError;
+    } finally {
+      releaseGasSlot_();
+    }
+  })().finally(() => {
+    delete gasFetchInflightByView_[key];
+  });
+
+  gasFetchInflightByView_[key] = promise;
+  return promise;
+}
+
 function startFakeProgress() {
   progressSteps =
     progressSets[
@@ -1392,11 +1479,9 @@ function speakCurrentVoiceLine_() {
 
 async function loadVoiceLines() {
   try {
-    const res = await fetch(
-      CONFIG.API_URL + "?view=voicelines"
-    );
-
-    const data = await res.json();
+    const data = await fetchConfigApi_("voicelines", {
+      retries: 2
+    });
 
     voiceLines = data.voiceLines || [];
 
@@ -3019,6 +3104,14 @@ async function init() {
 
   loadView(currentView);
   loadSiteGuided_();
+
+  // Let the initial view register its Apps Script request first.
+  await Promise.resolve();
+
+  const pending = Object.values(gasFetchInflightByView_);
+  if (pending.length) {
+    await Promise.all(pending.map(p => p.catch(() => {})));
+  }
 
   await loadVoiceLines();
   setRandomVoiceLine();

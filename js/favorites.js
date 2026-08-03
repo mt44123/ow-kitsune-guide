@@ -67,8 +67,7 @@ function loadFavoritesView() {
 
   startFakeProgress();
 
-  fetch(CONFIG.API_URL + "?view=playerlinks")
-    .then(res => res.json())
+  fetchConfigApi_("playerlinks")
     .then(data => {
       if (currentRequest !== requestId) {
         stopFakeProgress();
@@ -91,6 +90,14 @@ function loadFavoritesView() {
       if (currentRequest !== requestId) return;
 
       stopFakeProgress();
+
+      if (playerLinksCache) {
+        updated.textContent = playerLinksLastUpdated;
+        currentData = playerLinksCache;
+        renderFavorites(currentData);
+        applyCurrentSearch_();
+        return;
+      }
 
       app.innerHTML =
         `<p class="error">Failed to load data.</p>`;

@@ -1,3 +1,5 @@
+let liveBackgroundRefreshPromise_ = null;
+
 function loadLiveView(view) {
   history.replaceState({}, "", "?view=" + view);
 
@@ -22,12 +24,20 @@ function loadLiveView(view) {
     return;
   }
 
+  // Stale but usable: show now, refresh in background.
+  if (liveCache) {
+    requestId++;
+    stopFakeProgress();
+    renderLiveFromCache(view);
+    refreshLiveCacheInBackground_();
+    return;
+  }
+
   const currentRequest = ++requestId;
 
   startFakeProgress();
 
-  fetch(CONFIG.API_URL + "?view=new")
-    .then(res => res.json())
+  fetchConfigApi_("new")
     .then(data => {
       if (currentRequest !== requestId) {
         stopFakeProgress();
@@ -50,11 +60,45 @@ function loadLiveView(view) {
 
       stopFakeProgress();
 
+      if (liveCache) {
+        renderLiveFromCache(view);
+        return;
+      }
+
       app.innerHTML =
         `<p class="error">Failed to load data.</p>`;
 
       console.error(error);
     });
+}
+
+function refreshLiveCacheInBackground_() {
+  if (liveBackgroundRefreshPromise_) {
+    return liveBackgroundRefreshPromise_;
+  }
+
+  liveBackgroundRefreshPromise_ = fetchConfigApi_("new")
+    .then(data => {
+      liveCache = data;
+      liveCacheTime = Date.now();
+
+      if (data.counts) {
+        updateAllButtonCounts(data.counts);
+      }
+
+      if (isLiveView(currentView)) {
+        renderLiveFromCache(currentView);
+        applyCurrentSearch_();
+      }
+    })
+    .catch(error => {
+      console.error("Live background refresh failed:", error);
+    })
+    .finally(() => {
+      liveBackgroundRefreshPromise_ = null;
+    });
+
+  return liveBackgroundRefreshPromise_;
 }
 
 function renderLiveFromCache(view) {
