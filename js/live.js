@@ -129,7 +129,7 @@ function getClientFilteredLivePlayers(players, view) {
     )
     .sort((a, b) => {
       if (
-        view === "viewers" ||
+        view === "hot" ||
         view === "kr" ||
         view === "jp" ||
         view === "en" ||

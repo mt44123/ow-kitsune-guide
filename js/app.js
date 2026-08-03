@@ -1010,13 +1010,21 @@ function updateFavoriteCounts_() {
 
   document
     .querySelectorAll(
-      '[data-view="goats"], [data-view="favorites"]'
+      '[data-view="goats"], [data-view="archivegoats"], [data-view="favorites"]'
     )
     .forEach(btn => {
       switch (btn.dataset.view) {
         case "goats":
           btn.textContent = `★ (${liveCount})`;
           break;
+
+        case "archivegoats": {
+          const archiveCount = (archiveCache || []).filter(
+            a => favSet.has(a.name)
+          ).length;
+          btn.textContent = `★ (${archiveCount})`;
+          break;
+        }
 
         case "favorites":
           btn.textContent = `★ (${favoriteCount})`;
@@ -1154,26 +1162,49 @@ howtoNavButton?.addEventListener(
 );
 
 function viewToPath_(view) {
-  if (!view || view === "new") return "/";
-  return "/" + encodeURIComponent(view);
+  const id = normalizeViewId_(view);
+  if (!id) return "/";
+
+  // Players ★ MY GOATS list uses /goats (same path as LIVE ★).
+  if (id === "favorites") return "/goats";
+
+  return "/" + encodeURIComponent(id);
+}
+
+function normalizeViewId_(view) {
+  const id = String(view || "").trim();
+  if (!id) return "";
+
+  // Old LIVE HOT path/query used "viewers".
+  if (id === "viewers") return "hot";
+
+  return id;
 }
 
 function setViewUrl_(view, push = false) {
-  const url = viewToPath_(view);
+  const id = normalizeViewId_(view) || String(view || "");
+  const url = viewToPath_(id);
+  const state = { view: id };
 
   if (push) {
-    history.pushState({}, "", url);
+    history.pushState(state, "", url);
   } else {
-    history.replaceState({}, "", url);
+    history.replaceState(state, "", url);
   }
 }
 
 function migrateLegacyViewUrl_() {
   const params = new URLSearchParams(location.search);
   const legacyView = params.get("view");
-  if (!legacyView) return;
-
   const path = location.pathname || "/";
+
+  // Old Players ★ path.
+  if (path === "/favorites" || path === "/favorites/") {
+    history.replaceState({ view: "favorites" }, "", "/goats");
+    return;
+  }
+
+  if (!legacyView) return;
 
   // Detail pages: drop a misleading ?view= left by old relative updates.
   if (path.startsWith("/player/") || path.startsWith("/team/")) {
@@ -1181,7 +1212,8 @@ function migrateLegacyViewUrl_() {
     return;
   }
 
-  history.replaceState({}, "", viewToPath_(legacyView));
+  const id = normalizeViewId_(legacyView) || legacyView;
+  history.replaceState({ view: id }, "", viewToPath_(id));
 }
 
 function getViewFromLocation_() {
@@ -1200,12 +1232,37 @@ function getViewFromLocation_() {
     return "new";
   }
 
-  const view = decodeURIComponent(path.slice(1).split("/")[0] || "");
-  return view || "new";
+  // /goats is shared by LIVE ★ and Players ★; history.state disambiguates.
+  if (path === "/goats" || path === "/favorites") {
+    const stateView = history.state && history.state.view;
+    if (stateView === "favorites") return "favorites";
+    if (stateView === "goats") return "goats";
+    // Cold load / shared links default to LIVE ★.
+    return path === "/favorites" ? "favorites" : "goats";
+  }
+
+  const raw = decodeURIComponent(path.slice(1).split("/")[0] || "");
+  const view = normalizeViewId_(raw) || "new";
+
+  // Rewrite retired aliases onto the canonical path.
+  if (raw && view !== raw) {
+    history.replaceState({ view }, "", viewToPath_(view));
+  }
+
+  return view;
 }
 
 migrateLegacyViewUrl_();
 let currentView = getViewFromLocation_();
+
+// Canonical LIVE NEW path is /new (keep / as an alias).
+if (
+  currentView === "new" &&
+  ((location.pathname || "/") === "/" ||
+    location.pathname === "/index.html")
+) {
+  history.replaceState({ view: "new" }, "", "/new");
+}
 
 let currentRoleFilter =
   localStorage.getItem("roleFilter") || "all";
@@ -1413,6 +1470,7 @@ const titles = {
   new: "NEW",
   goats: "★MY GOATS",
   viewers: "HOT",
+  hot: "HOT",
   kr: "KR",
   en: "EN",
   cn: "CN",
@@ -1438,6 +1496,7 @@ const titles = {
   chzzkbestclips: "CHZZK BEST",
 
   archive: "ARCHIVE",
+  archivegoats: "★MY GOATS",
   archivekr: "KR",
   archiveen: "EN",
   archivecn: "CN",
@@ -1529,7 +1588,7 @@ const VIEW_GROUPS = {
   live: [
  "new",
  "goats",
- "viewers",
+ "hot",
  "kr",
  "en",
  "cn",
@@ -1569,6 +1628,7 @@ const VIEW_GROUPS = {
 
   archive: [
     "archive",
+    "archivegoats",
     "archivekr",
     "archiveen",
     "archivecn",

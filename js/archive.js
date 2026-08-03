@@ -67,6 +67,7 @@ function loadArchiveView(view) {
 function renderArchiveFromCache(view) {
   currentData = filterArchiveView_(archiveCache || [], view);
   renderArchive(filterArchive(currentData));
+  updateFavoriteCounts_();
   applyCurrentSearch_();
 }
 
@@ -75,6 +76,11 @@ function matchArchiveViewClient_(a, view) {
   const language = String(a.language || "").toUpperCase();
 
   switch (view) {
+    case "archivegoats": {
+      const favSet = new Set(getFavorites_());
+      return favSet.has(a.name);
+    }
+
     case "archivekr":
       return (
         platform.includes("CHZZK") ||

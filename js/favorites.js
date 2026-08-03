@@ -35,6 +35,7 @@ function toggleFavorite_(name) {
 }
 
 function loadFavoritesView() {
+  setViewUrl_("favorites");
 
   updateFavoriteCounts_();
   const now = Date.now();

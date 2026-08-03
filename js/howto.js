@@ -267,7 +267,7 @@ function loadHowtoView() {
           `
             <ul>
               <li><b>NEW</b> — newest first</li>
-              <li><b>★</b> — MY GOATS streams only</li>
+              <li><b>★</b> — MY GOATS streams only (LIVE and ARCHIVE)</li>
               <li><b>HOT</b> — sorted by viewers</li>
               <li><b>KR / EN / CN / JP / INTL / OWCS / FACEIT</b> — region or circuit filters</li>
               <li>Tap a card to open the stream. Use the card menu for ★ / Mute and more</li>
@@ -276,7 +276,7 @@ function loadHowtoView() {
           `
             <ul>
               <li><b>NEW</b> — 新しい順</li>
-              <li><b>★</b> — MY GOATS の配信だけ</li>
+              <li><b>★</b> — MY GOATS の配信だけ（LIVE / ARCHIVE）</li>
               <li><b>HOT</b> — 視聴者順</li>
               <li><b>KR / EN / CN / JP / INTL / OWCS / FACEIT</b> — 地域・大会系</li>
               <li>カードをタップで配信元へ。メニューから ★ / Mute など</li>
