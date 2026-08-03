@@ -107,12 +107,6 @@ function loadToolsView() {
               <p>
                 For YouTube videos, open the transcript ("Show transcript"), copy the text, and paste it into ChatGPT. It can translate long interviews, stream clips, and match discussions with better context than most translation tools.
               </p>
-              <p>
-                Chrome Live Caption subtitles cannot be directly selected or copied. If needed, you can use an OCR tool to extract text from the screen and then paste it into ChatGPT or another AI assistant.
-              </p>
-              <p>
-                Below are some OCR tools that I personally use.
-              </p>
             `,
             `
               <p>
@@ -121,6 +115,33 @@ function loadToolsView() {
               <p>
                 YouTube動画の場合は、「文字起こし（文字起こしを表示）」を開いて内容をコピーし、ChatGPTに貼り付けるだけです。長いインタビューや配信内容、試合の振り返りなども文脈を考慮して翻訳してくれます。
               </p>
+            `
+          )}
+
+          <figure class="tool-screenshot">
+            <img
+              src="/images/youtube-show-transcript.png"
+              alt="YouTube: Show transcript / 文字起こしを表示"
+              loading="lazy"
+            >
+            <figcaption>
+              ${siteText_(
+                `Look for <b>Show transcript</b> under the video description.`,
+                `動画の説明欄の下にある <b>文字起こしを表示</b> を開きます。`
+              )}
+            </figcaption>
+          </figure>
+
+          ${siteText_(
+            `
+              <p>
+                Chrome Live Caption subtitles cannot be directly selected or copied. If needed, you can use an OCR tool to extract text from the screen and then paste it into ChatGPT or another AI assistant.
+              </p>
+              <p>
+                Below are some OCR tools that I personally use.
+              </p>
+            `,
+            `
               <p>
                 Chromeの自動字幕起こしは直接選択やコピーができません。その場合はOCRソフトで画面内の文字を読み取り、テキスト化してからChatGPTなどのAIに貼り付ける方法もおすすめです。
               </p>
