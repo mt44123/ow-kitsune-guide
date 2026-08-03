@@ -256,7 +256,6 @@ function renderClipCard_(c) {
       c.titleKr || ""
     );
 
-  const logoPath = getTeamLogoPath_(c.team);
   const isFav = isFavorite_(c.name);
 
   return `
@@ -330,17 +329,7 @@ function renderClipCard_(c) {
 
                 </div>
 
-        ${
-          logoPath
-            ? `<img
-                class="card-team-watermark"
-                src="${logoPath}"
-                alt=""
-                loading="lazy"
-                onerror="this.remove()"
-              >`
-            : ""
-        }
+        ${renderCardTeamWatermarks_(c)}
 
       </div>
     </a>

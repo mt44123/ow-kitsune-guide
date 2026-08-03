@@ -2876,7 +2876,7 @@ function getTeamLogoPath_(team, useLightTheme = true, forceLightLogo = false) {
 
   const name = String(team || "").trim();
 
-  if (!name || name === "No team") return "";
+  if (!name || name === "No team" || name === "-") return "";
 
   const file =
     encodeURIComponent(
@@ -2927,6 +2927,85 @@ function getTeamLogoPath_(team, useLightTheme = true, forceLightLogo = false) {
   }
 
   return `/TeamLogo/${file}.png`;
+}
+
+function getPlayerOwwcTeam_(p) {
+  const direct = String(p?.owwcTeam || "").trim();
+
+  if (direct && direct !== "-") {
+    return direct;
+  }
+
+  const name = String(p?.name || "").trim();
+
+  if (!name || !Array.isArray(playerLinksCache)) {
+    return "";
+  }
+
+  const hit = playerLinksCache.find(x => x.name === name);
+  return String(hit?.owwcTeam || "").trim();
+}
+
+function getCardTeamLogoPaths_(p) {
+  const paths = [];
+  const seen = new Set();
+
+  function addTeam_(team) {
+    const name = String(team || "").trim();
+    if (!name || name === "-" || name === "No team") return;
+
+    const path = getTeamLogoPath_(name);
+    if (!path || seen.has(path)) return;
+
+    seen.add(path);
+    paths.push(path);
+  }
+
+  // OWWC national logo on the left, club logo on the right.
+  addTeam_(getPlayerOwwcTeam_(p));
+  addTeam_(p?.team);
+
+  return paths;
+}
+
+function renderCardTeamWatermarks_(p) {
+  const paths = getCardTeamLogoPaths_(p);
+
+  if (!paths.length) return "";
+
+  return `
+    <div class="card-team-watermarks">
+      ${paths.map(src => `
+        <img
+          class="card-team-watermark"
+          src="${src}"
+          alt=""
+          loading="lazy"
+          onerror="this.remove()"
+        >
+      `).join("")}
+    </div>
+  `;
+}
+
+function renderPlayerDetailTeamLogos_(player) {
+  const paths = getCardTeamLogoPaths_(player);
+
+  if (!paths.length) return "";
+
+  return `
+    <div class="player-detail-team-logos">
+      ${paths.map(src => `
+        <img
+          class="player-detail-team-logo"
+          src="${src}"
+          alt=""
+          loading="lazy"
+          onerror="this.remove()"
+        >
+      `).join("")}
+    </div>
+  `;
 }
 
 async function init() {

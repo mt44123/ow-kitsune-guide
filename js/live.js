@@ -278,7 +278,6 @@ function renderLiveGrid_(players) {
   }
 
   app.innerHTML = players.map(p => {
-    const logoPath = getTeamLogoPath_(p.team);
     const isLive = isPlayerLive_(p);
     const isFav = isFavorite_(p.name);
 
@@ -356,17 +355,7 @@ function renderLiveGrid_(players) {
               : ""
           }
 
-          ${
-            logoPath
-              ? `<img
-                  class="card-team-watermark"
-                  src="${logoPath}"
-                  alt=""
-                  loading="lazy"
-                  onerror="this.remove()"
-                >`
-              : ""
-          }
+          ${renderCardTeamWatermarks_(p)}
 
         </div>
       </a>

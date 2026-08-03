@@ -305,7 +305,6 @@ function renderPlayerLinksGrid_(players, options = {}) {
     <div class="player-links-grid">
       ${players.map(p => {
         const isFav = favSet.has(p.name);
-        const logoPath = getTeamLogoPath_(p.team);
 
         return `
         <div
@@ -318,17 +317,7 @@ function renderPlayerLinksGrid_(players, options = {}) {
           data-nationality="${(p.nationality || "").toLowerCase()}"
           data-role="${(p.role || "").toLowerCase()}"
         >
-          ${
-            logoPath
-              ? `<img
-                  class="card-team-watermark"
-                  src="${logoPath}"
-                  alt=""
-                  loading="lazy"
-                  onerror="this.remove()"
-                >`
-              : ""
-          }
+          ${renderCardTeamWatermarks_(p)}
 
           <div class="player-link-name-row">
             <span
@@ -822,7 +811,6 @@ function renderPlayerDetail(name, players) {
       : "";
 
   const isFav = isFavorite_(player.name);
-  const logoPath = getTeamLogoPath_(player.team);
 
   const latestVideo =
     youtubeCache?.find(v => v.name === player.name);
@@ -859,17 +847,7 @@ function renderPlayerDetail(name, players) {
 
   app.innerHTML = `
     <div class="card player-detail-card">
-    ${
-      logoPath
-        ? `<img
-            class="player-detail-team-logo"
-            src="${logoPath}"
-            alt=""
-            loading="lazy"
-            onerror="this.remove()"
-          >`
-        : ""
-    }
+    ${renderPlayerDetailTeamLogos_(player)}
       <div class="player-detail-title-row">
 
         <div class="player-detail-name-wrap">

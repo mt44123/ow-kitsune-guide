@@ -147,7 +147,6 @@ function renderYoutubeCard_(v) {
       v.titleKr || ""
     );
 
-  const logoPath = getTeamLogoPath_(v.team);
   const isFav = isFavorite_(v.name);
 
   return `
@@ -220,17 +219,7 @@ function renderYoutubeCard_(v) {
           </div>
                 </div>
 
-        ${
-          logoPath
-            ? `<img
-                class="card-team-watermark"
-                src="${logoPath}"
-                alt=""
-                loading="lazy"
-                onerror="this.remove()"
-              >`
-            : ""
-        }
+        ${renderCardTeamWatermarks_(v)}
 
       </div>
     </a>

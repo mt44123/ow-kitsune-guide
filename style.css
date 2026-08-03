@@ -1564,6 +1564,19 @@ display:none;
   overflow:hidden;
 }
 
+.card-team-watermarks{
+  position:absolute;
+  right:18px;
+  bottom:14px;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px;
+  pointer-events:none;
+  z-index:0;
+}
+
 .card-team-watermark{
   position:absolute;
   right:18px;
@@ -1576,7 +1589,13 @@ display:none;
   z-index:0;
 }
 
-.card > *:not(.card-team-watermark){
+.card-team-watermarks .card-team-watermark{
+  position:static;
+  right:auto;
+  bottom:auto;
+}
+
+.card > *:not(.card-team-watermark):not(.card-team-watermarks){
   position:relative;
   z-index:1;
 }
@@ -1813,6 +1832,11 @@ min-width:0;
 .youtube-card{
   position:relative;
   overflow:hidden;
+}
+
+.youtube-card > *:not(.card-team-watermark):not(.card-team-watermarks){
+  position:relative;
+  z-index:1;
 }
 
 /* =========================================================
@@ -2331,6 +2355,20 @@ color:var(--platform-twitch-inactive);
   overflow:hidden;
 }
 
+.player-link-card .card-team-watermarks{
+  position:absolute;
+  right:18px;
+  bottom:14px;
+  top:auto;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px;
+  pointer-events:none;
+  z-index:0;
+}
+
 .player-link-card .card-team-watermark{
   position:absolute;
   right:18px;
@@ -2347,7 +2385,14 @@ color:var(--platform-twitch-inactive);
   z-index:0;
 }
 
-.player-link-card > *:not(.card-team-watermark){
+.player-link-card .card-team-watermarks .card-team-watermark{
+  position:static;
+  right:auto;
+  bottom:auto;
+  top:auto;
+}
+
+.player-link-card > *:not(.card-team-watermark):not(.card-team-watermarks){
   position:relative;
   z-index:2;
 }
@@ -4245,6 +4290,18 @@ body.player-detail-view #app{
   overflow:hidden;
 }
 
+.player-detail-team-logos{
+  position:absolute;
+  right:-30px;
+  bottom:-30px;
+  display:flex;
+  flex-direction:row;
+  align-items:flex-end;
+  justify-content:flex-end;
+  gap:12px;
+  pointer-events:none;
+}
+
 .player-detail-team-logo{
   position:absolute;
   right:-30px;
@@ -4254,6 +4311,14 @@ body.player-detail-view #app{
   object-fit:contain;
   opacity:.08;
   pointer-events:none;
+}
+
+.player-detail-team-logos .player-detail-team-logo{
+  position:static;
+  right:auto;
+  bottom:auto;
+  width:150px;
+  max-height:150px;
 }
 
 .player-detail-section{

@@ -202,7 +202,6 @@ function renderArchiveGrid_(items) {
 }
 
 function renderArchiveCard_(a) {
-  const logoPath = getTeamLogoPath_(a.team);
   const isFav = isFavorite_(a.name);
 
   const { mainTitle, subTitles } =
@@ -269,17 +268,7 @@ function renderArchiveCard_(a) {
             : ""
         }
 
-        ${
-          logoPath
-            ? `<img
-                class="card-team-watermark"
-                src="${logoPath}"
-                alt=""
-                loading="lazy"
-                onerror="this.remove()"
-              >`
-            : ""
-        }
+        ${renderCardTeamWatermarks_(a)}
 
       </div>
     </a>
