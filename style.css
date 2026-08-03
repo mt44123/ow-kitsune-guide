@@ -1941,26 +1941,55 @@ width:max-content;
 
 .player-table.player-table-resizable{
   table-layout:fixed;
+  width:auto;
+  min-width:0 !important;
+  max-width:none;
 }
 
 .player-table.player-table-resizable th,
 .player-table.player-table-resizable td{
   min-width:0 !important;
-  max-width:none;
-  overflow:hidden;
+  max-width:none !important;
+  overflow:hidden !important;
   text-overflow:ellipsis;
+  white-space:nowrap !important;
+  box-sizing:border-box;
+  padding-left:4px;
+  padding-right:4px;
+}
+
+.player-table.player-table-resizable th{
+  padding-right:8px;
 }
 
 .player-table.player-table-resizable .team-link,
-.player-table.player-table-resizable .player-name-wrap,
 .player-table.player-table-resizable .player-name-link,
 .player-table.player-table-resizable .player-name-text,
-.player-table.player-table-resizable .last-stream-link{
+.player-table.player-table-resizable .last-stream-link,
+.player-table.player-table-resizable .last-stream-link span{
   display:block;
+  width:100%;
   max-width:100%;
+  min-width:0 !important;
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
+  box-sizing:border-box;
+}
+
+.player-table.player-table-resizable .last-stream-link{
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+
+.player-table.player-table-resizable .last-stream-link .platform-icons{
+  flex:0 0 auto;
+}
+
+.player-table.player-table-resizable .last-stream-link span{
+  flex:1 1 auto;
+  width:auto;
 }
 
 .player-table.player-table-resizable .player-name-wrap{
@@ -1968,6 +1997,8 @@ width:max-content;
   align-items:center;
   gap:4px;
   min-width:0;
+  max-width:100%;
+  overflow:hidden;
 }
 
 .player-table.player-table-resizable .player-name-wrap .favorite-star{
@@ -1977,7 +2008,7 @@ width:max-content;
 .player-table.player-table-resizable .player-name-wrap .player-name-link,
 .player-table.player-table-resizable .player-name-wrap .player-name-text{
   flex:1 1 auto;
-  min-width:0;
+  min-width:0 !important;
 }
 
 .player-table th,

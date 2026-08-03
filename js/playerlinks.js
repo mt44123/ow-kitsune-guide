@@ -679,7 +679,7 @@ function savePlayerTableColWidths_(table) {
     const key = th.dataset.colKey;
     if (!key) return;
 
-    const width = Math.round(th.getBoundingClientRect().width);
+    const width = parseInt(th.dataset.colWidth || "0", 10);
     if (width > 0) widths[key] = width;
   });
 
@@ -687,6 +687,36 @@ function savePlayerTableColWidths_(table) {
     PLAYER_TABLE_COL_WIDTHS_KEY_,
     JSON.stringify(widths)
   );
+}
+
+function syncPlayerTableColWidths_(table, cols, ths) {
+  let total = 0;
+
+  ths.forEach((th, index) => {
+    const widthPx = Math.max(
+      0,
+      parseInt(th.dataset.colWidth || "0", 10)
+    );
+
+    const width = `${widthPx}px`;
+
+    th.dataset.colWidth = String(widthPx);
+    th.style.width = width;
+    th.style.minWidth = "0";
+    th.style.maxWidth = width;
+
+    if (cols[index]) {
+      cols[index].style.width = width;
+      cols[index].style.minWidth = "0";
+    }
+
+    total += widthPx;
+  });
+
+  if (total > 0) {
+    table.style.width = `${total}px`;
+    table.style.minWidth = `${total}px`;
+  }
 }
 
 function setupPlayerTableColumnResize_() {
@@ -709,6 +739,7 @@ function setupPlayerTableColumnResize_() {
   const cols = Array.from(colgroup.querySelectorAll("col"));
   const saved = loadPlayerTableColWidths_();
 
+  // Measure natural widths before switching to fixed layout.
   ths.forEach((th, index) => {
     const key =
       th.dataset.colKey ||
@@ -719,18 +750,15 @@ function setupPlayerTableColumnResize_() {
 
     const widthPx =
       saved[key] ||
-      Math.round(th.getBoundingClientRect().width);
+      Math.max(8, Math.round(th.getBoundingClientRect().width));
 
-    if (widthPx > 0) {
-      const width = `${widthPx}px`;
-      th.style.width = width;
-      th.style.minWidth = width;
+    th.dataset.colWidth = String(widthPx);
+  });
 
-      if (cols[index]) {
-        cols[index].style.width = width;
-      }
-    }
+  table.classList.add("player-table-resizable");
+  syncPlayerTableColWidths_(table, cols, ths);
 
+  ths.forEach((th, index) => {
     if (th.querySelector(".col-resize-handle")) return;
 
     const handle = document.createElement("span");
@@ -739,21 +767,20 @@ function setupPlayerTableColumnResize_() {
     th.appendChild(handle);
 
     const startResize_ = (clientX) => {
-      const startWidth = th.getBoundingClientRect().width;
+      const startWidth = parseInt(th.dataset.colWidth || "0", 10) ||
+        Math.round(th.getBoundingClientRect().width);
 
       table.classList.add("is-col-resizing");
       document.body.classList.add("is-col-resizing");
 
       const onMove_ = (moveX) => {
-        const nextWidth = Math.max(8, Math.round(startWidth + (moveX - clientX)));
-        const width = `${nextWidth}px`;
+        const nextWidth = Math.max(
+          0,
+          Math.round(startWidth + (moveX - clientX))
+        );
 
-        th.style.width = width;
-        th.style.minWidth = width;
-
-        if (cols[index]) {
-          cols[index].style.width = width;
-        }
+        th.dataset.colWidth = String(nextWidth);
+        syncPlayerTableColWidths_(table, cols, ths);
       };
 
       const onMouseMove_ = (e) => {
@@ -804,8 +831,6 @@ function setupPlayerTableColumnResize_() {
       e.stopPropagation();
     });
   });
-
-  table.classList.add("player-table-resizable");
 }
 
 function searchPlayerLinksTable() {
