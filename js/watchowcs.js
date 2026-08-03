@@ -30,8 +30,7 @@ function loadWatchOwcsView() {
 
       <div class="card faq-card">
         <h3>
-          🦊 New to OWCS?<br>
-          🦊 OWCSは初めて？
+          ${siteHeading_("🦊 New to OWCS?", "🦊 OWCSは初めて？")}
         </h3>
         ${siteText_(
           `
@@ -60,8 +59,7 @@ function loadWatchOwcsView() {
 
       <div class="card faq-card">
         <h3>
-          🏆 What is OWCS?<br>
-          🏆 OWCSとは？
+          ${siteHeading_("🏆 What is OWCS?", "🏆 OWCSとは？")}
         </h3>
         ${siteText_(
           `
@@ -115,8 +113,7 @@ function loadWatchOwcsView() {
 
       <div class="card faq-card">
         <h3>
-          🗺️ How a season works<br>
-          🗺️ シーズンの流れ
+          ${siteHeading_("🗺️ How a season works", "🗺️ シーズンの流れ")}
         </h3>
         ${siteText_(
           `
@@ -151,8 +148,7 @@ function loadWatchOwcsView() {
 
       <div class="card faq-card">
         <h3>
-          ✨ What’s fun to watch<br>
-          ✨ 何が面白い？
+          ${siteHeading_("✨ What’s fun to watch", "✨ 何が面白い？")}
         </h3>
         ${siteText_(
           `
@@ -180,8 +176,7 @@ function loadWatchOwcsView() {
 
       <div class="card faq-card">
         <h3>
-          👀 How to start watching<br>
-          👀 初心者の観戦スタート
+          ${siteHeading_("👀 How to start watching", "👀 初心者の観戦スタート")}
         </h3>
         ${siteText_(
           `
@@ -237,49 +232,48 @@ function loadWatchOwcsView() {
 
       <div class="card faq-card">
         <h3>
-          📖 Terms worth knowing<br>
-          📖 最初に覚えたい用語
+          ${siteHeading_("📖 Terms worth knowing", "📖 最初に覚えたい用語")}
         </h3>
         <div class="howto-glossary-wrap">
           <table class="howto-glossary">
             <thead>
               <tr>
                 <th>Term</th>
-                <th>${siteText_("Meaning", "意味")}</th>
+                <th>${siteHeading_("Meaning", "意味")}</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><b>Ult</b></td>
-                <td>${siteText_("Ultimate ability", "アルティメット（必殺）")}</td>
+                <td>${siteHeading_("Ultimate ability", "アルティメット（必殺）")}</td>
               </tr>
               <tr>
                 <td><b>Pick</b></td>
-                <td>${siteText_("Eliminating one enemy", "敵を1人倒すこと")}</td>
+                <td>${siteHeading_("Eliminating one enemy", "敵を1人倒すこと")}</td>
               </tr>
               <tr>
                 <td><b>Dive</b></td>
-                <td>${siteText_("Jump in together on a target", "一気に飛び込む戦術")}</td>
+                <td>${siteHeading_("Jump in together on a target", "一気に飛び込む戦術")}</td>
               </tr>
               <tr>
                 <td><b>Rush</b></td>
-                <td>${siteText_("Push through as a group", "正面から押し切る戦術")}</td>
+                <td>${siteHeading_("Push through as a group", "正面から押し切る戦術")}</td>
               </tr>
               <tr>
                 <td><b>Hitscan</b></td>
-                <td>${siteText_("Hits instantly on aim", "照準どおり即着弾の武器系統")}</td>
+                <td>${siteHeading_("Hits instantly on aim", "照準どおり即着弾の武器系統")}</td>
               </tr>
               <tr>
                 <td><b>Flex</b></td>
-                <td>${siteText_("Player who covers many heroes", "幅広いヒーローを使える選手")}</td>
+                <td>${siteHeading_("Player who covers many heroes", "幅広いヒーローを使える選手")}</td>
               </tr>
               <tr>
                 <td><b>Ft3 / Ft4</b></td>
-                <td>${siteText_("First to 3 / 4 maps", "先に3（4）マップ取った方が勝ち")}</td>
+                <td>${siteHeading_("First to 3 / 4 maps", "先に3（4）マップ取った方が勝ち")}</td>
               </tr>
               <tr>
                 <td><b>Lower bracket</b></td>
-                <td>${siteText_("Second-chance side in double-elim", "ダブルエリミの敗者側ブラケット")}</td>
+                <td>${siteHeading_("Second-chance side in double-elim", "ダブルエリミの敗者側ブラケット")}</td>
               </tr>
             </tbody>
           </table>
@@ -292,8 +286,7 @@ function loadWatchOwcsView() {
 
       <div class="card faq-card">
         <h3>
-          📺 Where to watch<br>
-          📺 どこで見る？
+          ${siteHeading_("📺 Where to watch", "📺 どこで見る？")}
         </h3>
         ${siteText_(
           `
@@ -358,8 +351,7 @@ function loadWatchOwcsView() {
 
       <div class="card faq-card">
         <h3>
-          ❓ Beginner FAQ<br>
-          ❓ よくある質問
+          ${siteHeading_("❓ Beginner FAQ", "❓ よくある質問")}
         </h3>
         ${siteText_(
           `
@@ -418,8 +410,10 @@ function loadWatchOwcsView() {
 
       <div class="card faq-card">
         <h3>
-          🦊 Enjoy more with OW KITSUNE GUIDE<br>
-          🦊 このサイトでさらに楽しむ
+          ${siteHeading_(
+            "🦊 Enjoy more with OW KITSUNE GUIDE",
+            "🦊 このサイトでさらに楽しむ"
+          )}
         </h3>
         ${siteText_(
           `
@@ -483,8 +477,7 @@ function loadWatchOwcsView() {
 
       <div class="card faq-card">
         <h3>
-          ✅ Start simple<br>
-          ✅ まずはシンプルに
+          ${siteHeading_("✅ Start simple", "✅ まずはシンプルに")}
         </h3>
         ${siteText_(
           `

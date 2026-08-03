@@ -36,6 +36,21 @@ function siteText_(enHtml, jpHtml) {
   `;
 }
 
+/** Card/FAQ headings: EN only / JP only / both with <br> (no <hr>). */
+function siteHeading_(enHtml, jpHtml) {
+  const mode = getSiteTextLanguageMode_();
+
+  if (mode === "en") {
+    return enHtml;
+  }
+
+  if (mode === "jp") {
+    return jpHtml;
+  }
+
+  return `${enHtml}<br>${jpHtml}`;
+}
+
 function buildMediaTitles_(raw, jp, en, kr) {
   const mode = getTitleLanguageMode_();
 
