@@ -35,23 +35,25 @@ function loadWatchOwcsView() {
         ${siteText_(
           `
             <p>
-              A short map of Overwatch’s main competitive circuit — what OWCS is,
-              how a season feels, and how to start watching without learning every
-              term first.
+              “I keep hearing about OWCS — what tournament is that?”<br>
+              “What do Overwatch pro matches even look like?”<br>
+              “I open a stream and still feel lost…”
             </p>
             <p>
-              For exact times, drops, and stage-specific details, use the official
-              viewers guides and schedule. This page stays focused on beginner basics.
+              This page covers OWCS basics and simple ways beginners can enjoy watching —
+              without needing pro-level knowledge first.
             </p>
           `,
           `
             <p>
-              Overwatch 公式のメイン大会サーキット「OWCS」の全体像と、
-              最初の観戦のコツだけまとめました。専門用語は最小限です。
+              「OWCSってよく聞くけど、何の大会？」<br>
+
+              「Overwatchのプロってどんな試合をしているの？」<br>
+
+              「配信を見てもよく分からない…」<br>
             </p>
             <p>
-              日程・ドロップ・今ステージ固有の情報は公式の Viewers Guide や
-              スケジュールを見てください。ここはすぐ古くならない「入り口」です。
+              そんな方のために、このページではOWCSの基本から、初心者でも楽しめる観戦方法までを分かりやすく紹介します。
             </p>
           `
         )}
@@ -64,48 +66,41 @@ function loadWatchOwcsView() {
         ${siteText_(
           `
             <p>
-              <b>OWCS (Overwatch Champions Series)</b> is the main official esports
-              circuit for Overwatch 2.
+              <b>OWCS (Overwatch Champions Series)</b> is Overwatch’s official
+              international tournament series.
             </p>
             <p>
-              Top teams compete in their regions through the year. Strong results
-              lead to international live events, where regions meet and a season’s
-              biggest titles are decided.
+              Teams that advance through each region’s qualifiers move on to
+              international events — where the world’s best is decided.
             </p>
-            <p>Main regions you’ll hear about:</p>
+            <p>Participating regions:</p>
             <ul>
-              <li>Korea</li>
-              <li>Japan / Pacific</li>
-              <li>North America (NA)</li>
-              <li>EMEA</li>
+              <li>Asia (Japan, Korea, Pacific)</li>
+              <li>NA (North America)</li>
+              <li>EMEA (Europe, Middle East, Africa)</li>
               <li>China</li>
             </ul>
             <p>
-              You don’t need to follow every region. One region + the big
-              international weekends is enough to start.
+              You don’t need to follow everything. Starting with “your favorite
+              region + international events” is enough.
             </p>
           `,
           `
             <p>
-              <b>OWCS（Overwatch Champions Series）</b> は、Overwatch 2 の公式メイン
-              eスポーツサーキットです。
+              <b>OWCS（Overwatch Champions Series）</b> は、Overwatchの公式国際大会シリーズです。
             </p>
             <p>
-              各地域でトップチームが戦い、好成績を残したチームが国際ライブイベントへ
-              進みます。そこで地域を超えた強豪がぶつかり、シーズンの大きなタイトルが
-              決まります。
+              各地域の予選を突破したチームが国際大会へ進み、世界一が決まります。
             </p>
-            <p>よく聞く地域:</p>
+            <p>参加する地域:</p>
             <ul>
-              <li>Korea</li>
-              <li>Japan / Pacific</li>
-              <li>North America（NA）</li>
-              <li>EMEA</li>
+              <li>Asia(Japan, Korea, Pacific)</li>
+              <li>NA（North America）</li>
+              <li>EMEA（Europe, Middle East, Africa）</li>
               <li>China</li>
             </ul>
             <p>
-              全部追う必要はありません。最初は「推しの地域 + 大きな国際大会の週末」で
-              十分です。
+              全部追う必要はありません。最初は「推しの地域 + 国際大会」で十分です。
             </p>
           `
         )}
@@ -117,30 +112,51 @@ function loadWatchOwcsView() {
         </h3>
         ${siteText_(
           `
-            <p>Remember this flow first:</p>
-            <p><b>Regional stages</b> → <b>Regional playoffs</b> → <b>International events</b></p>
+            <p>Remember just this flow first:</p>
             <p>
-              A year usually has multiple <b>Stages</b>. Each Stage is its own chapter
-              of regional play. International events happen more than once a year
-              (for example Champions Clash, Midseason Championship, and later
-              finals-style events) — not a single one-and-done tournament.
+              <b>Open Qualifier</b> (regional open quals) →
+              <b>Regular Season</b> (regional league play) →
+              <b>Regional Playoffs</b> (regional tournament) →
+              <b>International Events</b>
             </p>
             <p>
-              Formats differ by region, but the idea is the same: win at home, then
-              prove it on the world stage.
+              Exact formats differ a little by region, but this cycle happens about
+              3–4 times a year.<br>
+              In other words, there are roughly 3–4 shots each year at becoming
+              #1 in the world.
+            </p>
+            <p>
+              For Japan:<br>
+              Finishing in the <b>top 2 domestically</b> can advance a team to the
+              Asia regional stage.<br>
+              The <b>top 2–3 Asia teams</b> advance to international events.<br>
+              <br>
+              Right now, the Asia power balance is roughly
+              <b>Korea &gt; Pacific / Japan</b>.<br>
+              Under this format, <b>Korean teams advance to internationals about
+              99% of the time</b>.<br>
+              <br>
+              Currently, only the summer <b>EWC</b> lets the #1 teams from Japan and
+              Pacific qualify directly for that international event.
             </p>
           `,
           `
-            <p>まずはこの流れだけ覚えればOKです:</p>
-            <p><b>地域ステージ</b> → <b>地域プレーオフ</b> → <b>国際イベント</b></p>
+            <p>まずはこれだけ覚えればOKです:</p>
+            <p><b>Open Qualifier(地域オープン予選)</b> → <b>Regular Season(地域総当たり戦)</b> → <b>Regional Playoffs(地域トーナメント)</b> → <b>International Events(国際大会)</b></p>
             <p>
-              1年は複数の <b>Stage（ステージ）</b> に分かれます。各ステージで地域大会が
-              あり、国際大会も年に複数回あります（Champions Clash、Midseason Championship、
-              後半の決勝系など）。1本のトーナメントだけ、ではありません。
+              地域ごとに形式は少し違いますが、これが年3～4回あります。<br>
+              つまり、年3～4回、世界1位を目指すチャンスがあります。<br>
             </p>
             <p>
-              方式は地域で違いますが、考え方は同じです。
-              「地域で勝ち上がり → 世界の舞台で証明する」。
+              日本の場合<br>
+              <b>国内上位2チーム</b>に入ることで、アジア地域大会へ進出可能です。<br>
+              <b>アジア上位2~3チーム</b>が国際大会へ進出します。<br>
+              <br>
+              ただし現状、アジア地域のパワーバランスは、<b>韓国＞パシフィック・日本</b>です。<br>
+              この形式で行われる際は<b>99％韓国チームが国際大会へ進出</b>します。<br>
+              <br>
+              現状、夏季に行われるEWCのみ、日本・パシフィックでの1位チームが直接国際大会へ進出可能です。<br>
+            
             </p>
           `
         )}
@@ -152,22 +168,34 @@ function loadWatchOwcsView() {
         </h3>
         ${siteText_(
           `
-            <p>You don’t need pro knowledge. These moments carry the show:</p>
+            <p>You don’t need pro knowledge. The highlights are usually these:</p>
             <ul>
-              <li><b>Aim &amp; mechanics</b> — Pro DPS can end a fight in a blink.</li>
-              <li><b>Teamwork</b> — Tank / DPS / Support only work as a unit of five.</li>
-              <li><b>Drafts &amp; swaps</b> — Hero changes mid-series feel like coaching chess.</li>
-              <li><b>Clutch plays</b> — One save or one pick can flip a map that looked lost.</li>
+              <li>
+                <b>World-class aim &amp; movement</b> — Pro-level mechanics are truly
+                another tier. Super plays come one after another.
+              </li>
+              <li>
+                <b>Teamwork</b> — Full-team voice comms produce coordination you
+                rarely see in ranked.
+              </li>
+              <li>
+                <b>Mind games &amp; strategy</b> — Multiple coaches are involved.
+                Map picks, player subs, bans, and comps can flip entire matches.
+              </li>
+              <li>
+                <b>Face cams &amp; interviews</b> — Player banter, behind-the-scenes
+                stories, and meta talk you won’t get from the scoreboard alone.
+              </li>
             </ul>
-            <p>If something looks amazing, it probably <i>is</i> — enjoy that first.</p>
+            <p>When something looks amazing, just enjoy that moment — you’re right.</p>
           `,
           `
             <p>プロ知識は不要です。見どころはだいたいこれです:</p>
             <ul>
-              <li><b>エイム・操作</b> — プロの DPS は一瞬でファイトを終わらせることがある</li>
-              <li><b>チームワーク</b> — タンク / DPS / サポートの5人が噛み合って初めて強い</li>
-              <li><b>編成・ヒーローチェンジ</b> — シリーズ中の入れ替えは、采配を見ている感覚に近い</li>
-              <li><b>クラッチ</b> — あと1秒、あと1キルで試合がひっくり返る</li>
+              <li><b>世界最高峰のエイム・キャラコン</b> — プロのフィジカルは本当に別次元です。スーパープレイの連続です。</li>
+              <li><b>チームワーク</b> — チーム全員がVCするため、異次元のチームプレーを見ることが出来ます。</li>
+              <li><b>作戦の読み合い</b> — コーチが何人もいます。マップ・選手交代・BAN・構成などの作戦選択によって、試合がひっくり返ります。</li>
+              <li><b>フェイスカメラ・インタビュー</b> — 選手同士のやり取りや、裏話・メタ考察等の情報も得ることが出来ます。</li>
             </ul>
             <p>「すごい」と思った瞬間を素直に楽しむのが正解です。</p>
           `
@@ -195,7 +223,8 @@ function loadWatchOwcsView() {
             <p><b>3. Listen to the casters</b></p>
             <p>
               They tell you who’s winning the fight, why a play was strong, and
-              what’s coming next. Unknown terms are fine — keep watching.
+              what’s coming next. If a term is unfamiliar, a quick search usually
+              clears it up.
             </p>
             <p>
               <b>Bonus:</b> When drop campaigns are live, official streams may give
@@ -219,7 +248,7 @@ function loadWatchOwcsView() {
             <p><b>3. 実況・解説を聞く</b></p>
             <p>
               どちらが有利か、なぜ強かったか、次に何が起きそうかを教えてくれます。
-              知らない用語はスルーでOK。見続ける方が早いです。
+              知らない用語は検索すれば大体わかります。
             </p>
             <p>
               <b>おまけ:</b> ドロップ期間中は、公式配信の視聴でゲーム内報酬が付くことが
@@ -227,60 +256,6 @@ function loadWatchOwcsView() {
               ついでに嬉しい要素です。
             </p>
           `
-        )}
-      </div>
-
-      <div class="card faq-card">
-        <h3>
-          ${siteHeading_("📖 Terms worth knowing", "📖 最初に覚えたい用語")}
-        </h3>
-        <div class="howto-glossary-wrap">
-          <table class="howto-glossary">
-            <thead>
-              <tr>
-                <th>Term</th>
-                <th>${siteHeading_("Meaning", "意味")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><b>Ult</b></td>
-                <td>${siteHeading_("Ultimate ability", "アルティメット（必殺）")}</td>
-              </tr>
-              <tr>
-                <td><b>Pick</b></td>
-                <td>${siteHeading_("Eliminating one enemy", "敵を1人倒すこと")}</td>
-              </tr>
-              <tr>
-                <td><b>Dive</b></td>
-                <td>${siteHeading_("Jump in together on a target", "一気に飛び込む戦術")}</td>
-              </tr>
-              <tr>
-                <td><b>Rush</b></td>
-                <td>${siteHeading_("Push through as a group", "正面から押し切る戦術")}</td>
-              </tr>
-              <tr>
-                <td><b>Hitscan</b></td>
-                <td>${siteHeading_("Hits instantly on aim", "照準どおり即着弾の武器系統")}</td>
-              </tr>
-              <tr>
-                <td><b>Flex</b></td>
-                <td>${siteHeading_("Player who covers many heroes", "幅広いヒーローを使える選手")}</td>
-              </tr>
-              <tr>
-                <td><b>Ft3 / Ft4</b></td>
-                <td>${siteHeading_("First to 3 / 4 maps", "先に3（4）マップ取った方が勝ち")}</td>
-              </tr>
-              <tr>
-                <td><b>Lower bracket</b></td>
-                <td>${siteHeading_("Second-chance side in double-elim", "ダブルエリミの敗者側ブラケット")}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        ${siteText_(
-          `<p>Everything else can wait.</p>`,
-          `<p>それ以外は後回しで大丈夫です。</p>`
         )}
       </div>
 
@@ -357,52 +332,52 @@ function loadWatchOwcsView() {
           `
             <p><b>Can I enjoy it if I don’t play Overwatch?</b></p>
             <p>
-              Yes. Like any sport on TV, you can enjoy skill, stories, and crowd
-              energy before you know every rule.
+              Yes. Like watching soccer on TV, you can enjoy skill and story even
+              when the rules still feel fuzzy at first.
             </p>
             <hr>
             <p><b>Is this the same as OWL?</b></p>
             <p>
-              No. <b>OWL (Overwatch League)</b> was the previous franchise league era.
-              <b>OWCS</b> is the current open, region-based official circuit.
+              OWCS was introduced in 2024 as the successor to the Overwatch League.
             </p>
             <hr>
             <p><b>Is Korea really that strong?</b></p>
             <p>
-              Often yes — Korea has long been one of the deepest regions and
-              frequently contenders at international events. That said, every Stage
-              has upsets.
+              Yes — Korea has long been one of the deepest regions and often sits
+              at the center of international events. That said, every Stage has
+              upsets. EMEA has also been getting stronger recently.
             </p>
             <hr>
             <p><b>What about Japan?</b></p>
             <p>
-              The JP scene has clear standout teams and is absolutely worth watching
-              on its own — especially if you want familiar language or local storylines.
+              Japan has plenty of teams worth watching on their own. Language also
+              makes it easier to follow players’ personal streams, which helps
+              fans stick with their favorites.
             </p>
           `,
           `
             <p><b>ゲームをやってなくても楽しめる？</b></p>
             <p>
-              できます。サッカー中継と同じで、最初はルールが曖昧でも
+              楽しめます。サッカー中継と同じで、最初はルールが曖昧でも
               「上手さ」と「物語」で楽しめます。
             </p>
             <hr>
             <p><b>OWL とは違うの？</b></p>
             <p>
-              違います。<b>OWL（Overwatch League）</b> は以前のフランチャイズリーグです。
-              いま世界で続く公式の主軸が <b>OWCS</b> です。
+              OWCSは、オーバーウォッチリーグの後継として、2024年に導入されました。
             </p>
             <hr>
             <p><b>韓国が強いって本当？</b></p>
             <p>
               長く世界トップクラスの厚みがある地域で、国際大会でも中心になりやすいです。
               ただし毎ステージ、番狂わせもあります。
+              また、最近はEMEA地域も強くなってきています。
             </p>
             <hr>
             <p><b>日本チームは？</b></p>
             <p>
               日本地域にも見どころのあるチームが多く、単独でも十分楽しめます。
-              言語やローカルな物語を追いやすいのも魅力です。
+              言語の関係で、選手の個人配信を追いかけやすい為、応援しやすいのも魅力です。
             </p>
           `
         )}
