@@ -2946,6 +2946,12 @@ function getPlayerOwwcTeam_(p) {
   return String(hit?.owwcTeam || "").trim();
 }
 
+function formatTeamDisplayName_(team) {
+  return String(team || "")
+    .replace(/_/g, " ")
+    .trim();
+}
+
 function getCardTeamLogoPaths_(p) {
   const paths = [];
   const seen = new Set();

@@ -133,31 +133,34 @@ app.innerHTML = `
     <table class="player-table">
       <thead>
         <tr>
-          <th class="sortable sorted-asc" data-sort="teamRegion">Region</th>
-          <th class="sortable" data-sort="team">Team</th>
-          <th class="sortable" data-sort="name">Name</th>
-          <th class="sortable" data-sort="nationality">Nationality</th>
-          <th class="sortable" data-sort="role">Role</th>
-          <th class="sortable" data-sort="age">Age (Born)</th>
-          <th class="sortable" data-sort="laststream">Last Stream</th>
-          <th>TW</th>
-          <th>CHZ</th>
-          <th>SOOP</th>
-          <th>BILI</th>
-          <th>YT</th>
-          <th>X</th>
-          <th>IG</th>
-          <th>DC*</th>
+          <th class="sortable sorted-asc" data-sort="teamRegion" data-col-key="teamRegion">Region</th>
+          <th class="sortable" data-sort="team" data-col-key="team">Team</th>
+          <th class="sortable" data-sort="owwcTeam" data-col-key="owwcTeam">OWWC</th>
+          <th class="sortable" data-sort="name" data-col-key="name">Name</th>
+          <th class="sortable" data-sort="nationality" data-col-key="nationality">Nationality</th>
+          <th class="sortable" data-sort="role" data-col-key="role">Role</th>
+          <th class="sortable" data-sort="age" data-col-key="age">Age (Born)</th>
+          <th class="sortable" data-sort="laststream" data-col-key="laststream">Last Stream</th>
+          <th data-col-key="tw">TW</th>
+          <th data-col-key="chz">CHZ</th>
+          <th data-col-key="soop">SOOP</th>
+          <th data-col-key="bili">BILI</th>
+          <th data-col-key="yt">YT</th>
+          <th data-col-key="x">X</th>
+          <th data-col-key="ig">IG</th>
+          <th data-col-key="dc">DC*</th>
         </tr>
       </thead>
       <tbody>
         ${players.map(p => {
           const isFav = favSet.has(p.name);
+          const owwcTeam = getPlayerOwwcTeam_(p);
 
           return `
           <tr
             data-team-region="${(p.teamRegion || "").toLowerCase()}"
             data-team="${(p.team || "").toLowerCase()}"
+            data-owwc-team="${(owwcTeam || "").toLowerCase()}"
             data-name="${(p.name || "").toLowerCase()}"
             data-team-alias="${(p.teamAlias || "").toLowerCase()}"
             data-player-alias="${(p.playerAlias || "").toLowerCase()}"
@@ -185,6 +188,22 @@ app.innerHTML = `
               >
                 ${escapeHtml(p.team || "-")}
               </button>
+            </td>
+
+            <td class="team-cell ${owwcTeam ? "team-official" : ""}">
+              ${
+                owwcTeam
+                  ? `
+                    <button
+                      type="button"
+                      class="team-link"
+                      data-team-menu="${escapeHtml(owwcTeam)}"
+                    >
+                      ${escapeHtml(formatTeamDisplayName_(owwcTeam))}
+                    </button>
+                  `
+                  : "-"
+              }
             </td>
 
             <td class="name-cell ${getNationalityRegionClass(p.nationality)}">
@@ -257,6 +276,7 @@ app.innerHTML = `
 `;
 
   setupPlayerLinksSort();
+  setupPlayerTableColumnResize_();
 }
 
 function renderPlayerLinksGrid_(players, options = {}) {
@@ -305,12 +325,14 @@ function renderPlayerLinksGrid_(players, options = {}) {
     <div class="player-links-grid">
       ${players.map(p => {
         const isFav = favSet.has(p.name);
+        const owwcTeam = getPlayerOwwcTeam_(p);
 
         return `
         <div
           class="card player-link-card"
           data-team-region="${(p.teamRegion || "").toLowerCase()}"
           data-team="${(p.team || "").toLowerCase()}"
+          data-owwc-team="${(owwcTeam || "").toLowerCase()}"
           data-name="${(p.name || "").toLowerCase()}"
           data-team-alias="${(p.teamAlias || "").toLowerCase()}"
           data-player-alias="${(p.playerAlias || "").toLowerCase()}"
@@ -356,6 +378,21 @@ function renderPlayerLinksGrid_(players, options = {}) {
             >
               ${escapeHtml(p.team || "-")}
             </button>
+
+            ${
+              owwcTeam
+                ? `
+                  <button
+                    type="button"
+                    class="player-detail-meta-pill"
+                    data-team-menu="${escapeHtml(owwcTeam)}"
+                    data-team-liquipedia="${escapeHtml(owwcTeam)}"
+                  >
+                    ${escapeHtml(formatTeamDisplayName_(owwcTeam))}
+                  </button>
+                `
+                : ""
+            }
 
             <button
               type="button"
@@ -623,6 +660,154 @@ function compareText_(aValue, bValue, dir) {
     : -result;
 }
 
+const PLAYER_TABLE_COL_WIDTHS_KEY_ = "playerTableColWidths";
+
+function loadPlayerTableColWidths_() {
+  try {
+    return JSON.parse(
+      localStorage.getItem(PLAYER_TABLE_COL_WIDTHS_KEY_) || "{}"
+    );
+  } catch (e) {
+    return {};
+  }
+}
+
+function savePlayerTableColWidths_(table) {
+  const widths = {};
+
+  table.querySelectorAll("thead th").forEach(th => {
+    const key = th.dataset.colKey;
+    if (!key) return;
+
+    const width = Math.round(th.getBoundingClientRect().width);
+    if (width > 0) widths[key] = width;
+  });
+
+  localStorage.setItem(
+    PLAYER_TABLE_COL_WIDTHS_KEY_,
+    JSON.stringify(widths)
+  );
+}
+
+function setupPlayerTableColumnResize_() {
+  const table = document.querySelector(".player-table");
+  if (!table) return;
+
+  const ths = Array.from(table.querySelectorAll("thead th"));
+  if (!ths.length) return;
+
+  let colgroup = table.querySelector("colgroup");
+
+  if (!colgroup) {
+    colgroup = document.createElement("colgroup");
+    ths.forEach(() => {
+      colgroup.appendChild(document.createElement("col"));
+    });
+    table.insertBefore(colgroup, table.firstChild);
+  }
+
+  const cols = Array.from(colgroup.querySelectorAll("col"));
+  const saved = loadPlayerTableColWidths_();
+
+  ths.forEach((th, index) => {
+    const key =
+      th.dataset.colKey ||
+      th.dataset.sort ||
+      `col${index}`;
+
+    th.dataset.colKey = key;
+
+    const widthPx =
+      saved[key] ||
+      Math.round(th.getBoundingClientRect().width);
+
+    if (widthPx > 0) {
+      const width = `${widthPx}px`;
+      th.style.width = width;
+      th.style.minWidth = width;
+
+      if (cols[index]) {
+        cols[index].style.width = width;
+      }
+    }
+
+    if (th.querySelector(".col-resize-handle")) return;
+
+    const handle = document.createElement("span");
+    handle.className = "col-resize-handle";
+    handle.title = "Drag to resize";
+    th.appendChild(handle);
+
+    const startResize_ = (clientX) => {
+      const startWidth = th.getBoundingClientRect().width;
+
+      table.classList.add("is-col-resizing");
+      document.body.classList.add("is-col-resizing");
+
+      const onMove_ = (moveX) => {
+        const nextWidth = Math.max(36, Math.round(startWidth + (moveX - clientX)));
+        const width = `${nextWidth}px`;
+
+        th.style.width = width;
+        th.style.minWidth = width;
+
+        if (cols[index]) {
+          cols[index].style.width = width;
+        }
+      };
+
+      const onMouseMove_ = (e) => {
+        e.preventDefault();
+        onMove_(e.clientX);
+      };
+
+      const onTouchMove_ = (e) => {
+        if (!e.touches[0]) return;
+        e.preventDefault();
+        onMove_(e.touches[0].clientX);
+      };
+
+      const stop_ = () => {
+        document.removeEventListener("mousemove", onMouseMove_);
+        document.removeEventListener("mouseup", stop_);
+        document.removeEventListener("touchmove", onTouchMove_);
+        document.removeEventListener("touchend", stop_);
+        document.removeEventListener("touchcancel", stop_);
+
+        table.classList.remove("is-col-resizing");
+        document.body.classList.remove("is-col-resizing");
+        savePlayerTableColWidths_(table);
+      };
+
+      document.addEventListener("mousemove", onMouseMove_);
+      document.addEventListener("mouseup", stop_);
+      document.addEventListener("touchmove", onTouchMove_, { passive: false });
+      document.addEventListener("touchend", stop_);
+      document.addEventListener("touchcancel", stop_);
+    };
+
+    handle.addEventListener("mousedown", e => {
+      e.preventDefault();
+      e.stopPropagation();
+      startResize_(e.clientX);
+    });
+
+    handle.addEventListener("touchstart", e => {
+      if (!e.touches[0]) return;
+      e.preventDefault();
+      e.stopPropagation();
+      startResize_(e.touches[0].clientX);
+    }, { passive: false });
+
+    handle.addEventListener("click", e => {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+  });
+
+  table.classList.add("player-table-resizable");
+}
+
 function searchPlayerLinksTable() {
   const query = searchBox.value;
   const rows = document.querySelectorAll(
@@ -633,6 +818,7 @@ function searchPlayerLinksTable() {
     const haystack = [
       row.dataset.teamRegion,
       row.dataset.team,
+      row.dataset.owwcTeam,
       row.dataset.teamAlias,
       row.dataset.name,
       row.dataset.playerAlias,
@@ -811,6 +997,7 @@ function renderPlayerDetail(name, players) {
       : "";
 
   const isFav = isFavorite_(player.name);
+  const owwcTeam = getPlayerOwwcTeam_(player);
 
   const latestVideo =
     youtubeCache?.find(v => v.name === player.name);
@@ -884,6 +1071,21 @@ function renderPlayerDetail(name, players) {
         >
           ${escapeHtml(player.team || "-")}
         </button>
+
+        ${
+          owwcTeam
+            ? `
+              <button
+                type="button"
+                class="player-detail-meta-pill"
+                data-player-detail-filter="team"
+                data-value="${escapeHtml(owwcTeam)}"
+              >
+                ${escapeHtml(formatTeamDisplayName_(owwcTeam))}
+              </button>
+            `
+            : ""
+        }
 
         <button
           type="button"
