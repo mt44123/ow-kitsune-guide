@@ -1943,6 +1943,43 @@ width:max-content;
   table-layout:fixed;
 }
 
+.player-table.player-table-resizable th,
+.player-table.player-table-resizable td{
+  min-width:0 !important;
+  max-width:none;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.player-table.player-table-resizable .team-link,
+.player-table.player-table-resizable .player-name-wrap,
+.player-table.player-table-resizable .player-name-link,
+.player-table.player-table-resizable .player-name-text,
+.player-table.player-table-resizable .last-stream-link{
+  display:block;
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.player-table.player-table-resizable .player-name-wrap{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  min-width:0;
+}
+
+.player-table.player-table-resizable .player-name-wrap .favorite-star{
+  flex:0 0 auto;
+}
+
+.player-table.player-table-resizable .player-name-wrap .player-name-link,
+.player-table.player-table-resizable .player-name-wrap .player-name-text{
+  flex:1 1 auto;
+  min-width:0;
+}
+
 .player-table th,
 .player-table td{
 padding:6px 8px;
@@ -2096,29 +2133,34 @@ min-width:120px;
 
 .player-table th:nth-child(3),
 .player-table td:nth-child(3){
-min-width:120px;
-  font-weight:bold;
+min-width:100px;
 }
 
 .player-table th:nth-child(4),
 .player-table td:nth-child(4){
-min-width:45px;
+min-width:120px;
+  font-weight:bold;
 }
 
 .player-table th:nth-child(5),
 .player-table td:nth-child(5){
-min-width:70px;
-  max-width:none;
+min-width:45px;
 }
 
 .player-table th:nth-child(6),
 .player-table td:nth-child(6){
+min-width:70px;
+  max-width:none;
+}
+
+.player-table th:nth-child(7),
+.player-table td:nth-child(7){
 min-width:90px;
   text-align:center;
 }
 
-.player-table th:nth-child(n+7),
-.player-table td:nth-child(n+7){
+.player-table th:nth-child(n+8),
+.player-table td:nth-child(n+8){
 text-align:center;
   min-width:42px;
 }
@@ -2160,20 +2202,20 @@ box-shadow:inset 3px 0 0 var(--region-sa);
 box-shadow:inset 3px 0 0 var(--region-unknown);
 }
 
-#app.table-mode .player-table th:nth-child(3),
-#app.table-mode .player-table td:nth-child(3){
+#app.table-mode .player-table th:nth-child(4),
+#app.table-mode .player-table td:nth-child(4){
 position:sticky;
   left:0;
   z-index:2;
   background:var(--bg-dark);
 }
 
-#app.table-mode .player-table th:nth-child(3){
+#app.table-mode .player-table th:nth-child(4){
 z-index:3;
   background:var(--bg-main);
 }
 
-#app.table-mode .player-table tr:hover td:nth-child(3){
+#app.table-mode .player-table tr:hover td:nth-child(4){
 background:var(--bg-light);
 }
 

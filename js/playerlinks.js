@@ -745,7 +745,7 @@ function setupPlayerTableColumnResize_() {
       document.body.classList.add("is-col-resizing");
 
       const onMove_ = (moveX) => {
-        const nextWidth = Math.max(36, Math.round(startWidth + (moveX - clientX)));
+        const nextWidth = Math.max(8, Math.round(startWidth + (moveX - clientX)));
         const width = `${nextWidth}px`;
 
         th.style.width = width;
