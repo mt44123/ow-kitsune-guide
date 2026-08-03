@@ -706,6 +706,7 @@ function loadPlayerDetailView() {
     return;
   }
 
+  const currentRequest = ++requestId;
   startFakeProgress();
 
   const linksPromise =
@@ -765,6 +766,8 @@ function loadPlayerDetailView() {
   ])
   
   .then(results => {
+    // Still update caches so other views benefit, but never paint
+    // player detail after the user has navigated away.
     const getResult = (index, fallback = {}) =>
       results[index]?.status === "fulfilled"
         ? results[index].value
@@ -801,11 +804,8 @@ function loadPlayerDetailView() {
       clips: [],
       chzzkbestclips: []
     });
-    finishFakeProgress();
 
     playerLinksLastUpdated = linksData.lastUpdated || "";
-    updated.textContent = playerLinksLastUpdated;
-
     playerLinksCache = linksData.playerLinks || [];
     playerLinksCacheTime = Date.now();
 
@@ -821,10 +821,23 @@ function loadPlayerDetailView() {
     setClipCacheIfNotEmpty_("chzzknew", chzzkNewClipsData.chzzknewclips || chzzkNewClipsData.clips);
     setClipCacheIfNotEmpty_("chzzkbest", chzzkBestClipsData.chzzkbestclips || chzzkBestClipsData.clips);
 
+    if (currentRequest !== requestId || currentView !== "player") {
+      stopFakeProgress();
+      return;
+    }
+
+    finishFakeProgress();
+
+    updated.textContent = playerLinksLastUpdated;
     currentData = playerLinksCache;
     renderPlayerDetail(name, currentData);    
   })
   .catch(error => {
+    if (currentRequest !== requestId || currentView !== "player") {
+      stopFakeProgress();
+      return;
+    }
+
     stopFakeProgress();
     console.error(error);
     app.innerHTML = `<p class="error">Failed to load player.</p>`;
@@ -832,6 +845,7 @@ function loadPlayerDetailView() {
 }
 
 function renderPlayerDetail(name, players) {
+  if (currentView !== "player") return;
 
   const decodedName = decodeURIComponent(name);
 
