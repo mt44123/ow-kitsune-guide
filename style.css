@@ -2011,6 +2011,32 @@ width:max-content;
   min-width:0 !important;
 }
 
+.player-table.player-table-resizable .archive-title-link,
+.player-table.player-table-resizable .archive-title-text,
+.player-table.player-table-resizable .archive-title-line{
+  display:block;
+  max-width:100%;
+  min-width:0 !important;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.player-table.player-table-resizable .archive-title-link{
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+
+.player-table.player-table-resizable .archive-title-link .platform-icons{
+  flex:0 0 auto;
+}
+
+.player-table.player-table-resizable .archive-title-link .archive-title-text{
+  flex:1 1 auto;
+  width:auto;
+}
+
 .player-table th,
 .player-table td{
 padding:6px 8px;

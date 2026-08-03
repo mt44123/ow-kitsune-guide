@@ -292,12 +292,12 @@ function renderArchiveList_(items) {
       <table class="player-table archive-table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th class="archive-title-col">Title</th>
-            <th>Team</th>
-            <th>Role</th>
-            <th>Nationality</th>
-            <th>Ended</th>
+            <th data-col-key="name">Name</th>
+            <th class="archive-title-col" data-col-key="title">Title</th>
+            <th data-col-key="team">Team</th>
+            <th data-col-key="role">Role</th>
+            <th data-col-key="nationality">Nationality</th>
+            <th data-col-key="ended">Ended</th>
           </tr>
         </thead>
 
@@ -307,6 +307,8 @@ function renderArchiveList_(items) {
       </table>
     </div>
   `;
+
+  setupPlayerTableColumnResize_(".archive-table", "archiveTableColWidths");
 }
 
 function renderArchiveListRow_(a) {

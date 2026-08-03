@@ -424,13 +424,13 @@ function renderLiveList_(players) {
       <table class="player-table live-table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th class="archive-title-col">Title</th>
-            <th>Team</th>
-            <th>Role</th>
-            <th>Nationality</th>
-            <th>Started</th>
-            <th>Viewers</th>
+            <th data-col-key="name">Name</th>
+            <th class="archive-title-col" data-col-key="title">Title</th>
+            <th data-col-key="team">Team</th>
+            <th data-col-key="role">Role</th>
+            <th data-col-key="nationality">Nationality</th>
+            <th data-col-key="started">Started</th>
+            <th data-col-key="viewers">Viewers</th>
           </tr>
         </thead>
 
@@ -440,6 +440,8 @@ function renderLiveList_(players) {
       </table>
     </div>
   `;
+
+  setupPlayerTableColumnResize_(".live-table", "liveTableColWidths");
 }
 
 function renderLiveListRow_(p) {
