@@ -1,37 +1,3 @@
-const HIDE_HOWTO_NAV_KEY = "hideHowtoNav";
-
-function isHowtoNavHidden_() {
-  return localStorage.getItem(HIDE_HOWTO_NAV_KEY) === "1";
-}
-
-function applyHowtoNavVisibility_() {
-  const howtoButton = document.getElementById("howtoNavButton");
-  const row = document.getElementById("howtoNavRow");
-  if (!howtoButton) return;
-
-  const hidden = isHowtoNavHidden_();
-  howtoButton.hidden = hidden;
-
-  // Keep the row visible when WATCH OWCS (or other guide buttons) remain.
-  if (row) {
-    const hasVisibleGuideButton = Array.from(
-      row.querySelectorAll(".howto-nav-button")
-    ).some(button => !button.hidden);
-
-    row.hidden = !hasVisibleGuideButton;
-  }
-}
-
-function setHowtoNavHidden_(hidden) {
-  if (hidden) {
-    localStorage.setItem(HIDE_HOWTO_NAV_KEY, "1");
-  } else {
-    localStorage.removeItem(HIDE_HOWTO_NAV_KEY);
-  }
-
-  applyHowtoNavVisibility_();
-}
-
 function loadHowtoView() {
   currentView = "howto";
   setViewUrl_("howto");
@@ -59,72 +25,8 @@ function loadHowtoView() {
 
   app.className = "tools-mode faq-mode";
 
-  const hidden = isHowtoNavHidden_();
-
-  const hideBanner = hidden
-    ? `
-      <div class="card faq-card howto-hide-card">
-        <h3>
-          📌 Nav button is hidden<br>
-          ナビボタンは非表示です
-        </h3>
-        ${siteText_(
-          `
-            <p>
-              The HOW TO USE button is hidden from the top nav.
-              You can still open this page anytime from ⚙ Settings.
-            </p>
-          `,
-          `
-            <p>
-              上部ナビの HOW TO USE ボタンは非表示です。
-              このページはいつでも ⚙ Settings から開けます。
-            </p>
-          `
-        )}
-        <button
-          type="button"
-          class="howto-action-button howto-action-button-show"
-          id="showHowtoNavButton"
-        >
-          Show HOW TO USE button
-        </button>
-      </div>
-    `
-    : `
-      <div class="card faq-card howto-hide-card howto-hide-card-emphasize">
-        <h3>
-          ✕ You can hide this button<br>
-          ✕ このボタンは消せます
-        </h3>
-        ${siteText_(
-          `
-            <p>
-              If the HOW TO USE nav button gets in the way, hide it anytime.
-              After hiding, you can still open this page from ⚙ Settings → How to use.
-            </p>
-          `,
-          `
-            <p>
-              HOW TO USE ナビボタンが邪魔なら、いつでも非表示にできます。
-              消したあとも ⚙ Settings → How to use から読めます。
-            </p>
-          `
-        )}
-        <button
-          type="button"
-          class="howto-action-button howto-action-button-hide"
-          id="hideHowtoNavButton"
-        >
-          ✕ Hide this button
-        </button>
-      </div>
-    `;
-
   app.innerHTML = `
     <div class="tools-page">
-
-      ${hideBanner}
 
       <div class="card faq-card">
         <h3>
@@ -208,8 +110,11 @@ function loadHowtoView() {
               <li><b>CLIP&amp;YOUTUBE</b> — clips and YouTube videos</li>
               <li><b>PLAYERS</b> — links for listed players, plus manage ★ MY GOATS and ◆ MUTED</li>
               <li><b>SEARCH</b> — open the search box</li>
-              <li><b>HOW TO USE</b> — this page (optional; hide anytime)</li>
-              <li><b>WATCH OWCS</b> — beginner guide to watching OWCS</li>
+              <li>
+                <b>▶ Guides</b> — second-row shortcuts:
+                <b>HOW TO USE</b>, <b>WATCH OWCS</b>, <b>TOOLS</b>, <b>LINKS</b>
+                (same expand/collapse style as Filters)
+              </li>
             </ul>
           `,
           `
@@ -219,8 +124,11 @@ function loadHowtoView() {
               <li><b>CLIP&amp;YOUTUBE</b> — クリップと YouTube</li>
               <li><b>PLAYERS</b> — 掲載プレイヤーのリンク一覧、★ MY GOATS・◆ MUTED の管理</li>
               <li><b>SEARCH</b> — 検索ボックスを開く</li>
-              <li><b>HOW TO USE</b> — このページ（任意・非表示可）</li>
-              <li><b>WATCH OWCS</b> — OWCS 観戦の初心者ガイド</li>
+              <li>
+                <b>▶ Guides</b> — 2行目のショートカット:
+                <b>HOW TO USE</b> / <b>WATCH OWCS</b> / <b>TOOLS</b> / <b>LINKS</b>
+                （Filters と同じ開閉）
+              </li>
             </ul>
           `
         )}
@@ -437,20 +345,4 @@ function loadHowtoView() {
 
     </div>
   `;
-
-  document
-    .getElementById("hideHowtoNavButton")
-    ?.addEventListener("click", () => {
-      setHowtoNavHidden_(true);
-      loadHowtoView();
-    });
-
-  document
-    .getElementById("showHowtoNavButton")
-    ?.addEventListener("click", () => {
-      setHowtoNavHidden_(false);
-      loadHowtoView();
-    });
 }
-
-applyHowtoNavVisibility_();

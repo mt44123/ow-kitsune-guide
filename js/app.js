@@ -497,6 +497,12 @@ const howtoNavButton =
 const watchOwcsNavButton =
   document.getElementById("watchOwcsNavButton");
 
+const toolsNavButton =
+  document.getElementById("toolsNavButton");
+
+const usefulLinksNavButton =
+  document.getElementById("usefulLinksNavButton");
+
 const settingsButton =  document.getElementById("settingsButton");
 const settingsMenu =  document.getElementById("settingsMenu");
 
@@ -516,8 +522,32 @@ const filtersToggle =
 const filtersPanel =
   document.getElementById("filtersPanel");
 
+const guideNavToggle =
+  document.getElementById("guideNavToggle");
+
+const guideNavPanel =
+  document.getElementById("guideNavPanel");
+
 let filtersExpanded =
   localStorage.getItem("filtersExpanded") !== "false";
+
+let guideNavExpanded =
+  localStorage.getItem("guideNavExpanded") !== "false";
+
+const GUIDE_NAV_LABELS = {
+  howto: "HOW TO USE",
+  watchowcs: "WATCH OWCS",
+  toolstips: "TOOLS",
+  usefullinks: "LINKS"
+};
+
+function isGuideNavView_(view) {
+  return Boolean(GUIDE_NAV_LABELS[view]);
+}
+
+function getCurrentGuideLabel_() {
+  return GUIDE_NAV_LABELS[currentView] || "";
+}
 
 function getCurrentFilterLabel_() {
   const viewLabel = titles[currentView] || currentView.toUpperCase();
@@ -544,6 +574,24 @@ function applyFiltersExpanded_() {
       : `▶ Filters (${getCurrentFilterLabel_()})`;
 }
 
+function applyGuideNavExpanded_() {
+  if (!guideNavToggle || !guideNavPanel) return;
+
+  guideNavPanel.classList.toggle(
+    "filters-collapsed",
+    !guideNavExpanded
+  );
+
+  const guideLabel = getCurrentGuideLabel_();
+
+  guideNavToggle.textContent =
+    guideNavExpanded
+      ? "▼ Guides"
+      : guideLabel
+        ? `▶ Guides (${guideLabel})`
+        : "▶ Guides";
+}
+
 filtersToggle?.addEventListener("click", () => {
   filtersExpanded = !filtersExpanded;
 
@@ -553,6 +601,17 @@ filtersToggle?.addEventListener("click", () => {
   );
 
   applyFiltersExpanded_();
+});
+
+guideNavToggle?.addEventListener("click", () => {
+  guideNavExpanded = !guideNavExpanded;
+
+  localStorage.setItem(
+    "guideNavExpanded",
+    String(guideNavExpanded)
+  );
+
+  applyGuideNavExpanded_();
 });
 
 function applyTheme_(theme) {
@@ -1167,6 +1226,16 @@ howtoNavButton?.addEventListener(
 watchOwcsNavButton?.addEventListener(
   "click",
   () => openStaticView_("watchowcs")
+);
+
+toolsNavButton?.addEventListener(
+  "click",
+  () => openStaticView_("toolstips")
+);
+
+usefulLinksNavButton?.addEventListener(
+  "click",
+  () => openStaticView_("usefullinks")
 );
 
 function viewToPath_(view) {
@@ -1787,6 +1856,8 @@ function updateNavState(view) {
 
   howtoNavButton?.classList.remove("active");
   watchOwcsNavButton?.classList.remove("active");
+  toolsNavButton?.classList.remove("active");
+  usefulLinksNavButton?.classList.remove("active");
 
   document
     .querySelectorAll(".sub-nav button")
@@ -1806,6 +1877,12 @@ function updateNavState(view) {
 
   } else if (view === "watchowcs") {
     watchOwcsNavButton?.classList.add("active");
+
+  } else if (view === "toolstips") {
+    toolsNavButton?.classList.add("active");
+
+  } else if (view === "usefullinks") {
+    usefulLinksNavButton?.classList.add("active");
 
   } else if (isLiveView(view)) {
     liveButton?.classList.add("active");
@@ -1885,6 +1962,8 @@ function updateNavState(view) {
   if (hasCollapsibleFilters_(view)) {
     applyFiltersExpanded_();
   }
+
+  applyGuideNavExpanded_();
 }
 
 document

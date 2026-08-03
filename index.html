@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="/style.css?v=1.2.5.7">
+  <link rel="stylesheet" href="/style.css?v=1.2.5.8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -533,32 +533,64 @@ YOUTUBE</span>
 
 </div>
 
-<div class="nav main-nav-howto" id="howtoNavRow">
-  <button
-    class="media-nav howto-nav-button"
-    data-view="howto"
-    id="howtoNavButton"
-    type="button"
-    aria-label="How to use"
-  >
-    <svg class="media-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
-      <path fill="currentColor" d="M424-320q0-81 14.5-116.5T500-514q41-36 62.5-62.5T584-637q0-41-27.5-68T480-732q-51 0-77.5 31T365-638l-103-44q21-64 77-111t141-47q105 0 161.5 58.5T698-641q0 50-21.5 85.5T609-475q-49 47-59.5 71.5T539-320H424Zm56 240q-33 0-56.5-23.5T400-160q0-33 23.5-56.5T480-240q33 0 56.5 23.5T560-160q0 33-23.5 56.5T480-80Z"/>
-    </svg>
-    <span class="media-label">HOW TO USE</span>
-  </button>
+<button id="guideNavToggle" class="filters-toggle" type="button">
+  ▼ Guides
+</button>
 
-  <button
-    class="media-nav howto-nav-button"
-    data-view="watchowcs"
-    id="watchOwcsNavButton"
-    type="button"
-    aria-label="Watch OWCS"
-  >
-    <svg class="media-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
-      <path fill="currentColor" d="M160-80q-33 0-56.5-23.5T80-160v-480q0-33 23.5-56.5T160-720h640q33 0 56.5 23.5T880-640v480q0 33-23.5 56.5T800-80H160Zm0-80h640v-480H160v480Zm160-200 280-160-280-160v320ZM80-800v-80h800v80H80Z"/>
-    </svg>
-    <span class="media-label">WATCH OWCS</span>
-  </button>
+<div id="guideNavPanel" class="filters-panel">
+  <div class="nav main-nav-howto" id="guideNavRow">
+    <button
+      class="media-nav howto-nav-button"
+      data-view="howto"
+      id="howtoNavButton"
+      type="button"
+      aria-label="How to use"
+    >
+      <svg class="media-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
+        <path fill="currentColor" d="M424-320q0-81 14.5-116.5T500-514q41-36 62.5-62.5T584-637q0-41-27.5-68T480-732q-51 0-77.5 31T365-638l-103-44q21-64 77-111t141-47q105 0 161.5 58.5T698-641q0 50-21.5 85.5T609-475q-49 47-59.5 71.5T539-320H424Zm56 240q-33 0-56.5-23.5T400-160q0-33 23.5-56.5T480-240q33 0 56.5 23.5T560-160q0 33-23.5 56.5T480-80Z"/>
+      </svg>
+      <span class="media-label">HOW TO USE</span>
+    </button>
+
+    <button
+      class="media-nav howto-nav-button"
+      data-view="watchowcs"
+      id="watchOwcsNavButton"
+      type="button"
+      aria-label="Watch OWCS"
+    >
+      <svg class="media-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
+        <path fill="currentColor" d="M160-80q-33 0-56.5-23.5T80-160v-480q0-33 23.5-56.5T160-720h640q33 0 56.5 23.5T880-640v480q0 33-23.5 56.5T800-80H160Zm0-80h640v-480H160v480Zm160-200 280-160-280-160v320ZM80-800v-80h800v80H80Z"/>
+      </svg>
+      <span class="media-label">WATCH OWCS</span>
+    </button>
+
+    <button
+      class="media-nav howto-nav-button"
+      data-view="toolstips"
+      id="toolsNavButton"
+      type="button"
+      aria-label="Translation tools"
+    >
+      <svg class="media-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
+        <path fill="currentColor" d="M423.5-103.5Q400-127 400-160h160q0 33-23.5 56.5T480-80q-33 0-56.5-23.5ZM320-200v-80h320v80H320Zm10-120q-69-41-109.5-110T180-580q0-125 87.5-212.5T480-880q125 0 212.5 87.5T780-580q0 81-40.5 150T630-320H330Z"/>
+      </svg>
+      <span class="media-label">TOOLS</span>
+    </button>
+
+    <button
+      class="media-nav howto-nav-button"
+      data-view="usefullinks"
+      id="usefulLinksNavButton"
+      type="button"
+      aria-label="Useful links"
+    >
+      <svg class="media-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
+        <path fill="currentColor" d="M320-240h320v-80H320v80Zm0-160h480v-80H320v80Zm0-160h480v-80H320v80ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Z"/>
+      </svg>
+      <span class="media-label">LINKS</span>
+    </button>
+  </div>
 </div>
 
 <button id="filtersToggle" class="filters-toggle" type="button">
@@ -772,7 +804,7 @@ YOUTUBE</span>
 </footer>
 
 <script src="/js/config.js?v=1.2.5.0" defer></script>
-<script src="/js/app.js?v=1.2.6.4" defer></script>
+<script src="/js/app.js?v=1.2.6.7" defer></script>
 <script src="/js/favorites.js?v=1.2.6.3" defer></script>
 <script src="/js/goatscanvas.js?v=1.2.4.22" defer></script>
 <script src="/js/goatscanvas-hype.js?v=1.2.4.23" defer></script>
@@ -781,7 +813,7 @@ YOUTUBE</span>
 <script src="/js/tools.js?v=1.2.6.1" defer></script>
 <script src="/js/usefullinks.js?v=1.2.6.0" defer></script>
 <script src="/js/faq.js?v=1.2.6.0" defer></script>
-<script src="/js/howto.js?v=1.2.6.4" defer></script>
+<script src="/js/howto.js?v=1.2.6.7" defer></script>
 <script src="/js/watchowcs.js?v=1.2.6.6" defer></script>
 <script src="/js/about.js?v=1.2.6.0" defer></script>
 <script src="/js/privacy.js?v=1.2.6.0" defer></script>
