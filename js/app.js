@@ -537,8 +537,8 @@ let guideNavExpanded =
 const GUIDE_NAV_LABELS = {
   howto: "HOW TO USE",
   watchowcs: "WATCH OWCS",
-  toolstips: "TOOLS",
-  usefullinks: "LINKS"
+  toolstips: "Translation",
+  usefullinks: "Links"
 };
 
 function isGuideNavView_(view) {

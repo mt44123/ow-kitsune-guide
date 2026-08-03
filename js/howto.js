@@ -112,7 +112,7 @@ function loadHowtoView() {
               <li><b>SEARCH</b> — open the search box</li>
               <li>
                 <b>▶ Guides</b> — second-row shortcuts:
-                <b>HOW TO USE</b>, <b>WATCH OWCS</b>, <b>TOOLS</b>, <b>LINKS</b>
+                <b>HOW TO USE</b>, <b>WATCH OWCS</b>, <b>Translation</b>, <b>Links</b>
                 (same expand/collapse style as Filters)
               </li>
             </ul>
@@ -126,7 +126,7 @@ function loadHowtoView() {
               <li><b>SEARCH</b> — 検索ボックスを開く</li>
               <li>
                 <b>▶ Guides</b> — 2行目のショートカット:
-                <b>HOW TO USE</b> / <b>WATCH OWCS</b> / <b>TOOLS</b> / <b>LINKS</b>
+                <b>HOW TO USE</b> / <b>WATCH OWCS</b> / <b>Translation</b> / <b>Links</b>
                 （Filters と同じ開閉）
               </li>
             </ul>
