@@ -155,21 +155,12 @@ function renderTeams(players) {
         return;
       }
 
-      if (isOwwcTeamOfficialRegion_(region)) {
-        renderTeamPlayers(
-          OWWC_TEAM_OFFICIAL_LABEL_,
-          players,
-          OWWC_TEAM_OFFICIAL_LABEL_
-        );
-        return;
-      }
-
       renderRegionTeams(region, players);
     });
   });
 }
 
-const OWWC_TEAM_OFFICIAL_LABEL_ = "OWWC Team Official";
+const OWWC_REGION_LABEL_ = "OWWC";
 
 function stripTeamRegionPrefix_(region) {
   return String(region || "")
@@ -177,39 +168,89 @@ function stripTeamRegionPrefix_(region) {
     .trim();
 }
 
-function isOwwcTeamOfficialRegion_(region) {
+function getOwwcTeam_(p) {
+  return String(p?.owwcTeam || "").trim();
+}
+
+function isLegacyOwwcTeamOfficialRegion_(region) {
   return (
     stripTeamRegionPrefix_(region).toLowerCase() ===
     "owwc team official"
   );
 }
 
+function isTeamOfficialAccount_(p) {
+  const region = stripTeamRegionPrefix_(p?.teamRegion).toLowerCase();
+
+  return (
+    region === "team official" ||
+    region === "owwc team official"
+  );
+}
+
+function ensureTeamEntry_(map, team, region) {
+  if (!team || team === "-") return null;
+
+  if (!map.has(team)) {
+    map.set(team, {
+      name: team,
+      region: "",
+      count: 0
+    });
+  }
+
+  const item = map.get(team);
+
+  if (region && !item.region) {
+    item.region = region;
+  }
+
+  return item;
+}
+
 function buildTeams_(players) {
   const map = new Map();
 
   players.forEach(p => {
+    if (isTeamListMember_(p)) {
+      const team = String(p.team || "").trim();
+      const clubRegion = normalizeTeamRegion_(p.teamRegion, team);
+      const club = ensureTeamEntry_(map, team, clubRegion);
 
-  if (!isTeamListMember_(p)) return;
+      if (club) {
+        club.count++;
+      }
 
-    const team = String(p.team || "").trim();
-    if (!team || team === "-") return;
+      const owwcTeam = getOwwcTeam_(p);
+      const owwc = ensureTeamEntry_(
+        map,
+        owwcTeam,
+        OWWC_REGION_LABEL_
+      );
 
-    if (!map.has(team)) {
-      map.set(team, {
-        name: team,
-        region: "",
-        count: 0
-      });
+      if (owwc) {
+        owwc.count++;
+      }
     }
-    
-    const item = map.get(team);
-    const normalizedRegion = normalizeTeamRegion_(p.teamRegion, team);
-    
-    if (normalizedRegion && !item.region) {
-      item.region = normalizedRegion;
+
+    // Legacy ●OWWC Team Official rows (or ● Team Official + owwcTeam)
+    // register national teams under OWWC without counting as players.
+    if (isLegacyOwwcTeamOfficialRegion_(p.teamRegion)) {
+      ensureTeamEntry_(
+        map,
+        String(p.team || "").trim(),
+        OWWC_REGION_LABEL_
+      );
+    } else if (
+      isTeamOfficialAccount_(p) &&
+      getOwwcTeam_(p)
+    ) {
+      ensureTeamEntry_(
+        map,
+        getOwwcTeam_(p),
+        OWWC_REGION_LABEL_
+      );
     }
-    
-    item.count++;
   });
 
   return Array.from(map.values())
@@ -229,6 +270,7 @@ function isTeamListMember_(p) {
   return (
     region !== "★OWCS Creator" &&
     region !== "Team Official" &&
+    region !== "OWWC Team Official" &&
     region !== "HERO"
   );
 }
@@ -237,18 +279,18 @@ function normalizeTeamRegion_(region, team = "") {
 
   region = stripTeamRegionPrefix_(region);
 
-  if (region === "★OWCS Creator") {
+  if (
+    region === "★OWCS Creator" ||
+    region === "OWWC Team Official"
+  ) {
     return null;
-  }
-
-  if (isOwwcTeamOfficialRegion_(region)) {
-    return OWWC_TEAM_OFFICIAL_LABEL_;
   }
 
   team = String(team || "").trim();
 
   if ([
     "Official OWCS",
+    OWWC_REGION_LABEL_,
     "KR",
     "JP",
     "PAC",
@@ -268,20 +310,7 @@ function normalizeTeamRegion_(region, team = "") {
 function buildTeamRegions_(players) {
   const map = new Map();
 
-  players.forEach(p => {
-
-  if (!isTeamListMember_(p)) return;
-
-  const region =
-    normalizeTeamRegion_(p.teamRegion, p.team)
-    
-    if (!region) return;
-
-    const team =
-      String(p.team || "").trim();
-
-    if (!team || team === "-") return;
-
+  function ensureRegion_(region) {
     if (!map.has(region)) {
       map.set(region, {
         name: region,
@@ -290,18 +319,47 @@ function buildTeamRegions_(players) {
       });
     }
 
-    // OWWC national official accounts share one TEAMS card.
-    map.get(region).teams.add(
-      isOwwcTeamOfficialRegion_(region)
-        ? OWWC_TEAM_OFFICIAL_LABEL_
-        : team
-    );
-    map.get(region).playerCount++;
+    return map.get(region);
+  }
+
+  players.forEach(p => {
+    if (isTeamListMember_(p)) {
+      const region = normalizeTeamRegion_(p.teamRegion, p.team);
+      const team = String(p.team || "").trim();
+
+      if (region && team && team !== "-") {
+        const item = ensureRegion_(region);
+        item.teams.add(team);
+        item.playerCount++;
+      }
+
+      const owwcTeam = getOwwcTeam_(p);
+
+      if (owwcTeam && owwcTeam !== "-") {
+        const item = ensureRegion_(OWWC_REGION_LABEL_);
+        item.teams.add(owwcTeam);
+        item.playerCount++;
+      }
+    }
+
+    if (isLegacyOwwcTeamOfficialRegion_(p.teamRegion)) {
+      const team = String(p.team || "").trim();
+
+      if (team && team !== "-") {
+        ensureRegion_(OWWC_REGION_LABEL_).teams.add(team);
+      }
+    } else if (isTeamOfficialAccount_(p)) {
+      const owwcTeam = getOwwcTeam_(p);
+
+      if (owwcTeam && owwcTeam !== "-") {
+        ensureRegion_(OWWC_REGION_LABEL_).teams.add(owwcTeam);
+      }
+    }
   });
 
-   const order = {
+  const order = {
     "Official OWCS": 1,
-    [OWWC_TEAM_OFFICIAL_LABEL_]: 2,
+    [OWWC_REGION_LABEL_]: 2,
     KR: 3,
     JP: 4,
     PAC: 5,
@@ -382,9 +440,7 @@ function renderTeamPlayers(teamName, players, regionName = null, updateUrl = tru
   currentTeamName = teamName;
   currentRegionName = regionName;
 
-  const isOwwcOfficial =
-    isOwwcTeamOfficialRegion_(regionName) ||
-    isOwwcTeamOfficialRegion_(teamName);
+  const isOwwcTeam = regionName === OWWC_REGION_LABEL_;
 
   if (updateUrl) {
     history.pushState(
@@ -400,14 +456,20 @@ function renderTeamPlayers(teamName, players, regionName = null, updateUrl = tru
   
   const official = players.find(
     p =>
-      p.teamRegion === "● Team Official" &&
-      p.team === teamName
+      isTeamOfficialAccount_(p) &&
+      (
+        p.team === teamName ||
+        getOwwcTeam_(p) === teamName
+      )
   );
 
   const members = players
     .filter(p => {
-      if (isOwwcOfficial) {
-        return isOwwcTeamOfficialRegion_(p.teamRegion);
+      if (isOwwcTeam) {
+        return (
+          getOwwcTeam_(p) === teamName &&
+          isTeamListMember_(p)
+        );
       }
 
       return (
@@ -416,12 +478,6 @@ function renderTeamPlayers(teamName, players, regionName = null, updateUrl = tru
       );
     })
     .sort((a, b) => {
-      if (isOwwcOfficial) {
-        return String(a.name || "").localeCompare(
-          String(b.name || "")
-        );
-      }
-
       const roleOrder = {
         TANK: 1,
         DPS: 2,
@@ -450,13 +506,9 @@ function renderTeamPlayers(teamName, players, regionName = null, updateUrl = tru
     members[0]?.teamAlias ||
     "";
 
-  const liquipediaTeam = isOwwcOfficial
-    ? "Overwatch_World_Cup"
-    : teamName;
-
-  const detailTitle = isOwwcOfficial
-    ? OWWC_TEAM_OFFICIAL_LABEL_
-    : teamName;
+  const detailRegion = isOwwcTeam
+    ? OWWC_REGION_LABEL_
+    : (members[0]?.teamRegion || regionName || "-");
 
   app.innerHTML = `
     ${renderLiquipediaNote_(true)}
@@ -466,19 +518,17 @@ function renderTeamPlayers(teamName, players, regionName = null, updateUrl = tru
     </button>
 
     <div class="team-detail-card ${getTeamRegionClass(
-      isOwwcOfficial
-        ? OWWC_TEAM_OFFICIAL_LABEL_
-        : members[0]?.teamRegion,
+      detailRegion,
       teamName
     )}">
       <div class="team-detail-title">
         <a
           class="team-link"
-          href="https://liquipedia.net/overwatch/${encodeURIComponent(liquipediaTeam)}"
+          href="https://liquipedia.net/overwatch/${encodeURIComponent(teamName)}"
           target="_blank"
           rel="noopener"
         >
-          ${escapeHtml(detailTitle)}
+          ${escapeHtml(teamName)}
         </a>
       </div>
 
@@ -500,11 +550,7 @@ function renderTeamPlayers(teamName, players, regionName = null, updateUrl = tru
       </div>
 
       <div class="team-detail-meta">
-        ${escapeHtml(
-          isOwwcOfficial
-            ? OWWC_TEAM_OFFICIAL_LABEL_
-            : (members[0]?.teamRegion || "-")
-        )} / Team
+        ${escapeHtml(detailRegion)} / Team
       </div>
 
       <div class="team-player-table">
@@ -615,10 +661,7 @@ function renderTeamPlayers(teamName, players, regionName = null, updateUrl = tru
   document
     .getElementById("teamBackButton")
     ?.addEventListener("click", () => {
-      if (
-        regionName === "Official OWCS" ||
-        isOwwcTeamOfficialRegion_(regionName)
-      ) {
+      if (regionName === "Official OWCS") {
         renderTeams(players);
         return;
       }

@@ -2541,6 +2541,7 @@ function getTeamRegionClass(region, team) {
       return "team-official-account";
 
     case "OFFICIAL OWCS":
+    case "OWWC":
     case "OWWC TEAM OFFICIAL":
       return "team-official";
 
@@ -2971,16 +2972,6 @@ function openTeamFromUrl_() {
 
   if (!slug) {
     renderTeams(currentData);
-    return;
-  }
-
-  if (slug === teamToSlug_(OWWC_TEAM_OFFICIAL_LABEL_)) {
-    renderTeamPlayers(
-      OWWC_TEAM_OFFICIAL_LABEL_,
-      currentData,
-      OWWC_TEAM_OFFICIAL_LABEL_,
-      false
-    );
     return;
   }
 
