@@ -3744,7 +3744,7 @@ color:var(--text-main);
   --flow-ink:#1A1512;
   --flow-ink-soft:#5C524A;
   --flow-accent:var(--accent);
-  --flow-box-h:92px;
+  --flow-box-h:96px;
 
   margin-top:14px;
   padding:12px;
@@ -3775,26 +3775,32 @@ body:not(.light-theme) .owcs-flow{
 
 .owcs-flow-desktop{
   display:block;
-  min-width:980px;
+  min-width:1080px;
 }
 
 .owcs-flow-mobile{
   display:none;
 }
 
+/* bar | label | open | arr | promo | arr | regional | arr | asia | arr | world */
 .owcs-flow-grid{
   display:grid;
   grid-template-columns:
     36px
     68px
     minmax(0, 1fr)
+    18px
     minmax(0, 1fr)
-    minmax(0, 1.2fr)
-    minmax(0, 1fr)
-    minmax(0, 1.3fr);
+    18px
+    minmax(0, 1.15fr)
+    18px
+    minmax(0, 1.15fr)
+    18px
+    minmax(0, 1.25fr);
   grid-template-rows:repeat(6, minmax(var(--flow-box-h), auto));
-  gap:6px 5px;
+  gap:6px 0;
   align-items:stretch;
+  column-gap:4px;
 }
 
 .owcs-flow-cell{
@@ -3809,9 +3815,9 @@ body:not(.light-theme) .owcs-flow{
   height:100%;
 }
 
-.owcs-flow-cell-empty{
-  visibility:hidden;
-  pointer-events:none;
+.owcs-flow-arrow-cell{
+  align-items:center;
+  justify-content:center;
 }
 
 .owcs-flow-label-cell{
@@ -3835,12 +3841,6 @@ body:not(.light-theme) .owcs-flow{
   word-break:break-word;
 }
 
-.owcs-flow-sublabel-plain{
-  border-color:color-mix(in srgb, var(--flow-ink) 25%, var(--flow-paper-edge));
-  color:var(--flow-ink);
-  background:color-mix(in srgb, white 45%, transparent);
-}
-
 .owcs-flow-region-kr .owcs-flow-sublabel{
   color:var(--region-kr);
   background:color-mix(in srgb, var(--region-kr) 12%, transparent);
@@ -3861,6 +3861,24 @@ body.light-theme .owcs-flow-region-pac .owcs-flow-sublabel{
   color:color-mix(in srgb, var(--region-pac) 55%, #7A2A4A);
 }
 
+.owcs-flow-sublabel-cn{
+  color:color-mix(in srgb, var(--region-cn) 70%, #1A1512);
+  border-color:color-mix(in srgb, var(--region-cn) 55%, var(--flow-paper-edge));
+  background:color-mix(in srgb, var(--region-cn) 16%, transparent);
+}
+
+.owcs-flow-sublabel-na{
+  color:var(--region-na);
+  border-color:color-mix(in srgb, var(--region-na) 50%, var(--flow-paper-edge));
+  background:color-mix(in srgb, var(--region-na) 12%, transparent);
+}
+
+.owcs-flow-sublabel-emea{
+  color:color-mix(in srgb, var(--region-emea) 70%, #103030);
+  border-color:color-mix(in srgb, var(--region-emea) 55%, var(--flow-paper-edge));
+  background:color-mix(in srgb, var(--region-emea) 14%, transparent);
+}
+
 .owcs-flow-bar-cell{
   display:flex;
   align-items:center;
@@ -3874,24 +3892,45 @@ body.light-theme .owcs-flow-region-pac .owcs-flow-sublabel{
   letter-spacing:.06em;
   color:#fff;
   padding:4px 2px;
+  text-shadow:0 1px 1px color-mix(in srgb, #000 25%, transparent);
 }
 
+/* white → region color (like Asia vertical bar feel) */
 .owcs-flow-asia-bar{
-  background:linear-gradient(180deg, var(--region-kr), var(--region-pac));
+  background:linear-gradient(
+    180deg,
+    color-mix(in srgb, white 72%, var(--region-kr)),
+    var(--region-kr) 42%,
+    var(--region-pac)
+  );
 }
 
 .owcs-flow-china-bar{
-  background:var(--region-cn);
+  background:linear-gradient(
+    180deg,
+    color-mix(in srgb, white 70%, var(--region-cn)),
+    var(--region-cn)
+  );
   color:#1A1512;
+  text-shadow:none;
 }
 
 .owcs-flow-na-bar{
-  background:var(--region-na);
+  background:linear-gradient(
+    180deg,
+    color-mix(in srgb, white 68%, var(--region-na)),
+    var(--region-na)
+  );
 }
 
 .owcs-flow-emea-bar{
-  background:var(--region-emea);
+  background:linear-gradient(
+    180deg,
+    color-mix(in srgb, white 68%, var(--region-emea)),
+    var(--region-emea)
+  );
   color:#103030;
+  text-shadow:none;
 }
 
 body:not(.light-theme) .owcs-flow-emea-bar{
@@ -3930,7 +3969,7 @@ body:not(.light-theme) .owcs-flow-box{
   display:block;
   font-size:9px;
   font-weight:500;
-  line-height:1.3;
+  line-height:1.35;
   color:var(--flow-ink-soft);
   text-align:center;
 }
@@ -3943,23 +3982,83 @@ body:not(.light-theme) .owcs-flow-box{
   opacity:0.96;
 }
 
-.owcs-flow-box-offline{
-  border-left:3px solid var(--flow-accent);
+/* OWCS tier boxes — regional tint (same style as Asia) */
+.owcs-flow-box-owcs{
+  font-weight:700;
+  height:100%;
 }
 
-.owcs-flow-box-asia-champ{
+.owcs-flow-box-owcs-kr{
   border-left:3px solid var(--region-kr);
-  background:color-mix(in srgb, var(--region-kr) 8%, white);
-  height:100%;
+  background:color-mix(in srgb, var(--region-kr) 10%, white);
 }
 
-body:not(.light-theme) .owcs-flow-box-asia-champ{
-  background:color-mix(in srgb, var(--region-kr) 14%, var(--bg-main));
+.owcs-flow-box-owcs-jp{
+  border-left:3px solid var(--region-jp);
+  background:color-mix(in srgb, var(--region-jp) 8%, white);
 }
 
-.owcs-flow-box-intl{
+.owcs-flow-box-owcs-pac{
+  border-left:3px solid var(--region-pac);
+  background:color-mix(in srgb, var(--region-pac) 14%, white);
+}
+
+.owcs-flow-box-owcs-asia{
+  border-left:3px solid var(--region-kr);
+  background:linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--region-kr) 10%, white),
+    color-mix(in srgb, var(--region-pac) 12%, white)
+  );
+}
+
+.owcs-flow-box-owcs-cn{
+  border-left:3px solid var(--region-cn);
+  background:color-mix(in srgb, var(--region-cn) 14%, white);
+}
+
+.owcs-flow-box-owcs-na{
+  border-left:3px solid var(--region-na);
+  background:color-mix(in srgb, var(--region-na) 12%, white);
+}
+
+.owcs-flow-box-owcs-emea{
+  border-left:3px solid var(--region-emea);
+  background:color-mix(in srgb, var(--region-emea) 14%, white);
+}
+
+.owcs-flow-box-owcs-world{
   border-left:3px solid var(--accent);
-  height:100%;
+  background:color-mix(in srgb, var(--accent) 12%, white);
+}
+
+body:not(.light-theme) .owcs-flow-box-owcs-kr{
+  background:color-mix(in srgb, var(--region-kr) 16%, var(--bg-main));
+}
+body:not(.light-theme) .owcs-flow-box-owcs-jp{
+  background:color-mix(in srgb, var(--region-jp) 12%, var(--bg-main));
+}
+body:not(.light-theme) .owcs-flow-box-owcs-pac{
+  background:color-mix(in srgb, var(--region-pac) 16%, var(--bg-main));
+}
+body:not(.light-theme) .owcs-flow-box-owcs-asia{
+  background:linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--region-kr) 16%, var(--bg-main)),
+    color-mix(in srgb, var(--region-pac) 14%, var(--bg-main))
+  );
+}
+body:not(.light-theme) .owcs-flow-box-owcs-cn{
+  background:color-mix(in srgb, var(--region-cn) 16%, var(--bg-main));
+}
+body:not(.light-theme) .owcs-flow-box-owcs-na{
+  background:color-mix(in srgb, var(--region-na) 16%, var(--bg-main));
+}
+body:not(.light-theme) .owcs-flow-box-owcs-emea{
+  background:color-mix(in srgb, var(--region-emea) 16%, var(--bg-main));
+}
+body:not(.light-theme) .owcs-flow-box-owcs-world{
+  background:color-mix(in srgb, var(--accent) 16%, var(--bg-main));
 }
 
 .owcs-flow-asia-span > .owcs-flow-box,
@@ -3981,7 +4080,8 @@ body:not(.light-theme) .owcs-flow-box-asia-champ{
   padding:0 1px;
   color:var(--flow-ink-soft);
   font-weight:700;
-  font-size:11px;
+  font-size:12px;
+  line-height:1;
 }
 
 .owcs-flow-arrow-v{
@@ -4008,24 +4108,44 @@ body:not(.light-theme) .owcs-flow-box-asia-champ{
   letter-spacing:.06em;
   color:#fff;
   padding:6px 2px;
+  text-shadow:0 1px 1px color-mix(in srgb, #000 25%, transparent);
 }
 
 .owcs-flow-asia .owcs-flow-region-bar{
-  background:linear-gradient(180deg, var(--region-kr), var(--region-pac));
+  background:linear-gradient(
+    180deg,
+    color-mix(in srgb, white 72%, var(--region-kr)),
+    var(--region-kr) 42%,
+    var(--region-pac)
+  );
 }
 
 .owcs-flow-china .owcs-flow-region-bar{
-  background:var(--region-cn);
+  background:linear-gradient(
+    180deg,
+    color-mix(in srgb, white 70%, var(--region-cn)),
+    var(--region-cn)
+  );
   color:#1A1512;
+  text-shadow:none;
 }
 
 .owcs-flow-na .owcs-flow-region-bar{
-  background:var(--region-na);
+  background:linear-gradient(
+    180deg,
+    color-mix(in srgb, white 68%, var(--region-na)),
+    var(--region-na)
+  );
 }
 
 .owcs-flow-emea .owcs-flow-region-bar{
-  background:var(--region-emea);
+  background:linear-gradient(
+    180deg,
+    color-mix(in srgb, white 68%, var(--region-emea)),
+    var(--region-emea)
+  );
   color:#103030;
+  text-shadow:none;
 }
 
 .owcs-flow-region-body{

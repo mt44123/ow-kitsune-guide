@@ -559,6 +559,28 @@ function buildOwcsSeasonFlowDiagram_(lang) {
   const L = lang === "jp" ? OWCS_FLOW_COPY_JP_ : OWCS_FLOW_COPY_EN_;
   const docLang = lang === "jp" ? "ja" : "en";
 
+  // Desktop grid cols:
+  // 1 bar | 2 label | 3 open | 4 arr | 5 promo | 6 arr | 7 regional | 8 arr | 9 asia | 10 arr | 11 world
+  const dCell = (row, col, html, extraClass = "", spanCols = 1, spanRows = 1) => {
+    const colEnd = spanCols > 1 ? ` / span ${spanCols}` : "";
+    const rowEnd = spanRows > 1 ? ` / span ${spanRows}` : "";
+    return `
+      <div class="owcs-flow-cell ${extraClass}" style="grid-row:${row}${rowEnd};grid-column:${col}${colEnd}">
+        ${html}
+      </div>
+    `;
+  };
+
+  const dArrow = (row, col, spanRows = 1) =>
+    dCell(
+      row,
+      col,
+      `<span class="owcs-flow-arrow owcs-flow-arrow-h" aria-hidden="true">→</span>`,
+      "owcs-flow-arrow-cell",
+      1,
+      spanRows
+    );
+
   const arrowH = `<span class="owcs-flow-arrow owcs-flow-arrow-h" aria-hidden="true">→</span>`;
   const arrowV = `<span class="owcs-flow-arrow owcs-flow-arrow-v" aria-hidden="true">↓</span>`;
 
@@ -574,107 +596,50 @@ function buildOwcsSeasonFlowDiagram_(lang) {
     return `<div class="owcs-flow-pipeline">${parts.join("")}</div>`;
   };
 
+  const asiaTrack = (row, regionKey, label, openTitle, regionalTitle) => `
+    ${dCell(row, 2, `<span class="owcs-flow-sublabel">${label}</span>`, `owcs-flow-label-cell owcs-flow-region-${regionKey}`)}
+    ${dCell(row, 3, owcsFlowBox_(openTitle, "", "owcs-flow-box-open"))}
+    ${dArrow(row, 4)}
+    ${dCell(row, 5, owcsFlowBox_(L.promo, "", "owcs-flow-box-soft"))}
+    ${dArrow(row, 6)}
+    ${dCell(row, 7, owcsFlowBox_(regionalTitle, L.stagePath, `owcs-flow-box-owcs owcs-flow-box-owcs-${regionKey}`))}
+    ${dArrow(row, 8)}
+  `;
+
   const desktop = `
     <div class="owcs-flow-desktop" aria-label="${L.flowAria}">
       <div class="owcs-flow-grid">
-        <div class="owcs-flow-cell owcs-flow-bar-cell owcs-flow-asia-bar" style="grid-row:1 / span 3;grid-column:1">
-          <span>${L.asia}</span>
-        </div>
+        ${dCell(1, 1, `<span>${L.asia}</span>`, "owcs-flow-bar-cell owcs-flow-asia-bar", 1, 3)}
 
-        <div class="owcs-flow-cell owcs-flow-label-cell owcs-flow-region-kr" style="grid-row:1;grid-column:2">
-          <span class="owcs-flow-sublabel">${L.kr}</span>
-        </div>
-        <div class="owcs-flow-cell" style="grid-row:1;grid-column:3">
-          ${owcsFlowBox_(L.krOpen, "", "owcs-flow-box-open")}
-        </div>
-        <div class="owcs-flow-cell" style="grid-row:1;grid-column:4">
-          ${owcsFlowBox_(L.promo, "", "owcs-flow-box-soft")}
-        </div>
-        <div class="owcs-flow-cell" style="grid-row:1;grid-column:5">
-          ${owcsFlowBox_(L.krRegional, L.stagePath, "owcs-flow-box-offline")}
-        </div>
+        ${asiaTrack(1, "kr", L.kr, L.krOpen, L.krRegional)}
+        ${asiaTrack(2, "jp", L.jp, L.jpOpen, L.jpRegional)}
+        ${asiaTrack(3, "pac", L.pac, L.pacOpen, L.pacRegional)}
 
-        <div class="owcs-flow-cell owcs-flow-label-cell owcs-flow-region-jp" style="grid-row:2;grid-column:2">
-          <span class="owcs-flow-sublabel">${L.jp}</span>
-        </div>
-        <div class="owcs-flow-cell" style="grid-row:2;grid-column:3">
-          ${owcsFlowBox_(L.jpOpen, "", "owcs-flow-box-open")}
-        </div>
-        <div class="owcs-flow-cell" style="grid-row:2;grid-column:4">
-          ${owcsFlowBox_(L.promo, "", "owcs-flow-box-soft")}
-        </div>
-        <div class="owcs-flow-cell" style="grid-row:2;grid-column:5">
-          ${owcsFlowBox_(L.jpRegional, L.stagePath, "owcs-flow-box-offline")}
-        </div>
+        ${dCell(1, 9, owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-owcs owcs-flow-box-owcs-asia"), "owcs-flow-asia-span", 1, 3)}
+        ${dArrow(1, 10, 6)}
+        ${dCell(1, 11, owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world"), "owcs-flow-world-span", 1, 6)}
 
-        <div class="owcs-flow-cell owcs-flow-label-cell owcs-flow-region-pac" style="grid-row:3;grid-column:2">
-          <span class="owcs-flow-sublabel">${L.pac}</span>
-        </div>
-        <div class="owcs-flow-cell" style="grid-row:3;grid-column:3">
-          ${owcsFlowBox_(L.pacOpen, "", "owcs-flow-box-open")}
-        </div>
-        <div class="owcs-flow-cell" style="grid-row:3;grid-column:4">
-          ${owcsFlowBox_(L.promo, "", "owcs-flow-box-soft")}
-        </div>
-        <div class="owcs-flow-cell" style="grid-row:3;grid-column:5">
-          ${owcsFlowBox_(L.pacRegional, L.stagePath, "owcs-flow-box-offline")}
-        </div>
+        ${dCell(4, 1, `<span>${L.china}</span>`, "owcs-flow-bar-cell owcs-flow-china-bar")}
+        ${dCell(4, 2, `<span class="owcs-flow-sublabel owcs-flow-sublabel-cn">${L.china}</span>`, "owcs-flow-label-cell owcs-flow-region-cn")}
+        ${dCell(4, 3, owcsFlowBox_(L.cnOpen, "", "owcs-flow-box-open"), "", 3)}
+        ${dArrow(4, 6)}
+        ${dCell(4, 7, owcsFlowBox_(L.cnMain, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-cn"), "", 3)}
 
-        <div class="owcs-flow-cell owcs-flow-asia-span" style="grid-row:1 / span 3;grid-column:6">
-          ${owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-asia-champ")}
-        </div>
-        <div class="owcs-flow-cell owcs-flow-world-span" style="grid-row:1 / span 6;grid-column:7">
-          ${owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-intl")}
-        </div>
+        ${dCell(5, 1, `<span>${L.na}</span>`, "owcs-flow-bar-cell owcs-flow-na-bar")}
+        ${dCell(5, 2, `<span class="owcs-flow-sublabel owcs-flow-sublabel-na">${L.na}</span>`, "owcs-flow-label-cell owcs-flow-region-na")}
+        ${dCell(5, 3, owcsFlowBox_(L.faceit, "", "owcs-flow-box-open"))}
+        ${dArrow(5, 4)}
+        ${dCell(5, 5, owcsFlowBox_(L.promo, "", "owcs-flow-box-soft"))}
+        ${dArrow(5, 6)}
+        ${dCell(5, 7, owcsFlowBox_(L.naMain, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-na"), "", 3)}
 
-        <div class="owcs-flow-cell owcs-flow-bar-cell owcs-flow-china-bar" style="grid-row:4;grid-column:1">
-          <span>${L.china}</span>
-        </div>
-        <div class="owcs-flow-cell owcs-flow-label-cell" style="grid-row:4;grid-column:2">
-          <span class="owcs-flow-sublabel owcs-flow-sublabel-plain">${L.china}</span>
-        </div>
-        <div class="owcs-flow-cell owcs-flow-cell-empty" style="grid-row:4;grid-column:3" aria-hidden="true"></div>
-        <div class="owcs-flow-cell" style="grid-row:4;grid-column:4">
-          ${owcsFlowBox_(L.cnOpen, "", "owcs-flow-box-open")}
-        </div>
-        <div class="owcs-flow-cell" style="grid-row:4;grid-column:5">
-          ${owcsFlowBox_(L.cnMain, L.stagePath, "owcs-flow-box-offline")}
-        </div>
-        <div class="owcs-flow-cell owcs-flow-cell-empty" style="grid-row:4;grid-column:6" aria-hidden="true"></div>
-
-        <div class="owcs-flow-cell owcs-flow-bar-cell owcs-flow-na-bar" style="grid-row:5;grid-column:1">
-          <span>${L.na}</span>
-        </div>
-        <div class="owcs-flow-cell owcs-flow-label-cell" style="grid-row:5;grid-column:2">
-          <span class="owcs-flow-sublabel owcs-flow-sublabel-plain">${L.na}</span>
-        </div>
-        <div class="owcs-flow-cell" style="grid-row:5;grid-column:3">
-          ${owcsFlowBox_(L.faceit, "", "owcs-flow-box-open")}
-        </div>
-        <div class="owcs-flow-cell" style="grid-row:5;grid-column:4">
-          ${owcsFlowBox_(L.promo, "", "owcs-flow-box-soft")}
-        </div>
-        <div class="owcs-flow-cell" style="grid-row:5;grid-column:5">
-          ${owcsFlowBox_(L.naMain, L.stagePath, "owcs-flow-box-offline")}
-        </div>
-        <div class="owcs-flow-cell owcs-flow-cell-empty" style="grid-row:5;grid-column:6" aria-hidden="true"></div>
-
-        <div class="owcs-flow-cell owcs-flow-bar-cell owcs-flow-emea-bar" style="grid-row:6;grid-column:1">
-          <span>${L.emea}</span>
-        </div>
-        <div class="owcs-flow-cell owcs-flow-label-cell" style="grid-row:6;grid-column:2">
-          <span class="owcs-flow-sublabel owcs-flow-sublabel-plain">${L.emea}</span>
-        </div>
-        <div class="owcs-flow-cell" style="grid-row:6;grid-column:3">
-          ${owcsFlowBox_(L.faceit, "", "owcs-flow-box-open")}
-        </div>
-        <div class="owcs-flow-cell" style="grid-row:6;grid-column:4">
-          ${owcsFlowBox_(L.promo, "", "owcs-flow-box-soft")}
-        </div>
-        <div class="owcs-flow-cell" style="grid-row:6;grid-column:5">
-          ${owcsFlowBox_(L.emeaMain, L.stagePath, "owcs-flow-box-offline")}
-        </div>
-        <div class="owcs-flow-cell owcs-flow-cell-empty" style="grid-row:6;grid-column:6" aria-hidden="true"></div>
+        ${dCell(6, 1, `<span>${L.emea}</span>`, "owcs-flow-bar-cell owcs-flow-emea-bar")}
+        ${dCell(6, 2, `<span class="owcs-flow-sublabel owcs-flow-sublabel-emea">${L.emea}</span>`, "owcs-flow-label-cell owcs-flow-region-emea")}
+        ${dCell(6, 3, owcsFlowBox_(L.faceit, "", "owcs-flow-box-open"))}
+        ${dArrow(6, 4)}
+        ${dCell(6, 5, owcsFlowBox_(L.promo, "", "owcs-flow-box-soft"))}
+        ${dArrow(6, 6)}
+        ${dCell(6, 7, owcsFlowBox_(L.emeaMain, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-emea"), "", 3)}
       </div>
     </div>
   `;
@@ -695,23 +660,23 @@ function buildOwcsSeasonFlowDiagram_(lang) {
             ${mobileTrack("kr", L.kr, [
               owcsFlowBox_(L.krOpen, "", "owcs-flow-box-open"),
               owcsFlowBox_(L.promo, "", "owcs-flow-box-soft"),
-              owcsFlowBox_(L.krRegional, L.stagePath, "owcs-flow-box-offline"),
-              owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-asia-champ"),
-              owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-intl")
+              owcsFlowBox_(L.krRegional, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-kr"),
+              owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-owcs owcs-flow-box-owcs-asia"),
+              owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
             ])}
             ${mobileTrack("jp", L.jp, [
               owcsFlowBox_(L.jpOpen, "", "owcs-flow-box-open"),
               owcsFlowBox_(L.promo, "", "owcs-flow-box-soft"),
-              owcsFlowBox_(L.jpRegional, L.stagePath, "owcs-flow-box-offline"),
-              owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-asia-champ"),
-              owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-intl")
+              owcsFlowBox_(L.jpRegional, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-jp"),
+              owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-owcs owcs-flow-box-owcs-asia"),
+              owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
             ])}
             ${mobileTrack("pac", L.pac, [
               owcsFlowBox_(L.pacOpen, "", "owcs-flow-box-open"),
               owcsFlowBox_(L.promo, "", "owcs-flow-box-soft"),
-              owcsFlowBox_(L.pacRegional, L.stagePath, "owcs-flow-box-offline"),
-              owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-asia-champ"),
-              owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-intl")
+              owcsFlowBox_(L.pacRegional, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-pac"),
+              owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-owcs owcs-flow-box-owcs-asia"),
+              owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
             ])}
           </div>
         </div>
@@ -722,8 +687,8 @@ function buildOwcsSeasonFlowDiagram_(lang) {
         <div class="owcs-flow-region-body">
           ${pipe([
             owcsFlowBox_(L.cnOpen, "", "owcs-flow-box-open"),
-            owcsFlowBox_(L.cnMain, L.stagePath, "owcs-flow-box-offline"),
-            owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-intl")
+            owcsFlowBox_(L.cnMain, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-cn"),
+            owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
           ])}
         </div>
       </div>
@@ -734,8 +699,8 @@ function buildOwcsSeasonFlowDiagram_(lang) {
           ${pipe([
             owcsFlowBox_(L.faceit, "", "owcs-flow-box-open"),
             owcsFlowBox_(L.promo, "", "owcs-flow-box-soft"),
-            owcsFlowBox_(L.naMain, L.stagePath, "owcs-flow-box-offline"),
-            owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-intl")
+            owcsFlowBox_(L.naMain, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-na"),
+            owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
           ])}
         </div>
       </div>
@@ -746,8 +711,8 @@ function buildOwcsSeasonFlowDiagram_(lang) {
           ${pipe([
             owcsFlowBox_(L.faceit, "", "owcs-flow-box-open"),
             owcsFlowBox_(L.promo, "", "owcs-flow-box-soft"),
-            owcsFlowBox_(L.emeaMain, L.stagePath, "owcs-flow-box-offline"),
-            owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-intl")
+            owcsFlowBox_(L.emeaMain, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-emea"),
+            owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
           ])}
         </div>
       </div>
@@ -778,7 +743,7 @@ const OWCS_FLOW_COPY_EN_ = {
   krRegional: "OWCS Korea<br>(offline)",
   jpRegional: "OWCS Japan",
   pacRegional: "OWCS Pacific",
-  stagePath: "Round robin → tournament → top 2 advance",
+  stagePath: "Round robin → tournament<br>Top 2 advance",
   asiaChampTitle: "OWCS Asia<br>(offline)",
   asiaNote: "Top 2 advance",
   cnOpen: "China Open Quals",
@@ -806,7 +771,7 @@ const OWCS_FLOW_COPY_JP_ = {
   krRegional: "OWCS Korea<br>（オフライン）",
   jpRegional: "OWCS Japan",
   pacRegional: "OWCS Pacific",
-  stagePath: "総当たり戦→トーナメント→上位2チームが進出",
+  stagePath: "総当たり戦→トーナメント<br>上位2チームが進出",
   asiaChampTitle: "OWCS Asia<br>（オフライン）",
   asiaNote: "上位2チームが進出",
   cnOpen: "中国オープン予選",
