@@ -182,6 +182,33 @@ function loadWatchOwcsView() {
 
       <div class="card faq-card">
         <h3>
+          ${siteHeading_("🗺️ Season structure map", "🗺️ シーズン構造図")}
+        </h3>
+        ${siteText_(
+          `
+            <p>
+              Real HTML text (not a flat image), so browser translate tools can usually
+              read the labels. Site Text (EN / JP / both) also switches this map.
+            </p>
+            <p>
+              Colors follow this site’s region tokens: KR / JP / Pacific, China, NA, EMEA.
+            </p>
+          `,
+          `
+            <p>
+              画像ではなくHTMLのテキストなので、ブラウザの翻訳機能でもラベルを
+              読み取れることが多くあります。Site Text（英 / 日 / 併記）でも切替できます。
+            </p>
+            <p>
+              色はこのサイトの地域カラー（KR / JP / Pacific、China、NA、EMEA）に合わせています。
+            </p>
+          `
+        )}
+        ${buildOwcsSeasonFlowHtml_()}
+      </div>
+
+      <div class="card faq-card">
+        <h3>
           ${siteHeading_("✨ What’s fun to watch", "✨ 何が面白い？")}
         </h3>
         ${siteText_(
@@ -489,6 +516,224 @@ function loadWatchOwcsView() {
     </div>
   `;
 }
+
+/**
+ * OWCS season flowchart as real DOM text (browser-translate friendly).
+ * Uses Site Text language: en | jp | both.
+ */
+function buildOwcsSeasonFlowHtml_() {
+  const mode =
+    typeof getSiteTextLanguageMode_ === "function"
+      ? getSiteTextLanguageMode_()
+      : "both";
+
+  if (mode === "en") {
+    return buildOwcsSeasonFlowDiagram_("en");
+  }
+
+  if (mode === "jp") {
+    return buildOwcsSeasonFlowDiagram_("jp");
+  }
+
+  return `
+    ${buildOwcsSeasonFlowDiagram_("en")}
+    <hr class="owcs-flow-lang-sep">
+    ${buildOwcsSeasonFlowDiagram_("jp")}
+  `;
+}
+
+function buildOwcsSeasonFlowDiagram_(lang) {
+  const L = lang === "jp" ? OWCS_FLOW_COPY_JP_ : OWCS_FLOW_COPY_EN_;
+  const docLang = lang === "jp" ? "ja" : "en";
+
+  const arrow = `<span class="owcs-flow-arrow" aria-hidden="true">→</span>`;
+
+  const tierHead = (num, title, note) => `
+    <div class="owcs-flow-tier-head">
+      <span class="owcs-flow-tier-num">TIER ${num}</span>
+      <span class="owcs-flow-tier-title">${title}</span>
+      ${note ? `<span class="owcs-flow-tier-note">${note}</span>` : ""}
+    </div>
+  `;
+
+  const box = (html, extraClass = "") =>
+    `<div class="owcs-flow-box ${extraClass}">${html}</div>`;
+
+  const subTrack = (regionKey, label, openText, offlineText) => `
+    <div class="owcs-flow-subtrack owcs-flow-region-${regionKey}">
+      <div class="owcs-flow-sublabel">${label}</div>
+      <div class="owcs-flow-pipeline">
+        ${box(openText, "owcs-flow-box-open")}
+        ${arrow}
+        ${box(L.promo, "owcs-flow-box-soft")}
+        ${arrow}
+        ${box(offlineText, "owcs-flow-box-offline")}
+      </div>
+    </div>
+  `;
+
+  return `
+    <div class="owcs-flow" lang="${docLang}">
+      <div class="owcs-flow-header" role="list">
+        ${tierHead(4, L.t4Title, L.t4Note)}
+        ${tierHead(3, L.t3Title, L.t3Note)}
+        ${tierHead(2, L.t2Title, L.t2Note)}
+        ${tierHead(1, L.t1Title, L.t1Note)}
+      </div>
+
+      <div class="owcs-flow-block owcs-flow-asia">
+        <div class="owcs-flow-region-bar">
+          <span>${L.asia}</span>
+        </div>
+        <div class="owcs-flow-region-body">
+          <div class="owcs-flow-asia-tracks">
+            ${subTrack("kr", L.kr, L.krOpen, L.krOffline)}
+            ${subTrack("jp", L.jp, L.jpOpen, L.jpOffline)}
+            ${subTrack("pac", L.pac, L.pacOpen, L.pacOffline)}
+          </div>
+          <div class="owcs-flow-merge" aria-hidden="true">↘ ↙</div>
+          <div class="owcs-flow-asia-late">
+            ${box(L.asiaChamp, "owcs-flow-box-asia-champ")}
+            ${arrow}
+            ${box(L.intlShort, "owcs-flow-box-intl")}
+          </div>
+        </div>
+      </div>
+
+      <div class="owcs-flow-block owcs-flow-china">
+        <div class="owcs-flow-region-bar">
+          <span>${L.china}</span>
+        </div>
+        <div class="owcs-flow-region-body">
+          <div class="owcs-flow-pipeline owcs-flow-pipeline-single">
+            ${box(L.cnOpen, "owcs-flow-box-open")}
+            ${arrow}
+            ${box(L.cnMain, "owcs-flow-box-offline")}
+            ${arrow}
+            ${box(L.top2Intl, "owcs-flow-box-soft")}
+            ${arrow}
+            ${box(L.intlShort, "owcs-flow-box-intl")}
+          </div>
+        </div>
+      </div>
+
+      <div class="owcs-flow-block owcs-flow-na">
+        <div class="owcs-flow-region-bar">
+          <span>${L.na}</span>
+        </div>
+        <div class="owcs-flow-region-body">
+          <div class="owcs-flow-pipeline owcs-flow-pipeline-single">
+            ${box(L.faceit, "owcs-flow-box-open")}
+            ${arrow}
+            ${box(L.promo, "owcs-flow-box-soft")}
+            ${arrow}
+            ${box(L.naMain, "owcs-flow-box-offline")}
+            ${arrow}
+            ${box(L.top2Intl, "owcs-flow-box-soft")}
+            ${arrow}
+            ${box(L.intlShort, "owcs-flow-box-intl")}
+          </div>
+        </div>
+      </div>
+
+      <div class="owcs-flow-block owcs-flow-emea">
+        <div class="owcs-flow-region-bar">
+          <span>${L.emea}</span>
+        </div>
+        <div class="owcs-flow-region-body">
+          <div class="owcs-flow-pipeline owcs-flow-pipeline-single">
+            ${box(L.faceit, "owcs-flow-box-open")}
+            ${arrow}
+            ${box(L.promo, "owcs-flow-box-soft")}
+            ${arrow}
+            ${box(L.emeaMain, "owcs-flow-box-offline")}
+            ${arrow}
+            ${box(L.top2Intl, "owcs-flow-box-soft")}
+            ${arrow}
+            ${box(L.intlShort, "owcs-flow-box-intl")}
+          </div>
+        </div>
+      </div>
+
+      <div class="owcs-flow-footer">
+        <div class="owcs-flow-box owcs-flow-box-intl owcs-flow-box-intl-wide">
+          <strong>${L.intlFull}</strong>
+          <span class="owcs-flow-footer-events">${L.intlEvents}</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+const OWCS_FLOW_COPY_EN_ = {
+  asia: "Asia",
+  china: "China",
+  na: "NA",
+  emea: "EMEA",
+  kr: "KR",
+  jp: "JP",
+  pac: "Pacific",
+  t4Title: "Open path",
+  t4Note: "Online open quals + promo / relegation",
+  t3Title: "Regional",
+  t3Note: "Regional championships",
+  t2Title: "Asia stage",
+  t2Note: "Asia Championship (offline)",
+  t1Title: "International",
+  t1Note: "Worldwide LAN events",
+  promo: "Promotion / relegation",
+  krOpen: "Korea Open (online)",
+  jpOpen: "Japan Open (online)",
+  pacOpen: "Pacific Open (online)",
+  krOffline: "Korea regional (offline)",
+  jpOffline: "Japan regional (offline)",
+  pacOffline: "Pacific regional (offline)",
+  asiaChamp: "OWCS Asia Championship",
+  cnOpen: "OWCS China Open",
+  cnMain: "China regular + regional playoffs",
+  faceit: "FACEIT League<br>Open · Advanced · Expert · Master",
+  naMain: "NA regional (round robin / playoffs)",
+  emeaMain: "EMEA regional (round robin / playoffs)",
+  top2Intl: "Top teams → intl",
+  intlShort: "International",
+  intlFull: "OWCS International events",
+  intlEvents: "Champions Clash · Midseason Championship · World Finals"
+};
+
+const OWCS_FLOW_COPY_JP_ = {
+  asia: "Asia",
+  china: "China",
+  na: "NA",
+  emea: "EMEA",
+  kr: "KR",
+  jp: "JP",
+  pac: "Pacific",
+  t4Title: "オープン枠",
+  t4Note: "オンラインオープン予選 + 昇格/降格",
+  t3Title: "地域大会",
+  t3Note: "地域チャンピオンシップ",
+  t2Title: "アジア大会",
+  t2Note: "アジア選手権（オフライン）",
+  t1Title: "国際大会",
+  t1Note: "世界大会（オフライン）",
+  promo: "昇格 / 降格",
+  krOpen: "韓国オープン（オンライン）",
+  jpOpen: "日本オープン（オンライン）",
+  pacOpen: "パシフィックオープン（オンライン）",
+  krOffline: "韓国地域大会（オフライン）",
+  jpOffline: "日本地域大会（オフライン）",
+  pacOffline: "パシフィック地域大会（オフライン）",
+  asiaChamp: "OWCS Asia Championship",
+  cnOpen: "OWCS China Open",
+  cnMain: "中国レギュラー + 地域プレーオフ",
+  faceit: "FACEIT League<br>Open · Advanced · Expert · Master",
+  naMain: "NA地域大会（総当り / プレーオフ）",
+  emeaMain: "EMEA地域大会（総当り / プレーオフ）",
+  top2Intl: "上位 → 国際大会",
+  intlShort: "国際大会",
+  intlFull: "OWCS 国際大会",
+  intlEvents: "Champions Clash · Midseason Championship · World Finals"
+};
 
 function openOwcsLiveFromGuide_() {
   settingsMenu?.classList.add("settings-hidden");
