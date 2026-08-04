@@ -933,9 +933,12 @@ flex:0 0 auto;
   margin:0 0 8px;
   overflow-x:auto;
   flex-wrap:nowrap;
-  /* Match main-nav footprint: 4×64px + 3 gaps ≤ 5×64px + 4 gaps */
   width:max-content;
   max-width:100%;
+}
+
+.main-nav-howto[hidden]{
+  display:none;
 }
 
 .nav button.howto-nav-button{
@@ -958,6 +961,14 @@ flex:0 0 auto;
 .howto-nav-button .media-icon{
   width:18px;
   height:18px;
+}
+
+.howto-nav-hide-button{
+  opacity:0.75;
+}
+
+.howto-nav-hide-button:hover{
+  opacity:1;
 }
 
 .sub-nav{

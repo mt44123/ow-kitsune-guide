@@ -111,9 +111,9 @@ function loadHowtoView() {
               <li><b>PLAYERS</b> — links for listed players, plus manage ★ MY GOATS and ◆ MUTED</li>
               <li><b>SEARCH</b> — open the search box</li>
               <li>
-                <b>▶ Guides</b> — second-row shortcuts:
-                <b>HOW TO USE</b>, <b>WATCH OWCS</b>, <b>Translation</b>, <b>Links</b>
-                (same expand/collapse style as Filters)
+                <b>Guide row</b> — <b>HOW TO USE</b>, <b>WATCH OWCS</b>,
+                <b>Translation</b>, <b>Links</b>. Use <b>Hide</b> next to Links
+                (or ⚙ Settings → Guide Buttons) to hide the whole row
               </li>
             </ul>
           `,
@@ -125,9 +125,9 @@ function loadHowtoView() {
               <li><b>PLAYERS</b> — 掲載プレイヤーのリンク一覧、★ MY GOATS・◆ MUTED の管理</li>
               <li><b>SEARCH</b> — 検索ボックスを開く</li>
               <li>
-                <b>▶ Guides</b> — 2行目のショートカット:
-                <b>HOW TO USE</b> / <b>WATCH OWCS</b> / <b>Translation</b> / <b>Links</b>
-                （Filters と同じ開閉）
+                <b>ガイド行</b> — <b>HOW TO USE</b> / <b>WATCH OWCS</b> /
+                <b>Translation</b> / <b>Links</b>。Links 横の <b>Hide</b>
+                （または ⚙ Settings → ガイドボタン）で2行目ごと非表示
               </li>
             </ul>
           `

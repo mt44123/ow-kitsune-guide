@@ -479,15 +479,6 @@ document.addEventListener("click", e => {
 const refreshDataButton =
   document.getElementById("refreshDataButton");
 
-const toolsButton =
-  document.getElementById("toolsButton");
-
-const usefulLinksButton =
-  document.getElementById("usefulLinksButton");
-
-const howtoButton =
-  document.getElementById("howtoButton");
-
 const faqButton =
   document.getElementById("faqButton");
 
@@ -503,6 +494,12 @@ const toolsNavButton =
 const usefulLinksNavButton =
   document.getElementById("usefulLinksNavButton");
 
+const hideGuideNavButton =
+  document.getElementById("hideGuideNavButton");
+
+const guideNavRow =
+  document.getElementById("guideNavRow");
+
 const settingsButton =  document.getElementById("settingsButton");
 const settingsMenu =  document.getElementById("settingsMenu");
 
@@ -516,38 +513,21 @@ const siteTextLanguageSelect =
 const streamTitleSelect =
   document.getElementById("streamTitleSelect");
 
+const guideNavSelect =
+  document.getElementById("guideNavSelect");
+
 const filtersToggle =
   document.getElementById("filtersToggle");
 
 const filtersPanel =
   document.getElementById("filtersPanel");
 
-const guideNavToggle =
-  document.getElementById("guideNavToggle");
-
-const guideNavPanel =
-  document.getElementById("guideNavPanel");
-
 let filtersExpanded =
   localStorage.getItem("filtersExpanded") !== "false";
 
-let guideNavExpanded =
-  localStorage.getItem("guideNavExpanded") !== "false";
-
-const GUIDE_NAV_LABELS = {
-  howto: "HOW TO USE",
-  watchowcs: "WATCH OWCS",
-  toolstips: "Translation",
-  usefullinks: "Links"
-};
-
-function isGuideNavView_(view) {
-  return Boolean(GUIDE_NAV_LABELS[view]);
-}
-
-function getCurrentGuideLabel_() {
-  return GUIDE_NAV_LABELS[currentView] || "";
-}
+// SHOW by default; HIDE when user chose hide in settings or via Hide button.
+let guideNavVisible =
+  localStorage.getItem("guideNavVisible") !== "hide";
 
 function getCurrentFilterLabel_() {
   const viewLabel = titles[currentView] || currentView.toUpperCase();
@@ -574,22 +554,25 @@ function applyFiltersExpanded_() {
       : `▶ Filters (${getCurrentFilterLabel_()})`;
 }
 
-function applyGuideNavExpanded_() {
-  if (!guideNavToggle || !guideNavPanel) return;
+function setGuideNavVisible_(visible, { syncSelect = true } = {}) {
+  guideNavVisible = Boolean(visible);
 
-  guideNavPanel.classList.toggle(
-    "filters-collapsed",
-    !guideNavExpanded
+  localStorage.setItem(
+    "guideNavVisible",
+    guideNavVisible ? "show" : "hide"
   );
 
-  const guideLabel = getCurrentGuideLabel_();
+  if (guideNavRow) {
+    guideNavRow.hidden = !guideNavVisible;
+  }
 
-  guideNavToggle.textContent =
-    guideNavExpanded
-      ? "▼ Guides"
-      : guideLabel
-        ? `▶ Guides (${guideLabel})`
-        : "▶ Guides";
+  if (syncSelect && guideNavSelect) {
+    guideNavSelect.value = guideNavVisible ? "show" : "hide";
+  }
+}
+
+function applyGuideNavVisibility_() {
+  setGuideNavVisible_(guideNavVisible, { syncSelect: true });
 }
 
 filtersToggle?.addEventListener("click", () => {
@@ -601,17 +584,6 @@ filtersToggle?.addEventListener("click", () => {
   );
 
   applyFiltersExpanded_();
-});
-
-guideNavToggle?.addEventListener("click", () => {
-  guideNavExpanded = !guideNavExpanded;
-
-  localStorage.setItem(
-    "guideNavExpanded",
-    String(guideNavExpanded)
-  );
-
-  applyGuideNavExpanded_();
 });
 
 function applyTheme_(theme) {
@@ -777,24 +749,22 @@ function updateSettingsMenuText_() {
     )
   );
 
+  setSettingsText_(
+    "#guideNavSettingTitle",
+    settingsText_("Guide Buttons", "ガイドボタン")
+  );
+
+  setSettingsText_(
+    "#guideNavSettingDesc",
+    settingsText_(
+      "Second-row shortcuts under the main nav.",
+      "メインナビ下の2行目ショートカット。"
+    )
+  );
+
   setSettingsRowTitle_(
     refreshDataButton,
     settingsText_("Refresh Data", "データ更新")
-  );
-
-  setSettingsRowTitle_(
-    toolsButton,
-    settingsText_("Translation Tools", "翻訳ツール")
-  );
-
-  setSettingsRowTitle_(
-    usefulLinksButton,
-    settingsText_("Useful Links", "関連リンク")
-  );
-
-  setSettingsRowTitle_(
-    howtoButton,
-    settingsText_("How to use", "使い方")
   );
 
   setSettingsRowTitle_(
@@ -923,6 +893,20 @@ streamTitleSelect?.addEventListener("change", () => {
   } else if (isArchiveView(currentView)) {
     rerenderCurrentArchiveView_();
   }
+});
+
+if (guideNavSelect) {
+  guideNavSelect.value = guideNavVisible ? "show" : "hide";
+}
+
+applyGuideNavVisibility_();
+
+guideNavSelect?.addEventListener("change", () => {
+  setGuideNavVisible_(guideNavSelect.value !== "hide");
+});
+
+hideGuideNavButton?.addEventListener("click", () => {
+  setGuideNavVisible_(false);
 });
 
 let liveLayout =
@@ -1197,21 +1181,6 @@ refreshDataButton?.addEventListener("click", () => {
   loadView(currentView);
 
 });
-
-toolsButton?.addEventListener(
-  "click",
-  () => openStaticView_("toolstips")
-);
-
-usefulLinksButton?.addEventListener(
-  "click",
-  () => openStaticView_("usefullinks")
-);
-
-howtoButton?.addEventListener(
-  "click",
-  () => openStaticView_("howto")
-);
 
 faqButton?.addEventListener(
   "click",
@@ -1962,8 +1931,6 @@ function updateNavState(view) {
   if (hasCollapsibleFilters_(view)) {
     applyFiltersExpanded_();
   }
-
-  applyGuideNavExpanded_();
 }
 
 document
