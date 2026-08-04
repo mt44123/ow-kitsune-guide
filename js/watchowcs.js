@@ -140,58 +140,21 @@ function loadWatchOwcsView() {
         </h3>
         ${siteText_(
           `
-            <p>Here’s how the season flows:</p>
-            <ol>
-              <li>Open Qualifier - (prelims)</li>
-              <li>Promotion / Relegation</li>
-              <li>Regular Season - (round robin)</li>
-              <li>
-                Regional Playoffs - (tournament)<br>
-                (In Asia, there is also an Asia stage.)
-              </li>
-              <li>World events</li>
-            </ol>
             <p>
-              Exact formats differ a little by region, but this cycle happens about
-              3–4 times a year.<br>
-              In other words, there are roughly 3–4 shots each year at becoming
-              #1 in the world.
+              Formats differ a little by region, but the diagram below is one season —
+              and there are about 3–4 seasons each year.
+            </p>
+            <p>
+              In other words, there are roughly 3–4 chances each year to chase the
+              #1 ranking in the world.
             </p>
           `,
           `
-            <p>大会の流れです。</p>
-            <ol>
-              <li>予選 - (Open Qualifier)</li>
-              <li>昇格戦・降格戦 - (Promotion/Relegation)</li>
-              <li>総当たり戦 - (Regular Season)</li>
-              <li>
-                トーナメント戦 - (Regional Playoffs)<br>
-                （アジア地域は、アジア大会もあります）
-              </li>
-              <li>世界大会</li>
-            </ol>
             <p>
-              地域ごとに形式は少し違いますが、これが年3～4回あります。<br>
+              地域ごとに形式は少し違いますが、下図が1シーズンで、年間3～4シーズンあります。
+            </p>
+            <p>
               つまり、年3～4回、世界1位を目指すチャンスがあります。
-            </p>
-          `
-        )}
-      </div>
-
-      <div class="card faq-card">
-        <h3>
-          ${siteHeading_("🗺️ Season structure map", "🗺️ シーズン構造図")}
-        </h3>
-        ${siteText_(
-          `
-            <p>
-              Real HTML text (not a flat image), so browser translation tools can be used.
-              Site Text (EN / JP) can also switch this map.
-            </p>
-          `,
-          `
-            <p>
-              画像ではなくHTMLのテキストなので、ブラウザの翻訳機能を使用可能です。Site Text（英 / 日 ）でも切替可能です。
             </p>
           `
         )}
