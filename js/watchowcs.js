@@ -164,19 +164,24 @@ function loadWatchOwcsView() {
         </h4>
         ${buildOwcsYearFlowHtml_()}
         <h4 class="owcs-flow-subhead">
-          ${siteHeading_("One season in detail", "1シーズンの詳細")}
+          ${siteHeading_("One stage in detail", "1ステージの詳細")}
         </h4>
         ${siteText_(
           `
             <p class="owcs-flow-detail-lead">
-              Each stage (one season) has a path like this. Regions differ a little,
-              but the overall picture is the same.
+              Each stage has a path like this.
+            </p>
+            <p class="owcs-flow-detail-lead">
+              The number of slots and the qualification rules differ slightly for
+              each world event.
             </p>
           `,
           `
             <p class="owcs-flow-detail-lead">
-              各ステージ（1シーズン）の中身は、だいたい下図のような流れです。
-              地域ごとに少し違いますが、全体像はこの通りです。
+              各ステージの中身は、だいたい下図のような流れです。
+            </p>
+            <p class="owcs-flow-detail-lead">
+              各世界大会ごとに、進出できるチーム数・条件は若干異なります。
             </p>
           `
         )}
@@ -184,10 +189,6 @@ function loadWatchOwcsView() {
         ${siteText_(
           `
             <div class="owcs-flow-aside">
-              <p>
-                The number of slots and the qualification rules differ slightly for
-                each world event.
-              </p>
               <p>
                 <b>Q: Do Japanese teams play at world events?</b><br>
                 <b>A:</b> Sometimes, yes.
@@ -210,9 +211,6 @@ function loadWatchOwcsView() {
           `,
           `
             <div class="owcs-flow-aside">
-              <p>
-                各世界大会ごとに、進出できるチーム数・条件は若干異なります。
-              </p>
               <p>
                 <b>Q: 日本チームは世界大会に出場してる？</b><br>
                 <b>A:</b> 出場している時もあります。
