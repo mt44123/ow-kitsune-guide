@@ -3777,6 +3777,14 @@ body:not(.light-theme) .owcs-flow{
   border-top:1px dashed var(--border);
 }
 
+.owcs-flow-aside{
+  margin-top:16px;
+}
+
+.owcs-flow-aside p{
+  margin:10px 0;
+}
+
 .owcs-flow-desktop{
   display:block;
   width:100%;

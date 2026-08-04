@@ -48,7 +48,7 @@ function loadWatchOwcsView() {
 
       <div class="card faq-card">
         <h3>
-          ${siteHeading_("🦊 New to OWCS?", "🦊 OWCSは初めて？")}
+          ${siteHeading_("🦊 New to OWCS?", "🦊 OWCSは初めてですか？")}
         </h3>
         ${siteText_(
           `
@@ -102,7 +102,7 @@ function loadWatchOwcsView() {
               You don’t need to follow everything. Starting with “your favorite
               region + world events” is enough.<br>
               Japan, Korea, Asia, and World events also have Japanese cast
-              commentary.
+              commentary — so they’re easier for Japanese viewers to follow!
             </p>
           `,
           `
@@ -121,7 +121,7 @@ function loadWatchOwcsView() {
             </ul>
             <p>
               全部追う必要はありません。最初は「推しの地域 + 世界大会」で十分です。<br>
-              ちなみに、Japan、Korea、Asia、世界大会には日本語実況がついています。
+              ちなみに、Japan、Korea、Asia、世界大会には日本語実況がついている為、日本人にとってわかりやすいです！
             </p>
           `
         )}
@@ -189,6 +189,57 @@ function loadWatchOwcsView() {
           `
         )}
         ${buildOwcsSeasonFlowHtml_()}
+        ${siteText_(
+          `
+            <div class="owcs-flow-aside">
+              <p>
+                The number of slots and the qualification rules differ slightly for
+                each world event.
+              </p>
+              <p>
+                <b>Q: Do Japanese teams play at world events?</b><br>
+                <b>A:</b> Sometimes, yes.
+              </p>
+              <p>
+                Right now the Asia power balance is roughly
+                <b>Korea &gt; Pacific / Japan</b>. Under the flowchart-style season
+                format, Korean teams advance to world events about
+                <b>99%</b> of the time.
+              </p>
+              <p>
+                Depending on the event format, though, Korea may use a separate
+                path — and then Japan can appear at world events more often. For
+                example, at the summer
+                <b>Midseason Championship (EWC)</b>, the #1 teams from Japan and
+                Pacific can qualify directly for that international field.
+              </p>
+            </div>
+          `,
+          `
+            <div class="owcs-flow-aside">
+              <p>
+                各世界大会ごとに、進出できるチーム数・条件は若干異なります。
+              </p>
+              <p>
+                <b>Q: 日本チームは世界大会に出場してる？</b><br>
+                <b>A:</b> 出場している時もあります。
+              </p>
+              <p>
+                現状、アジア地域のパワーバランスは
+                <b>韓国 &gt; パシフィック・日本</b>です。
+                フロー図形式のシーズンでは、約
+                <b>99%</b>の確率で韓国チームが世界大会へ進出します。
+              </p>
+              <p>
+                ただ、大会形式によっては韓国が別枠扱いになるため、
+                日本が世界大会に出場していることもあります。
+                たとえば夏季の
+                <b>Midseason Championship（EWC）</b>では、
+                日本・パシフィック内の1位チームが、直接その国際大会へ進出できます。
+              </p>
+            </div>
+          `
+        )}
       </div>
 
       <div class="card faq-card">
@@ -764,7 +815,7 @@ const OWCS_FLOW_COPY_EN_ = {
   faceitBar: "FACEIT",
   faceitLabel: "FACEIT",
   faceitInfoTitle:
-    "FACEIT League NA · EMEA · Oceania · South America<br>(Open → Advanced → Expert → Master)",
+    "【FACEIT League】 NA · EMEA · Oceania · South America<br>(Open → Advanced → Expert → Master)",
   faceitInfoBody:
     "A second-division style pathway that runs alongside OWCS.<br>Like OWCS, each tier runs round robin → playoffs every season.<br>※ Not present in the Asia region.",
   naMain: "OWCS NA",
@@ -800,7 +851,7 @@ const OWCS_FLOW_COPY_JP_ = {
   faceitBar: "FACEIT",
   faceitLabel: "FACEIT",
   faceitInfoTitle:
-    "FACEIT League NA・EMEA・Oceania・SouthAmerica<br>(Open→Advanced→Expert→Master）",
+    "【FACEIT League】 NA・EMEA・Oceania・SouthAmerica<br>(Open→Advanced→Expert→Master）",
   faceitInfoBody:
     "2部リーグのような位置付けで、OWCSと同時進行されています。<br>OWCS同様、シーズン毎に各階級の総当たり戦→トーナメント戦が行われています。<br>※アジア地域にはありません。",
   naMain: "OWCS NA",
