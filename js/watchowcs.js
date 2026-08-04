@@ -4,6 +4,17 @@ function loadWatchOwcsView() {
 
   resetSeo_();
 
+  document.title = "OWCS観戦ガイド | OW KITSUNE GUIDE";
+  const meta = document.getElementById("metaDescription");
+  if (meta) {
+    meta.content =
+      "OWCS初心者向け観戦ガイド。日本語実況・見どころ・視聴方法・大会の仕組みをわかりやすく解説。";
+  }
+  const canonical = document.getElementById("canonicalUrl");
+  if (canonical) {
+    canonical.href = "https://owkitsune.com/watchowcs";
+  }
+
   requestId++;
 
   updateNavState(currentView);
@@ -26,771 +37,260 @@ function loadWatchOwcsView() {
   app.className = "tools-mode faq-mode";
 
   app.innerHTML = `
-    <div class="tools-page">
+    <main class="tools-page watchowcs-page">
 
-      <div class="card faq-card howto-wip-card">
-        <h3>
-          ${siteHeading_("📝 Work in progress", "📝 執筆中です")}
-        </h3>
+      <header class="card faq-card watchowcs-hero" id="watchowcs-top">
+        <p class="watchowcs-kicker">${siteHeading_("OWCS beginner guide", "OWCS初心者向け")}</p>
+        <h1 class="watchowcs-h1">
+          ${siteHeading_("OWCS watch guide", "OWCS観戦ガイド")}
+        </h1>
         ${siteText_(
           `
+            <p class="watchowcs-lead">
+              Enjoy world-class Overwatch with Japanese casts — without needing
+              pro-level know-how.
+            </p>
             <p>
-              This guide is still being written. Content may change or expand.
+              This page covers highlights, how to watch, and how the tournament
+              works — for first-time viewers.
             </p>
           `,
           `
+            <p class="watchowcs-lead">
+              世界最高峰のOverwatchを、日本語実況で気軽に楽しもう。
+            </p>
             <p>
-              このページは現在執筆中です。内容は今後追加・修正していく予定です。
+              OWCSを初めて見る人向けに、見どころ・視聴方法・大会の仕組みを分かりやすく紹介します。
             </p>
           `
         )}
-      </div>
 
-      <div class="card faq-card">
-        <h3>
-          ${siteHeading_("🦊 New to OWCS?", "🦊 OWCSは初めてですか？")}
-        </h3>
+        <ul class="watchowcs-trust" aria-label="Key points">
+          <li>${siteHeading_("Japanese casts available", "日本語配信あり")}</li>
+          <li>${siteHeading_("No competitive knowledge required", "競技知識がなくても楽しめる")}</li>
+          <li>${siteHeading_("Free to watch", "無料で視聴できる")}</li>
+        </ul>
+
+        <div class="watchowcs-cta">
+          <a class="watchowcs-cta-primary" href="/owcs" onclick="openOwcsLiveFromGuide_(); return false;">
+            ${siteHeading_("Find live OWCS streams", "今見られるOWCS配信を探す")}
+          </a>
+          <a class="watchowcs-cta-secondary" href="#watchowcs-fun">
+            ${siteHeading_("See what’s fun about OWCS", "OWCSの見どころを知る")}
+          </a>
+          <a class="watchowcs-cta-secondary" href="#watchowcs-structure">
+            ${siteHeading_("How the tournament works", "大会の仕組みを見る")}
+          </a>
+        </div>
+
         ${siteText_(
           `
-            <p>
-              “I keep hearing about OWCS — what tournament is that?”<br>
-              “What do Overwatch pro matches even look like?”<br>
-              “I open a stream and still feel lost…”
-            </p>
-            <p>
-              This page covers OWCS basics and simple ways beginners can enjoy watching —
-              without needing pro-level knowledge first.
-            </p>
             <p class="owcs-sitetext-tip">
               <b>Tip:</b> Open the ⚙ menu (top right) and set <b>Site Text</b> to
               English or Japanese only — it’s much easier to read.
             </p>
           `,
           `
-            <p>
-              「OWCSってよく聞くけど、何の大会？」<br>
-
-              「Overwatchのプロってどんな試合をしているの？」<br>
-
-              「配信を見てもよく分からない…」<br>
-            </p>
-            <p>
-              そんな方のために、このページではOWCSの基本から、初心者でも楽しめる観戦方法までを分かりやすく紹介します。
-            </p>
             <p class="owcs-sitetext-tip">
               <b>右上の⚙マークから、Site Text設定を英/日どちらかに切り替えると読みやすいです。</b>
             </p>
           `
         )}
-      </div>
 
-      <div class="card faq-card">
-        <h3>
-          ${siteHeading_("🏆 What is OWCS?", "🏆 OWCSとは？")}
-        </h3>
+        <nav class="watchowcs-toc" aria-label="On this page">
+          ${siteText_(
+            `
+              <p><b>On this page</b></p>
+              <ol>
+                <li><a href="#watchowcs-what">What is OWCS?</a></li>
+                <li><a href="#watchowcs-fun">4 highlights</a></li>
+                <li><a href="#watchowcs-watch">How to watch</a></li>
+                <li><a href="#watchowcs-first">What to watch first</a></li>
+                <li><a href="#watchowcs-structure">How the season progresses</a></li>
+                <li><a href="#watchowcs-regions">Region notes</a></li>
+                <li><a href="#watchowcs-terms">Quick terms</a></li>
+                <li><a href="#watchowcs-links">Useful links</a></li>
+              </ol>
+            `,
+            `
+              <p><b>このページの内容</b></p>
+              <ol>
+                <li><a href="#watchowcs-what">OWCSとは？</a></li>
+                <li><a href="#watchowcs-fun">4つの見どころ</a></li>
+                <li><a href="#watchowcs-watch">OWCSを見てみよう</a></li>
+                <li><a href="#watchowcs-first">初めて見るなら</a></li>
+                <li><a href="#watchowcs-structure">大会の流れ</a></li>
+                <li><a href="#watchowcs-regions">地域の特徴</a></li>
+                <li><a href="#watchowcs-terms">これだけ分かれば観戦できる</a></li>
+                <li><a href="#watchowcs-links">観戦に役立つリンク</a></li>
+              </ol>
+            `
+          )}
+        </nav>
+      </header>
+
+      <section class="card faq-card" id="watchowcs-what">
+        <h2 class="watchowcs-h2">
+          ${siteHeading_("What is OWCS?", "OWCSとは？")}
+        </h2>
         ${siteText_(
           `
             <p>
               <b>OWCS (Overwatch Champions Series)</b> is Overwatch’s official
-              tournament.
+              competitive circuit. Top teams from each region play through their
+              local stages; the best advance to world events.
             </p>
             <p>
-              Teams that advance through each region’s qualifiers move on to
-              world events — where the world’s best is decided.
-            </p>
-            <p>Participating regions:</p>
-            <ul>
-              <li>Asia</li>
-              <li>China</li>
-              <li>NA</li>
-              <li>EMEA</li>
-            </ul>
-            <p>
-              You don’t need to follow everything. Starting with “your favorite
-              region + world events” is enough.<br>
-              Japan, Korea, Asia, and World events also have Japanese cast
-              commentary — so they’re easier for Japanese viewers to follow!
+              Regions include Asia (Japan, Korea, Pacific), China, NA, and EMEA.
+              You don’t need to follow every region — “your favorite region +
+              world events” is enough at first. Japan, Korea, Asia, and world
+              events often have Japanese casts.
             </p>
           `,
           `
             <p>
-              <b>OWCS（Overwatch Champions Series）</b> はOverwatchの公式大会です。
+              <b>OWCS（Overwatch Champions Series）</b> は、世界各地域のトップチームが参加する
+              Overwatchの公式競技大会です。
             </p>
             <p>
-              各地域の予選を突破したチームが世界大会へ進み、世界一が決まります。
-            </p>
-            <p>参加する地域:</p>
-            <ul>
-              <li>Asia</li>
-              <li>China</li>
-              <li>NA</li>
-              <li>EMEA</li>
-            </ul>
-            <p>
-              全部追う必要はありません。最初は「推しの地域 + 世界大会」で十分です。<br>
-              ちなみに、Japan、Korea、Asia、世界大会には日本語実況がついている為、日本人向けでわかりやすいです！
+              Japan・Koreaなどが参加するAsiaをはじめ、China、NA、EMEAで大会が行われ、
+              上位チームは世界大会へ進出します。
+              全部追う必要はありません。最初は「推しの地域 + 世界大会」で十分です。
+              Japan、Korea、Asia、世界大会には日本語実況がついていることが多く、日本人向けでも分かりやすいです。
             </p>
           `
         )}
-      </div>
+      </section>
 
-      <div class="card faq-card">
-        <h3>
-          ${siteHeading_("🗺️ How a season works", "🗺️ シーズンの流れ")}
-        </h3>
+      <section class="card faq-card" id="watchowcs-fun">
+        <h2 class="watchowcs-h2">
+          ${siteHeading_("4 highlights of OWCS", "OWCSの4つの見どころ")}
+        </h2>
         ${siteText_(
           `
             <p>
-              Formats differ a little by region, but the year usually follows the flow
-              below — about 3–4 stages, each leading into a world event.
+              “Pro matches seem hard…” is a common first impression — but you can enjoy
+              OWCS without deep game knowledge.
+            </p>
+
+            <h3 class="owcs-fun-subhead">① Japanese casts make matches readable</h3>
+            <p>
+              JP streams explain not only the fight, but schedule context, teams and
+              players to watch, and common comps/tactics.
             </p>
             <p>
-              In other words, there are roughly 3–4 chances each year to chase the
-              #1 ranking in the world.
+              Start the stream from the beginning if you can — you’ll usually pick up
+              enough basics for the day. Winner interviews in other languages are often
+              summarized in Japanese too.
+            </p>
+
+            <h3 class="owcs-fun-subhead">② World-class individual play</h3>
+            <p>
+              Elite aim, movement, and clutch decisions show up every series.
+            </p>
+            <p>
+              It’s also a five-player team game: full-team voice fights are a spectacle of
+              their own.
+            </p>
+
+            <h3 class="owcs-fun-subhead">③ Strategy and mind games</h3>
+            <p>
+              Map plans, hero comps, ult timing, and hero bans shape series beyond aim.
+            </p>
+            <p>
+              Once you can tell when a team “read” the next fight, same-looking
+              teamfights get way more interesting.
+            </p>
+
+            <h3 class="owcs-fun-subhead">④ Players and stories to root for</h3>
+            <p>
+              After a few series you’ll naturally pick favorites from style and vibes.
+            </p>
+            <p>
+              Supporting a team or player lets you follow their path through regional and
+              world-event stages.
             </p>
           `,
           `
             <p>
-              地域ごとに形式は少し違いますが、年間はだいたい下図のような流れです。
-              ステージは年3～4回あり、それぞれ世界大会につながります。
+              「プロの試合って難しそう……」と感じる人もいますが、
+              実際はゲームの知識がなくても十分楽しめます。
+            </p>
+
+            <h3 class="owcs-fun-subhead">① 日本語実況で、初めてでも状況が分かる</h3>
+            <p>
+              日本語配信では、試合内容だけでなく、大会の流れ、注目チーム、選手の特徴、
+              現在の構成や戦術も解説されることが多いです。
             </p>
             <p>
-              つまり、年3～4回、世界1位を目指すチャンスがあります。
+              気になる試合は冒頭から見るのがおすすめです。観戦に必要な基本をつかみやすくなります。
+              韓国語などの勝利者インタビューも、日本語で内容が紹介されることがあります。
+            </p>
+
+            <h3 class="owcs-fun-subhead">② プロ選手の異次元のプレー</h3>
+            <p>
+              正確なエイム、素早いキャラクター操作、ギリギリの判断など、
+              普段の試合ではなかなか見られないプレーが続きます。
+            </p>
+            <p>
+              個人技だけでなく、チーム全員が連携する集団戦も大きな見どころです。
+            </p>
+
+            <h3 class="owcs-fun-subhead">③ 作戦と読み合い</h3>
+            <p>
+              使うヒーロー、攻めるルート、アルティメットのタイミング、ヒーローBANなど、
+              試合中には多くの駆け引きがあります。
+            </p>
+            <p>
+              「相手の作戦を読んで先回りした」場面が分かるようになると、さらに面白くなります。
+            </p>
+
+            <h3 class="owcs-fun-subhead">④ 応援したい選手やチームが見つかる</h3>
+            <p>
+              何度か見ると、プレースタイルや雰囲気から自然と気になる選手が見つかります。
+            </p>
+            <p>
+              応援するチームができると、地域大会から世界大会まで続く結果や成長も楽しめます。
             </p>
           `
         )}
-        <h4 class="owcs-flow-subhead">
-          ${siteHeading_("Year overview (Jan → Dec)", "1年の流れ（1月 → 12月）")}
-        </h4>
-        ${buildOwcsYearFlowHtml_()}
-        <h4 class="owcs-flow-subhead">
-          ${siteHeading_("One stage in detail", "1ステージの詳細")}
-        </h4>
+      </section>
+
+      <section class="card faq-card" id="watchowcs-watch">
+        <h2 class="watchowcs-h2">
+          ${siteHeading_("Start watching OWCS", "OWCSを見てみよう")}
+        </h2>
         ${siteText_(
           `
-            <p class="owcs-flow-detail-lead">
-              Each stage has a path like this.
-            </p>
-            <p class="owcs-flow-detail-lead">
-              The number of slots and the qualification rules differ slightly for
-              each world event.
-            </p>
+            <p>Pick the path that matches what you want right now.</p>
           `,
           `
-            <p class="owcs-flow-detail-lead">
-              各ステージの中身は、だいたい下図のような流れです。
-            </p>
-            <p class="owcs-flow-detail-lead">
-              各世界大会ごとに、進出できるチーム数・条件は若干異なります。
-            </p>
+            <p>今の目的に合う入口を選んでください。</p>
           `
         )}
-        ${buildOwcsSeasonFlowHtml_()}
+
+        <div class="watchowcs-action-grid">
+          <a class="watchowcs-action-card" href="/owcs" onclick="openOwcsLiveFromGuide_(); return false;">
+            <span class="watchowcs-action-title">${siteHeading_("Watch a live match", "今まさに試合を見たい")}</span>
+            <span class="watchowcs-action-desc">${siteHeading_("Open LIVE filtered to OWCS", "LIVEのOWCS配信一覧へ")}</span>
+          </a>
+          <a class="watchowcs-action-card" href="/team/overwatch-champions-series">
+            <span class="watchowcs-action-title">${siteHeading_("Japanese / regional official casts", "日本語・各地域の公式配信")}</span>
+            <span class="watchowcs-action-desc">${siteHeading_("Channel list by region", "地域別・公式チャンネル一覧")}</span>
+          </a>
+          <a class="watchowcs-action-card" href="https://esports.overwatch.com/en-us/schedule" target="_blank" rel="noopener">
+            <span class="watchowcs-action-title">${siteHeading_("Catch up / check schedules", "見逃し・日程を確認")}</span>
+            <span class="watchowcs-action-desc">${siteHeading_("Official schedule pages", "公式スケジュール")}</span>
+          </a>
+          <a class="watchowcs-action-card" href="/owcs" onclick="openOwcsLiveFromGuide_(); return false;">
+            <span class="watchowcs-action-title">${siteHeading_("Player personal streams", "選手の個人配信も見たい")}</span>
+            <span class="watchowcs-action-desc">${siteHeading_("Browse streams on this site", "このサイトで配信を探す")}</span>
+          </a>
+        </div>
+
         ${siteText_(
           `
-            <div class="owcs-flow-aside">
-              <p>
-                <b>Q: Do Japanese teams play at world events?</b><br>
-                <b>A:</b> Sometimes, yes.
-              </p>
-              <p>
-                Right now the Asia power balance is roughly
-                Korea &gt; Pacific / Japan. Under the flowchart-style season format,
-                Korean teams advance to world events about 99% of the time.
-              </p>
-              <p>
-                Depending on the event format, though, Korea may use a separate
-                path — and then Japan can appear at world events more often.
-              </p>
-              <p>
-                For example, at the summer Midseason Championship (EWC), the #1
-                teams from Japan and Pacific can qualify directly for that world
-                event.
-              </p>
-            </div>
-          `,
-          `
-            <div class="owcs-flow-aside">
-              <p>
-                <b>Q: 日本チームは世界大会に出場してる？</b><br>
-                <b>A:</b> 出場している時もあります。
-              </p>
-              <p>
-                現状、アジア地域のパワーバランスは 韓国 &gt; パシフィック・日本です。
-                フロー図形式のシーズンでは、約 99%の確率で韓国チームが世界大会へ進出します。
-              </p>
-              <p>
-                ただ、大会形式によっては韓国が別枠扱いになるため、
-                日本が世界大会に出場していることもあります。
-              </p>
-              <p>
-                たとえば夏季の Midseason Championship（EWC）では、
-                日本・パシフィック内の1位チームが、直接その世界大会へ進出できます。
-              </p>
-            </div>
-          `
-        )}
-      </div>
-
-      <div class="card faq-card">
-        <h3>
-          ${siteHeading_("✨ What’s fun about OWCS?", "✨ OWCSは何が面白い？")}
-        </h3>
-        ${siteText_(
-          `
-            <p>“Pro matches seem hard to follow…”</p>
-            <p>
-              It’s easy to feel that way. In practice, though, you can enjoy OWCS
-              fully without deep game knowledge.
-            </p>
-            <p>Here are five reasons I especially want people to watch OWCS.</p>
-
-            <h4 class="owcs-fun-subhead">① Clear Japanese cast &amp; analysis</h4>
-            <p>“If I don’t know the rules, I won’t understand anything…”</p>
-            <p>You barely need to worry about that.</p>
-            <p>
-              OWCS has Japanese streams where casters and analysts explain the match
-              in plain language.
-            </p>
-            <p>At the start of a broadcast they carefully cover:</p>
-            <ul>
-              <li>how the tournament works and the schedule</li>
-              <li>teams and players to watch that day</li>
-              <li>the current meta (common tactics and hero comps)</li>
-            </ul>
-            <p>During the match they cover things like:</p>
-            <ul>
-              <li>why a play was strong</li>
-              <li>which team is ahead right now</li>
-              <li>what might happen next</li>
-            </ul>
-            <p>
-              so even first-timers can follow the flow while watching.
-            </p>
-            <p>
-              Korean or English winner interviews from international events are also
-              often summarized on the Japanese cast, so the language barrier is low.
-            </p>
-            <p class="owcs-sitetext-tip">
-              <b>If it’s your first time, start the stream from the beginning.</b>
-              You’ll usually get the overview and what to watch for in that series.
-            </p>
-
-            <h4 class="owcs-fun-subhead">② World-class aim and team play</h4>
-            <p>OWCS players are among the best in the world.</p>
-            <p>
-              Amazing aim, clutch decisions that flip a map — super plays show up in
-              almost every series.
-            </p>
-            <p>It’s not only individual skill, either.</p>
-            <p>Overwatch is a five-player team game.</p>
-            <p>
-              Pros fight on full-team voice comms, so perfect five-player teamfights are
-              a spectacle of their own.
-            </p>
-            <p>
-              One person’s super play, and the whole team locking in together —
-              getting both is a big part of what makes OWCS special.
-            </p>
-
-            <h4 class="owcs-fun-subhead">③ Mind games and strategy</h4>
-            <p>Results aren’t only about who aims better.</p>
-            <p>
-              Before maps, coaches and players plan map strategies, hero comps, and
-              roster choices.
-            </p>
-            <p>
-              OWCS also uses hero bans, so “which comps you ban” and “which comps
-              you run” can swing whole series.
-            </p>
-            <p>
-              Favorites lose prep games, underdogs cook a plan and upset — that happens
-              more often than you might think.
-            </p>
-            <p>
-              Wondering “what’s the next comps?” is part of the fun unique to OWCS.
-            </p>
-
-            <h4 class="owcs-fun-subhead">④ Interviews and face cams show the human side</h4>
-            <p>
-              At events, winner interviews after maps are a highlight
-              (not for Japan and Pacific).
-            </p>
-            <p>
-              Players rewatch the series, talk about teammates, or chat about the meta —
-              sides of the game the scoreboard never shows.
-            </p>
-            <p>
-              Many offline broadcasts also show each player’s face cam: a grin after a
-              pop-off, a fist pump in a huge win, the frustration of a hard loss —
-              emotions come through clearly.
-            </p>
-            <p>
-              One recent scene that stuck with fans: in a high-stakes match for a world
-              event berth, T1’s DONGHAK was booped by ZETA DIVISION’s Viol2t and hit by
-              a Neon Junction train, losing D.Va’s mech. On the way to respawn he
-              scratched his head — a raw, human moment of frustration that a lot of
-              people remember.
-            </p>
-            <p>
-              Seeing expressions and stories beyond pure gameplay makes “I want to root
-              for this player” feel natural — and watching gets even more fun.
-            </p>
-
-            <h4 class="owcs-fun-subhead">⑤ Stories make every match mean more</h4>
-            <p>OWCS isn’t just strong teams trading blows on empty blueprints.</p>
-            <p>Behind each series are player and team stories.</p>
-            <ul>
-              <li>revenge against someone who stopped you last season</li>
-              <li>long-time rivals settling another chapter</li>
-              <li>a new roster challenging a champion</li>
-              <li>a do-or-die series for a world event slot</li>
-            </ul>
-            <p>
-              Knowing that context changes how every fight — and every result — feels.
-            </p>
-            <p>
-              Once you’ve felt their grind, losses, and hunger to win, you’ll often
-              want both sides to pull it off — just like any sport where you pick
-              favorites.
-            </p>
-            <p>
-              <a href="https://liquipedia.net/overwatch/Main_Page" target="_blank" rel="noopener">Liquipedia</a>
-              covers player profiles, teams, and past results.
-              Even a little prep before a series — “they were on another roster last
-              year,” “this team missed worlds by a hair” — makes watch night better.
-            </p>
-            <p>
-              Great pro play is one half of it. Knowing the path those players walked
-              might be the best part of watching OWCS.
-            </p>
-          `,
-          `
-            <p>「プロの試合って難しそう……」</p>
-            <p>
-              そんなイメージを持っている方もいるかもしれません。しかし、実際にはゲームの知識がなくても十分楽しめます。
-            </p>
-            <p>ここでは、私がOWCSをぜひ見てほしいと思う理由を5つ紹介します。</p>
-
-            <h4 class="owcs-fun-subhead">① 日本語実況・解説がとても分かりやすい</h4>
-            <p>「ルールが分からないから見ても理解できないかも……」</p>
-            <p>そんな心配はほとんど必要ありません。</p>
-            <p>
-              OWCSでは日本語配信が行われており、実況・解説が試合を分かりやすく伝えてくれます。
-            </p>
-            <p>配信の冒頭では、次のような内容を丁寧に紹介してくれます。</p>
-            <ul>
-              <li>大会全体の仕組みやスケジュール</li>
-              <li>その日の注目チームや注目選手</li>
-              <li>現在のメタ（流行している戦術やヒーロー構成）</li>
-            </ul>
-            <p>さらに試合中は、</p>
-            <ul>
-              <li>なぜこのプレイが強かったのか</li>
-              <li>今どちらのチームが有利なのか</li>
-              <li>この後どんな展開になりそうなのか</li>
-            </ul>
-            <p>
-              といったポイントをリアルタイムで解説してくれるため、初心者でも試合の流れを理解しながら観戦できます。
-            </p>
-            <p>
-              また、海外大会で行われる韓国語や英語の勝利者インタビューも、日本語配信では内容を紹介してくれることが多く、
-              言語の壁を感じることなく楽しめるのも魅力です。
-            </p>
-            <p class="owcs-sitetext-tip">
-              <b>初めて見る方は、ぜひ配信を最初から視聴してみてください。</b>
-              大会の概要から試合の見どころまで、一通り理解できるはずです。
-            </p>
-
-            <h4 class="owcs-fun-subhead">② 世界最高峰の神エイムとチームプレー</h4>
-            <p>OWCSに出場する選手たちは、世界トップレベルの実力を持っています。</p>
-            <p>
-              驚異的なエイムで敵を次々と倒したり、一瞬の判断で試合をひっくり返したりと、
-              毎試合のようにスーパープレイが飛び出します。
-            </p>
-            <p>もちろん見どころは個人技だけではありません。</p>
-            <p>Overwatchは5人で戦うチームゲームです。</p>
-            <p>
-              プロチームは常にボイスチャットでコミュニケーションを取りながら戦っているため、
-              5人全員が完璧に連携した集団戦は圧巻です。
-            </p>
-            <p>
-              「一人のスーパープレイ」と「チーム全体の連携」。<br>
-              その両方を楽しめるのがOWCSの大きな魅力です。
-            </p>
-
-            <h4 class="owcs-fun-subhead">③ 作戦の読み合いが熱い</h4>
-            <p>OWCSでは、選手の実力だけで勝敗が決まるわけではありません。</p>
-            <p>
-              試合前にはコーチと選手が話し合い、マップごとの戦略やヒーロー構成、メンバー起用など、
-              さまざまな作戦を練っています。
-            </p>
-            <p>
-              また、OWCSではヒーローBANルールが採用されており、
-              「どの構成を封じるか」「どの構成で挑むか」が勝敗を大きく左右します。
-            </p>
-            <p>
-              格上チームが作戦負けをしたり、格下チームが緻密な準備で番狂わせを起こしたりすることも珍しくありません。
-            </p>
-            <p>
-              「次はどんな構成で来るんだろう？」<br>
-              そんな予想をしながら見るのも、OWCSならではの楽しみ方です。
-            </p>
-
-            <h4 class="owcs-fun-subhead">④ インタビューやフェイスカメラで選手の"人間らしさ"が見える</h4>
-            <p>
-              大会では、試合後の勝利者インタビューも見どころのひとつです。（JapanとPacificはありません）
-            </p>
-            <p>
-              選手が試合を振り返ったり、チームメイトへの思いを語ったり、現在のメタについて話したりと、
-              ゲーム内では見えない一面を知ることができます。
-            </p>
-            <p>
-              さらに、多くのオフライン大会では各選手のフェイスカメラも配信に映ります。
-              スーパープレイを決めて思わず笑顔になる瞬間、劇的な勝利にガッツポーズをする瞬間、
-              そして敗戦を受け止めて悔しそうな表情を見せる瞬間まで、選手たちの感情がリアルに伝わってきます。
-            </p>
-            <p>
-              例えば、最近の印象的なシーンでは、世界大会出場を懸けた重要な試合で、
-              T1のDONGHAK選手がZETA DIVISIONのViol2t選手のブープによってNEON JUNCTIONの電車にひかれてしまい、
-              D.Vaのメックを失ってしまう場面がありました。
-              リスポーンへ戻る途中、思わず頭をかく仕草を見せたその姿は、
-              悔しさと人間らしさが伝わるワンシーンとして、多くのファンの印象に残っています。
-            </p>
-            <p>
-              こうしたプレー以外の表情やストーリーを知ることで、「この選手を応援したい」という気持ちが自然と生まれ、
-              観戦がさらに楽しくなります。
-            </p>
-
-            <h4 class="owcs-fun-subhead">⑤ 選手やチームのストーリーを知ると、もっと面白い</h4>
-            <p>OWCSは、ただ強いチーム同士が試合をするだけではありません。</p>
-            <p>その試合の裏には、選手やチームそれぞれのストーリーがあります。</p>
-            <ul>
-              <li>昨シーズン敗れた相手へのリベンジ</li>
-              <li>長年ライバルとして戦い続けてきたチーム同士の対決</li>
-              <li>新人チームが王者に挑む下剋上</li>
-              <li>世界大会出場をかけた運命の一戦</li>
-            </ul>
-            <p>
-              こうした背景を知っているだけで、一つひとつのプレイや勝敗の重みがまったく違って見えてきます。
-            </p>
-            <p>
-              選手たちが積み重ねてきた努力や悔しさ、そして勝利への思いを知ると、
-              「どちらにも勝ってほしい」と感じるような試合も少なくありません。
-            </p>
-            <p>
-              スポーツ観戦で選手を応援したくなるのと同じように、
-              OWCSでも自然と「推し」の選手やチームができていきます。
-            </p>
-            <p>
-              <a href="https://liquipedia.net/overwatch/Main_Page" target="_blank" rel="noopener">リキペディア</a>
-              というサイトでは、各選手のプロフィールや所属チーム、過去の戦績なども紹介されています。
-              試合を見る前に少しだけ予習しておくだけでも、
-              「この選手が去年は別のチームにいたんだ」「このチームは去年あと一歩で世界大会を逃したんだ」
-              といった背景が分かり、観戦がより楽しくなります。
-            </p>
-            <p>
-              プロのプレーを見るだけでなく、その選手たちが歩んできたストーリーを知ること。<br>
-              それこそが、OWCS観戦の一番の魅力なのかもしれません。
-            </p>
-          `
-        )}
-      </div>
-
-      <div class="card faq-card">
-        <h3>
-          ${siteHeading_(
-            "👀 Beginner watch guide",
-            "👀 初心者のための観戦ガイド"
-          )}
-        </h3>
-        ${siteText_(
-          `
-            <p>“I want to watch OWCS — but where do I start?”</p>
-            <p>
-              The easiest first step is finding one way to enjoy it that feels like yours.
-            </p>
-            <p>You don’t need to memorize every rule or every roster.</p>
-            <p>
-              Below are recommended approaches, ordered from the simplest for beginners.
-            </p>
-
-            <h4 class="owcs-fun-subhead">① Start by picking a team to support</h4>
-            <p>The simplest move is choosing one team to root for.</p>
-            <p>
-              Many OWCS orgs also field teams in other esports — VALORANT, League of
-              Legends, and more.
-            </p>
-            <p>So any of these reasons is totally fine:</p>
-            <ul>
-              <li>“I’ve heard of this org!”</li>
-              <li>“I already support them in another game!”</li>
-              <li>“The logo / jersey looks cool!”</li>
-            </ul>
-            <p>
-              Once you have a team to cheer for, watching becomes far more fun.
-            </p>
-            <p>
-              On Twitch streams, channel-point match predictions sometimes run as well.
-              Betting points can feel like sports picks and pull you into the series.
-            </p>
-
-            <h4 class="owcs-fun-subhead">② Find a player to follow</h4>
-            <p>You can also root for a player instead of a whole org.</p>
-            <p>For example:</p>
-            <ul>
-              <li>“I’ve seen their highlight clips!”</li>
-              <li>“They play the hero I main!”</li>
-              <li>“They’re an OTP (one-tricked a hero) — that’s entertaining!”</li>
-              <li>“Cool name!”</li>
-            </ul>
-            <p>Any spark is enough.</p>
-            <p>
-              When one player catches your eye, following just them through a series
-              makes watch night much more engaging.
-            </p>
-            <p>Go hunt for someone you want to track.</p>
-
-            <h4 class="owcs-fun-subhead">③ Watch with a watch party</h4>
-            <p>
-              In sports, watching with someone often feels bigger than watching alone.
-              Same idea here.
-            </p>
-            <p>
-              A watch party is a streamer reacting to the official broadcast and
-              sometimes explaining the match — shared hype and tension.
-            </p>
-            <p>You’ll get reactions like:</p>
-            <ul>
-              <li>“That play was insane!”</li>
-              <li>“Wait, that comps incoming?!”</li>
-            </ul>
-            <p>…which is why watch parties are great for newcomers.</p>
-            <p>
-              If you try one, former Overwatch League player
-              <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>’s
-              streams are especially popular.
-            </p>
-
-            <h4 class="owcs-fun-subhead">④ Prefer VODs? Try POV watching</h4>
-            <p>
-              “Official broadcasts cut camera so fast I can’t tell what happened…”
-            </p>
-            <p>
-              For that,
-              <b>POV (Player Point of View)</b>
-              watching is a strong option.
-            </p>
-            <p>
-              For many OWCS matches outside world events (LAN),
-              <a
-                href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
-                target="_blank"
-                rel="noopener"
-              >replay codes</a>
-              are published. You can rewatch from a favorite player’s perspective
-              in-game. After a patch, codes may stop working — while they’re live, watch
-              freely.
-            </p>
-            <p>Even better:</p>
-            <p>
-              Play the official archive while opening a player’s POV in the client.
-            </p>
-            <p>
-              You get casters in your ears while you keep eyes locked on one player.
-            </p>
-            <p>Especially good if you wonder:</p>
-            <ul>
-              <li>“How do pros move their camera?”</li>
-              <li>“I want to copy aim and positioning!”</li>
-            </ul>
-            <p>
-              <b>▶ Replay code list</b><br>
-              <a
-                href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
-                target="_blank"
-                rel="noopener"
-              >Google Spreadsheet — OWCS Replay Codes</a>
-            </p>
-            <p><b>▶ Codes expired? You’re fine</b></p>
-            <p>
-              Overwatch replay codes can stop working after game updates.
-            </p>
-            <p>Don’t worry.</p>
-            <p>
-              Observer
-              <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener"
-                >ObsSojourn</a
-              >
-              uploads POV videos of standout players to YouTube, so you can still enjoy
-              many series from a player cam after in-client replays die.
-              World event replay codes especially aren’t available for the public
-              client — so those POV uploads are a valuable resource.
-            </p>
-
-            <h4 class="owcs-fun-subhead">First, find your way to enjoy it</h4>
-            <p>OWCS isn’t a “learn every rule first, then watch” product.</p>
-            <ul>
-              <li>Cheer for a team</li>
-              <li>Follow a player</li>
-              <li>Watch with the casters</li>
-              <li>Study pro POVs for your own play</li>
-            </ul>
-            <p>Everyone’s path is different.</p>
-            <p>
-              Finding one style that fits you is the fastest route to enjoying OWCS
-              more.
-            </p>
-          `,
-          `
-            <p>「OWCSを見てみたいけど、何から始めればいいの？」</p>
-            <p>
-              そんな方におすすめなのが、自分なりの楽しみ方を一つ見つけることです。
-            </p>
-            <p>ルールや選手をすべて覚える必要はありません。</p>
-            <p>
-              ここでは、初心者でも始めやすい順番で、おすすめの観戦方法を紹介します。
-            </p>
-
-            <h4 class="owcs-fun-subhead">① まずは「推しチーム」を決めよう</h4>
-            <p>一番簡単なのが、応援するチームを決めることです。</p>
-            <p>
-              OWCSに参加しているチームの多くは、Overwatch以外にもVALORANTやLeague of Legendsなど、
-              さまざまなゲーム部門を持つeスポーツチームです。
-            </p>
-            <p>そのため、</p>
-            <ul>
-              <li>「このチーム、名前を聞いたことがある！」</li>
-              <li>「他のゲームで応援しているチームだ！」</li>
-              <li>「ロゴやユニフォームがかっこいい！」</li>
-            </ul>
-            <p>そんな理由で選んでもまったく問題ありません。</p>
-            <p>
-              応援するチームができるだけで、試合を見る楽しさは大きく変わります。
-            </p>
-            <p>
-              さらに、Twitch配信ではチャンネルポイントを使った勝敗予想が行われることもあります。
-              ポイントを賭けながら試合を見ると、スポーツの勝敗予想のような感覚で、
-              より試合に熱中できます。
-            </p>
-
-            <h4 class="owcs-fun-subhead">② 「推し選手」を見つけよう</h4>
-            <p>チームではなく、好きな選手を見つけるのもおすすめです。</p>
-            <p>例えば、</p>
-            <ul>
-              <li>「この選手のプレイ動画を見たことがある！」</li>
-              <li>「自分がよく使うヒーローを使っている！」</li>
-              <li>「OTP（特定のヒーローを極めた選手）なんだ、面白そう！」</li>
-              <li>「名前がかっこいい！」</li>
-            </ul>
-            <p>きっかけは本当に何でも構いません。</p>
-            <p>
-              一人でも気になる選手ができると、その選手を追いかけながら試合を見るだけで、
-              観戦がぐっと楽しくなります。
-            </p>
-            <p>ぜひ気になる選手を探してみてください。</p>
-
-            <h4 class="owcs-fun-subhead">③ ウォッチパーティで一緒に観戦する</h4>
-            <p>
-              スポーツ観戦でも、一人で見るより誰かと一緒に見た方が盛り上がることがありますよね。
-              OWCSでも同じです。
-            </p>
-            <p>
-              配信者が公式配信を見ながらリアクションしたり、試合内容を解説したりする
-              ウォッチパーティを見れば、試合の面白さや緊張感を共有できます。
-            </p>
-            <p>例えば、</p>
-            <ul>
-              <li>「今のプレイやばい！」</li>
-              <li>「その構成で来るのか！」</li>
-            </ul>
-            <p>
-              といったリアルな反応を一緒に楽しめるので、初心者にもおすすめです。
-            </p>
-            <p>
-              ウォッチパーティを見るなら、元Overwatch League選手でもある
-              <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>
-              さんの配信は特に人気があります。
-            </p>
-
-            <h4 class="owcs-fun-subhead">④ 録画でじっくり見るなら「POV観戦」がおすすめ</h4>
-            <p>
-              「公式配信は視点がコロコロ切り替わって、何が起きているか分からない……」
-            </p>
-            <p>
-              そんな方には
-              <b>POV（Player Point of View：選手視点）</b>
-              での観戦がおすすめです。
-            </p>
-            <p>
-              OWCSでは、世界大会（LANイベント）を除く多くの試合でリプレイコードが公開されています。
-              これを使えば、ゲーム内で好きな選手の視点から試合を見返すことができます。
-              パッチ更新後はリプレイコードが利用できなくなることがありますが、
-              公開されている期間中は自由に視聴できます。
-            </p>
-            <p>さらにおすすめなのが、</p>
-            <p>
-              公式配信のアーカイブを流しながら、ゲーム内では好きな選手のPOVを開くこと。
-            </p>
-            <p>
-              これなら実況・解説を聞きながら、気になる選手だけを追い続けることができます。
-            </p>
-            <p>特に、</p>
-            <ul>
-              <li>「プロはどうやって視点を動かしているの？」</li>
-              <li>「エイムや立ち回りを真似したい！」</li>
-            </ul>
-            <p>という方には特におすすめの観戦方法です。</p>
-            <p>
-              <b>▶ リプレイコード一覧</b><br>
-              <a
-                href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
-                target="_blank"
-                rel="noopener"
-              >Googleスプレッドシート（OWCS Replay Codes）</a>
-            </p>
-            <p><b>▶ リプレイコードが見られなくなっても大丈夫</b></p>
-            <p>
-              Overwatchのリプレイコードは、ゲームのアップデートが入ると利用できなくなることがあります。
-            </p>
-            <p>そんな時でも安心してください。</p>
-            <p>
-              大会オブザーバーの
-              <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener"
-                >ObsSojourn</a
-              >
-              さんが、活躍した選手のPOV動画をYouTubeへ公開してくれているため、
-              ゲーム内でリプレイが見られなくなった後でも、多くの試合を選手視点で楽しめます。
-              特に世界大会のリプレイコードは一般人は視聴できないため、このようなPOV動画は貴重な資料にもなっています。
-            </p>
-
-            <h4 class="owcs-fun-subhead">まずは、自分なりの楽しみ方を見つけよう</h4>
-            <p>OWCSは、「ルールを全部覚えてから見る大会」ではありません。</p>
-            <ul>
-              <li>推しチームを応援する</li>
-              <li>好きな選手を追いかける</li>
-              <li>実況を聞きながら試合を見る</li>
-              <li>プロのPOVを参考にプレイを研究する</li>
-            </ul>
-            <p>楽しみ方は人それぞれです。</p>
-            <p>
-              まずは自分に合った観戦スタイルを一つ見つけること。
-              それが、OWCSをもっと楽しむための一番の近道です。
-            </p>
-          `
-        )}
-      </div>
-
-      <div class="card faq-card">
-        <h3>
-          ${siteHeading_("📺 Where to watch", "📺 どこで見る？")}
-        </h3>
-        ${siteText_(
-          `
-            <p>Official OWCS streams are free to watch in most cases.</p>
-            <p>
-              Platforms differ by region. The main ones are:
-            </p>
+            <h3 class="owcs-fun-subhead">Platforms (free)</h3>
             <ul>
               <li>Twitch</li>
               <li>YouTube</li>
@@ -798,42 +298,21 @@ function loadWatchOwcsView() {
               <li>Bilibili (China)</li>
             </ul>
             <p>
-              “Which region streams where?” “Where’s the Japanese cast?”
+              Japanese casts commonly appear for Japan, Korea, Asia, and world events.
+              YouTube free archives are great if you miss the live show (Twitch free VODs
+              may not always remain).
             </p>
             <p>
-              OW KITSUNE GUIDE collects official channels for each region here:
+              <b>Typical times (JST, approximate):</b>
+              Japan Mon–Wed ~18:00 · Pacific Thu ~20:00 · Korea Fri ~17:00 / weekend ~15:00 ·
+              China weekend ~18:00 · EMEA/NA weekend from ~02:00.
             </p>
             <p>
-              <a href="/team/overwatch-champions-series">👉 Official OWCS stream channels</a>
-            </p>
-
-            <h4 class="owcs-fun-subhead">Japanese language broadcasts</h4>
-            <p>
-              Japanese casts are available for OWCS Japan, Korea, Asia, and world
-              events.
-            </p>
-            <p>
-              Twitch free VODs may not always remain, but YouTube keeps free live
-              archives you can rewatch later.
-            </p>
-            <p>
-              If you can’t watch live, YouTube archives are the easiest way to catch up.
-            </p>
-
-            <h4 class="owcs-fun-subhead">A Korea-only bonus</h4>
-            <p>
-              In the Korea region, some matches later publish player voice-comm VODs as
-              subscription-limited content.
-            </p>
-            <p>
-              Hearing how pros talk during fights is incredibly watchable in its own right.
+              <b>Beginner tip:</b> start with <b>Monday 18:00 (JST) Japan</b>.
             </p>
           `,
           `
-            <p>OWCSの公式配信は、基本的に無料で視聴できます。</p>
-            <p>
-              大会の地域によって配信プラットフォームが異なり、主に以下のサービスで配信されています。
-            </p>
+            <h3 class="owcs-fun-subhead">配信プラットフォーム（無料）</h3>
             <ul>
               <li>Twitch</li>
               <li>YouTube</li>
@@ -841,380 +320,376 @@ function loadWatchOwcsView() {
               <li>Bilibili（中国）</li>
             </ul>
             <p>
-              「どの地域がどこで配信されるの？」「日本語配信はどこ？」
-            </p>
-            <p>
-              という方のために、OW KITSUNE GUIDEでは各地域の公式配信チャンネルをまとめています。
-            </p>
-            <p>
-              <a href="/team/overwatch-champions-series">👉 OWCS公式配信チャンネル一覧</a>
-            </p>
-
-            <h4 class="owcs-fun-subhead">日本語配信について</h4>
-            <p>
               日本語配信がある大会は、OWCS Japan、Korea、Asia、世界大会です。
+              リアルタイムで見られない場合は、YouTubeアーカイブがおすすめです
+              （Twitchでは無料VODが残らない場合があります）。
             </p>
             <p>
-              なお、Twitchでは無料アーカイブ（VOD）が残らない場合がありますが、
-              YouTubeではライブ配信のアーカイブを無料で視聴できます。
+              <b>よくある時間帯（日本時間・目安）:</b>
+              Japan 月〜水18時〜 · Pacific 木20時〜 · Korea 金17時〜 / 土日15時〜 ·
+              China 土日18時〜 · EMEA/NA 土日深夜2時〜
+              （大会によって前後します）
             </p>
             <p>
-              「リアルタイムでは見られない」という方は、YouTubeのアーカイブで後からゆっくり観戦するのがおすすめです。
-            </p>
-
-            <h4 class="owcs-fun-subhead">韓国配信ならではの楽しみも</h4>
-            <p>
-              韓国地域では、一部の試合で選手のボイスチャット（VC）入り動画が
-              サブスクリプション限定コンテンツとして公開されることがあります。
-            </p>
-            <p>
-              試合中にどのようなコミュニケーションを取っているのかを知ることができるため、
-              非常に見応えがあります。
+              <b>まず始めるなら:</b> <b>月曜18時 日本枠</b>に集合！
             </p>
           `
         )}
-      </div>
+      </section>
 
-      <div class="card faq-card">
-        <h3>
-          ${siteHeading_("🗓️ When can I watch?", "🗓️ いつ見れる？")}
-        </h3>
+      <section class="card faq-card" id="watchowcs-first">
+        <h2 class="watchowcs-h2">
+          ${siteHeading_("If it’s your first time", "初めて見るなら")}
+        </h2>
         ${siteText_(
           `
-            <p>
-              OWCS runs worldwide, so “when’s the next series?” can feel cloudy.
-            </p>
-            <p>
-              As a rough rule of thumb for Overwatch pro windows
-              <b>(Japan Standard Time / JST)</b>, days often look like this
-              (exact times shift by stage — always double-check):
-            </p>
+            <p>Not sure which series to open? Use this shortcut.</p>
             <ul>
-              <li><b>Japan</b> — Mon–Wed from about 18:00</li>
-              <li><b>Pacific</b> — Thu from about 20:00</li>
-              <li><b>Korea</b> — Fri from about 17:00; Sat–Sun from about 15:00</li>
-              <li><b>China</b> — Sat–Sun from about 18:00</li>
-              <li><b>EMEA / NA</b> — Sat–Sun from about 02:00 (late night into early morning)</li>
+              <li>
+                <b>Want Japanese casts</b> → OWCS Japan or Asia JP streams
+              </li>
+              <li>
+                <b>Want world-class intensity</b> → Korea, China, or world events
+              </li>
+              <li>
+                <b>Short on time</b> → highlights, or series with close scorelines
+              </li>
             </ul>
             <p>
-              So “start with Monday 18:00 for Japan” is a solid beginner habit.
-            </p>
-            <p>Here are three easy ways to confirm exact match times.</p>
-
-            <h4 class="owcs-fun-subhead">① Official X (Twitter)</h4>
-            <p>
-              The quickest option is OWCS’s official X accounts.
+              Also try: pick one team or one player first
+              (<a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS</a>),
+              or join a watch party (e.g.
+              <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>).
             </p>
             <p>
-              Before a stage, they post schedule graphics with matchups and start times
-              at a glance — perfect for “what plays today?” and “what time in my timezone?”
-            </p>
-            <div class="owcs-schedule-examples" aria-label="Example schedule images from official X">
-              <figure class="owcs-schedule-example">
-                <img
-                  src="https://pbs.twimg.com/media/G_FWRblXUAAX_vl?format=jpg&name=large"
-                  alt="Example: OWCS Asia calendar-style schedule graphic"
-                  loading="lazy"
-                  referrerpolicy="no-referrer"
-                >
-                <figcaption>Example: monthly calendar style</figcaption>
-              </figure>
-              <figure class="owcs-schedule-example">
-                <img
-                  src="https://pbs.twimg.com/media/HDgQ9ZsawAAjcyC?format=jpg&name=large"
-                  alt="Example: OWCS Asia match-by-match schedule graphic"
-                  loading="lazy"
-                  referrerpolicy="no-referrer"
-                >
-                <figcaption>Example: day-by-day match list</figcaption>
-              </figure>
-            </div>
-
-            <h4 class="owcs-fun-subhead">② Liquipedia (most recommended)</h4>
-            <p>
-              If you also follow international events,
-              <a href="https://liquipedia.net/overwatch/Main_Page" target="_blank" rel="noopener">Liquipedia</a>
-              is the best one-stop page.
-            </p>
-            <p>You can check things like:</p>
-            <ul>
-              <li>match start times (Japan time)</li>
-              <li>time remaining until the match</li>
-              <li>brackets</li>
-              <li>team rosters</li>
-              <li>match results</li>
-            </ul>
-            <p>Essentially a must-have while watching OWCS.</p>
-
-            <h4 class="owcs-fun-subhead">③ Official OWCS site</h4>
-            <p>
-              The
-              <a href="https://esports.overwatch.com/en-us/schedule" target="_blank" rel="noopener">official OWCS site</a>
-              shows yearly NA / EMEA calendars, plus event dates and matchups.
-              From those, you can often roughly estimate when Asia windows fall as well.
-            </p>
-
-            <p>
-              On OW KITSUNE GUIDE, useful watch links are collected on one page —
-              official streams, official X, Liquipedia, the OWCS site, and more tools:
-            </p>
-            <p>
-              <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">
-                👉 Links for watching OWCS
-              </a>
-            </p>
-
-            <p class="owcs-sitetext-tip">
-              <b>Summary:</b> New to OWCS? Try
-              “check the schedule on official X → watch a Japanese cast → look up
-              players you notice.” That loop alone is enough for beginners to enjoy
-              OWCS without getting lost.<br>
-              <b>For starters — meet up Monday 18:00 (JST)!</b>
+              Prefer study mode? Use
+              <a
+                href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
+                target="_blank"
+                rel="noopener"
+              >replay codes</a>
+              + official VODs, or
+              <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">POV uploads by ObsSojourn</a>
+              when codes expire (world-event POVs are especially valuable).
             </p>
           `,
           `
-            <p>
-              OWCSは世界各地で大会が開催されるため、「次の試合はいつ？」と迷うこともあります。
-            </p>
-            <p>
-              目安として、Overwatchの大会はだいたい次のような時間帯
-              <b>（日本時間）</b>で行われることが多いです
-              （ステージや大会によって前後します。必ず当日のスケジュールも確認してください）。
-            </p>
+            <p>どの試合から見ればいいか迷ったら、次の目安で選べます。</p>
             <ul>
-              <li><b>Japan</b> — 月〜水 18時〜</li>
-              <li><b>Pacific</b> — 木 20時〜</li>
-              <li><b>Korea</b> — 金 17時〜 / 土日 15時〜</li>
-              <li><b>China</b> — 土日 18時〜</li>
-              <li><b>EMEA / NA</b> — 土日 深夜2時〜</li>
+              <li>
+                <b>日本語実況で見たい</b> → OWCS Japan または Asia の日本語配信
+              </li>
+              <li>
+                <b>世界トップクラスの試合を見たい</b> → Korea、China、世界大会
+              </li>
+              <li>
+                <b>短時間で見どころを知りたい</b> → ハイライト、または接戦の試合
+              </li>
             </ul>
             <p>
-              なので、「とりあえず月曜18時に日本枠を見る」から始めるのがおすすめです。
-            </p>
-            <p>より正確に確認するなら、次の3つが便利です。</p>
-
-            <h4 class="owcs-fun-subhead">① 公式Xをチェックする</h4>
-            <p>一番手軽なのが、OWCS公式X（旧Twitter）です。</p>
-            <p>
-              大会前になると、対戦カードや開始時間がひと目で分かるスケジュール画像が投稿されます。
+              あわせて推しチーム／推し選手を1つ決める
+              （<a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS</a>）
+              のもおすすめです。知っている配信者のウォッチパーティ
+              （例:
+              <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>）
+              も初心者に安心です。
             </p>
             <p>
-              「今日はどの試合があるの？」「日本時間で何時から始まるの？」
-              という確認に最適です。
-            </p>
-            <div class="owcs-schedule-examples" aria-label="公式Xのスケジュール画像の例">
-              <figure class="owcs-schedule-example">
-                <img
-                  src="https://pbs.twimg.com/media/G_FWRblXUAAX_vl?format=jpg&name=large"
-                  alt="公式Xのスケジュール画像の例（月間カレンダー）"
-                  loading="lazy"
-                  referrerpolicy="no-referrer"
-                >
-                <figcaption>例：月間カレンダー形式</figcaption>
-              </figure>
-              <figure class="owcs-schedule-example">
-                <img
-                  src="https://pbs.twimg.com/media/HDgQ9ZsawAAjcyC?format=jpg&name=large"
-                  alt="公式Xのスケジュール画像の例（対戦カード）"
-                  loading="lazy"
-                  referrerpolicy="no-referrer"
-                >
-                <figcaption>例：対戦カード・時刻つき</figcaption>
-              </figure>
-            </div>
-
-            <h4 class="owcs-fun-subhead">② Liquipediaを見る【一番おすすめ】</h4>
-            <p>
-              海外大会までチェックしたいなら、
-              <a href="https://liquipedia.net/overwatch/Main_Page" target="_blank" rel="noopener">Liquipedia</a>
-              がおすすめです。
-            </p>
-            <p>Liquipediaでは、</p>
-            <ul>
-              <li>日本時間での試合開始時刻</li>
-              <li>試合開始までの残り時間</li>
-              <li>トーナメント表</li>
-              <li>チームロスター</li>
-              <li>試合結果</li>
-            </ul>
-            <p>
-              など、大会に関する情報をまとめて確認できます。大会を観戦する方には欠かせないサイトです。
-            </p>
-
-            <h4 class="owcs-fun-subhead">③ OWCS公式サイトを見る</h4>
-            <p>
-              <a href="https://esports.overwatch.com/en-us/schedule" target="_blank" rel="noopener">OWCS公式サイト</a>
-              では、NA・EMEAの年間スケジュールや各大会の日程、対戦カードを確認できます。
-              そこからAsiaのスケジュールも大体予想可能です。
-            </p>
-
-            <p>
-              OW KITSUNE GUIDEでは、公式配信・公式X・Liquipedia・OWCS公式サイト・
-              その他便利なツールなど、観戦に役立つリンクを1ページにまとめています。
-            </p>
-            <p>
-              <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">
-                👉 OWCS観戦に役立つリンク集
-              </a>
-            </p>
-
-            <p class="owcs-sitetext-tip">
-              <b>まとめ：</b>
-              初めてOWCSを見るなら、
-              「公式Xで試合日程を確認 → 日本語配信を見る → 気になった選手を調べる」
-              という流れがおすすめです。
-              これだけでも、初心者でも迷わずOWCS観戦を楽しめるようになります。<br>
-              <b>とりあえず月曜18時に集合！</b>
+              じっくり見たいなら
+              <a
+                href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
+                target="_blank"
+                rel="noopener"
+              >リプレイコード</a>
+              ＋大会アーカイブでのPOV観戦。期限切れ後は
+              <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
+              のPOV動画が役立ちます（世界大会POVは特に貴重です）。
             </p>
           `
         )}
-      </div>
+      </section>
 
-      <div class="card faq-card">
-        <h3>
-          ${siteHeading_("❓ Beginner FAQ", "❓ よくある質問")}
-        </h3>
+      <section class="card faq-card" id="watchowcs-structure">
+        <h2 class="watchowcs-h2">
+          ${siteHeading_("How OWCS progresses", "OWCSはどう進む？")}
+        </h2>
         ${siteText_(
           `
-            <p><b>Can I enjoy it if I don’t play Overwatch?</b></p>
+            <p>At a high level, the path looks like this:</p>
+          `,
+          `
+            <p>ざっくり言うと、大会は次の3段階です。</p>
+          `
+        )}
+
+        <div class="watchowcs-simple-flow" aria-label="Simple OWCS path">
+          <div class="watchowcs-simple-step">
+            <span class="watchowcs-simple-num">1</span>
+            <div>
+              <b>${siteHeading_("Regional competition", "地域大会")}</b>
+              <p>${siteHeading_("Teams compete inside each region", "各地域でチームが対戦")}</p>
+            </div>
+          </div>
+          <div class="watchowcs-simple-arrow" aria-hidden="true">↓</div>
+          <div class="watchowcs-simple-step">
+            <span class="watchowcs-simple-num">2</span>
+            <div>
+              <b>${siteHeading_("Regional tops decided", "地域上位の決定")}</b>
+              <p>${siteHeading_("Decide who advances", "上位チームを決定")}</p>
+            </div>
+          </div>
+          <div class="watchowcs-simple-arrow" aria-hidden="true">↓</div>
+          <div class="watchowcs-simple-step">
+            <span class="watchowcs-simple-num">3</span>
+            <div>
+              <b>${siteHeading_("World events", "世界大会")}</b>
+              <p>${siteHeading_("Regional representatives meet", "各地域の代表が対戦")}</p>
+            </div>
+          </div>
+        </div>
+
+        ${siteText_(
+          `
             <p>
-              Yes. Like watching soccer on TV, you can enjoy skill and story even
-              when the rules still feel fuzzy at first.
+              The year usually has about 3–4 stages, each feeding into a world event
+              window. Slots and rules differ slightly by world event.
+            </p>
+            <h3 class="owcs-fun-subhead">Year overview (Jan → Dec)</h3>
+          `,
+          `
+            <p>
+              年間はだいたい3〜4ステージあり、それぞれ世界大会につながります。
+              進出枠や条件は世界大会ごとに若干異なります。
+            </p>
+            <h3 class="owcs-fun-subhead">1年の流れ（1月 → 12月）</h3>
+          `
+        )}
+        ${buildOwcsYearFlowHtml_()}
+
+        <details class="watchowcs-details">
+          <summary>
+            ${siteHeading_("See regional structure in more detail", "地域ごとの詳しい仕組みを見る")}
+          </summary>
+          ${siteText_(
+            `
+              <p>
+                Each stage typically involves open quals (or FACEIT pathway),
+                promo/relegation, regular season, and playoffs. Asia also runs an Asia stage.
+              </p>
+            `,
+            `
+              <p>
+                各ステージの中身は、だいたいオープン予選（またはFACEIT経路）、昇格戦・降格戦、
+                総当たり戦、トーナメント戦、という流れです。Asiaにはアジア大会もあります。
+              </p>
+            `
+          )}
+          ${buildOwcsSeasonFlowHtml_()}
+          ${siteText_(
+            `
+              <div class="owcs-flow-aside">
+                <p>
+                  <b>Q: Do Japanese teams make world events?</b><br>
+                  <b>A:</b> Sometimes yes. On flowchart-style Asia seasons, Korea often
+                  advances ~99% of the time — but formats like summer Midseason Championship
+                  (EWC) can give Japan/Pacific direct paths.
+                </p>
+              </div>
+            `,
+            `
+              <div class="owcs-flow-aside">
+                <p>
+                  <b>Q: 日本チームは世界大会に出場してる？</b><br>
+                  <b>A:</b> 出場している時もあります。
+                  フロー図形式のアジアでは韓国進出が多い一方、
+                  夏季の Midseason Championship（EWC）などでは
+                  日本・パシフィック1位が直接進出できる形式もあります。
+                </p>
+              </div>
+            `
+          )}
+        </details>
+      </section>
+
+      <section class="card faq-card" id="watchowcs-regions">
+        <h2 class="watchowcs-h2">
+          ${siteHeading_("Region notes", "地域の特徴")}
+        </h2>
+        ${siteText_(
+          `
+            <ul>
+              <li><b>Asia</b> — Japan, Korea, and Pacific compete (with an Asia stage)</li>
+              <li><b>China</b> — China’s own regional path</li>
+              <li><b>NA</b> — North America</li>
+              <li><b>EMEA</b> — Europe, Middle East, and Africa</li>
+            </ul>
+            <p>
+              Strength and style shift by meta and season. Korea often draws attention
+              for high mechanical skill and fast teamfights — but every stage has upsets,
+              and regions like EMEA have been rising too.
+            </p>
+          `,
+          `
+            <ul>
+              <li><b>Asia</b> — Japan、Korea、Pacific（アジア大会あり）</li>
+              <li><b>China</b> — 中国地域の大会</li>
+              <li><b>NA</b> — 北米</li>
+              <li><b>EMEA</b> — ヨーロッパ・中東・アフリカ</li>
+            </ul>
+            <p>
+              強さやプレースタイルはシーズン・メタで変わります。
+              Koreaでは素早い集団戦や高い個人技が注目されることが多い一方、
+              毎ステージ番狂わせもあり、EMEAも近年強さを見せています。
+            </p>
+          `
+        )}
+      </section>
+
+      <section class="card faq-card" id="watchowcs-terms">
+        <h2 class="watchowcs-h2">
+          ${siteHeading_("Terms that make streams readable", "これだけ分かれば観戦できる")}
+        </h2>
+        ${siteText_(
+          `
+            <div class="watchowcs-glossary-wrap">
+              <table class="howto-glossary watchowcs-glossary">
+                <thead>
+                  <tr><th>Term</th><th>Simple meaning</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Meta</td><td>Common strong comps / play styles that period</td></tr>
+                  <tr><td>Comp</td><td>The five-hero lineup a team locks</td></tr>
+                  <tr><td>Ult / ULT</td><td>Ultimate ability</td></tr>
+                  <tr><td>Teamfight</td><td>Both teams committing into one fight</td></tr>
+                  <tr><td>Map take</td><td>Winning that map</td></tr>
+                  <tr><td>BO5</td><td>First to 3 maps wins the series</td></tr>
+                  <tr><td>Ban</td><td>Heroes locked out before map play</td></tr>
+                  <tr><td>POV</td><td>Player camera / player-eye VOD</td></tr>
+                </tbody>
+              </table>
+            </div>
+          `,
+          `
+            <div class="watchowcs-glossary-wrap">
+              <table class="howto-glossary watchowcs-glossary">
+                <thead>
+                  <tr><th>用語</th><th>簡単な説明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>メタ</td><td>その時期によく使われる強い構成や戦い方</td></tr>
+                  <tr><td>構成</td><td>チームが選んだヒーローの組み合わせ</td></tr>
+                  <tr><td>ウルト／ULT</td><td>アルティメット・アビリティ</td></tr>
+                  <tr><td>集団戦</td><td>両チームがまとまって戦う場面</td></tr>
+                  <tr><td>マップ取得</td><td>そのマップで勝利すること</td></tr>
+                  <tr><td>BO5</td><td>先に3マップ取ったチームが勝つ形式</td></tr>
+                  <tr><td>BAN</td><td>マップ前に使用を封じるヒーロー指定</td></tr>
+                  <tr><td>POV</td><td>選手視点の映像</td></tr>
+                </tbody>
+              </table>
+            </div>
+          `
+        )}
+      </section>
+
+      <section class="card faq-card" id="watchowcs-links">
+        <h2 class="watchowcs-h2">
+          ${siteHeading_("Links for watching", "観戦に役立つリンク")}
+        </h2>
+        ${siteText_(
+          `
+            <ul class="watchowcs-linklist">
+              <li><a href="/team/overwatch-champions-series">Official stream channels by region</a></li>
+              <li><a href="/owcs" onclick="openOwcsLiveFromGuide_(); return false;">Find live OWCS streams on this site</a></li>
+              <li><a href="https://esports.overwatch.com/en-us/schedule" target="_blank" rel="noopener">Official OWCS schedule</a></li>
+              <li><a href="https://liquipedia.net/overwatch/Main_Page" target="_blank" rel="noopener">Liquipedia (times, brackets, results)</a></li>
+              <li><a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">USEFUL LINKS (schedule, X, tools, more)</a></li>
+              <li><a href="/howto" onclick="openStaticView_('howto'); return false;">HOW TO USE (including translation tips)</a></li>
+              <li><a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS / player discovery</a></li>
+            </ul>
+          `,
+          `
+            <ul class="watchowcs-linklist">
+              <li><a href="/team/overwatch-champions-series">OWCS公式配信チャンネル一覧（地域別）</a></li>
+              <li><a href="/owcs" onclick="openOwcsLiveFromGuide_(); return false;">今見られるOWCS配信を探す（LIVE）</a></li>
+              <li><a href="https://esports.overwatch.com/en-us/schedule" target="_blank" rel="noopener">OWCS公式スケジュール</a></li>
+              <li><a href="https://liquipedia.net/overwatch/Main_Page" target="_blank" rel="noopener">Liquipedia（時刻・トーナメント・結果）</a></li>
+              <li><a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">観戦に役立つリンク集（公式X・ツールなど）</a></li>
+              <li><a href="/howto" onclick="openStaticView_('howto'); return false;">HOW TO USE（翻訳の使い方など）</a></li>
+              <li><a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS / 選手を探す</a></li>
+            </ul>
+          `
+        )}
+      </section>
+
+      <section class="card faq-card" id="watchowcs-faq">
+        <h2 class="watchowcs-h2">
+          ${siteHeading_("FAQ", "よくある質問")}
+        </h2>
+        ${siteText_(
+          `
+            <p><b>Can I enjoy OWCS if I don’t play Overwatch?</b></p>
+            <p>
+              Yes — skill and story work like watching soccer even when rules are fuzzy
+              at first.
             </p>
             <hr>
             <p><b>Is this the same as OWL?</b></p>
-            <p>
-              OWCS was introduced in 2024 as the successor to the Overwatch League.
-            </p>
+            <p>OWCS launched in 2024 as the successor to the Overwatch League.</p>
             <hr>
             <p><b>Is Korea really that strong?</b></p>
             <p>
-              Yes — Korea has long been one of the deepest regions and often sits
-              at the center of international events. That said, every Stage has
-              upsets. EMEA has also been getting stronger recently.
-            </p>
-            <hr>
-            <p><b>What about Japan?</b></p>
-            <p>
-              Japan has plenty of teams worth watching on their own. Language also
-              makes it easier to follow players’ personal streams, which helps
-              fans stick with their favorites.
+              Korea is often a deep, high-skill region central to internationals — but
+              upsets happen every stage, and other regions stay competitive.
             </p>
           `,
           `
             <p><b>ゲームをやってなくても楽しめる？</b></p>
             <p>
-              楽しめます。サッカー中継と同じで、最初はルールが曖昧でも
-              「上手さ」と「物語」で楽しめます。
+              楽しめます。最初はルールが曖昧でも、「上手さ」と「物語」で十分観戦できます。
             </p>
             <hr>
-            <p><b>OWL とは違うの？</b></p>
+            <p><b>OWLとは違うの？</b></p>
             <p>
-              OWCSは、オーバーウォッチリーグの後継として、2024年に導入されました。
+              OWCSは、オーバーウォッチリーグの後継として2024年に導入されました。
             </p>
             <hr>
             <p><b>韓国が強いって本当？</b></p>
             <p>
-              長く世界トップクラスの厚みがある地域で、国際大会でも中心になりやすいです。
-              ただし毎ステージ、番狂わせもあります。
-              また、最近はEMEA地域も強くなってきています。
-            </p>
-            <hr>
-            <p><b>日本チームは？</b></p>
-            <p>
-              日本地域にも見どころのあるチームが多く、単独でも十分楽しめます。
-              言語の関係で、選手の個人配信を追いかけやすい為、応援しやすいのも魅力です。
+              高い個人技と早い集団戦で注目されやすい地域です。
+              ただし毎ステージ番狂わせもあり、他地域も強いです。
             </p>
           `
         )}
-      </div>
+      </section>
 
-      <div class="card faq-card">
-        <h3>
-          ${siteHeading_(
-            "🦊 Enjoy more with OW KITSUNE GUIDE",
-            "🦊 このサイトでさらに楽しむ"
-          )}
-        </h3>
+      <section class="card faq-card howto-wip-card">
         ${siteText_(
           `
-            <ul>
-              <li>
-                <b>LIVE</b> — catch streams; filter
-                <a href="/owcs" onclick="openOwcsLiveFromGuide_(); return false;">OWCS</a>
-                during events
-              </li>
-              <li>
-                <b>PLAYERS / TEAMS</b> — learn rosters and find favorites
-                (<a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS</a>)
-              </li>
-              <li>
-                <b>USEFUL LINKS</b> — official schedule, channels, Liquipedia, replay codes
-                (<a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">open</a>)
-              </li>
-              <li><b>★ Favorites</b> — keep your players easy to reopen</li>
-            </ul>
             <p>
-              Official stage blogs cover drops and week-by-week details. This page is
-              your starting map; the rest of the site helps you build <i>your</i> watch list.
-            </p>
-            <p>
-              Further reading (official):
+              Official reading:
               <a href="https://overwatch.blizzard.com/en-us/news/24033788/the-future-of-overwatch-esports/" target="_blank" rel="noopener">The Future of Overwatch Esports</a>
               ·
               <a href="https://esports.overwatch.com/en-us/news" target="_blank" rel="noopener">Overwatch Esports News</a>
             </p>
+            <p class="watchowcs-updated">
+              This guide is maintained for beginners and may be updated as formats change.
+            </p>
           `,
           `
-            <ul>
-              <li>
-                <b>LIVE</b> — 配信を探す。大会中は
-                <a href="/owcs" onclick="openOwcsLiveFromGuide_(); return false;">OWCS</a>
-                フィルタ
-              </li>
-              <li>
-                <b>PLAYERS / TEAMS</b> — ロスターを見て推しを見つける
-                （<a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS</a>）
-              </li>
-              <li>
-                <b>USEFUL LINKS</b> — 公式スケジュール・配信・Liquipedia・リプレイコード
-                （<a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">開く</a>）
-              </li>
-              <li><b>★ お気に入り</b> — 推し選手をすぐ開けるようにする</li>
-            </ul>
-            <p>
-              ドロップや週ごとの詳細は公式ブログへ。このページは地図、サイトの他機能は
-              「自分の観戦リスト」作りに使ってください。
-            </p>
             <p>
               公式の参考:
               <a href="https://overwatch.blizzard.com/en-us/news/24033788/the-future-of-overwatch-esports/" target="_blank" rel="noopener">The Future of Overwatch Esports</a>
               ·
               <a href="https://esports.overwatch.com/en-us/news" target="_blank" rel="noopener">Overwatch Esports News</a>
             </p>
-          `
-        )}
-      </div>
-
-      <div class="card faq-card">
-        <h3>
-          ${siteHeading_("✅ Start simple", "✅ まずはシンプルに")}
-        </h3>
-        ${siteText_(
-          `
-            <p>
-              Start with one team, one player, and one full series. The rest comes naturally.
-            </p>
-          `,
-          `
-            <p>
-              まずは推しチーム1つ、推し選手1人、シリーズ1本。あとは見ながら自然に増えます。
+            <p class="watchowcs-updated">
+              このページは初心者向けに随時更新します。大会形式は年によって変わることがあります。
             </p>
           `
         )}
-      </div>
+      </section>
 
-    </div>
+    </main>
   `;
 }
 
