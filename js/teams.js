@@ -1,8 +1,6 @@
 function loadTeamsView(openFromUrl = false) {
   document.body.classList.remove("player-detail-view");
 
-  const now = Date.now();
-
   resetSeo_();
 
   pageTitle.textContent = "TEAMS";
@@ -10,10 +8,7 @@ function loadTeamsView(openFromUrl = false) {
 
   viewNote.textContent = "";
 
-  if (
-    playerLinksCache &&
-    now - playerLinksCacheTime < PLAYER_LINKS_CLIENT_CACHE_MS
-  ) {
+  if (isPlayerLinksCacheUsable_("teams")) {
     requestId++;
     stopFakeProgress();
 
@@ -31,12 +26,70 @@ function loadTeamsView(openFromUrl = false) {
     return;
   }
 
+  const persisted = readPersistedTeamsPlayerLinksCache_();
+
+  if (persisted) {
+    setPlayerLinksCache_(
+      persisted.playerLinks,
+      persisted.lastUpdated,
+      "teams"
+    );
+
+    requestId++;
+    stopFakeProgress();
+
+    updated.textContent = playerLinksLastUpdated;
+    currentData = playerLinksCache;
+
+    if (openFromUrl) {
+      openTeamFromUrl_();
+    } else {
+      renderTeams(currentData);
+    }
+
+    applyCurrentSearch_();
+
+    // Refresh in background; paint stayed instant from disk.
+    fetchTeamsPayload_()
+      .then(payload => {
+        setPlayerLinksCache_(
+          payload.playerLinks,
+          payload.lastUpdated,
+          payload.mode
+        );
+
+        if (
+          currentView !== "teams" &&
+          currentView !== "team"
+        ) {
+          return;
+        }
+
+        updated.textContent = playerLinksLastUpdated;
+        currentData = playerLinksCache;
+
+        if (currentView === "team" && currentTeamName) {
+          renderTeamPlayers(
+            currentTeamName,
+            currentData,
+            currentRegionName,
+            false
+          );
+        } else if (currentView === "teams") {
+          renderTeams(currentData);
+        }
+      })
+      .catch(() => {});
+
+    return;
+  }
+
   const currentRequest = ++requestId;
 
   startFakeProgress();
 
-  fetchConfigApi_("playerlinks")
-    .then(data => {
+  fetchTeamsPayload_()
+    .then(payload => {
       if (currentRequest !== requestId) {
         stopFakeProgress();
         return;
@@ -44,18 +97,13 @@ function loadTeamsView(openFromUrl = false) {
 
       finishFakeProgress();
 
-      playerLinksLastUpdated =
-        data.lastUpdated || "";
+      setPlayerLinksCache_(
+        payload.playerLinks,
+        payload.lastUpdated,
+        payload.mode
+      );
 
-      updated.textContent =
-        playerLinksLastUpdated;
-
-      playerLinksCache =
-        data.playerLinks || [];
-
-      playerLinksCacheTime =
-        Date.now();
-
+      updated.textContent = playerLinksLastUpdated;
       currentData = playerLinksCache;
 
       if (openFromUrl) {
@@ -71,7 +119,7 @@ function loadTeamsView(openFromUrl = false) {
 
       stopFakeProgress();
 
-      if (playerLinksCache) {
+      if (isPlayerLinksCacheUsable_("teams")) {
         updated.textContent = playerLinksLastUpdated;
         currentData = playerLinksCache;
 

@@ -38,7 +38,6 @@ function loadFavoritesView() {
   setViewUrl_("favorites");
 
   updateFavoriteCounts_();
-  const now = Date.now();
 
   resetSeo_();
   pageTitle.textContent = "★MY GOATS";
@@ -49,10 +48,7 @@ function loadFavoritesView() {
     `詳しくは ⚙ の <b>FAQ</b> へ`
   );
 
-  if (
-    playerLinksCache &&
-    now - playerLinksCacheTime < PLAYER_LINKS_CLIENT_CACHE_MS
-  ) {
+  if (isPlayerLinksCacheUsable_("full")) {
     requestId++;
     stopFakeProgress();
 
@@ -77,11 +73,12 @@ function loadFavoritesView() {
 
       finishFakeProgress();
 
-      playerLinksLastUpdated = data.lastUpdated || "";
+      setPlayerLinksCache_(
+        data.playerLinks || [],
+        data.lastUpdated || "",
+        "full"
+      );
       updated.textContent = playerLinksLastUpdated;
-
-      playerLinksCache = data.playerLinks || [];
-      playerLinksCacheTime = Date.now();
 
       currentData = playerLinksCache;
       renderFavorites(currentData);
@@ -92,7 +89,7 @@ function loadFavoritesView() {
 
       stopFakeProgress();
 
-      if (playerLinksCache) {
+      if (isPlayerLinksCacheUsable_("full")) {
         updated.textContent = playerLinksLastUpdated;
         currentData = playerLinksCache;
         renderFavorites(currentData);

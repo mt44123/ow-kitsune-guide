@@ -1446,7 +1446,10 @@ const LIVE_CLIENT_CACHE_MS = 60 * 1000;
 
 let playerLinksCache = null;
 let playerLinksCacheTime = 0;
+// "full" = entire playerlinks payload; "teams" = slim TEAMS-only fields.
+let playerLinksCacheMode = "";
 const PLAYER_LINKS_CLIENT_CACHE_MS =  6 * 60 * 60 * 1000;
+const TEAMS_PERSIST_KEY_ = "okgTeamsPlayerLinksV1";
 
 const clipCache = {
   twitch:{ data:null, time:0 },
@@ -1595,6 +1598,193 @@ function stopFakeProgress() {
   clearInterval(progressTimer);
 }
 
+function isPlayerLinksCacheUsable_(mode = "full") {
+  if (!playerLinksCache) return false;
+
+  if (Date.now() - playerLinksCacheTime >= PLAYER_LINKS_CLIENT_CACHE_MS) {
+    return false;
+  }
+
+  // Full cache always works for TEAMS; slim TEAMS cache is not enough for PLAYERS.
+  if (mode === "teams") return true;
+
+  return playerLinksCacheMode !== "teams";
+}
+
+function setPlayerLinksCache_(list, lastUpdated, mode = "full") {
+  // Prefer keeping a full payload over overwriting with a slim TEAMS subset.
+  if (
+    mode === "teams" &&
+    playerLinksCache &&
+    playerLinksCacheMode === "full" &&
+    Date.now() - playerLinksCacheTime < PLAYER_LINKS_CLIENT_CACHE_MS
+  ) {
+    return false;
+  }
+
+  playerLinksCache = Array.isArray(list) ? list : [];
+  playerLinksCacheTime = Date.now();
+  playerLinksCacheMode = mode === "teams" ? "teams" : "full";
+
+  if (lastUpdated != null) {
+    playerLinksLastUpdated = lastUpdated;
+  }
+
+  // Keep a slim local copy so TEAMS can paint instantly after reload.
+  persistTeamsPlayerLinksCache_();
+
+  return true;
+}
+
+function readPersistedTeamsPlayerLinksCache_() {
+  try {
+    const raw = localStorage.getItem(TEAMS_PERSIST_KEY_);
+    if (!raw) return null;
+
+    const data = JSON.parse(raw);
+    const time = Number(data?.time || 0);
+
+    if (!time || Date.now() - time >= PLAYER_LINKS_CLIENT_CACHE_MS) {
+      return null;
+    }
+
+    if (!Array.isArray(data.playerLinks)) return null;
+
+    return {
+      playerLinks: data.playerLinks,
+      lastUpdated: data.lastUpdated || ""
+    };
+  } catch (e) {
+    return null;
+  }
+}
+
+function persistTeamsPlayerLinksCache_() {
+  if (
+    !playerLinksCache ||
+    (playerLinksCacheMode !== "teams" && playerLinksCacheMode !== "full")
+  ) {
+    return;
+  }
+
+  try {
+    localStorage.setItem(
+      TEAMS_PERSIST_KEY_,
+      JSON.stringify({
+        time: Date.now(),
+        lastUpdated: playerLinksLastUpdated || "",
+        // Slim when possible so quota stays modest; full list is still ok as fallback.
+        playerLinks:
+          playerLinksCacheMode === "full"
+            ? playerLinksCache.map(slimPlayerForTeamsCache_)
+            : playerLinksCache
+      })
+    );
+  } catch (e) {
+    // Quota / private mode — ignore.
+  }
+}
+
+function slimPlayerForTeamsCache_(p) {
+  if (!p || typeof p !== "object") return p;
+
+  const out = {};
+  const keys = [
+    "teamRegion",
+    "team",
+    "name",
+    "nationality",
+    "role",
+    "born",
+    "age",
+    "teamAlias",
+    "playerAlias",
+    "owwcTeam",
+    "lastStreamAge",
+    "lastStreamPlatform",
+    "lastStreamUrl",
+    "twitchActive",
+    "twitchUrl",
+    "chzzkUrl",
+    "soopUrl",
+    "biliUrl",
+    "youtubeUrl",
+    "discordUrl",
+    "xUrl",
+    "instagramUrl"
+  ];
+
+  for (const key of keys) {
+    const value = p[key];
+    if (value == null || value === "") continue;
+    out[key] = value;
+  }
+
+  return out;
+}
+
+function clearPersistedTeamsPlayerLinksCache_() {
+  try {
+    localStorage.removeItem(TEAMS_PERSIST_KEY_);
+  } catch (e) {
+    // ignore
+  }
+}
+
+function prefetchTeamsData_() {
+  if (isPlayerLinksCacheUsable_("teams")) {
+    persistTeamsPlayerLinksCache_();
+    return;
+  }
+
+  const run = () => {
+    if (isPlayerLinksCacheUsable_("teams")) return;
+
+    const persisted = readPersistedTeamsPlayerLinksCache_();
+
+    if (persisted) {
+      setPlayerLinksCache_(
+        persisted.playerLinks,
+        persisted.lastUpdated,
+        "teams"
+      );
+    }
+
+    fetchTeamsPayload_()
+      .then(payload => {
+        setPlayerLinksCache_(
+          payload.playerLinks,
+          payload.lastUpdated,
+          payload.mode
+        );
+      })
+      .catch(() => {});
+  };
+
+  if (typeof requestIdleCallback === "function") {
+    requestIdleCallback(run, { timeout: 4000 });
+  } else {
+    setTimeout(run, 2000);
+  }
+}
+
+function fetchTeamsPayload_() {
+  return fetchConfigApi_("teams", { retries: 1 })
+    .then(data => ({
+      playerLinks: data.playerLinks || [],
+      lastUpdated: data.lastUpdated || "",
+      mode: "teams"
+    }))
+    .catch(() =>
+      // Worker not deployed / cold edge — fall back to full playerlinks.
+      fetchConfigApi_("playerlinks").then(data => ({
+        playerLinks: data.playerLinks || [],
+        lastUpdated: data.lastUpdated || "",
+        mode: "full"
+      }))
+    );
+}
+
 function clearClientCache_() {
 
   liveCache = null;
@@ -1605,6 +1795,8 @@ function clearClientCache_() {
 
   playerLinksCache = null;
   playerLinksCacheTime = 0;
+  playerLinksCacheMode = "";
+  clearPersistedTeamsPlayerLinksCache_();
 
   birthdaysCache = null;
   birthdaysCacheTime = 0;
@@ -3554,6 +3746,11 @@ async function init() {
 
   await loadVoiceLines();
   setRandomVoiceLine();
+
+  // Warm TEAMS data after first paint so opening TEAMS is usually cache-hit.
+  if (currentView !== "teams" && currentView !== "team") {
+    prefetchTeamsData_();
+  }
 }
 
 function teamToSlug_(team) {

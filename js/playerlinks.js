@@ -4,15 +4,11 @@ function loadPlayerLinksView() {
   resetSeo_();
 
   viewNote.textContent = "";
-  const now = Date.now();
 
   pageTitle.textContent = titles.playerlinks;
   setRandomVoiceLine();
 
-  if (
-    playerLinksCache &&
-    now - playerLinksCacheTime < PLAYER_LINKS_CLIENT_CACHE_MS
-  ) {
+  if (isPlayerLinksCacheUsable_("full")) {
     requestId++;
     stopFakeProgress();
 
@@ -37,11 +33,12 @@ function loadPlayerLinksView() {
 
       finishFakeProgress();
 
-      playerLinksLastUpdated = data.lastUpdated || "";
+      setPlayerLinksCache_(
+        data.playerLinks || [],
+        data.lastUpdated || "",
+        "full"
+      );
       updated.textContent = playerLinksLastUpdated;
-
-      playerLinksCache = data.playerLinks || [];
-      playerLinksCacheTime = Date.now();
 
       currentData = getRoleFilteredPlayerLinks_(playerLinksCache);
       renderPlayerLinks(currentData);
@@ -52,7 +49,7 @@ function loadPlayerLinksView() {
 
       stopFakeProgress();
 
-      if (playerLinksCache) {
+      if (isPlayerLinksCacheUsable_("full")) {
         updated.textContent = playerLinksLastUpdated;
         currentData = getRoleFilteredPlayerLinks_(playerLinksCache);
         renderPlayerLinks(currentData);
@@ -710,7 +707,7 @@ function loadPlayerDetailView() {
   startFakeProgress();
 
   const linksPromise =
-    playerLinksCache
+    isPlayerLinksCacheUsable_("full")
       ? Promise.resolve({
           playerLinks: playerLinksCache,
           lastUpdated: playerLinksLastUpdated
@@ -805,9 +802,11 @@ function loadPlayerDetailView() {
       chzzkbestclips: []
     });
 
-    playerLinksLastUpdated = linksData.lastUpdated || "";
-    playerLinksCache = linksData.playerLinks || [];
-    playerLinksCacheTime = Date.now();
+    setPlayerLinksCache_(
+      linksData.playerLinks || [],
+      linksData.lastUpdated || "",
+      "full"
+    );
 
     youtubeCache = youtubeData.videos || [];
     youtubeCacheTime = Date.now();

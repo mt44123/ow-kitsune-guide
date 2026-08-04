@@ -304,7 +304,7 @@ document
 
     settingsMenu?.classList.add("settings-hidden");
 
-    if (!playerLinksCache) {
+    if (!isPlayerLinksCacheUsable_("full")) {
 
       const res = await fetch(
         CONFIG.API_URL + "?view=playerlinks"
@@ -312,9 +312,11 @@ document
 
       const data = await res.json();
 
-      playerLinksLastUpdated = data.lastUpdated || "";
-      playerLinksCache = data.playerLinks || [];
-      playerLinksCacheTime = Date.now();
+      setPlayerLinksCache_(
+        data.playerLinks || [],
+        data.lastUpdated || "",
+        "full"
+      );
     }
 
     const backup = currentData;
