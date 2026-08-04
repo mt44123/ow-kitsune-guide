@@ -28,6 +28,24 @@ function loadWatchOwcsView() {
   app.innerHTML = `
     <div class="tools-page">
 
+      <div class="card faq-card howto-wip-card">
+        <h3>
+          ${siteHeading_("📝 Work in progress", "📝 執筆中です")}
+        </h3>
+        ${siteText_(
+          `
+            <p>
+              This guide is still being written. Content may change or expand.
+            </p>
+          `,
+          `
+            <p>
+              このページは現在執筆中です。内容は今後追加・修正していく予定です。
+            </p>
+          `
+        )}
+      </div>
+
       <div class="card faq-card">
         <h3>
           ${siteHeading_("🦊 New to OWCS?", "🦊 OWCSは初めて？")}

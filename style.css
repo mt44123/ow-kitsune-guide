@@ -973,6 +973,41 @@ flex:0 0 auto;
   opacity:1;
 }
 
+.howto-nav-button.howto-nav-nudge{
+  opacity:1;
+  background:color-mix(in srgb, var(--accent) 28%, var(--button-bg));
+  box-shadow:
+    0 0 0 2px var(--accent),
+    0 0 12px color-mix(in srgb, var(--accent) 55%, transparent);
+  animation:howto-nav-nudge-pulse 1.6s ease-in-out infinite;
+}
+
+.howto-nav-button.howto-nav-nudge .media-label,
+.howto-nav-button.howto-nav-nudge .media-icon{
+  font-weight:800;
+  color:var(--text-main);
+}
+
+@keyframes howto-nav-nudge-pulse{
+  0%,
+  100%{
+    box-shadow:
+      0 0 0 2px var(--accent),
+      0 0 10px color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+  50%{
+    box-shadow:
+      0 0 0 3px var(--accent),
+      0 0 18px color-mix(in srgb, var(--accent) 70%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .howto-nav-button.howto-nav-nudge{
+    animation:none;
+  }
+}
+
 .sub-nav{
 display:flex;
   gap:var(--space-sm);
@@ -3693,6 +3728,11 @@ color:var(--text-main);
   background:var(--bg-light);
   border:1px solid var(--border);
   font-size:.85em;
+}
+
+.howto-wip-card{
+  border:1px solid color-mix(in srgb, var(--accent) 55%, var(--border));
+  background:color-mix(in srgb, var(--accent) 10%, var(--bg-main));
 }
 
 /* =========================================================

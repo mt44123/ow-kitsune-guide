@@ -611,6 +611,47 @@ function applyGuideNavVisibility_() {
   setGuideNavVisible_(guideNavVisible, { syncSelect: true });
 }
 
+const HOWTO_NAV_SEEN_KEY = "howtoNavButtonSeen";
+const HIDE_GUIDE_NAV_SEEN_KEY = "hideGuideNavButtonSeen";
+
+function isHowtoNavSeen_() {
+  return localStorage.getItem(HOWTO_NAV_SEEN_KEY) === "1";
+}
+
+function isHideGuideNavSeen_() {
+  return localStorage.getItem(HIDE_GUIDE_NAV_SEEN_KEY) === "1";
+}
+
+function markHowtoNavSeen_() {
+  try {
+    localStorage.setItem(HOWTO_NAV_SEEN_KEY, "1");
+  } catch (_) {
+    /* ignore */
+  }
+  applyGuideNavNudge_();
+}
+
+function markHideGuideNavSeen_() {
+  try {
+    localStorage.setItem(HIDE_GUIDE_NAV_SEEN_KEY, "1");
+  } catch (_) {
+    /* ignore */
+  }
+  applyGuideNavNudge_();
+}
+
+function applyGuideNavNudge_() {
+  howtoNavButton?.classList.toggle(
+    "howto-nav-nudge",
+    !isHowtoNavSeen_()
+  );
+
+  hideGuideNavButton?.classList.toggle(
+    "howto-nav-nudge",
+    !isHideGuideNavSeen_()
+  );
+}
+
 filtersToggle?.addEventListener("click", () => {
   filtersExpanded = !filtersExpanded;
 
@@ -936,12 +977,14 @@ if (guideNavSelect) {
 }
 
 applyGuideNavVisibility_();
+applyGuideNavNudge_();
 
 guideNavSelect?.addEventListener("change", () => {
   setGuideNavVisible_(guideNavSelect.value !== "hide");
 });
 
 hideGuideNavButton?.addEventListener("click", () => {
+  markHideGuideNavSeen_();
   setGuideNavVisible_(false);
 });
 
@@ -1225,7 +1268,10 @@ faqButton?.addEventListener(
 
 howtoNavButton?.addEventListener(
   "click",
-  () => openStaticView_("howto")
+  () => {
+    markHowtoNavSeen_();
+    openStaticView_("howto");
+  }
 );
 
 watchOwcsNavButton?.addEventListener(
