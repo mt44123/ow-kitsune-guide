@@ -133,7 +133,7 @@ function loadWatchOwcsView() {
         </h3>
         ${siteText_(
           `
-            <p>Remember just this flow first:</p>
+            <p>Here’s how the season flows:</p>
             <ol>
               <li><b>Open Qualifier</b> (prelims)</li>
               <li><b>Promotion / Relegation</b></li>
@@ -152,7 +152,7 @@ function loadWatchOwcsView() {
             </p>
           `,
           `
-            <p>まずはこれだけ覚えればOKです:</p>
+            <p>大会の流れです。</p>
             <ol>
               <li><b>予選</b> (Open Qualifier)</li>
               <li><b>昇格戦・降格戦</b> (Promotion/Relegation)</li>
@@ -178,14 +178,13 @@ function loadWatchOwcsView() {
         ${siteText_(
           `
             <p>
-              Real HTML text (not a flat image), so browser translate tools can usually
-              read the labels. Site Text (EN / JP / both) also switches this map.
+              Real HTML text (not a flat image), so browser translation tools can be used.
+              Site Text (EN / JP) can also switch this map.
             </p>
           `,
           `
             <p>
-              画像ではなくHTMLのテキストなので、ブラウザの翻訳機能でもラベルを
-              読み取れることが多くあります。Site Text（英 / 日 / 併記）でも切替できます。
+              画像ではなくHTMLのテキストなので、ブラウザの翻訳機能を使用可能です。Site Text（英 / 日 ）でも切替可能です。
             </p>
           `
         )}
@@ -585,7 +584,7 @@ function buildOwcsSeasonFlowDiagram_(lang) {
     ${dCell(row, 2, `<span class="owcs-flow-sublabel">${label}</span>`, `owcs-flow-label-cell owcs-flow-region-${regionKey}`)}
     ${dCell(row, 3, owcsFlowBox_(openTitle, "", "owcs-flow-box-open"))}
     ${dArrow(row, 4)}
-    ${dCell(row, 5, owcsFlowBox_(L.promo, "", "owcs-flow-box-soft"))}
+    ${dCell(row, 5, owcsFlowBox_(L.promo, L.promoAsiaNote, "owcs-flow-box-soft"))}
     ${dArrow(row, 6)}
     ${dCell(row, 7, owcsFlowBox_(regionalTitle, L.stagePath, `owcs-flow-box-owcs owcs-flow-box-owcs-${regionKey}`))}
     ${dArrow(row, 8)}
@@ -614,7 +613,7 @@ function buildOwcsSeasonFlowDiagram_(lang) {
         ${dCell(5, 2, `<span class="owcs-flow-sublabel owcs-flow-sublabel-na">${L.na}</span>`, "owcs-flow-label-cell owcs-flow-region-na")}
         ${dCell(5, 3, owcsFlowBox_(L.faceit, "", "owcs-flow-box-open"))}
         ${dArrow(5, 4)}
-        ${dCell(5, 5, owcsFlowBox_(L.promo, "", "owcs-flow-box-soft"))}
+        ${dCell(5, 5, owcsFlowBox_(L.promo, L.promoFaceitNote, "owcs-flow-box-soft"))}
         ${dArrow(5, 6)}
         ${dCell(5, 7, owcsFlowBox_(L.naMain, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-na"), "", 3)}
 
@@ -622,7 +621,7 @@ function buildOwcsSeasonFlowDiagram_(lang) {
         ${dCell(6, 2, `<span class="owcs-flow-sublabel owcs-flow-sublabel-emea">${L.emea}</span>`, "owcs-flow-label-cell owcs-flow-region-emea")}
         ${dCell(6, 3, owcsFlowBox_(L.faceit, "", "owcs-flow-box-open"))}
         ${dArrow(6, 4)}
-        ${dCell(6, 5, owcsFlowBox_(L.promo, "", "owcs-flow-box-soft"))}
+        ${dCell(6, 5, owcsFlowBox_(L.promo, L.promoFaceitNote, "owcs-flow-box-soft"))}
         ${dArrow(6, 6)}
         ${dCell(6, 7, owcsFlowBox_(L.emeaMain, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-emea"), "", 3)}
       </div>
@@ -644,21 +643,21 @@ function buildOwcsSeasonFlowDiagram_(lang) {
           <div class="owcs-flow-asia-tracks">
             ${mobileTrack("kr", L.kr, [
               owcsFlowBox_(L.krOpen, "", "owcs-flow-box-open"),
-              owcsFlowBox_(L.promo, "", "owcs-flow-box-soft"),
+              owcsFlowBox_(L.promo, L.promoAsiaNote, "owcs-flow-box-soft"),
               owcsFlowBox_(L.krRegional, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-kr"),
               owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-owcs owcs-flow-box-owcs-asia"),
               owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
             ])}
             ${mobileTrack("jp", L.jp, [
               owcsFlowBox_(L.jpOpen, "", "owcs-flow-box-open"),
-              owcsFlowBox_(L.promo, "", "owcs-flow-box-soft"),
+              owcsFlowBox_(L.promo, L.promoAsiaNote, "owcs-flow-box-soft"),
               owcsFlowBox_(L.jpRegional, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-jp"),
               owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-owcs owcs-flow-box-owcs-asia"),
               owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
             ])}
             ${mobileTrack("pac", L.pac, [
               owcsFlowBox_(L.pacOpen, "", "owcs-flow-box-open"),
-              owcsFlowBox_(L.promo, "", "owcs-flow-box-soft"),
+              owcsFlowBox_(L.promo, L.promoAsiaNote, "owcs-flow-box-soft"),
               owcsFlowBox_(L.pacRegional, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-pac"),
               owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-owcs owcs-flow-box-owcs-asia"),
               owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
@@ -683,7 +682,7 @@ function buildOwcsSeasonFlowDiagram_(lang) {
         <div class="owcs-flow-region-body">
           ${pipe([
             owcsFlowBox_(L.faceit, "", "owcs-flow-box-open"),
-            owcsFlowBox_(L.promo, "", "owcs-flow-box-soft"),
+            owcsFlowBox_(L.promo, L.promoFaceitNote, "owcs-flow-box-soft"),
             owcsFlowBox_(L.naMain, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-na"),
             owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
           ])}
@@ -695,7 +694,7 @@ function buildOwcsSeasonFlowDiagram_(lang) {
         <div class="owcs-flow-region-body">
           ${pipe([
             owcsFlowBox_(L.faceit, "", "owcs-flow-box-open"),
-            owcsFlowBox_(L.promo, "", "owcs-flow-box-soft"),
+            owcsFlowBox_(L.promo, L.promoFaceitNote, "owcs-flow-box-soft"),
             owcsFlowBox_(L.emeaMain, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-emea"),
             owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
           ])}
@@ -722,6 +721,8 @@ const OWCS_FLOW_COPY_EN_ = {
   jp: "Japan",
   pac: "Pacific",
   promo: "Promo / relegation",
+  promoAsiaNote: "Open Quals top teams vs last season’s lower teams",
+  promoFaceitNote: "FACEIT League Master top teams vs last season’s lower teams",
   krOpen: "Korea Open Quals",
   jpOpen: "Japan Open Quals",
   pacOpen: "Pacific Open Quals",
@@ -750,6 +751,8 @@ const OWCS_FLOW_COPY_JP_ = {
   jp: "Japan",
   pac: "Pacific",
   promo: "昇格戦・降格戦",
+  promoAsiaNote: "オープン予選上位チーム VS 前シーズン下位チーム",
+  promoFaceitNote: "FACEIT League Master 上位チーム VS 前シーズン下位チーム",
   krOpen: "韓国オープン予選",
   jpOpen: "日本オープン予選",
   pacOpen: "パシフィックオープン予選",
