@@ -252,11 +252,12 @@ function loadWatchOwcsView() {
               OWCS has Japanese streams where casters and analysts explain the match
               in plain language.
             </p>
-            <p>
-              At the start of a broadcast they walk through not only how the tournament
-              works and the schedule, but also teams and players to watch that day —
-              plus the current meta (common tactics and hero comps).
-            </p>
+            <p>At the start of a broadcast they carefully cover:</p>
+            <ul>
+              <li>how the tournament works and the schedule</li>
+              <li>teams and players to watch that day</li>
+              <li>the current meta (common tactics and hero comps)</li>
+            </ul>
             <p>During the match they cover things like:</p>
             <ul>
               <li>why a play was strong</li>
@@ -299,8 +300,8 @@ function loadWatchOwcsView() {
               roster choices.
             </p>
             <p>
-              OWCS uses hero bans, so “what heroes you play” and “what comps you run”
-              can swing whole series.
+              OWCS also uses hero bans, so “which comps you ban” and “which comps
+              you run” can swing whole series.
             </p>
             <p>
               Favorites lose prep games, underdogs cook a plan and upset — that happens
@@ -352,7 +353,7 @@ function loadWatchOwcsView() {
             </p>
             <p>
               <a href="https://liquipedia.net/overwatch/Main_Page" target="_blank" rel="noopener">Liquipedia</a>
-              covers player profiles, teams, and past results too.
+              covers player profiles, teams, and past results.
               Even a little prep before a series — “they were on another roster last
               year,” “this team missed worlds by a hair” — makes watch night better.
             </p>
@@ -374,10 +375,12 @@ function loadWatchOwcsView() {
             <p>
               OWCSでは日本語配信が行われており、実況・解説が試合を分かりやすく伝えてくれます。
             </p>
-            <p>
-              配信の冒頭では、大会全体の仕組みやスケジュールだけでなく、その日の注目チームや注目選手、
-              現在のメタ（流行している戦術やヒーロー構成）まで丁寧に紹介してくれます。
-            </p>
+            <p>配信の冒頭では、次のような内容を丁寧に紹介してくれます。</p>
+            <ul>
+              <li>大会全体の仕組みやスケジュール</li>
+              <li>その日の注目チームや注目選手</li>
+              <li>現在のメタ（流行している戦術やヒーロー構成）</li>
+            </ul>
             <p>さらに試合中は、</p>
             <ul>
               <li>なぜこのプレイが強かったのか</li>
@@ -420,8 +423,8 @@ function loadWatchOwcsView() {
               さまざまな作戦を練っています。
             </p>
             <p>
-              OWCSではヒーローBANルールが採用されており、
-              「どのヒーローを使うか」「どんな構成で挑むか」が勝敗を大きく左右します。
+              また、OWCSではヒーローBANルールが採用されており、
+              「どの構成を封じるか」「どの構成で挑むか」が勝敗を大きく左右します。
             </p>
             <p>
               格上チームが作戦負けをしたり、格下チームが緻密な準備で番狂わせを起こしたりすることも珍しくありません。
@@ -476,7 +479,7 @@ function loadWatchOwcsView() {
             </p>
             <p>
               <a href="https://liquipedia.net/overwatch/Main_Page" target="_blank" rel="noopener">リキペディア</a>
-              というサイトでは、各選手のプロフィールや所属チーム、過去の戦績なども紹介しています。
+              というサイトでは、各選手のプロフィールや所属チーム、過去の戦績なども紹介されています。
               試合を見る前に少しだけ予習しておくだけでも、
               「この選手が去年は別のチームにいたんだ」「このチームは去年あと一歩で世界大会を逃したんだ」
               といった背景が分かり、観戦がより楽しくなります。
