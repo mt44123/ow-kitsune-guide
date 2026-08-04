@@ -3639,6 +3639,18 @@ margin:0 0 14px;
   line-height:1.55;
 }
 
+.faq-card .owcs-fun-subhead{
+  margin:22px 0 10px;
+  font-size:.95rem;
+  font-weight:700;
+  line-height:1.5;
+  color:var(--text-main);
+}
+
+.faq-card .owcs-fun-subhead:first-of-type{
+  margin-top:16px;
+}
+
 .faq-lang{
 margin:18px 0 8px;
   font-size:.78rem;
