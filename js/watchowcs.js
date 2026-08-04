@@ -312,7 +312,10 @@ function loadWatchOwcsView() {
             </p>
 
             <h4 class="owcs-fun-subhead">④ Interviews and face cams show the human side</h4>
-            <p>At offline events, winner interviews after maps are a highlight.</p>
+            <p>
+              At events, winner interviews after maps are a highlight
+              (not for Japan and Pacific).
+            </p>
             <p>
               Players rewatch the series, talk about teammates, or chat about the meta —
               sides of the game the scoreboard never shows.
@@ -435,7 +438,9 @@ function loadWatchOwcsView() {
             </p>
 
             <h4 class="owcs-fun-subhead">④ インタビューやフェイスカメラで選手の"人間らしさ"が見える</h4>
-            <p>オフライン大会では、試合後の勝利者インタビューも見どころのひとつです。</p>
+            <p>
+              大会では、試合後の勝利者インタビューも見どころのひとつです。（JapanとPacificはありません）
+            </p>
             <p>
               選手が試合を振り返ったり、チームメイトへの思いを語ったり、現在のメタについて話したりと、
               ゲーム内では見えない一面を知ることができます。
@@ -494,56 +499,144 @@ function loadWatchOwcsView() {
 
       <div class="card faq-card">
         <h3>
-          ${siteHeading_("👀 How to start watching", "👀 初心者の観戦スタート")}
+          ${siteHeading_(
+            "👀 Beginner watch guide",
+            "👀 初心者のための観戦ガイド"
+          )}
         </h3>
         ${siteText_(
           `
-            <p>Don’t try to understand everything. Do these three:</p>
-            <p><b>1. Pick a team to root for</b></p>
             <p>
-              Having someone to cheer for makes every map matter. Browse
+              So… what should you do first? Just hitting “play from the start” on a
+              stream can feel dull if you don’t have anyone to root for.
+            </p>
+            <p>
+              Here are recommended ways to watch, ordered from easiest to more
+              involved.
+            </p>
+
+            <h4 class="owcs-fun-subhead">① Pick a team to root for</h4>
+            <p>
+              A lot of OWCS orgs also run teams in other games. “I’ve heard of this
+              brand,” “I already like them in another title” — that’s enough.
+            </p>
+            <p>
+              On Twitch, channel-point prediction bets on who wins often run during
+              matches. Joining those makes follow-along more fun.
+            </p>
+            <p>
+              You can also browse rosters on this site’s
               <a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS</a>
-              on this site and pick one roster that clicks.
+              page.
             </p>
-            <p><b>2. Pick a player to follow</b></p>
+
+            <h4 class="owcs-fun-subhead">② Find a player to follow</h4>
             <p>
-              One “wait, that player is insane” moment is enough. Use player pages
-              for role, heroes, team, and region — then favorite them for LIVE.
+              “I’ve seen their clips,” “they play the same hero I do,” “wait, they’re
+              an OTP?” — one favorite is enough. Even liking a name is fine.
             </p>
-            <p><b>3. Listen to the casters</b></p>
+            <p>Watch with eyes on that player first.</p>
+
+            <h4 class="owcs-fun-subhead">③ Watch a watch party</h4>
             <p>
-              They tell you who’s winning the fight, why a play was strong, and
-              what’s coming next. If a term is unfamiliar, a quick search usually
-              clears it up.
+              Same energy as watching sports with friends. Viewing with a streamer you
+              know means shared reactions and feelings.
             </p>
             <p>
-              <b>Bonus:</b> When drop campaigns are live, official streams may give
-              in-game rewards for watch time (Battle.net linking is often required).
-              Nice extra, not required for enjoying the games.
+              A strong pick:
+              <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>.
+            </p>
+
+            <h4 class="owcs-fun-subhead">④ If VODs are fine — try player POVs</h4>
+            <p>
+              Official broadcasts cut between cameras so fast that sometimes you can’t
+              tell what just happened.
+            </p>
+            <p>
+              If that bothers you, POVs help. Outside world events, OWCS matches often
+              publish
+              <a
+                href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
+                target="_blank"
+                rel="noopener"
+              >replay codes</a>.
+              Open a favorite player’s POV in-game while you play the official VOD —
+              casters on one side, personal cam on the other.
+            </p>
+            <p>
+              Codes expired? Observers also upload standout POVs from the series to
+              YouTube:
+              <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener"
+                >@ObsSojourn</a
+              >.
             </p>
           `,
           `
-            <p>全部理解しようとしなくて大丈夫。この3つだけで始められます:</p>
-            <p><b>1. 推しチームを決める</b></p>
             <p>
-              応援するチームがあるだけで、毎マップが違って見えます。このサイトの
+              じゃあまず何したらいいの？ただ配信を最初から見るだけだと、
+              少し退屈に感じることもあるかもしれません。
+            </p>
+            <p>
+              ここでは、おすすめの観戦方法を「難易度が低い順」に紹介します。
+            </p>
+
+            <h4 class="owcs-fun-subhead">① 推しチームを決める</h4>
+            <p>
+              OWCSに参加しているプロチームは、他のゲームのチームも持っていることが多いです。
+              「このチーム聞いたことある」「他のゲームでこのチームが好き」くらいで大丈夫です。
+              応援する1チームを決めてから観てみてください。
+            </p>
+            <p>
+              また、Twitchではチャンネルポイントで勝敗予想（ベット）が行われることも多いので、
+              参加するとより楽しめます。
+            </p>
+            <p>
+              このサイトの
               <a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS</a>
-              から、しっくりくる1チームを選んでみてください。
+              からロスターを眺めてみるのもおすすめです。
             </p>
-            <p><b>2. 推し選手を見つける</b></p>
+
+            <h4 class="owcs-fun-subhead">② 推し選手を見つける</h4>
             <p>
-              「この人すごい」が1人いれば十分です。選手ページでロール・ヒーロー・所属・
-              地域を確認して、お気に入りに入れると LIVE で追いやすくなります。
+              「この選手の動画見たことある」「この選手が使ってるキャラ、自分と同じだ」
+              「この選手OTPなんだ、おもしろ」——1人いれば十分です。
+              名前が好き、くらいでも全然OKです。
             </p>
-            <p><b>3. 実況・解説を聞く</b></p>
+            <p>その選手に注目しながら観てみてください。</p>
+
+            <h4 class="owcs-fun-subhead">③ ウォッチパーティを見る</h4>
             <p>
-              どちらが有利か、なぜ強かったか、次に何が起きそうかを教えてくれます。
-              知らない用語は検索すれば大体わかります。
+              スポーツ観戦と同じです。知っている配信者と一緒に観戦すると、
+              反応を見たり感情を共有できたりして、より面白くなります。
             </p>
             <p>
-              <b>おまけ:</b> ドロップ期間中は、公式配信の視聴でゲーム内報酬が付くことが
-              あります（Battle.net 連携が必要なことが多いです）。必須ではありませんが、
-              ついでに嬉しい要素です。
+              おすすめは
+              <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>
+              です。
+            </p>
+
+            <h4 class="owcs-fun-subhead">④ 録画でもいいなら POV を見る</h4>
+            <p>
+              公式配信は視点がチャカチャカ切り替わって、何が起きているかわからない——
+              そんな人にオススメなのが POV です。
+            </p>
+            <p>
+              世界大会以外では、OWCSの試合で
+              <a
+                href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
+                target="_blank"
+                rel="noopener"
+              >リプレイコード</a>
+              が公開されていることが多いです。
+              好きな選手の視点を見ながら、同時に大会配信のアーカイブを再生すると、
+              実況付きで個人視点を楽しめます。
+            </p>
+            <p>
+              リプレイコードの期限が切れても大丈夫です。
+              その試合で活躍した選手の POV を、大会のオブザーバーが YouTube に上げてくれています。
+              <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener"
+                >@ObsSojourn</a
+              >
             </p>
           `
         )}
