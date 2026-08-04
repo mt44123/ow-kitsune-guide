@@ -141,8 +141,8 @@ function loadWatchOwcsView() {
         ${siteText_(
           `
             <p>
-              Formats differ a little by region, but the diagram below is one season —
-              and there are about 3–4 seasons each year.
+              Formats differ a little by region, but the year usually follows the flow
+              below — about 3–4 stages, each leading into a world event.
             </p>
             <p>
               In other words, there are roughly 3–4 chances each year to chase the
@@ -151,10 +151,32 @@ function loadWatchOwcsView() {
           `,
           `
             <p>
-              地域ごとに形式は少し違いますが、下図が1シーズンで、年間3～4シーズンあります。
+              地域ごとに形式は少し違いますが、年間はだいたい下図のような流れです。
+              ステージは年3～4回あり、それぞれ世界大会につながります。
             </p>
             <p>
               つまり、年3～4回、世界1位を目指すチャンスがあります。
+            </p>
+          `
+        )}
+        <h4 class="owcs-flow-subhead">
+          ${siteHeading_("Year overview (Jan → Dec)", "1年の流れ（1月 → 12月）")}
+        </h4>
+        ${buildOwcsYearFlowHtml_()}
+        <h4 class="owcs-flow-subhead">
+          ${siteHeading_("One season in detail", "1シーズンの詳細")}
+        </h4>
+        ${siteText_(
+          `
+            <p class="owcs-flow-detail-lead">
+              Each stage (one season) has a path like this. Regions differ a little,
+              but the overall picture is the same.
+            </p>
+          `,
+          `
+            <p class="owcs-flow-detail-lead">
+              各ステージ（1シーズン）の中身は、だいたい下図のような流れです。
+              地域ごとに少し違いますが、全体像はこの通りです。
             </p>
           `
         )}
@@ -523,6 +545,65 @@ function loadWatchOwcsView() {
 }
 
 /**
+ * Year overview flowchart (Jan → Dec stages + world events).
+ * Site Text: en | jp | both.
+ */
+function buildOwcsYearFlowHtml_() {
+  const mode =
+    typeof getSiteTextLanguageMode_ === "function"
+      ? getSiteTextLanguageMode_()
+      : "both";
+
+  if (mode === "en") {
+    return buildOwcsYearFlowDiagram_("en");
+  }
+
+  if (mode === "jp") {
+    return buildOwcsYearFlowDiagram_("jp");
+  }
+
+  return `
+    ${buildOwcsYearFlowDiagram_("en")}
+    <hr class="owcs-flow-lang-sep">
+    ${buildOwcsYearFlowDiagram_("jp")}
+  `;
+}
+
+function buildOwcsYearFlowDiagram_(lang) {
+  const L = lang === "jp" ? OWCS_YEAR_FLOW_COPY_JP_ : OWCS_YEAR_FLOW_COPY_EN_;
+  const docLang = lang === "jp" ? "ja" : "en";
+  const arrow = `<span class="owcs-year-flow-arrow" aria-hidden="true">→</span>`;
+  const arrowV = `<span class="owcs-year-flow-arrow owcs-year-flow-arrow-v" aria-hidden="true">↓</span>`;
+
+  const box = (text, extraClass = "") =>
+    `<div class="owcs-year-flow-box ${extraClass}"><span>${text}</span></div>`;
+
+  return `
+    <div class="owcs-year-flow" lang="${docLang}" aria-label="${L.aria}">
+      <div class="owcs-year-flow-range">
+        <span class="owcs-year-flow-month">${L.jan}</span>
+        <span class="owcs-year-flow-range-line" aria-hidden="true"></span>
+        <span class="owcs-year-flow-month">${L.dec}</span>
+      </div>
+      <div class="owcs-year-flow-track">
+        ${box(L.stage1, "owcs-year-flow-box-stage")}
+        ${arrow}${arrowV}
+        ${box(L.world, "owcs-year-flow-box-world")}
+        ${arrow}${arrowV}
+        ${box(L.stage2, "owcs-year-flow-box-stage")}
+        ${arrow}${arrowV}
+        ${box(L.world, "owcs-year-flow-box-world")}
+        ${arrow}${arrowV}
+        ${box(L.stage3, "owcs-year-flow-box-stage")}
+        ${arrow}${arrowV}
+        ${box(L.worldFinals, "owcs-year-flow-box-world owcs-year-flow-box-finals")}
+      </div>
+      <p class="owcs-year-flow-note">${L.note}</p>
+    </div>
+  `;
+}
+
+/**
  * OWCS season flowchart as real DOM text (browser-translate friendly).
  * Uses Site Text language: en | jp | both.
  */
@@ -757,6 +838,30 @@ function buildOwcsSeasonFlowDiagram_(lang) {
     </div>
   `;
 }
+
+const OWCS_YEAR_FLOW_COPY_EN_ = {
+  aria: "OWCS year overview",
+  jan: "Jan",
+  dec: "Dec",
+  stage1: "Stage 1",
+  stage2: "Stage 2",
+  stage3: "Stage 3",
+  world: "World event",
+  worldFinals: "World event<br>(World Finals)",
+  note: "Open Qualifiers and promo / relegation happen around each stage (details below)."
+};
+
+const OWCS_YEAR_FLOW_COPY_JP_ = {
+  aria: "OWCS 1年の流れ",
+  jan: "1月",
+  dec: "12月",
+  stage1: "ステージ1",
+  stage2: "ステージ2",
+  stage3: "ステージ3",
+  world: "世界大会",
+  worldFinals: "世界大会<br>(World Finals)",
+  note: "各ステージ前後にはオープン予選や昇格戦・降格戦などもあります（詳細は下図）。"
+};
 
 const OWCS_FLOW_COPY_EN_ = {
   flowAria: "OWCS season structure",
