@@ -85,40 +85,43 @@ function loadWatchOwcsView() {
           `
             <p>
               <b>OWCS (Overwatch Champions Series)</b> is Overwatch’s official
-              international tournament series.
+              tournament.
             </p>
             <p>
               Teams that advance through each region’s qualifiers move on to
-              international events — where the world’s best is decided.
+              world events — where the world’s best is decided.
             </p>
             <p>Participating regions:</p>
             <ul>
-              <li>Asia (Japan, Korea, Pacific)</li>
-              <li>NA (North America)</li>
-              <li>EMEA (Europe, Middle East, Africa)</li>
+              <li>Asia</li>
               <li>China</li>
+              <li>NA</li>
+              <li>EMEA</li>
             </ul>
             <p>
               You don’t need to follow everything. Starting with “your favorite
-              region + international events” is enough.
+              region + world events” is enough.<br>
+              Japan, Korea, Asia, and World events also have Japanese cast
+              commentary.
             </p>
           `,
           `
             <p>
-              <b>OWCS（Overwatch Champions Series）</b> は、Overwatchの公式国際大会シリーズです。
+              <b>OWCS（Overwatch Champions Series）</b> はOverwatchの公式大会です。
             </p>
             <p>
-              各地域の予選を突破したチームが国際大会へ進み、世界一が決まります。
+              各地域の予選を突破したチームが世界大会へ進み、世界一が決まります。
             </p>
             <p>参加する地域:</p>
             <ul>
-              <li>Asia(Japan, Korea, Pacific)</li>
-              <li>NA（North America）</li>
-              <li>EMEA（Europe, Middle East, Africa）</li>
+              <li>Asia</li>
               <li>China</li>
+              <li>NA</li>
+              <li>EMEA</li>
             </ul>
             <p>
-              全部追う必要はありません。最初は「推しの地域 + 国際大会」で十分です。
+              全部追う必要はありません。最初は「推しの地域 + 世界大会」で十分です。<br>
+              ちなみに、Japan、Korea、Asia、世界大会には日本語実況がついています。
             </p>
           `
         )}
@@ -131,50 +134,38 @@ function loadWatchOwcsView() {
         ${siteText_(
           `
             <p>Remember just this flow first:</p>
-            <p>
-              <b>Open Qualifier</b> (regional open quals) →
-              <b>Regular Season</b> (regional league play) →
-              <b>Regional Playoffs</b> (regional tournament) →
-              <b>International Events</b>
-            </p>
+            <ol>
+              <li><b>Open Qualifier</b> (prelims)</li>
+              <li><b>Promotion / Relegation</b></li>
+              <li><b>Regular Season</b> (round robin)</li>
+              <li>
+                <b>Regional Playoffs</b> (tournament)<br>
+                (In Asia, there is also an Asia stage.)
+              </li>
+              <li><b>World events</b></li>
+            </ol>
             <p>
               Exact formats differ a little by region, but this cycle happens about
               3–4 times a year.<br>
               In other words, there are roughly 3–4 shots each year at becoming
               #1 in the world.
             </p>
-            <p>
-              For Japan:<br>
-              Finishing in the <b>top 2 domestically</b> can advance a team to the
-              Asia regional stage.<br>
-              The <b>top 2–3 Asia teams</b> advance to international events.<br>
-              <br>
-              Right now, the Asia power balance is roughly
-              <b>Korea &gt; Pacific / Japan</b>.<br>
-              Under this format, <b>Korean teams advance to internationals about
-              99% of the time</b>.<br>
-              <br>
-              Currently, only the summer <b>EWC</b> lets the #1 teams from Japan and
-              Pacific qualify directly for that international event.
-            </p>
           `,
           `
             <p>まずはこれだけ覚えればOKです:</p>
-            <p><b>Open Qualifier(地域オープン予選)</b> → <b>Regular Season(地域総当たり戦)</b> → <b>Regional Playoffs(地域トーナメント)</b> → <b>International Events(国際大会)</b></p>
+            <ol>
+              <li><b>予選</b> (Open Qualifier)</li>
+              <li><b>昇格戦・降格戦</b> (Promotion/Relegation)</li>
+              <li><b>総当たり戦</b> (Regular Season)</li>
+              <li>
+                <b>トーナメント戦</b> (Regional Playoffs)<br>
+                （アジア地域は、アジア大会もあります）
+              </li>
+              <li><b>世界大会</b></li>
+            </ol>
             <p>
               地域ごとに形式は少し違いますが、これが年3～4回あります。<br>
-              つまり、年3～4回、世界1位を目指すチャンスがあります。<br>
-            </p>
-            <p>
-              日本の場合<br>
-              <b>国内上位2チーム</b>に入ることで、アジア地域大会へ進出可能です。<br>
-              <b>アジア上位2~3チーム</b>が国際大会へ進出します。<br>
-              <br>
-              ただし現状、アジア地域のパワーバランスは、<b>韓国＞パシフィック・日本</b>です。<br>
-              この形式で行われる際は<b>99％韓国チームが国際大会へ進出</b>します。<br>
-              <br>
-              現状、夏季に行われるEWCのみ、日本・パシフィックでの1位チームが直接国際大会へ進出可能です。<br>
-            
+              つまり、年3～4回、世界1位を目指すチャンスがあります。
             </p>
           `
         )}
