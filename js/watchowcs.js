@@ -506,137 +506,277 @@ function loadWatchOwcsView() {
         </h3>
         ${siteText_(
           `
+            <p>“I want to watch OWCS — but where do I start?”</p>
             <p>
-              So… what should you do first? Just hitting “play from the start” on a
-              stream can feel dull if you don’t have anyone to root for.
+              The easiest first step is finding one way to enjoy it that feels like yours.
             </p>
+            <p>You don’t need to memorize every rule or every roster.</p>
             <p>
-              Here are recommended ways to watch, ordered from easiest to more
-              involved.
+              Below are recommended approaches, ordered from the simplest for beginners.
             </p>
 
-            <h4 class="owcs-fun-subhead">① Pick a team to root for</h4>
+            <h4 class="owcs-fun-subhead">① Start by picking a team to support</h4>
+            <p>The simplest move is choosing one team to root for.</p>
             <p>
-              A lot of OWCS orgs also run teams in other games. “I’ve heard of this
-              brand,” “I already like them in another title” — that’s enough.
+              Many OWCS orgs also field teams in other esports — VALORANT, League of
+              Legends, and more.
+            </p>
+            <p>So any of these reasons is totally fine:</p>
+            <ul>
+              <li>“I’ve heard of this org!”</li>
+              <li>“I already support them in another game!”</li>
+              <li>“The logo / jersey looks cool!”</li>
+            </ul>
+            <p>
+              Once you have a team to cheer for, watching becomes far more fun.
             </p>
             <p>
-              On Twitch, channel-point prediction bets on who wins often run during
-              matches. Joining those makes follow-along more fun.
-            </p>
-            <p>
-              You can also browse rosters on this site’s
-              <a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS</a>
-              page.
+              On Twitch streams, channel-point match predictions sometimes run as well.
+              Betting points can feel like sports picks and pull you into the series.
             </p>
 
             <h4 class="owcs-fun-subhead">② Find a player to follow</h4>
+            <p>You can also root for a player instead of a whole org.</p>
+            <p>For example:</p>
+            <ul>
+              <li>“I’ve seen their highlight clips!”</li>
+              <li>“They play the hero I main!”</li>
+              <li>“They’re an OTP (one-tricked a hero) — that’s entertaining!”</li>
+              <li>“Cool name!”</li>
+            </ul>
+            <p>Any spark is enough.</p>
             <p>
-              “I’ve seen their clips,” “they play the same hero I do,” “wait, they’re
-              an OTP?” — one favorite is enough. Even liking a name is fine.
+              When one player catches your eye, following just them through a series
+              makes watch night much more engaging.
             </p>
-            <p>Watch with eyes on that player first.</p>
+            <p>Go hunt for someone you want to track.</p>
 
-            <h4 class="owcs-fun-subhead">③ Watch a watch party</h4>
+            <h4 class="owcs-fun-subhead">③ Watch with a watch party</h4>
             <p>
-              Same energy as watching sports with friends. Viewing with a streamer you
-              know means shared reactions and feelings.
+              In sports, watching with someone often feels bigger than watching alone.
+              Same idea here.
             </p>
             <p>
-              A strong pick:
-              <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>.
+              A watch party is a streamer reacting to the official broadcast and
+              sometimes explaining the match — shared hype and tension.
+            </p>
+            <p>You’ll get reactions like:</p>
+            <ul>
+              <li>“That play was insane!”</li>
+              <li>“Wait, that comps incoming?!”</li>
+            </ul>
+            <p>…which is why watch parties are great for newcomers.</p>
+            <p>
+              If you try one, former Overwatch League player
+              <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>’s
+              streams are especially popular.
             </p>
 
-            <h4 class="owcs-fun-subhead">④ If VODs are fine — try player POVs</h4>
+            <h4 class="owcs-fun-subhead">④ Prefer VODs? Try POV watching</h4>
             <p>
-              Official broadcasts cut between cameras so fast that sometimes you can’t
-              tell what just happened.
+              “Official broadcasts cut camera so fast I can’t tell what happened…”
             </p>
             <p>
-              If that bothers you, POVs help. Outside world events, OWCS matches often
-              publish
+              For that,
+              <b>POV (Player Point of View)</b>
+              watching is a strong option.
+            </p>
+            <p>
+              For many OWCS matches outside world events (LAN),
               <a
                 href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
                 target="_blank"
                 rel="noopener"
-              >replay codes</a>.
-              Open a favorite player’s POV in-game while you play the official VOD —
-              casters on one side, personal cam on the other.
+              >replay codes</a>
+              are published. You can rewatch from a favorite player’s perspective
+              in-game. After a patch, codes may stop working — while they’re live, watch
+              freely.
+            </p>
+            <p>Even better:</p>
+            <p>
+              Play the official archive while opening a player’s POV in the client.
             </p>
             <p>
-              Codes expired? Observers also upload standout POVs from the series to
-              YouTube:
+              You get casters in your ears while you keep eyes locked on one player.
+            </p>
+            <p>Especially good if you wonder:</p>
+            <ul>
+              <li>“How do pros move their camera?”</li>
+              <li>“I want to copy aim and positioning!”</li>
+            </ul>
+            <p>
+              <b>▶ Replay code list</b><br>
+              <a
+                href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
+                target="_blank"
+                rel="noopener"
+              >Google Spreadsheet — OWCS Replay Codes</a>
+            </p>
+            <p><b>▶ Codes expired? You’re fine</b></p>
+            <p>
+              Overwatch replay codes can stop working after game updates.
+            </p>
+            <p>Don’t worry.</p>
+            <p>
+              Observer
               <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener"
-                >@ObsSojourn</a
-              >.
+                >ObsSojourn</a
+              >
+              uploads POV videos of standout players to YouTube, so you can still enjoy
+              many series from a player cam after in-client replays die.
+              Some LAN replays aren’t viewable on the public client either — those
+              uploads become especially valuable.
+            </p>
+
+            <h4 class="owcs-fun-subhead">First, find your way to enjoy it</h4>
+            <p>OWCS isn’t a “learn every rule first, then watch” product.</p>
+            <ul>
+              <li>Cheer for a team</li>
+              <li>Follow a player</li>
+              <li>Watch with the casters</li>
+              <li>Study pro POVs for your own play</li>
+            </ul>
+            <p>Everyone’s path is different.</p>
+            <p>
+              Finding one style that fits you is the fastest route to enjoying OWCS
+              more.
             </p>
           `,
           `
+            <p>「OWCSを見てみたいけど、何から始めればいいの？」</p>
             <p>
-              じゃあまず何したらいいの？ただ配信を最初から見るだけだと、
-              少し退屈に感じることもあるかもしれません。
+              そんな方におすすめなのが、自分なりの楽しみ方を一つ見つけることです。
             </p>
+            <p>ルールや選手をすべて覚える必要はありません。</p>
             <p>
-              ここでは、おすすめの観戦方法を「難易度が低い順」に紹介します。
-            </p>
-
-            <h4 class="owcs-fun-subhead">① 推しチームを決める</h4>
-            <p>
-              OWCSに参加しているプロチームは、他のゲームのチームも持っていることが多いです。
-              「このチーム聞いたことある」「他のゲームでこのチームが好き」くらいで大丈夫です。
-              応援する1チームを決めてから観てみてください。
-            </p>
-            <p>
-              また、Twitchではチャンネルポイントで勝敗予想（ベット）が行われることも多いので、
-              参加するとより楽しめます。
-            </p>
-            <p>
-              このサイトの
-              <a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS</a>
-              からロスターを眺めてみるのもおすすめです。
+              ここでは、初心者でも始めやすい順番で、おすすめの観戦方法を紹介します。
             </p>
 
-            <h4 class="owcs-fun-subhead">② 推し選手を見つける</h4>
+            <h4 class="owcs-fun-subhead">① まずは「推しチーム」を決めよう</h4>
+            <p>一番簡単なのが、応援するチームを決めることです。</p>
             <p>
-              「この選手の動画見たことある」「この選手が使ってるキャラ、自分と同じだ」
-              「この選手OTPなんだ、おもしろ」——1人いれば十分です。
-              名前が好き、くらいでも全然OKです。
+              OWCSに参加しているチームの多くは、Overwatch以外にもVALORANTやLeague of Legendsなど、
+              さまざまなゲーム部門を持つeスポーツチームです。
             </p>
-            <p>その選手に注目しながら観てみてください。</p>
+            <p>そのため、</p>
+            <ul>
+              <li>「このチーム、名前を聞いたことがある！」</li>
+              <li>「他のゲームで応援しているチームだ！」</li>
+              <li>「ロゴやユニフォームがかっこいい！」</li>
+            </ul>
+            <p>そんな理由で選んでもまったく問題ありません。</p>
+            <p>
+              応援するチームができるだけで、試合を見る楽しさは大きく変わります。
+            </p>
+            <p>
+              さらに、Twitch配信ではチャンネルポイントを使った勝敗予想が行われることもあります。
+              ポイントを賭けながら試合を見ると、スポーツの勝敗予想のような感覚で、
+              より試合に熱中できます。
+            </p>
 
-            <h4 class="owcs-fun-subhead">③ ウォッチパーティを見る</h4>
+            <h4 class="owcs-fun-subhead">② 「推し選手」を見つけよう</h4>
+            <p>チームではなく、好きな選手を見つけるのもおすすめです。</p>
+            <p>例えば、</p>
+            <ul>
+              <li>「この選手のプレイ動画を見たことがある！」</li>
+              <li>「自分がよく使うヒーローを使っている！」</li>
+              <li>「OTP（特定のヒーローを極めた選手）なんだ、面白そう！」</li>
+              <li>「名前がかっこいい！」</li>
+            </ul>
+            <p>きっかけは本当に何でも構いません。</p>
             <p>
-              スポーツ観戦と同じです。知っている配信者と一緒に観戦すると、
-              反応を見たり感情を共有できたりして、より面白くなります。
+              一人でも気になる選手ができると、その選手を追いかけながら試合を見るだけで、
+              観戦がぐっと楽しくなります。
+            </p>
+            <p>ぜひ気になる選手を探してみてください。</p>
+
+            <h4 class="owcs-fun-subhead">③ ウォッチパーティで一緒に観戦する</h4>
+            <p>
+              スポーツ観戦でも、一人で見るより誰かと一緒に見た方が盛り上がることがありますよね。
+              OWCSでも同じです。
             </p>
             <p>
-              おすすめは
+              配信者が公式配信を見ながらリアクションしたり、試合内容を解説したりする
+              ウォッチパーティを見れば、試合の面白さや緊張感を共有できます。
+            </p>
+            <p>例えば、</p>
+            <ul>
+              <li>「今のプレイやばい！」</li>
+              <li>「その構成で来るのか！」</li>
+            </ul>
+            <p>
+              といったリアルな反応を一緒に楽しめるので、初心者にもおすすめです。
+            </p>
+            <p>
+              ウォッチパーティを見るなら、元Overwatch League選手でもある
               <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>
-              です。
+              さんの配信は特に人気があります。
             </p>
 
-            <h4 class="owcs-fun-subhead">④ 録画でもいいなら POV を見る</h4>
+            <h4 class="owcs-fun-subhead">④ 録画でじっくり見るなら「POV観戦」がおすすめ</h4>
             <p>
-              公式配信は視点がチャカチャカ切り替わって、何が起きているかわからない——
-              そんな人にオススメなのが POV です。
+              「公式配信は視点がコロコロ切り替わって、何が起きているか分からない……」
             </p>
             <p>
-              世界大会以外では、OWCSの試合で
+              そんな方には
+              <b>POV（Player Point of View：選手視点）</b>
+              での観戦がおすすめです。
+            </p>
+            <p>
+              OWCSでは、世界大会（LANイベント）を除く多くの試合でリプレイコードが公開されています。
+              これを使えば、ゲーム内で好きな選手の視点から試合を見返すことができます。
+              パッチ更新後はリプレイコードが利用できなくなることがありますが、
+              公開されている期間中は自由に視聴できます。
+            </p>
+            <p>さらにおすすめなのが、</p>
+            <p>
+              公式配信のアーカイブを流しながら、ゲーム内では好きな選手のPOVを開くこと。
+            </p>
+            <p>
+              これなら実況・解説を聞きながら、気になる選手だけを追い続けることができます。
+            </p>
+            <p>特に、</p>
+            <ul>
+              <li>「プロはどうやって視点を動かしているの？」</li>
+              <li>「エイムや立ち回りを真似したい！」</li>
+            </ul>
+            <p>という方には特におすすめの観戦方法です。</p>
+            <p>
+              <b>▶ リプレイコード一覧</b><br>
               <a
                 href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
                 target="_blank"
                 rel="noopener"
-              >リプレイコード</a>
-              が公開されていることが多いです。
-              好きな選手の視点を見ながら、同時に大会配信のアーカイブを再生すると、
-              実況付きで個人視点を楽しめます。
+              >Googleスプレッドシート（OWCS Replay Codes）</a>
             </p>
+            <p><b>▶ リプレイコードが見られなくなっても大丈夫</b></p>
             <p>
-              リプレイコードの期限が切れても大丈夫です。
-              その試合で活躍した選手の POV を、大会のオブザーバーが YouTube に上げてくれています。
+              Overwatchのリプレイコードは、ゲームのアップデートが入ると利用できなくなることがあります。
+            </p>
+            <p>そんな時でも安心してください。</p>
+            <p>
+              大会オブザーバーの
               <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener"
-                >@ObsSojourn</a
+                >ObsSojourn</a
               >
+              さんが、活躍した選手のPOV動画をYouTubeへ公開してくれているため、
+              ゲーム内でリプレイが見られなくなった後でも、多くの試合を選手視点で楽しめます。
+              LAN大会の一部リプレイは一般クライアントでは視聴できないため、
+              このようなPOV動画は貴重な資料にもなっています。
+            </p>
+
+            <h4 class="owcs-fun-subhead">まずは、自分なりの楽しみ方を見つけよう</h4>
+            <p>OWCSは、「ルールを全部覚えてから見る大会」ではありません。</p>
+            <ul>
+              <li>推しチームを応援する</li>
+              <li>好きな選手を追いかける</li>
+              <li>実況を聞きながら試合を見る</li>
+              <li>プロのPOVを参考にプレイを研究する</li>
+            </ul>
+            <p>楽しみ方は人それぞれです。</p>
+            <p>
+              まずは自分に合った観戦スタイルを一つ見つけること。
+              それが、OWCSをもっと楽しむための一番の近道です。
             </p>
           `
         )}
