@@ -809,7 +809,8 @@ function loadWatchOwcsView() {
 
             <h4 class="owcs-fun-subhead">Japanese language broadcasts</h4>
             <p>
-              OWCS Japan is cast in Japanese on both Twitch and YouTube.
+              Japanese casts are available for OWCS Japan, Korea, Asia, and world
+              events.
             </p>
             <p>
               Twitch free VODs may not always remain, but YouTube keeps free live
@@ -827,8 +828,59 @@ function loadWatchOwcsView() {
             <p>
               Hearing how pros talk during fights is incredibly watchable in its own right.
             </p>
+          `,
+          `
+            <p>OWCSの公式配信は、基本的に無料で視聴できます。</p>
+            <p>
+              大会の地域によって配信プラットフォームが異なり、主に以下のサービスで配信されています。
+            </p>
+            <ul>
+              <li>Twitch</li>
+              <li>YouTube</li>
+              <li>SOOP（韓国）</li>
+              <li>Bilibili（中国）</li>
+            </ul>
+            <p>
+              「どの地域がどこで配信されるの？」「日本語配信はどこ？」
+            </p>
+            <p>
+              という方のために、OW KITSUNE GUIDEでは各地域の公式配信チャンネルをまとめています。
+            </p>
+            <p>
+              <a href="/team/overwatch-champions-series">👉 OWCS公式配信チャンネル一覧</a>
+            </p>
 
-            <h4 class="owcs-fun-subhead">Where do I check the schedule?</h4>
+            <h4 class="owcs-fun-subhead">日本語配信について</h4>
+            <p>
+              日本語配信がある大会は、OWCS Japan、Korea、Asia、世界大会です。
+            </p>
+            <p>
+              なお、Twitchでは無料アーカイブ（VOD）が残らない場合がありますが、
+              YouTubeではライブ配信のアーカイブを無料で視聴できます。
+            </p>
+            <p>
+              「リアルタイムでは見られない」という方は、YouTubeのアーカイブで後からゆっくり観戦するのがおすすめです。
+            </p>
+
+            <h4 class="owcs-fun-subhead">韓国配信ならではの楽しみも</h4>
+            <p>
+              韓国地域では、一部の試合で選手のボイスチャット（VC）入り動画が
+              サブスクリプション限定コンテンツとして公開されることがあります。
+            </p>
+            <p>
+              試合中にどのようなコミュニケーションを取っているのかを知ることができるため、
+              非常に見応えがあります。
+            </p>
+          `
+        )}
+      </div>
+
+      <div class="card faq-card">
+        <h3>
+          ${siteHeading_("🗓️ When can I watch?", "🗓️ いつ見れる？")}
+        </h3>
+        ${siteText_(
+          `
             <p>
               OWCS runs worldwide, so “when’s the next series?” can feel cloudy.
             </p>
@@ -871,11 +923,11 @@ function loadWatchOwcsView() {
             </p>
             <p>You can check things like:</p>
             <ul>
-              <li>start times (including local conversions)</li>
-              <li>countdown style “starts in X hours”</li>
-              <li>bracket</li>
-              <li>rosters</li>
-              <li>results</li>
+              <li>match start times (Japan time)</li>
+              <li>time remaining until the match</li>
+              <li>brackets</li>
+              <li>team rosters</li>
+              <li>match results</li>
             </ul>
             <p>Essentially a must-have while watching OWCS.</p>
 
@@ -899,54 +951,13 @@ function loadWatchOwcsView() {
 
             <p class="owcs-sitetext-tip">
               <b>Summary:</b> New to OWCS? Try
-              “check today’s matches on official X → watch a Japanese cast → look up
+              “check the schedule on official X → watch a Japanese cast → look up
               players you notice.” That loop alone is enough for beginners to enjoy
-              OWCS without getting lost.
+              OWCS without getting lost.<br>
+              <b>For starters — meet up Monday 6:00 PM (JST)!</b>
             </p>
           `,
           `
-            <p>OWCSの公式配信は、基本的に無料で視聴できます。</p>
-            <p>
-              大会の地域によって配信プラットフォームが異なり、主に以下のサービスで配信されています。
-            </p>
-            <ul>
-              <li>Twitch</li>
-              <li>YouTube</li>
-              <li>SOOP（韓国）</li>
-              <li>Bilibili（中国）</li>
-            </ul>
-            <p>
-              「どの地域がどこで配信されるの？」「日本語配信はどこ？」
-            </p>
-            <p>
-              という方のために、OW KITSUNE GUIDEでは各地域の公式配信チャンネルをまとめています。
-            </p>
-            <p>
-              <a href="/team/overwatch-champions-series">👉 OWCS公式配信チャンネル一覧</a>
-            </p>
-
-            <h4 class="owcs-fun-subhead">日本語配信について</h4>
-            <p>
-              日本地域（OWCS Japan）は、TwitchとYouTubeで日本語配信が行われます。
-            </p>
-            <p>
-              なお、Twitchでは無料アーカイブ（VOD）が残らない場合がありますが、
-              YouTubeではライブ配信のアーカイブを無料で視聴できます。
-            </p>
-            <p>
-              「リアルタイムでは見られない」という方は、YouTubeのアーカイブで後からゆっくり観戦するのがおすすめです。
-            </p>
-
-            <h4 class="owcs-fun-subhead">韓国配信ならではの楽しみも</h4>
-            <p>
-              韓国地域では、一部の試合で選手のボイスチャット（VC）入り動画が
-              サブスクリプション限定コンテンツとして公開されることがあります。
-            </p>
-            <p>
-              試合中にどのようなコミュニケーションを取っているのかを知ることができるため、非常に見応えがあります。
-            </p>
-
-            <h4 class="owcs-fun-subhead">試合スケジュールはどこで確認する？</h4>
             <p>
               OWCSは世界各地で大会が開催されるため、「次の試合はいつ？」と迷うこともあります。
             </p>
@@ -991,7 +1002,7 @@ function loadWatchOwcsView() {
             <p>Liquipediaでは、</p>
             <ul>
               <li>日本時間での試合開始時刻</li>
-              <li>「あと何時間で試合開始」</li>
+              <li>試合開始までの残り時間</li>
               <li>トーナメント表</li>
               <li>チームロスター</li>
               <li>試合結果</li>
@@ -1020,9 +1031,10 @@ function loadWatchOwcsView() {
             <p class="owcs-sitetext-tip">
               <b>まとめ：</b>
               初めてOWCSを見るなら、
-              「公式Xで今日の試合を確認 → 日本語配信を見る → 気になった選手を調べる」
+              「公式Xで試合日程を確認 → 日本語配信を見る → 気になった選手を調べる」
               という流れがおすすめです。
-              これだけでも、初心者でも迷わずOWCS観戦を楽しめるようになります。
+              これだけでも、初心者でも迷わずOWCS観戦を楽しめるようになります。<br>
+              <b>とりあえず月曜18時に集合！</b>
             </p>
           `
         )}
