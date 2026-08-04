@@ -3651,6 +3651,41 @@ margin:0 0 14px;
   margin-top:16px;
 }
 
+.faq-card .owcs-schedule-examples{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:12px;
+  margin:14px 0 18px;
+}
+
+.faq-card .owcs-schedule-example{
+  margin:0;
+  min-width:0;
+}
+
+.faq-card .owcs-schedule-example img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:var(--radius-md);
+  border:1px solid var(--border);
+  background:var(--bg-light);
+}
+
+.faq-card .owcs-schedule-example figcaption{
+  margin-top:6px;
+  font-size:.78rem;
+  line-height:1.4;
+  color:var(--text-muted);
+  text-align:center;
+}
+
+@media (max-width:720px){
+  .faq-card .owcs-schedule-examples{
+    grid-template-columns:1fr;
+  }
+}
+
 .faq-lang{
 margin:18px 0 8px;
   font-size:.78rem;

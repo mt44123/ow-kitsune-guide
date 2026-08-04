@@ -787,60 +787,241 @@ function loadWatchOwcsView() {
         </h3>
         ${siteText_(
           `
+            <p>Official OWCS streams are free to watch in most cases.</p>
             <p>
-              OWCS broadcasts are free. Channels depend on the region
-              (Twitch, YouTube, SOOP, Bilibili, and more).
+              Platforms vary by region. You’ll mostly see broadcasts on:
             </p>
-            <p>Quick path:</p>
             <ul>
-              <li>
-                Check the
-                <a href="https://esports.overwatch.com/en-us/schedule" target="_blank" rel="noopener">
-                  official OWCS schedule
-                </a>
-              </li>
-              <li>
-                Open stream links from this site’s
-                <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">USEFUL LINKS</a>
-              </li>
-              <li>
-                On this site, use
-                <a href="/owcs" onclick="openOwcsLiveFromGuide_(); return false;">LIVE → OWCS</a>
-                while events are on
-              </li>
+              <li>Twitch</li>
+              <li>YouTube</li>
+              <li>SOOP (Korea)</li>
+              <li>Bilibili (China)</li>
             </ul>
             <p>
-              Japanese-language casts appear for some Asia broadcasts — check
-              JP / Pacific / Korea listings when you want that.
+              “Which region is on which channel?” / “Where’s the Japanese cast?”
+            </p>
+            <p>
+              OW KITSUNE GUIDE collects official region channel links here:
+            </p>
+            <p>
+              👉
+              <a href="/team/overwatch-champions-series">Official OWCS stream channels</a>
+            </p>
+
+            <h4 class="owcs-fun-subhead">Japanese-language broadcasts</h4>
+            <p>
+              OWCS Japan is cast in Japanese on Twitch and YouTube.
+            </p>
+            <p>
+              Twitch may not keep free VODs; YouTube usually keeps free livestream
+              archives. If you can’t watch live, YouTube VODs are a great pace
+              to catch up later.
+            </p>
+
+            <h4 class="owcs-fun-subhead">A Korea-only treat</h4>
+            <p>
+              On the Korean side, some series publish player voice chat VODs as
+              subscription content. Hearing in-match comms is a deep watch if you
+              want that layer.
+            </p>
+
+            <h4 class="owcs-fun-subhead">Where do match schedules live?</h4>
+            <p>
+              OWCS runs worldwide, so “when’s the next match?” can get confusing.
+              Here are three solid ways to check dates.
+            </p>
+
+            <h4 class="owcs-fun-subhead">① Official X</h4>
+            <p>
+              The quickest check is official OWCS X accounts.
+            </p>
+            <p>
+              Before events, they post schedule images that show matchups and start
+              times at a glance — perfect for “what’s on today?” and “what JST is
+              that?”
+            </p>
+            <div class="owcs-schedule-examples">
+              <figure class="owcs-schedule-example">
+                <img
+                  src="/images/watchowcs/schedule-asia-month.jpg"
+                  alt="Example OWCS Asia calendar-style schedule image from official X"
+                  loading="lazy"
+                >
+                <figcaption>Example: monthly calendar-style graphic</figcaption>
+              </figure>
+              <figure class="owcs-schedule-example">
+                <img
+                  src="/images/watchowcs/schedule-korea-matchups.jpg"
+                  alt="Example OWCS Korea Stage match schedule image from official X"
+                  loading="lazy"
+                >
+                <figcaption>Example: weekly matchup schedule graphic</figcaption>
+              </figure>
+            </div>
+
+            <h4 class="owcs-fun-subhead">② Liquipedia (most recommended)</h4>
+            <p>
+              For internationals and deep detail,
+              <a href="https://liquipedia.net/overwatch/Main_Page" target="_blank" rel="noopener">Liquipedia</a>
+              is the best hub.
+            </p>
+            <p>You can check:</p>
+            <ul>
+              <li>match start times in Japan time</li>
+              <li>“starts in X hours” countdowns</li>
+              <li>brackets</li>
+              <li>team rosters</li>
+              <li>results</li>
+            </ul>
+            <p>If you watch regularly, it’s hard to live without.</p>
+
+            <h4 class="owcs-fun-subhead">③ Official OWCS site</h4>
+            <p>
+              The
+              <a href="https://esports.overwatch.com/en-us/schedule" target="_blank" rel="noopener">official OWCS site</a>
+              lists annual schedules and cards for NA / EMEA, and from there you can
+              roughly anticipate Asia timing as well.
+            </p>
+
+            <p>
+              OW KITSUNE GUIDE also gathers streams, official X, Liquipedia, the OWCS
+              site, and other watch tools on one page:
+            </p>
+            <p>
+              👉
+              <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">
+                Links for watching OWCS
+              </a>
+            </p>
+
+            <p class="owcs-sitetext-tip">
+              <b>Summary:</b> first-timers can start with
+              “check today’s matches on official X → watch a Japanese cast → look
+              up players who catch your eye.”
+              That path alone is enough to enjoy OWCS without getting lost.
             </p>
           `,
           `
+            <p>OWCSの公式配信は、基本的に無料で視聴できます。</p>
             <p>
-              OWCS の公式配信は基本無料です。地域ごとに Twitch / YouTube / SOOP /
-              Bilibili などが使われます。
+              大会の地域によって配信プラットフォームが異なり、主に以下のサービスで配信されています。
             </p>
-            <p>手順の例:</p>
             <ul>
-              <li>
-                <a href="https://esports.overwatch.com/en-us/schedule" target="_blank" rel="noopener">
-                  公式 OWCS スケジュール
-                </a>
-                を見る
-              </li>
-              <li>
-                このサイトの
-                <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">USEFUL LINKS</a>
-                から配信を開く
-              </li>
-              <li>
-                大会中は
-                <a href="/owcs" onclick="openOwcsLiveFromGuide_(); return false;">LIVE → OWCS</a>
-                も併用する
-              </li>
+              <li>Twitch</li>
+              <li>YouTube</li>
+              <li>SOOP（韓国）</li>
+              <li>Bilibili（中国）</li>
             </ul>
             <p>
-              日本語配信がある大会・チャンネルもあります。
-              JP / Pacific / Korea 周りを見ると見つけやすいです。
+              「どの地域がどこで配信されるの？」<br>
+              「日本語配信はどこ？」
+            </p>
+            <p>
+              という方のために、OW KITSUNE GUIDEでは各地域の公式配信チャンネルをまとめています。
+            </p>
+            <p>
+              👉
+              <a href="/team/overwatch-champions-series">OWCS公式配信チャンネル一覧</a>
+            </p>
+
+            <h4 class="owcs-fun-subhead">日本語配信について</h4>
+            <p>
+              日本地域（OWCS Japan）は、TwitchとYouTubeで日本語配信が行われます。
+            </p>
+            <p>
+              なお、Twitchでは無料アーカイブ（VOD）が残らない場合がありますが、
+              YouTubeではライブ配信のアーカイブを無料で視聴できます。
+            </p>
+            <p>
+              「リアルタイムでは見られない」という方は、
+              YouTubeのアーカイブで後からゆっくり観戦するのがおすすめです。
+            </p>
+
+            <h4 class="owcs-fun-subhead">韓国配信ならではの楽しみも</h4>
+            <p>
+              韓国地域では、一部の試合で選手のボイスチャット（VC）入り動画が
+              サブスクリプション限定コンテンツとして公開されることがあります。
+            </p>
+            <p>
+              試合中にどのようなコミュニケーションを取っているのかを知ることができるため、
+              非常に見応えがあります。
+            </p>
+
+            <h4 class="owcs-fun-subhead">試合スケジュールはどこで確認する？</h4>
+            <p>
+              OWCSは世界各地で大会が開催されるため、「次の試合はいつ？」と迷うこともあります。
+              ここでは、試合日程を確認するおすすめの方法を3つ紹介します。
+            </p>
+
+            <h4 class="owcs-fun-subhead">① 公式Xをチェックする</h4>
+            <p>一番手軽なのが、OWCS公式X（旧Twitter）です。</p>
+            <p>
+              大会前になると、対戦カードや開始時間がひと目で分かるスケジュール画像が投稿されます。
+            </p>
+            <p>
+              「今日はどの試合があるの？」<br>
+              「日本時間で何時から始まるの？」
+            </p>
+            <p>という確認に最適です。</p>
+            <div class="owcs-schedule-examples">
+              <figure class="owcs-schedule-example">
+                <img
+                  src="/images/watchowcs/schedule-asia-month.jpg"
+                  alt="公式Xで投稿される月間カレンダー風スケジュール画像の例"
+                  loading="lazy"
+                >
+                <figcaption>例：月間カレンダー風のスケジュール画像</figcaption>
+              </figure>
+              <figure class="owcs-schedule-example">
+                <img
+                  src="/images/watchowcs/schedule-korea-matchups.jpg"
+                  alt="公式Xで投稿される週次対戦カードスケジュール画像の例"
+                  loading="lazy"
+                >
+                <figcaption>例：対戦カード付きスケジュール画像</figcaption>
+              </figure>
+            </div>
+
+            <h4 class="owcs-fun-subhead">② Liquipediaを見る【一番おすすめ】</h4>
+            <p>
+              海外大会までチェックしたいなら、
+              <a href="https://liquipedia.net/overwatch/Main_Page" target="_blank" rel="noopener">Liquipedia</a>
+              がおすすめです。
+            </p>
+            <p>Liquipediaでは、</p>
+            <ul>
+              <li>日本時間での試合開始時刻</li>
+              <li>「あと何時間で試合開始」</li>
+              <li>トーナメント表</li>
+              <li>チームロスター</li>
+              <li>試合結果</li>
+            </ul>
+            <p>など、大会に関する情報をまとめて確認できます。</p>
+            <p>大会を観戦する方には欠かせないサイトです。</p>
+
+            <h4 class="owcs-fun-subhead">③ OWCS公式サイトを見る</h4>
+            <p>
+              <a href="https://esports.overwatch.com/en-us/schedule" target="_blank" rel="noopener">OWCS公式サイト</a>
+              では、NA・EMEAの年間スケジュールや各大会の日程、対戦カードを確認できます。
+              そこからAsiaのスケジュールも大体予想可能です。
+            </p>
+
+            <p>
+              OW KITSUNE GUIDEでは、公式配信・公式X・Liquipedia・OWCS公式サイト・
+              その他便利なツールなど、観戦に役立つリンクを1ページにまとめています。
+            </p>
+            <p>
+              👉
+              <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">
+                OWCS観戦に役立つリンク集
+              </a>
+            </p>
+
+            <p class="owcs-sitetext-tip">
+              <b>まとめ:</b>
+              初めてOWCSを見るなら、「公式Xで今日の試合を確認 → 日本語配信を見る →
+              気になった選手を調べる」という流れがおすすめです。
+              これだけでも、初心者でも迷わずOWCS観戦を楽しめるようになります。
             </p>
           `
         )}
