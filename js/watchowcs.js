@@ -299,7 +299,7 @@ function loadWatchOwcsView() {
               roster choices.
             </p>
             <p>
-              Some events use hero bans, so “what’s banned / what comps they bring”
+              OWCS uses hero bans, so “what heroes you play” and “what comps you run”
               can swing whole series.
             </p>
             <p>
@@ -323,9 +323,10 @@ function loadWatchOwcsView() {
             </p>
             <p>
               One recent scene that stuck with fans: in a high-stakes match for a world
-              event berth, T1’s DONGHAK was booped off the map by ZETA DIVISION’s
-              Viol2t and lost D.Va’s mech. On the way to respawn he scratched his
-              head — a raw, human moment of frustration that a lot of people remember.
+              event berth, T1’s DONGHAK was booped by ZETA DIVISION’s Viol2t and hit by
+              a Neon Junction train, losing D.Va’s mech. On the way to respawn he
+              scratched his head — a raw, human moment of frustration that a lot of
+              people remember.
             </p>
             <p>
               Seeing expressions and stories beyond pure gameplay makes “I want to root
@@ -345,16 +346,13 @@ function loadWatchOwcsView() {
               Knowing that context changes how every fight — and every result — feels.
             </p>
             <p>
-              A team that just missed worlds last year trying again, former teammates
-              facing each other as rivals… that kind of plot is everywhere.
-            </p>
-            <p>
               Once you’ve felt their grind, losses, and hunger to win, you’ll often
               want both sides to pull it off — just like any sport where you pick
               favorites.
             </p>
             <p>
-              OW KITSUNE GUIDE covers player profiles, teams, and past results too.
+              <a href="https://liquipedia.net/overwatch/Main_Page" target="_blank" rel="noopener">Liquipedia</a>
+              covers player profiles, teams, and past results too.
               Even a little prep before a series — “they were on another roster last
               year,” “this team missed worlds by a hair” — makes watch night better.
             </p>
@@ -422,7 +420,7 @@ function loadWatchOwcsView() {
               さまざまな作戦を練っています。
             </p>
             <p>
-              大会によってはヒーローBANルールが採用されることもあり、
+              OWCSではヒーローBANルールが採用されており、
               「どのヒーローを使うか」「どんな構成で挑むか」が勝敗を大きく左右します。
             </p>
             <p>
@@ -446,7 +444,7 @@ function loadWatchOwcsView() {
             </p>
             <p>
               例えば、最近の印象的なシーンでは、世界大会出場を懸けた重要な試合で、
-              T1のDONGHAK選手がZETA DIVISIONのViol2t選手のブープによってマップ外へ押し出され、
+              T1のDONGHAK選手がZETA DIVISIONのViol2t選手のブープによってNEON JUNCTIONの電車にひかれてしまい、
               D.Vaのメックを失ってしまう場面がありました。
               リスポーンへ戻る途中、思わず頭をかく仕草を見せたその姿は、
               悔しさと人間らしさが伝わるワンシーンとして、多くのファンの印象に残っています。
@@ -469,10 +467,6 @@ function loadWatchOwcsView() {
               こうした背景を知っているだけで、一つひとつのプレイや勝敗の重みがまったく違って見えてきます。
             </p>
             <p>
-              例えば、あと一歩で世界大会出場を逃したチームが翌シーズンに再挑戦したり、
-              元チームメイト同士がライバルとして対戦したりすることもあります。
-            </p>
-            <p>
               選手たちが積み重ねてきた努力や悔しさ、そして勝利への思いを知ると、
               「どちらにも勝ってほしい」と感じるような試合も少なくありません。
             </p>
@@ -481,7 +475,8 @@ function loadWatchOwcsView() {
               OWCSでも自然と「推し」の選手やチームができていきます。
             </p>
             <p>
-              OW KITSUNE GUIDEでは、各選手のプロフィールや所属チーム、過去の戦績なども紹介しています。
+              <a href="https://liquipedia.net/overwatch/Main_Page" target="_blank" rel="noopener">リキペディア</a>
+              というサイトでは、各選手のプロフィールや所属チーム、過去の戦績なども紹介しています。
               試合を見る前に少しだけ予習しておくだけでも、
               「この選手が去年は別のチームにいたんだ」「このチームは去年あと一歩で世界大会を逃したんだ」
               といった背景が分かり、観戦がより楽しくなります。
