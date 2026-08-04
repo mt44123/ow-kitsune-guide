@@ -190,17 +190,11 @@ function loadWatchOwcsView() {
               Real HTML text (not a flat image), so browser translate tools can usually
               read the labels. Site Text (EN / JP / both) also switches this map.
             </p>
-            <p>
-              Colors follow this site’s region tokens: KR / JP / Pacific, China, NA, EMEA.
-            </p>
           `,
           `
             <p>
               画像ではなくHTMLのテキストなので、ブラウザの翻訳機能でもラベルを
               読み取れることが多くあります。Site Text（英 / 日 / 併記）でも切替できます。
-            </p>
-            <p>
-              色はこのサイトの地域カラー（KR / JP / Pacific、China、NA、EMEA）に合わせています。
             </p>
           `
         )}
