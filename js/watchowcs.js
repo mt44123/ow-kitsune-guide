@@ -624,8 +624,8 @@ function loadWatchOwcsView() {
               >
               uploads POV videos of standout players to YouTube, so you can still enjoy
               many series from a player cam after in-client replays die.
-              Some LAN replays aren’t viewable on the public client either — those
-              uploads become especially valuable.
+              World event replay codes especially aren’t available for the public
+              client — so those POV uploads are a valuable resource.
             </p>
 
             <h4 class="owcs-fun-subhead">First, find your way to enjoy it</h4>
@@ -761,8 +761,7 @@ function loadWatchOwcsView() {
               >
               さんが、活躍した選手のPOV動画をYouTubeへ公開してくれているため、
               ゲーム内でリプレイが見られなくなった後でも、多くの試合を選手視点で楽しめます。
-              LAN大会の一部リプレイは一般クライアントでは視聴できないため、
-              このようなPOV動画は貴重な資料にもなっています。
+              特に世界大会のリプレイコードは一般人は視聴できないため、このようなPOV動画は貴重な資料にもなっています。
             </p>
 
             <h4 class="owcs-fun-subhead">まずは、自分なりの楽しみ方を見つけよう</h4>
