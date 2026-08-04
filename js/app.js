@@ -526,8 +526,32 @@ let filtersExpanded =
   localStorage.getItem("filtersExpanded") !== "false";
 
 // SHOW by default; HIDE when user chose hide in settings or via Hide button.
-let guideNavVisible =
-  localStorage.getItem("guideNavVisible") !== "hide";
+// Treat any of "hide" / "0" / "false" as hidden (and clean legacy keys).
+function readGuideNavVisible_() {
+  // Drop keys from the old fold / howto-hide UX so leftover values never confuse state.
+  try {
+    localStorage.removeItem("guideNavExpanded");
+    localStorage.removeItem("hideHowtoNav");
+  } catch (_) {
+    /* ignore */
+  }
+
+  const raw = String(localStorage.getItem("guideNavVisible") || "show")
+    .trim()
+    .toLowerCase();
+
+  return raw !== "hide" && raw !== "0" && raw !== "false";
+}
+
+let guideNavVisible = readGuideNavVisible_();
+
+function getGuideNavRow_() {
+  return guideNavRow || document.getElementById("guideNavRow");
+}
+
+function getGuideNavSelect_() {
+  return guideNavSelect || document.getElementById("guideNavSelect");
+}
 
 function getCurrentFilterLabel_() {
   const viewLabel = titles[currentView] || currentView.toUpperCase();
@@ -557,17 +581,29 @@ function applyFiltersExpanded_() {
 function setGuideNavVisible_(visible, { syncSelect = true } = {}) {
   guideNavVisible = Boolean(visible);
 
-  localStorage.setItem(
-    "guideNavVisible",
-    guideNavVisible ? "show" : "hide"
-  );
-
-  if (guideNavRow) {
-    guideNavRow.hidden = !guideNavVisible;
+  try {
+    localStorage.setItem(
+      "guideNavVisible",
+      guideNavVisible ? "show" : "hide"
+    );
+  } catch (_) {
+    /* private mode etc. */
   }
 
-  if (syncSelect && guideNavSelect) {
-    guideNavSelect.value = guideNavVisible ? "show" : "hide";
+  const row = getGuideNavRow_();
+
+  if (row) {
+    row.hidden = !guideNavVisible;
+    row.classList.toggle("is-hidden", !guideNavVisible);
+    // Inline style as a hard fallback against display:flex rules
+    row.style.display = guideNavVisible ? "" : "none";
+  }
+
+  if (syncSelect) {
+    const select = getGuideNavSelect_();
+    if (select) {
+      select.value = guideNavVisible ? "show" : "hide";
+    }
   }
 }
 

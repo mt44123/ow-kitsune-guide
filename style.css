@@ -937,8 +937,10 @@ flex:0 0 auto;
   max-width:100%;
 }
 
-.main-nav-howto[hidden]{
-  display:none;
+/* display:flex must lose to hide — use !important (author flex can beat bare [hidden]) */
+.main-nav-howto[hidden],
+.main-nav-howto.is-hidden{
+  display:none !important;
 }
 
 .nav button.howto-nav-button{
