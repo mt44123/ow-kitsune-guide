@@ -546,121 +546,82 @@ function buildOwcsSeasonFlowDiagram_(lang) {
   const L = lang === "jp" ? OWCS_FLOW_COPY_JP_ : OWCS_FLOW_COPY_EN_;
   const docLang = lang === "jp" ? "ja" : "en";
 
-  const arrow = `<span class="owcs-flow-arrow" aria-hidden="true">→</span>`;
-
-  const tierHead = (num, title, note) => `
-    <div class="owcs-flow-tier-head">
-      <span class="owcs-flow-tier-num">TIER ${num}</span>
-      <span class="owcs-flow-tier-title">${title}</span>
-      ${note ? `<span class="owcs-flow-tier-note">${note}</span>` : ""}
-    </div>
-  `;
+  const arrowH = `<span class="owcs-flow-arrow owcs-flow-arrow-h" aria-hidden="true">→</span>`;
+  const arrowV = `<span class="owcs-flow-arrow owcs-flow-arrow-v" aria-hidden="true">↓</span>`;
 
   const box = (html, extraClass = "") =>
     `<div class="owcs-flow-box ${extraClass}">${html}</div>`;
 
-  const subTrack = (regionKey, label, openText, offlineText) => `
+  const pipe = items => {
+    const parts = [];
+    items.forEach((item, i) => {
+      parts.push(item);
+      if (i < items.length - 1) {
+        parts.push(arrowH);
+        parts.push(arrowV);
+      }
+    });
+    return `<div class="owcs-flow-pipeline">${parts.join("")}</div>`;
+  };
+
+  const asiaSub = (regionKey, label, openText, regionalText) => `
     <div class="owcs-flow-subtrack owcs-flow-region-${regionKey}">
       <div class="owcs-flow-sublabel">${label}</div>
-      <div class="owcs-flow-pipeline">
-        ${box(openText, "owcs-flow-box-open")}
-        ${arrow}
-        ${box(L.promo, "owcs-flow-box-soft")}
-        ${arrow}
-        ${box(offlineText, "owcs-flow-box-offline")}
+      ${pipe([
+        box(openText, "owcs-flow-box-open"),
+        box(L.promo, "owcs-flow-box-soft"),
+        box(regionalText, "owcs-flow-box-offline"),
+        box(L.asiaChamp, "owcs-flow-box-asia-champ"),
+        box(L.world, "owcs-flow-box-intl")
+      ])}
+    </div>
+  `;
+
+  const regionRow = (blockClass, regionLabel, boxes) => `
+    <div class="owcs-flow-block ${blockClass}">
+      <div class="owcs-flow-region-bar">
+        <span>${regionLabel}</span>
+      </div>
+      <div class="owcs-flow-region-body">
+        ${pipe(boxes)}
       </div>
     </div>
   `;
 
   return `
     <div class="owcs-flow" lang="${docLang}">
-      <div class="owcs-flow-header" role="list">
-        ${tierHead(4, L.t4Title, L.t4Note)}
-        ${tierHead(3, L.t3Title, L.t3Note)}
-        ${tierHead(2, L.t2Title, L.t2Note)}
-        ${tierHead(1, L.t1Title, L.t1Note)}
-      </div>
-
       <div class="owcs-flow-block owcs-flow-asia">
         <div class="owcs-flow-region-bar">
           <span>${L.asia}</span>
         </div>
         <div class="owcs-flow-region-body">
           <div class="owcs-flow-asia-tracks">
-            ${subTrack("kr", L.kr, L.krOpen, L.krOffline)}
-            ${subTrack("jp", L.jp, L.jpOpen, L.jpOffline)}
-            ${subTrack("pac", L.pac, L.pacOpen, L.pacOffline)}
-          </div>
-          <div class="owcs-flow-merge" aria-hidden="true">↘ ↙</div>
-          <div class="owcs-flow-asia-late">
-            ${box(L.asiaChamp, "owcs-flow-box-asia-champ")}
-            ${arrow}
-            ${box(L.intlShort, "owcs-flow-box-intl")}
+            ${asiaSub("kr", L.kr, L.krOpen, L.krRegional)}
+            ${asiaSub("jp", L.jp, L.jpOpen, L.jpRegional)}
+            ${asiaSub("pac", L.pac, L.pacOpen, L.pacRegional)}
           </div>
         </div>
       </div>
 
-      <div class="owcs-flow-block owcs-flow-china">
-        <div class="owcs-flow-region-bar">
-          <span>${L.china}</span>
-        </div>
-        <div class="owcs-flow-region-body">
-          <div class="owcs-flow-pipeline owcs-flow-pipeline-single">
-            ${box(L.cnOpen, "owcs-flow-box-open")}
-            ${arrow}
-            ${box(L.cnMain, "owcs-flow-box-offline")}
-            ${arrow}
-            ${box(L.top2Intl, "owcs-flow-box-soft")}
-            ${arrow}
-            ${box(L.intlShort, "owcs-flow-box-intl")}
-          </div>
-        </div>
-      </div>
+      ${regionRow("owcs-flow-china", L.china, [
+        box(L.cnOpen, "owcs-flow-box-open"),
+        box(L.cnMain, "owcs-flow-box-offline"),
+        box(L.world, "owcs-flow-box-intl")
+      ])}
 
-      <div class="owcs-flow-block owcs-flow-na">
-        <div class="owcs-flow-region-bar">
-          <span>${L.na}</span>
-        </div>
-        <div class="owcs-flow-region-body">
-          <div class="owcs-flow-pipeline owcs-flow-pipeline-single">
-            ${box(L.faceit, "owcs-flow-box-open")}
-            ${arrow}
-            ${box(L.promo, "owcs-flow-box-soft")}
-            ${arrow}
-            ${box(L.naMain, "owcs-flow-box-offline")}
-            ${arrow}
-            ${box(L.top2Intl, "owcs-flow-box-soft")}
-            ${arrow}
-            ${box(L.intlShort, "owcs-flow-box-intl")}
-          </div>
-        </div>
-      </div>
+      ${regionRow("owcs-flow-na", L.na, [
+        box(L.faceit, "owcs-flow-box-open"),
+        box(L.promo, "owcs-flow-box-soft"),
+        box(L.naMain, "owcs-flow-box-offline"),
+        box(L.world, "owcs-flow-box-intl")
+      ])}
 
-      <div class="owcs-flow-block owcs-flow-emea">
-        <div class="owcs-flow-region-bar">
-          <span>${L.emea}</span>
-        </div>
-        <div class="owcs-flow-region-body">
-          <div class="owcs-flow-pipeline owcs-flow-pipeline-single">
-            ${box(L.faceit, "owcs-flow-box-open")}
-            ${arrow}
-            ${box(L.promo, "owcs-flow-box-soft")}
-            ${arrow}
-            ${box(L.emeaMain, "owcs-flow-box-offline")}
-            ${arrow}
-            ${box(L.top2Intl, "owcs-flow-box-soft")}
-            ${arrow}
-            ${box(L.intlShort, "owcs-flow-box-intl")}
-          </div>
-        </div>
-      </div>
-
-      <div class="owcs-flow-footer">
-        <div class="owcs-flow-box owcs-flow-box-intl owcs-flow-box-intl-wide">
-          <strong>${L.intlFull}</strong>
-          <span class="owcs-flow-footer-events">${L.intlEvents}</span>
-        </div>
-      </div>
+      ${regionRow("owcs-flow-emea", L.emea, [
+        box(L.faceit, "owcs-flow-box-open"),
+        box(L.promo, "owcs-flow-box-soft"),
+        box(L.emeaMain, "owcs-flow-box-offline"),
+        box(L.world, "owcs-flow-box-intl")
+      ])}
     </div>
   `;
 }
@@ -670,34 +631,24 @@ const OWCS_FLOW_COPY_EN_ = {
   china: "China",
   na: "NA",
   emea: "EMEA",
-  kr: "KR",
-  jp: "JP",
+  kr: "Korea",
+  jp: "Japan",
   pac: "Pacific",
-  t4Title: "Open path",
-  t4Note: "Online open quals + promo / relegation",
-  t3Title: "Regional",
-  t3Note: "Regional championships",
-  t2Title: "Asia stage",
-  t2Note: "Asia Championship (offline)",
-  t1Title: "International",
-  t1Note: "Worldwide LAN events",
-  promo: "Promotion / relegation",
-  krOpen: "Korea Open (online)",
-  jpOpen: "Japan Open (online)",
-  pacOpen: "Pacific Open (online)",
-  krOffline: "Korea regional (offline)",
-  jpOffline: "Japan regional (offline)",
-  pacOffline: "Pacific regional (offline)",
-  asiaChamp: "OWCS Asia Championship",
-  cnOpen: "OWCS China Open",
-  cnMain: "China regular + regional playoffs",
-  faceit: "FACEIT League<br>Open · Advanced · Expert · Master",
-  naMain: "NA regional (round robin / playoffs)",
-  emeaMain: "EMEA regional (round robin / playoffs)",
-  top2Intl: "Top teams → intl",
-  intlShort: "International",
-  intlFull: "OWCS International events",
-  intlEvents: "Champions Clash · Midseason Championship · World Finals"
+  promo: "Promo /<br>relegation",
+  krOpen: "Korea<br>Open Quals",
+  jpOpen: "Japan<br>Open Quals",
+  pacOpen: "Pacific<br>Open Quals",
+  krRegional: "OWCS Korea<br>(offline)",
+  jpRegional: "OWCS Japan",
+  pacRegional: "OWCS Pacific",
+  asiaChamp: "OWCS Asia<br>(offline)",
+  cnOpen: "China<br>Open Quals",
+  cnMain: "OWCS China",
+  faceit: "FACEIT League<br>Open · Adv<br>Expert · Master",
+  naMain: "OWCS NA",
+  emeaMain: "OWCS EMEA",
+  world:
+    "OWCS World Events<br>(offline)<br>Champions Clash · Midseason Championship · World Finals"
 };
 
 const OWCS_FLOW_COPY_JP_ = {
@@ -705,34 +656,24 @@ const OWCS_FLOW_COPY_JP_ = {
   china: "China",
   na: "NA",
   emea: "EMEA",
-  kr: "KR",
-  jp: "JP",
+  kr: "Korea",
+  jp: "Japan",
   pac: "Pacific",
-  t4Title: "オープン枠",
-  t4Note: "オンラインオープン予選 + 昇格/降格",
-  t3Title: "地域大会",
-  t3Note: "地域チャンピオンシップ",
-  t2Title: "アジア大会",
-  t2Note: "アジア選手権（オフライン）",
-  t1Title: "国際大会",
-  t1Note: "世界大会（オフライン）",
-  promo: "昇格 / 降格",
-  krOpen: "韓国オープン（オンライン）",
-  jpOpen: "日本オープン（オンライン）",
-  pacOpen: "パシフィックオープン（オンライン）",
-  krOffline: "韓国地域大会（オフライン）",
-  jpOffline: "日本地域大会（オフライン）",
-  pacOffline: "パシフィック地域大会（オフライン）",
-  asiaChamp: "OWCS Asia Championship",
-  cnOpen: "OWCS China Open",
-  cnMain: "中国レギュラー + 地域プレーオフ",
-  faceit: "FACEIT League<br>Open · Advanced · Expert · Master",
-  naMain: "NA地域大会（総当り / プレーオフ）",
-  emeaMain: "EMEA地域大会（総当り / プレーオフ）",
-  top2Intl: "上位 → 国際大会",
-  intlShort: "国際大会",
-  intlFull: "OWCS 国際大会",
-  intlEvents: "Champions Clash · Midseason Championship · World Finals"
+  promo: "昇格戦・<br>降格戦",
+  krOpen: "韓国<br>オープン予選",
+  jpOpen: "日本<br>オープン予選",
+  pacOpen: "パシフィック<br>オープン予選",
+  krRegional: "OWCS Korea<br>（オフライン）",
+  jpRegional: "OWCS Japan",
+  pacRegional: "OWCS Pacific",
+  asiaChamp: "OWCS Asia<br>（オフライン）",
+  cnOpen: "中国<br>オープン予選",
+  cnMain: "OWCS China",
+  faceit: "FACEIT League<br>Open · Adv<br>Expert · Master",
+  naMain: "OWCS NA",
+  emeaMain: "OWCS EMEA",
+  world:
+    "OWCS 世界大会<br>（オフライン）<br>Champions Clash · Midseason Championship · World Finals"
 };
 
 function openOwcsLiveFromGuide_() {
