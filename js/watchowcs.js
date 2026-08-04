@@ -61,6 +61,10 @@ function loadWatchOwcsView() {
               This page covers OWCS basics and simple ways beginners can enjoy watching —
               without needing pro-level knowledge first.
             </p>
+            <p class="owcs-sitetext-tip">
+              <b>Tip:</b> Open the ⚙ menu (top right) and set <b>Site Text</b> to
+              English or Japanese only — it’s much easier to read.
+            </p>
           `,
           `
             <p>
@@ -72,6 +76,9 @@ function loadWatchOwcsView() {
             </p>
             <p>
               そんな方のために、このページではOWCSの基本から、初心者でも楽しめる観戦方法までを分かりやすく紹介します。
+            </p>
+            <p class="owcs-sitetext-tip">
+              <b>右上の⚙マークから、Site Text設定を英/日どちらかに切り替えると読みやすいです。</b>
             </p>
           `
         )}
@@ -121,7 +128,7 @@ function loadWatchOwcsView() {
             </ul>
             <p>
               全部追う必要はありません。最初は「推しの地域 + 世界大会」で十分です。<br>
-              ちなみに、Japan、Korea、Asia、世界大会には日本語実況がついている為、日本人にとってわかりやすいです！
+              ちなみに、Japan、Korea、Asia、世界大会には日本語実況がついている為、日本人向けでわかりやすいです！
             </p>
           `
         )}
@@ -135,14 +142,14 @@ function loadWatchOwcsView() {
           `
             <p>Here’s how the season flows:</p>
             <ol>
-              <li><b>Open Qualifier</b> (prelims)</li>
-              <li><b>Promotion / Relegation</b></li>
-              <li><b>Regular Season</b> (round robin)</li>
+              <li>Open Qualifier - (prelims)</li>
+              <li>Promotion / Relegation</li>
+              <li>Regular Season - (round robin)</li>
               <li>
-                <b>Regional Playoffs</b> (tournament)<br>
+                Regional Playoffs - (tournament)<br>
                 (In Asia, there is also an Asia stage.)
               </li>
-              <li><b>World events</b></li>
+              <li>World events</li>
             </ol>
             <p>
               Exact formats differ a little by region, but this cycle happens about
@@ -154,14 +161,14 @@ function loadWatchOwcsView() {
           `
             <p>大会の流れです。</p>
             <ol>
-              <li><b>予選</b> (Open Qualifier)</li>
-              <li><b>昇格戦・降格戦</b> (Promotion/Relegation)</li>
-              <li><b>総当たり戦</b> (Regular Season)</li>
+              <li>予選 - (Open Qualifier)</li>
+              <li>昇格戦・降格戦 - (Promotion/Relegation)</li>
+              <li>総当たり戦 - (Regular Season)</li>
               <li>
-                <b>トーナメント戦</b> (Regional Playoffs)<br>
+                トーナメント戦 - (Regional Playoffs)<br>
                 （アジア地域は、アジア大会もあります）
               </li>
-              <li><b>世界大会</b></li>
+              <li>世界大会</li>
             </ol>
             <p>
               地域ごとに形式は少し違いますが、これが年3～4回あります。<br>
@@ -202,16 +209,17 @@ function loadWatchOwcsView() {
               </p>
               <p>
                 Right now the Asia power balance is roughly
-                <b>Korea &gt; Pacific / Japan</b>. Under the flowchart-style season
-                format, Korean teams advance to world events about
-                <b>99%</b> of the time.
+                Korea &gt; Pacific / Japan. Under the flowchart-style season format,
+                Korean teams advance to world events about 99% of the time.
               </p>
               <p>
                 Depending on the event format, though, Korea may use a separate
-                path — and then Japan can appear at world events more often. For
-                example, at the summer
-                <b>Midseason Championship (EWC)</b>, the #1 teams from Japan and
-                Pacific can qualify directly for that international field.
+                path — and then Japan can appear at world events more often.
+              </p>
+              <p>
+                For example, at the summer Midseason Championship (EWC), the #1
+                teams from Japan and Pacific can qualify directly for that world
+                event.
               </p>
             </div>
           `,
@@ -225,17 +233,16 @@ function loadWatchOwcsView() {
                 <b>A:</b> 出場している時もあります。
               </p>
               <p>
-                現状、アジア地域のパワーバランスは
-                <b>韓国 &gt; パシフィック・日本</b>です。
-                フロー図形式のシーズンでは、約
-                <b>99%</b>の確率で韓国チームが世界大会へ進出します。
+                現状、アジア地域のパワーバランスは 韓国 &gt; パシフィック・日本です。
+                フロー図形式のシーズンでは、約 99%の確率で韓国チームが世界大会へ進出します。
               </p>
               <p>
                 ただ、大会形式によっては韓国が別枠扱いになるため、
                 日本が世界大会に出場していることもあります。
-                たとえば夏季の
-                <b>Midseason Championship（EWC）</b>では、
-                日本・パシフィック内の1位チームが、直接その国際大会へ進出できます。
+              </p>
+              <p>
+                たとえば夏季の Midseason Championship（EWC）では、
+                日本・パシフィック内の1位チームが、直接その世界大会へ進出できます。
               </p>
             </div>
           `

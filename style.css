@@ -3736,6 +3736,23 @@ color:var(--text-main);
   background:color-mix(in srgb, var(--accent) 10%, var(--bg-main));
 }
 
+.faq-card .owcs-sitetext-tip{
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:var(--radius-md);
+  border:1px solid color-mix(in srgb, var(--accent) 50%, var(--border));
+  background:color-mix(in srgb, var(--accent) 12%, var(--bg-main));
+  color:var(--text-main);
+  font-size:.95rem;
+  font-weight:600;
+  line-height:1.7;
+}
+
+.faq-card .owcs-sitetext-tip b{
+  font-weight:800;
+  color:var(--text-main);
+}
+
 /* =========================================================
    14c. OWCS SEASON FLOW (WATCH OWCS)
    ========================================================= */
