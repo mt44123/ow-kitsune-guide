@@ -624,6 +624,21 @@ function buildOwcsSeasonFlowDiagram_(lang) {
         ${dCell(6, 5, owcsFlowBox_(L.promo, L.promoFaceitNote, "owcs-flow-box-soft"))}
         ${dArrow(6, 6)}
         ${dCell(6, 7, owcsFlowBox_(L.emeaMain, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-emea"), "", 3)}
+
+        ${dCell(7, 1, `<span>${L.faceitBar}</span>`, "owcs-flow-bar-cell owcs-flow-faceit-bar")}
+        ${dCell(7, 2, `<span class="owcs-flow-sublabel owcs-flow-sublabel-faceit">${L.faceitLabel}</span>`, "owcs-flow-label-cell owcs-flow-region-faceit")}
+        ${dCell(
+          7,
+          3,
+          `
+            <div class="owcs-flow-box owcs-flow-box-faceit-info">
+              <span class="owcs-flow-box-title">${L.faceitInfoTitle}</span>
+              <span class="owcs-flow-box-note">${L.faceitInfoBody}</span>
+            </div>
+          `,
+          "owcs-flow-faceit-span",
+          9
+        )}
       </div>
     </div>
   `;
@@ -700,6 +715,17 @@ function buildOwcsSeasonFlowDiagram_(lang) {
           ])}
         </div>
       </div>
+
+      <div class="owcs-flow-block owcs-flow-faceit">
+        <div class="owcs-flow-region-bar"><span>${L.faceitBar}</span></div>
+        <div class="owcs-flow-region-body">
+          <div class="owcs-flow-sublabel owcs-flow-sublabel-faceit">${L.faceitLabel}</div>
+          <div class="owcs-flow-box owcs-flow-box-faceit-info">
+            <span class="owcs-flow-box-title">${L.faceitInfoTitle}</span>
+            <span class="owcs-flow-box-note">${L.faceitInfoBody}</span>
+          </div>
+        </div>
+      </div>
     </div>
   `;
 
@@ -734,7 +760,13 @@ const OWCS_FLOW_COPY_EN_ = {
   asiaNote: "Top 2 advance",
   cnOpen: "China Open Quals",
   cnMain: "OWCS China",
-  faceit: "FACEIT League<br>Open · Adv · Expert · Master",
+  faceit: "FACEIT League<br>Master",
+  faceitBar: "FACEIT",
+  faceitLabel: "FACEIT",
+  faceitInfoTitle:
+    "FACEIT League NA · EMEA · Oceania · South America<br>(Open → Advanced → Expert → Master)",
+  faceitInfoBody:
+    "A second-division style pathway that runs alongside OWCS.<br>Like OWCS, each tier runs round robin → playoffs every season.<br>※ Not present in the Asia region.",
   naMain: "OWCS NA",
   emeaMain: "OWCS EMEA",
   worldTitle: "OWCS World Events<br>(offline)",
@@ -764,7 +796,13 @@ const OWCS_FLOW_COPY_JP_ = {
   asiaNote: "上位2チームが進出",
   cnOpen: "中国オープン予選",
   cnMain: "OWCS China",
-  faceit: "FACEIT League<br>Open · Adv · Expert · Master",
+  faceit: "FACEIT League<br>Master",
+  faceitBar: "FACEIT",
+  faceitLabel: "FACEIT",
+  faceitInfoTitle:
+    "FACEIT League NA・EMEA・Oceania・SouthAmerica<br>(Open→Advanced→Expert→Master）",
+  faceitInfoBody:
+    "2部リーグのような位置付けで、OWCSと同時進行されています。<br>OWCS同様、シーズン毎に各階級の総当たり戦→トーナメント戦が行われています。<br>※アジア地域にはありません。",
   naMain: "OWCS NA",
   emeaMain: "OWCS EMEA",
   worldTitle: "OWCS 世界大会<br>（オフライン）",

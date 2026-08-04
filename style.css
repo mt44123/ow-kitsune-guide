@@ -3807,7 +3807,9 @@ body:not(.light-theme) .owcs-flow{
     minmax(0, 1.15fr)
     20px
     minmax(0, 1.25fr);
-  grid-template-rows:repeat(6, minmax(var(--flow-box-h), auto));
+  grid-template-rows:
+    repeat(6, minmax(var(--flow-box-h), auto))
+    minmax(120px, auto);
   gap:8px 0;
   align-items:stretch;
   column-gap:5px;
@@ -3889,6 +3891,12 @@ body.light-theme .owcs-flow-region-pac .owcs-flow-sublabel{
   background:color-mix(in srgb, var(--region-emea) 14%, transparent);
 }
 
+.owcs-flow-sublabel-faceit{
+  color:var(--accent);
+  border-color:color-mix(in srgb, var(--accent) 55%, var(--flow-paper-edge));
+  background:color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
 .owcs-flow-bar-cell{
   display:flex;
   align-items:center;
@@ -3945,6 +3953,15 @@ body.light-theme .owcs-flow-region-pac .owcs-flow-sublabel{
 
 body:not(.light-theme) .owcs-flow-emea-bar{
   color:#0a1a1a;
+}
+
+.owcs-flow-faceit-bar{
+  background:linear-gradient(
+    180deg,
+    color-mix(in srgb, white 78%, var(--accent)),
+    var(--accent)
+  );
+  color:#fff;
 }
 
 .owcs-flow-box{
@@ -4072,8 +4089,34 @@ body:not(.light-theme) .owcs-flow-box-owcs-world{
 }
 
 .owcs-flow-asia-span > .owcs-flow-box,
-.owcs-flow-world-span > .owcs-flow-box{
+.owcs-flow-world-span > .owcs-flow-box,
+.owcs-flow-faceit-span > .owcs-flow-box{
   min-height:100%;
+}
+
+.owcs-flow-box-faceit-info{
+  border-left:3px solid var(--accent);
+  background:color-mix(in srgb, var(--accent) 10%, white);
+  gap:8px;
+  padding:12px 14px;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.owcs-flow-box-faceit-info .owcs-flow-box-title{
+  font-size:13px;
+  line-height:1.4;
+}
+
+.owcs-flow-box-faceit-info .owcs-flow-box-note{
+  font-size:12px;
+  line-height:1.5;
+  color:var(--flow-ink-soft);
+}
+
+body:not(.light-theme) .owcs-flow-box-faceit-info{
+  background:color-mix(in srgb, var(--accent) 14%, var(--bg-main));
 }
 
 .owcs-flow-pipeline{
@@ -4156,6 +4199,23 @@ body:not(.light-theme) .owcs-flow-box-owcs-world{
   );
   color:#103030;
   text-shadow:none;
+}
+
+.owcs-flow-faceit .owcs-flow-region-bar{
+  background:linear-gradient(
+    180deg,
+    color-mix(in srgb, white 78%, var(--accent)),
+    var(--accent)
+  );
+  color:#fff;
+}
+
+.owcs-flow-faceit .owcs-flow-region-body{
+  gap:8px;
+}
+
+.owcs-flow-faceit .owcs-flow-sublabel-faceit{
+  width:fit-content;
 }
 
 .owcs-flow-region-body{
