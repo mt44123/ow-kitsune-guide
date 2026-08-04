@@ -884,7 +884,22 @@ function loadWatchOwcsView() {
             <p>
               OWCS runs worldwide, so “when’s the next series?” can feel cloudy.
             </p>
-            <p>Here are three easy ways to check match times.</p>
+            <p>
+              As a rough rule of thumb for Overwatch pro windows
+              <b>(Japan Standard Time / JST)</b>, days often look like this
+              (exact times shift by stage — always double-check):
+            </p>
+            <ul>
+              <li><b>Japan</b> — Mon–Wed from about 18:00</li>
+              <li><b>Pacific</b> — Thu from about 20:00</li>
+              <li><b>Korea</b> — Fri from about 17:00; Sat–Sun from about 15:00</li>
+              <li><b>China</b> — Sat–Sun from about 18:00</li>
+              <li><b>EMEA / NA</b> — Sat–Sun from about 02:00 (late night into early morning)</li>
+            </ul>
+            <p>
+              So “start with Monday 18:00 for Japan” is a solid beginner habit.
+            </p>
+            <p>Here are three easy ways to confirm exact match times.</p>
 
             <h4 class="owcs-fun-subhead">① Official X (Twitter)</h4>
             <p>
@@ -954,14 +969,29 @@ function loadWatchOwcsView() {
               “check the schedule on official X → watch a Japanese cast → look up
               players you notice.” That loop alone is enough for beginners to enjoy
               OWCS without getting lost.<br>
-              <b>For starters — meet up Monday 6:00 PM (JST)!</b>
+              <b>For starters — meet up Monday 18:00 (JST)!</b>
             </p>
           `,
           `
             <p>
               OWCSは世界各地で大会が開催されるため、「次の試合はいつ？」と迷うこともあります。
             </p>
-            <p>ここでは、試合日程を確認するおすすめの方法を3つ紹介します。</p>
+            <p>
+              目安として、Overwatchの大会はだいたい次のような時間帯
+              <b>（日本時間）</b>で行われることが多いです
+              （ステージや大会によって前後します。必ず当日のスケジュールも確認してください）。
+            </p>
+            <ul>
+              <li><b>Japan</b> — 月〜水 18時〜</li>
+              <li><b>Pacific</b> — 木 20時〜</li>
+              <li><b>Korea</b> — 金 17時〜 / 土日 15時〜</li>
+              <li><b>China</b> — 土日 18時〜</li>
+              <li><b>EMEA / NA</b> — 土日 深夜2時〜</li>
+            </ul>
+            <p>
+              なので、「とりあえず月曜18時に日本枠を見る」から始めるのがおすすめです。
+            </p>
+            <p>より正確に確認するなら、次の3つが便利です。</p>
 
             <h4 class="owcs-fun-subhead">① 公式Xをチェックする</h4>
             <p>一番手軽なのが、OWCS公式X（旧Twitter）です。</p>
