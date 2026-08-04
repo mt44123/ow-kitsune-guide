@@ -159,10 +159,11 @@ function loadWatchOwcsView() {
               Overwatchの公式esports大会です。
             </p>
             <p>
-              Japan・Koreaなどが参加するAsiaをはじめ、China、NA、EMEAで大会が行われ、
+              日本が参加するAsiaをはじめ、China、NA、EMEAで大会が行われ、
               上位チームは世界大会へ進出します。
+            </p>
+            <p>
               全部追う必要はありません。最初は「推しの地域 + 世界大会」で十分です。
-              Japan、Korea、Asia、世界大会には日本語実況がついている為、日本人でもわかりやすいです。
             </p>
           `
         )}
@@ -526,10 +527,10 @@ function loadWatchOwcsView() {
         )}
         ${buildOwcsYearFlowHtml_()}
 
-        <details class="watchowcs-details">
-          <summary>
-            ${siteHeading_("See regional structure in more detail", "地域ごとの詳しい仕組みを見る")}
-          </summary>
+        <div class="watchowcs-region-detail" id="watchowcs-region-detail">
+          <h3 class="owcs-fun-subhead">
+            ${siteHeading_("Regional structure in more detail", "地域ごとの詳しい仕組み")}
+          </h3>
           ${siteText_(
             `
               <p>
@@ -568,7 +569,7 @@ function loadWatchOwcsView() {
               </div>
             `
           )}
-        </details>
+        </div>
       </section>
 
     </main>

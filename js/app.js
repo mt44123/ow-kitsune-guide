@@ -578,6 +578,31 @@ function applyFiltersExpanded_() {
       : `▶ Filters (${getCurrentFilterLabel_()})`;
 }
 
+function updateStickyHeaderScrollOffset_() {
+  const header = document.querySelector(".sticky-header");
+  if (!header) return;
+
+  // +12px breathing room so card titles clear the sticky nav
+  const offset = Math.ceil(header.getBoundingClientRect().height) + 12;
+  document.documentElement.style.setProperty(
+    "--sticky-header-offset",
+    `${Math.max(offset, 72)}px`
+  );
+}
+
+function initStickyHeaderScrollOffset_() {
+  updateStickyHeaderScrollOffset_();
+
+  const header = document.querySelector(".sticky-header");
+  if (header && typeof ResizeObserver !== "undefined") {
+    const ro = new ResizeObserver(() => updateStickyHeaderScrollOffset_());
+    ro.observe(header);
+  }
+
+  window.addEventListener("resize", updateStickyHeaderScrollOffset_);
+  window.addEventListener("orientationchange", updateStickyHeaderScrollOffset_);
+}
+
 function setGuideNavVisible_(visible, { syncSelect = true } = {}) {
   guideNavVisible = Boolean(visible);
 
@@ -605,6 +630,9 @@ function setGuideNavVisible_(visible, { syncSelect = true } = {}) {
       select.value = guideNavVisible ? "show" : "hide";
     }
   }
+
+  // Measure after guide row show/hide changes sticky height
+  requestAnimationFrame(updateStickyHeaderScrollOffset_);
 }
 
 function applyGuideNavVisibility_() {
@@ -977,6 +1005,7 @@ if (guideNavSelect) {
 }
 
 applyGuideNavVisibility_();
+initStickyHeaderScrollOffset_();
 applyGuideNavNudge_();
 
 guideNavSelect?.addEventListener("change", () => {

@@ -627,6 +627,15 @@ margin-top:0;
 
 html{
 overflow-x:hidden;
+  /* Sticky double-nav (LIVE… + guide row) — keep #anchors readable under header */
+  scroll-padding-top:var(--sticky-header-offset, 140px);
+}
+
+/* In-page anchors (TOC / jump links): leave room for .sticky-header */
+#app section[id],
+#app header[id],
+#app .card[id]{
+  scroll-margin-top:var(--sticky-header-offset, 140px);
 }
 
 img{
@@ -3945,12 +3954,16 @@ color:var(--text-main);
 .watchowcs-simple-flow{
   display:flex;
   flex-direction:column;
-  gap:8px;
+  align-items:flex-start;
+  gap:2px;
+  width:fit-content;
+  max-width:100%;
   margin:12px 0 18px;
-  padding:14px;
+  padding:12px 14px;
   border-radius:var(--radius-md);
   border:1px solid var(--border);
   background:var(--bg-light);
+  box-sizing:border-box;
 }
 
 .watchowcs-simple-step{
@@ -3978,9 +3991,19 @@ color:var(--text-main);
 }
 
 .watchowcs-simple-arrow{
+  width:28px;
+  flex:0 0 28px;
   text-align:center;
+  line-height:1.2;
   color:var(--text-muted);
   font-weight:700;
+  user-select:none;
+}
+
+.watchowcs-region-detail{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px dashed var(--border);
 }
 
 .watchowcs-details{
