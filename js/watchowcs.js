@@ -175,11 +175,14 @@ function loadWatchOwcsView() {
               local stages; the best advance to world events.
             </p>
             <p>
-              Regions include Asia (Japan, Korea, Pacific), China, NA, and EMEA.
-              You don’t need to follow every region — “your favorite region +
-              world events” is enough at first. Japan, Korea, Asia, and world
-              events have Japanese casts, so they’re easy to follow for Japanese
-              viewers.
+              Regions include Asia (with Japan), China, NA, and EMEA.
+            </p>
+            <p>
+              <a href="#watchowcs-structure">👉 How OWCS progresses (below)</a>
+            </p>
+            <p>
+              You don’t need to follow everything — starting with “your favorites’
+              matches” is enough.
             </p>
           `,
           `
@@ -218,8 +221,8 @@ function loadWatchOwcsView() {
               players to watch, and common comps/tactics.
             </p>
             <p>
-              Start interesting series from the beginning — casters walk through the
-              basics you need every time.
+              Start with any OWCS stream from the beginning —
+              pro casters walk through the basics you need every time.
             </p>
 
             <h3 class="owcs-fun-subhead">② World-class super plays</h3>
@@ -232,32 +235,40 @@ function loadWatchOwcsView() {
               their own.
             </p>
 
-            <h3 class="owcs-fun-subhead">③ Players and teams you’ll want to root for</h3>
+            <h3 class="owcs-fun-subhead">③ Find favorites you’ll root for</h3>
             <p>
               Watching OWCS naturally creates “I want to root for this player / team”
               moments — and that makes every series more fun.
             </p>
-            <p>
-              <b>Winner interviews after maps</b> (not for Japan and Pacific):
-              players revisit the series, talk about teammates, or discuss the meta —
-              sides of the game you don’t see only from kill feed.
-            </p>
-            <p>
-              <b>Player face cams</b> (offline / LAN events only):
-              grins after pop-offs, fist pumps in huge wins, frustration after tough
-              losses — emotions come through clearly.
-            </p>
-            <p>
-              <b>Player and team stories</b> sit behind every series:
-            </p>
-            <ul>
-              <li>long-time rivals meeting again</li>
-              <li>new rosters challenging champions</li>
-              <li>do-or-die series for a world-event spot</li>
+            <ul class="watchowcs-tip-list">
+              <li>
+                <span class="watchowcs-tip-label">Winner interviews after maps</span>
+                <span class="watchowcs-tip-note">(not for Japan and Pacific)</span>
+                <span class="watchowcs-tip-body">
+                  Players revisit the series, talk about teammates, or discuss the meta —
+                  sides of the game you don’t see only from kill feed.
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">Player face cams</span>
+                <span class="watchowcs-tip-note">(offline / LAN events only)</span>
+                <span class="watchowcs-tip-body">
+                  Grins after pop-offs, fist pumps in huge wins, frustration after tough
+                  losses — emotions come through clearly.
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">Player and team stories</span>
+                <span class="watchowcs-tip-body">
+                  Behind every series are long-time rivalries, underdog championship
+                  runs, and do-or-die series for a world-event spot.
+                </span>
+              </li>
             </ul>
             <p>
               Knowing the effort, heartbreak, and hunger for wins often leaves you
-              pulling for both sides. Casters also explain this context as the show goes on.
+              pulling for both sides. Pro casters also explain this context as the
+              show goes on.
             </p>
           `,
           `
@@ -445,52 +456,72 @@ function loadWatchOwcsView() {
         </h2>
         ${siteText_(
           `
-            <ul>
+            <ul class="watchowcs-tip-list">
               <li>
-                <b>Want Japanese casts</b> → Japanese streams for OWCS Japan, Korea,
-                and world events
+                <span class="watchowcs-tip-label">Want Japanese casts</span>
+                <span class="watchowcs-tip-body">
+                  Japanese streams for OWCS Japan, Korea, Asia, and world events
+                </span>
               </li>
               <li>
-                <b>Want top-tier matches</b> → OWCS Korea and world events
+                <span class="watchowcs-tip-label">Want top-tier matches</span>
+                <span class="watchowcs-tip-body">OWCS Korea and world events</span>
               </li>
               <li>
-                <b>Want highlight-heavy series</b> → even small skill gaps often finish
-                3–0. 3–2 close series are usually the most watchable
+                <span class="watchowcs-tip-label">Want highlight-heavy series</span>
+                <span class="watchowcs-tip-body">
+                  In OWCS, even small skill gaps often finish 3–0.
+                  Series that go to 3–2 are often the ones you can’t stop watching.
+                </span>
               </li>
               <li>
-                <b>Want to study pro play</b> → OWCS publishes
-                <a
-                  href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
-                  target="_blank"
-                  rel="noopener"
-                >replay codes</a>.
-                After codes expire,
-                <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
-                POV videos help a lot (world-event codes aren’t viewable for the public,
-                so those POVs are especially valuable)
+                <span class="watchowcs-tip-label">Want to study pro play</span>
+                <span class="watchowcs-tip-body">
+                  OWCS publishes
+                  <a
+                    href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
+                    target="_blank"
+                    rel="noopener"
+                  >replay codes</a>.
+                  After codes expire,
+                  <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
+                  POV videos help a lot
+                  (world-event codes aren’t viewable for the public, so those POVs are especially valuable).
+                </span>
               </li>
               <li>
-                <b>Official cams jump around too fast</b> →
-                <a
-                  href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
-                  target="_blank"
-                  rel="noopener"
-                >replay codes</a>
-                or
-                <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
+                <span class="watchowcs-tip-label">Official cams jump around too fast</span>
+                <span class="watchowcs-tip-body">
+                  OWCS publishes
+                  <a
+                    href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
+                    target="_blank"
+                    rel="noopener"
+                  >replay codes</a>.
+                  After codes expire,
+                  <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
+                  POV videos help a lot
+                  (world-event codes aren’t viewable for the public, so those POVs are especially valuable).
+                </span>
               </li>
               <li>
-                <b>Want more fun</b> → Twitch channel-point win predictions, or a
-                streamer watch party. For Japanese streams, KR &amp; JP are often covered by
-                <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>;
-                EMEA &amp; NA are usually covered almost every time by official caster
-                <a href="https://www.twitch.tv/hoshimi0000" target="_blank" rel="noopener">hoshimi</a>
+                <span class="watchowcs-tip-label">Want more fun</span>
+                <span class="watchowcs-tip-body">
+                  Join Twitch channel-point win predictions.<br>
+                  Watch with a streamer watch party — for Japanese streams, KR &amp; JP are
+                  often covered by
+                  <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>;
+                  EMEA &amp; NA are usually covered almost every time by official caster
+                  <a href="https://www.twitch.tv/hoshimi0000" target="_blank" rel="noopener">hoshimi</a>.
+                </span>
               </li>
               <li>
-                <b>Want your favorites’ games</b> → open a Liquipedia player or team
-                page — match schedules sit at the top. On this site, tap a player or
-                team name to open Liquipedia. Fan Discords also often share which
-                events that player is entering.
+                <span class="watchowcs-tip-label">Want your favorites’ games</span>
+                <span class="watchowcs-tip-body">
+                  Open a Liquipedia player or team page — match schedules sit at the top.
+                  On this site, tap a player or team name to open Liquipedia.<br>
+                  Fan Discords also often share which events that player is entering.
+                </span>
               </li>
             </ul>
             <p>First, find a way of watching that fits you.</p>
@@ -510,7 +541,7 @@ function loadWatchOwcsView() {
               <li>
                 <span class="watchowcs-tip-label">日本語実況で見たい</span>
                 <span class="watchowcs-tip-body">
-                  OWCS Japan、Korea、国際大会の日本語配信
+                  OWCS Japan、Korea、Asia、世界大会の日本語配信
                 </span>
               </li>
               <li>
@@ -635,8 +666,9 @@ function loadWatchOwcsView() {
         ${siteText_(
           `
             <p>
-              The year usually has about 3–4 stages, each feeding into a world event
-              window. Slots and rules differ slightly by world event.
+              The year usually has about 3 stages, each feeding into a world event.
+              In other words, there are about 3 chances each year to chase the #1 team
+              in the world. Slots and rules differ slightly by world event.
             </p>
             <h3 class="owcs-fun-subhead">Year overview (Jan → Dec)</h3>
           `,
@@ -714,20 +746,19 @@ function loadWatchOwcsView() {
             <ul class="watchowcs-tip-list">
               <li>
                 <span class="watchowcs-tip-label">
-                  <a href="/teams" onclick="openTeamsFromGuide_(); return false;">
-                    Find favorites — TEAMS / PLAYERS
+                  <a href="/playerlinks" onclick="openPlayerlinksFromGuide_(); return false;">
+                    Find channels &amp; socials — PLAYERS
                   </a>
                 </span>
                 <span class="watchowcs-tip-body">
-                  Browse rosters on
-                  <a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS</a>,
-                  open a player page, and pick a team or player you want to root for.
+                  Open a player page to check stream and SNS links
+                  (Twitch / CHZZK / SOOP / YouTube and more).
                 </span>
               </li>
               <li>
                 <span class="watchowcs-tip-label">
                   <a href="/goats" onclick="openFavoritesFromGuide_(); return false;">
-                    ★ MY GOATS — save favorites
+                    Register favorites to ★ MY GOATS
                   </a>
                 </span>
                 <span class="watchowcs-tip-body">
@@ -738,13 +769,24 @@ function loadWatchOwcsView() {
               <li>
                 <span class="watchowcs-tip-label">
                   <a href="/owcs" onclick="openOwcsLiveFromGuide_(); return false;">
-                    LIVE — watch streams now
+                    Watch favorites live — LIVE
                   </a>
                 </span>
                 <span class="watchowcs-tip-body">
                   Spot who’s live, including
                   <a href="/owcs" onclick="openOwcsLiveFromGuide_(); return false;">OWCS</a>
                   filters during events, and personal streams from pros.
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/youtube" onclick="openMediaFromGuide_(); return false;">
+                    Watch favorites’ clips &amp; videos — CLIP&amp;YOUTUBE
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  Twitch has clips — and CHZZK / SOOP do too.
+                  Browse them together on CLIP&amp;YOUTUBE.
                 </span>
               </li>
               <li>
@@ -770,10 +812,6 @@ function loadWatchOwcsView() {
                 </span>
               </li>
             </ul>
-            <p>
-              This page is the map. The rest of the site helps you build
-              <i>your</i> watch list.
-            </p>
           `,
           `
             <p>
@@ -782,20 +820,18 @@ function loadWatchOwcsView() {
             <ul class="watchowcs-tip-list">
               <li>
                 <span class="watchowcs-tip-label">
-                  <a href="/teams" onclick="openTeamsFromGuide_(); return false;">
-                    推しを探す — TEAMS / PLAYERS
+                  <a href="/playerlinks" onclick="openPlayerlinksFromGuide_(); return false;">
+                    推しのチャンネル・SNSを探す — PLAYERS
                   </a>
                 </span>
                 <span class="watchowcs-tip-body">
-                  <a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS</a>
-                  でロスターを見たり、選手ページを開いたりして、
-                  しっくりくるチームや選手を見つけてみてください。
+                  選手ページを開くと、Twitch / CHZZK / SOOP / YouTube や SNS のリンクを確認できます。
                 </span>
               </li>
               <li>
                 <span class="watchowcs-tip-label">
                   <a href="/goats" onclick="openFavoritesFromGuide_(); return false;">
-                    ★ MY GOATS に登録する
+                    推しを★ MY GOATS に登録する
                   </a>
                 </span>
                 <span class="watchowcs-tip-body">
@@ -806,13 +842,24 @@ function loadWatchOwcsView() {
               <li>
                 <span class="watchowcs-tip-label">
                   <a href="/owcs" onclick="openOwcsLiveFromGuide_(); return false;">
-                    LIVE で配信を見る
+                    推しの配信を見る — LIVE
                   </a>
                 </span>
                 <span class="watchowcs-tip-body">
                   今配信中の選手をチェック。大会中は
                   <a href="/owcs" onclick="openOwcsLiveFromGuide_(); return false;">OWCS</a>
                   フィルタ、普段はプロの個人配信も探せます。
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/youtube" onclick="openMediaFromGuide_(); return false;">
+                    推しのクリップ・動画を見る — CLIP&amp;YOUTUBE
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  Twitchにあるクリップ機能は、CHZZKやSOOPにもあります。
+                  CLIP&amp;YOUTUBEでまとめて確認できます。
                 </span>
               </li>
               <li>
@@ -838,9 +885,6 @@ function loadWatchOwcsView() {
                 </span>
               </li>
             </ul>
-            <p>
-              このページは地図。サイトの他の機能で、自分だけの観戦リストを作ってみてください。
-            </p>
           `
         )}
       </section>
@@ -1189,7 +1233,7 @@ const OWCS_FLOW_COPY_EN_ = {
   pacRegional: "OWCS Pacific",
   stagePath: "Round robin → tournament<br>Top 2 advance",
   asiaChampTitle: "OWCS Asia<br>(offline)",
-  asiaNote: "Top 2 advance",
+  asiaNote: "Group round robin → tournament<br>Top 2 advance",
   cnOpen: "China Open Quals",
   cnMain: "OWCS China",
   openNoOfficialCast: "※ No official cast. Player personal streams only.",
@@ -1203,7 +1247,7 @@ const OWCS_FLOW_COPY_EN_ = {
   naMain: "OWCS NA",
   emeaMain: "OWCS EMEA",
   worldTitle: "OWCS World Events<br>(offline)",
-  worldEvents: "Champions Clash · Midseason Championship · World Finals"
+  worldEvents: "Champions Clash · Midseason Championship · World Finals<br>Tournament"
 };
 
 const OWCS_FLOW_COPY_JP_ = {
@@ -1346,4 +1390,24 @@ function openFavoritesFromGuide_() {
   setViewUrl_("favorites");
   updateNavState(currentView);
   loadView(currentView);
+}
+
+function openPlayerlinksFromGuide_() {
+  settingsMenu?.classList.add("settings-hidden");
+  currentView = "playerlinks";
+  currentPlayerView = "playerlinks";
+  setViewUrl_("playerlinks");
+  updateNavState(currentView);
+  loadView(currentView);
+  window.scrollTo(0, 0);
+}
+
+function openMediaFromGuide_() {
+  settingsMenu?.classList.add("settings-hidden");
+  currentView = "youtube";
+  currentMediaView = "youtube";
+  setViewUrl_("youtube");
+  updateNavState(currentView);
+  loadView(currentView);
+  window.scrollTo(0, 0);
 }
