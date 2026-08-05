@@ -1198,7 +1198,7 @@ const OWCS_FLOW_COPY_EN_ = {
   faceitInfoTitle:
     "【FACEIT League】 NA · EMEA · Oceania · South America<br>(Open → Advanced → Expert → Master)",
   faceitInfoBody:
-    "A second-division style pathway that runs alongside OWCS.<br>Like OWCS, each tier runs round robin → playoffs every season.<br>※ Not present in the Asia region.",
+    "A second-division style pathway that runs alongside OWCS.<br>Like OWCS, each tier runs round robin → playoffs every season.<br>※ Not present in the Asia region.<br>※ No official cast. Check match times on Liquipedia — if a player is streaming personally or a FACEIT caster is on that day, you can watch there.",
   naMain: "OWCS NA",
   emeaMain: "OWCS EMEA",
   worldTitle: "OWCS World Events<br>(offline)",
@@ -1234,7 +1234,7 @@ const OWCS_FLOW_COPY_JP_ = {
   faceitInfoTitle:
     "【FACEIT League】 NA・EMEA・Oceania・SouthAmerica<br>(Open→Advanced→Expert→Master）",
   faceitInfoBody:
-    "2部リーグのような位置付けで、OWCSと同時進行されています。<br>OWCS同様、シーズン毎に各階級の総当たり戦→トーナメント戦が行われています。<br>※アジア地域にはありません。",
+    "2部リーグのような位置付けで、OWCSと同時進行されています。<br>OWCS同様、シーズン毎に各階級の総当たり戦→トーナメント戦が行われています。<br>※アジア地域にはありません。<br>※公式配信はありません。Liquipediaで試合日程を確認し、試合当日に選手の個人配信や FACEIT キャスター配信があれば、視聴可能です。",
   naMain: "OWCS NA",
   emeaMain: "OWCS EMEA",
   worldTitle: "OWCS 世界大会<br>（オフライン）",
