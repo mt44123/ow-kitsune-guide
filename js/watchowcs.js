@@ -1060,13 +1060,13 @@ function buildOwcsSeasonFlowDiagram_(lang) {
     return `<div class="owcs-flow-pipeline">${parts.join("")}</div>`;
   };
 
-  const asiaTrack = (row, regionKey, label, openTitle, regionalTitle) => `
+  const asiaTrack = (row, regionKey, label, openTitle, regionalTitle, stageNote = L.stagePath) => `
     ${dCell(row, 2, `<span class="owcs-flow-sublabel">${label}</span>`, `owcs-flow-label-cell owcs-flow-region-${regionKey}`)}
     ${dCell(row, 3, owcsFlowBox_(openTitle, L.openNoOfficialCast, "owcs-flow-box-open"))}
     ${dArrow(row, 4)}
     ${dCell(row, 5, owcsFlowBox_(L.promo, L.promoAsiaNote, "owcs-flow-box-soft"))}
     ${dArrow(row, 6)}
-    ${dCell(row, 7, owcsFlowBox_(regionalTitle, L.stagePath, `owcs-flow-box-owcs owcs-flow-box-owcs-${regionKey}`))}
+    ${dCell(row, 7, owcsFlowBox_(regionalTitle, stageNote, `owcs-flow-box-owcs owcs-flow-box-owcs-${regionKey}`))}
     ${dArrow(row, 8)}
   `;
 
@@ -1076,8 +1076,8 @@ function buildOwcsSeasonFlowDiagram_(lang) {
         ${dCell(1, 1, `<span>${L.asia}</span>`, "owcs-flow-bar-cell owcs-flow-asia-bar", 1, 3)}
 
         ${asiaTrack(1, "kr", L.kr, L.krOpen, L.krRegional)}
-        ${asiaTrack(2, "jp", L.jp, L.jpOpen, L.jpRegional)}
-        ${asiaTrack(3, "pac", L.pac, L.pacOpen, L.pacRegional)}
+        ${asiaTrack(2, "jp", L.jp, L.jpOpen, L.jpRegional, L.stagePathTop2)}
+        ${asiaTrack(3, "pac", L.pac, L.pacOpen, L.pacRegional, L.stagePathTop2)}
 
         ${dCell(1, 9, owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-owcs owcs-flow-box-owcs-asia"), "owcs-flow-asia-span", 1, 3)}
         ${dArrow(1, 10, 6)}
@@ -1146,14 +1146,14 @@ function buildOwcsSeasonFlowDiagram_(lang) {
             ${mobileTrack("jp", L.jp, [
               owcsFlowBox_(L.jpOpen, L.openNoOfficialCast, "owcs-flow-box-open"),
               owcsFlowBox_(L.promo, L.promoAsiaNote, "owcs-flow-box-soft"),
-              owcsFlowBox_(L.jpRegional, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-jp"),
+              owcsFlowBox_(L.jpRegional, L.stagePathTop2, "owcs-flow-box-owcs owcs-flow-box-owcs-jp"),
               owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-owcs owcs-flow-box-owcs-asia"),
               owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
             ])}
             ${mobileTrack("pac", L.pac, [
               owcsFlowBox_(L.pacOpen, L.openNoOfficialCast, "owcs-flow-box-open"),
               owcsFlowBox_(L.promo, L.promoAsiaNote, "owcs-flow-box-soft"),
-              owcsFlowBox_(L.pacRegional, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-pac"),
+              owcsFlowBox_(L.pacRegional, L.stagePathTop2, "owcs-flow-box-owcs owcs-flow-box-owcs-pac"),
               owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-owcs owcs-flow-box-owcs-asia"),
               owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
             ])}
@@ -1260,12 +1260,13 @@ const OWCS_FLOW_COPY_EN_ = {
   krRegional: "OWCS Korea<br>(offline)",
   jpRegional: "OWCS Japan",
   pacRegional: "OWCS Pacific",
-  stagePath: "Round robin → tournament<br>Top 2 advance",
+  stagePath: "Round robin → tournament<br>Top 2–3 advance",
+  stagePathTop2: "Round robin → tournament<br>Top 2 advance",
   asiaChampTitle: "OWCS Asia<br>(offline)",
-  asiaNote: "Group round robin → tournament<br>Top 2 advance",
+  asiaNote: "Group round robin → tournament<br>Top 2–3 advance",
   cnOpen: "China Open Quals",
   cnMain: "OWCS China",
-  cnStagePath: "Swiss-style tournament → round robin → tournament",
+  cnStagePath: "Swiss-style tournament → round robin → tournament<br>Top 2–3 advance",
   openNoOfficialCast: "※ No official cast. Player personal streams only.",
   faceit: "FACEIT League<br>Master",
   faceitBar: "FACEIT",
@@ -1299,12 +1300,13 @@ const OWCS_FLOW_COPY_JP_ = {
   krRegional: "OWCS Korea<br>（オフライン）",
   jpRegional: "OWCS Japan",
   pacRegional: "OWCS Pacific",
-  stagePath: "総当たり戦→トーナメント戦<br>上位2チームが進出",
+  stagePath: "総当たり戦→トーナメント戦<br>上位2〜3チームが進出",
+  stagePathTop2: "総当たり戦→トーナメント戦<br>上位2チームが進出",
   asiaChampTitle: "OWCS Asia<br>（オフライン）",
-  asiaNote: "グループ別総当たり戦→トーナメント戦<br>上位2チームが進出",
+  asiaNote: "グループ別総当たり戦→トーナメント戦<br>上位2〜3チームが進出",
   cnOpen: "中国オープン予選",
   cnMain: "OWCS China",
-  cnStagePath: "スイス式トーナメント戦→総当たり戦→トーナメント戦",
+  cnStagePath: "スイス式トーナメント戦→総当たり戦→トーナメント戦<br>上位2〜3チームが進出",
   openNoOfficialCast: "※公式配信はありません。選手の個人配信のみ。",
   faceit: "FACEIT League<br>Master",
   faceitBar: "FACEIT",
