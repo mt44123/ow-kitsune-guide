@@ -540,11 +540,6 @@ function loadWatchOwcsView() {
             </ul>
             <p>First, find a way of watching that fits you.</p>
             <p>OWCS is not a “learn every rule before you start” product.</p>
-            <ul>
-              <li>Root for favorites</li>
-              <li>Watch with the cast commentary</li>
-              <li>Study pro POVs for your own play</li>
-            </ul>
             <p>Everyone’s path is different.</p>
             <p>
               Finding one style that fits you is the fastest way to enjoy OWCS more.
@@ -638,11 +633,6 @@ function loadWatchOwcsView() {
             </ul>
             <p>まずは、自分なりの楽しみ方を見つけてください。</p>
             <p>OWCSは、「ルールを全部覚えてから見る大会」ではありません。</p>
-            <ul>
-              <li>推しを応援する</li>
-              <li>実況を聞きながら試合を見る</li>
-              <li>プロを参考にプレイを研究する</li>
-            </ul>
             <p>楽しみ方は人それぞれです。</p>
             <p>
               まずは自分に合った観戦スタイルを一つ見つけること。
