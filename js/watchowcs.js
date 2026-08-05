@@ -48,7 +48,7 @@ function loadWatchOwcsView() {
             <p>
               This guide is still being written. Content may change or expand.
             </p>
-            <p>
+            <p class="owcs-sitetext-tip">
               Tip: Open the ⚙ menu (top right) and set <b>Site Text</b> to
               English or Japanese only — it’s much easier to read.
             </p>
@@ -58,8 +58,8 @@ function loadWatchOwcsView() {
             <p>
               このページは現在執筆中です。内容は今後追加・修正していく予定です。
             </p>
-            <p>
-              右上の⚙マークから、Site Text設定を英/日どちらかに切り替えると読みやすいです。
+            <p class="owcs-sitetext-tip">
+              右上の⚙マークから、<b>Site Text</b>設定を英/日どちらかに切り替えると読みやすいです。
             </p>
             <p class="watchowcs-updated">更新日：2026年8月5日</p>
           `
