@@ -738,6 +738,10 @@ function loadWatchOwcsView() {
                   advances ~99% of the time — but formats like summer Midseason Championship
                   (EWC) can give Japan/Pacific direct paths.
                 </p>
+                <p>
+                  <b>Q: Do teams have players from overseas?</b><br>
+                  <b>A:</b> Yes. In OWCS, teams can roster up to two players from other regions.
+                </p>
               </div>
             `,
             `
@@ -748,6 +752,10 @@ function loadWatchOwcsView() {
                   フロー図形式のアジアでは韓国進出が多い一方、
                   夏季の Midseason Championship（EWC）などでは
                   日本・パシフィック1位が直接進出できる形式もあります。
+                </p>
+                <p>
+                  <b>Q: チームに海外出身の選手が居る？</b><br>
+                  <b>A:</b> はい。OWCSでは、最大2名まで他地域の選手が所属できます。
                 </p>
               </div>
             `
