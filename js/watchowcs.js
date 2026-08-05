@@ -285,7 +285,7 @@ function loadWatchOwcsView() {
               個人技だけでなく、チーム全員が連携する集団戦も大きな見どころです。
             </p>
 
-            <h3 class="owcs-fun-subhead">③ 応援したい選手やチームが見つかる</h3>
+            <h3 class="owcs-fun-subhead">③ 推しが見つかる</h3>
             <p>
               OWCSを見ることで、「この選手・このチームを応援したい」という気持ちが自然と生まれ、
               観戦がさらに楽しくなります。
@@ -385,9 +385,6 @@ function loadWatchOwcsView() {
                 👉 Links for watching OWCS
               </a>
             </p>
-            <p>
-              <b>Beginner tip:</b> start with <b>Monday 18:00 (JST) Japan</b>.
-            </p>
           `,
           `
             <h3 class="owcs-fun-subhead">配信プラットフォーム（無料）</h3>
@@ -431,7 +428,7 @@ function loadWatchOwcsView() {
                 </a>
               </li>
             </ul>
-            <h3 class="owcs-fun-subhead">よくある時間帯（日本時間・目安）</h3>
+            <h3 class="owcs-fun-subhead">リアルタイムで観戦できる時間帯（日本時間・目安）</h3>
             <ul>
               <li><b>Japan</b> — 月〜水 18時〜</li>
               <li><b>Pacific</b> — 木 20時〜</li>
@@ -444,9 +441,6 @@ function loadWatchOwcsView() {
               <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">
                 👉 OWCS観戦に役立つリンク集
               </a>
-            </p>
-            <p>
-              <b>まず始めるなら:</b> <b>月曜18時 日本枠</b>に集合！
             </p>
           `
         )}
@@ -496,6 +490,11 @@ function loadWatchOwcsView() {
                 <b>Want more fun</b> → Twitch channel-point win predictions, or a
                 streamer watch party (e.g.
                 <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>)
+              </li>
+              <li>
+                <b>Want your favorites’ games</b> → find a team or player on
+                <a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS</a>
+                / PLAYERS, save them to ★ MY GOATS, then follow their series
               </li>
             </ul>
             <p>First, find a way of watching that fits you.</p>
@@ -567,6 +566,13 @@ function loadWatchOwcsView() {
                   Twitchのチャンネルポイントによる勝敗予想に参加する、<br>
                   配信者のウォッチパーティで見てみる（例:
                   <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>）
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">推しの試合を見たい</span>
+                <span class="watchowcs-tip-body">
+                  <a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS</a>
+                  / PLAYERS で推しチーム・推し選手を見つけて、★ MY GOATS に登録すると追いやすくなります。
                 </span>
               </li>
             </ul>
