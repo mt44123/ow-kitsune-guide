@@ -456,72 +456,86 @@ function loadWatchOwcsView() {
         </h2>
         ${siteText_(
           `
-            <ul class="watchowcs-tip-list">
+            <ul class="watchowcs-tip-list watchowcs-tip-list-accordion">
               <li>
-                <span class="watchowcs-tip-label">Want Japanese casts</span>
-                <span class="watchowcs-tip-body">
-                  Japanese streams for OWCS Japan, Korea, Asia, and world events
-                </span>
+                <details>
+                  <summary class="watchowcs-tip-label">Want Japanese casts</summary>
+                  <span class="watchowcs-tip-body">
+                    Japanese streams for OWCS Japan, Korea, Asia, and world events
+                  </span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">Want top-tier matches</span>
-                <span class="watchowcs-tip-body">OWCS Korea and world events</span>
+                <details>
+                  <summary class="watchowcs-tip-label">Want top-tier matches</summary>
+                  <span class="watchowcs-tip-body">OWCS Korea and world events</span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">Want highlight-heavy series</span>
-                <span class="watchowcs-tip-body">
-                  In OWCS, even small skill gaps often finish 3–0.
-                  Series that go to 3–2 are often the ones you can’t stop watching.
-                </span>
+                <details>
+                  <summary class="watchowcs-tip-label">Want highlight-heavy series</summary>
+                  <span class="watchowcs-tip-body">
+                    In OWCS, even small skill gaps often finish 3–0.
+                    Series that go to 3–2 are often the ones you can’t stop watching.
+                  </span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">Want to study pro play</span>
-                <span class="watchowcs-tip-body">
-                  OWCS publishes
-                  <a
-                    href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
-                    target="_blank"
-                    rel="noopener"
-                  >replay codes</a>.
-                  After codes expire,
-                  <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
-                  POV videos help a lot
-                  (world-event codes aren’t viewable for the public, so those POVs are especially valuable).
-                </span>
+                <details>
+                  <summary class="watchowcs-tip-label">Want to study pro play</summary>
+                  <span class="watchowcs-tip-body">
+                    OWCS publishes
+                    <a
+                      href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
+                      target="_blank"
+                      rel="noopener"
+                    >replay codes</a>.
+                    After codes expire,
+                    <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
+                    POV videos help a lot
+                    (world-event codes aren’t viewable for the public, so those POVs are especially valuable).
+                  </span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">Official cams jump around too fast</span>
-                <span class="watchowcs-tip-body">
-                  OWCS publishes
-                  <a
-                    href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
-                    target="_blank"
-                    rel="noopener"
-                  >replay codes</a>.
-                  After codes expire,
-                  <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
-                  POV videos help a lot
-                  (world-event codes aren’t viewable for the public, so those POVs are especially valuable).
-                </span>
+                <details>
+                  <summary class="watchowcs-tip-label">Official cams jump around too fast</summary>
+                  <span class="watchowcs-tip-body">
+                    OWCS publishes
+                    <a
+                      href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
+                      target="_blank"
+                      rel="noopener"
+                    >replay codes</a>.
+                    After codes expire,
+                    <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
+                    POV videos help a lot
+                    (world-event codes aren’t viewable for the public, so those POVs are especially valuable).
+                  </span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">Want more fun</span>
-                <span class="watchowcs-tip-body">
-                  Join Twitch channel-point win predictions.<br>
-                  Watch with a streamer watch party — for Japanese streams, KR &amp; JP are
-                  often covered by
-                  <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>;
-                  EMEA &amp; NA are usually covered almost every time by official caster
-                  <a href="https://www.twitch.tv/hoshimi0000" target="_blank" rel="noopener">hoshimi</a>.
-                </span>
+                <details>
+                  <summary class="watchowcs-tip-label">Want more fun</summary>
+                  <span class="watchowcs-tip-body">
+                    Join Twitch channel-point win predictions.<br>
+                    Watch with a streamer watch party — for Japanese streams, KR &amp; JP are
+                    often covered by
+                    <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>;
+                    EMEA &amp; NA are usually covered almost every time by official caster
+                    <a href="https://www.twitch.tv/hoshimi0000" target="_blank" rel="noopener">hoshimi</a>.
+                  </span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">Want your favorites’ games</span>
-                <span class="watchowcs-tip-body">
-                  Open a Liquipedia player or team page — match schedules sit at the top.
-                  On this site, tap a player or team name to open Liquipedia.<br>
-                  Fan Discords also often share which events that player is entering.
-                </span>
+                <details>
+                  <summary class="watchowcs-tip-label">Want your favorites’ games</summary>
+                  <span class="watchowcs-tip-body">
+                    Open a Liquipedia player or team page — match schedules sit at the top.
+                    On this site, tap a player or team name to open Liquipedia.<br>
+                    Fan Discords also often share which events that player is entering.
+                  </span>
+                </details>
               </li>
             </ul>
             <p>First, find a way of watching that fits you.</p>
@@ -537,75 +551,89 @@ function loadWatchOwcsView() {
             </p>
           `,
           `
-            <ul class="watchowcs-tip-list">
+            <ul class="watchowcs-tip-list watchowcs-tip-list-accordion">
               <li>
-                <span class="watchowcs-tip-label">日本語実況で見たい</span>
-                <span class="watchowcs-tip-body">
-                  OWCS Japan、Korea、Asia、世界大会の日本語配信
-                </span>
+                <details>
+                  <summary class="watchowcs-tip-label">日本語実況で見たい</summary>
+                  <span class="watchowcs-tip-body">
+                    OWCS Japan、Korea、Asia、世界大会の日本語配信
+                  </span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">トップクラスの試合を見たい</span>
-                <span class="watchowcs-tip-body">OWCS Korea、国際大会</span>
+                <details>
+                  <summary class="watchowcs-tip-label">トップクラスの試合を見たい</summary>
+                  <span class="watchowcs-tip-body">OWCS Korea、国際大会</span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">見どころある試合を見たい</span>
-                <span class="watchowcs-tip-body">
-                  OWCSでは、わずかな実力差でも3-0になることが多いです。
-                  3-2までもつれた試合は、最後まで目が離せない好ゲームが多いです。
-                </span>
+                <details>
+                  <summary class="watchowcs-tip-label">見どころある試合を見たい</summary>
+                  <span class="watchowcs-tip-body">
+                    OWCSでは、わずかな実力差でも3-0になることが多いです。
+                    3-2までもつれた試合は、最後まで目が離せない好ゲームが多いです。
+                  </span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">プロを参考にプレイを研究したい</span>
-                <span class="watchowcs-tip-body">
-                  OWCSは
-                  <a
-                    href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
-                    target="_blank"
-                    rel="noopener"
-                  >リプレイコード</a>
-                  が公開されています。<br>
-                  リプレイコードの期限切れ後は
-                  <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
-                  のPOV動画が役立ちます
-                  （世界大会のリプレイコードは関係者以外視聴不可の為、特に貴重です）。
-                </span>
+                <details>
+                  <summary class="watchowcs-tip-label">プロを参考にプレイを研究したい</summary>
+                  <span class="watchowcs-tip-body">
+                    OWCSは
+                    <a
+                      href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
+                      target="_blank"
+                      rel="noopener"
+                    >リプレイコード</a>
+                    が公開されています。<br>
+                    リプレイコードの期限切れ後は
+                    <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
+                    のPOV動画が役立ちます
+                    （世界大会のリプレイコードは関係者以外視聴不可の為、特に貴重です）。
+                  </span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">公式配信は視点がコロコロ変わってよくわからない</span>
-                <span class="watchowcs-tip-body">
-                  OWCSは
-                  <a
-                    href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
-                    target="_blank"
-                    rel="noopener"
-                  >リプレイコード</a>
-                  が公開されています。<br>
-                  リプレイコードの期限切れ後は
-                  <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
-                  のPOV動画が役立ちます
-                  （世界大会のリプレイコードは関係者以外視聴不可の為、特に貴重です）。
-                </span>
+                <details>
+                  <summary class="watchowcs-tip-label">公式配信は視点がコロコロ変わってよくわからない</summary>
+                  <span class="watchowcs-tip-body">
+                    OWCSは
+                    <a
+                      href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
+                      target="_blank"
+                      rel="noopener"
+                    >リプレイコード</a>
+                    が公開されています。<br>
+                    リプレイコードの期限切れ後は
+                    <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
+                    のPOV動画が役立ちます
+                    （世界大会のリプレイコードは関係者以外視聴不可の為、特に貴重です）。
+                  </span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">楽しく見たい</span>
-                <span class="watchowcs-tip-body">
-                  Twitchのチャンネルポイントによる勝敗予想に参加できます。<br>
-                  配信者のウォッチパーティで見てみるのもおすすめです。
-                  日本語なら、KR・JPは
-                  <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>、
-                  EMEA・NAは公式キャスターの
-                  <a href="https://www.twitch.tv/hoshimi0000" target="_blank" rel="noopener">hoshimi</a>
-                  がほぼ毎回配信してくれています。
-                </span>
+                <details>
+                  <summary class="watchowcs-tip-label">楽しく見たい</summary>
+                  <span class="watchowcs-tip-body">
+                    Twitchのチャンネルポイントによる勝敗予想に参加できます。<br>
+                    配信者のウォッチパーティで見てみるのもおすすめです。
+                    日本語なら、KR・JPは
+                    <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>、
+                    EMEA・NAは公式キャスターの
+                    <a href="https://www.twitch.tv/hoshimi0000" target="_blank" rel="noopener">hoshimi</a>
+                    がほぼ毎回配信してくれています。
+                  </span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">推しの試合を見たい</span>
-                <span class="watchowcs-tip-body">
-                  Liquipediaの選手ページ・チームページを開くと、上部に試合予定が表示されます。
-                  このサイトでは、チーム名や選手名をクリックするとLiquipediaを開けます。<br>
-                  あわせて、推し選手のファンDiscordに入ると、どの大会に出るか教えてもらえることも多いです。
-                </span>
+                <details>
+                  <summary class="watchowcs-tip-label">推しの試合を見たい</summary>
+                  <span class="watchowcs-tip-body">
+                    Liquipediaの選手ページ・チームページを開くと、上部に試合予定が表示されます。
+                    このサイトでは、チーム名や選手名をクリックするとLiquipediaを開けます。<br>
+                    あわせて、推し選手のファンDiscordに入ると、どの大会に出るか教えてもらえることも多いです。
+                  </span>
+                </details>
               </li>
             </ul>
             <p>まずは、自分なりの楽しみ方を見つけてください。</p>
@@ -1367,36 +1395,43 @@ function buildOwcsLocalWatchTimesHtml_() {
 
 function openOwcsLiveFromGuide_() {
   settingsMenu?.classList.add("settings-hidden");
+  const shouldPush = currentView !== "owcs";
   currentView = "owcs";
   currentLiveView = "owcs";
-  setViewUrl_("owcs");
+  setViewUrl_("owcs", shouldPush);
   updateNavState(currentView);
   loadView(currentView);
+  window.scrollTo(0, 0);
 }
 
 function openTeamsFromGuide_() {
   settingsMenu?.classList.add("settings-hidden");
+  const shouldPush = currentView !== "teams";
   currentView = "teams";
   currentPlayerView = "teams";
-  setViewUrl_("teams");
+  setViewUrl_("teams", shouldPush);
   updateNavState(currentView);
   loadView(currentView);
+  window.scrollTo(0, 0);
 }
 
 function openFavoritesFromGuide_() {
   settingsMenu?.classList.add("settings-hidden");
+  const shouldPush = currentView !== "favorites";
   currentView = "favorites";
   currentPlayerView = "favorites";
-  setViewUrl_("favorites");
+  setViewUrl_("favorites", shouldPush);
   updateNavState(currentView);
   loadView(currentView);
+  window.scrollTo(0, 0);
 }
 
 function openPlayerlinksFromGuide_() {
   settingsMenu?.classList.add("settings-hidden");
+  const shouldPush = currentView !== "playerlinks";
   currentView = "playerlinks";
   currentPlayerView = "playerlinks";
-  setViewUrl_("playerlinks");
+  setViewUrl_("playerlinks", shouldPush);
   updateNavState(currentView);
   loadView(currentView);
   window.scrollTo(0, 0);
@@ -1404,9 +1439,10 @@ function openPlayerlinksFromGuide_() {
 
 function openMediaFromGuide_() {
   settingsMenu?.classList.add("settings-hidden");
+  const shouldPush = currentView !== "youtube";
   currentView = "youtube";
   currentMediaView = "youtube";
-  setViewUrl_("youtube");
+  setViewUrl_("youtube", shouldPush);
   updateNavState(currentView);
   loadView(currentView);
   window.scrollTo(0, 0);

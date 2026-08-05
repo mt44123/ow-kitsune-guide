@@ -2033,10 +2033,15 @@ function loadStaticView_(view) {
 function openStaticView_(view) {
   settingsMenu?.classList.add("settings-hidden");
 
+  const nextPath = viewToPath_(normalizeViewId_(view) || view);
+  const currentPath =
+    (location.pathname || "/").replace(/\/+$/, "") || "/";
+  const shouldPush = nextPath !== currentPath;
+
   currentView = view;
   currentPlayerView = "teams";
 
-  setViewUrl_(view);
+  setViewUrl_(view, shouldPush);
 
   updateNavState(currentView);
   loadView(currentView);
