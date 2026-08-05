@@ -20,78 +20,114 @@ function loadMediaGoatsView() {
   document.body.classList.add("mediagoats-view");
   document.body.classList.remove("youtube-view", "clip-view", "archive-view");
 
-  const now = Date.now();
-
   pageTitle.textContent = titles.mediagoats;
   setRandomVoiceLine();
   updatePageTitleLink_("mediagoats");
 
-  const allReady =
-    youtubeCache &&
-    now - youtubeCacheTime < YOUTUBE_CLIENT_CACHE_MS &&
-    clipCache.twitch.data &&
-    clipCache.twitchhot.data &&
-    clipCache.soop.data &&
-    clipCache.chzzknew.data &&
-    clipCache.chzzkbest.data &&
-    now - clipCache.twitch.time < CLIPS_CLIENT_CACHE_MS &&
-    now - clipCache.twitchhot.time < CLIPS_CLIENT_CACHE_MS &&
-    now - clipCache.soop.time < CLIPS_CLIENT_CACHE_MS &&
-    now - clipCache.chzzknew.time < CLIPS_CLIENT_CACHE_MS &&
-    now - clipCache.chzzkbest.time < CLIPS_CLIENT_CACHE_MS;
+  const sources = [
+    "youtube",
+    "twitch",
+    "twitchhot",
+    "soop",
+    "chzzknew",
+    "chzzkbest"
+  ];
 
-  if (allReady) {
-    requestId++;
-    stopFakeProgress();
+  hydrateYoutubeFromDisk_();
+  sources.slice(1).forEach(hydrateClipCacheFromDisk_);
 
+  const hasAny_ = () =>
+    !!(
+      youtubeCache ||
+      clipCache.twitch.data ||
+      clipCache.twitchhot.data ||
+      clipCache.soop.data ||
+      clipCache.chzzknew.data ||
+      clipCache.chzzkbest.data
+    );
+
+  const allFresh =
+    isYoutubeCacheFresh_() &&
+    isClipCacheFresh_("twitch") &&
+    isClipCacheFresh_("twitchhot") &&
+    isClipCacheFresh_("soop") &&
+    isClipCacheFresh_("chzzknew") &&
+    isClipCacheFresh_("chzzkbest");
+
+  const paint_ = () => {
+    if (currentView !== "mediagoats") return;
     currentData = buildMediaGoats_();
     renderMediaGoats_(filterMediaGoats_(currentData));
     applyCurrentSearch_();
+  };
+
+  if (allFresh) {
+    requestId++;
+    stopFakeProgress();
+    paint_();
     return;
   }
 
   const currentRequest = ++requestId;
 
-  startFakeProgress();
+  if (hasAny_()) {
+    stopFakeProgress();
+    paint_();
+  } else {
+    startFakeProgress();
+  }
 
-  Promise.all([
-    fetch(CONFIG.API_URL + "?view=youtube").then(r => r.json()),
-    fetch(CONFIG.API_URL + "?view=clips").then(r => r.json()),
-    fetch(CONFIG.API_URL + "?view=hotclips").then(r => r.json()),
-    fetch(CONFIG.API_URL + "?view=soopclips").then(r => r.json()),
-    fetch(CONFIG.API_URL + "?view=chzzknewclips").then(r => r.json()),
-    fetch(CONFIG.API_URL + "?view=chzzkbestclips").then(r => r.json())
-  ])
-    .then(([youtube, twitchNew, twitchHot, soop, chzzkNew, chzzkBest]) => {
+  const ensureOne_ = key => {
+    if (key === "youtube") {
+      return ensureYoutubeCache_();
+    }
+    return ensureClipCache_(key);
+  };
 
-      if (currentRequest !== requestId) {
-        stopFakeProgress();
+  // Load missing sources with concurrency limits from fetchConfigApi_;
+  // repaint after each completion so feed fills progressively.
+  Promise.all(
+    sources.map(key =>
+      ensureOne_(key)
+        .then(() => {
+          if (currentRequest !== requestId) return;
+          if (currentView !== "mediagoats") return;
+
+          if (
+            app.querySelector(".loading") ||
+            !hasAny_()
+          ) {
+            stopFakeProgress();
+          }
+
+          paint_();
+        })
+        .catch(() => {})
+    )
+  )
+    .then(() => {
+      if (currentRequest !== requestId) return;
+      if (currentView !== "mediagoats") return;
+
+      stopFakeProgress();
+
+      if (!hasAny_()) {
+        app.innerHTML = `<p class="error">Failed to load data.</p>`;
         return;
       }
 
-      if (currentView !== "mediagoats") {
-        return;
-      }
-
-      finishFakeProgress();
-
-      youtubeCache = youtube.videos || [];
-      youtubeCacheTime = Date.now();
-
-      setClipCache_("twitch", twitchNew.clips || []);
-      setClipCache_("twitchhot", twitchHot.clips || []);
-      setClipCache_("soop", soop.soopclips || []);
-      setClipCache_("chzzknew", chzzkNew.chzzknewclips || []);
-      setClipCache_("chzzkbest", chzzkBest.chzzkbestclips || []);
-
-      currentData = buildMediaGoats_();
-      renderMediaGoats_(filterMediaGoats_(currentData));
-      applyCurrentSearch_();
+      paint_();
     })
     .catch(error => {
       if (currentRequest !== requestId) return;
 
       stopFakeProgress();
+
+      if (hasAny_()) {
+        paint_();
+        return;
+      }
+
       app.innerHTML = `<p class="error">Failed to load data.</p>`;
       console.error(error);
     });

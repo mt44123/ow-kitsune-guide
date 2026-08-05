@@ -165,8 +165,6 @@ function loadBirthdaysView() {
 
   resetSeo_();
 
-  const now = Date.now();
-
   updated.textContent =
   playerLinksLastUpdated;
 
@@ -203,16 +201,31 @@ function loadBirthdaysView() {
 
   app.className = "birthday-calendar-mode";
 
-  if (
-    birthdaysCache &&
-    now - birthdaysCacheTime < BIRTHDAYS_CLIENT_CACHE_MS
-  ) {
-    requestId++;
-    stopFakeProgress();
-
+  const paint_ = () => {
+    updated.textContent = playerLinksLastUpdated;
     currentData = birthdaysCache;
     renderBirthdayCalendar(currentData);
     applyCurrentSearch_();
+  };
+
+  hydrateBirthdaysFromDisk_();
+
+  if (isBirthdaysCacheFresh_()) {
+    requestId++;
+    stopFakeProgress();
+    paint_();
+    return;
+  }
+
+  if (birthdaysCache) {
+    requestId++;
+    stopFakeProgress();
+    paint_();
+
+    refreshBirthdaysInBackground_().then(() => {
+      if (currentView !== "birthdays") return;
+      paint_();
+    });
     return;
   }
 
@@ -226,12 +239,8 @@ function loadBirthdaysView() {
 
       finishFakeProgress();
 
-      birthdaysCache = data.birthdays || [];
-      birthdaysCacheTime = Date.now();
-
-      currentData = birthdaysCache;
-      renderBirthdayCalendar(currentData);
-      applyCurrentSearch_();
+      setBirthdaysCache_(data.birthdays || [], data.lastUpdated || "");
+      paint_();
     })
     .catch(err => {
       if (currentRequest !== requestId) return;
@@ -240,9 +249,7 @@ function loadBirthdaysView() {
       console.error(err);
 
       if (birthdaysCache) {
-        currentData = birthdaysCache;
-        renderBirthdayCalendar(currentData);
-        applyCurrentSearch_();
+        paint_();
         return;
       }
 

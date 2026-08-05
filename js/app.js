@@ -1449,7 +1449,14 @@ let playerLinksCacheTime = 0;
 // "full" = entire playerlinks payload; "teams" = slim TEAMS-only fields.
 let playerLinksCacheMode = "";
 const PLAYER_LINKS_CLIENT_CACHE_MS =  6 * 60 * 60 * 1000;
+// Hard max for disk copies (fresh TTL is shorter; extra age enables SWR after reload).
+const CLIENT_PERSIST_MAX_MS = 6 * 60 * 60 * 1000;
 const TEAMS_PERSIST_KEY_ = "okgTeamsPlayerLinksV1";
+const PLAYERLINKS_FULL_PERSIST_KEY_ = "okgPlayerLinksFullV1";
+const YOUTUBE_PERSIST_KEY_ = "okgYoutubeV1";
+const ARCHIVE_PERSIST_KEY_ = "okgArchiveV1";
+const BIRTHDAYS_PERSIST_KEY_ = "okgBirthdaysV1";
+const CLIP_PERSIST_PREFIX_ = "okgClips_";
 
 const clipCache = {
   twitch:{ data:null, time:0 },
@@ -1477,6 +1484,12 @@ let birthdaysCacheTime = 0;
 const BIRTHDAYS_CLIENT_CACHE_MS = 6 * 60 * 60 * 1000;
 
 let playerLinksLastUpdated = "";
+
+let youtubeBackgroundRefreshPromise_ = null;
+let archiveBackgroundRefreshPromise_ = null;
+let birthdaysBackgroundRefreshPromise_ = null;
+let playerLinksBackgroundRefreshPromise_ = null;
+const clipBackgroundRefreshPromises_ = Object.create(null);
 
 // Apps Script often returns HTML 404s under load; retry + dedupe reduce
 // "Failed to load data" without hammering the same endpoint twice.
@@ -1598,17 +1611,73 @@ function stopFakeProgress() {
   clearInterval(progressTimer);
 }
 
-function isPlayerLinksCacheUsable_(mode = "full") {
-  if (!playerLinksCache) return false;
+function isCacheFresh_(time, freshMs) {
+  return Number(time) > 0 && Date.now() - Number(time) < freshMs;
+}
 
-  if (Date.now() - playerLinksCacheTime >= PLAYER_LINKS_CLIENT_CACHE_MS) {
+function readPersistedPayload_(key, maxAgeMs = CLIENT_PERSIST_MAX_MS) {
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return null;
+
+    const data = JSON.parse(raw);
+    const time = Number(data?.time || 0);
+
+    if (!time || Date.now() - time >= maxAgeMs) return null;
+
+    return data;
+  } catch (e) {
+    return null;
+  }
+}
+
+function writePersistedPayload_(key, fields) {
+  try {
+    localStorage.setItem(
+      key,
+      JSON.stringify({
+        time: Date.now(),
+        ...fields
+      })
+    );
+    return true;
+  } catch (e) {
     return false;
   }
+}
 
-  // Full cache always works for TEAMS; slim TEAMS cache is not enough for PLAYERS.
+function removePersistedPayload_(key) {
+  try {
+    localStorage.removeItem(key);
+  } catch (e) {
+    // ignore
+  }
+}
+
+function clearAllPersistedClientCaches_() {
+  removePersistedPayload_(TEAMS_PERSIST_KEY_);
+  removePersistedPayload_(PLAYERLINKS_FULL_PERSIST_KEY_);
+  removePersistedPayload_(YOUTUBE_PERSIST_KEY_);
+  removePersistedPayload_(ARCHIVE_PERSIST_KEY_);
+  removePersistedPayload_(BIRTHDAYS_PERSIST_KEY_);
+
+  Object.keys(clipCache).forEach(key => {
+    removePersistedPayload_(CLIP_PERSIST_PREFIX_ + key + "V1");
+  });
+}
+
+function hasPlayerLinksCache_(mode = "full") {
+  if (!playerLinksCache) return false;
   if (mode === "teams") return true;
-
   return playerLinksCacheMode !== "teams";
+}
+
+function isPlayerLinksCacheUsable_(mode = "full", options = {}) {
+  if (!hasPlayerLinksCache_(mode)) return false;
+
+  if (options.allowStale) return true;
+
+  return isCacheFresh_(playerLinksCacheTime, PLAYER_LINKS_CLIENT_CACHE_MS);
 }
 
 function setPlayerLinksCache_(list, lastUpdated, mode = "full") {
@@ -1630,33 +1699,45 @@ function setPlayerLinksCache_(list, lastUpdated, mode = "full") {
     playerLinksLastUpdated = lastUpdated;
   }
 
+  if (playerLinksCacheMode === "full") {
+    writePersistedPayload_(PLAYERLINKS_FULL_PERSIST_KEY_, {
+      lastUpdated: playerLinksLastUpdated || "",
+      playerLinks: playerLinksCache
+    });
+  }
+
   // Keep a slim local copy so TEAMS can paint instantly after reload.
   persistTeamsPlayerLinksCache_();
 
   return true;
 }
 
-function readPersistedTeamsPlayerLinksCache_() {
-  try {
-    const raw = localStorage.getItem(TEAMS_PERSIST_KEY_);
-    if (!raw) return null;
+function hydratePlayerLinksFullFromDisk_() {
+  if (hasPlayerLinksCache_("full")) return true;
 
-    const data = JSON.parse(raw);
-    const time = Number(data?.time || 0);
+  const data = readPersistedPayload_(PLAYERLINKS_FULL_PERSIST_KEY_);
 
-    if (!time || Date.now() - time >= PLAYER_LINKS_CLIENT_CACHE_MS) {
-      return null;
-    }
-
-    if (!Array.isArray(data.playerLinks)) return null;
-
-    return {
-      playerLinks: data.playerLinks,
-      lastUpdated: data.lastUpdated || ""
-    };
-  } catch (e) {
-    return null;
+  if (!data || !Array.isArray(data.playerLinks) || !data.playerLinks.length) {
+    return false;
   }
+
+  playerLinksCache = data.playerLinks;
+  playerLinksCacheTime = Number(data.time) || 0;
+  playerLinksCacheMode = "full";
+  playerLinksLastUpdated = data.lastUpdated || "";
+  return true;
+}
+
+function readPersistedTeamsPlayerLinksCache_() {
+  const data = readPersistedPayload_(TEAMS_PERSIST_KEY_);
+
+  if (!data || !Array.isArray(data.playerLinks)) return null;
+
+  return {
+    playerLinks: data.playerLinks,
+    lastUpdated: data.lastUpdated || "",
+    time: Number(data.time) || 0
+  };
 }
 
 function persistTeamsPlayerLinksCache_() {
@@ -1667,22 +1748,13 @@ function persistTeamsPlayerLinksCache_() {
     return;
   }
 
-  try {
-    localStorage.setItem(
-      TEAMS_PERSIST_KEY_,
-      JSON.stringify({
-        time: Date.now(),
-        lastUpdated: playerLinksLastUpdated || "",
-        // Slim when possible so quota stays modest; full list is still ok as fallback.
-        playerLinks:
-          playerLinksCacheMode === "full"
-            ? playerLinksCache.map(slimPlayerForTeamsCache_)
-            : playerLinksCache
-      })
-    );
-  } catch (e) {
-    // Quota / private mode — ignore.
-  }
+  writePersistedPayload_(TEAMS_PERSIST_KEY_, {
+    lastUpdated: playerLinksLastUpdated || "",
+    playerLinks:
+      playerLinksCacheMode === "full"
+        ? playerLinksCache.map(slimPlayerForTeamsCache_)
+        : playerLinksCache
+  });
 }
 
 function slimPlayerForTeamsCache_(p) {
@@ -1724,11 +1796,318 @@ function slimPlayerForTeamsCache_(p) {
 }
 
 function clearPersistedTeamsPlayerLinksCache_() {
-  try {
-    localStorage.removeItem(TEAMS_PERSIST_KEY_);
-  } catch (e) {
-    // ignore
+  removePersistedPayload_(TEAMS_PERSIST_KEY_);
+}
+
+function refreshPlayerLinksInBackground_() {
+  if (playerLinksBackgroundRefreshPromise_) {
+    return playerLinksBackgroundRefreshPromise_;
   }
+
+  playerLinksBackgroundRefreshPromise_ = fetchConfigApi_("playerlinks")
+    .then(data => {
+      setPlayerLinksCache_(
+        data.playerLinks || [],
+        data.lastUpdated || "",
+        "full"
+      );
+    })
+    .catch(() => {})
+    .finally(() => {
+      playerLinksBackgroundRefreshPromise_ = null;
+    });
+
+  return playerLinksBackgroundRefreshPromise_;
+}
+
+function setYoutubeCache_(videos, lastUpdated, time = Date.now()) {
+  youtubeCache = Array.isArray(videos) ? videos : [];
+  youtubeCacheTime = time;
+
+  if (lastUpdated != null) {
+    youtubeLastUpdated = lastUpdated;
+  }
+
+  writePersistedPayload_(YOUTUBE_PERSIST_KEY_, {
+    lastUpdated: youtubeLastUpdated || "",
+    videos: youtubeCache
+  });
+}
+
+function hydrateYoutubeFromDisk_() {
+  if (youtubeCache) return true;
+
+  const data = readPersistedPayload_(YOUTUBE_PERSIST_KEY_);
+
+  if (!data || !Array.isArray(data.videos)) return false;
+
+  youtubeCache = data.videos;
+  youtubeCacheTime = Number(data.time) || 0;
+  youtubeLastUpdated = data.lastUpdated || "";
+  return true;
+}
+
+function isYoutubeCacheFresh_() {
+  return (
+    Array.isArray(youtubeCache) &&
+    isCacheFresh_(youtubeCacheTime, YOUTUBE_CLIENT_CACHE_MS)
+  );
+}
+
+function refreshYoutubeInBackground_() {
+  if (youtubeBackgroundRefreshPromise_) {
+    return youtubeBackgroundRefreshPromise_;
+  }
+
+  youtubeBackgroundRefreshPromise_ = fetchConfigApi_("youtube")
+    .then(data => {
+      setYoutubeCache_(data.videos || [], data.lastUpdated || "");
+    })
+    .catch(() => {})
+    .finally(() => {
+      youtubeBackgroundRefreshPromise_ = null;
+    });
+
+  return youtubeBackgroundRefreshPromise_;
+}
+
+function ensureYoutubeCache_() {
+  hydrateYoutubeFromDisk_();
+
+  if (isYoutubeCacheFresh_()) {
+    return Promise.resolve(youtubeCache);
+  }
+
+  if (youtubeCache) {
+    refreshYoutubeInBackground_();
+    return Promise.resolve(youtubeCache);
+  }
+
+  return fetchConfigApi_("youtube").then(data => {
+    setYoutubeCache_(data.videos || [], data.lastUpdated || "");
+    return youtubeCache;
+  });
+}
+
+function setClipCache_(cacheKey, clips, lastUpdated, time = Date.now()) {
+  if (!clipCache[cacheKey]) return;
+
+  clipCache[cacheKey].data = Array.isArray(clips) ? clips : [];
+  clipCache[cacheKey].time = time;
+
+  if (lastUpdated != null) {
+    clipLastUpdated[cacheKey] = lastUpdated;
+  }
+
+  writePersistedPayload_(CLIP_PERSIST_PREFIX_ + cacheKey + "V1", {
+    lastUpdated: clipLastUpdated[cacheKey] || "",
+    clips: clipCache[cacheKey].data
+  });
+}
+
+function hydrateClipCacheFromDisk_(cacheKey) {
+  if (!clipCache[cacheKey]) return false;
+  if (clipCache[cacheKey].data) return true;
+
+  const data = readPersistedPayload_(CLIP_PERSIST_PREFIX_ + cacheKey + "V1");
+
+  if (!data || !Array.isArray(data.clips)) return false;
+
+  clipCache[cacheKey].data = data.clips;
+  clipCache[cacheKey].time = Number(data.time) || 0;
+  clipLastUpdated[cacheKey] = data.lastUpdated || "";
+  return true;
+}
+
+function isClipCacheFresh_(cacheKey) {
+  const cached = clipCache[cacheKey];
+  return !!(
+    cached?.data &&
+    isCacheFresh_(cached.time, CLIPS_CLIENT_CACHE_MS)
+  );
+}
+
+function getClipApiKeyMeta_(cacheKey) {
+  switch (cacheKey) {
+    case "twitch":
+      return { apiView: "clips", type: "twitch" };
+    case "twitchhot":
+      return { apiView: "hotclips", type: "twitch" };
+    case "soop":
+      return { apiView: "soopclips", type: "soop" };
+    case "soophot":
+      return { apiView: "soophotclips", type: "soop" };
+    case "chzzknew":
+      return { apiView: "chzzknewclips", type: "chzzknew" };
+    case "chzzkbest":
+      return { apiView: "chzzkbestclips", type: "chzzkbest" };
+    default:
+      return null;
+  }
+}
+
+function extractClipsFromApiData_(data, type) {
+  if (type === "soop") {
+    return data.soopclips || data.clips || [];
+  }
+
+  if (type === "chzzknew") {
+    return data.chzzknewclips || data.clips || [];
+  }
+
+  if (type === "chzzkbest") {
+    return data.chzzkbestclips || data.clips || [];
+  }
+
+  return data.clips || [];
+}
+
+function refreshClipCacheInBackground_(cacheKey) {
+  const meta = getClipApiKeyMeta_(cacheKey);
+  if (!meta) return Promise.resolve();
+
+  if (clipBackgroundRefreshPromises_[cacheKey]) {
+    return clipBackgroundRefreshPromises_[cacheKey];
+  }
+
+  clipBackgroundRefreshPromises_[cacheKey] = fetchConfigApi_(meta.apiView)
+    .then(data => {
+      const clips = extractClipsFromApiData_(data, meta.type);
+      setClipCache_(cacheKey, clips, data.lastUpdated || "");
+    })
+    .catch(() => {})
+    .finally(() => {
+      delete clipBackgroundRefreshPromises_[cacheKey];
+    });
+
+  return clipBackgroundRefreshPromises_[cacheKey];
+}
+
+function ensureClipCache_(cacheKey) {
+  hydrateClipCacheFromDisk_(cacheKey);
+
+  if (isClipCacheFresh_(cacheKey)) {
+    return Promise.resolve(clipCache[cacheKey].data);
+  }
+
+  if (clipCache[cacheKey]?.data) {
+    refreshClipCacheInBackground_(cacheKey);
+    return Promise.resolve(clipCache[cacheKey].data);
+  }
+
+  const meta = getClipApiKeyMeta_(cacheKey);
+  if (!meta) return Promise.resolve([]);
+
+  return fetchConfigApi_(meta.apiView).then(data => {
+    const clips = extractClipsFromApiData_(data, meta.type);
+    setClipCache_(cacheKey, clips, data.lastUpdated || "");
+    return clips;
+  });
+}
+
+function setArchiveCache_(list, lastUpdated, time = Date.now()) {
+  archiveCache = Array.isArray(list) ? list : [];
+  archiveCacheTime = time;
+  writePersistedPayload_(ARCHIVE_PERSIST_KEY_, {
+    lastUpdated: lastUpdated || "",
+    archive: archiveCache
+  });
+}
+
+function hydrateArchiveFromDisk_() {
+  if (archiveCache) return true;
+
+  const data = readPersistedPayload_(ARCHIVE_PERSIST_KEY_);
+
+  if (!data || !Array.isArray(data.archive)) return false;
+
+  archiveCache = data.archive;
+  archiveCacheTime = Number(data.time) || 0;
+  return true;
+}
+
+function isArchiveCacheFresh_() {
+  const freshMs =
+    typeof ARCHIVE_CLIENT_CACHE_MS === "number"
+      ? ARCHIVE_CLIENT_CACHE_MS
+      : 5 * 60 * 1000;
+
+  return (
+    Array.isArray(archiveCache) &&
+    isCacheFresh_(archiveCacheTime, freshMs)
+  );
+}
+
+function refreshArchiveInBackground_() {
+  if (archiveBackgroundRefreshPromise_) {
+    return archiveBackgroundRefreshPromise_;
+  }
+
+  archiveBackgroundRefreshPromise_ = fetchConfigApi_("archive")
+    .then(data => {
+      setArchiveCache_(data.archive || [], data.lastUpdated || "");
+    })
+    .catch(() => {})
+    .finally(() => {
+      archiveBackgroundRefreshPromise_ = null;
+    });
+
+  return archiveBackgroundRefreshPromise_;
+}
+
+function setBirthdaysCache_(list, lastUpdated, time = Date.now()) {
+  birthdaysCache = Array.isArray(list) ? list : [];
+  birthdaysCacheTime = time;
+
+  if (lastUpdated != null && lastUpdated !== "") {
+    playerLinksLastUpdated = lastUpdated;
+  }
+
+  writePersistedPayload_(BIRTHDAYS_PERSIST_KEY_, {
+    lastUpdated: playerLinksLastUpdated || "",
+    birthdays: birthdaysCache
+  });
+}
+
+function hydrateBirthdaysFromDisk_() {
+  if (birthdaysCache) return true;
+
+  const data = readPersistedPayload_(BIRTHDAYS_PERSIST_KEY_);
+
+  if (!data || !Array.isArray(data.birthdays)) return false;
+
+  birthdaysCache = data.birthdays;
+  birthdaysCacheTime = Number(data.time) || 0;
+
+  if (data.lastUpdated) {
+    playerLinksLastUpdated = data.lastUpdated;
+  }
+
+  return true;
+}
+
+function isBirthdaysCacheFresh_() {
+  return (
+    Array.isArray(birthdaysCache) &&
+    isCacheFresh_(birthdaysCacheTime, BIRTHDAYS_CLIENT_CACHE_MS)
+  );
+}
+
+function refreshBirthdaysInBackground_() {
+  if (birthdaysBackgroundRefreshPromise_) {
+    return birthdaysBackgroundRefreshPromise_;
+  }
+
+  birthdaysBackgroundRefreshPromise_ = fetchConfigApi_("birthdays")
+    .then(data => {
+      setBirthdaysCache_(data.birthdays || [], data.lastUpdated || "");
+    })
+    .catch(() => {})
+    .finally(() => {
+      birthdaysBackgroundRefreshPromise_ = null;
+    });
+
+  return birthdaysBackgroundRefreshPromise_;
 }
 
 function prefetchTeamsData_() {
@@ -1743,11 +2122,10 @@ function prefetchTeamsData_() {
     const persisted = readPersistedTeamsPlayerLinksCache_();
 
     if (persisted) {
-      setPlayerLinksCache_(
-        persisted.playerLinks,
-        persisted.lastUpdated,
-        "teams"
-      );
+      playerLinksCache = persisted.playerLinks;
+      playerLinksCacheTime = persisted.time || Date.now();
+      playerLinksCacheMode = "teams";
+      playerLinksLastUpdated = persisted.lastUpdated || "";
     }
 
     fetchTeamsPayload_()
@@ -1765,6 +2143,57 @@ function prefetchTeamsData_() {
     requestIdleCallback(run, { timeout: 4000 });
   } else {
     setTimeout(run, 2000);
+  }
+}
+
+function prefetchSecondaryData_() {
+  const run = () => {
+    // Full player list is the next-most common slow tab after TEAMS.
+    if (!hasPlayerLinksCache_("full")) {
+      if (hydratePlayerLinksFullFromDisk_()) {
+        if (!isPlayerLinksCacheUsable_("full")) {
+          refreshPlayerLinksInBackground_();
+        }
+      } else if (
+        currentView !== "playerlinks" &&
+        currentView !== "favorites" &&
+        currentView !== "player" &&
+        currentView !== "muted"
+      ) {
+        refreshPlayerLinksInBackground_();
+      }
+    }
+
+    if (
+      !isYoutubeCacheFresh_() &&
+      currentView !== "youtube" &&
+      currentView !== "youtubehot" &&
+      currentView !== "youtubejp" &&
+      currentView !== "mediagoats" &&
+      currentView !== "player"
+    ) {
+      ensureYoutubeCache_().catch(() => {});
+    }
+
+    if (
+      typeof archiveCache !== "undefined" &&
+      !isArchiveCacheFresh_() &&
+      !String(currentView || "").startsWith("archive")
+    ) {
+      hydrateArchiveFromDisk_();
+
+      if (archiveCache) {
+        if (!isArchiveCacheFresh_()) refreshArchiveInBackground_();
+      } else {
+        refreshArchiveInBackground_();
+      }
+    }
+  };
+
+  if (typeof requestIdleCallback === "function") {
+    requestIdleCallback(run, { timeout: 8000 });
+  } else {
+    setTimeout(run, 3500);
   }
 }
 
@@ -1796,7 +2225,7 @@ function clearClientCache_() {
   playerLinksCache = null;
   playerLinksCacheTime = 0;
   playerLinksCacheMode = "";
-  clearPersistedTeamsPlayerLinksCache_();
+  clearAllPersistedClientCaches_();
 
   birthdaysCache = null;
   birthdaysCacheTime = 0;
@@ -3739,6 +4168,11 @@ function renderPlayerDetailTeamLogos_(player) {
 async function init() {
   speechSynthesis.getVoices();
 
+  // Hydrate disk caches before first paint when possible.
+  hydratePlayerLinksFullFromDisk_();
+  hydrateYoutubeFromDisk_();
+  hydrateBirthdaysFromDisk_();
+
   loadView(currentView);
   loadSiteGuided_();
 
@@ -3753,10 +4187,12 @@ async function init() {
   await loadVoiceLines();
   setRandomVoiceLine();
 
-  // Warm TEAMS data after first paint so opening TEAMS is usually cache-hit.
+  // Warm slower tabs after first paint.
   if (currentView !== "teams" && currentView !== "team") {
     prefetchTeamsData_();
   }
+
+  prefetchSecondaryData_();
 }
 
 function teamToSlug_(team) {
@@ -4323,8 +4759,8 @@ document.addEventListener("click", e => {
   loadPlayerLinksView();
 });
 
-function setClipCacheIfNotEmpty_(key, data) {
+function setClipCacheIfNotEmpty_(key, data, lastUpdated) {
   if (Array.isArray(data) && data.length > 0) {
-    setClipCache_(key, data);
+    setClipCache_(key, data, lastUpdated);
   }
 }

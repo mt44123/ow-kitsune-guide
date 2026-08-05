@@ -20,19 +20,27 @@ function loadArchiveView(view) {
   document.body.classList.add("archive-view");
   document.body.classList.remove("youtube-view", "clip-view", "mediagoats-view");
 
-  const now = Date.now();
-
   pageTitle.textContent = titles[view] || "ARCHIVE";
   setRandomVoiceLine();
 
-  if (
-    archiveCache &&
-    now - archiveCacheTime < ARCHIVE_CLIENT_CACHE_MS
-  ) {
+  hydrateArchiveFromDisk_();
+
+  if (isArchiveCacheFresh_()) {
     requestId++;
     stopFakeProgress();
-
     renderArchiveFromCache(view);
+    return;
+  }
+
+  if (archiveCache) {
+    requestId++;
+    stopFakeProgress();
+    renderArchiveFromCache(view);
+
+    refreshArchiveInBackground_().then(() => {
+      if (!isArchiveView(currentView)) return;
+      renderArchiveFromCache(currentView);
+    });
     return;
   }
 
@@ -40,8 +48,7 @@ function loadArchiveView(view) {
 
   startFakeProgress();
 
-  fetch(CONFIG.API_URL + "?view=archive")
-    .then(res => res.json())
+  fetchConfigApi_("archive")
     .then(data => {
       if (currentRequest !== requestId) {
         stopFakeProgress();
@@ -50,15 +57,19 @@ function loadArchiveView(view) {
 
       finishFakeProgress();
 
-      archiveCache = data.archive || [];
-      archiveCacheTime = Date.now();
-
+      setArchiveCache_(data.archive || [], data.lastUpdated || "");
       renderArchiveFromCache(view);
     })
     .catch(error => {
       if (currentRequest !== requestId) return;
 
       stopFakeProgress();
+
+      if (archiveCache) {
+        renderArchiveFromCache(view);
+        return;
+      }
+
       app.innerHTML = `<p class="error">Failed to load data.</p>`;
       console.error(error);
     });

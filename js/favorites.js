@@ -48,15 +48,31 @@ function loadFavoritesView() {
     `詳しくは ⚙ の <b>FAQ</b> へ`
   );
 
-  if (isPlayerLinksCacheUsable_("full")) {
-    requestId++;
-    stopFakeProgress();
-
+  const paint_ = () => {
     updated.textContent = playerLinksLastUpdated;
-
     currentData = playerLinksCache;
     renderFavorites(currentData);
     applyCurrentSearch_();
+  };
+
+  hydratePlayerLinksFullFromDisk_();
+
+  if (isPlayerLinksCacheUsable_("full")) {
+    requestId++;
+    stopFakeProgress();
+    paint_();
+    return;
+  }
+
+  if (hasPlayerLinksCache_("full")) {
+    requestId++;
+    stopFakeProgress();
+    paint_();
+
+    refreshPlayerLinksInBackground_().then(() => {
+      if (currentView !== "favorites") return;
+      paint_();
+    });
     return;
   }
 
@@ -78,22 +94,15 @@ function loadFavoritesView() {
         data.lastUpdated || "",
         "full"
       );
-      updated.textContent = playerLinksLastUpdated;
-
-      currentData = playerLinksCache;
-      renderFavorites(currentData);
-      applyCurrentSearch_();
+      paint_();
     })
     .catch(error => {
       if (currentRequest !== requestId) return;
 
       stopFakeProgress();
 
-      if (isPlayerLinksCacheUsable_("full")) {
-        updated.textContent = playerLinksLastUpdated;
-        currentData = playerLinksCache;
-        renderFavorites(currentData);
-        applyCurrentSearch_();
+      if (hasPlayerLinksCache_("full")) {
+        paint_();
         return;
       }
 

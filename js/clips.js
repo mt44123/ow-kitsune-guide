@@ -6,8 +6,6 @@ function loadClipsView(view) {
   viewNote.textContent = "";
   document.body.classList.add("clip-view");
   document.body.classList.remove("youtube-view", "mediagoats-view", "archive-view");
-  
-  const now = Date.now();
 
   pageTitle.textContent = titles[view] || view.toUpperCase();
   setRandomVoiceLine();
@@ -33,18 +31,35 @@ function loadClipsView(view) {
   }
 
   const source = getClipSource_(view);
-  const cached = clipCache[source.cacheKey];
+  const cacheKey = source.cacheKey;
 
-  if (
-    cached?.data &&
-    now - cached.time < CLIPS_CLIENT_CACHE_MS
-  ) {
-    requestId++;
-    stopFakeProgress();
-
-    currentData = filterClipView(cached.data, view);
+  const paint_ = () => {
+    const clips = clipCache[cacheKey]?.data || [];
+    currentData = filterClipView(clips, view);
     renderClips(filterClips(currentData));
     applyCurrentSearch_();
+  };
+
+  hydrateClipCacheFromDisk_(cacheKey);
+
+  if (isClipCacheFresh_(cacheKey)) {
+    requestId++;
+    stopFakeProgress();
+    paint_();
+    return;
+  }
+
+  if (clipCache[cacheKey]?.data) {
+    requestId++;
+    stopFakeProgress();
+    paint_();
+
+    refreshClipCacheInBackground_(cacheKey).then(() => {
+      if (!isClipView(currentView)) return;
+      const active = getClipSource_(currentView);
+      if (active.cacheKey !== cacheKey) return;
+      paint_();
+    });
     return;
   }
 
@@ -52,31 +67,29 @@ function loadClipsView(view) {
 
   startFakeProgress();
 
-  fetch(CONFIG.API_URL + "?view=" + source.apiView)
-    .then(res => res.json())
+  fetchConfigApi_(source.apiView)
     .then(data => {
       if (currentRequest !== requestId) {
         stopFakeProgress();
         return;
       }
 
-      clipLastUpdated[source.cacheKey] =
-        data.lastUpdated || "";
-
       finishFakeProgress();
 
       const clips = getClipsFromApiData_(data, source.type);
-
-      setClipCache_(source.cacheKey, clips);
-
-      currentData = filterClipView(clips, view);
-      renderClips(filterClips(currentData));
-      applyCurrentSearch_();
+      setClipCache_(cacheKey, clips, data.lastUpdated || "");
+      paint_();
     })
     .catch(error => {
       if (currentRequest !== requestId) return;
 
       stopFakeProgress();
+
+      if (clipCache[cacheKey]?.data) {
+        paint_();
+        return;
+      }
+
       app.innerHTML = `<p class="error">Failed to load data.</p>`;
       console.error(error);
     });
@@ -141,27 +154,10 @@ function getClipSource_(view) {
 }
 
 function getClipsFromApiData_(data, type) {
-  if (type === "soop") {
-    return data.soopclips || data.clips || [];
-  }
-
-  if (type === "chzzknew") {
-    return data.chzzknewclips || data.clips || [];
-  }
-
-  if (type === "chzzkbest") {
-    return data.chzzkbestclips || data.clips || [];
-  }
-
-  return data.clips || [];
+  return extractClipsFromApiData_(data, type);
 }
 
-function setClipCache_(cacheKey, clips) {
-  if (!clipCache[cacheKey]) return;
-
-  clipCache[cacheKey].data = clips;
-  clipCache[cacheKey].time = Date.now();
-}
+// setClipCache_ lives in app.js (disk persistence + shared access).
 
 function filterClips(clips) {
   const query = searchBox.value;

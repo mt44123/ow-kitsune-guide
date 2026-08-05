@@ -7,21 +7,34 @@ function loadYoutubeView(view) {
   document.body.classList.add("youtube-view");
   document.body.classList.remove("clip-view", "mediagoats-view", "archive-view");
 
-  const now = Date.now();
-
   pageTitle.textContent = titles[view] || "YOUTUBE";
   setRandomVoiceLine();
 
-  if (
-    youtubeCache &&
-    now - youtubeCacheTime < YOUTUBE_CLIENT_CACHE_MS
-  ) {
-    requestId++;
-    stopFakeProgress();
-
-    currentData = filterYoutubeView(youtubeCache, view);
+  const paint_ = () => {
+    currentData = filterYoutubeView(youtubeCache || [], view);
     renderYoutube(filterYoutube(currentData));
     applyCurrentSearch_();
+  };
+
+  hydrateYoutubeFromDisk_();
+
+  if (isYoutubeCacheFresh_()) {
+    requestId++;
+    stopFakeProgress();
+    paint_();
+    return;
+  }
+
+  // Stale disk/memory: paint now, refresh behind the scenes.
+  if (youtubeCache) {
+    requestId++;
+    stopFakeProgress();
+    paint_();
+
+    refreshYoutubeInBackground_().then(() => {
+      if (!isYoutubeView(currentView)) return;
+      paint_();
+    });
     return;
   }
 
@@ -29,8 +42,7 @@ function loadYoutubeView(view) {
 
   startFakeProgress();
 
-  fetch(CONFIG.API_URL + "?view=youtube")
-    .then(res => res.json())
+  fetchConfigApi_("youtube")
     .then(data => {
       if (currentRequest !== requestId) {
         stopFakeProgress();
@@ -39,17 +51,19 @@ function loadYoutubeView(view) {
 
       finishFakeProgress();
 
-      youtubeCache = data.videos || [];
-      youtubeCacheTime = Date.now();
-
-      currentData = filterYoutubeView(youtubeCache, view);
-      renderYoutube(filterYoutube(currentData));
-      applyCurrentSearch_();
+      setYoutubeCache_(data.videos || [], data.lastUpdated || "");
+      paint_();
     })
     .catch(error => {
       if (currentRequest !== requestId) return;
 
       stopFakeProgress();
+
+      if (youtubeCache) {
+        paint_();
+        return;
+      }
+
       app.innerHTML = `<p class="error">Failed to load data.</p>`;
       console.error(error);
     });

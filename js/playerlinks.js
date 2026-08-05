@@ -8,15 +8,32 @@ function loadPlayerLinksView() {
   pageTitle.textContent = titles.playerlinks;
   setRandomVoiceLine();
 
-  if (isPlayerLinksCacheUsable_("full")) {
-    requestId++;
-    stopFakeProgress();
-
+  const paint_ = () => {
     updated.textContent = playerLinksLastUpdated;
-
     currentData = getRoleFilteredPlayerLinks_(playerLinksCache);
     renderPlayerLinks(currentData);
     applyCurrentSearch_();
+  };
+
+  hydratePlayerLinksFullFromDisk_();
+
+  if (isPlayerLinksCacheUsable_("full")) {
+    requestId++;
+    stopFakeProgress();
+    paint_();
+    return;
+  }
+
+  // Stale (or disk hydrate past "fresh" TTL): show immediately, refresh in bg.
+  if (hasPlayerLinksCache_("full")) {
+    requestId++;
+    stopFakeProgress();
+    paint_();
+
+    refreshPlayerLinksInBackground_().then(() => {
+      if (currentView !== "playerlinks") return;
+      paint_();
+    });
     return;
   }
 
@@ -38,22 +55,15 @@ function loadPlayerLinksView() {
         data.lastUpdated || "",
         "full"
       );
-      updated.textContent = playerLinksLastUpdated;
-
-      currentData = getRoleFilteredPlayerLinks_(playerLinksCache);
-      renderPlayerLinks(currentData);
-      applyCurrentSearch_();
+      paint_();
     })
     .catch(error => {
       if (currentRequest !== requestId) return;
 
       stopFakeProgress();
 
-      if (isPlayerLinksCacheUsable_("full")) {
-        updated.textContent = playerLinksLastUpdated;
-        currentData = getRoleFilteredPlayerLinks_(playerLinksCache);
-        renderPlayerLinks(currentData);
-        applyCurrentSearch_();
+      if (hasPlayerLinksCache_("full")) {
+        paint_();
         return;
       }
 
@@ -704,143 +714,76 @@ function loadPlayerDetailView() {
   }
 
   const currentRequest = ++requestId;
-  startFakeProgress();
 
-  const linksPromise =
-    isPlayerLinksCacheUsable_("full")
-      ? Promise.resolve({
-          playerLinks: playerLinksCache,
-          lastUpdated: playerLinksLastUpdated
-        })
-      : fetchConfigApi_("playerlinks");
-
-  const youtubePromise =
-    youtubeCache
-      ? Promise.resolve({
-          videos: youtubeCache
-        })
-      : fetchConfigApi_("youtube");
-
-  const twitchPromise =
-    clipCache.twitch.data
-      ? Promise.resolve({ clips: clipCache.twitch.data })
-      : fetchConfigApi_("clips");
-
-  const twitchHotPromise =
-    clipCache.twitchhot.data
-      ? Promise.resolve({ clips: clipCache.twitchhot.data })
-      : fetchConfigApi_("hotclips");
-
-  const soopPromise =
-    clipCache.soop.data
-      ? Promise.resolve({ clips: clipCache.soop.data })
-      : fetchConfigApi_("soopclips");
-
-  const soopHotPromise =
-    clipCache.soophot.data
-      ? Promise.resolve({ clips: clipCache.soophot.data })
-      : fetchConfigApi_("soophotclips");
-
-  const chzzkNewPromise =
-    clipCache.chzzknew.data
-      ? Promise.resolve({ clips: clipCache.chzzknew.data })
-      : fetchConfigApi_("chzzknewclips");
-
-  const chzzkBestPromise =
-    clipCache.chzzkbest.data
-      ? Promise.resolve({ clips: clipCache.chzzkbest.data })
-      : fetchConfigApi_("chzzkbestclips");
-
-  Promise.allSettled([
-    linksPromise,
-    youtubePromise,
-    twitchPromise,
-    twitchHotPromise,
-    soopPromise,
-    soopHotPromise,
-    chzzkNewPromise,
-    chzzkBestPromise
-  ])
-  
-  .then(results => {
-    // Still update caches so other views benefit, but never paint
-    // player detail after the user has navigated away.
-    const getResult = (index, fallback = {}) =>
-      results[index]?.status === "fulfilled"
-        ? results[index].value
-        : fallback;
-
-    const linksData = getResult(0, {
-      playerLinks: playerLinksCache || [],
-      lastUpdated: playerLinksLastUpdated || ""
-    });
-
-    const youtubeData = getResult(1, {
-      videos: youtubeCache || []
-    });
-
-    const clipsData = getResult(2, { clips: [] });
-    const hotClipsData = getResult(3, { clips: [] });
-
-    const soopClipsData = getResult(4, {
-      clips: [],
-      soopclips: []
-    });
-
-    const soopHotClipsData = getResult(5, {
-      clips: [],
-      soopclips: []
-    });
-
-    const chzzkNewClipsData = getResult(6, {
-      clips: [],
-      chzzknewclips: []
-    });
-
-    const chzzkBestClipsData = getResult(7, {
-      clips: [],
-      chzzkbestclips: []
-    });
-
-    setPlayerLinksCache_(
-      linksData.playerLinks || [],
-      linksData.lastUpdated || "",
-      "full"
-    );
-
-    youtubeCache = youtubeData.videos || [];
-    youtubeCacheTime = Date.now();
-
-    setClipCache_("twitch", clipsData.clips || []);
-    setClipCache_("twitchhot", hotClipsData.clips || []);
-
-    setClipCacheIfNotEmpty_("soop", soopClipsData.soopclips || soopClipsData.clips);
-    setClipCacheIfNotEmpty_("soophot", soopHotClipsData.soopclips || soopHotClipsData.clips);
-
-    setClipCacheIfNotEmpty_("chzzknew", chzzkNewClipsData.chzzknewclips || chzzkNewClipsData.clips);
-    setClipCacheIfNotEmpty_("chzzkbest", chzzkBestClipsData.chzzkbestclips || chzzkBestClipsData.clips);
-
-    if (currentRequest !== requestId || currentView !== "player") {
-      stopFakeProgress();
-      return;
-    }
-
-    finishFakeProgress();
+  const paintDetail_ = () => {
+    if (currentRequest !== requestId || currentView !== "player") return;
 
     updated.textContent = playerLinksLastUpdated;
     currentData = playerLinksCache;
-    renderPlayerDetail(name, currentData);    
-  })
-  .catch(error => {
-    if (currentRequest !== requestId || currentView !== "player") {
-      stopFakeProgress();
-      return;
+    renderPlayerDetail(name, currentData);
+  };
+
+  const ensureLinks_ = () => {
+    hydratePlayerLinksFullFromDisk_();
+
+    if (isPlayerLinksCacheUsable_("full")) {
+      return Promise.resolve();
     }
 
-    stopFakeProgress();
-    console.error(error);
-    app.innerHTML = `<p class="error">Failed to load player.</p>`;
-  });
+    if (hasPlayerLinksCache_("full")) {
+      refreshPlayerLinksInBackground_();
+      return Promise.resolve();
+    }
+
+    return fetchConfigApi_("playerlinks").then(data => {
+      setPlayerLinksCache_(
+        data.playerLinks || [],
+        data.lastUpdated || "",
+        "full"
+      );
+    });
+  };
+
+  // Paint profile first from playerlinks (includes youtubeLatest* fallbacks).
+  // Media feeds fill Activity section in the background.
+  startFakeProgress();
+
+  ensureLinks_()
+    .then(() => {
+      if (currentRequest !== requestId || currentView !== "player") {
+        stopFakeProgress();
+        return;
+      }
+
+      finishFakeProgress();
+      paintDetail_();
+
+      const mediaJobs = [
+        ensureYoutubeCache_(),
+        ensureClipCache_("twitch"),
+        ensureClipCache_("twitchhot"),
+        ensureClipCache_("soop"),
+        ensureClipCache_("soophot"),
+        ensureClipCache_("chzzknew"),
+        ensureClipCache_("chzzkbest")
+      ];
+
+      mediaJobs.forEach(job => {
+        job
+          .then(() => paintDetail_())
+          .catch(() => {});
+      });
+    })
+    .catch(error => {
+      if (currentRequest !== requestId || currentView !== "player") {
+        stopFakeProgress();
+        return;
+      }
+
+      stopFakeProgress();
+      console.error(error);
+      app.innerHTML = `<p class="error">Failed to load player.</p>`;
+    });
 }
 
 function renderPlayerDetail(name, players) {
