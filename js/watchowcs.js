@@ -492,9 +492,10 @@ function loadWatchOwcsView() {
                 <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>)
               </li>
               <li>
-                <b>Want your favorites’ games</b> → find a team or player on
-                <a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS</a>
-                / PLAYERS, save them to ★ MY GOATS, then follow their series
+                <b>Want your favorites’ games</b> → open a Liquipedia player or team
+                page — match schedules sit at the top. On this site, tap a player or
+                team name to open Liquipedia. Fan Discords also often share which
+                events that player is entering.
               </li>
             </ul>
             <p>First, find a way of watching that fits you.</p>
@@ -571,8 +572,9 @@ function loadWatchOwcsView() {
               <li>
                 <span class="watchowcs-tip-label">推しの試合を見たい</span>
                 <span class="watchowcs-tip-body">
-                  <a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS</a>
-                  / PLAYERS で推しチーム・推し選手を見つけて、★ MY GOATS に登録すると追いやすくなります。
+                  Liquipediaの選手ページ・チームページを開くと、上部に試合予定が表示されます。
+                  このサイトでは、チーム名や選手名をクリックするとLiquipediaを開けます。<br>
+                  あわせて、推し選手のファンDiscordに入ると、どの大会に出るか教えてもらえることも多いです。
                 </span>
               </li>
             </ul>
