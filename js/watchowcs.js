@@ -983,7 +983,7 @@ function buildOwcsSeasonFlowDiagram_(lang) {
 
   const asiaTrack = (row, regionKey, label, openTitle, regionalTitle) => `
     ${dCell(row, 2, `<span class="owcs-flow-sublabel">${label}</span>`, `owcs-flow-label-cell owcs-flow-region-${regionKey}`)}
-    ${dCell(row, 3, owcsFlowBox_(openTitle, "", "owcs-flow-box-open"))}
+    ${dCell(row, 3, owcsFlowBox_(openTitle, L.openNoOfficialCast, "owcs-flow-box-open"))}
     ${dArrow(row, 4)}
     ${dCell(row, 5, owcsFlowBox_(L.promo, L.promoAsiaNote, "owcs-flow-box-soft"))}
     ${dArrow(row, 6)}
@@ -1006,7 +1006,7 @@ function buildOwcsSeasonFlowDiagram_(lang) {
 
         ${dCell(4, 1, `<span>${L.china}</span>`, "owcs-flow-bar-cell owcs-flow-china-bar")}
         ${dCell(4, 2, `<span class="owcs-flow-sublabel owcs-flow-sublabel-cn">${L.china}</span>`, "owcs-flow-label-cell owcs-flow-region-cn")}
-        ${dCell(4, 3, owcsFlowBox_(L.cnOpen, "", "owcs-flow-box-open"), "", 3)}
+        ${dCell(4, 3, owcsFlowBox_(L.cnOpen, L.openNoOfficialCast, "owcs-flow-box-open"), "", 3)}
         ${dArrow(4, 6)}
         ${dCell(4, 7, owcsFlowBox_(L.cnMain, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-cn"), "", 3)}
 
@@ -1058,21 +1058,21 @@ function buildOwcsSeasonFlowDiagram_(lang) {
         <div class="owcs-flow-region-body">
           <div class="owcs-flow-asia-tracks">
             ${mobileTrack("kr", L.kr, [
-              owcsFlowBox_(L.krOpen, "", "owcs-flow-box-open"),
+              owcsFlowBox_(L.krOpen, L.openNoOfficialCast, "owcs-flow-box-open"),
               owcsFlowBox_(L.promo, L.promoAsiaNote, "owcs-flow-box-soft"),
               owcsFlowBox_(L.krRegional, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-kr"),
               owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-owcs owcs-flow-box-owcs-asia"),
               owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
             ])}
             ${mobileTrack("jp", L.jp, [
-              owcsFlowBox_(L.jpOpen, "", "owcs-flow-box-open"),
+              owcsFlowBox_(L.jpOpen, L.openNoOfficialCast, "owcs-flow-box-open"),
               owcsFlowBox_(L.promo, L.promoAsiaNote, "owcs-flow-box-soft"),
               owcsFlowBox_(L.jpRegional, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-jp"),
               owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-owcs owcs-flow-box-owcs-asia"),
               owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
             ])}
             ${mobileTrack("pac", L.pac, [
-              owcsFlowBox_(L.pacOpen, "", "owcs-flow-box-open"),
+              owcsFlowBox_(L.pacOpen, L.openNoOfficialCast, "owcs-flow-box-open"),
               owcsFlowBox_(L.promo, L.promoAsiaNote, "owcs-flow-box-soft"),
               owcsFlowBox_(L.pacRegional, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-pac"),
               owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-owcs owcs-flow-box-owcs-asia"),
@@ -1086,7 +1086,7 @@ function buildOwcsSeasonFlowDiagram_(lang) {
         <div class="owcs-flow-region-bar"><span>${L.china}</span></div>
         <div class="owcs-flow-region-body">
           ${pipe([
-            owcsFlowBox_(L.cnOpen, "", "owcs-flow-box-open"),
+            owcsFlowBox_(L.cnOpen, L.openNoOfficialCast, "owcs-flow-box-open"),
             owcsFlowBox_(L.cnMain, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-cn"),
             owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
           ])}
@@ -1172,7 +1172,8 @@ const OWCS_FLOW_COPY_EN_ = {
   jp: "Japan",
   pac: "Pacific",
   promo: "Promo / relegation",
-  promoAsiaNote: "Open Quals top teams vs last season’s lower teams",
+  promoAsiaNote:
+    "Open Quals top teams vs last season’s lower teams<br>※ No official cast. Player personal streams only.",
   promoFaceitNote: "FACEIT League Master top teams vs last season’s lower teams",
   krOpen: "Korea Open Quals",
   jpOpen: "Japan Open Quals",
@@ -1185,6 +1186,7 @@ const OWCS_FLOW_COPY_EN_ = {
   asiaNote: "Top 2 advance",
   cnOpen: "China Open Quals",
   cnMain: "OWCS China",
+  openNoOfficialCast: "※ No official cast. Player personal streams only.",
   faceit: "FACEIT League<br>Master",
   faceitBar: "FACEIT",
   faceitLabel: "FACEIT",
@@ -1208,7 +1210,8 @@ const OWCS_FLOW_COPY_JP_ = {
   jp: "Japan",
   pac: "Pacific",
   promo: "昇格戦・降格戦",
-  promoAsiaNote: "オープン予選上位チーム VS 前シーズン下位チーム",
+  promoAsiaNote:
+    "オープン予選上位チーム VS 前シーズン下位チーム<br>※公式配信はありません。選手の個人配信のみ。",
   promoFaceitNote: "FACEIT League Master 上位チーム VS 前シーズン下位チーム",
   krOpen: "韓国オープン予選",
   jpOpen: "日本オープン予選",
@@ -1216,11 +1219,12 @@ const OWCS_FLOW_COPY_JP_ = {
   krRegional: "OWCS Korea<br>（オフライン）",
   jpRegional: "OWCS Japan",
   pacRegional: "OWCS Pacific",
-  stagePath: "総当たり戦→トーナメント<br>上位2チームが進出",
+  stagePath: "総当たり戦→トーナメント戦<br>上位2チームが進出",
   asiaChampTitle: "OWCS Asia<br>（オフライン）",
-  asiaNote: "上位2チームが進出",
+  asiaNote: "グループ別総当たり戦→トーナメント戦<br>上位2チームが進出",
   cnOpen: "中国オープン予選",
   cnMain: "OWCS China",
+  openNoOfficialCast: "※公式配信はありません。選手の個人配信のみ。",
   faceit: "FACEIT League<br>Master",
   faceitBar: "FACEIT",
   faceitLabel: "FACEIT",
@@ -1231,7 +1235,7 @@ const OWCS_FLOW_COPY_JP_ = {
   naMain: "OWCS NA",
   emeaMain: "OWCS EMEA",
   worldTitle: "OWCS 世界大会<br>（オフライン）",
-  worldEvents: "Champions Clash · Midseason Championship · World Finals"
+  worldEvents: "Champions Clash · Midseason Championship · World Finals<br>トーナメント戦"
 };
 
 /**
