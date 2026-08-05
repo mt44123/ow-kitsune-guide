@@ -39,6 +39,33 @@ function loadWatchOwcsView() {
   app.innerHTML = `
     <main class="tools-page watchowcs-page">
 
+      <div class="card faq-card howto-wip-card">
+        <h3>
+          ${siteHeading_("📝 Work in progress", "📝 執筆中です")}
+        </h3>
+        ${siteText_(
+          `
+            <p>
+              This guide is still being written. Content may change or expand.
+            </p>
+            <p>
+              Tip: Open the ⚙ menu (top right) and set <b>Site Text</b> to
+              English or Japanese only — it’s much easier to read.
+            </p>
+            <p class="watchowcs-updated">Last updated: August 5, 2026</p>
+          `,
+          `
+            <p>
+              このページは現在執筆中です。内容は今後追加・修正していく予定です。
+            </p>
+            <p>
+              右上の⚙マークから、Site Text設定を英/日どちらかに切り替えると読みやすいです。
+            </p>
+            <p class="watchowcs-updated">更新日：2026年8月5日</p>
+          `
+        )}
+      </div>
+
       <header class="card faq-card watchowcs-hero" id="watchowcs-top">
         <p class="watchowcs-kicker">${siteHeading_("OWCS beginner guide", "OWCS初心者向け")}</p>
         <h1 class="watchowcs-h1">
@@ -96,14 +123,14 @@ function loadWatchOwcsView() {
 
         ${siteText_(
           `
-            <p class="owcs-sitetext-tip">
-              <b>Tip:</b> Open the ⚙ menu (top right) and set <b>Site Text</b> to
+            <p>
+              Tip: Open the ⚙ menu (top right) and set Site Text to
               English or Japanese only — it’s much easier to read.
             </p>
           `,
           `
-            <p class="owcs-sitetext-tip">
-              <b>右上の⚙マークから、Site Text設定を英/日どちらかに切り替えると読みやすいです。</b>
+            <p>
+              右上の⚙マークから、Site Text設定を英/日どちらかに切り替えると読みやすいです。
             </p>
           `
         )}
@@ -438,8 +465,8 @@ function loadWatchOwcsView() {
               <li>
                 <span class="watchowcs-tip-label">見どころある試合を見たい</span>
                 <span class="watchowcs-tip-body">
-                  OWCSは少しの実力差でも3-0になりがちです。
-                  3-2の接戦は、見どころのある試合が多いです。
+                  OWCSでは、わずかな実力差でも3-0になることが多いです。
+                  3-2までもつれた試合は、最後まで目が離せない好ゲームが多いです。
                 </span>
               </li>
               <li>
@@ -461,19 +488,23 @@ function loadWatchOwcsView() {
               <li>
                 <span class="watchowcs-tip-label">公式配信は視点がコロコロ変わってよくわからない</span>
                 <span class="watchowcs-tip-body">
+                  OWCSは
                   <a
                     href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
                     target="_blank"
                     rel="noopener"
                   >リプレイコード</a>
-                  、
+                  が公開されています。<br>
+                  リプレイコードの期限切れ後は
                   <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
+                  のPOV動画が役立ちます
+                  （世界大会のリプレイコードは関係者以外視聴不可の為、特に貴重です）。
                 </span>
               </li>
               <li>
                 <span class="watchowcs-tip-label">楽しく見たい</span>
                 <span class="watchowcs-tip-body">
-                  Twitchのチャンネルポイントでの勝敗の賭けに参加する、<br>
+                  Twitchのチャンネルポイントによる勝敗予想に参加する、<br>
                   配信者のウォッチパーティで見てみる（例:
                   <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>）
                 </span>
