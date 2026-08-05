@@ -714,8 +714,8 @@ function loadWatchOwcsView() {
               <ul>
                 <li>Open Qualifier (or FACEIT pathway in some regions)</li>
                 <li>Promotion &amp; Relegation</li>
-                <li>Regular Season (Group Stage when teams are split into groups)</li>
-                <li>Playoffs</li>
+                <li>Regular Season (Group Stage when teams are split into groups; Korea also has Seeding Decider matches that set tournament seeding)</li>
+                <li>Playoffs (Korea also has an LCQ tournament that decides advancement for lower Round Robin teams)</li>
               </ul>
             `,
             `
@@ -723,8 +723,8 @@ function loadWatchOwcsView() {
               <ul>
                 <li>オープン予選（オープン・クオリファイア）※または FACEIT 経路</li>
                 <li>昇格戦・降格戦（プロモーション・レリゲーション）</li>
-                <li>総当たり戦（レギュラーシーズン。グループ分けされる場合はグループステージ）</li>
-                <li>トーナメント戦（プレイオフ）</li>
+                <li>総当たり戦（レギュラーシーズン。グループ分けされる場合はグループステージ。Koreaにはシーディングディサイダーというトーナメント戦での位置を決めるマッチもある）</li>
+                <li>トーナメント戦（プレイオフ・KoreaにはLCQという総当たり戦下位チームの進退を決めるトーナメントもある）</li>
               </ul>
             `
           )}
@@ -1087,7 +1087,7 @@ function buildOwcsSeasonFlowDiagram_(lang) {
         ${dCell(4, 2, `<span class="owcs-flow-sublabel owcs-flow-sublabel-cn">${L.china}</span>`, "owcs-flow-label-cell owcs-flow-region-cn")}
         ${dCell(4, 3, owcsFlowBox_(L.cnOpen, L.openNoOfficialCast, "owcs-flow-box-open"), "", 3)}
         ${dArrow(4, 6)}
-        ${dCell(4, 7, owcsFlowBox_(L.cnMain, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-cn"), "", 3)}
+        ${dCell(4, 7, owcsFlowBox_(L.cnMain, L.cnStagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-cn"), "", 3)}
 
         ${dCell(5, 1, `<span>${L.na}</span>`, "owcs-flow-bar-cell owcs-flow-na-bar")}
         ${dCell(5, 2, `<span class="owcs-flow-sublabel owcs-flow-sublabel-na">${L.na}</span>`, "owcs-flow-label-cell owcs-flow-region-na")}
@@ -1166,7 +1166,7 @@ function buildOwcsSeasonFlowDiagram_(lang) {
         <div class="owcs-flow-region-body">
           ${pipe([
             owcsFlowBox_(L.cnOpen, L.openNoOfficialCast, "owcs-flow-box-open"),
-            owcsFlowBox_(L.cnMain, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-cn"),
+            owcsFlowBox_(L.cnMain, L.cnStagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-cn"),
             owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
           ])}
         </div>
@@ -1265,6 +1265,7 @@ const OWCS_FLOW_COPY_EN_ = {
   asiaNote: "Group round robin → tournament<br>Top 2 advance",
   cnOpen: "China Open Quals",
   cnMain: "OWCS China",
+  cnStagePath: "Swiss-style tournament → round robin → tournament",
   openNoOfficialCast: "※ No official cast. Player personal streams only.",
   faceit: "FACEIT League<br>Master",
   faceitBar: "FACEIT",
@@ -1303,6 +1304,7 @@ const OWCS_FLOW_COPY_JP_ = {
   asiaNote: "グループ別総当たり戦→トーナメント戦<br>上位2チームが進出",
   cnOpen: "中国オープン予選",
   cnMain: "OWCS China",
+  cnStagePath: "スイス式トーナメント戦→総当たり戦→トーナメント戦",
   openNoOfficialCast: "※公式配信はありません。選手の個人配信のみ。",
   faceit: "FACEIT League<br>Master",
   faceitBar: "FACEIT",
