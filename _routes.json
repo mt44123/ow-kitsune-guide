@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": [
+    "/js/*",
+    "/icons/*",
+    "/TeamLogo/*",
+    "/style.css",
+    "/manifest.json",
+    "/robots.txt",
+    "/service-worker.js",
+    "/og-image.png",
+    "/*.png",
+    "/*.svg",
+    "/*.jpg",
+    "/*.jpeg",
+    "/*.webp",
+    "/*.ico",
+    "/*.woff",
+    "/*.woff2",
+    "/*.map"
+  ]
+}

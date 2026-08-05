@@ -658,16 +658,22 @@ function loadWatchOwcsView() {
           </h3>
           ${siteText_(
             `
-              <p>
-                Each stage typically involves open quals (or FACEIT pathway),
-                promo/relegation, regular season, and playoffs. Asia also runs an Asia stage.
-              </p>
+              <p>Each stage typically follows this path:</p>
+              <ul>
+                <li>Open Qualifier（オープン予選 / FACEIT path in some regions）</li>
+                <li>Promotion &amp; Relegation（昇格戦・降格戦）</li>
+                <li>Regular Season（総当たり戦；when split into groups = Group Stage）</li>
+                <li>Playoffs（トーナメント戦）</li>
+              </ul>
             `,
             `
-              <p>
-                各ステージの中身は、だいたいオープン予選（またはFACEIT経路）、昇格戦・降格戦、
-                総当たり戦、トーナメント戦、という流れです。Asiaにはアジア大会もあります。
-              </p>
+              <p>各ステージの中身は、だいたい次の流れです。</p>
+              <ul>
+                <li>オープン予選（オープン・クオリファイア）※または FACEIT 経路</li>
+                <li>昇格戦・降格戦（プロモーション・レリゲーション）</li>
+                <li>総当たり戦（レギュラーシーズン。グループ分けされる場合はグループステージ）</li>
+                <li>トーナメント戦（プレイオフ）</li>
+              </ul>
             `
           )}
           ${buildOwcsSeasonFlowHtml_()}

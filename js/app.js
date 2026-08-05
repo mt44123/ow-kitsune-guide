@@ -3807,25 +3807,245 @@ function openTeamFromUrl_() {
   );
 }
 
+const VIEW_SEO_META_ = {
+  new: {
+    title: "LIVE NEW Streams | OW KITSUNE GUIDE",
+    description:
+      "Latest Overwatch pro player live streams from Twitch, CHZZK, SOOP and more."
+  },
+  goats: {
+    title: "MY GOATS Live Streams | OW KITSUNE GUIDE",
+    description:
+      "Follow live streams from your favorite Overwatch pro players."
+  },
+  hot: {
+    title: "HOT Live Streams | OW KITSUNE GUIDE",
+    description:
+      "Most-watched Overwatch pro player live streams right now."
+  },
+  kr: {
+    title: "KR Live Streams | OW KITSUNE GUIDE",
+    description: "Live Overwatch streams from Korean pro players."
+  },
+  en: {
+    title: "EN Live Streams | OW KITSUNE GUIDE",
+    description: "Live Overwatch streams from English-speaking pro players."
+  },
+  cn: {
+    title: "CN Live Streams | OW KITSUNE GUIDE",
+    description: "Live Overwatch streams from Chinese pro players."
+  },
+  jp: {
+    title: "JP Live Streams | OW KITSUNE GUIDE",
+    description: "Live Overwatch streams from Japanese pro players."
+  },
+  intl: {
+    title: "INTL Live Streams | OW KITSUNE GUIDE",
+    description: "International Overwatch pro player live streams."
+  },
+  owcs: {
+    title: "OWCS Live Streams | OW KITSUNE GUIDE",
+    description: "Live streams related to Overwatch Champions Series."
+  },
+  faceit: {
+    title: "FACEIT Live Streams | OW KITSUNE GUIDE",
+    description: "FACEIT Overwatch pro player live streams."
+  },
+  archive: {
+    title: "Recent Streams Archive | OW KITSUNE GUIDE",
+    description: "Recent Overwatch pro player stream VODs and archives."
+  },
+  archivegoats: {
+    title: "MY GOATS Stream Archive | OW KITSUNE GUIDE",
+    description: "Stream archives for your favorite Overwatch pro players."
+  },
+  youtube: {
+    title: "YouTube NEW Videos | OW KITSUNE GUIDE",
+    description: "Latest YouTube videos from Overwatch pro players."
+  },
+  youtubehot: {
+    title: "YouTube HOT Videos | OW KITSUNE GUIDE",
+    description: "Popular YouTube videos from Overwatch pro players."
+  },
+  youtubejp: {
+    title: "YouTube JP Videos | OW KITSUNE GUIDE",
+    description: "Japanese Overwatch pro player YouTube videos."
+  },
+  clips: {
+    title: "Twitch NEW Clips | OW KITSUNE GUIDE",
+    description: "Latest Twitch clips from Overwatch pro players."
+  },
+  hotclips: {
+    title: "Twitch HOT Clips | OW KITSUNE GUIDE",
+    description: "Popular Twitch clips from Overwatch pro players."
+  },
+  jpclips: {
+    title: "Twitch JP Clips | OW KITSUNE GUIDE",
+    description: "Japanese Overwatch pro player Twitch clips."
+  },
+  chzzknewclips: {
+    title: "CHZZK NEW Clips | OW KITSUNE GUIDE",
+    description: "Latest CHZZK clips from Overwatch pro players."
+  },
+  chzzkhotclips: {
+    title: "CHZZK HOT Clips | OW KITSUNE GUIDE",
+    description: "Popular CHZZK clips from Overwatch pro players."
+  },
+  chzzkbestclips: {
+    title: "CHZZK BEST Clips | OW KITSUNE GUIDE",
+    description: "Top CHZZK clips from Overwatch pro players."
+  },
+  soopclips: {
+    title: "SOOP NEW Clips | OW KITSUNE GUIDE",
+    description: "Latest SOOP clips from Overwatch pro players."
+  },
+  soophotclips: {
+    title: "SOOP HOT Clips | OW KITSUNE GUIDE",
+    description: "Popular SOOP clips from Overwatch pro players."
+  },
+  mediagoats: {
+    title: "MY GOATS Media | OW KITSUNE GUIDE",
+    description: "Clips and videos from your favorite Overwatch pro players."
+  },
+  teams: {
+    title: "Overwatch Teams & Rosters | OW KITSUNE GUIDE",
+    description:
+      "Overwatch team rosters with player links, live streams, YouTube and social profiles."
+  },
+  playerlinks: {
+    title: "All Overwatch Pro Players | OW KITSUNE GUIDE",
+    description:
+      "Directory of Overwatch pro players with Twitch, CHZZK, SOOP, Bilibili, YouTube and social links."
+  },
+  birthdays: {
+    title: "Overwatch Pro Player Birthdays | OW KITSUNE GUIDE",
+    description: "Birthday calendar for Overwatch professional players."
+  },
+  favorites: {
+    title: "MY GOATS Players | OW KITSUNE GUIDE",
+    description: "Your favorite Overwatch pro player profiles and links."
+  },
+  howto: {
+    title: "How to Use | OW KITSUNE GUIDE",
+    description: "How to use OW KITSUNE GUIDE to track Overwatch pro players."
+  },
+  watchowcs: {
+    title: "OWCS観戦ガイド | OW KITSUNE GUIDE",
+    description:
+      "How and where to watch Overwatch Champions Series matches."
+  },
+  toolstips: {
+    title: "Tools & Tips | OW KITSUNE GUIDE",
+    description: "Tools and tips for following Overwatch esports."
+  },
+  usefullinks: {
+    title: "Useful Links | OW KITSUNE GUIDE",
+    description: "Useful Overwatch esports links and resources."
+  },
+  faq: {
+    title: "FAQ | OW KITSUNE GUIDE",
+    description: "Frequently asked questions about OW KITSUNE GUIDE."
+  },
+  about: {
+    title: "About | OW KITSUNE GUIDE",
+    description: "About OW KITSUNE GUIDE."
+  },
+  privacy: {
+    title: "Privacy Policy | OW KITSUNE GUIDE",
+    description: "Privacy policy for OW KITSUNE GUIDE."
+  },
+  updatelog: {
+    title: "Update Log | OW KITSUNE GUIDE",
+    description: "Site update history for OW KITSUNE GUIDE."
+  },
+  muted: {
+    title: "Muted Players | OW KITSUNE GUIDE",
+    description: "Manage muted Overwatch players on OW KITSUNE GUIDE."
+  }
+};
+
+const DEFAULT_SEO_META_ = {
+  title:
+    "OW KITSUNE GUIDE | Overwatch Pro Player Streams, Videos & Clips",
+  description:
+    "Track Overwatch pro player live streams, YouTube videos, clips and player links."
+};
+
 function resetSeo_() {
-  document.title = "OW KITSUNE GUIDE";
-  
-  const meta = document.getElementById("metaDescription");
-  if (meta) {
-    meta.content =
-      "Track Overwatch pro player live streams, YouTube videos, clips and player links.";
-  }
-
-  const canonical = document.getElementById("canonicalUrl");
-  if (canonical) {
-    canonical.href = "https://owkitsune.com/";
-  }
-
   document
     .querySelectorAll(
-      'script[data-player-jsonld="true"], script[data-team-jsonld="true"]'
+      'script[data-player-jsonld="true"], script[data-team-jsonld="true"], script[data-edge-seo="true"]'
     )
     .forEach(script => script.remove());
+
+  applyPathSeo_(location.pathname || "/");
+}
+
+function applyPathSeo_(pathname) {
+  const path =
+    String(pathname || "/")
+      .replace(/\/+$/, "") || "/";
+
+  // Detail pages set full SEO after data loads; still fix canonical for crawlers mid-load.
+  if (path.startsWith("/team/")) {
+    const slug = path.replace(/^\/team\//, "");
+    const title = `${slug.replace(/-/g, " ")} | OW KITSUNE GUIDE`;
+    const description =
+      "Overwatch team roster, live streams, YouTube videos, clips and player links.";
+    document.title = title;
+    setMeta_("description", description);
+    setCanonical_(`${location.origin}/team/${slug}`);
+    setOg_("og:title", title);
+    setOg_("og:description", description);
+    setOg_("og:url", `${location.origin}/team/${slug}`);
+    return;
+  }
+
+  if (path.startsWith("/player/")) {
+    const slug = decodeURIComponent(path.replace(/^\/player\//, ""));
+    const title = `${slug} | OW KITSUNE GUIDE`;
+    const description =
+      "Overwatch player profile with streams, videos, clips and social links.";
+    document.title = title;
+    setMeta_("description", description);
+    setCanonical_(
+      `${location.origin}/player/${encodeURIComponent(slug)}`
+    );
+    setOg_("og:title", title);
+    setOg_("og:description", description);
+    setOg_(
+      "og:url",
+      `${location.origin}/player/${encodeURIComponent(slug)}`
+    );
+    return;
+  }
+
+  const viewKey =
+    path === "/" || path === "/index.html"
+      ? ""
+      : decodeURIComponent(path.slice(1).split("/")[0] || "");
+
+  if (!viewKey) {
+    document.title = DEFAULT_SEO_META_.title;
+    setMeta_("description", DEFAULT_SEO_META_.description);
+    setCanonical_(`${location.origin}/`);
+    setOg_("og:title", DEFAULT_SEO_META_.title);
+    setOg_("og:description", DEFAULT_SEO_META_.description);
+    setOg_("og:url", `${location.origin}/`);
+    setOg_("og:type", "website");
+    return;
+  }
+
+  const meta = VIEW_SEO_META_[viewKey] || DEFAULT_SEO_META_;
+  const canonicalPath = path.startsWith("/") ? path : `/${path}`;
+
+  document.title = meta.title;
+  setMeta_("description", meta.description);
+  setCanonical_(`${location.origin}${canonicalPath}`);
+  setOg_("og:title", meta.title);
+  setOg_("og:description", meta.description);
+  setOg_("og:url", `${location.origin}${canonicalPath}`);
+  setOg_("og:type", "website");
 }
 
 function setOg_(property, content) {
