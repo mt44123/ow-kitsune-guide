@@ -145,6 +145,7 @@ function loadWatchOwcsView() {
                 <li><a href="#watchowcs-watch">How to watch</a></li>
                 <li><a href="#watchowcs-first">What to watch first</a></li>
                 <li><a href="#watchowcs-structure">How the season progresses</a></li>
+                <li><a href="#watchowcs-site">What you can do on this site</a></li>
               </ol>
             `,
             `
@@ -155,6 +156,7 @@ function loadWatchOwcsView() {
                 <li><a href="#watchowcs-watch">OWCSを見てみよう</a></li>
                 <li><a href="#watchowcs-first">初めて見るなら</a></li>
                 <li><a href="#watchowcs-structure">OWCSの流れ</a></li>
+                <li><a href="#watchowcs-site">このサイトでできること</a></li>
               </ol>
             `
           )}
@@ -193,7 +195,7 @@ function loadWatchOwcsView() {
               <a href="#watchowcs-structure">👉OWCSの流れ（後述）</a>
             </p>
             <p>
-              全部追う必要はありません。最初は「推しの地域 + 世界大会」で十分です。
+              全部追う必要はありません。最初は「推しの試合」だけで十分です。
             </p>
           `
         )}
@@ -337,9 +339,38 @@ function loadWatchOwcsView() {
             </ul>
             <p>
               Japanese casts are available for OWCS Japan, Korea, Asia, and world events.
-              If you can’t watch live, YouTube archives are recommended
+            </p>
+            <p>
+              <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">
+                👉 Links for watching OWCS
+              </a>
+            </p>
+            <p>
+              If you can’t watch live, archives are recommended
               (Twitch free VODs may not always remain).
             </p>
+            <ul>
+              <li>
+                <a href="https://www.youtube.com/@ow_esports/streams" target="_blank" rel="noopener">
+                  English cast (EMEA / NA / world) — YouTube
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/@ow_esports_jp/streams" target="_blank" rel="noopener">
+                  Japanese cast (Japan / Korea / Asia / world) — YouTube
+                </a>
+              </li>
+              <li>
+                <a href="https://www.sooplive.com/station/owesports/vod/review" target="_blank" rel="noopener">
+                  Korean cast (Korea / Asia / world) — SOOP
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/@roofesports/streams" target="_blank" rel="noopener">
+                  Thai cast (Pacific) — YouTube
+                </a>
+              </li>
+            </ul>
             <h3 class="owcs-fun-subhead">Typical times (JST, approximate)</h3>
             <ul>
               <li><b>Japan</b> — Mon–Wed from 18:00</li>
@@ -368,9 +399,38 @@ function loadWatchOwcsView() {
             </ul>
             <p>
               日本語配信がある大会は、OWCS Japan、Korea、Asia、世界大会です。
+            </p>
+            <p>
+              <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">
+                👉 OWCS観戦に役立つリンク集
+              </a>
+            </p>
+            <p>
               リアルタイムで見られない場合は、YouTubeアーカイブがおすすめです
               （Twitchでは無料VODが残らない場合があります）。
             </p>
+            <ul>
+              <li>
+                <a href="https://www.youtube.com/@ow_esports/streams" target="_blank" rel="noopener">
+                  英語実況（EMEA / NA / 世界）— YouTube
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/@ow_esports_jp/streams" target="_blank" rel="noopener">
+                  日本語実況（Japan / Korea / Asia / 世界）— YouTube
+                </a>
+              </li>
+              <li>
+                <a href="https://www.sooplive.com/station/owesports/vod/review" target="_blank" rel="noopener">
+                  韓国語実況（Korea / Asia / 世界）— SOOP
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/@roofesports/streams" target="_blank" rel="noopener">
+                  タイ語実況（Pacific）— YouTube
+                </a>
+              </li>
+            </ul>
             <h3 class="owcs-fun-subhead">よくある時間帯（日本時間・目安）</h3>
             <ul>
               <li><b>Japan</b> — 月〜水 18時〜</li>
@@ -627,6 +687,149 @@ function loadWatchOwcsView() {
             `
           )}
         </div>
+      </section>
+
+      <section class="card faq-card" id="watchowcs-site">
+        <h2 class="watchowcs-h2">
+          ${siteHeading_("What you can do on this site", "このサイトでできること")}
+        </h2>
+        ${siteText_(
+          `
+            <p>
+              After watching OWCS, use this site to find favorites and keep following them.
+            </p>
+            <ul class="watchowcs-tip-list">
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/teams" onclick="openTeamsFromGuide_(); return false;">
+                    Find favorites — TEAMS / PLAYERS
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  Browse rosters on
+                  <a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS</a>,
+                  open a player page, and pick a team or player you want to root for.
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/goats" onclick="openFavoritesFromGuide_(); return false;">
+                    ★ MY GOATS — save favorites
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  Tap ☆ / ★ on a card to save players. Then use the ★ tab on LIVE /
+                  media, or Live Notifications → MY GOATS, to catch them easily.
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/owcs" onclick="openOwcsLiveFromGuide_(); return false;">
+                    LIVE — watch streams now
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  Spot who’s live, including
+                  <a href="/owcs" onclick="openOwcsLiveFromGuide_(); return false;">OWCS</a>
+                  filters during events, and personal streams from pros.
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">
+                    USEFUL LINKS — schedules &amp; more
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  Official schedule, cast channels, Liquipedia, and replay codes —
+                  handy for watching and studying matches.
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/howto" onclick="openStaticView_('howto'); return false;">
+                    HOW TO USE — site guide
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  Filters, search, ★ MY GOATS, ◆ MUTED, and more —
+                  the full tour of this site lives there.
+                </span>
+              </li>
+            </ul>
+            <p>
+              This page is the map. The rest of the site helps you build
+              <i>your</i> watch list.
+            </p>
+          `,
+          `
+            <p>
+              OWCSを見たら、このサイトで推しを見つけて追いかけやすくできます。
+            </p>
+            <ul class="watchowcs-tip-list">
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/teams" onclick="openTeamsFromGuide_(); return false;">
+                    推しを探す — TEAMS / PLAYERS
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  <a href="/teams" onclick="openTeamsFromGuide_(); return false;">TEAMS</a>
+                  でロスターを見たり、選手ページを開いたりして、
+                  しっくりくるチームや選手を見つけてみてください。
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/goats" onclick="openFavoritesFromGuide_(); return false;">
+                    ★ MY GOATS に登録する
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  カードの ☆ / ★ でお気に入り保存。LIVE やメディアの ★ タブ、
+                  通知の MY GOATS で推しを追いやすくなります。
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/owcs" onclick="openOwcsLiveFromGuide_(); return false;">
+                    LIVE で配信を見る
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  今配信中の選手をチェック。大会中は
+                  <a href="/owcs" onclick="openOwcsLiveFromGuide_(); return false;">OWCS</a>
+                  フィルタ、普段はプロの個人配信も探せます。
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">
+                    USEFUL LINKS — 観戦に役立つリンク
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  公式スケジュール、配信チャンネル、Liquipedia、リプレイコードなど、
+                  観戦や研究に便利なサイトをまとめています。
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/howto" onclick="openStaticView_('howto'); return false;">
+                    HOW TO USE — サイトの使い方
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  フィルター、検索、★ MY GOATS、◆ MUTED など、
+                  このサイト全体の使い方はこちらです。
+                </span>
+              </li>
+            </ul>
+            <p>
+              このページは地図。サイトの他の機能で、自分だけの観戦リストを作ってみてください。
+            </p>
+          `
+        )}
       </section>
 
     </main>
@@ -1038,6 +1241,15 @@ function openTeamsFromGuide_() {
   currentView = "teams";
   currentPlayerView = "teams";
   setViewUrl_("teams");
+  updateNavState(currentView);
+  loadView(currentView);
+}
+
+function openFavoritesFromGuide_() {
+  settingsMenu?.classList.add("settings-hidden");
+  currentView = "favorites";
+  currentPlayerView = "favorites";
+  setViewUrl_("favorites");
   updateNavState(currentView);
   loadView(currentView);
 }

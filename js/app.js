@@ -2040,6 +2040,7 @@ function openStaticView_(view) {
 
   updateNavState(currentView);
   loadView(currentView);
+  window.scrollTo(0, 0);
 }
 
 let currentLiveView =

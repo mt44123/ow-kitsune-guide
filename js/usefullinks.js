@@ -20,7 +20,7 @@ function loadUsefulLinksView() {
   app.className = "tools-mode faq-mode";
 
   app.innerHTML = `
-    <div class="tools-page">
+    <div class="tools-page" id="usefullinks-top">
 
       <div class="card faq-card">
         <h3>🌐 Useful Links</h3>
@@ -226,4 +226,6 @@ function loadUsefulLinksView() {
 
     </div>
   `;
+
+  window.scrollTo(0, 0);
 }
