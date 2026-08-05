@@ -261,21 +261,29 @@ function loadWatchOwcsView() {
               OWCSを見ることで、「この選手・このチームを応援したい」という気持ちが自然と生まれ、
               観戦がさらに楽しくなります。
             </p>
-            <ul>
+            <ul class="watchowcs-tip-list">
               <li>
-                <b>試合後の勝利者インタビュー</b>（JapanとPacificはありません）—
-                選手が試合を振り返ったり、チームメイトへの思いを語ったり、
-                現在のメタについて話したりと、ゲーム内では見えない一面を知ることができます。
+                <span class="watchowcs-tip-label">試合後の勝利者インタビュー</span>
+                <span class="watchowcs-tip-note">（JapanとPacificはありません）</span>
+                <span class="watchowcs-tip-body">
+                  選手が試合を振り返ったり、チームメイトへの思いを語ったり、
+                  現在のメタについて話したりと、ゲーム内では見えない一面を知ることができます。
+                </span>
               </li>
               <li>
-                <b>各選手のフェイスカメラ</b>（オフライン大会のみ）—
-                スーパープレイを決めて思わず笑顔になる瞬間、劇的な勝利にガッツポーズをする瞬間、
-                敗戦を受け止めて悔しそうな表情を見せる瞬間まで、選手たちの感情がリアルに伝わってきます。
+                <span class="watchowcs-tip-label">各選手のフェイスカメラ</span>
+                <span class="watchowcs-tip-note">（オフライン大会のみ）</span>
+                <span class="watchowcs-tip-body">
+                  スーパープレイを決めて思わず笑顔になる瞬間、劇的な勝利にガッツポーズをする瞬間、
+                  敗戦を受け止めて悔しそうな表情を見せる瞬間まで、選手たちの感情がリアルに伝わってきます。
+                </span>
               </li>
               <li>
-                <b>選手やチームのストーリー</b>—
-                試合の裏には、長年のライバル対決、新人チームの下剋上、
-                世界大会出場をかけた一戦など、それぞれの物語があります。
+                <span class="watchowcs-tip-label">選手やチームのストーリー</span>
+                <span class="watchowcs-tip-body">
+                  試合の裏には、長年のライバル対決、新人チームの下剋上、
+                  世界大会出場をかけた一戦など、それぞれの物語があります。
+                </span>
               </li>
             </ul>
             <p>
@@ -416,43 +424,59 @@ function loadWatchOwcsView() {
             </p>
           `,
           `
-            <ul>
+            <ul class="watchowcs-tip-list">
               <li>
-                <b>日本語実況で見たい</b> → OWCS Japan、Korea、国際大会の日本語配信
+                <span class="watchowcs-tip-label">日本語実況で見たい</span>
+                <span class="watchowcs-tip-body">
+                  OWCS Japan、Korea、国際大会の日本語配信
+                </span>
               </li>
               <li>
-                <b>トップクラスの試合を見たい</b> → OWCS Korea、国際大会
+                <span class="watchowcs-tip-label">トップクラスの試合を見たい</span>
+                <span class="watchowcs-tip-body">OWCS Korea、国際大会</span>
               </li>
               <li>
-                <b>見どころある試合を見たい</b> → OWCSは少しの実力差でも3-0になりがちです。
-                3-2の接戦は、見どころのある試合が多いです
+                <span class="watchowcs-tip-label">見どころある試合を見たい</span>
+                <span class="watchowcs-tip-body">
+                  OWCSは少しの実力差でも3-0になりがちです。
+                  3-2の接戦は、見どころのある試合が多いです。
+                </span>
               </li>
               <li>
-                <b>プロを参考にプレイを研究したい</b> → OWCSは
-                <a
-                  href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
-                  target="_blank"
-                  rel="noopener"
-                >リプレイコード</a>
-                が公開されています。
-                リプレイコードの期限切れ後は
-                <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
-                のPOV動画が役立ちます（世界大会のリプレイコードは関係者以外視聴不可の為、特に貴重です）
+                <span class="watchowcs-tip-label">プロを参考にプレイを研究したい</span>
+                <span class="watchowcs-tip-body">
+                  OWCSは
+                  <a
+                    href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
+                    target="_blank"
+                    rel="noopener"
+                  >リプレイコード</a>
+                  が公開されています。<br>
+                  リプレイコードの期限切れ後は
+                  <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
+                  のPOV動画が役立ちます
+                  （世界大会のリプレイコードは関係者以外視聴不可の為、特に貴重です）。
+                </span>
               </li>
               <li>
-                <b>公式配信は視点がコロコロ変わってよくわからない</b> →
-                <a
-                  href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
-                  target="_blank"
-                  rel="noopener"
-                >リプレイコード</a>
-                、
-                <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
+                <span class="watchowcs-tip-label">公式配信は視点がコロコロ変わってよくわからない</span>
+                <span class="watchowcs-tip-body">
+                  <a
+                    href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRy-b0Vo5LecKRY21-pBfw40TRlqukyjyMqSOTmlo0oe4hWlFDTmnmnuuRecgAWODfPUiM5o3FJ92Xf/pubhtml#gid=1098723955"
+                    target="_blank"
+                    rel="noopener"
+                  >リプレイコード</a>
+                  、
+                  <a href="https://www.youtube.com/@ObsSojourn" target="_blank" rel="noopener">ObsSojourn</a>
+                </span>
               </li>
               <li>
-                <b>楽しく見たい</b> → Twitchのチャンネルポイントでの勝敗の賭けに参加する、
-                配信者のウォッチパーティで見てみる（例:
-                <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>）
+                <span class="watchowcs-tip-label">楽しく見たい</span>
+                <span class="watchowcs-tip-body">
+                  Twitchのチャンネルポイントでの勝敗の賭けに参加する、<br>
+                  配信者のウォッチパーティで見てみる（例:
+                  <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>）
+                </span>
               </li>
             </ul>
             <p>まずは、自分なりの楽しみ方を見つけてください。</p>
@@ -520,7 +544,8 @@ function loadWatchOwcsView() {
           `,
           `
             <p>
-              年間はだいたい3〜4ステージあり、それぞれ世界大会につながります。
+              年間はだいたい3ステージあり、それぞれ世界大会につながります。
+              つまり年3回世界一のチームを目指せます。
               進出枠や条件は世界大会ごとに若干異なります。
             </p>
             <h3 class="owcs-fun-subhead">1年の流れ（1月 → 12月）</h3>

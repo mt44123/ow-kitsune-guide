@@ -4034,6 +4034,44 @@ color:var(--text-main);
   margin:8px 0;
 }
 
+.faq-card ul.watchowcs-tip-list{
+  padding-top:8px;
+  padding-bottom:8px;
+}
+
+.faq-card .watchowcs-tip-list > li{
+  margin:12px 0;
+}
+
+.faq-card .watchowcs-tip-list > li + li{
+  padding-top:10px;
+  border-top:1px solid color-mix(in srgb, var(--border) 80%, transparent);
+}
+
+.faq-card .watchowcs-tip-label{
+  display:block;
+  font-weight:700;
+  line-height:1.45;
+  color:var(--text-main);
+}
+
+.faq-card .watchowcs-tip-note{
+  display:block;
+  margin-top:2px;
+  font-size:.85rem;
+  font-weight:500;
+  line-height:1.45;
+  color:var(--text-muted);
+}
+
+.faq-card .watchowcs-tip-body{
+  display:block;
+  margin-top:6px;
+  font-weight:400;
+  line-height:1.75;
+  color:var(--text-sub);
+}
+
 .watchowcs-updated{
   font-size:.85rem;
   color:var(--text-muted) !important;
