@@ -715,8 +715,7 @@ function loadWatchOwcsView() {
                 <li>Open Qualifier (or FACEIT pathway in some regions)</li>
                 <li>Promotion &amp; Relegation</li>
                 <li>Regular Season (Group Stage when teams are split into groups; Korea also has a “Seeding Decider” that sets tournament matchups)</li>
-                <li>Playoffs</li>
-                <li>Korea also has an “LCQ,” where lower Round Robin teams fight to stay alive</li>
+                <li>Playoffs (Korea also has an “LCQ,” where lower Round Robin teams fight to stay alive)</li>
               </ul>
             `,
             `
@@ -724,9 +723,8 @@ function loadWatchOwcsView() {
               <ul>
                 <li>オープン予選（オープン・クオリファイア）※または FACEIT 経路</li>
                 <li>昇格戦・降格戦（プロモーション・レリゲーション）</li>
-                <li>総当たり戦（レギュラーシーズン。グループ分けされる場合はグループステージ。Koreaにはトーナメント戦での組み合わせを決める「シーディングディサイダー」もある）</li>
-                <li>トーナメント戦（プレイオフ）</li>
-                <li>Koreaには、総当たり戦の下位チームが生き残りを懸けて戦う「LCQ」もあります。</li>
+                <li>総当たり戦（レギュラーシーズン。グループ分けされる場合はグループステージ。Koreaにはトーナメント戦での組み合わせを決める「シーディングディサイダー」もあります）</li>
+                <li>トーナメント戦（プレイオフ・Koreaには、総当たり戦の下位チームが生き残りを懸けて戦う「LCQ」もあります）</li>
               </ul>
             `
           )}
