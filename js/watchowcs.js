@@ -371,14 +371,7 @@ function loadWatchOwcsView() {
                 </a>
               </li>
             </ul>
-            <h3 class="owcs-fun-subhead">Typical times (JST, approximate)</h3>
-            <ul>
-              <li><b>Japan</b> — Mon–Wed from 18:00</li>
-              <li><b>Pacific</b> — Thu from 20:00</li>
-              <li><b>Korea</b> — Fri from 17:00 / Sat–Sun from 15:00</li>
-              <li><b>China</b> — Sat–Sun from 18:00</li>
-              <li><b>EMEA / NA</b> — Sat–Sun from 02:00 (late night)</li>
-            </ul>
+            ${buildOwcsLocalWatchTimesHtml_()}
             <p>
               For exact times, check official X or Liquipedia.<br>
               <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">
@@ -1240,6 +1233,83 @@ const OWCS_FLOW_COPY_JP_ = {
   worldTitle: "OWCS 世界大会<br>（オフライン）",
   worldEvents: "Champions Clash · Midseason Championship · World Finals"
 };
+
+/**
+ * Convert a Japan wall-clock schedule slot to the viewer’s local weekday + time.
+ * monOffset: 0 = Monday … 6 = Sunday (JST), using a fixed JST week in 2024.
+ */
+function owcsJstToDate_(monOffset, hour, minute = 0) {
+  const day = monOffset + 1;
+  const iso =
+    `2024-01-${String(day).padStart(2, "0")}` +
+    `T${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}:00+09:00`;
+  return new Date(iso);
+}
+
+function owcsFormatLocalDayTime_(date) {
+  return {
+    weekday: new Intl.DateTimeFormat(undefined, { weekday: "short" }).format(date),
+    time: new Intl.DateTimeFormat(undefined, {
+      hour: "numeric",
+      minute: "2-digit"
+    }).format(date)
+  };
+}
+
+/** e.g. Mon–Wed from 4:00 AM, or Fri 3:00 AM / Sat–Sun 1:00 AM */
+function owcsFormatLocalFromJstDays_(monOffsets, hour, minute = 0) {
+  const parts = monOffsets.map(d =>
+    owcsFormatLocalDayTime_(owcsJstToDate_(d, hour, minute))
+  );
+  if (!parts.length) return "";
+
+  const uniqueTimes = [...new Set(parts.map(p => p.time))];
+  if (uniqueTimes.length === 1) {
+    const time = uniqueTimes[0];
+    const days = parts.map(p => p.weekday);
+    if (days.length === 1) return `${days[0]} from ${time}`;
+
+    const sameName = days.every(d => d === days[0]);
+    if (sameName) return `${days[0]} from ${time}`;
+
+    return `${days[0]}–${days[days.length - 1]} from ${time}`;
+  }
+
+  return parts.map(p => `${p.weekday} ${p.time}`).join(", ");
+}
+
+function owcsVisitorTimezoneLabel_() {
+  if (typeof getVisitorTimezoneText_ === "function") {
+    const t = getVisitorTimezoneText_();
+    if (t) return t;
+  }
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || "your local time";
+  } catch (e) {
+    return "your local time";
+  }
+}
+
+function buildOwcsLocalWatchTimesHtml_() {
+  const tz = owcsVisitorTimezoneLabel_();
+  const japan = owcsFormatLocalFromJstDays_([0, 1, 2], 18);
+  const pacific = owcsFormatLocalFromJstDays_([3], 20);
+  const korea = `${owcsFormatLocalFromJstDays_([4], 17)} / ${owcsFormatLocalFromJstDays_([5, 6], 15)}`;
+  const china = owcsFormatLocalFromJstDays_([5, 6], 18);
+  const emeaNa = owcsFormatLocalFromJstDays_([5, 6], 2);
+
+  return `
+    <h3 class="owcs-fun-subhead">Typical live times (your local time, approximate)</h3>
+    <p class="watchowcs-updated">Shown in: ${tz}</p>
+    <ul>
+      <li><b>Japan</b> — ${japan}</li>
+      <li><b>Pacific</b> — ${pacific}</li>
+      <li><b>Korea</b> — ${korea}</li>
+      <li><b>China</b> — ${china}</li>
+      <li><b>EMEA / NA</b> — ${emeaNa}</li>
+    </ul>
+  `;
+}
 
 function openOwcsLiveFromGuide_() {
   settingsMenu?.classList.add("settings-hidden");
