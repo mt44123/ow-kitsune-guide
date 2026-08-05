@@ -481,8 +481,10 @@ function loadWatchOwcsView() {
               </li>
               <li>
                 <b>Want more fun</b> → Twitch channel-point win predictions, or a
-                streamer watch party (e.g.
-                <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>)
+                streamer watch party. For Japanese streams, KR &amp; JP are often covered by
+                <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>;
+                EMEA &amp; NA are usually covered almost every time by official caster
+                <a href="https://www.twitch.tv/hoshimi0000" target="_blank" rel="noopener">hoshimi</a>
               </li>
               <li>
                 <b>Want your favorites’ games</b> → open a Liquipedia player or team
@@ -557,9 +559,13 @@ function loadWatchOwcsView() {
               <li>
                 <span class="watchowcs-tip-label">楽しく見たい</span>
                 <span class="watchowcs-tip-body">
-                  Twitchのチャンネルポイントによる勝敗予想に参加する、<br>
-                  配信者のウォッチパーティで見てみる（例:
-                  <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>）
+                  Twitchのチャンネルポイントによる勝敗予想に参加できます。<br>
+                  配信者のウォッチパーティで見てみるのもおすすめです。
+                  日本語なら、KR・JPは
+                  <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>、
+                  EMEA・NAは公式キャスターの
+                  <a href="https://www.twitch.tv/hoshimi0000" target="_blank" rel="noopener">hoshimi</a>
+                  がほぼ毎回配信してくれています。
                 </span>
               </li>
               <li>
