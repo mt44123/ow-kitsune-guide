@@ -660,10 +660,10 @@ function loadWatchOwcsView() {
             `
               <p>Each stage typically follows this path:</p>
               <ul>
-                <li>Open Qualifier（オープン予選 / FACEIT path in some regions）</li>
-                <li>Promotion &amp; Relegation（昇格戦・降格戦）</li>
-                <li>Regular Season（総当たり戦；when split into groups = Group Stage）</li>
-                <li>Playoffs（トーナメント戦）</li>
+                <li>Open Qualifier (or FACEIT pathway in some regions)</li>
+                <li>Promotion &amp; Relegation</li>
+                <li>Regular Season (Group Stage when teams are split into groups)</li>
+                <li>Playoffs</li>
               </ul>
             `,
             `
