@@ -461,14 +461,16 @@ function loadWatchOwcsView() {
                 <details>
                   <summary class="watchowcs-tip-label">Want Japanese casts</summary>
                   <span class="watchowcs-tip-body">
-                    Japanese streams for OWCS Japan, Korea, Asia, and world events
+                    Japanese streams are also available for OWCS Japan, Korea, Asia, and world events.
                   </span>
                 </details>
               </li>
               <li>
                 <details>
                   <summary class="watchowcs-tip-label">Want top-tier matches</summary>
-                  <span class="watchowcs-tip-body">OWCS Korea and world events</span>
+                  <span class="watchowcs-tip-body">
+                    OWCS Korea and international events are a great place to start.
+                  </span>
                 </details>
               </li>
               <li>
@@ -521,7 +523,7 @@ function loadWatchOwcsView() {
                     Join Twitch channel-point win predictions.<br>
                     Watch with a streamer watch party — for Japanese streams, KR &amp; JP are
                     often covered by
-                    <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>;
+                    <a href="https://www.twitch.tv/ta1yo_tv" target="_blank" rel="noopener">Ta1yo</a>;
                     EMEA &amp; NA are usually covered almost every time by official caster
                     <a href="https://www.twitch.tv/hoshimi0000" target="_blank" rel="noopener">hoshimi</a>.
                   </span>
@@ -538,11 +540,11 @@ function loadWatchOwcsView() {
                 </details>
               </li>
             </ul>
-            <p>First, find a way of watching that fits you.</p>
-            <p>OWCS is not a “learn every rule before you start” product.</p>
-            <p>Everyone’s path is different.</p>
+            <p>There’s no single “right” way to watch.</p>
+            <p>Start with whatever looks fun and jump in casually.</p>
             <p>
-              Finding one style that fits you is the fastest way to enjoy OWCS more.
+              Rules and flow can sink in while you watch.
+              Finding a style that fits you makes it easier to keep enjoying OWCS longer.
             </p>
           `,
           `
@@ -551,14 +553,16 @@ function loadWatchOwcsView() {
                 <details>
                   <summary class="watchowcs-tip-label">日本語実況で見たい</summary>
                   <span class="watchowcs-tip-body">
-                    OWCS Japan、Korea、Asia、世界大会の日本語配信
+                    OWCS Japan・Korea・Asia・世界大会では、日本語配信もお届けされています。
                   </span>
                 </details>
               </li>
               <li>
                 <details>
                   <summary class="watchowcs-tip-label">トップクラスの試合を見たい</summary>
-                  <span class="watchowcs-tip-body">OWCS Korea、国際大会</span>
+                  <span class="watchowcs-tip-body">
+                    OWCS Korea や国際大会がおすすめです。
+                  </span>
                 </details>
               </li>
               <li>
@@ -613,7 +617,7 @@ function loadWatchOwcsView() {
                     Twitchのチャンネルポイントによる勝敗予想に参加できます。<br>
                     配信者のウォッチパーティで見てみるのもおすすめです。
                     日本語なら、KR・JPは
-                    <a href="https://www.twitch.tv/ta1yo" target="_blank" rel="noopener">Ta1yo</a>、
+                    <a href="https://www.twitch.tv/ta1yo_tv" target="_blank" rel="noopener">Ta1yo</a>、
                     EMEA・NAは公式キャスターの
                     <a href="https://www.twitch.tv/hoshimi0000" target="_blank" rel="noopener">hoshimi</a>
                     がほぼ毎回配信してくれています。
@@ -631,12 +635,11 @@ function loadWatchOwcsView() {
                 </details>
               </li>
             </ul>
-            <p>まずは、自分なりの楽しみ方を見つけてください。</p>
-            <p>OWCSは、「ルールを全部覚えてから見る大会」ではありません。</p>
-            <p>楽しみ方は人それぞれです。</p>
+            <p>どう見るのが正しい、という決まりはありません。</p>
+            <p>まずは、好きそうなところから気軽に覗いてみてください。</p>
             <p>
-              まずは自分に合った観戦スタイルを一つ見つけること。
-              それが、OWCSをもっと楽しむための一番の近道です。
+              ルールや流れは、観戦しながら覚えていけば大丈夫です。
+              自分に合った楽しみ方が見つかると、もっと長く続けやすくなります。
             </p>
           `
         )}
