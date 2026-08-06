@@ -398,50 +398,21 @@ function loadWatchOwcsView() {
             <ul class="watchowcs-tip-list watchowcs-tip-list-accordion">
               <li>
                 <details>
-                  <summary class="watchowcs-tip-label">
-                    English cast (EMEA / NA / world) — YouTube
-                  </summary>
+                  <summary class="watchowcs-tip-label">Archive list (free)</summary>
                   <span class="watchowcs-tip-body">
                     <a href="https://www.youtube.com/@ow_esports/streams" target="_blank" rel="noopener">
-                      Archive list (free)
-                    </a>
-                  </span>
-                </details>
-              </li>
-              <li>
-                <details>
-                  <summary class="watchowcs-tip-label">
-                    Japanese cast (Japan / Korea / Asia / world) — YouTube<br>
-                    ※ Membership-only videos also include match-only edited highlights
-                  </summary>
-                  <span class="watchowcs-tip-body">
+                      English cast (EMEA / NA / world) — YouTube
+                    </a><br>
                     <a href="https://www.youtube.com/@ow_esports_jp/streams" target="_blank" rel="noopener">
-                      Archive list (free)
-                    </a>
-                  </span>
-                </details>
-              </li>
-              <li>
-                <details>
-                  <summary class="watchowcs-tip-label">
-                    Korean cast (Korea / Asia / world) — SOOP<br>
-                    ※ Membership-only content also includes open-mic videos and match-only edited highlights
-                  </summary>
-                  <span class="watchowcs-tip-body">
+                      Japanese cast (Japan / Korea / Asia / world) — YouTube
+                    </a><br>
+                    ※ Membership-only videos also include match-only edited highlights<br><br>
                     <a href="https://www.sooplive.com/station/owesports/vod/review" target="_blank" rel="noopener">
-                      Archive list (free)
-                    </a>
-                  </span>
-                </details>
-              </li>
-              <li>
-                <details>
-                  <summary class="watchowcs-tip-label">
-                    Thai cast (Pacific) — YouTube
-                  </summary>
-                  <span class="watchowcs-tip-body">
+                      Korean cast (Korea / Asia / world) — SOOP
+                    </a><br>
+                    ※ Membership-only content also includes open-mic videos and match-only edited highlights<br><br>
                     <a href="https://www.youtube.com/@roofesports/streams" target="_blank" rel="noopener">
-                      Archive list (free)
+                      Thai cast (Pacific) — YouTube
                     </a>
                   </span>
                 </details>
@@ -513,50 +484,21 @@ function loadWatchOwcsView() {
             <ul class="watchowcs-tip-list watchowcs-tip-list-accordion">
               <li>
                 <details>
-                  <summary class="watchowcs-tip-label">
-                    英語実況（EMEA / NA / 世界）— YouTube
-                  </summary>
+                  <summary class="watchowcs-tip-label">アーカイブ一覧のリンク（無料）</summary>
                   <span class="watchowcs-tip-body">
                     <a href="https://www.youtube.com/@ow_esports/streams" target="_blank" rel="noopener">
-                      アーカイブ一覧のリンク（無料）
-                    </a>
-                  </span>
-                </details>
-              </li>
-              <li>
-                <details>
-                  <summary class="watchowcs-tip-label">
-                    日本語実況（Japan / Korea / Asia / 世界）— YouTube<br>
-                    ※サブスク限定で、試合部分のみ抜粋編集した動画もあります
-                  </summary>
-                  <span class="watchowcs-tip-body">
+                      英語実況（EMEA / NA / 世界）— YouTube
+                    </a><br>
                     <a href="https://www.youtube.com/@ow_esports_jp/streams" target="_blank" rel="noopener">
-                      アーカイブ一覧のリンク（無料）
-                    </a>
-                  </span>
-                </details>
-              </li>
-              <li>
-                <details>
-                  <summary class="watchowcs-tip-label">
-                    韓国語実況（Korea / Asia / 世界）— SOOP<br>
-                    ※サブスク限定で、オープンマイク動画や、試合部分のみ抜粋編集した動画もあります
-                  </summary>
-                  <span class="watchowcs-tip-body">
+                      日本語実況（Japan / Korea / Asia / 世界）— YouTube
+                    </a><br>
+                    ※サブスク限定で、試合部分のみ抜粋編集した動画もあります<br><br>
                     <a href="https://www.sooplive.com/station/owesports/vod/review" target="_blank" rel="noopener">
-                      アーカイブ一覧のリンク（無料）
-                    </a>
-                  </span>
-                </details>
-              </li>
-              <li>
-                <details>
-                  <summary class="watchowcs-tip-label">
-                    タイ語実況（Pacific）— YouTube
-                  </summary>
-                  <span class="watchowcs-tip-body">
+                      韓国語実況（Korea / Asia / 世界）— SOOP
+                    </a><br>
+                    ※サブスク限定で、オープンマイク動画や、試合部分のみ抜粋編集した動画もあります<br><br>
                     <a href="https://www.youtube.com/@roofesports/streams" target="_blank" rel="noopener">
-                      アーカイブ一覧のリンク（無料）
+                      タイ語実況（Pacific）— YouTube
                     </a>
                   </span>
                 </details>
