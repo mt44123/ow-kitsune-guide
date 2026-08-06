@@ -28,7 +28,35 @@ function loadHowtoView() {
   app.innerHTML = `
     <div class="tools-page">
 
-      <div class="card faq-card">
+      <div class="card faq-card" id="howto-players-links">
+        <h3>
+          🔗 Find channels &amp; socials — PLAYERS<br>
+          選手のチャンネル・SNSを探す — PLAYERS
+        </h3>
+        ${siteText_(
+          `
+            <p>
+              Open a player page to check stream and SNS links
+              (Twitch / CHZZK / SOOP / YouTube and more).
+              We’re working on supporting katakana and Hangul search as much as possible.
+            </p>
+            <p>
+              <a href="/playerlinks" onclick="openPlayerlinksFromGuide_(); return false;">Open PLAYERS →</a>
+            </p>
+          `,
+          `
+            <p>
+              選手ページを開くと、Twitch / CHZZK / SOOP / YouTube や SNS のリンクを確認できます。
+              できるだけカタカナやハングルでも検索できるよう対応中です。
+            </p>
+            <p>
+              <a href="/playerlinks" onclick="openPlayerlinksFromGuide_(); return false;">PLAYERS を開く →</a>
+            </p>
+          `
+        )}
+      </div>
+
+      <div class="card faq-card" id="howto-overview">
         <h3>
           🦊 What you can do here<br>
           このサイトでできること
@@ -60,7 +88,42 @@ function loadHowtoView() {
         )}
       </div>
 
-      <div class="card faq-card">
+      <nav class="card faq-card howto-toc" aria-label="Detailed features">
+        ${siteText_(
+          `
+            <p><b>Detailed features</b></p>
+            <ol>
+              <li><a href="#howto-settings">Settings</a></li>
+              <li><a href="#howto-nav">Top navigation</a></li>
+              <li><a href="#howto-filters">Filters</a></li>
+              <li><a href="#howto-search">Search</a></li>
+              <li><a href="#howto-live">LIVE / ARCHIVE</a></li>
+              <li><a href="#howto-media">CLIP &amp; YouTube</a></li>
+              <li><a href="#howto-players">PLAYERS</a></li>
+              <li><a href="#howto-goats">★ MY GOATS</a></li>
+              <li><a href="#howto-muted">◆ MUTED</a></li>
+              <li><a href="#howto-help">Need more help?</a></li>
+            </ol>
+          `,
+          `
+            <p><b>詳しい機能はこちら</b></p>
+            <ol>
+              <li><a href="#howto-settings">Settings（設定）</a></li>
+              <li><a href="#howto-nav">Top navigation（上のナビ）</a></li>
+              <li><a href="#howto-filters">Filters（フィルター）</a></li>
+              <li><a href="#howto-search">Search（検索）</a></li>
+              <li><a href="#howto-live">LIVE / ARCHIVE</a></li>
+              <li><a href="#howto-media">CLIP &amp; YouTube</a></li>
+              <li><a href="#howto-players">PLAYERS</a></li>
+              <li><a href="#howto-goats">★ MY GOATS</a></li>
+              <li><a href="#howto-muted">◆ MUTED</a></li>
+              <li><a href="#howto-help">困ったとき</a></li>
+            </ol>
+          `
+        )}
+      </nav>
+
+      <div class="card faq-card" id="howto-settings">
         <h3>
           ⚙ Settings<br>
           設定
@@ -97,7 +160,7 @@ function loadHowtoView() {
         )}
       </div>
 
-      <div class="card faq-card">
+      <div class="card faq-card" id="howto-nav">
         <h3>
           🧭 Top navigation<br>
           上のナビ
@@ -134,7 +197,7 @@ function loadHowtoView() {
         )}
       </div>
 
-      <div class="card faq-card">
+      <div class="card faq-card" id="howto-filters">
         <h3>
           ▶ Filters<br>
           フィルター
@@ -157,7 +220,7 @@ function loadHowtoView() {
         )}
       </div>
 
-      <div class="card faq-card">
+      <div class="card faq-card" id="howto-search">
         <h3>
           🔍 Search<br>
           検索
@@ -180,7 +243,7 @@ function loadHowtoView() {
         )}
       </div>
 
-      <div class="card faq-card">
+      <div class="card faq-card" id="howto-live">
         <h3>
           🔴 LIVE / ARCHIVE
         </h3>
@@ -206,7 +269,7 @@ function loadHowtoView() {
         )}
       </div>
 
-      <div class="card faq-card">
+      <div class="card faq-card" id="howto-media">
         <h3>
           🎬 CLIP &amp; YouTube
         </h3>
@@ -228,7 +291,7 @@ function loadHowtoView() {
         )}
       </div>
 
-      <div class="card faq-card">
+      <div class="card faq-card" id="howto-players">
         <h3>
           ⭐ PLAYERS
         </h3>
@@ -256,7 +319,7 @@ function loadHowtoView() {
         )}
       </div>
 
-      <div class="card faq-card">
+      <div class="card faq-card" id="howto-goats">
         <h3>
           ★ MY GOATS
         </h3>
@@ -288,7 +351,7 @@ function loadHowtoView() {
         )}
       </div>
 
-      <div class="card faq-card">
+      <div class="card faq-card" id="howto-muted">
         <h3>
           ◆ MUTED
         </h3>
@@ -318,7 +381,7 @@ function loadHowtoView() {
         )}
       </div>
 
-      <div class="card faq-card">
+      <div class="card faq-card" id="howto-help">
         <h3>
           💬 Need more help?<br>
           困ったとき

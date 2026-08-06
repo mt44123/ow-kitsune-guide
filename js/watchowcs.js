@@ -959,6 +959,7 @@ function loadWatchOwcsView() {
                 <span class="watchowcs-tip-body">
                   Open a player page to check stream and SNS links
                   (Twitch / CHZZK / SOOP / YouTube and more).
+                  We’re working on supporting katakana and Hangul search as much as possible.
                 </span>
               </li>
               <li>
@@ -1006,17 +1007,6 @@ function loadWatchOwcsView() {
                   handy for watching and studying matches.
                 </span>
               </li>
-              <li>
-                <span class="watchowcs-tip-label">
-                  <a href="/howto" onclick="openStaticView_('howto'); return false;">
-                    HOW TO USE — site guide
-                  </a>
-                </span>
-                <span class="watchowcs-tip-body">
-                  Filters, search, ★ MY GOATS, ◆ MUTED, and more —
-                  the full tour of this site lives there.
-                </span>
-              </li>
             </ul>
           `,
           `
@@ -1032,6 +1022,7 @@ function loadWatchOwcsView() {
                 </span>
                 <span class="watchowcs-tip-body">
                   選手ページを開くと、Twitch / CHZZK / SOOP / YouTube や SNS のリンクを確認できます。
+                  できるだけカタカナやハングルでも検索できるよう対応中です。
                 </span>
               </li>
               <li>
@@ -1077,17 +1068,6 @@ function loadWatchOwcsView() {
                 <span class="watchowcs-tip-body">
                   公式スケジュール、配信チャンネル、Liquipedia、リプレイコードなど、
                   観戦や研究に便利なサイトをまとめています。
-                </span>
-              </li>
-              <li>
-                <span class="watchowcs-tip-label">
-                  <a href="/howto" onclick="openStaticView_('howto'); return false;">
-                    HOW TO USE — サイトの使い方
-                  </a>
-                </span>
-                <span class="watchowcs-tip-body">
-                  フィルター、検索、★ MY GOATS、◆ MUTED など、
-                  このサイト全体の使い方はこちらです。
                 </span>
               </li>
             </ul>
@@ -1252,7 +1232,7 @@ function buildOwcsSeasonFlowDiagram_(lang) {
       <div class="owcs-flow-grid">
         ${dCell(1, 1, `<span>${L.asia}</span>`, "owcs-flow-bar-cell owcs-flow-asia-bar", 1, 3)}
 
-        ${asiaTrack(1, "kr", L.kr, L.krOpen, L.krRegional)}
+        ${asiaTrack(1, "kr", L.kr, L.krOpen, L.krRegional, L.stagePathTop4)}
         ${asiaTrack(2, "jp", L.jp, L.jpOpen, L.jpRegional, L.stagePathTop2)}
         ${asiaTrack(3, "pac", L.pac, L.pacOpen, L.pacRegional, L.stagePathTop2)}
 
@@ -1316,7 +1296,7 @@ function buildOwcsSeasonFlowDiagram_(lang) {
             ${mobileTrack("kr", L.kr, [
               owcsFlowBox_(L.krOpen, L.openNoOfficialCast, "owcs-flow-box-open"),
               owcsFlowBox_(L.promo, L.promoAsiaNote, "owcs-flow-box-soft"),
-              owcsFlowBox_(L.krRegional, L.stagePath, "owcs-flow-box-owcs owcs-flow-box-owcs-kr"),
+              owcsFlowBox_(L.krRegional, L.stagePathTop4, "owcs-flow-box-owcs owcs-flow-box-owcs-kr"),
               owcsFlowBox_(L.asiaChampTitle, L.asiaNote, "owcs-flow-box-owcs owcs-flow-box-owcs-asia"),
               owcsFlowBox_(L.worldTitle, L.worldEvents, "owcs-flow-box-owcs owcs-flow-box-owcs-world")
             ])}
@@ -1439,6 +1419,7 @@ const OWCS_FLOW_COPY_EN_ = {
   pacRegional: "OWCS Pacific",
   stagePath: "Round robin → tournament<br>Top 2–3 advance",
   stagePathTop2: "Round robin → tournament<br>Top 2 advance",
+  stagePathTop4: "Round robin → tournament<br>Top 4 advance",
   asiaChampTitle: "OWCS Asia<br>(offline)",
   asiaNote:
     "Group round robin → tournament<br>Top 2–3 advance<br><br>※ For some events (e.g. EWC), there is no Asia event and Japan / Pacific #1 and Korea’s top 2–3 may advance directly",
@@ -1480,6 +1461,7 @@ const OWCS_FLOW_COPY_JP_ = {
   pacRegional: "OWCS Pacific",
   stagePath: "総当たり戦→トーナメント戦<br>上位2〜3チームが進出",
   stagePathTop2: "総当たり戦→トーナメント戦<br>上位2チームが進出",
+  stagePathTop4: "総当たり戦→トーナメント戦<br>上位4チームが進出",
   asiaChampTitle: "OWCS Asia<br>（オフライン）",
   asiaNote:
     "グループ別総当たり戦→トーナメント戦<br>上位2〜3チームが進出<br><br>※EWC等大会によっては、Asia大会なしで、日本・パシフィック1位、韓国上位2〜3チームが直接進出できる場合もあります",

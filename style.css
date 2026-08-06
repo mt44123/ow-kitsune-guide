@@ -3786,6 +3786,15 @@ color:var(--text-main);
   background:color-mix(in srgb, var(--accent) 10%, var(--bg-main));
 }
 
+.howto-toc ol{
+  margin:8px 0 0;
+  padding-left:1.3em;
+}
+
+.howto-toc p{
+  margin:0;
+}
+
 .faq-card .owcs-sitetext-tip{
   margin-top:14px;
   padding:12px 14px;
