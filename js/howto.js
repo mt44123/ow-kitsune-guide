@@ -35,6 +35,19 @@ function loadHowtoView() {
         </h3>
         ${siteText_(
           `
+            <p class="owcs-sitetext-tip">
+              ※ Open the ⚙ menu (top right) and set <b>Site Text</b> to
+              English or Japanese — it’s much easier to read.
+            </p>
+          `,
+          `
+            <p class="owcs-sitetext-tip">
+              ※右上の⚙マークから、<b>Site Text</b>設定を英/日どちらかに切り替えると読みやすいです。
+            </p>
+          `
+        )}
+        ${siteText_(
+          `
             <ul class="watchowcs-tip-list">
               <li>
                 <span class="watchowcs-tip-label">
