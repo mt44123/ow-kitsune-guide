@@ -28,34 +28,6 @@ function loadHowtoView() {
   app.innerHTML = `
     <div class="tools-page">
 
-      <div class="card faq-card" id="howto-players-links">
-        <h3>
-          🔗 Find channels &amp; socials — PLAYERS<br>
-          選手のチャンネル・SNSを探す — PLAYERS
-        </h3>
-        ${siteText_(
-          `
-            <p>
-              Open a player page to check stream and SNS links
-              (Twitch / CHZZK / SOOP / YouTube and more).
-              We’re working on supporting katakana and Hangul search as much as possible.
-            </p>
-            <p>
-              <a href="/playerlinks" onclick="openPlayerlinksFromGuide_(); return false;">Open PLAYERS →</a>
-            </p>
-          `,
-          `
-            <p>
-              選手ページを開くと、Twitch / CHZZK / SOOP / YouTube や SNS のリンクを確認できます。
-              できるだけカタカナやハングルでも検索できるよう対応中です。
-            </p>
-            <p>
-              <a href="/playerlinks" onclick="openPlayerlinksFromGuide_(); return false;">PLAYERS を開く →</a>
-            </p>
-          `
-        )}
-      </div>
-
       <div class="card faq-card" id="howto-overview">
         <h3>
           🦊 What you can do here<br>
@@ -63,25 +35,127 @@ function loadHowtoView() {
         </h3>
         ${siteText_(
           `
-            <ul>
+            <p>
+              After watching OWCS, use this site to find players and keep following them.
+            </p>
+            <ul class="watchowcs-tip-list">
               <li>
-                An unofficial fan site for checking which Overwatch pro players are
-                live right now — Twitch, CHZZK, SOOP, Bilibili, and more in one place
+                <span class="watchowcs-tip-label">
+                  <a href="/new" onclick="openNewLiveFromHowto_(); return false;">
+                    Watch players live — LIVE
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  Check which Overwatch pro players are live right now —
+                  Twitch / CHZZK / SOOP / Bilibili and more in one place.
+                </span>
               </li>
               <li>
-                You can also browse clips &amp; YouTube and player link collections
+                <span class="watchowcs-tip-label">
+                  <a href="/playerlinks" onclick="openPlayerlinksFromGuide_(); return false;">
+                    Find channels &amp; socials — PLAYERS
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  Open a player page to check stream and SNS links
+                  (Twitch / CHZZK / SOOP / YouTube and more).
+                  We’re working on supporting katakana and Hangul search as much as possible.
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/goats" onclick="openFavoritesFromGuide_(); return false;">
+                    Register players to ★ MY GOATS
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  Tap ☆ / ★ on a card to save players. Then use the ★ tab on LIVE /
+                  media, or Live Notifications → MY GOATS, to catch them easily.
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/youtube" onclick="openMediaFromGuide_(); return false;">
+                    Watch players’ clips &amp; videos — CLIP&amp;YOUTUBE
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  Twitch has clips — and CHZZK / SOOP do too.
+                  Browse them together on CLIP&amp;YOUTUBE.
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">
+                    USEFUL LINKS — schedules &amp; more
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  Official schedule, cast channels, Liquipedia, and replay codes —
+                  handy for watching and studying matches.
+                </span>
               </li>
             </ul>
           `,
           `
-            <ul>
+            <p>
+              OWCSを見たら、このサイトで選手を見つけて追いかけやすくできます。
+            </p>
+            <ul class="watchowcs-tip-list">
               <li>
-                Overwatch のプロプレイヤーで「今」誰が配信しているかを、
-                Twitch / CHZZK / SOOP / Bilibili などからまとめてチェックできる
-                非公式ファンサイトです
+                <span class="watchowcs-tip-label">
+                  <a href="/new" onclick="openNewLiveFromHowto_(); return false;">
+                    選手の配信を見る — LIVE
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  Overwatch のプロプレイヤーで「今」誰が配信しているかを、
+                  Twitch / CHZZK / SOOP / Bilibili などからまとめてチェックできます。
+                </span>
               </li>
               <li>
-                CLIP &amp; YouTube・プレイヤーのリンク集なども一覧で確認できます
+                <span class="watchowcs-tip-label">
+                  <a href="/playerlinks" onclick="openPlayerlinksFromGuide_(); return false;">
+                    選手のチャンネル・SNSを探す — PLAYERS
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  選手ページを開くと、Twitch / CHZZK / SOOP / YouTube や SNS のリンクを確認できます。
+                  できるだけカタカナやハングルでも検索できるよう対応中です。
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/goats" onclick="openFavoritesFromGuide_(); return false;">
+                    選手を★ MY GOATS に登録する
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  カードの ☆ / ★ でお気に入り保存。LIVE やメディアの ★ タブ、
+                  通知の MY GOATS で選手を追いやすくなります。
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/youtube" onclick="openMediaFromGuide_(); return false;">
+                    選手のクリップ・動画を見る — CLIP&amp;YOUTUBE
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  Twitchにあるクリップ機能は、CHZZKやSOOPにもあります。
+                  CLIP&amp;YOUTUBEでまとめて確認できます。
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">
+                    USEFUL LINKS — 観戦に役立つリンク
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  公式スケジュール、配信チャンネル、Liquipedia、リプレイコードなど、
+                  観戦や研究に便利なサイトをまとめています。
+                </span>
               </li>
             </ul>
           `
@@ -408,4 +482,15 @@ function loadHowtoView() {
 
     </div>
   `;
+}
+
+function openNewLiveFromHowto_() {
+  settingsMenu?.classList.add("settings-hidden");
+  const shouldPush = currentView !== "new";
+  currentView = "new";
+  currentLiveView = "new";
+  setViewUrl_("new", shouldPush);
+  updateNavState(currentView);
+  loadView(currentView);
+  window.scrollTo(0, 0);
 }
