@@ -1,22 +1,36 @@
 let liveBackgroundRefreshPromise_ = null;
 
+function isLiveCacheFresh_() {
+  return !!(
+    liveCache &&
+    Date.now() - liveCacheTime < LIVE_CLIENT_CACHE_MS
+  );
+}
+
+function applyLivePayload_(data) {
+  if (!data || typeof data !== "object") return;
+
+  liveCache = data;
+  liveCacheTime = Date.now();
+
+  if (data.counts) {
+    updateAllButtonCounts(data.counts);
+  }
+}
+
 function loadLiveView(view) {
   setViewUrl_(view);
 
   resetSeo_();
   
   viewNote.textContent = "";
-  const now = Date.now();
 
   pageTitle.textContent =
     titles[view] || view.toUpperCase();
 
   setRandomVoiceLine();
 
-  if (
-  liveCache &&
-  now - liveCacheTime < LIVE_CLIENT_CACHE_MS
-  ) {
+  if (isLiveCacheFresh_()) {
     requestId++;
     stopFakeProgress();
     
@@ -46,13 +60,7 @@ function loadLiveView(view) {
 
       finishFakeProgress();
 
-      liveCache = data;
-      liveCacheTime = Date.now();
-
-      if (data.counts) {
-        updateAllButtonCounts(data.counts);
-      }
-
+      applyLivePayload_(data);
       renderLiveFromCache(view);
     })
     .catch(error => {
@@ -79,12 +87,7 @@ function refreshLiveCacheInBackground_() {
 
   liveBackgroundRefreshPromise_ = fetchConfigApi_("new")
     .then(data => {
-      liveCache = data;
-      liveCacheTime = Date.now();
-
-      if (data.counts) {
-        updateAllButtonCounts(data.counts);
-      }
+      applyLivePayload_(data);
 
       if (isLiveView(currentView)) {
         renderLiveFromCache(currentView);
@@ -99,6 +102,51 @@ function refreshLiveCacheInBackground_() {
     });
 
   return liveBackgroundRefreshPromise_;
+}
+
+/**
+ * Warm LIVE in memory while the user is on other tabs.
+ * Memory only + 60s TTL — same freshness budget as on-LIVE cache.
+ * Does not paint non-live views.
+ */
+function prefetchLiveData_() {
+  if (isLiveCacheFresh_()) return;
+  if (liveBackgroundRefreshPromise_) return;
+
+  // Current LIVE load already owns the network path.
+  if (isLiveView(currentView) && !liveCache) return;
+
+  const run = () => {
+    if (isLiveCacheFresh_()) return;
+    if (liveBackgroundRefreshPromise_) return;
+    if (isLiveView(currentView) && gasFetchInflightByView_?.new) return;
+
+    refreshLiveCacheInBackground_();
+  };
+
+  if (typeof requestIdleCallback === "function") {
+    requestIdleCallback(run, { timeout: 2500 });
+  } else {
+    setTimeout(run, 1200);
+  }
+}
+
+function setupLivePrefetchListeners_() {
+  if (setupLivePrefetchListeners_.done) return;
+  setupLivePrefetchListeners_.done = true;
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState !== "visible") return;
+
+    if (isLiveCacheFresh_()) return;
+
+    if (isLiveView(currentView)) {
+      refreshLiveCacheInBackground_();
+      return;
+    }
+
+    prefetchLiveData_();
+  });
 }
 
 function renderLiveFromCache(view) {

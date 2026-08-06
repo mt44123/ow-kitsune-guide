@@ -4188,6 +4188,13 @@ async function init() {
   setRandomVoiceLine();
 
   // Warm slower tabs after first paint.
+  // LIVE first: small payload, most common next tab.
+  setupLivePrefetchListeners_();
+
+  if (!isLiveView(currentView)) {
+    prefetchLiveData_();
+  }
+
   if (currentView !== "teams" && currentView !== "team") {
     prefetchTeamsData_();
   }

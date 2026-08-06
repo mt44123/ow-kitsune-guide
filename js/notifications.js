@@ -251,16 +251,18 @@ function refreshLiveNotificationsOnly_() {
 
   fetchConfigApi_("new")
     .then(data => {
-      const players = data.players || [];
+      if (typeof applyLivePayload_ === "function") {
+        applyLivePayload_(data);
+      } else {
+        liveCache = data;
+        liveCacheTime = Date.now();
 
-      liveCache = data;
-      liveCacheTime = Date.now();
-
-      if (data.counts) {
-        updateAllButtonCounts(data.counts);
+        if (data.counts) {
+          updateAllButtonCounts(data.counts);
+        }
       }
 
-      checkLiveNotifications_(players);
+      checkLiveNotifications_(data.players || []);
     })
     .catch(error => {
       console.error("Live notification refresh failed:", error);
