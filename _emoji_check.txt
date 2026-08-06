@@ -1,0 +1,33 @@
+74: <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦊</text></svg>">
+  🦊 U+1F98A
+122: Track Twitch, CHZZK, SOOP, Bilibili, YouTube, birthdays and player links in one place.
+352: <span class="settings-chevron">›</span>
+  › U+203A
+377: <span class="settings-chevron">›</span>
+  › U+203A
+407: <span class="settings-chevron">›</span>
+  › U+203A
+432: <span class="settings-chevron">›</span>
+  › U+203A
+549: ▶ Filters
+  ▶ U+25B6
+556: <button data-view="goats">★</button>
+  ★ U+2605
+575: <button class="clip-tab-goats clip-icon-tab" data-view="mediagoats">
+648: <button data-view="archivegoats">★</button>
+  ★ U+2605
+668: <button data-view="birthdays">🎂HBD</button>
+  🎂 U+1F382
+669: <button data-view="favorites">★</button>
+  ★ U+2605
+670: <button data-view="muted">◆</button>
+  ◆ U+25C6
+686: placeholder="🔍 Search player, team, nationality, title..."
+  🔍 U+1F50D
+739: © 2026 OW KITSUNE GUIDE
+  © U+00A9
+743: 🦊OW KITSUNE GUIDE is an unofficial fan-made project and is not affiliated with
+  🦊 U+1F98A
+760: <script src="/js/favorites.js?v=1.2.9.2" defer></script>
+763: <script src="/js/birthdays.js?v=1.2.9.2" defer></script>
+764: <script src="/js/goatscanvas-birthdays.js?v=1.2.9.2" defer></script>
