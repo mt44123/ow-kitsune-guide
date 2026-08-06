@@ -395,26 +395,56 @@ function loadWatchOwcsView() {
               If you can’t watch live, archives are recommended
               (Twitch free VODs may not always remain).
             </p>
-            <ul>
+            <ul class="watchowcs-tip-list watchowcs-tip-list-accordion">
               <li>
-                <a href="https://www.youtube.com/@ow_esports/streams" target="_blank" rel="noopener">
-                  English cast (EMEA / NA / world) — YouTube
-                </a>
+                <details>
+                  <summary class="watchowcs-tip-label">
+                    English cast (EMEA / NA / world) — YouTube
+                  </summary>
+                  <span class="watchowcs-tip-body">
+                    <a href="https://www.youtube.com/@ow_esports/streams" target="_blank" rel="noopener">
+                      Archive list (free)
+                    </a>
+                  </span>
+                </details>
               </li>
               <li>
-                <a href="https://www.youtube.com/@ow_esports_jp/streams" target="_blank" rel="noopener">
-                  Japanese cast (Japan / Korea / Asia / world) — YouTube
-                </a>
+                <details>
+                  <summary class="watchowcs-tip-label">
+                    Japanese cast (Japan / Korea / Asia / world) — YouTube<br>
+                    ※ Membership-only videos also include match-only edited highlights
+                  </summary>
+                  <span class="watchowcs-tip-body">
+                    <a href="https://www.youtube.com/@ow_esports_jp/streams" target="_blank" rel="noopener">
+                      Archive list (free)
+                    </a>
+                  </span>
+                </details>
               </li>
               <li>
-                <a href="https://www.sooplive.com/station/owesports/vod/review" target="_blank" rel="noopener">
-                  Korean cast (Korea / Asia / world) — SOOP
-                </a>
+                <details>
+                  <summary class="watchowcs-tip-label">
+                    Korean cast (Korea / Asia / world) — SOOP<br>
+                    ※ Membership-only content also includes open-mic videos and match-only edited highlights
+                  </summary>
+                  <span class="watchowcs-tip-body">
+                    <a href="https://www.sooplive.com/station/owesports/vod/review" target="_blank" rel="noopener">
+                      Archive list (free)
+                    </a>
+                  </span>
+                </details>
               </li>
               <li>
-                <a href="https://www.youtube.com/@roofesports/streams" target="_blank" rel="noopener">
-                  Thai cast (Pacific) — YouTube
-                </a>
+                <details>
+                  <summary class="watchowcs-tip-label">
+                    Thai cast (Pacific) — YouTube
+                  </summary>
+                  <span class="watchowcs-tip-body">
+                    <a href="https://www.youtube.com/@roofesports/streams" target="_blank" rel="noopener">
+                      Archive list (free)
+                    </a>
+                  </span>
+                </details>
               </li>
             </ul>
             ${buildOwcsLocalWatchTimesHtml_()}
@@ -480,26 +510,56 @@ function loadWatchOwcsView() {
               リアルタイムで見られない場合は、YouTubeアーカイブがおすすめです
               （Twitchでは無料VODが残らない場合があります）。
             </p>
-            <ul>
+            <ul class="watchowcs-tip-list watchowcs-tip-list-accordion">
               <li>
-                <a href="https://www.youtube.com/@ow_esports/streams" target="_blank" rel="noopener">
-                  英語実況（EMEA / NA / 世界）— YouTube
-                </a>
+                <details>
+                  <summary class="watchowcs-tip-label">
+                    英語実況（EMEA / NA / 世界）— YouTube
+                  </summary>
+                  <span class="watchowcs-tip-body">
+                    <a href="https://www.youtube.com/@ow_esports/streams" target="_blank" rel="noopener">
+                      アーカイブ一覧のリンク（無料）
+                    </a>
+                  </span>
+                </details>
               </li>
               <li>
-                <a href="https://www.youtube.com/@ow_esports_jp/streams" target="_blank" rel="noopener">
-                  日本語実況（Japan / Korea / Asia / 世界）— YouTube
-                </a>
+                <details>
+                  <summary class="watchowcs-tip-label">
+                    日本語実況（Japan / Korea / Asia / 世界）— YouTube<br>
+                    ※サブスク限定で、試合部分のみ抜粋編集した動画もあります
+                  </summary>
+                  <span class="watchowcs-tip-body">
+                    <a href="https://www.youtube.com/@ow_esports_jp/streams" target="_blank" rel="noopener">
+                      アーカイブ一覧のリンク（無料）
+                    </a>
+                  </span>
+                </details>
               </li>
               <li>
-                <a href="https://www.sooplive.com/station/owesports/vod/review" target="_blank" rel="noopener">
-                  韓国語実況（Korea / Asia / 世界）— SOOP
-                </a>
+                <details>
+                  <summary class="watchowcs-tip-label">
+                    韓国語実況（Korea / Asia / 世界）— SOOP<br>
+                    ※サブスク限定で、オープンマイク動画や、試合部分のみ抜粋編集した動画もあります
+                  </summary>
+                  <span class="watchowcs-tip-body">
+                    <a href="https://www.sooplive.com/station/owesports/vod/review" target="_blank" rel="noopener">
+                      アーカイブ一覧のリンク（無料）
+                    </a>
+                  </span>
+                </details>
               </li>
               <li>
-                <a href="https://www.youtube.com/@roofesports/streams" target="_blank" rel="noopener">
-                  タイ語実況（Pacific）— YouTube
-                </a>
+                <details>
+                  <summary class="watchowcs-tip-label">
+                    タイ語実況（Pacific）— YouTube
+                  </summary>
+                  <span class="watchowcs-tip-body">
+                    <a href="https://www.youtube.com/@roofesports/streams" target="_blank" rel="noopener">
+                      アーカイブ一覧のリンク（無料）
+                    </a>
+                  </span>
+                </details>
               </li>
             </ul>
             <h3 class="owcs-fun-subhead">リアルタイムで観戦できる時間帯（日本時間・目安）</h3>
@@ -782,21 +842,133 @@ function loadWatchOwcsView() {
           </h3>
           ${siteText_(
             `
-              <p>Each stage typically follows this path:</p>
-              <ul>
-                <li>Open Qualifier (or FACEIT pathway in some regions)</li>
-                <li>Promotion &amp; Relegation</li>
-                <li>Regular Season (Group Stage when teams are split into groups; Korea also has a “Seeding Decider” that sets tournament matchups)</li>
-                <li>Playoffs (Korea also has an “LCQ,” where lower Round Robin teams fight to stay alive)</li>
+              <p>Each stage typically follows this path. Tap an item for details:</p>
+              <ul class="watchowcs-tip-list watchowcs-tip-list-accordion">
+                <li>
+                  <details>
+                    <summary class="watchowcs-tip-label">
+                      Open Qualifiers (Open Qualifier / FACEIT pathway)
+                    </summary>
+                    <span class="watchowcs-tip-body">
+                      The entry point into OWCS.<br>
+                      If you meet the eligibility requirements, anyone can enter—pro or amateur.<br><br>
+                      Match format varies by region and season (group round robin, tournament, and so on).<br><br>
+                      There is generally no official cast, but when participating players stream personally, you can still follow the match from a player’s point of view.<br><br>
+                      In EMEA and NA, the “FACEIT League” doubles as the OWCS qualifying pathway.
+                    </span>
+                  </details>
+                </li>
+                <li>
+                  <details>
+                    <summary class="watchowcs-tip-label">
+                      Promotion &amp; Relegation
+                    </summary>
+                    <span class="watchowcs-tip-body">
+                      A roster shuffle that decides which teams get to play in OWCS.<br><br>
+                      Teams that climb Open Qualifiers face teams that finished near the bottom last season, competing for limited spots.<br><br>
+                      EMEA and NA have official broadcasts for these matches.<br><br>
+                      Other regions generally have no official cast, but you may still watch if a participating player is streaming personally.
+                    </span>
+                  </details>
+                </li>
+                <li>
+                  <details>
+                    <summary class="watchowcs-tip-label">
+                      Round robin (Regular Season / Group Stage / Round Robin)
+                    </summary>
+                    <span class="watchowcs-tip-body">
+                      Each team plays the others in turn. Standings are decided by wins and losses, maps taken, head-to-head results, and similar tiebreakers.<br><br>
+                      Some regions and events split teams into groups—then it is also called a “Group Stage.”<br><br>
+                      Top teams advance to the next tournament stage (“playoffs”). Bottom teams go into the next season’s promotion &amp; relegation and fight Open Qualifier winners for spots.<br><br>
+                      In Korea, a round-robin “Seeding Decider” is sometimes used to set playoff matchups and seeding.<br><br>
+                      In China, a “Swiss-style” round may appear. Teams with the same or similar current records play each other, so matches between similarly strong teams become more common as the stage progresses.
+                    </span>
+                  </details>
+                </li>
+                <li>
+                  <details>
+                    <summary class="watchowcs-tip-label">
+                      Tournament (Playoffs)
+                    </summary>
+                    <span class="watchowcs-tip-body">
+                      Teams that made the cut battle for world-event slots and regional titles.<br>
+                      Events mainly use one of these two formats.<br><br>
+                      <b>Single elimination</b><br>
+                      One loss and you’re out. Every match is win-or-go-home, so tension stays high.<br><br>
+                      <b>Double elimination</b><br>
+                      You still have a chance until you lose twice.<br><br>
+                      Teams start in the “Upper Bracket.” A loss moves you to the “Lower Bracket.” Lose once more on the lower side and you’re out—but keep winning and you can still chase the title or a world berth after that first defeat.<br><br>
+                      Korea may also run an “LCQ (Last Chance Qualifier),” a tournament where lower round-robin teams fight to stay alive.
+                    </span>
+                  </details>
+                </li>
               </ul>
             `,
             `
-              <p>各ステージの中身は、だいたい次の流れです。</p>
-              <ul>
-                <li>オープン予選（オープン・クオリファイア）※または FACEIT 経路</li>
-                <li>昇格戦・降格戦（プロモーション・レリゲーション）</li>
-                <li>総当たり戦（レギュラーシーズン。グループ分けされる場合はグループステージ。Koreaにはトーナメント戦での組み合わせを決める「シーディングディサイダー」もあります）</li>
-                <li>トーナメント戦（プレイオフ・Koreaには、総当たり戦の下位チームが生き残りを懸けて戦う「LCQ」もあります）</li>
+              <p>各ステージの中身は、だいたい次の流れです。項目をタップすると詳しく見られます。</p>
+              <ul class="watchowcs-tip-list watchowcs-tip-list-accordion">
+                <li>
+                  <details>
+                    <summary class="watchowcs-tip-label">
+                      オープン予選（オープン・クオリファイア／FACEIT経路）
+                    </summary>
+                    <span class="watchowcs-tip-body">
+                      OWCSへの入口となる予選です。<br>
+                      参加条件を満たしていれば、プロ・アマチュアを問わず、誰でも参加できます。<br><br>
+                      試合形式は、グループ別総当たり戦や、トーナメント戦など、地域や開催時期によって異なります。<br><br>
+                      基本的に公式配信はありませんが、出場選手が個人配信を行っている場合は、選手目線で試合を楽しめることもあります。<br><br>
+                      なお、EMEA・NA地域では、「FACEIT League」がOWCS予選を兼ねています。
+                    </span>
+                  </details>
+                </li>
+                <li>
+                  <details>
+                    <summary class="watchowcs-tip-label">
+                      昇格戦・降格戦（プロモーション・レリゲーション）
+                    </summary>
+                    <span class="watchowcs-tip-body">
+                      OWCSへ出場できるチームを決める入れ替え戦です。<br><br>
+                      オープン予選を勝ち上がったチームと、前シーズンで下位になったチームが対戦し、限られた出場枠を争います。<br><br>
+                      EMEA・NA地域では公式配信があります。<br><br>
+                      その他の地域では基本的に公式配信はありませんが、出場選手が個人配信を行っている場合は、試合を視聴できることがあります。
+                    </span>
+                  </details>
+                </li>
+                <li>
+                  <details>
+                    <summary class="watchowcs-tip-label">
+                      総当たり戦（レギュラーシーズン／グループステージ／ラウンドロビン）
+                    </summary>
+                    <span class="watchowcs-tip-body">
+                      各チームがほかのチームと順番に対戦し、勝敗数・獲得マップ数・直接対決の結果等によって順位を決めるステージです。<br><br>
+                      地域や大会によっては、複数のグループに分かれて行われることもあり、その場合は「グループステージ」と呼ばれます。<br><br>
+                      成績上位のチームは、次段階のトーナメント戦「プレイオフ」へ進出します。<br>
+                      一方、下位のチームは次のシーズンの昇格戦・降格戦に回り、予選を勝ち上がったチームと出場枠を争います。<br><br>
+                      Koreaでは、プレイオフの対戦相手や組み合わせを決めるために、「シーディング・ディサイダー」と呼ばれる総当たり戦が行われることもあります。<br><br>
+                      Chinaでは、「スイス式」と呼ばれるラウンドが行われることもあります。<br>
+                      スイス式では、その時点での勝敗数が同じ、または近いチーム同士が対戦します。試合が進むにつれて、実力の近いチーム同士がぶつかりやすくなる形式です。
+                    </span>
+                  </details>
+                </li>
+                <li>
+                  <details>
+                    <summary class="watchowcs-tip-label">
+                      トーナメント戦（プレイオフ）
+                    </summary>
+                    <span class="watchowcs-tip-body">
+                      レギュラーシーズンなどを勝ち上がったチームが、世界大会への出場枠や地域王者の座を懸けて戦うステージです。<br>
+                      大会によって、主に次の2つの形式が採用されます。<br><br>
+                      <b>シングルエリミネーション</b><br>
+                      1回負けた時点で敗退となる形式です。<br>
+                      すべての試合が後のない戦いになるため、緊張感の高い試合を楽しめます。<br><br>
+                      <b>ダブルエリミネーション</b><br>
+                      「2回負けるまではチャンスが残るトーナメント」です。<br><br>
+                      最初は「アッパーブラケット」と呼ばれる組み合わせで戦い、敗北すると「ローワーブラケット」へ移動します。<br>
+                      ローワー側でもう一度負けると敗退となりますが、そこで勝ち続ければ、敗北後も優勝や世界大会出場を目指せます。<br><br>
+                      Koreaでは、総当たり戦の下位チームが生き残りを懸けて戦う「LCQ（ラストチャンス・クオリファイア）」というトーナメント戦もあります。
+                    </span>
+                  </details>
+                </li>
               </ul>
             `
           )}
