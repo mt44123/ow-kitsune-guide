@@ -1265,7 +1265,8 @@ const OWCS_FLOW_COPY_EN_ = {
   stagePath: "Round robin → tournament<br>Top 2–3 advance",
   stagePathTop2: "Round robin → tournament<br>Top 2 advance",
   asiaChampTitle: "OWCS Asia<br>(offline)",
-  asiaNote: "Group round robin → tournament<br>Top 2–3 advance",
+  asiaNote:
+    "Group round robin → tournament<br>Top 2–3 advance<br>※ For some events (e.g. EWC), there is no Asia event and Japan / Pacific #1 and Korea’s top 2–3 may advance directly",
   cnOpen: "China Open Quals",
   cnMain: "OWCS China",
   cnStagePath: "Swiss-style tournament → round robin → tournament<br>Top 2–3 advance",
@@ -1305,7 +1306,8 @@ const OWCS_FLOW_COPY_JP_ = {
   stagePath: "総当たり戦→トーナメント戦<br>上位2〜3チームが進出",
   stagePathTop2: "総当たり戦→トーナメント戦<br>上位2チームが進出",
   asiaChampTitle: "OWCS Asia<br>（オフライン）",
-  asiaNote: "グループ別総当たり戦→トーナメント戦<br>上位2〜3チームが進出",
+  asiaNote:
+    "グループ別総当たり戦→トーナメント戦<br>上位2〜3チームが進出<br>※EWC等大会によっては、Asia大会なしで、日本・パシフィック1位、韓国上位2〜3チームが直接進出できる場合もあります",
   cnOpen: "中国オープン予選",
   cnMain: "OWCS China",
   cnStagePath: "スイス式トーナメント戦→総当たり戦→トーナメント戦<br>上位2〜3チームが進出",
