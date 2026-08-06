@@ -534,7 +534,8 @@ function loadWatchOwcsView() {
                   <summary class="watchowcs-tip-label">Want your favorites’ games</summary>
                   <span class="watchowcs-tip-body">
                     Open a Liquipedia player or team page — match schedules sit at the top.
-                    On this site, tap a player or team name to open Liquipedia.<br>
+                    (e.g.
+                    <a href="https://liquipedia.net/overwatch/KSG" target="_blank" rel="noopener">KSG on Liquipedia</a>)<br>
                     Fan Discords also often share which events that player is entering.
                   </span>
                 </details>
@@ -629,7 +630,8 @@ function loadWatchOwcsView() {
                   <summary class="watchowcs-tip-label">推しの試合を見たい</summary>
                   <span class="watchowcs-tip-body">
                     Liquipediaの選手ページ・チームページを開くと、上部に試合予定が表示されます。
-                    このサイトでは、チーム名や選手名をクリックするとLiquipediaを開けます。<br>
+                    （例:
+                    <a href="https://liquipedia.net/overwatch/KSG" target="_blank" rel="noopener">KSGのLiquipedia</a>）<br>
                     あわせて、推し選手のファンDiscordに入ると、どの大会に出るか教えてもらえることも多いです。
                   </span>
                 </details>
