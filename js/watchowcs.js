@@ -342,11 +342,46 @@ function loadWatchOwcsView() {
         ${siteText_(
           `
             <h3 class="owcs-fun-subhead">Platforms (free)</h3>
-            <ul>
-              <li>Twitch</li>
-              <li>YouTube</li>
-              <li>SOOP (Korea)</li>
-              <li>Bilibili (China)</li>
+            <ul class="watchowcs-tip-list watchowcs-tip-list-accordion">
+              <li>
+                <details>
+                  <summary class="watchowcs-tip-label">Twitch</summary>
+                  <span class="watchowcs-tip-body">
+                    <a href="https://www.twitch.tv/ow_esports" target="_blank" rel="noopener">English cast (OWCS EMEA/NA)</a><br>
+                    <a href="https://www.twitch.tv/ow_esports_jp" target="_blank" rel="noopener">Japanese cast (OWCS JP/KR)</a><br>
+                    <a href="https://www.twitch.tv/ow_esports_th" target="_blank" rel="noopener">Thai cast (OWCS Pacific)</a>
+                  </span>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary class="watchowcs-tip-label">YouTube</summary>
+                  <span class="watchowcs-tip-body">
+                    <a href="https://www.youtube.com/c/ow_esports" target="_blank" rel="noopener">English cast (OWCS EMEA/NA)</a><br>
+                    <a href="https://youtube.com/@ow_esports_jp" target="_blank" rel="noopener">Japanese cast (OWCS JP/KR)</a><br>
+                    <a href="https://youtube.com/@roofesports" target="_blank" rel="noopener">Thai cast (OWCS Pacific)</a>
+                  </span>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary class="watchowcs-tip-label">SOOP (Korea)</summary>
+                  <span class="watchowcs-tip-body">
+                    <a href="https://play.sooplive.com/owesports/295314607" target="_blank" rel="noopener">Korean cast (OWCS KR)</a><br>
+                    <a href="https://play.sooplive.com/owesportsen/null" target="_blank" rel="noopener">English cast (OWCS EMEA/NA)</a><br>
+                    <a href="https://play.sooplive.com/owesportsjp/295314613" target="_blank" rel="noopener">Japanese cast (OWCS JP/KR)</a><br>
+                    <a href="https://play.sooplive.com/owesportsth" target="_blank" rel="noopener">Thai cast (OWCS Pacific)</a>
+                  </span>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary class="watchowcs-tip-label">Bilibili (China)</summary>
+                  <span class="watchowcs-tip-body">
+                    <a href="https://live.bilibili.com/23612045" target="_blank" rel="noopener">Chinese cast (OWCS China)</a>
+                  </span>
+                </details>
+              </li>
             </ul>
             <p>
               Japanese casts are available for OWCS Japan, Korea, Asia, and world events.
@@ -392,11 +427,46 @@ function loadWatchOwcsView() {
           `,
           `
             <h3 class="owcs-fun-subhead">配信プラットフォーム（無料）</h3>
-            <ul>
-              <li>Twitch</li>
-              <li>YouTube</li>
-              <li>SOOP（韓国）</li>
-              <li>Bilibili（中国）</li>
+            <ul class="watchowcs-tip-list watchowcs-tip-list-accordion">
+              <li>
+                <details>
+                  <summary class="watchowcs-tip-label">Twitch</summary>
+                  <span class="watchowcs-tip-body">
+                    <a href="https://www.twitch.tv/ow_esports" target="_blank" rel="noopener">英語実況 (OWCS EMEA/NA)</a><br>
+                    <a href="https://www.twitch.tv/ow_esports_jp" target="_blank" rel="noopener">日本語実況 (OWCS JP/KR)</a><br>
+                    <a href="https://www.twitch.tv/ow_esports_th" target="_blank" rel="noopener">タイ語実況 (OWCS Pacific)</a>
+                  </span>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary class="watchowcs-tip-label">YouTube</summary>
+                  <span class="watchowcs-tip-body">
+                    <a href="https://www.youtube.com/c/ow_esports" target="_blank" rel="noopener">英語実況 (OWCS EMEA/NA)</a><br>
+                    <a href="https://youtube.com/@ow_esports_jp" target="_blank" rel="noopener">日本語実況 (OWCS JP/KR)</a><br>
+                    <a href="https://youtube.com/@roofesports" target="_blank" rel="noopener">タイ語実況 (OWCS Pacific)</a>
+                  </span>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary class="watchowcs-tip-label">SOOP（韓国）</summary>
+                  <span class="watchowcs-tip-body">
+                    <a href="https://play.sooplive.com/owesports/295314607" target="_blank" rel="noopener">韓国語実況 (OWCS KR)</a><br>
+                    <a href="https://play.sooplive.com/owesportsen/null" target="_blank" rel="noopener">英語実況 (OWCS EMEA/NA)</a><br>
+                    <a href="https://play.sooplive.com/owesportsjp/295314613" target="_blank" rel="noopener">日本語実況 (OWCS JP/KR)</a><br>
+                    <a href="https://play.sooplive.com/owesportsth" target="_blank" rel="noopener">タイ語実況 (OWCS Pacific)</a>
+                  </span>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary class="watchowcs-tip-label">Bilibili（中国）</summary>
+                  <span class="watchowcs-tip-body">
+                    <a href="https://live.bilibili.com/23612045" target="_blank" rel="noopener">中国語実況 (OWCS China)</a>
+                  </span>
+                </details>
+              </li>
             </ul>
             <p>
               日本語配信がある大会は、OWCS Japan、Korea、Asia、世界大会です。
@@ -1266,7 +1336,7 @@ const OWCS_FLOW_COPY_EN_ = {
   stagePathTop2: "Round robin → tournament<br>Top 2 advance",
   asiaChampTitle: "OWCS Asia<br>(offline)",
   asiaNote:
-    "Group round robin → tournament<br>Top 2–3 advance<br>※ For some events (e.g. EWC), there is no Asia event and Japan / Pacific #1 and Korea’s top 2–3 may advance directly",
+    "Group round robin → tournament<br>Top 2–3 advance<br><br>※ For some events (e.g. EWC), there is no Asia event and Japan / Pacific #1 and Korea’s top 2–3 may advance directly",
   cnOpen: "China Open Quals",
   cnMain: "OWCS China",
   cnStagePath: "Swiss-style tournament → round robin → tournament<br>Top 2–3 advance",
@@ -1307,7 +1377,7 @@ const OWCS_FLOW_COPY_JP_ = {
   stagePathTop2: "総当たり戦→トーナメント戦<br>上位2チームが進出",
   asiaChampTitle: "OWCS Asia<br>（オフライン）",
   asiaNote:
-    "グループ別総当たり戦→トーナメント戦<br>上位2〜3チームが進出<br>※EWC等大会によっては、Asia大会なしで、日本・パシフィック1位、韓国上位2〜3チームが直接進出できる場合もあります",
+    "グループ別総当たり戦→トーナメント戦<br>上位2〜3チームが進出<br><br>※EWC等大会によっては、Asia大会なしで、日本・パシフィック1位、韓国上位2〜3チームが直接進出できる場合もあります",
   cnOpen: "中国オープン予選",
   cnMain: "OWCS China",
   cnStagePath: "スイス式トーナメント戦→総当たり戦→トーナメント戦<br>上位2〜3チームが進出",
