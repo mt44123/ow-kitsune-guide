@@ -35,9 +35,6 @@ function loadHowtoView() {
         </h3>
         ${siteText_(
           `
-            <p>
-              After watching OWCS, use this site to find players and keep following them.
-            </p>
             <ul class="watchowcs-tip-list">
               <li>
                 <span class="watchowcs-tip-label">
@@ -64,17 +61,6 @@ function loadHowtoView() {
               </li>
               <li>
                 <span class="watchowcs-tip-label">
-                  <a href="/goats" onclick="openFavoritesFromGuide_(); return false;">
-                    Register players to ★ MY GOATS
-                  </a>
-                </span>
-                <span class="watchowcs-tip-body">
-                  Tap ☆ / ★ on a card to save players. Then use the ★ tab on LIVE /
-                  media, or Live Notifications → MY GOATS, to catch them easily.
-                </span>
-              </li>
-              <li>
-                <span class="watchowcs-tip-label">
                   <a href="/youtube" onclick="openMediaFromGuide_(); return false;">
                     Watch players’ clips &amp; videos — CLIP&amp;YOUTUBE
                   </a>
@@ -84,23 +70,9 @@ function loadHowtoView() {
                   Browse them together on CLIP&amp;YOUTUBE.
                 </span>
               </li>
-              <li>
-                <span class="watchowcs-tip-label">
-                  <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">
-                    USEFUL LINKS — schedules &amp; more
-                  </a>
-                </span>
-                <span class="watchowcs-tip-body">
-                  Official schedule, cast channels, Liquipedia, and replay codes —
-                  handy for watching and studying matches.
-                </span>
-              </li>
             </ul>
           `,
           `
-            <p>
-              OWCSを見たら、このサイトで選手を見つけて追いかけやすくできます。
-            </p>
             <ul class="watchowcs-tip-list">
               <li>
                 <span class="watchowcs-tip-label">
@@ -126,17 +98,6 @@ function loadHowtoView() {
               </li>
               <li>
                 <span class="watchowcs-tip-label">
-                  <a href="/goats" onclick="openFavoritesFromGuide_(); return false;">
-                    選手を★ MY GOATS に登録する
-                  </a>
-                </span>
-                <span class="watchowcs-tip-body">
-                  カードの ☆ / ★ でお気に入り保存。LIVE やメディアの ★ タブ、
-                  通知の MY GOATS で選手を追いやすくなります。
-                </span>
-              </li>
-              <li>
-                <span class="watchowcs-tip-label">
                   <a href="/youtube" onclick="openMediaFromGuide_(); return false;">
                     選手のクリップ・動画を見る — CLIP&amp;YOUTUBE
                   </a>
@@ -144,17 +105,6 @@ function loadHowtoView() {
                 <span class="watchowcs-tip-body">
                   Twitchにあるクリップ機能は、CHZZKやSOOPにもあります。
                   CLIP&amp;YOUTUBEでまとめて確認できます。
-                </span>
-              </li>
-              <li>
-                <span class="watchowcs-tip-label">
-                  <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">
-                    USEFUL LINKS — 観戦に役立つリンク
-                  </a>
-                </span>
-                <span class="watchowcs-tip-body">
-                  公式スケジュール、配信チャンネル、Liquipedia、リプレイコードなど、
-                  観戦や研究に便利なサイトをまとめています。
                 </span>
               </li>
             </ul>
@@ -206,28 +156,21 @@ function loadHowtoView() {
           `
             <ul>
               <li>
-                In ⚙ Settings, you can change how the site looks — themes, languages,
-                and more — and find useful URLs and tools
+                Use the ⚙ in the top right to change themes, languages, and more
               </li>
               <li>
-                <b>Site Text</b> switches the site’s explanatory text between English
-                and Japanese. If you prefer another language, choose EN or JP first,
-                then use your browser’s translate feature. The creator is Japanese,
-                so when wording differs, the Japanese text is the intended meaning
+                Start by switching <b>Site Text</b> to English or Japanese — that makes
+                the site easier to read
               </li>
             </ul>
           `,
           `
             <ul>
               <li>
-                ⚙ では、テーマや言語など、サイトの表示変更や、
-                便利なURLやツールの紹介を確認できます
+                右上の⚙ では、テーマや言語など、変更できます
               </li>
               <li>
-                <b>Site Text</b> では、サイト内の説明文を英語または日本語に
-                切り替えられます。その他の言語の方は、英語か日本語に切り替えたうえで
-                ブラウザの翻訳機能を使うと読みやすいです。
-                製作者が日本人のため、意味の正は日本語側です
+                はじめに<b>Site Text</b>設定を英/日どちらかに切り替えると読みやすいです
               </li>
             </ul>
           `

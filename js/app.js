@@ -641,6 +641,7 @@ function applyGuideNavVisibility_() {
 
 const HOWTO_NAV_SEEN_KEY = "howtoNavButtonSeen";
 const HIDE_GUIDE_NAV_SEEN_KEY = "hideGuideNavButtonSeen";
+const SETTINGS_BUTTON_SEEN_KEY = "settingsButtonSeen";
 
 function isHowtoNavSeen_() {
   return localStorage.getItem(HOWTO_NAV_SEEN_KEY) === "1";
@@ -648,6 +649,10 @@ function isHowtoNavSeen_() {
 
 function isHideGuideNavSeen_() {
   return localStorage.getItem(HIDE_GUIDE_NAV_SEEN_KEY) === "1";
+}
+
+function isSettingsButtonSeen_() {
+  return localStorage.getItem(SETTINGS_BUTTON_SEEN_KEY) === "1";
 }
 
 function markHowtoNavSeen_() {
@@ -668,6 +673,15 @@ function markHideGuideNavSeen_() {
   applyGuideNavNudge_();
 }
 
+function markSettingsButtonSeen_() {
+  try {
+    localStorage.setItem(SETTINGS_BUTTON_SEEN_KEY, "1");
+  } catch (_) {
+    /* ignore */
+  }
+  applySettingsButtonNudge_();
+}
+
 function applyGuideNavNudge_() {
   howtoNavButton?.classList.toggle(
     "howto-nav-nudge",
@@ -677,6 +691,21 @@ function applyGuideNavNudge_() {
   hideGuideNavButton?.classList.toggle(
     "howto-nav-nudge",
     !isHideGuideNavSeen_()
+  );
+}
+
+function applySettingsButtonNudge_() {
+  settingsButton?.classList.toggle(
+    "settings-button-nudge",
+    !isSettingsButtonSeen_()
+  );
+}
+
+function applySiteTextNudge_() {
+  const row = siteTextLanguageSelect?.closest(".settings-row");
+  row?.classList.toggle(
+    "settings-sitetext-nudge",
+    siteTextLanguageMode === "both"
   );
 }
 
@@ -931,6 +960,8 @@ siteTextLanguageSelect?.addEventListener("change", () => {
     siteTextLanguageMode
   );
 
+  applySiteTextNudge_();
+
   updateSettingsMenuText_();
 
   if (typeof updateNotifySelect_ === "function") {
@@ -1007,6 +1038,8 @@ if (guideNavSelect) {
 applyGuideNavVisibility_();
 initStickyHeaderScrollOffset_();
 applyGuideNavNudge_();
+applySettingsButtonNudge_();
+applySiteTextNudge_();
 
 guideNavSelect?.addEventListener("change", () => {
   setGuideNavVisible_(guideNavSelect.value !== "hide");
@@ -1191,6 +1224,8 @@ settingsButton?.addEventListener(
   "click",
   e => {
     e.stopPropagation();
+
+    markSettingsButtonSeen_();
 
     settingsMenu?.classList.toggle(
       "settings-hidden"

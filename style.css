@@ -1017,6 +1017,35 @@ flex:0 0 auto;
   }
 }
 
+.tools-link.settings-button-nudge{
+  background:color-mix(in srgb, var(--accent) 28%, var(--bg-main));
+  border-color:var(--accent);
+  box-shadow:
+    0 0 0 2px var(--accent),
+    0 0 12px color-mix(in srgb, var(--accent) 55%, transparent);
+  animation:howto-nav-nudge-pulse 1.6s ease-in-out infinite;
+}
+
+.settings-row.settings-sitetext-nudge{
+  background:color-mix(in srgb, var(--accent) 18%, transparent);
+  box-shadow:
+    0 0 0 2px var(--accent),
+    0 0 12px color-mix(in srgb, var(--accent) 45%, transparent);
+  animation:howto-nav-nudge-pulse 1.6s ease-in-out infinite;
+}
+
+.settings-row.settings-sitetext-nudge .settings-row-title{
+  font-weight:800;
+  color:var(--text-main);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .tools-link.settings-button-nudge,
+  .settings-row.settings-sitetext-nudge{
+    animation:none;
+  }
+}
+
 .sub-nav{
 display:flex;
   gap:var(--space-sm);
