@@ -387,11 +387,6 @@ function loadWatchOwcsView() {
               Japanese casts are available for OWCS Japan, Korea, Asia, and world events.
             </p>
             <p>
-              <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">
-                👉 Links for watching OWCS
-              </a>
-            </p>
-            <p>
               If you can’t watch live, archives are recommended
               (Twitch free VODs may not always remain).
             </p>
@@ -471,11 +466,6 @@ function loadWatchOwcsView() {
             </ul>
             <p>
               日本語配信がある大会は、OWCS Japan、Korea、Asia、世界大会です。
-            </p>
-            <p>
-              <a href="/usefullinks" onclick="openStaticView_('usefullinks'); return false;">
-                👉 OWCS観戦に役立つリンク集
-              </a>
             </p>
             <p>
               リアルタイムで見られない場合は、YouTubeアーカイブがおすすめです
@@ -617,7 +607,7 @@ function loadWatchOwcsView() {
             <p>Start with whatever looks fun and jump in casually.</p>
             <p>
               Rules and flow can sink in while you watch.
-              Finding a style that fits you makes it easier to keep enjoying OWCS longer.
+              When you find a viewing style that fits you, OWCS becomes even more enjoyable.
             </p>
           `,
           `
@@ -713,7 +703,7 @@ function loadWatchOwcsView() {
             <p>まずは、好きそうなところから気軽に覗いてみてください。</p>
             <p>
               ルールや流れは、観戦しながら覚えていけば大丈夫です。
-              自分に合った楽しみ方が見つかると、もっと長く続けやすくなります。
+              自分らしい観戦スタイルが見つかると、もっと楽しめます。
             </p>
           `
         )}
@@ -763,7 +753,7 @@ function loadWatchOwcsView() {
             <p>
               The year usually has about 3 stages, each feeding into a world event.
               In other words, there are about 3 chances each year to chase the #1 team
-              in the world. Slots and rules differ slightly by world event.
+              in the world.
             </p>
             <h3 class="owcs-fun-subhead">Year overview (Jan → Dec)</h3>
           `,
@@ -771,7 +761,6 @@ function loadWatchOwcsView() {
             <p>
               年間はだいたい3ステージあり、それぞれ世界大会につながります。
               つまり年3回世界一のチームを目指せます。
-              進出枠や条件は世界大会ごとに若干異なります。
             </p>
             <h3 class="owcs-fun-subhead">1年の流れ（1月 → 12月）</h3>
           `
@@ -785,6 +774,7 @@ function loadWatchOwcsView() {
           ${siteText_(
             `
               <p>Each stage typically follows this path. Tap an item for details:</p>
+              <p>Slots and rules differ slightly by world event.</p>
               <ul class="watchowcs-tip-list watchowcs-tip-list-accordion">
                 <li>
                   <details>
@@ -848,6 +838,7 @@ function loadWatchOwcsView() {
             `,
             `
               <p>各ステージの中身は、だいたい次の流れです。項目をタップすると詳しく見られます。</p>
+              <p>進出枠や条件は世界大会ごとに若干異なります。</p>
               <ul class="watchowcs-tip-list watchowcs-tip-list-accordion">
                 <li>
                   <details>
