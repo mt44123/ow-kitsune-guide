@@ -1105,6 +1105,20 @@ function loadWatchOwcsView() {
               </a>
             </p>
 
+            <h3 class="owcs-fun-subhead">FACEIT League Masters (Playoffs)</h3>
+            <p>
+              Liquipedia usually rates this around <b>B-Tier</b>, but the
+              <b>FACEIT League Masters Playoffs</b> are still highly recommended.
+            </p>
+            <p>
+              FACEIT League is a pathway tied to OWCS in NA and EMEA, and Masters is its
+              top division. You’ll see former OWCS players, rising talent, and teams that
+              may promote into OWCS next stage.
+            </p>
+            <p>
+              Playoff teams especially are a good place to spot “who might show up in OWCS next.”
+            </p>
+
             <h3 class="owcs-fun-subhead">One-off &amp; invitational events</h3>
             <p>
               Not every non-OWCS event returns every year on a fixed calendar.
@@ -1118,20 +1132,6 @@ function loadWatchOwcsView() {
               These often land in OWCS off-windows and can feature rare matchups or special
               lineups. Similar events — or brand-new ones — can appear again with little notice,
               so off-season stretches are still worth checking.
-            </p>
-
-            <h3 class="owcs-fun-subhead">FACEIT League Masters (Playoffs)</h3>
-            <p>
-              Liquipedia usually rates this around <b>B-Tier</b>, but the
-              <b>FACEIT League Masters Playoffs</b> are still highly recommended.
-            </p>
-            <p>
-              FACEIT League is a pathway tied to OWCS in NA and EMEA, and Masters is its
-              top division. You’ll see former OWCS players, rising talent, and teams that
-              may promote into OWCS next stage.
-            </p>
-            <p>
-              Playoff teams especially are a good place to spot “who might show up in OWCS next.”
             </p>
 
             <h3 class="owcs-fun-subhead">Where to find upcoming matches</h3>
@@ -1332,6 +1332,21 @@ function loadWatchOwcsView() {
               </a>
             </p>
 
+            <h3 class="owcs-fun-subhead">FACEIT League Masters（Playoffs）</h3>
+            <p>
+              Liquipediaでは <b>B-Tier</b> に分類されることが多いですが、
+              <b>FACEIT League MastersのPlayoffs</b> もおすすめです。
+            </p>
+            <p>
+              FACEIT LeagueはNA・EMEA地域のOWCSにつながる大会で、Mastersはその最上位Divisionです。
+              元OWCS選手、これからOWCSを目指す選手、次のStageでOWCSに昇格する可能性があるチームなどが
+              多数出場しています。
+            </p>
+            <p>
+              特にPlayoffsまで進むチームはかなりレベルが高く、
+              「次にOWCSへ出てきそうな選手・チームを先に見つける」という楽しみ方ができます。
+            </p>
+
             <h3 class="owcs-fun-subhead">突発・招待大会も要チェック</h3>
             <p>
               OWCS以外の大会は、毎年必ず同じ大会が開催されるとは限りません。
@@ -1346,21 +1361,6 @@ function loadWatchOwcsView() {
               特別ロスターを見ることができます。
               今後も同じ大会、あるいは新しい大会が突然発表される可能性があるので、
               OWCSがない期間も意外と要チェックです。
-            </p>
-
-            <h3 class="owcs-fun-subhead">FACEIT League Masters（Playoffs）</h3>
-            <p>
-              Liquipediaでは <b>B-Tier</b> に分類されることが多いですが、
-              <b>FACEIT League MastersのPlayoffs</b> もおすすめです。
-            </p>
-            <p>
-              FACEIT LeagueはNA・EMEA地域のOWCSにつながる大会で、Mastersはその最上位Divisionです。
-              元OWCS選手、これからOWCSを目指す選手、次のStageでOWCSに昇格する可能性があるチームなどが
-              多数出場しています。
-            </p>
-            <p>
-              特にPlayoffsまで進むチームはかなりレベルが高く、
-              「次にOWCSへ出てきそうな選手・チームを先に見つける」という楽しみ方ができます。
             </p>
 
             <h3 class="owcs-fun-subhead">次の大会・試合はどこで探す？</h3>
