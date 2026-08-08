@@ -1057,22 +1057,12 @@ function loadWatchOwcsView() {
               through players’ personal streams. Some events or stages do get an official
               broadcast, though.
             </p>
-            <ul class="watchowcs-tip-list">
-              <li>
-                <span class="watchowcs-tip-label">
-                  <a href="https://liquipedia.net/overwatch/Northwood_University_Blue" target="_blank" rel="noopener">
-                    Northwood University Blue
-                  </a>
-                </span>
-              </li>
-              <li>
-                <span class="watchowcs-tip-label">
-                  <a href="https://liquipedia.net/overwatch/Winthrop_University" target="_blank" rel="noopener">
-                    Winthrop University
-                  </a>
-                </span>
-              </li>
-            </ul>
+            <p>
+              Examples of strong programs include
+              <a href="https://liquipedia.net/overwatch/Northwood_University_Blue" target="_blank" rel="noopener">Northwood University Blue</a>
+              and
+              <a href="https://liquipedia.net/overwatch/Winthrop_University" target="_blank" rel="noopener">Winthrop University</a>.
+            </p>
             <p>
               Players also come from outside North America to study and compete on university
               esports teams — a kind of “esports study abroad” path.
@@ -1176,8 +1166,14 @@ function loadWatchOwcsView() {
             <ul class="watchowcs-tip-list watchowcs-tip-list-accordion">
               <li>
                 <details>
-                  <summary class="watchowcs-tip-label">Want world-class play</summary>
-                  <span class="watchowcs-tip-body">S-Tier / A-Tier events on Liquipedia</span>
+                  <summary class="watchowcs-tip-label">Want world-class play / next OWCS contenders</summary>
+                  <span class="watchowcs-tip-body">S-Tier / A-Tier events on Liquipedia, FACEIT League Masters</span>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary class="watchowcs-tip-label">Want Japanese casts</summary>
+                  <span class="watchowcs-tip-body">Overwatch World Cup, STAGE:0</span>
                 </details>
               </li>
               <li>
@@ -1189,25 +1185,13 @@ function loadWatchOwcsView() {
               <li>
                 <details>
                   <summary class="watchowcs-tip-label">Want offline events</summary>
-                  <span class="watchowcs-tip-body">Overwatch World Cup, Saudi eLeague, STAGE:0 (national finals)</span>
+                  <span class="watchowcs-tip-body">Overwatch World Cup, Saudi eLeague, STAGE:0 (national finals), Overwatch Collegiate (Final)</span>
                 </details>
               </li>
               <li>
                 <details>
-                  <summary class="watchowcs-tip-label">Want NA pros / rising talent</summary>
-                  <span class="watchowcs-tip-body">Overwatch Collegiate</span>
-                </details>
-              </li>
-              <li>
-                <details>
-                  <summary class="watchowcs-tip-label">Want Japan’s rising talent</summary>
-                  <span class="watchowcs-tip-body">STAGE:0</span>
-                </details>
-              </li>
-              <li>
-                <details>
-                  <summary class="watchowcs-tip-label">Want the next OWCS contenders early</summary>
-                  <span class="watchowcs-tip-body">FACEIT League Masters</span>
+                  <summary class="watchowcs-tip-label">Want rising talent</summary>
+                  <span class="watchowcs-tip-body">Overwatch Collegiate, STAGE:0</span>
                 </details>
               </li>
             </ul>
@@ -1300,22 +1284,13 @@ function loadWatchOwcsView() {
               視聴について：基本的に公式配信はなく、出場選手の個人配信で試合を追う形になります。
               大会やステージによっては公式配信が行われることもあります。
             </p>
-            <ul class="watchowcs-tip-list">
-              <li>
-                <span class="watchowcs-tip-label">
-                  <a href="https://liquipedia.net/overwatch/Northwood_University_Blue" target="_blank" rel="noopener">
-                    Northwood University Blue
-                  </a>
-                </span>
-              </li>
-              <li>
-                <span class="watchowcs-tip-label">
-                  <a href="https://liquipedia.net/overwatch/Winthrop_University" target="_blank" rel="noopener">
-                    Winthrop University
-                  </a>
-                </span>
-              </li>
-            </ul>
+            <p>
+              強い大学の例として、
+              <a href="https://liquipedia.net/overwatch/Northwood_University_Blue" target="_blank" rel="noopener">Northwood University Blue</a>
+              や
+              <a href="https://liquipedia.net/overwatch/Winthrop_University" target="_blank" rel="noopener">Winthrop University</a>
+              などがあります。
+            </p>
             <p>
               海外から北米の大学へ進学し、大学のeスポーツチームで活動している選手もいます。
               Overwatchを競技として続けながら大学へ通う、いわゆるeスポーツ留学のようなケースもあります。
@@ -1421,8 +1396,14 @@ function loadWatchOwcsView() {
             <ul class="watchowcs-tip-list watchowcs-tip-list-accordion">
               <li>
                 <details>
-                  <summary class="watchowcs-tip-label">世界トップ選手を見たい</summary>
-                  <span class="watchowcs-tip-body">S-Tier・A-Tierの大会</span>
+                  <summary class="watchowcs-tip-label">世界トップ選手・次にOWCSへ上がってきそうな選手を見たい</summary>
+                  <span class="watchowcs-tip-body">S-Tier・A-Tierの大会、FACEIT League Masters</span>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary class="watchowcs-tip-label">日本語実況で見たい</summary>
+                  <span class="watchowcs-tip-body">Overwatch World Cup、STAGE:0</span>
                 </details>
               </li>
               <li>
@@ -1434,25 +1415,13 @@ function loadWatchOwcsView() {
               <li>
                 <details>
                   <summary class="watchowcs-tip-label">オフライン大会を見たい</summary>
-                  <span class="watchowcs-tip-body">Overwatch World Cup、Saudi eLeague、STAGE:0（全国大会）</span>
+                  <span class="watchowcs-tip-body">Overwatch World Cup、Saudi eLeague、STAGE:0（全国大会）、Overwatch Collegiate（Final）</span>
                 </details>
               </li>
               <li>
                 <details>
-                  <summary class="watchowcs-tip-label">NAのプロ・若手選手を見たい</summary>
-                  <span class="watchowcs-tip-body">Overwatch Collegiate</span>
-                </details>
-              </li>
-              <li>
-                <details>
-                  <summary class="watchowcs-tip-label">日本の若手選手を見たい</summary>
-                  <span class="watchowcs-tip-body">STAGE:0</span>
-                </details>
-              </li>
-              <li>
-                <details>
-                  <summary class="watchowcs-tip-label">次にOWCSへ上がってきそうな選手を見たい</summary>
-                  <span class="watchowcs-tip-body">FACEIT League Masters</span>
+                  <summary class="watchowcs-tip-label">若手選手を見たい</summary>
+                  <span class="watchowcs-tip-body">Overwatch Collegiate、STAGE:0</span>
                 </details>
               </li>
             </ul>
