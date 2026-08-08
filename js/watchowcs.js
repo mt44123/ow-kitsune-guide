@@ -478,7 +478,7 @@ function loadWatchOwcsView() {
                   <span class="watchowcs-tip-body">
                     <a href="https://www.youtube.com/@ow_esports/streams" target="_blank" rel="noopener">
                       英語実況（EMEA / NA / 世界）— YouTube
-                    </a><br>
+                    </a><br><br>
                     <a href="https://www.youtube.com/@ow_esports_jp/streams" target="_blank" rel="noopener">
                       日本語実況（Japan / Korea / Asia / 世界）— YouTube
                     </a><br>
@@ -487,6 +487,10 @@ function loadWatchOwcsView() {
                       韓国語実況（Korea / Asia / 世界）— SOOP
                     </a><br>
                     ※サブスク限定で、オープンマイク動画や、試合部分のみ抜粋編集した動画もあります<br><br>
+                    <a href="https://space.bilibili.com/365902357" target="_blank" rel="noopener">
+                      中国語実況（China）— Bilibili
+                    </a><br>
+                    ※各動画はチャプター式で、右側のリストから再生する試合・マップを選択可能です。<br><br>
                     <a href="https://www.youtube.com/@roofesports/streams" target="_blank" rel="noopener">
                       タイ語実況（Pacific）— YouTube
                     </a>
@@ -624,7 +628,7 @@ function loadWatchOwcsView() {
                 <details>
                   <summary class="watchowcs-tip-label">トップクラスの試合を見たい</summary>
                   <span class="watchowcs-tip-body">
-                    OWCS Korea や国際大会がおすすめです。
+                    OWCS Korea や世界大会がおすすめです。
                   </span>
                 </details>
               </li>
@@ -632,8 +636,10 @@ function loadWatchOwcsView() {
                 <details>
                   <summary class="watchowcs-tip-label">見どころある試合を見たい</summary>
                   <span class="watchowcs-tip-body">
-                    OWCSでは、わずかな実力差でも3-0になることが多いです。
-                    3-2までもつれた試合は、最後まで目が離せない好ゲームが多いです。
+                    実力が近いチーム同士の試合がおすすめです。<br><br>
+                    OWCSは少しの実力差でも3-0になりやすいので、3-2になった試合は特におすすめ。最後まで接戦になることが多く、見どころもたくさんあります。<br><br>
+                    また、下剋上が起こることもあります。
+                    ネタバレOKなら、結果を見てから3-2の試合を探すのもおすすめです。
                   </span>
                 </details>
               </li>
