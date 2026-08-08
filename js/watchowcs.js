@@ -52,7 +52,7 @@ function loadWatchOwcsView() {
               Tip: Open the ⚙ menu (top right) and set <b>Site Text</b> to
               English or Japanese only — it’s much easier to read.
             </p>
-            <p class="watchowcs-updated">Last updated: August 7, 2026</p>
+            <p class="watchowcs-updated">Last updated: August 8, 2026</p>
           `,
           `
             <p>
@@ -61,7 +61,7 @@ function loadWatchOwcsView() {
             <p class="owcs-sitetext-tip">
               右上の⚙マークから、<b>Site Text</b>設定を英/日どちらかに切り替えると読みやすいです。
             </p>
-            <p class="watchowcs-updated">更新日：2026年8月7日</p>
+            <p class="watchowcs-updated">更新日：2026年8月8日</p>
           `
         )}
       </div>
@@ -145,6 +145,7 @@ function loadWatchOwcsView() {
                 <li><a href="#watchowcs-watch">How to watch</a></li>
                 <li><a href="#watchowcs-first">What to watch first</a></li>
                 <li><a href="#watchowcs-structure">How the season progresses</a></li>
+                <li><a href="#watchowcs-beyond">Tournaments beyond OWCS</a></li>
                 <li><a href="#watchowcs-site">What you can do on this site</a></li>
               </ol>
             `,
@@ -156,6 +157,7 @@ function loadWatchOwcsView() {
                 <li><a href="#watchowcs-watch">OWCSを見てみよう</a></li>
                 <li><a href="#watchowcs-first">初めて見るなら</a></li>
                 <li><a href="#watchowcs-structure">OWCSの流れ</a></li>
+                <li><a href="#watchowcs-beyond">OWCS以外の大会</a></li>
                 <li><a href="#watchowcs-site">このサイトでできること</a></li>
               </ol>
             `
@@ -535,7 +537,7 @@ function loadWatchOwcsView() {
                 <details>
                   <summary class="watchowcs-tip-label">Want top-tier matches</summary>
                   <span class="watchowcs-tip-body">
-                    OWCS Korea and international events are a great place to start.
+                    OWCS Korea and world events are a great place to start.
                   </span>
                 </details>
               </li>
@@ -543,8 +545,9 @@ function loadWatchOwcsView() {
                 <details>
                   <summary class="watchowcs-tip-label">Want highlight-heavy series</summary>
                   <span class="watchowcs-tip-body">
-                    In OWCS, even small skill gaps often finish 3–0.
-                    Series that go to 3–2 are often the ones you can’t stop watching.
+                    Matches between closely matched teams are the safest pick.<br><br>
+                    In OWCS, even a small skill gap can end 3–0, so 3–2 series are especially worth watching — they often stay close to the end and have lots of highlights.<br><br>
+                    Upsets happen too. If spoilers are fine, searching for 3–2 series after the result is set is another good approach.
                   </span>
                 </details>
               </li>
@@ -603,6 +606,16 @@ function loadWatchOwcsView() {
                     (e.g.
                     <a href="https://liquipedia.net/overwatch/KSG" target="_blank" rel="noopener">KSG on Liquipedia</a>)<br>
                     Fan Discords also often share which events that player is entering.
+                  </span>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary class="watchowcs-tip-label">Want tournaments beyond OWCS</summary>
+                  <span class="watchowcs-tip-body">
+                    Even when OWCS isn’t running, plenty of other events take place.<br><br>
+                    You can enjoy matches with OWCS players, plus country/region and college events that feel different from the usual OWCS slate.<br><br>
+                    <a href="#watchowcs-beyond">→ Read more about tournaments beyond OWCS</a>
                   </span>
                 </details>
               </li>
@@ -701,6 +714,16 @@ function loadWatchOwcsView() {
                     （例:
                     <a href="https://liquipedia.net/overwatch/KSG" target="_blank" rel="noopener">KSGのLiquipedia</a>）<br>
                     あわせて、推し選手のファンDiscordに入ると、どの大会に出るか教えてもらえることも多いです。
+                  </span>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary class="watchowcs-tip-label">OWCS以外の大会も見てみたい</summary>
+                  <span class="watchowcs-tip-body">
+                    OWCSがない時期にも、いろいろな大会が開催されています。<br><br>
+                    OWCSの選手が出場する大会や、各国・地域の大会など、普段とは違った試合を楽しめます！<br><br>
+                    <a href="#watchowcs-beyond">→ OWCS以外の大会を詳しく見る</a>
                   </span>
                 </details>
               </li>
@@ -944,6 +967,422 @@ function loadWatchOwcsView() {
             `
           )}
         </div>
+      </section>
+
+      <section class="card faq-card" id="watchowcs-beyond">
+        <h2 class="watchowcs-h2">
+          ${siteHeading_("Tournaments beyond OWCS", "OWCS以外の大会も見てみよう")}
+        </h2>
+        ${siteText_(
+          `
+            <p>
+              Even when OWCS isn’t running, Overwatch tournaments still happen around the world.
+            </p>
+            <p>
+              You’ll find events with active OWCS players, plus national, regional, and college
+              competitions that feel a bit different from the usual OWCS season.
+            </p>
+            <p>
+              Not sure where to start? Check tournaments Liquipedia lists as
+              <b>S-Tier</b> or <b>A-Tier</b> first.
+              <a href="https://liquipedia.net/overwatch/Portal:Tournaments" target="_blank" rel="noopener">
+                Liquipedia Tournament Portal
+              </a>
+            </p>
+            <p>
+              OWCS world events are usually S-Tier, and most regional OWCS stages are A-Tier.
+              Other events with top-level players often land in S-Tier or A-Tier too —
+              use those ratings as a quick “is this worth watching?” guide.
+            </p>
+
+            <h3 class="owcs-fun-subhead">Overwatch World Cup (OWWC)</h3>
+            <p>
+              A national-team competition: players represent their country instead of their OWCS org.
+            </p>
+            <p>
+              Rivals from different OWCS teams may share a roster for their country —
+              and teammates may face each other across borders.
+              Great if you want to cheer for a nation, or watch all-star style lineups.
+            </p>
+            <p>
+              OWWC isn’t held every year, so when it returns it’s worth making time for.
+            </p>
+            <p>
+              <b>OWWC 2026</b> is scheduled — regional qualifiers feed into a world finals
+              to decide the top country.
+            </p>
+            <p>
+              <a href="https://liquipedia.net/overwatch/Overwatch_World_Cup/2026" target="_blank" rel="noopener">
+                → Overwatch World Cup 2026 on Liquipedia
+              </a>
+            </p>
+
+            <h3 class="owcs-fun-subhead">Saudi eLeague</h3>
+            <p>
+              A regularly held series in Saudi Arabia. Teams typically include Saudi players.
+            </p>
+            <p>
+              Familiar OWCS names often show up — for example
+              <b>Twisted Minds</b>, <b>Al Qadsiah</b>, and <b>Team Vision</b>.
+            </p>
+            <p>
+              The fun twist: lineups can look very different from regular OWCS.
+              Saudi players are often joined by stars from Korea, EMEA, and elsewhere,
+              so you get “dream team” style rosters you rarely see elsewhere.
+            </p>
+            <p>
+              <a href="https://liquipedia.net/overwatch/Saudi_eLeague" target="_blank" rel="noopener">
+                → Saudi eLeague on Liquipedia
+              </a>
+            </p>
+
+            <h3 class="owcs-fun-subhead">Overwatch Collegiate</h3>
+            <p>
+              A college league centered on schools in the US and Canada.
+              Teams are generally built from students at the same university.
+            </p>
+            <p>
+              “College” doesn’t mean “not pro.” Top programs often field players who also
+              compete in OWCS.
+            </p>
+            <ul class="watchowcs-tip-list">
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="https://liquipedia.net/overwatch/Northwood_University_Blue" target="_blank" rel="noopener">
+                    Northwood University Blue
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  Has featured OWCS-familiar names such as Rokit, Kronik, Painkiller, and Vega.
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="https://liquipedia.net/overwatch/Winthrop_University" target="_blank" rel="noopener">
+                    Winthrop University
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  Another powerhouse — recent lineups have included names like zeruhh, Coluge,
+                  Infekted, and UltraViolet.
+                </span>
+              </li>
+            </ul>
+            <p>
+              At that level, it can feel less like a student league and more like
+              an OWCS-player college showdown.
+            </p>
+            <p>
+              Players also come from outside North America to study and compete on university
+              esports teams — a kind of “esports study abroad” path.
+            </p>
+            <p>
+              In the past,
+              <a href="https://liquipedia.net/overwatch/Illinois_State_University" target="_blank" rel="noopener">
+                Illinois State University
+              </a>
+              gathered strong international talent. Rosters built around players who spent a long
+              time together there later succeeded in the pro scene —
+              including a run as NTMR and then Geekay Esports that won
+              <b>OWCS NA Stage 2 in 2025</b>.
+            </p>
+            <p>
+              That “college → OWCS top tier” route is one of the more interesting parts of
+              the NA scene.
+            </p>
+
+            <h3 class="owcs-fun-subhead">One-off &amp; invitational events</h3>
+            <p>
+              Not every non-OWCS event returns every year on a fixed calendar.
+            </p>
+            <p>
+              Korea has hosted <b>SOOP Cup</b>, with teams such as Crazy Raccoon, Team Falcons,
+              ZETA DIVISION, and T1.
+              China has hosted invitationals like <b>Shanghai Esports Masters</b>.
+            </p>
+            <p>
+              These often land in OWCS off-windows and can feature rare matchups or special
+              lineups. Similar events — or brand-new ones — can appear again with little notice,
+              so off-season stretches are still worth checking.
+            </p>
+
+            <h3 class="owcs-fun-subhead">FACEIT League Masters (Playoffs)</h3>
+            <p>
+              Liquipedia usually rates this around <b>B-Tier</b>, but the
+              <b>FACEIT League Masters Playoffs</b> are still highly recommended.
+            </p>
+            <p>
+              FACEIT League is a pathway tied to OWCS in NA and EMEA, and Masters is its
+              top division. You’ll see former OWCS players, rising talent, and teams that
+              may promote into OWCS next stage.
+            </p>
+            <p>
+              Playoff teams especially are a good place to spot “who might show up in OWCS next.”
+            </p>
+
+            <h3 class="owcs-fun-subhead">Where to find upcoming matches</h3>
+            <p>
+              The easiest hub is the
+              <a href="https://liquipedia.net/overwatch/Main_Page" target="_blank" rel="noopener">
+                Liquipedia Overwatch main page
+              </a>.
+            </p>
+            <ul class="watchowcs-tip-list">
+              <li>
+                <span class="watchowcs-tip-label">Matches</span>
+                <span class="watchowcs-tip-body">
+                  Upcoming games across OWCS, OWWC, FACEIT League, regional events, and more.
+                  Best for “what can I watch today / soon?”
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">Tournaments</span>
+                <span class="watchowcs-tip-body">
+                  Ongoing events plus tournaments a bit further out.
+                  Best for “OWCS just ended — what’s next?”
+                </span>
+              </li>
+            </ul>
+            <p>
+              Opening your favorite player’s Liquipedia page and checking their upcoming
+              events works well too.
+            </p>
+
+            <h3 class="owcs-fun-subhead">Quick picks if you’re unsure</h3>
+            <ul class="watchowcs-tip-list">
+              <li>
+                <span class="watchowcs-tip-label">Want world-class play</span>
+                <span class="watchowcs-tip-body">S-Tier / A-Tier events on Liquipedia</span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">Want national teams</span>
+                <span class="watchowcs-tip-body">Overwatch World Cup</span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">Want special dream-team rosters</span>
+                <span class="watchowcs-tip-body">Saudi eLeague</span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">Want NA pros / rising talent</span>
+                <span class="watchowcs-tip-body">Overwatch Collegiate</span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">Want the next OWCS contenders early</span>
+                <span class="watchowcs-tip-body">FACEIT League Masters</span>
+              </li>
+            </ul>
+            <p>
+              Even in OWCS downtime, Overwatch esports keeps moving worldwide —
+              follow the events that fit how you like to watch.
+            </p>
+          `,
+          `
+            <p>
+              OWCSが開催されていない時期にも、Overwatchの大会は世界各地で開催されています。
+            </p>
+            <p>
+              OWCSで活躍している選手が出場する大会や、国・地域・大学ごとの大会など、
+              OWCSとは少し違った楽しみ方ができます。
+            </p>
+            <p>
+              「OWCS以外だと、どの大会を見ればいいの？」という場合は、まずLiquipediaで
+              <b>S-Tier</b>・<b>A-Tier</b>に分類されている大会をチェックするのがおすすめです。
+              <a href="https://liquipedia.net/overwatch/Portal:Tournaments" target="_blank" rel="noopener">
+                Liquipediaの大会ポータル
+              </a>
+            </p>
+            <p>
+              OWCSの国際大会はS-Tier、各地域の大会は主にA-Tierに分類されています。
+              それ以外でもトップクラスの選手が集まる大会はS-Tier・A-Tierになりやすく、
+              「見る価値があるか」の目安として使えます。
+            </p>
+
+            <h3 class="owcs-fun-subhead">Overwatch World Cup（OWWC）</h3>
+            <p>
+              国の代表選手が集まって戦う、Overwatchの国別対抗戦です。
+            </p>
+            <p>
+              普段は別々のOWCSチームで戦っている選手たちが、この大会では自分の国の代表として
+              同じチームになります。逆に、普段はチームメイトの選手が敵同士になることもあります。
+            </p>
+            <p>
+              「国を応援したい」「各国のオールスターチームを見たい」人には特におすすめです。
+              OWWCは毎年開催される大会ではないため、開催される年はぜひチェックしてみてください。
+            </p>
+            <p>
+              <b>OWWC 2026</b>では、各地域の予選を勝ち抜いた代表チームが集まり、
+              世界一の国を決めます。
+            </p>
+            <p>
+              <a href="https://liquipedia.net/overwatch/Overwatch_World_Cup/2026" target="_blank" rel="noopener">
+                → Overwatch World Cup 2026をLiquipediaで見る
+              </a>
+            </p>
+
+            <h3 class="owcs-fun-subhead">Saudi eLeague</h3>
+            <p>
+              サウジアラビアで定期的に開催されている大会です。
+              サウジアラビアの選手を含むチームが出場します。
+            </p>
+            <p>
+              OWCSでもおなじみの <b>Twisted Minds</b>、<b>Al Qadsiah</b>、<b>Team Vision</b>
+              などのチーム・選手が出場することがあります。
+            </p>
+            <p>
+              面白いところは、普段のOWCSとは違うロスターが見られること。
+              サウジアラビアの選手に加えて、韓国やEMEAなどからトップ選手を加えた特別なロスターが
+              組まれることも多く、「このメンバーが同じチームにいるの！？」という豪華な組み合わせが
+              生まれることがあります。
+            </p>
+            <p>
+              <a href="https://liquipedia.net/overwatch/Saudi_eLeague" target="_blank" rel="noopener">
+                → Saudi eLeagueをLiquipediaで見る
+              </a>
+            </p>
+
+            <h3 class="owcs-fun-subhead">Overwatch Collegiate</h3>
+            <p>
+              アメリカ・カナダの大学を中心に行われている大学リーグです。
+              基本的には、同じ大学に所属している学生たちでチームを組んで戦います。
+            </p>
+            <p>
+              「大学大会ならプロとは関係ないのでは？」と思うかもしれませんが、
+              トップクラスの大学にはOWCSで活躍している選手が多数在籍しています。
+            </p>
+            <ul class="watchowcs-tip-list">
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="https://liquipedia.net/overwatch/Northwood_University_Blue" target="_blank" rel="noopener">
+                    Northwood University Blue
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  Rokit、Kronik、Painkiller、Vegaなど、OWCSでも見かける選手が所属してきました。
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">
+                  <a href="https://liquipedia.net/overwatch/Winthrop_University" target="_blank" rel="noopener">
+                    Winthrop University
+                  </a>
+                </span>
+                <span class="watchowcs-tip-body">
+                  zeruhh、Coluge、Infekted、UltraVioletなど、プロシーンでも有名な選手が出場しています。
+                </span>
+              </li>
+            </ul>
+            <p>
+              トップクラスになると、「大学生の大会」というより、
+              OWCS選手だらけの大学対抗戦になっていることもあります。
+            </p>
+            <p>
+              海外から北米の大学へ進学し、大学のeスポーツチームで活動している選手もいます。
+              Overwatchを競技として続けながら大学へ通う、いわゆるeスポーツ留学のようなケースもあります。
+            </p>
+            <p>
+              過去には
+              <a href="https://liquipedia.net/overwatch/Illinois_State_University" target="_blank" rel="noopener">
+                Illinois State University
+              </a>
+              に、アメリカ以外の国籍を持つトップ選手たちが集まっていました。
+              その大学チームで長く一緒にプレーしていた選手たちを中心とするロスターは、
+              その後プロシーンでも活躍。2025年にはNTMR、そしてGeekay Esportsとして
+              OWCS NAに出場し、<b>OWCS NA Stage 2で優勝</b>しています。
+            </p>
+            <p>
+              「大学リーグから、そのままOWCSトップクラスへ」というルートが実際に存在するのも、
+              NAのOverwatchシーンの面白いところです。
+            </p>
+
+            <h3 class="owcs-fun-subhead">突発・招待大会も要チェック</h3>
+            <p>
+              OWCS以外の大会は、毎年必ず同じ大会が開催されるとは限りません。
+            </p>
+            <p>
+              過去には韓国で <b>SOOP Cup</b> が開催され、Crazy Raccoon、Team Falcons、
+              ZETA DIVISION、T1などトップクラスのチームが参加しました。
+              中国では <b>Shanghai Esports Masters</b> のような招待大会も開催されています。
+            </p>
+            <p>
+              こうした大会はOWCSのシーズン外に開催されることもあり、普段は見られない対戦や
+              特別ロスターを見ることができます。
+              今後も同じ大会、あるいは新しい大会が突然発表される可能性があるので、
+              OWCSがない期間も意外と要チェックです。
+            </p>
+
+            <h3 class="owcs-fun-subhead">FACEIT League Masters（Playoffs）</h3>
+            <p>
+              Liquipediaでは <b>B-Tier</b> に分類されることが多いですが、
+              <b>FACEIT League MastersのPlayoffs</b> もおすすめです。
+            </p>
+            <p>
+              FACEIT LeagueはNA・EMEA地域のOWCSにつながる大会で、Mastersはその最上位Divisionです。
+              元OWCS選手、これからOWCSを目指す選手、次のStageでOWCSに昇格する可能性があるチームなどが
+              多数出場しています。
+            </p>
+            <p>
+              特にPlayoffsまで進むチームはかなりレベルが高く、
+              「次にOWCSへ出てきそうな選手・チームを先に見つける」という楽しみ方ができます。
+            </p>
+
+            <h3 class="owcs-fun-subhead">次の大会・試合はどこで探す？</h3>
+            <p>
+              「何か大会やってないかな？」と思ったら、
+              <a href="https://liquipedia.net/overwatch/Main_Page" target="_blank" rel="noopener">
+                LiquipediaのOverwatchトップページ
+              </a>
+              を見るのが一番簡単です。
+            </p>
+            <ul class="watchowcs-tip-list">
+              <li>
+                <span class="watchowcs-tip-label">Matches</span>
+                <span class="watchowcs-tip-body">
+                  これから行われる試合が表示されます。
+                  OWCSだけでなく、OWWC、FACEIT League、各地域の大会などもまとめて確認できます。
+                  今日・近日中に見る試合を探したい場合はこちら。
+                </span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">Tournaments</span>
+                <span class="watchowcs-tip-body">
+                  現在開催中の大会だけでなく、少し先に開催予定の大会も確認できます。
+                  「OWCSが終わった後、次は何の大会がある？」というときはこちらがおすすめです。
+                </span>
+              </li>
+            </ul>
+            <p>
+              好きな選手のLiquipediaページから出場予定の大会を探してみるのもおすすめです。
+            </p>
+
+            <h3 class="owcs-fun-subhead">どれを見ればいいか迷ったら</h3>
+            <ul class="watchowcs-tip-list">
+              <li>
+                <span class="watchowcs-tip-label">世界トップ選手を見たい</span>
+                <span class="watchowcs-tip-body">S-Tier・A-Tierの大会</span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">国別対抗戦を見たい</span>
+                <span class="watchowcs-tip-body">Overwatch World Cup</span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">豪華な特別ロスターを見たい</span>
+                <span class="watchowcs-tip-body">Saudi eLeague</span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">NAのプロ・若手選手を見たい</span>
+                <span class="watchowcs-tip-body">Overwatch Collegiate</span>
+              </li>
+              <li>
+                <span class="watchowcs-tip-label">次にOWCSへ上がってきそうな選手を見たい</span>
+                <span class="watchowcs-tip-body">FACEIT League Masters</span>
+              </li>
+            </ul>
+            <p>
+              OWCSがお休みの期間でも、世界中では意外とたくさんのOverwatch大会が開催されています。
+              自分の観戦スタイルに合う大会から、気軽に覗いてみてください。
+            </p>
+          `
+        )}
       </section>
 
       <section class="card faq-card" id="watchowcs-site">
