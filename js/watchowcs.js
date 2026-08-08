@@ -1101,6 +1101,11 @@ function loadWatchOwcsView() {
               Japanese casts make it especially easy to watch if you prefer Japanese commentary.
             </p>
             <p>
+              Like EWC, STAGE:0 runs multiple game titles at the same time. Broadcasts often
+              include explanations for viewers who don’t know Overwatch rules — or who know
+              the game but haven’t watched OWCS.
+            </p>
+            <p>
               Winning teams have previously earned a path into OWCS proper, and a number of
               STAGE:0 alumni have since joined pro orgs and gone on to compete in OWCS.
             </p>
@@ -1330,6 +1335,10 @@ function loadWatchOwcsView() {
             </p>
             <p>
               日本語実況があるため、日本語で観戦しやすいのもポイントです。
+            </p>
+            <p>
+              EWCのように複数タイトルの大会が同時開催されるため、OWのルールは知らない・
+              知ってるけどOWCSは見ていない視聴者向けの解説が入るのも特徴です。
             </p>
             <p>
               過去には優勝チームにOWCS本戦への出場権が与えられたこともあり、
