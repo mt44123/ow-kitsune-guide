@@ -983,16 +983,11 @@ function loadWatchOwcsView() {
               competitions that feel a bit different from the usual OWCS season.
             </p>
             <p>
-              Not sure where to start? Check tournaments Liquipedia lists as
-              <b>S-Tier</b> or <b>A-Tier</b> first.
+              Not sure where to start? Check tournaments Liquipedia lists in the same
+              <b>S-Tier</b> / <b>A-Tier</b> as OWCS.
               <a href="https://liquipedia.net/overwatch/Portal:Tournaments" target="_blank" rel="noopener">
                 Liquipedia Tournament Portal
               </a>
-            </p>
-            <p>
-              OWCS world events are usually S-Tier, and most regional OWCS stages are A-Tier.
-              Other events with top-level players often land in S-Tier or A-Tier too —
-              use those ratings as a quick “is this worth watching?” guide.
             </p>
 
             <h3 class="owcs-fun-subhead">Overwatch World Cup (OWWC)</h3>
@@ -1031,6 +1026,18 @@ function loadWatchOwcsView() {
               so you get “dream team” style rosters you rarely see elsewhere.
             </p>
             <p>
+              Because it’s an offline event, broadcasts often include player face cams —
+              so you can enjoy the atmosphere and reactions as well as the play.
+            </p>
+            <p>
+              Replay codes are also published.
+              <a
+                href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSk5k4PDJ2w3L7vv2fzOyKYMUtvhPYtfUtuWx4Q1rLzobax4V9Q7oieKCPeo3pGPnQC9xLK8atHQmvL/pubhtml"
+                target="_blank"
+                rel="noopener"
+              >→ Saudi eLeague replay codes</a>
+            </p>
+            <p>
               <a href="https://liquipedia.net/overwatch/Saudi_eLeague" target="_blank" rel="noopener">
                 → Saudi eLeague on Liquipedia
               </a>
@@ -1045,15 +1052,17 @@ function loadWatchOwcsView() {
               “College” doesn’t mean “not pro.” Top programs often field players who also
               compete in OWCS.
             </p>
+            <p>
+              How to watch: there usually isn’t an official cast — most matches are followed
+              through players’ personal streams. Some events or stages do get an official
+              broadcast, though.
+            </p>
             <ul class="watchowcs-tip-list">
               <li>
                 <span class="watchowcs-tip-label">
                   <a href="https://liquipedia.net/overwatch/Northwood_University_Blue" target="_blank" rel="noopener">
                     Northwood University Blue
                   </a>
-                </span>
-                <span class="watchowcs-tip-body">
-                  Has featured OWCS-familiar names such as Rokit, Kronik, Painkiller, and Vega.
                 </span>
               </li>
               <li>
@@ -1062,16 +1071,8 @@ function loadWatchOwcsView() {
                     Winthrop University
                   </a>
                 </span>
-                <span class="watchowcs-tip-body">
-                  Another powerhouse — recent lineups have included names like zeruhh, Coluge,
-                  Infekted, and UltraViolet.
-                </span>
               </li>
             </ul>
-            <p>
-              At that level, it can feel less like a student league and more like
-              an OWCS-player college showdown.
-            </p>
             <p>
               Players also come from outside North America to study and compete on university
               esports teams — a kind of “esports study abroad” path.
@@ -1089,6 +1090,29 @@ function loadWatchOwcsView() {
             <p>
               That “college → OWCS top tier” route is one of the more interesting parts of
               the NA scene.
+            </p>
+
+            <h3 class="owcs-fun-subhead">STAGE:0</h3>
+            <p>
+              Japan’s national high-school esports championship. In the Overwatch division,
+              students from the same school team up and compete for the national title every summer.
+            </p>
+            <p>
+              Most rounds are online, but broadcasts still include face cams and interviews —
+              so you can enjoy the players’ reactions as well as the matches.
+              The national finals are held offline.
+            </p>
+            <p>
+              Japanese casts make it especially easy to watch if you prefer Japanese commentary.
+            </p>
+            <p>
+              Winning teams have previously earned a path into OWCS proper, and a number of
+              STAGE:0 alumni have since joined pro orgs and gone on to compete in OWCS.
+            </p>
+            <p>
+              <a href="https://stage0.jp/games/ow2.html" target="_blank" rel="noopener">
+                → STAGE:0 Overwatch (official site)
+              </a>
             </p>
 
             <h3 class="owcs-fun-subhead">One-off &amp; invitational events</h3>
@@ -1149,26 +1173,42 @@ function loadWatchOwcsView() {
             </p>
 
             <h3 class="owcs-fun-subhead">Quick picks if you’re unsure</h3>
-            <ul class="watchowcs-tip-list">
+            <ul class="watchowcs-tip-list watchowcs-tip-list-accordion">
               <li>
-                <span class="watchowcs-tip-label">Want world-class play</span>
-                <span class="watchowcs-tip-body">S-Tier / A-Tier events on Liquipedia</span>
+                <details>
+                  <summary class="watchowcs-tip-label">Want world-class play</summary>
+                  <span class="watchowcs-tip-body">S-Tier / A-Tier events on Liquipedia</span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">Want national teams</span>
-                <span class="watchowcs-tip-body">Overwatch World Cup</span>
+                <details>
+                  <summary class="watchowcs-tip-label">Want national teams</summary>
+                  <span class="watchowcs-tip-body">Overwatch World Cup</span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">Want special dream-team rosters</span>
-                <span class="watchowcs-tip-body">Saudi eLeague</span>
+                <details>
+                  <summary class="watchowcs-tip-label">Want offline events</summary>
+                  <span class="watchowcs-tip-body">Overwatch World Cup, Saudi eLeague, STAGE:0 (national finals)</span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">Want NA pros / rising talent</span>
-                <span class="watchowcs-tip-body">Overwatch Collegiate</span>
+                <details>
+                  <summary class="watchowcs-tip-label">Want NA pros / rising talent</summary>
+                  <span class="watchowcs-tip-body">Overwatch Collegiate</span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">Want the next OWCS contenders early</span>
-                <span class="watchowcs-tip-body">FACEIT League Masters</span>
+                <details>
+                  <summary class="watchowcs-tip-label">Want Japan’s rising talent</summary>
+                  <span class="watchowcs-tip-body">STAGE:0</span>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary class="watchowcs-tip-label">Want the next OWCS contenders early</summary>
+                  <span class="watchowcs-tip-body">FACEIT League Masters</span>
+                </details>
               </li>
             </ul>
             <p>
@@ -1186,15 +1226,10 @@ function loadWatchOwcsView() {
             </p>
             <p>
               「OWCS以外だと、どの大会を見ればいいの？」という場合は、まずLiquipediaで
-              <b>S-Tier</b>・<b>A-Tier</b>に分類されている大会をチェックするのがおすすめです。
+              OWCSと同じ<b>S-Tier</b>・<b>A-Tier</b>に分類されている大会をチェックするのがおすすめです。
               <a href="https://liquipedia.net/overwatch/Portal:Tournaments" target="_blank" rel="noopener">
                 Liquipediaの大会ポータル
               </a>
-            </p>
-            <p>
-              OWCSの国際大会はS-Tier、各地域の大会は主にA-Tierに分類されています。
-              それ以外でもトップクラスの選手が集まる大会はS-Tier・A-Tierになりやすく、
-              「見る価値があるか」の目安として使えます。
             </p>
 
             <h3 class="owcs-fun-subhead">Overwatch World Cup（OWWC）</h3>
@@ -1235,6 +1270,18 @@ function loadWatchOwcsView() {
               生まれることがあります。
             </p>
             <p>
+              オフライン大会なので、配信では選手のフェイスカメラも見られます。
+              試合の雰囲気やリアクションまで楽しめるのが魅力です。
+            </p>
+            <p>
+              また、リプレイコードも公開されています。
+              <a
+                href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSk5k4PDJ2w3L7vv2fzOyKYMUtvhPYtfUtuWx4Q1rLzobax4V9Q7oieKCPeo3pGPnQC9xLK8atHQmvL/pubhtml"
+                target="_blank"
+                rel="noopener"
+              >→ Saudi eLeagueのリプレイコードを見る</a>
+            </p>
+            <p>
               <a href="https://liquipedia.net/overwatch/Saudi_eLeague" target="_blank" rel="noopener">
                 → Saudi eLeagueをLiquipediaで見る
               </a>
@@ -1249,15 +1296,16 @@ function loadWatchOwcsView() {
               「大学大会ならプロとは関係ないのでは？」と思うかもしれませんが、
               トップクラスの大学にはOWCSで活躍している選手が多数在籍しています。
             </p>
+            <p>
+              視聴について：基本的に公式配信はなく、出場選手の個人配信で試合を追う形になります。
+              大会やステージによっては公式配信が行われることもあります。
+            </p>
             <ul class="watchowcs-tip-list">
               <li>
                 <span class="watchowcs-tip-label">
                   <a href="https://liquipedia.net/overwatch/Northwood_University_Blue" target="_blank" rel="noopener">
                     Northwood University Blue
                   </a>
-                </span>
-                <span class="watchowcs-tip-body">
-                  Rokit、Kronik、Painkiller、Vegaなど、OWCSでも見かける選手が所属してきました。
                 </span>
               </li>
               <li>
@@ -1266,15 +1314,8 @@ function loadWatchOwcsView() {
                     Winthrop University
                   </a>
                 </span>
-                <span class="watchowcs-tip-body">
-                  zeruhh、Coluge、Infekted、UltraVioletなど、プロシーンでも有名な選手が出場しています。
-                </span>
               </li>
             </ul>
-            <p>
-              トップクラスになると、「大学生の大会」というより、
-              OWCS選手だらけの大学対抗戦になっていることもあります。
-            </p>
             <p>
               海外から北米の大学へ進学し、大学のeスポーツチームで活動している選手もいます。
               Overwatchを競技として続けながら大学へ通う、いわゆるeスポーツ留学のようなケースもあります。
@@ -1292,6 +1333,28 @@ function loadWatchOwcsView() {
             <p>
               「大学リーグから、そのままOWCSトップクラスへ」というルートが実際に存在するのも、
               NAのOverwatchシーンの面白いところです。
+            </p>
+
+            <h3 class="owcs-fun-subhead">STAGE:0</h3>
+            <p>
+              日本の全国高校対抗eスポーツ大会です。
+              Overwatch部門では、同じ高校に通う生徒たちがチームを組み、毎年夏に日本一を争います。
+            </p>
+            <p>
+              大会の多くはオンラインですが、配信では選手のフェイスカメラやインタビューも見られ、
+              プレー以外の表情や声も楽しめます。全国大会はオフラインで開催されます。
+            </p>
+            <p>
+              日本語実況があるため、日本語で観戦しやすいのもポイントです。
+            </p>
+            <p>
+              過去には優勝チームにOWCS本戦への出場権が与えられたこともあり、
+              STAGE:0を経てプロチームに入り、OWCSで活躍する選手も少なくありません。
+            </p>
+            <p>
+              <a href="https://stage0.jp/games/ow2.html" target="_blank" rel="noopener">
+                → STAGE:0 Overwatch（公式サイト）
+              </a>
             </p>
 
             <h3 class="owcs-fun-subhead">突発・招待大会も要チェック</h3>
@@ -1355,26 +1418,42 @@ function loadWatchOwcsView() {
             </p>
 
             <h3 class="owcs-fun-subhead">どれを見ればいいか迷ったら</h3>
-            <ul class="watchowcs-tip-list">
+            <ul class="watchowcs-tip-list watchowcs-tip-list-accordion">
               <li>
-                <span class="watchowcs-tip-label">世界トップ選手を見たい</span>
-                <span class="watchowcs-tip-body">S-Tier・A-Tierの大会</span>
+                <details>
+                  <summary class="watchowcs-tip-label">世界トップ選手を見たい</summary>
+                  <span class="watchowcs-tip-body">S-Tier・A-Tierの大会</span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">国別対抗戦を見たい</span>
-                <span class="watchowcs-tip-body">Overwatch World Cup</span>
+                <details>
+                  <summary class="watchowcs-tip-label">国別対抗戦を見たい</summary>
+                  <span class="watchowcs-tip-body">Overwatch World Cup</span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">豪華な特別ロスターを見たい</span>
-                <span class="watchowcs-tip-body">Saudi eLeague</span>
+                <details>
+                  <summary class="watchowcs-tip-label">オフライン大会を見たい</summary>
+                  <span class="watchowcs-tip-body">Overwatch World Cup、Saudi eLeague、STAGE:0（全国大会）</span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">NAのプロ・若手選手を見たい</span>
-                <span class="watchowcs-tip-body">Overwatch Collegiate</span>
+                <details>
+                  <summary class="watchowcs-tip-label">NAのプロ・若手選手を見たい</summary>
+                  <span class="watchowcs-tip-body">Overwatch Collegiate</span>
+                </details>
               </li>
               <li>
-                <span class="watchowcs-tip-label">次にOWCSへ上がってきそうな選手を見たい</span>
-                <span class="watchowcs-tip-body">FACEIT League Masters</span>
+                <details>
+                  <summary class="watchowcs-tip-label">日本の若手選手を見たい</summary>
+                  <span class="watchowcs-tip-body">STAGE:0</span>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary class="watchowcs-tip-label">次にOWCSへ上がってきそうな選手を見たい</summary>
+                  <span class="watchowcs-tip-body">FACEIT League Masters</span>
+                </details>
               </li>
             </ul>
             <p>
