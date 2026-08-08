@@ -1064,6 +1064,11 @@ function loadWatchOwcsView() {
               <a href="https://liquipedia.net/overwatch/Winthrop_University" target="_blank" rel="noopener">Winthrop University</a>.
             </p>
             <p>
+              When top schools face each other, players who normally compete on different
+              OWCS teams may share a college roster — and OWCS teammates may end up on
+              opposite sides.
+            </p>
+            <p>
               Players also come from outside North America to study and compete on university
               esports teams — a kind of “esports study abroad” path.
             </p>
@@ -1285,11 +1290,15 @@ function loadWatchOwcsView() {
               大会やステージによっては公式配信が行われることもあります。
             </p>
             <p>
-              強い大学の例として、
+              強豪校の例として、
               <a href="https://liquipedia.net/overwatch/Northwood_University_Blue" target="_blank" rel="noopener">Northwood University Blue</a>
               や
               <a href="https://liquipedia.net/overwatch/Winthrop_University" target="_blank" rel="noopener">Winthrop University</a>
               などがあります。
+            </p>
+            <p>
+              強豪校同士の戦いだと、普段は別々のOWCSチームで戦っている選手たちが同じチームになったり、
+              チームメイトが敵同士になることもあります。
             </p>
             <p>
               海外から北米の大学へ進学し、大学のeスポーツチームで活動している選手もいます。
